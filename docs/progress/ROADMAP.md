@@ -384,36 +384,37 @@ c45f2f0 feat(home): rebuild OurLeadership and Partners sections with Gerat engin
 
 ---
 
-## Phase 8 — Portfolio & Case Studies
+## Phase 8 — Portfolio & Case Studies ✅ COMPLETED
 
-**Goal:** Build the portfolio showcase as a major interaction pattern with horizontal scroll.
+**Goal:** Build the portfolio showcase as a major interaction pattern with discipline filtering and detailed architecture breakdowns.
 
 ### Tasks
 
-- [ ] **Portfolio showcase page** (*Spec ref: §18*)
-  - Sequential presentation: 01/05 counter, project name, description, large visual, services list
-  - "View Case Study" CTA per item
+- [x] **Portfolio Hero with discipline filtering** (*Spec ref: §18, Content §7*)
+  - Category filters: ALL DISCIPLINES, ENTERPRISE ERP, PUBLIC SECTOR, AI & RAG NETWORKS, TELEMETRY
+  - SplitText headline: "PROVEN ARCHITECTURES. DELIVERED SYSTEMS."
+  - System directory counter: "INDEX // 06 SYSTEMS CATALOGED"
 
-- [ ] **Horizontal scroll section** (*Spec ref: §19*)
-  - Vertical page → pin section → horizontal progression → release → continue vertical
-  - GSAP ScrollTrigger + scrub
-  - Mobile: horizontal snap carousel instead
+- [x] **Sticky Directory Sidebar** (*Spec ref: §18*)
+  - Sticky left navigation tracking current scroll position via IntersectionObserver
+  - Active indicator with accent color and hairline border
+  - "COMMISSION A SYSTEM" button connected to global ContactDrawer
 
-- [ ] **Drag interaction** (*Spec ref: §18*)
-  - Mouse, touch, trackpad/scroll fallback
-  - Visible drag affordance, momentum, clamped boundaries
+- [x] **Flagship Case Study Cards Feed** (*Spec ref: §18, §20, Content §7*)
+  - 6 comprehensive enterprise case studies for Gerat Software Solutions PLC
+  - Dual-column challenge vs. engineered resolution breakdown
+  - Key impact metrics (e.g., 12M+ records, 99.999% uptime, 45% cycle reduction)
+  - Technology stack tags and "INQUIRE ABOUT THIS ARCHITECTURE" triggers
+  - Precision corner accents and hover media scaling
 
-- [ ] **Case study cards** (*Spec ref: §20*)
-  - Large image with clip-path reveal
-  - Hover: media shifts 2–8px, title shifts 2–4px
-  - 200–350ms duration
+- [x] **Automated smoke tests update**
+  - Added portfolio Hero and Showcase anti-legacy assertions
 
-### Commit plan
+### Commit history (Phase 8)
 ```
-1. feat: build portfolio showcase with sequential presentation
-2. feat: implement horizontal scroll with GSAP ScrollTrigger
-3. feat: add drag interaction with momentum and cursor label
-4. feat: build case study cards with hover motion
+ae0e122 feat(portfolio): rebuild portfolio Hero with discipline filters and editorial typography
+5f7a248 feat(portfolio): rebuild PortfolioShowcase with 6 flagship case studies and sticky directory
+71aaf51 refactor(portfolio): coordinate active category state and update smoke tests
 ```
 
 ---
