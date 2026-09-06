@@ -5,11 +5,14 @@ import { usePathname } from "next/navigation";
 import DashboardSidebar from "./DashboardSidebar";
 import DashboardHeader from "./DashboardHeader";
 import CommandPalette from "./CommandPalette";
+import { ThemeProvider, useTheme } from "@/context/ThemeContext";
 
-export default function DashboardShell({ user, stats = {}, children }) {
+function DashboardShellInner({ user, stats = {}, children }) {
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isCommandOpen, setIsCommandOpen] = useState(false);
+  const { resolvedTheme } = useTheme();
+  const isLight = resolvedTheme === "light";
 
   // If on login page, render clean full-screen terminal without chrome
   if (pathname === "/dashboard/login") {
@@ -17,7 +20,11 @@ export default function DashboardShell({ user, stats = {}, children }) {
   }
 
   return (
-    <div className="min-h-screen bg-[#080808] text-white flex font-sans selection:bg-accent selection:text-black">
+    <div
+      className={`min-h-screen flex font-sans transition-colors duration-200 selection:bg-accent selection:text-black ${
+        isLight ? "bg-[#F4F5F7] text-[#0D0F12]" : "bg-[#080808] text-white"
+      }`}
+    >
       {/* Collapsible Left Sidebar */}
       <DashboardSidebar
         stats={stats}
@@ -44,5 +51,15 @@ export default function DashboardShell({ user, stats = {}, children }) {
         onClose={() => setIsCommandOpen(false)}
       />
     </div>
+  );
+}
+
+export default function DashboardShell({ user, stats = {}, children }) {
+  return (
+    <ThemeProvider>
+      <DashboardShellInner user={user} stats={stats}>
+        {children}
+      </DashboardShellInner>
+    </ThemeProvider>
   );
 }

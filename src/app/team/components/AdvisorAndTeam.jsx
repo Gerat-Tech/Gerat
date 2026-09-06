@@ -18,7 +18,8 @@ export default function AdvisorAndTeam() {
           );
           if (nonExecs.length > 0) {
             const normalized = nonExecs.map((m) => ({
-              role: m.roleTitle || m.name,
+              name: m.name,
+              role: m.roleTitle || m.division.replace("_", " "),
               discipline: m.focusTag || m.division.replace("_", " "),
               focus: m.bio,
               image: m.photoUrl || "/image/team/advisors/WQF__0000_Advisor-MarkCarney.webp",
@@ -49,7 +50,7 @@ export default function AdvisorAndTeam() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {engineeringSpecialists.map((member, idx) => (
-          <FadeUp key={member.role + idx} delay={0.08 * idx} y={20}>
+          <FadeUp key={(member.name || member.role) + idx} delay={0.08 * idx} y={20}>
             <div className="group relative bg-[#0a0a0a] border border-white/10 hover:border-accent/60 p-6 rounded-[3px] flex flex-col justify-between min-h-[300px] transition-all duration-300">
               {/* Precision Corner Accents */}
               <span className="absolute top-0 left-0 size-1.5 border-t border-l border-white/30 group-hover:border-accent transition-colors" />
@@ -62,7 +63,7 @@ export default function AdvisorAndTeam() {
                 <div className="size-16 rounded-[2px] overflow-hidden bg-black/60 shrink-0 border border-white/10">
                   <img
                     src={member.image}
-                    alt={member.role}
+                    alt={member.name || member.role}
                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
                     loading="lazy"
                   />
@@ -73,13 +74,18 @@ export default function AdvisorAndTeam() {
               </div>
 
               {/* Content */}
-              <div className="flex flex-col gap-2 my-auto">
+              <div className="flex flex-col gap-1.5 my-auto">
                 <span className="font-azeret text-[8px] tracking-[0.2em] text-accent uppercase">
                   {member.discipline}
                 </span>
                 <h3 className="font-roc text-lg font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
-                  {member.role}
+                  {member.name || member.role}
                 </h3>
+                {member.name && member.role && member.name !== member.role && (
+                  <span className="font-azeret text-[9px] tracking-[0.15em] text-white/50 uppercase">
+                    {member.role}
+                  </span>
+                )}
                 <p className="font-roc text-xs text-white/65 leading-relaxed pt-1">
                   {member.focus}
                 </p>
