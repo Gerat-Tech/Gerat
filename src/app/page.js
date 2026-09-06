@@ -1,27 +1,25 @@
-
-import Footer from "@/components/layout/Footer";
 import Hero from "@/components/home/Hero";
+import Marquee from "@/components/home/Marquee";
 import OurEthos from "@/components/home/OurEthos";
 import OurFocus from "@/components/home/OurFocus";
-import OurFounders from "@/components/home/OurFounders";
-import OurInvestors from "@/components/home/OurInvestors";
-import OurLeadership from "@/components/home/OurLeadership";
 import OurPortfolio from "@/components/home/OurPortfolio";
+import HowWeWork from "@/components/home/HowWeWork";
+import OurLeadership from "@/components/home/OurLeadership";
 import Partners from "@/components/home/Partners";
+import Footer from "@/components/layout/Footer";
 
 export default function Home() {
   return (
-   
-    <main className="bg-black min-h-screen">
-           <Hero />
-           <OurEthos />
-           <OurFocus />
-           <OurPortfolio/>
-           <OurLeadership/>
-           <OurInvestors/>
-           <OurFounders/>
-           <Partners/>
-           <Footer/>
+    <main className="bg-[#050505] min-h-screen text-white selection:bg-accent selection:text-black">
+      <Hero />
+      <Marquee />
+      <OurEthos />
+      <OurFocus />
+      <OurPortfolio />
+      <HowWeWork />
+      <OurLeadership />
+      <Partners />
+      <Footer />
     </main>
   );
 }

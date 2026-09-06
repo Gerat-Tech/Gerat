@@ -25,11 +25,19 @@ export async function runComponentSmokeTests() {
     "src/components/layout/TransitionOverlay.jsx",
     "src/components/layout/ClientWrapper.js",
     "src/components/layout/ContactDrawer.jsx",
+    "src/components/layout/Footer.jsx",
     // 3D
     "src/components/three/HeroDataField.jsx",
     "src/components/three/Hero3DFallback.jsx",
-    // Home
+    // Home Composite Sections
     "src/components/home/Hero.jsx",
+    "src/components/home/Marquee.jsx",
+    "src/components/home/OurEthos.jsx",
+    "src/components/home/OurFocus.jsx",
+    "src/components/home/OurPortfolio.jsx",
+    "src/components/home/HowWeWork.jsx",
+    "src/components/home/OurLeadership.jsx",
+    "src/components/home/Partners.jsx",
     // Context
     "src/context/NavContext.js",
     "src/context/PageTransitionContext.jsx",
@@ -40,7 +48,10 @@ export async function runComponentSmokeTests() {
     assert(fs.existsSync(fullPath), `Component missing: ${compPath}`);
     const content = fs.readFileSync(fullPath, "utf-8");
     assert(
-      content.includes("export default") || content.includes("export function") || content.includes("export const") || content.includes("export {"),
+      content.includes("export default") ||
+        content.includes("export function") ||
+        content.includes("export const") ||
+        content.includes("export {"),
       `Component ${compPath} has no export statement`
     );
     console.log(`  ✓ ${compPath} verified`);

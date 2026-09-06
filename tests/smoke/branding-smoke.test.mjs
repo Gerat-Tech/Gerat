@@ -29,4 +29,21 @@ export async function runBrandingSmokeTests() {
   assert(hero.includes("TECHNOLOGY THAT MOVES"), "Hero must contain Gerat 'TECHNOLOGY THAT MOVES' headline");
   assert(hero.includes("REAL SYSTEMS."), "Hero must contain Gerat 'REAL SYSTEMS.' headline");
   console.log("  ✓ Hero branding verified");
+
+  // Ethos must not contain legacy WQF copy
+  const ethos = fs.readFileSync(path.join(root, "src/components/home/OurEthos.jsx"), "utf-8");
+  assert(!ethos.includes("Exponential Foresight"), "Ethos should not contain legacy 'Exponential Foresight'");
+  assert(ethos.includes("SYSTEM RESILIENCE"), "Ethos must contain 'SYSTEM RESILIENCE'");
+  console.log("  ✓ Ethos branding verified");
+
+  // Portfolio must not link to external worldquantfoundry.com
+  const portfolio = fs.readFileSync(path.join(root, "src/components/home/OurPortfolio.jsx"), "utf-8");
+  assert(!portfolio.includes("worldquantfoundry.com"), "Portfolio should not contain external WQF links");
+  console.log("  ✓ Portfolio internal routing verified");
+
+  // Footer must have Gerat copyright
+  const footer = fs.readFileSync(path.join(root, "src/components/layout/Footer.jsx"), "utf-8");
+  assert(!footer.includes("WorldQuant"), "Footer should not contain 'WorldQuant'");
+  assert(footer.includes("GERAT SOFTWARE SOLUTIONS PLC"), "Footer must contain 'GERAT SOFTWARE SOLUTIONS PLC'");
+  console.log("  ✓ Footer branding verified");
 }
