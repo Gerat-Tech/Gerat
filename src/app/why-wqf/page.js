@@ -1,27 +1,18 @@
+import React from "react";
+import ServicesOverview from "./components/ServicesOverview";
 import Footer from "@/components/layout/Footer";
-import BuildProcessCard from "./components/BuildProcessCard";
-import FounderNetwork from "./components/FounderNetwork";
-import Hero from "./components/Hero";
-import Insfrastructure from "./components/Infrastructure";
-import InvestorBenefits from "./components/InvestorBenefits";
-import Investors from "./components/Investors";
-import PartnerBlocks from "./components/PartnerBlocks";
-import Partners from "./components/Partners";
-import Founders from "./components/Founders";
+
+export const metadata = {
+  title: "Platform & Engineering Services | Gerat Software Solutions PLC",
+  description:
+    "Explore Gerat's four core engineering practices: Enterprise Software Architecture, Domain-Grounded AI & RAG, Custom ERP, and Public-Sector Platforms.",
+};
 
 export default function WhyWQF() {
   return (
-    <div >
-    <Hero />
-    <Founders/>
-    <BuildProcessCard/>
-    <Insfrastructure/>
-    <FounderNetwork/>
-    <Investors/>
-    <InvestorBenefits/>
-    <Partners/>
-    <PartnerBlocks/>
-    <Footer/>
-    </div>
+    <main className="bg-[#050505] min-h-screen text-white selection:bg-accent selection:text-black">
+      <ServicesOverview />
+      <Footer />
+    </main>
   );
 }
