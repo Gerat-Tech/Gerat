@@ -751,15 +751,15 @@ export default function SettingsClientView({
                     )}
                   </div>
                   <p className="font-sans text-xs text-[#555D6B] leading-relaxed">
-                    Swiss gallery canvas (`#F4F5F7`), crisp white card surfaces (`#FFFFFF`), deep charcoal typography (`#0D0F12`), and slate borders. Designed for bright daytime focus.
+                    Architectural gray canvas (`#F0F2F5`), refined light-gray card surfaces (`#E4E7EB`), deep dark typography (`#0A0C10`), and crisp borders. Eliminates dark cards for a cohesive daylight experience.
                   </p>
                 </div>
 
                 <div className="flex items-center gap-2 mt-4 pt-3 border-t border-[#E2E5EB]">
-                  <span className="size-5 rounded-[2px] bg-[#F4F5F7] border border-[#D4D8E0]" title="Canvas #F4F5F7" />
-                  <span className="size-5 rounded-[2px] bg-white border border-[#D4D8E0]" title="Card #FFFFFF" />
+                  <span className="size-5 rounded-[2px] bg-[#F0F2F5] border border-[#CBD2DC]" title="Canvas #F0F2F5" />
+                  <span className="size-5 rounded-[2px] bg-[#E4E7EB] border border-[#CBD2DC]" title="Card #E4E7EB" />
                   <span className="size-5 rounded-[2px] bg-[#FF4A00]" title="Accent #FF4A00" />
-                  <span className="size-5 rounded-[2px] bg-[#0D0F12]" title="Text #0D0F12" />
+                  <span className="size-5 rounded-[2px] bg-[#0A0C10]" title="Text #0A0C10" />
                 </div>
               </div>
 

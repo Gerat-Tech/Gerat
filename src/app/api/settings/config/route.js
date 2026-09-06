@@ -27,7 +27,7 @@ export async function POST(request) {
       return NextResponse.json({ error: "Unauthorized access." }, { status: 401 });
     }
 
-    if (!isAuthorized(user.role, [ROLES.SUPER_ADMIN, ROLES.OPERATIONS_LEAD])) {
+    if (!isAuthorized(user.role, [ROLES.SUPER_ADMIN])) {
       return NextResponse.json(
         { error: "Insufficient privileges to modify site configuration." },
         { status: 403 }

@@ -1,12 +1,16 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { getCurrentUser } from "@/lib/auth";
+import { getCurrentUser, isAuthorized, ROLES } from "@/lib/auth";
 
 export async function GET(request, { params }) {
   try {
     const user = await getCurrentUser();
     if (!user) {
       return NextResponse.json({ error: "Unauthorized access." }, { status: 401 });
+    }
+
+    if (!isAuthorized(user.role, [ROLES.SUPER_ADMIN, ROLES.OPERATIONS_LEAD])) {
+      return NextResponse.json({ error: "Forbidden: Access restricted to Operations Lead and Admin." }, { status: 403 });
     }
 
     const { id } = await params;
@@ -49,6 +53,10 @@ export async function PATCH(request, { params }) {
       return NextResponse.json({ error: "Unauthorized access." }, { status: 401 });
     }
 
+    if (!isAuthorized(user.role, [ROLES.SUPER_ADMIN, ROLES.OPERATIONS_LEAD])) {
+      return NextResponse.json({ error: "Forbidden: Access restricted to Operations Lead and Admin." }, { status: 403 });
+    }
+
     const { id } = await params;
     const body = await request.json();
     const { status, priority, assignedToId } = body;
@@ -88,6 +96,10 @@ export async function POST(request, { params }) {
     const user = await getCurrentUser();
     if (!user) {
       return NextResponse.json({ error: "Unauthorized access." }, { status: 401 });
+    }
+
+    if (!isAuthorized(user.role, [ROLES.SUPER_ADMIN, ROLES.OPERATIONS_LEAD])) {
+      return NextResponse.json({ error: "Forbidden: Access restricted to Operations Lead and Admin." }, { status: 403 });
     }
 
     const { id } = await params;

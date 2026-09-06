@@ -9,7 +9,7 @@ export async function GET(request) {
       return NextResponse.json({ error: "Unauthorized access." }, { status: 401 });
     }
 
-    if (!isAuthorized(user.role, [ROLES.SUPER_ADMIN, ROLES.OPERATIONS_LEAD, ROLES.TECHNICAL_EDITOR])) {
+    if (!isAuthorized(user.role, [ROLES.SUPER_ADMIN])) {
       return NextResponse.json({ error: "Forbidden: Access restricted." }, { status: 403 });
     }
 

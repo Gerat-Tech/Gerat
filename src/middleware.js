@@ -43,6 +43,72 @@ export async function middleware(request) {
     return NextResponse.redirect(loginUrl);
   }
 
+  // Role-Based Access Control (RBAC) Route Clearance
+  if (user && !isLoginPage && pathname !== "/dashboard") {
+    const userRole = user.role || "VIEWER";
+
+    if (userRole !== "SUPER_ADMIN") {
+      const ALLOWED_ROLE_ROUTES = {
+        OPERATIONS_LEAD: [
+          "/dashboard",
+          "/dashboard/inquiries",
+          "/dashboard/team",
+          "/dashboard/services",
+        ],
+        TECHNICAL_EDITOR: [
+          "/dashboard",
+          "/dashboard/insights",
+          "/dashboard/portfolio",
+          "/dashboard/services",
+        ],
+        CREATIVE_EDITOR: [
+          "/dashboard",
+          "/dashboard/portfolio",
+          "/dashboard/insights",
+          "/dashboard/services",
+        ],
+        VIEWER: [
+          "/dashboard",
+          "/dashboard/insights",
+          "/dashboard/portfolio",
+          "/dashboard/team",
+          "/dashboard/services",
+        ],
+      };
+
+      // Block VIEWER from any creation or edit routes
+      if (userRole === "VIEWER" && (pathname.includes("/new") || pathname.includes("/edit"))) {
+        const redirectUrl = new URL("/dashboard", request.url);
+        redirectUrl.searchParams.set("unauthorized", "true");
+        redirectUrl.searchParams.set("domain", pathname);
+        return NextResponse.redirect(redirectUrl);
+      }
+
+      // Block OPERATIONS_LEAD from mutating team or service pillars
+      if (
+        userRole === "OPERATIONS_LEAD" &&
+        (pathname.startsWith("/dashboard/team/") || pathname.startsWith("/dashboard/services/"))
+      ) {
+        const redirectUrl = new URL("/dashboard", request.url);
+        redirectUrl.searchParams.set("unauthorized", "true");
+        redirectUrl.searchParams.set("domain", pathname);
+        return NextResponse.redirect(redirectUrl);
+      }
+
+      const allowedPrefixes = ALLOWED_ROLE_ROUTES[userRole] || ["/dashboard"];
+      const isAllowed = allowedPrefixes.some((prefix) =>
+        prefix === "/dashboard" ? pathname === "/dashboard" : pathname.startsWith(prefix)
+      );
+
+      if (!isAllowed) {
+        const redirectUrl = new URL("/dashboard", request.url);
+        redirectUrl.searchParams.set("unauthorized", "true");
+        redirectUrl.searchParams.set("domain", pathname);
+        return NextResponse.redirect(redirectUrl);
+      }
+    }
+  }
+
   return NextResponse.next();
 }
 

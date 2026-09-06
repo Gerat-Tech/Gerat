@@ -142,3 +142,161 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* ==========================================================================
+   Dashboard Monolithic Theme & Universal Light Mode Overhaul
+   User Requirements:
+   - Light Mode: texts must be dark (#0A0C10 / #1F242E / #4B5565).
+   - Light Mode: card backgrounds must be a gray kind of thing (#E4E7EB / #DDE2E8).
+   - Light Mode: canvas background is soft architectural gray (#F0F2F5).
+   - Dark Mode: stays pitch obsidian (#080808) with high-density tech surfaces.
+   ========================================================================== */
+
+/* Universal Light Mode Variables */
+html.dashboard-light {
+  --dash-bg: #F0F2F5;
+  --dash-card: #E4E7EB;
+  --dash-card-hover: #D8DCE2;
+  --dash-card-subtle: #DDE2E8;
+  --dash-border: #CBD2DC;
+  --dash-border-subtle: #D8DCE2;
+  --dash-text-heading: #0A0C10;
+  --dash-text-body: #1F242E;
+  --dash-text-muted: #4B5565;
+  --dash-text-dim: #697586;
+  --dash-input-bg: #FFFFFF;
+  --dash-input-border: #BCC5D1;
+  --dash-input-text: #0A0C10;
+}
+
+/* Light mode container */
+html.dashboard-light .dashboard-shell {
+  background-color: #F0F2F5 !important;
+  color: #1F242E !important;
+}
+
+/* Card backgrounds: Gray kind of thing as requested */
+html.dashboard-light .dashboard-shell .bg-\[\#121212\],
+html.dashboard-light .dashboard-shell .bg-\[\#111111\],
+html.dashboard-light .dashboard-shell .bg-\[\#141414\],
+html.dashboard-light .dashboard-shell .bg-\[\#0d0d0d\],
+html.dashboard-light .dashboard-shell .bg-\[\#0e0e0e\],
+html.dashboard-light .dashboard-shell .bg-\[\#181818\],
+html.dashboard-light .dashboard-shell .bg-black\/40,
+html.dashboard-light .dashboard-shell .bg-black\/50,
+html.dashboard-light .dashboard-shell .bg-black\/60,
+html.dashboard-light .dashboard-shell .bg-black\/80 {
+  background-color: #E4E7EB !important;
+}
+
+/* Interactive card hover */
+html.dashboard-light .dashboard-shell .bg-\[\#121212\]:hover,
+html.dashboard-light .dashboard-shell .bg-\[\#141414\]:hover {
+  background-color: #D8DCE2 !important;
+}
+
+/* Subtle / Inset elements */
+html.dashboard-light .dashboard-shell .bg-white\/\[0\.02\],
+html.dashboard-light .dashboard-shell .bg-white\/\[0\.03\],
+html.dashboard-light .dashboard-shell .bg-white\/\[0\.05\],
+html.dashboard-light .dashboard-shell .bg-white\/5,
+html.dashboard-light .dashboard-shell .bg-white\/10 {
+  background-color: #DDE2E8 !important;
+}
+
+/* Borders in Light Mode */
+html.dashboard-light .dashboard-shell .border-white\/5,
+html.dashboard-light .dashboard-shell .border-white\/10,
+html.dashboard-light .dashboard-shell .border-white\/15,
+html.dashboard-light .dashboard-shell .border-white\/20,
+html.dashboard-light .dashboard-shell .border-white\/30,
+html.dashboard-light .dashboard-shell .border-white\/40 {
+  border-color: #CBD2DC !important;
+}
+
+/* Headings and Titles in Light Mode: DARK */
+html.dashboard-light .dashboard-shell h1,
+html.dashboard-light .dashboard-shell h2,
+html.dashboard-light .dashboard-shell h3,
+html.dashboard-light .dashboard-shell h4,
+html.dashboard-light .dashboard-shell .dash-title {
+  color: #0A0C10 !important;
+}
+
+/* Text in Light Mode: DARK */
+html.dashboard-light .dashboard-shell .text-white {
+  color: #0A0C10 !important;
+}
+
+html.dashboard-light .dashboard-shell .text-white\/40,
+html.dashboard-light .dashboard-shell .text-white\/50,
+html.dashboard-light .dashboard-shell .text-white\/60,
+html.dashboard-light .dashboard-shell .text-white\/70 {
+  color: #4B5565 !important;
+}
+
+html.dashboard-light .dashboard-shell .text-white\/80,
+html.dashboard-light .dashboard-shell .text-white\/90 {
+  color: #1F242E !important;
+}
+
+html.dashboard-light .dashboard-shell .text-white\/20,
+html.dashboard-light .dashboard-shell .text-white\/30 {
+  color: #697586 !important;
+}
+
+/* Preserve bright white text on primary accent buttons */
+html.dashboard-light .dashboard-shell .bg-accent,
+html.dashboard-light .dashboard-shell .bg-accent * {
+  color: #FFFFFF !important;
+}
+
+/* Form Controls in Light Mode */
+html.dashboard-light .dashboard-shell input,
+html.dashboard-light .dashboard-shell select,
+html.dashboard-light .dashboard-shell textarea {
+  background-color: #FFFFFF !important;
+  color: #0A0C10 !important;
+  border-color: #BCC5D1 !important;
+}
+
+html.dashboard-light .dashboard-shell input::placeholder,
+html.dashboard-light .dashboard-shell textarea::placeholder {
+  color: #697586 !important;
+}
+
+/* Sidebar styling in Light Mode */
+html.dashboard-light .dashboard-shell aside {
+  background-color: #E6E9EE !important;
+  border-color: #CBD2DC !important;
+  color: #0A0C10 !important;
+}
+
+/* Header in Light Mode */
+html.dashboard-light .dashboard-shell header {
+  background-color: #E6E9EE !important;
+  border-color: #CBD2DC !important;
+}
+
+/* Status Badges in Light Mode */
+html.dashboard-light .dashboard-shell .bg-emerald-950\/40 {
+  background-color: #D1FAE5 !important;
+  color: #065F46 !important;
+  border-color: #6EE7B7 !important;
+}
+html.dashboard-light .dashboard-shell .bg-blue-950\/40 {
+  background-color: #DBEAFE !important;
+  color: #1E40AF !important;
+  border-color: #93C5FD !important;
+}
+html.dashboard-light .dashboard-shell .bg-amber-950\/40 {
+  background-color: #FEF3C7 !important;
+  color: #92400E !important;
+  border-color: #FCD34D !important;
+}
+html.dashboard-light .dashboard-shell .bg-red-950\/40 {
+  background-color: #FEE2E2 !important;
+  color: #991B1B !important;
+  border-color: #FCA5A5 !important;
+}
+

@@ -21,12 +21,13 @@ function DashboardShellInner({ user, stats = {}, children }) {
 
   return (
     <div
-      className={`min-h-screen flex font-sans transition-colors duration-200 selection:bg-accent selection:text-black ${
-        isLight ? "bg-[#F4F5F7] text-[#0D0F12]" : "bg-[#080808] text-white"
+      className={`dashboard-shell min-h-screen flex font-sans transition-colors duration-200 selection:bg-accent selection:text-black ${
+        isLight ? "bg-[#F0F2F5] text-[#1F242E]" : "bg-[#080808] text-white"
       }`}
     >
       {/* Collapsible Left Sidebar */}
       <DashboardSidebar
+        user={user}
         stats={stats}
         isOpen={isSidebarOpen}
         onClose={() => setIsSidebarOpen(false)}
