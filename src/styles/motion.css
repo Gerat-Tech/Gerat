@@ -1,0 +1,121 @@
+/* ==========================================================================
+   Motion System (Spec §13, §15, §16, §40)
+   Coordinated timing, organic easings, and reduced-motion enforcement
+   ========================================================================== */
+
+:root {
+  /* Durations */
+  --duration-instant: 100ms;
+  --duration-fast: 200ms;
+  --duration-normal: 400ms;
+  --duration-reveal: 600ms;
+  --duration-slow: 800ms;
+  --duration-deliberate: 1200ms;
+
+  /* Easing Presets */
+  --ease-primary: cubic-bezier(0.22, 1, 0.36, 1);     /* Smooth deceleration */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);     /* Dramatic snap-in */
+  --ease-in-out-smooth: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Stagger Intervals (Spec §15) */
+  --stagger-base: 80ms;
+  --stagger-fast: 50ms;
+}
+
+/* Base interactive transitions */
+.transition-smooth {
+  transition-property: color, background-color, border-color, opacity, transform;
+  transition-duration: var(--duration-normal);
+  transition-timing-function: var(--ease-primary);
+}
+
+.transition-fast {
+  transition-property: color, background-color, border-color, opacity, transform;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--ease-primary);
+}
+
+/* Ticker / Marquee Animation (Spec §25) */
+@keyframes ticker {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: ticker 28s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Subtle Corner Accent Pulse */
+@keyframes cornerPulse {
+  0%, 100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+.animate-corner-pulse {
+  animation: cornerPulse 3s ease-in-out infinite;
+}
+
+/* Glitch & Blink (Preserved for micro-accent moments) */
+@keyframes glitch-micro {
+  0% {
+    transform: translate(0);
+    opacity: 1;
+  }
+  20% {
+    transform: translate(-1px, 1px);
+    opacity: 0.85;
+  }
+  40% {
+    transform: translate(1px, -1px);
+    opacity: 0.95;
+  }
+  60% {
+    transform: translate(-1px, 0);
+    opacity: 0.8;
+  }
+  80% {
+    transform: translate(1px, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0);
+    opacity: 1;
+  }
+}
+
+.hover-glitch:hover {
+  animation: glitch-micro 0.2s linear 2;
+}
+
+/* Reduced Motion Enforcement (Spec §13) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-marquee {
+    animation: none !important;
+    transform: none !important;
+  }
+}
