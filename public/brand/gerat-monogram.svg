@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <!-- Background Plate -->
+  <rect width="120" height="120" rx="16" fill="#050505"/>
+  <rect x="1" y="1" width="118" height="118" rx="15" fill="none" stroke="#222222" stroke-width="1.5"/>
+
+  <!-- Architectural 'G' Monogram -->
+  <path d="M24 28V92H96V64H60V56H104V28H24Z" fill="#FFFFFF"/>
+
+  <!-- Precision Accent Spark -->
+  <rect x="68" y="72" width="20" height="20" rx="2" fill="#FF4A00"/>
+</svg>

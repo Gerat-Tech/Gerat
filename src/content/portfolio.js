@@ -140,4 +140,73 @@ export const portfolioProjects = [
     year: "2024",
     status: "PRODUCTION // STABLE",
   },
+  {
+    id: "axiom-brand",
+    index: "07",
+    num: "07 / 09",
+    title: "AXIOM IDENTITY SYSTEM & DESIGN LANGUAGE",
+    category: "BRAND & IDENTITY",
+    tags: "BRAND STRATEGY // VISUAL IDENTITY // DESIGN SYSTEM",
+    metric: "COMPLETE DESIGN SYSTEM // 140+ ASSETS // MULTI-PLATFORM",
+    metricDetail: "MONOLITHIC IDENTITY SYSTEM // 140+ PRODUCTION ASSETS // FULL DIGITAL + PRINT SUITE",
+    summary:
+      "A complete visual architecture and brand design system engineered for an industrial logistics conglomerate spanning brand guidelines, vector marks, and collateral.",
+    problem:
+      "Disjointed sub-brands and inconsistent marketing collateral weakened market authority and customer recognition across digital and physical operations.",
+    architecture:
+      "Constructed a high-contrast monolithic visual identity, precision geometric G-glyph mark, strict tokenized typography rules, and production templates for digital and print.",
+    tech: "FIGMA // VECTOR SUITE // DESIGN TOKENS // EDITORIAL PRINT",
+    stack: ["Vector Geometry", "Design Tokens", "Print Collateral", "Brand Guidelines", "Figma"],
+    image: "/image/portfolioPage/stratahub-featured.webp",
+    impact:
+      "Unified 5 corporate subsidiaries into a single authoritative identity system, cutting collateral production cycles by 60% and increasing brand recall across institutional tenders.",
+    year: "2025",
+    status: "DEPLOYED // GUIDELINES ACTIVE",
+  },
+  {
+    id: "synapse-brand",
+    index: "08",
+    num: "08 / 09",
+    title: "SYNAPSE AI PRODUCT BRAND & EDITORIAL ENGINE",
+    category: "BRAND & IDENTITY",
+    tags: "PRODUCT IDENTITY // GRAPHIC DESIGN // MOTION",
+    metric: "PRODUCT LAUNCH ASSETS // 3.2M SOCIAL IMPRESSIONS",
+    metricDetail: "PRODUCT IDENTITY & LAUNCH SUITE // 3.2M COMBINED IMPRESSIONS // 280+ GRAPHIC ASSETS",
+    summary:
+      "End-to-end brand identity, technical whitepaper layouts, and marketing launch collateral designed for a frontier AI retrieval-augmented generation engine.",
+    problem:
+      "Deep technical capabilities lacked an accessible, high-credibility editorial design system required to win institutional enterprise trust.",
+    architecture:
+      "Created a high-density, mathematical visual identity featuring custom data-flow iconography, dark-mode technical infographics, and modular marketing carousels.",
+    tech: "TYPOGRAPHY SYSTEM // DATA VISUALIZATION // MOTION ASSETS",
+    stack: ["Vector Graphics", "Typography Hierarchy", "Technical Infographics", "Social Kit"],
+    image: "/image/portfolioPage/Alph-1_2026-02-17-164533_rxel.webp",
+    impact:
+      "Established instant category leadership at release; technical whitepapers achieved 45,000+ institutional downloads in the first quarter post-launch.",
+    year: "2025",
+    status: "PRODUCTION // ACTIVE",
+  },
+  {
+    id: "meridian-executive",
+    index: "09",
+    num: "09 / 09",
+    title: "EXECUTIVE AUTHORITY & PERSONAL BRANDING",
+    category: "PERSONAL BRAND",
+    tags: "PERSONAL BRANDING // EXECUTIVE POSITIONING // DIGITAL PRESENCE",
+    metric: "4.8X LINKEDIN REACH // 2 KEYNOTE APPOINTMENTS",
+    metricDetail: "EXECUTIVE PRESENCE LAUNCH // 4.8X ENGAGEMENT MULTIPLIER // 2 GLOBAL KEYNOTE INVITATIONS",
+    summary:
+      "Strategic personal branding framework for a prominent technology founder and infrastructure investor, encompassing narrative positioning, visual monogram, and executive web presence.",
+    problem:
+      "Extensive industry accomplishments were scattered across unstructured channels, lacking a singular cohesive digital asset representing executive authority.",
+    architecture:
+      "Crafted an executive narrative blueprint, bespoke typographic monogram mark, editorial photography direction, LinkedIn profile architecture, and personal portfolio site.",
+    tech: "EXECUTIVE POSITIONING // MONOGRAM // EDITORIAL WEB // LINKEDIN ARCHITECTURE",
+    stack: ["Positioning Strategy", "Typographic Monogram", "Editorial Direction", "Next.js"],
+    image: "/image/portfolioPage/US-AUT-1.webp",
+    impact:
+      "Elevated executive visibility across institutional circles, generating 2 international keynote invitations and 4.8x inbound venture inquiries within 90 days.",
+    year: "2025",
+    status: "LIVE // EXPANDING",
+  },
 ];

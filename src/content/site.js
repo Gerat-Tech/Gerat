@@ -6,9 +6,9 @@ export const siteConfig = {
   name: "Gerat Software Solutions PLC",
   shortName: "GERAT",
   legalName: "Gerat Software Solutions Public Limited Company",
-  tagline: "Technology That Moves Real Systems",
+  tagline: "From Identity to Infrastructure",
   description:
-    "Deep-tech software engineering studio architecting mission-critical platforms, enterprise ERPs, and domain-grounded AI systems for high-stakes operational environments.",
+    "Gerat Software Solutions PLC builds monolithic brand identities, digital products, intelligent AI systems, and enterprise software architectures for high-stakes operational environments.",
   telemetry: {
     status: "OPERATIONAL // STABLE",
     location: "ADDIS ABABA, EAST AFRICA",
@@ -27,6 +27,13 @@ export const siteConfig = {
     { name: "PORTFOLIO", href: "/portfolio" },
     { name: "TEAM", href: "/team" },
     { name: "INSIGHTS", href: "/insights" },
+  ],
+  creativeServices: [
+    { name: "BRAND STRATEGY", id: "brand-strategy" },
+    { name: "LOGO & IDENTITY", id: "brand-identity" },
+    { name: "GRAPHIC DESIGN", id: "graphic-design" },
+    { name: "SOCIAL SYSTEMS", id: "social-design" },
+    { name: "PERSONAL BRANDING", id: "personal-branding" },
   ],
   socials: [
     { name: "LINKEDIN", href: "https://linkedin.com/company/gerat" },

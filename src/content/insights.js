@@ -92,4 +92,49 @@ export const insightsArticles = [
     image: "/image/LatestNews/06_David-K_Hero.webp",
     featured: false,
   },
+  {
+    id: 7,
+    slug: "why-logo-is-not-your-brand",
+    category: "BRAND STRATEGY",
+    title: "WHY YOUR LOGO IS NOT YOUR BRAND: ANATOMY OF A SCALABLE IDENTITY SYSTEM",
+    excerpt:
+      "Deconstructing how modern tech enterprises bridge typography, color tokens, and layout guidelines into an operational asset that commands trust before code is deployed.",
+    summary:
+      "Deconstructing how modern tech enterprises bridge typography, color tokens, and layout guidelines into an operational asset that commands trust before code is deployed.",
+    readTime: "6 MIN READ",
+    date: "FEB 2026",
+    author: "Michael Tadesse",
+    image: "/image/LatestNews/01_Picture.webp",
+    featured: false,
+  },
+  {
+    id: 8,
+    slug: "personal-branding-for-tech-founders",
+    category: "PERSONAL BRANDING",
+    title: "PERSONAL BRANDING FOR FOUNDERS: TRANSLATING ENGINEERING MASTERY INTO AUTHORITY",
+    excerpt:
+      "Why executive positioning is a critical business asset, and how technical leaders systematically build high-credibility digital presence across LinkedIn, personal platforms, and keynotes.",
+    summary:
+      "Why executive positioning is a critical business asset, and how technical leaders systematically build high-credibility digital presence across LinkedIn, personal platforms, and keynotes.",
+    readTime: "8 MIN READ",
+    date: "JAN 2026",
+    author: "Yonatan Abera",
+    image: "/image/LatestNews/02_Advisor_Dmitry-Green.webp",
+    featured: false,
+  },
+  {
+    id: 9,
+    slug: "from-identity-to-infrastructure",
+    category: "DESIGN SYSTEMS",
+    title: "FROM IDENTITY TO INFRASTRUCTURE: WHY BRAND AND SOFTWARE ARCHITECTURE MUST BE CO-DESIGNED",
+    excerpt:
+      "How unifying brand strategy with software engineering eliminates design-to-production friction, ensures design token consistency, and elevates user conversion across enterprise platforms.",
+    summary:
+      "How unifying brand strategy with software engineering eliminates design-to-production friction, ensures design token consistency, and elevates user conversion across enterprise platforms.",
+    readTime: "7 MIN READ",
+    date: "JAN 2026",
+    author: "Dawit Tsegaye",
+    image: "/image/LatestNews/03_Chris-Mason-hero.webp",
+    featured: false,
+  },
 ];

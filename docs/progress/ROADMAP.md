@@ -71,6 +71,12 @@
 | **14** | Accessibility & Reduced Motion | Keyboard, ARIA, reduced-motion, contrast, focus |
 | **15** | Performance & SEO | Lazy loading, image optimization, meta tags, bundle splitting |
 | **16** | Visual QA & Polish | Cross-viewport testing, motion QA, final comparison |
+| **17** | Brand & Creative Content Architecture | Single-source data models, 6 brand disciplines, personal branding |
+| **18** | Contact Drawer & Intake System | Multi-disciplinary selector, conditional questions, ETB budgets |
+| **19** | Homepage Integration | "From Identity to Infrastructure" section, ticker, marquee, CTA |
+| **20** | Services Expansion & Landing Pages | `/services/brand-creative`, `/services/personal-branding`, pillar updates |
+| **21** | Portfolio Showcase & Filtering | Brand & identity case studies, multi-tag filtering, visual deliverables |
+| **22** | Navigation, Footer & Verification | Service menus, footer links, sitemap update, automated smoke tests |
 
 ---
 
@@ -634,6 +640,167 @@ c096429 feat(test): update smoke tests to verify all inner pages and anti-legacy
 
 ---
 
+## Phase 17 — Brand & Creative Content Architecture & Data Models ✅ COMPLETED
+
+**Goal:** Establish single-source-of-truth datasets in `src/content/` for the complete Brand & Creative service family and personal branding offerings, linking brand identity directly to technology.
+
+### Tasks
+
+- [x] **Expand Services Dataset (`src/content/services.js`)**
+  - Add `brandCreativeFamily` defining all 6 core disciplines:
+    1. *Brand Strategy* (Discovery, positioning, audience, personality, messaging pillars, competitive review)
+    2. *Logo Design* (Primary/secondary lockups, symbol/icon, dark/light/monochrome variants, favicon, export package)
+    3. *Brand Identity* (Color system, typography, graphic language, image direction, layout system, brand guidelines)
+    4. *Graphic Design* (Company profiles, pitch decks, brochures, reports, presentation design, infographics, digital/print collateral)
+    5. *Social & Marketing Design* (Social templates, post systems, carousel templates, story systems, ad creative)
+    6. *Personal Branding for Founders & Leaders* (Positioning, personal visual identity, photography direction, LinkedIn optimization, personal website, content strategy)
+  - Add internal strategic service packages: *Launch Brand*, *Brand + Digital*, *Founder Presence*, *Product Launch*
+  - Add 2 new service pillars to `servicePillars`:
+    - `05`: `BRAND STRATEGY, IDENTITY & DESIGN SYSTEMS` ("COHESIVE VISUAL ARCHITECTURE")
+    - `06`: `EXECUTIVE & FOUNDER PERSONAL BRANDING` ("AUTHORITY & RECOGNITION PLATFORMS")
+  - Add design & brand capabilities to `capabilitiesTable` (Visual Identity Systems, Typographic Hierarchies, Graphic Collateral, Executive Presence)
+
+- [x] **Update Company Positioning & Site Config (`src/content/site.js`)**
+  - Update master positioning: *"From identity to infrastructure — Gerat Software Solutions PLC builds brands, digital products, intelligent systems, and enterprise software."*
+  - Update tagline and meta descriptions
+  - Add Brand & Creative navigation anchors and footer link groups
+
+- [x] **Expand Portfolio Dataset (`src/content/portfolio.js`)**
+  - Add brand identity and personal branding flagship case studies:
+    - `axiom-identity`: *Axiom Identity System & Design Language* (`BRAND & IDENTITY`)
+    - `synapse-brand`: *Synapse AI Product Brand & Editorial Engine* (`BRAND & IDENTITY`)
+    - `meridian-executive`: *Executive Authority & Personal Presence Platform* (`PERSONAL BRAND`)
+  - Ensure multi-tag taxonomy support (`BRAND`, `IDENTITY`, `PERSONAL BRAND`, `DIGITAL`, `PRODUCT`)
+
+- [x] **Expand Insights Dataset (`src/content/insights.js`)**
+  - Add 3 research whitepapers / technical articles:
+    - *"Why Your Logo Is Not Your Brand: The Anatomy of a Scalable Identity System"*
+    - *"Personal Branding for Founders: Translating Technical Expertise into Digital Authority"*
+    - *"From Identity to Infrastructure: Why Brand Systems and Digital Architecture Must Be Co-Designed"*
+
+---
+
+## Phase 18 — Contact Drawer & Intake System Expansion (Forms & Conditional Fields) ✅ COMPLETED
+
+**Goal:** Transform `ContactDrawer.jsx` into a high-converting, multi-disciplinary intake system with dynamic conditional questionnaires for Brand Strategy, Logo Design, Brand Identity, Graphic Design, and Personal Branding.
+
+### Tasks
+
+- [x] **Expand Discipline Selector**
+  - Add: `BRAND STRATEGY`, `LOGO & BRAND IDENTITY`, `GRAPHIC DESIGN`, `SOCIAL & MARKETING DESIGN`, `PERSONAL BRANDING` alongside existing technical disciplines.
+
+- [x] **Implement Dynamic Conditional Questionnaires**
+  - **Brand Strategy / Logo / Identity:**
+    - Current situation (New brand / Rebrand)
+    - Need brand guidelines (Yes / No)
+    - Key applications (Digital, Website, Print, Product UI)
+  - **Graphic Design:**
+    - Asset types (Company Profile, Pitch Deck, Brochure, Social System, Reports)
+    - Format (Digital, Print, Both)
+    - Existing brand guidelines (Yes / No)
+  - **Personal Branding:**
+    - Professional role (Founder, Executive, Consultant, Specialist)
+    - Primary objective (Fundraising, Thought Leadership, Client Acquisition)
+    - Required modules (Visual Identity, Photography Direction, LinkedIn Branding, Personal Website)
+
+- [x] **Add Optional ETB Budget Qualification**
+  - Lead qualification options: `Under 25K ETB`, `25K–50K ETB`, `50K–100K ETB`, `100K–250K ETB`, `250K+ ETB`, `Exploring / Undetermined`
+
+- [x] **Telemetry Intake Confirmation Pipeline**
+  - Generate specialized telemetry codes (`GRT-BRD-XXXXXX` for creative, `GRT-ENG-XXXXXX` for engineering)
+  - Display customized summary confirmation matching the requested service family
+
+---
+
+## Phase 19 — Homepage Integration ("From Identity to Infrastructure")
+
+**Goal:** Integrate the Brand & Creative service family into the existing homepage without disrupting the dark architectural aesthetic.
+
+### Tasks
+
+- [ ] **Create `BrandCreativeSection.jsx` (`src/components/home/BrandCreativeSection.jsx`)**
+  - Eyebrow: `04 / BRAND & CREATIVE`
+  - Heading: "BUILD THE PRODUCT. BUILD THE BRAND. BUILD THE PRESENCE."
+  - Narrative: Connect identity to the digital experiences and software systems Gerat builds.
+  - Interactive cards for:
+    1. *Brand Strategy*
+    2. *Logo & Identity*
+    3. *Graphic Design*
+    4. *Personal Branding*
+  - CTA button: "EXPLORE BRAND & CREATIVE →" with direct drawer/page routing
+
+- [ ] **Update `Hero.jsx` & `Marquee.jsx`**
+  - Reflect combined capability: "From Identity to Infrastructure"
+  - Include creative ticker tokens (`BRAND STRATEGY // LOGO SYSTEMS // VISUAL IDENTITY // EXECUTIVE BRANDING //`)
+
+- [ ] **Update Home Capabilities Table (`OurFocus.jsx`)**
+  - Integrate visual identity and creative systems into the capabilities matrix
+
+- [ ] **Update Home Final CTA & Colophon**
+  - Heading: "HAVE AN IDEA, A BRAND, OR A SYSTEM WORTH BUILDING?"
+  - Dual action buttons: `START A PROJECT` and `BOOK A BRAND CONSULTATION`
+
+---
+
+## Phase 20 — Services Expansion & Dedicated Landing Pages
+
+**Goal:** Provide full editorial landing pages for clients seeking dedicated brand identity, logo, graphic design, and personal branding engagements.
+
+### Tasks
+
+- [ ] **Update Services Overview (`src/app/why-wqf/components/ServicesOverview.jsx`)**
+  - Incorporate Practice 05 (Brand & Design Systems) and Practice 06 (Executive Personal Branding) into the pillars deck
+  - Detail concrete deliverables (Vector suites, typography guides, presentation decks, personal websites)
+
+- [ ] **Create Dedicated Brand & Creative Landing Page (`src/app/services/brand-creative/page.js`)**
+  - Comprehensive service breakdowns for Strategy, Logo, Identity, Graphic Design, Social Systems
+  - Production Deliverables & File Formats matrix (SVG, EPS, PDF, Print, Web)
+  - Reassurance FAQs (Logo vs Brand, IP Ownership, Source Files, Revisions)
+  - Strategic Packages overview (Launch Brand, Brand + Digital, Product Launch)
+
+- [ ] **Create Dedicated Personal Branding Landing Page (`src/app/services/personal-branding/page.js`)**
+  - Modular framework for founders and executives: Positioning, Visual Identity, Photography Direction, LinkedIn Branding, Personal Website, Content Direction, Launch Rollout
+  - Persona matching (Founders, Executives, Consultants, Technology Leaders)
+  - Direct booking and consultation CTA
+
+---
+
+## Phase 21 — Portfolio Showcase & Case Study Filtering
+
+**Goal:** Enable discovery of brand identity, graphic design, and personal branding case studies alongside technical platforms.
+
+### Tasks
+
+- [ ] **Update Portfolio Filter Bar (`src/app/portfolio/components/Hero.jsx`)**
+  - Add category tabs: `ALL`, `BRAND & IDENTITY`, `PERSONAL BRAND`, `ENTERPRISE ERP`, `AI & RAG`, `PUBLIC SECTOR`
+
+- [ ] **Update Showcase Cards (`src/app/portfolio/components/PortfolioShowcase.jsx`)**
+  - Support multi-tag badge rendering
+  - Add creative asset specifications (Typefaces, Color swatches, Deliverable packages) for brand projects
+
+---
+
+## Phase 22 — Navigation, Footer, SEO & Automated Smoke Test Verification
+
+**Goal:** Ensure site-wide consistency, update dynamic sitemap & robots, and expand the smoke test suite to guarantee 100% test coverage and zero runtime regressions.
+
+### Tasks
+
+- [ ] **Update Global Navigation (`Navbar.jsx`)**
+  - Ensure links and mobile menu accommodate services navigation
+
+- [ ] **Update Global Footer (`Footer.jsx`)**
+  - Add dedicated `BRAND & CREATIVE` links column: Brand Strategy, Logo & Identity, Graphic Design, Social Design, Personal Branding
+
+- [ ] **Update Sitemap & Robots (`src/app/sitemap.js` and `docs/progress/sitemap/SITEMAP.md`)**
+  - Include `/services/brand-creative` and `/services/personal-branding` with priority weighting
+
+- [ ] **Update Smoke Test Suite (`tests/smoke/`)**
+  - Verify all new datasets, components, form fields, and routes pass automated testing
+  - Run `pnpm run test:smoke`, `pnpm run test:runtime`, `pnpm run lint`, and `pnpm build`
+
+---
+
 ## Guiding Principles
 
 1. **Build systems, not screenshots.** When grid + type + spacing + motion + interaction are correct, the result will feel like the reference naturally.
@@ -665,6 +832,12 @@ Phase 1 (repo setup)
                                           └─→ Phase 14 (a11y)
                                                └─→ Phase 15 (performance + SEO)
                                                     └─→ Phase 16 (QA + polish)
+                                                         └─→ Phase 17 (brand content data)
+                                                              ├─→ Phase 18 (contact drawer & forms)
+                                                              ├─→ Phase 19 (homepage brand integration)
+                                                              ├─→ Phase 20 (services landing pages)
+                                                              ├─→ Phase 21 (portfolio showcase & filters)
+                                                              └─→ Phase 22 (navigation, footer, smoke tests)
 ```
 
 ---

@@ -72,11 +72,23 @@ export async function runBrandingSmokeTests() {
   assert(services.includes("PURPOSE-BUILT DIGITAL SYSTEMS."), "Services page must contain Gerat headline");
   console.log("  ✓ Services page Overview verified");
 
-  // Contact drawer must have Gerat branding and no legacy Foundry copy
+  // Contact drawer must have Gerat branding and brand/creative disciplines
   const contactDrawer = fs.readFileSync(path.join(root, "src/components/layout/ContactDrawer.jsx"), "utf-8");
   assert(!contactDrawer.includes("foundry team"), "Contact drawer must not contain 'foundry team'");
   assert(contactDrawer.includes("GERAT SOFTWARE SOLUTIONS PLC"), "Contact drawer must contain 'GERAT SOFTWARE SOLUTIONS PLC'");
-  console.log("  ✓ ContactDrawer branding verified");
+  assert(contactDrawer.includes("BRAND STRATEGY"), "Contact drawer must support 'BRAND STRATEGY'");
+  assert(contactDrawer.includes("LOGO & BRAND IDENTITY"), "Contact drawer must support 'LOGO & BRAND IDENTITY'");
+  assert(contactDrawer.includes("PERSONAL BRANDING"), "Contact drawer must support 'PERSONAL BRANDING'");
+  assert(contactDrawer.includes("BUDGET_RANGES"), "Contact drawer must include lead qualification budget ranges");
+  console.log("  ✓ ContactDrawer branding & creative disciplines verified");
+
+  // Content dataset must contain brandCreativeFamily and brand pillars
+  const servicesContent = fs.readFileSync(path.join(root, "src/content/services.js"), "utf-8");
+  assert(servicesContent.includes("brandCreativeFamily"), "services.js must export brandCreativeFamily");
+  assert(servicesContent.includes("creativeServicePackages"), "services.js must export creativeServicePackages");
+  assert(servicesContent.includes("BRAND STRATEGY, IDENTITY & DESIGN SYSTEMS"), "services.js must include Brand pillar");
+  assert(servicesContent.includes("EXECUTIVE & FOUNDER PERSONAL BRANDING"), "services.js must include Personal Branding pillar");
+  console.log("  ✓ Services content brand architecture verified");
 
   // Footer must have Gerat copyright
   const footer = fs.readFileSync(path.join(root, "src/components/layout/Footer.jsx"), "utf-8");

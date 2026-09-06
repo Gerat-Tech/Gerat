@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 120" width="540" height="120">
+  <defs>
+    <style>
+      .brand-title {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-weight: 800;
+        font-size: 42px;
+        fill: #FFFFFF;
+        letter-spacing: 0.16em;
+      }
+      .brand-sub {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-weight: 500;
+        font-size: 11px;
+        fill: #999999;
+        letter-spacing: 0.28em;
+      }
+      .accent-spark {
+        fill: #FF4A00;
+      }
+      .corner-mark {
+        stroke: rgba(255, 255, 255, 0.25);
+        stroke-width: 1.5;
+        fill: none;
+      }
+    </style>
+  </defs>
+
+  <!-- Background Plate -->
+  <rect width="540" height="120" rx="10" fill="#0A0A0A"/>
+  <rect x="0.5" y="0.5" width="539" height="119" rx="9.5" fill="none" stroke="#1F1F1F" stroke-width="1"/>
+
+  <!-- Precision Corner Brackets -->
+  <path d="M12 20H20 M12 20V28" class="corner-mark"/>
+  <path d="M528 20H520 M528 20V28" class="corner-mark"/>
+  <path d="M12 100H20 M12 100V92" class="corner-mark"/>
+  <path d="M528 100H520 M528 100V92" class="corner-mark"/>
+
+  <!-- Emblem Container -->
+  <g transform="translate(36, 26)">
+    <rect width="68" height="68" rx="8" fill="#141414" stroke="#262626" stroke-width="1"/>
+    <!-- G Glyph -->
+    <path d="M14 16V52H54V36H34V31H59V16H14Z" fill="#FFFFFF"/>
+    <!-- Accent Core Spark -->
+    <rect x="38" y="41" width="11" height="11" rx="1" class="accent-spark"/>
+  </g>
+
+  <!-- Typographic Wordmark -->
+  <text x="126" y="62" class="brand-title">GERAT</text>
+  <text x="128" y="85" class="brand-sub">SOFTWARE SOLUTIONS PLC</text>
+
+  <!-- Operational Telemetry Tag -->
+  <g transform="translate(435, 34)">
+    <circle cx="6" cy="6" r="3" fill="#10B981"/>
+    <text x="16" y="10" font-family="ui-monospace, monospace" font-size="9" fill="#666666" letter-spacing="0.2em">SYS:OK</text>
+  </g>
+</svg>

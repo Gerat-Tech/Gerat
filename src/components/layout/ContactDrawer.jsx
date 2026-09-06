@@ -7,7 +7,11 @@ import { motion, AnimatePresence } from "framer-motion";
 const DISCIPLINES = [
   "ENTERPRISE ERP",
   "AI & DOMAIN RAG",
-  "TELEMETRY & IOT",
+  "BRAND STRATEGY",
+  "LOGO & BRAND IDENTITY",
+  "GRAPHIC DESIGN",
+  "SOCIAL & MARKETING DESIGN",
+  "PERSONAL BRANDING",
   "PUBLIC SECTOR",
   "WEB & MOBILE",
   "ARCHITECTURE AUDIT",
@@ -20,13 +24,54 @@ const TIMELINES = [
   "STRATEGIC ENGAGEMENT",
 ];
 
+const BUDGET_RANGES = [
+  "EXPLORING / NOT SURE YET",
+  "UNDER 25K ETB",
+  "25K – 50K ETB",
+  "50K – 100K ETB",
+  "100K – 250K ETB",
+  "250K+ ETB",
+];
+
+const BRAND_SITUATIONS = [
+  "NEW VENTURE / BRAND",
+  "REBRAND / REFRESH",
+  "EXISTING PRODUCT LINE",
+];
+
+const GRAPHIC_ASSET_TYPES = [
+  "COMPANY PROFILE",
+  "PITCH DECK",
+  "ANNUAL REPORT / WHITEPAPER",
+  "SOCIAL POST SYSTEM",
+  "MARKETING COLLATERAL",
+];
+
+const PERSONAL_ROLES = [
+  "FOUNDER / CEO",
+  "EXECUTIVE / DIRECTOR",
+  "CONSULTANT / ADVISOR",
+  "TECH LEADER / RESEARCHER",
+];
+
 /**
- * Editorial Contact Drawer (Spec ref: §31)
- * Enters from right with backdrop blur and staggered field reveals.
+ * Editorial Contact Drawer (Spec ref: §31 & Brand Spec §20, §21, §22)
+ * Enters from right with backdrop blur, conditional question modules, and staggered field reveals.
  */
 export default function ContactDrawer({ open, setOpen }) {
   const [selectedDiscipline, setSelectedDiscipline] = useState(DISCIPLINES[0]);
   const [selectedTimeline, setSelectedTimeline] = useState(TIMELINES[0]);
+  const [selectedBudget, setSelectedBudget] = useState(BUDGET_RANGES[0]);
+  
+  // Conditional creative question state
+  const [brandSituation, setBrandSituation] = useState(BRAND_SITUATIONS[0]);
+  const [needBrandGuidelines, setNeedBrandGuidelines] = useState(true);
+  const [selectedAssetType, setSelectedAssetType] = useState(GRAPHIC_ASSET_TYPES[0]);
+  const [personalRole, setPersonalRole] = useState(PERSONAL_ROLES[0]);
+  const [personalGoal, setPersonalGoal] = useState("EXECUTIVE AUTHORITY");
+  const [needPhotographyDirection, setNeedPhotographyDirection] = useState(false);
+  const [needPersonalWebsite, setNeedPersonalWebsite] = useState(false);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -38,6 +83,14 @@ export default function ContactDrawer({ open, setOpen }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [inquiryId, setInquiryId] = useState("");
+
+  const isBrandDiscipline = [
+    "BRAND STRATEGY",
+    "LOGO & BRAND IDENTITY",
+    "GRAPHIC DESIGN",
+    "SOCIAL & MARKETING DESIGN",
+    "PERSONAL BRANDING",
+  ].includes(selectedDiscipline);
 
   // Lock body scroll when open and handle Escape key
   useEffect(() => {
@@ -67,7 +120,8 @@ export default function ContactDrawer({ open, setOpen }) {
     setIsSubmitting(true);
     // Simulate telemetry intake pipeline
     setTimeout(() => {
-      const generatedId = `GRT-${Math.floor(100000 + Math.random() * 900000)}`;
+      const prefix = isBrandDiscipline ? "GRT-BRD" : "GRT-ENG";
+      const generatedId = `${prefix}-${Math.floor(100000 + Math.random() * 900000)}`;
       setInquiryId(generatedId);
       setIsSubmitting(false);
       setIsSubmitted(true);
@@ -109,7 +163,7 @@ export default function ContactDrawer({ open, setOpen }) {
             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
             role="dialog"
             aria-modal="true"
-            aria-label="Commission an engineering engagement with Gerat"
+            aria-label="Commission an engineering or creative engagement with Gerat"
             className="relative z-10 w-full max-w-[640px] h-full bg-[#0a0a0a] text-white border-l border-white/10 flex flex-col shadow-2xl overflow-y-auto hide-scrollbar"
           >
             {/* Header / Telemetry Bar */}
@@ -117,7 +171,7 @@ export default function ContactDrawer({ open, setOpen }) {
               <div className="flex items-center gap-3">
                 <span className="size-2 rounded-full bg-accent animate-pulse" />
                 <span className="font-azeret text-[10px] tracking-[0.25em] text-white/70 uppercase">
-                  INITIATE COMMISSION // ENGAGEMENT PIPELINE
+                  INITIATE COMMISSION // {isBrandDiscipline ? "CREATIVE & BRAND PIPELINE" : "ENGAGEMENT PIPELINE"}
                 </span>
               </div>
 
@@ -143,19 +197,29 @@ export default function ContactDrawer({ open, setOpen }) {
                       GERAT SOFTWARE SOLUTIONS PLC
                     </span>
                     <h2 className="font-roc text-3xl sm:text-4xl font-medium tracking-tight uppercase leading-[1.05]">
-                      TALK TO THE <br />
-                      <span className="text-white/60">ENGINEERING ARCHITECTS.</span>
+                      {isBrandDiscipline ? (
+                        <>
+                          TALK TO THE <br />
+                          <span className="text-white/60">BRAND & CREATIVE DIRECTORS.</span>
+                        </>
+                      ) : (
+                        <>
+                          TALK TO THE <br />
+                          <span className="text-white/60">ENGINEERING ARCHITECTS.</span>
+                        </>
+                      )}
                     </h2>
                     <p className="font-roc text-sm text-white/60 leading-relaxed mt-1">
-                      Direct engineering review. We evaluate system scope, computational
-                      constraints, and deployment SLAs within 24–48 hours.
+                      {isBrandDiscipline
+                        ? "Strategic brand positioning, monolithic visual identity, and graphic systems connected directly to digital execution. Direct review within 24–48 hours."
+                        : "Direct engineering review. We evaluate system scope, computational constraints, and deployment SLAs within 24–48 hours."}
                     </p>
                   </div>
 
                   {/* Discipline Selection */}
                   <div className="flex flex-col gap-3">
                     <label className="font-azeret text-[10px] tracking-[0.2em] text-white/50 uppercase">
-                      01 // SYSTEM DISCIPLINE <span className="text-accent">*</span>
+                      01 // SYSTEM & CREATIVE DISCIPLINE <span className="text-accent">*</span>
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                       {DISCIPLINES.map((discipline) => {
@@ -165,7 +229,7 @@ export default function ContactDrawer({ open, setOpen }) {
                             key={discipline}
                             type="button"
                             onClick={() => setSelectedDiscipline(discipline)}
-                            className={`px-3 py-2.5 text-left font-azeret text-[10px] tracking-[0.1em] border transition-all rounded-[2px] flex items-center justify-between ${
+                            className={`px-3 py-2.5 text-left font-azeret text-[9px] tracking-[0.08em] border transition-all rounded-[2px] flex items-center justify-between ${
                               isSelected
                                 ? "bg-accent/10 border-accent text-white font-medium"
                                 : "bg-white/[0.02] border-white/10 text-white/60 hover:border-white/30 hover:text-white"
@@ -208,7 +272,7 @@ export default function ContactDrawer({ open, setOpen }) {
                           onChange={(e) =>
                             setFormData({ ...formData, email: e.target.value })
                           }
-                          placeholder="Institutional Work Email"
+                          placeholder="Corporate / Work Email"
                           className="w-full bg-[#141414] border border-white/10 px-4 py-3 font-roc text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-accent transition-colors rounded-[2px]"
                         />
                       </div>
@@ -223,7 +287,7 @@ export default function ContactDrawer({ open, setOpen }) {
                           onChange={(e) =>
                             setFormData({ ...formData, company: e.target.value })
                           }
-                          placeholder="Company / Institution"
+                          placeholder="Company / Institution / Brand"
                           className="w-full bg-[#141414] border border-white/10 px-4 py-3 font-roc text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-accent transition-colors rounded-[2px]"
                         />
                       </div>
@@ -240,6 +304,136 @@ export default function ContactDrawer({ open, setOpen }) {
                       </div>
                     </div>
                   </div>
+
+                  {/* Conditional Discipline Specifications */}
+                  {(selectedDiscipline === "BRAND STRATEGY" || selectedDiscipline === "LOGO & BRAND IDENTITY") && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-4 bg-white/[0.02] border border-white/10 rounded-[2px] flex flex-col gap-3"
+                    >
+                      <label className="font-azeret text-[10px] tracking-[0.2em] text-accent uppercase">
+                        BRAND ARCHITECTURE SPECIFICATIONS
+                      </label>
+                      <div className="flex flex-col gap-2">
+                        <span className="font-azeret text-[9px] text-white/50 tracking-[0.1em] uppercase">
+                          CURRENT STAGE
+                        </span>
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                          {BRAND_SITUATIONS.map((situation) => (
+                            <button
+                              key={situation}
+                              type="button"
+                              onClick={() => setBrandSituation(situation)}
+                              className={`px-3 py-2 text-left font-azeret text-[9px] tracking-[0.05em] border rounded-[2px] transition-all ${
+                                brandSituation === situation
+                                  ? "bg-accent/15 border-accent text-white"
+                                  : "border-white/10 text-white/60 hover:text-white"
+                              }`}
+                            >
+                              {situation}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                      <label className="flex items-center gap-2 mt-1 cursor-pointer select-none">
+                        <input
+                          type="checkbox"
+                          checked={needBrandGuidelines}
+                          onChange={(e) => setNeedBrandGuidelines(e.target.checked)}
+                          className="size-3.5 accent-accent"
+                        />
+                        <span className="font-azeret text-[9px] tracking-[0.1em] text-white/70 uppercase">
+                          Include Production Brand Guidelines & Digital Asset System
+                        </span>
+                      </label>
+                    </motion.div>
+                  )}
+
+                  {(selectedDiscipline === "GRAPHIC DESIGN" || selectedDiscipline === "SOCIAL & MARKETING DESIGN") && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-4 bg-white/[0.02] border border-white/10 rounded-[2px] flex flex-col gap-3"
+                    >
+                      <label className="font-azeret text-[10px] tracking-[0.2em] text-accent uppercase">
+                        GRAPHIC COLLATERAL FOCUS
+                      </label>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                        {GRAPHIC_ASSET_TYPES.map((asset) => (
+                          <button
+                            key={asset}
+                            type="button"
+                            onClick={() => setSelectedAssetType(asset)}
+                            className={`px-2.5 py-2 text-left font-azeret text-[9px] tracking-[0.05em] border rounded-[2px] transition-all ${
+                              selectedAssetType === asset
+                                ? "bg-accent/15 border-accent text-white"
+                                : "border-white/10 text-white/60 hover:text-white"
+                            }`}
+                          >
+                            {asset}
+                          </button>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {selectedDiscipline === "PERSONAL BRANDING" && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-4 bg-white/[0.02] border border-white/10 rounded-[2px] flex flex-col gap-3"
+                    >
+                      <label className="font-azeret text-[10px] tracking-[0.2em] text-accent uppercase">
+                        EXECUTIVE PERSONAL BRANDING MODULES
+                      </label>
+                      <div className="flex flex-col gap-2">
+                        <span className="font-azeret text-[9px] text-white/50 tracking-[0.1em] uppercase">
+                          PROFESSIONAL ROLE
+                        </span>
+                        <div className="grid grid-cols-2 gap-2">
+                          {PERSONAL_ROLES.map((role) => (
+                            <button
+                              key={role}
+                              type="button"
+                              onClick={() => setPersonalRole(role)}
+                              className={`px-2.5 py-2 text-left font-azeret text-[9px] tracking-[0.05em] border rounded-[2px] transition-all ${
+                                personalRole === role
+                                  ? "bg-accent/15 border-accent text-white"
+                                  : "border-white/10 text-white/60 hover:text-white"
+                              }`}
+                            >
+                              {role}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="flex flex-col sm:flex-row gap-4 mt-2">
+                        <label className="flex items-center gap-2 cursor-pointer select-none">
+                          <input
+                            type="checkbox"
+                            checked={needPhotographyDirection}
+                            onChange={(e) => setNeedPhotographyDirection(e.target.checked)}
+                            className="size-3.5 accent-accent"
+                          />
+                          <span className="font-azeret text-[9px] tracking-[0.1em] text-white/70 uppercase">
+                            Photography Direction
+                          </span>
+                        </label>
+                        <label className="flex items-center gap-2 cursor-pointer select-none">
+                          <input
+                            type="checkbox"
+                            checked={needPersonalWebsite}
+                            onChange={(e) => setNeedPersonalWebsite(e.target.checked)}
+                            className="size-3.5 accent-accent"
+                          />
+                          <span className="font-azeret text-[9px] tracking-[0.1em] text-white/70 uppercase">
+                            Personal Executive Site
+                          </span>
+                        </label>
+                      </div>
+                    </motion.div>
+                  )}
 
                   {/* Timeline Selection */}
                   <div className="flex flex-col gap-3">
@@ -267,10 +461,36 @@ export default function ContactDrawer({ open, setOpen }) {
                     </div>
                   </div>
 
+                  {/* Budget Qualification */}
+                  <div className="flex flex-col gap-3">
+                    <label className="font-azeret text-[10px] tracking-[0.2em] text-white/50 uppercase">
+                      04 // ESTIMATED BUDGET SCALE (OPTIONAL)
+                    </label>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                      {BUDGET_RANGES.map((budget) => {
+                        const isSelected = selectedBudget === budget;
+                        return (
+                          <button
+                            key={budget}
+                            type="button"
+                            onClick={() => setSelectedBudget(budget)}
+                            className={`px-2.5 py-2 font-azeret text-[9px] tracking-[0.05em] border text-left transition-all rounded-[2px] ${
+                              isSelected
+                                ? "bg-accent/15 border-accent text-white"
+                                : "bg-transparent border-white/10 text-white/50 hover:text-white hover:border-white/20"
+                            }`}
+                          >
+                            {budget}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
                   {/* Scope Details */}
                   <div className="flex flex-col gap-3">
                     <label className="font-azeret text-[10px] tracking-[0.2em] text-white/50 uppercase">
-                      04 // ARCHITECTURAL REQUIREMENTS
+                      05 // {isBrandDiscipline ? "CREATIVE OBJECTIVES & CONTEXT" : "ARCHITECTURAL REQUIREMENTS"}
                     </label>
                     <textarea
                       rows={4}
@@ -278,7 +498,11 @@ export default function ContactDrawer({ open, setOpen }) {
                       onChange={(e) =>
                         setFormData({ ...formData, message: e.target.value })
                       }
-                      placeholder="Outline operational requirements, expected transaction volumes, legacy integrations, or specific target deadlines..."
+                      placeholder={
+                        isBrandDiscipline
+                          ? "Describe your brand vision, target audience, aesthetic benchmarks, existing assets, or specific collateral requirements..."
+                          : "Outline operational requirements, expected transaction volumes, legacy integrations, or specific target deadlines..."
+                      }
                       className="w-full bg-[#141414] border border-white/10 p-4 font-roc text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-accent transition-colors rounded-[2px] resize-none"
                     />
                   </div>
@@ -299,8 +523,7 @@ export default function ContactDrawer({ open, setOpen }) {
                         className="mt-0.5 size-4 accent-accent rounded-[2px] cursor-pointer"
                       />
                       <span className="font-azeret text-[10px] tracking-[0.1em] text-white/60 uppercase leading-relaxed group-hover:text-white/80 transition-colors">
-                        I agree to direct contact from Gerat engineering leads
-                        regarding this inquiry under confidentiality protocols.
+                        I agree to direct contact from Gerat leads regarding this inquiry under confidentiality protocols.
                       </span>
                     </label>
 
@@ -329,14 +552,15 @@ export default function ContactDrawer({ open, setOpen }) {
 
                   <div className="flex flex-col gap-2">
                     <span className="font-azeret text-[10px] tracking-[0.25em] text-accent uppercase">
-                      TELEMETRY RECEIVED // DISPATCH QUEUE 01
+                      TELEMETRY RECEIVED // {isBrandDiscipline ? "CREATIVE DISPATCH 02" : "DISPATCH QUEUE 01"}
                     </span>
                     <h3 className="font-roc text-2xl sm:text-3xl font-medium tracking-tight uppercase">
                       INQUIRY LOGGED SUCCESSFULLY
                     </h3>
                     <p className="font-roc text-sm text-white/60 max-w-sm">
-                      Our lead software architects will review your system
-                      parameters and follow up via email within 24 business hours.
+                      {isBrandDiscipline
+                        ? "Our creative directors and brand architects will review your parameters and follow up within 24 business hours."
+                        : "Our lead software architects will review your system parameters and follow up via email within 24 business hours."}
                     </p>
                   </div>
 
@@ -351,6 +575,10 @@ export default function ContactDrawer({ open, setOpen }) {
                     <div className="flex justify-between items-center text-white/50 border-b border-white/5 pb-2">
                       <span>PRIMARY DISCIPLINE:</span>
                       <span className="text-white">{selectedDiscipline}</span>
+                    </div>
+                    <div className="flex justify-between items-center text-white/50 border-b border-white/5 pb-2">
+                      <span>BUDGET BRACKET:</span>
+                      <span className="text-white/80">{selectedBudget}</span>
                     </div>
                     <div className="flex justify-between items-center text-white/50">
                       <span>SLA WINDOW:</span>

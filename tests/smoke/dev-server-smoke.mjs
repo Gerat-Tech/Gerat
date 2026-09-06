@@ -17,7 +17,7 @@ function fetchRoute(path) {
   });
 }
 
-function waitForReady(maxAttempts = 30) {
+function waitForReady(devServer, getServerLogs, maxAttempts = 60) {
   return new Promise((resolve, reject) => {
     let attempts = 0;
     const interval = setInterval(async () => {
@@ -31,7 +31,8 @@ function waitForReady(maxAttempts = 30) {
       } catch {
         if (attempts >= maxAttempts) {
           clearInterval(interval);
-          reject(new Error("Next.js dev server timed out waiting to become ready"));
+          const logs = getServerLogs();
+          reject(new Error(`Next.js dev server timed out waiting to become ready. Server logs:\n${logs}`));
         }
       }
     }, 500);
@@ -54,7 +55,7 @@ async function runDevServerSmokeTests() {
   devServer.stderr.on("data", (d) => (serverLogs += d.toString()));
 
   try {
-    await waitForReady();
+    await waitForReady(devServer, () => serverLogs, 60);
     console.log("  ✓ Dev server is ready and responding");
 
     const routes = [
