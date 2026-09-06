@@ -1,30 +1,78 @@
 "use client";
 
-export default function Hero() {
+import React from "react";
+import SectionLabel from "@/components/common/SectionLabel";
+import SplitText from "@/components/motion/SplitText";
+import FadeUp from "@/components/motion/FadeUp";
+
+/**
+ * Editorial Portfolio Hero (Spec §18, Content Replacement §7)
+ */
+export default function Hero({ activeCategory, onSelectCategory }) {
+  const categories = [
+    "ALL DISCIPLINES",
+    "ENTERPRISE ERP",
+    "PUBLIC SECTOR",
+    "AI & RAG NETWORKS",
+    "TELEMETRY",
+  ];
+
   return (
-    <div className="relative  mx-auto pt-[160px] md:pt-[220px] px-10 ">
-      {/* TOP CONTENT */}
-      <div className="flex gap-[24px]">
-        {/* LEFT SPACER */}
-        <div className="hidden w-full max-w-[207px] shrink-0 md:block" />
+    <div className="relative w-full max-w-[1440px] mx-auto pt-32 sm:pt-40 pb-12 px-4 sm:px-6 md:px-8 lg:px-10 text-white">
+      <div className="flex flex-col gap-6 max-w-4xl">
+        <SectionLabel index="03" label="CASE STUDIES & SELECTED WORK" />
 
-        {/* TEXT */}
-        <div className="max-w-[896px]">
-          <h1 className="flex items-center gap-[10px] text-sm uppercase text-white/60 font-mono">
-            <span className="w-[10px] h-[10px] bg-gray-300 rounded-[3px]" />
-            Portfolio
-          </h1>
-
-          <div className="mt-[20px] md:mt-[24px] uppercase text-[28px] md:text-[50px] text-white/80 font-normal leading-12">
-            Born at the edge of exponential. Where zero becomes one.
-          </div>
+        <div className="space-y-1 sm:space-y-2">
+          <SplitText
+            text="PROVEN ARCHITECTURES."
+            as="h1"
+            className="font-roc text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+          />
+          <SplitText
+            text="DELIVERED SYSTEMS."
+            as="div"
+            wordClassName="text-accent"
+            className="font-roc text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+          />
         </div>
+
+        <FadeUp delay={0.3} y={16}>
+          <p className="font-roc text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed">
+            An index of mission-critical software, custom enterprise platforms,
+            domain-grounded RAG systems, and institutional digital products
+            engineered by Gerat Software Solutions PLC.
+          </p>
+        </FadeUp>
+
+        {/* Category Filters */}
+        <FadeUp delay={0.4} y={16}>
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 pt-4 font-azeret text-[10px] tracking-[0.2em] uppercase select-none">
+            {categories.map((cat) => {
+              const isSelected = activeCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => onSelectCategory(cat)}
+                  className={`px-4 py-2 border rounded-[2px] transition-all duration-300 ${
+                    isSelected
+                      ? "border-accent bg-accent text-white font-bold"
+                      : "border-white/15 text-white/60 hover:text-white hover:border-white/40 bg-white/[0.02]"
+                  }`}
+                >
+                  {cat}
+                </button>
+              );
+            })}
+          </div>
+        </FadeUp>
       </div>
 
-      {/* SCROLL TEXT */}
-      <p className="mt-[32px] md:mt-[40px] border-b border-white/20 pb-[8px] text-[12px] uppercase text-white/60 font-azeret">
-        Scroll to explore
-      </p>
+      {/* Bottom Sub-Header Anchor */}
+      <div className="mt-12 pt-4 border-t border-white/10 flex items-center justify-between font-azeret text-[10px] tracking-[0.2em] text-white/40 uppercase">
+        <span>INDEX // 06 SYSTEMS CATALOGED</span>
+        <span>SCROLL TO EXPLORE ↓</span>
+      </div>
     </div>
   );
 }
