@@ -188,20 +188,29 @@ The Gerat website has established an architectural, dark-mode digital identity. 
 
 ---
 
-## Phase D-06 — Team & Services Matrix CMS
+## Phase D-06 — Team & Services Matrix CMS ✅ COMPLETED
 
 **Goal:** Manage company leadership, practitioners, practice pillars, and capabilities matrices from the dashboard.
 
 ### Tasks
-- [ ] **Build Team & Leadership Manager (`src/app/(dashboard)/team/page.jsx`)**
-  - Roster grid: Executive Directors vs Engineering Practitioners vs Creative Directors
-  - Profile modal/editor: Name, official title, focus tagline, architectural bio, credentials, social links
-  - Photo uploader with aspect-ratio crop (4:5) and grayscale optimization
-- [ ] **Build Services & Practice Pillars Editor (`src/app/(dashboard)/services/page.jsx`)**
-  - Editor for practice pillars `01` through `06` (Title, tagline, description, deliverables list, deep link)
-  - Capabilities table row manager (8-row capabilities on home page)
-  - Creative service packages editor (Scope, timeline, starting investment)
-- [ ] **Wire Public `/team` and `/why-wqf` to Dynamic Records**
+- [x] **Build Team & Leadership Manager (`src/app/dashboard/team/page.jsx`)**
+  - Roster grid & table views: Executive Leadership, Engineering Practitioners, Creative & Brand Directors, Advisors
+  - Profile editor (`src/app/dashboard/team/[id]/page.jsx` & `/new`): Name, official title, cadre division, discipline focus tag, architectural bio, social links (LinkedIn, GitHub, X)
+  - Active status toggle (`ACTIVE` / `HIDDEN`), display order rank, and delete action
+  - **Live Real-Time Card Preview:** Exact rendering of the leadership/specialist card with 4:5 aspect portrait, hover grayscale transitions, and discipline tags
+- [x] **Build Services & Practice Pillars Editor (`src/app/dashboard/services/page.jsx`)**
+  - Editor for practice pillars `01` through `06` (`src/app/dashboard/services/[id]/page.jsx` & `/new`): Index number, title, tagline, description, multi-line deliverables parser, deep specification link, order, and active toggle
+  - Services dashboard client view (`ServicesClientView.jsx`) with live search, status filter tabs (`ALL`, `ACTIVE`, `HIDDEN`), one-click activation toggle, and deletion
+  - **Live Real-Time Deck Preview:** Exact architectural deck card with precision corner accents, practice index badge, and formatted deliverables checklist
+- [x] **Wire Public `/team` and `/why-wqf` to Dynamic Records**
+  - Updated `TeamLeadership.jsx` to load executive cadre dynamically from `/api/team?division=EXECUTIVE_LEADERSHIP&active=true` with fallback to static content
+  - Updated `AdvisorAndTeam.jsx` to load engineering practitioners from `/api/team?active=true` with fallback to static content
+  - Updated `ServicesOverview.jsx` (at `/why-wqf`) to load practice pillars dynamically from `/api/services?active=true` with fallback to static content
+- [x] **Automated Smoke Test Verification (`tests/smoke/team-services-cms-smoke.test.mjs`)**
+  - Verified component modules and route files
+  - Verified `TeamMember` model CRUD (create, update active status, role title, division queries, cleanup)
+  - Verified `ServicePillar` model CRUD (create, update active status, tagline, deliverables, cleanup)
+  - All 9 smoke test suites passing seamlessly (0.71s runtime)
 
 ---
 

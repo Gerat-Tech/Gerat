@@ -6,6 +6,7 @@ import { runDashboardAuthSmokeTests } from "./dashboard-auth-smoke.test.mjs";
 import { runCrmIntakeSmokeTests } from "./crm-intake-smoke.test.mjs";
 import { runArticlesCmsSmokeTests } from "./articles-cms-smoke.test.mjs";
 import { runPortfolioCmsSmokeTests } from "./portfolio-cms-smoke.test.mjs";
+import { runTeamServicesCmsSmokeTests } from "./team-services-cms-smoke.test.mjs";
 
 async function main() {
   console.log("=================================================");
@@ -25,6 +26,7 @@ async function main() {
     { name: "CRM & Client Intake Pipeline", fn: runCrmIntakeSmokeTests },
     { name: "Research & Insights CMS", fn: runArticlesCmsSmokeTests },
     { name: "Flagship Portfolio CMS", fn: runPortfolioCmsSmokeTests },
+    { name: "Team & Services CMS", fn: runTeamServicesCmsSmokeTests },
   ];
 
   for (const suite of testSuites) {

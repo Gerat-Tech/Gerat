@@ -1,14 +1,52 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import SectionLabel from "@/components/common/SectionLabel";
 import SplitText from "@/components/motion/SplitText";
 import FadeUp from "@/components/motion/FadeUp";
 import { useNav } from "@/context/NavContext";
-import { servicePillars } from "@/content";
+import { servicePillars as defaultPillars } from "@/content";
 
 export default function ServicesOverview() {
   const { openContact } = useNav();
+  const [fetchedPillars, setFetchedPillars] = useState(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetch("/api/services?active=true")
+      .then((res) => res.json())
+      .then((data) => {
+        if (isMounted && data.success && data.pillars && data.pillars.length > 0) {
+          const normalized = data.pillars.map((p) => {
+            let dels = [];
+            if (Array.isArray(p.deliverables)) {
+              dels = p.deliverables;
+            } else if (typeof p.deliverables === "string" && p.deliverables.startsWith("[")) {
+              try {
+                dels = JSON.parse(p.deliverables);
+              } catch {
+                dels = p.deliverables.split("\n").filter(Boolean);
+              }
+            } else if (p.deliverables) {
+              dels = p.deliverables.split("\n").filter(Boolean);
+            }
+
+            return {
+              ...p,
+              deliverables: dels,
+            };
+          });
+          setFetchedPillars(normalized);
+        }
+      })
+      .catch(() => {});
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const servicePillars = fetchedPillars || defaultPillars;
 
   return (
     <div className="w-full text-white">
@@ -93,7 +131,7 @@ export default function ServicesOverview() {
                     CORE DELIVERABLES
                   </span>
                   <ul className="space-y-1.5 font-azeret text-[10px] tracking-[0.15em] text-white/60">
-                    {pillar.deliverables.map((del) => (
+                    {(pillar.deliverables || []).map((del) => (
                       <li key={del} className="flex items-center gap-2">
                         <span className="text-accent">•</span>
                         <span>{del}</span>
@@ -101,24 +139,24 @@ export default function ServicesOverview() {
                     ))}
                   </ul>
 
-                  {pillar.num === "05" && (
+                  {(pillar.deepLink || pillar.num === "05" || pillar.num === "06") && (
                     <div className="mt-4 pt-3 border-t border-white/5">
                       <a
-                        href="/services/brand-creative"
+                        href={
+                          pillar.deepLink ||
+                          (pillar.num === "05"
+                            ? "/services/brand-creative"
+                            : "/services/personal-branding")
+                        }
                         className="inline-flex items-center gap-1.5 font-azeret text-[9px] tracking-[0.2em] uppercase text-accent hover:text-white transition-colors"
                       >
-                        <span>VIEW BRAND & CREATIVE SPECIFICATION →</span>
-                      </a>
-                    </div>
-                  )}
-
-                  {pillar.num === "06" && (
-                    <div className="mt-4 pt-3 border-t border-white/5">
-                      <a
-                        href="/services/personal-branding"
-                        className="inline-flex items-center gap-1.5 font-azeret text-[9px] tracking-[0.2em] uppercase text-accent hover:text-white transition-colors"
-                      >
-                        <span>VIEW FOUNDER BRANDING SPECIFICATION →</span>
+                        <span>
+                          {pillar.num === "05"
+                            ? "VIEW BRAND & CREATIVE SPECIFICATION →"
+                            : pillar.num === "06"
+                            ? "VIEW FOUNDER BRANDING SPECIFICATION →"
+                            : "VIEW PRACTICE SPECIFICATION →"}
+                        </span>
                       </a>
                     </div>
                   )}

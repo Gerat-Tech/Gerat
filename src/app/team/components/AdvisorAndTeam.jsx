@@ -1,11 +1,41 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import FadeUp from "@/components/motion/FadeUp";
-
-import { engineeringSpecialists } from "@/content";
+import { engineeringSpecialists as defaultSpecialists } from "@/content";
 
 export default function AdvisorAndTeam() {
+  const [fetchedSpecialists, setFetchedSpecialists] = useState(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetch("/api/team?active=true")
+      .then((res) => res.json())
+      .then((data) => {
+        if (isMounted && data.success && data.members && data.members.length > 0) {
+          const nonExecs = data.members.filter(
+            (m) => m.division !== "EXECUTIVE_LEADERSHIP"
+          );
+          if (nonExecs.length > 0) {
+            const normalized = nonExecs.map((m) => ({
+              role: m.roleTitle || m.name,
+              discipline: m.focusTag || m.division.replace("_", " "),
+              focus: m.bio,
+              image: m.photoUrl || "/image/team/advisors/WQF__0000_Advisor-MarkCarney.webp",
+            }));
+            setFetchedSpecialists(normalized);
+          }
+        }
+      })
+      .catch(() => {});
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const engineeringSpecialists = fetchedSpecialists || defaultSpecialists;
+
   return (
     <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-16 text-white border-t border-white/10">
       <div className="flex flex-col gap-3 mb-12">
@@ -19,7 +49,7 @@ export default function AdvisorAndTeam() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {engineeringSpecialists.map((member, idx) => (
-          <FadeUp key={member.role} delay={0.08 * idx} y={20}>
+          <FadeUp key={member.role + idx} delay={0.08 * idx} y={20}>
             <div className="group relative bg-[#0a0a0a] border border-white/10 hover:border-accent/60 p-6 rounded-[3px] flex flex-col justify-between min-h-[300px] transition-all duration-300">
               {/* Precision Corner Accents */}
               <span className="absolute top-0 left-0 size-1.5 border-t border-l border-white/30 group-hover:border-accent transition-colors" />
