@@ -451,18 +451,18 @@ c096429 feat(test): update smoke tests to verify all inner pages and anti-legacy
 
 ---
 
-## Phase 10 — Contact & Footer
+## Phase 10 — Contact & Footer ✅ COMPLETED
 
 **Goal:** Build the contact drawer and footer as premium closing experiences.
 
 ### Tasks
 
-- [ ] **Contact drawer** (*Spec ref: §31*)
+- [x] **Contact drawer** (*Spec ref: §31*)
   - Side drawer from right with clip-path reveal
   - Background muted (backdrop-blur)
   - Form fields stagger 40–70ms
 
-- [ ] **Footer** (*Spec ref: §34*)
+- [x] **Footer** (*Spec ref: §34*)
   - Large final CTA + divider + navigation + social + legal + copyright
 
 ### Commit plan
@@ -473,17 +473,17 @@ c096429 feat(test): update smoke tests to verify all inner pages and anti-legacy
 
 ---
 
-## Phase 11 — Content Replacement
+## Phase 11 — Content Replacement ✅ COMPLETED
 
 **Goal:** Replace all WorldQuant Foundry placeholder content with Gerat content.
 
 ### Tasks
 
-- [ ] **Create data architecture** (*Spec ref: §49, §50*)
+- [x] **Create data architecture** (*Spec ref: §49, §50*)
   - `src/content/` directory with structured data files per section
   - Components consume data objects, never hardcode copy
 
-- [ ] **Replace all section content** per `GERAT_CONTENT_REPLACEMENT.md`
+- [x] **Replace all section content** per `GERAT_CONTENT_REPLACEMENT.md`
   - Hero, intro, ethos, services, capabilities, team, portfolio, insights
   - Footer, contact form, navigation labels
   - Logos, marks, company names
@@ -498,26 +498,26 @@ c096429 feat(test): update smoke tests to verify all inner pages and anti-legacy
 
 ---
 
-## Phase 12 — Cursor, Magnetic & Micro-interactions
+## Phase 12 — Cursor, Magnetic & Micro-interactions ✅ COMPLETED
 
 **Goal:** Add the premium interaction details that elevate the experience.
 
 ### Tasks
 
-- [ ] **Custom cursor** (*Spec ref: §22*)
+- [x] **Custom cursor** (*Spec ref: §22*)
   - Small dot default, larger ring on hover, context labels
   - Remove on touch devices, respect reduced-motion
 
-- [ ] **Magnetic interactions** (*Spec ref: §24*)
+- [x] **Magnetic interactions** (*Spec ref: §24*)
   - Hero CTA, final CTA — max displacement 6–12px, spring interpolation
 
-- [ ] **Button micro-interactions** (*Spec ref: §23*)
+- [x] **Button micro-interactions** (*Spec ref: §23*)
   - Background transition, text shift 1–3px, arrow travel 3–6px
 
-- [ ] **Image motion** (*Spec ref: §21*)
+- [x] **Image motion** (*Spec ref: §21*)
   - Hover scale 1→1.03, scroll clip-path reveal, parallax −20px to +20px
 
-- [ ] **Card hover motion** (*Spec ref: §20*)
+- [x] **Card hover motion** (*Spec ref: §20*)
   - Media shifts, border reacts, title shifts, 200–350ms
 
 ### Commit plan
@@ -529,17 +529,17 @@ c096429 feat(test): update smoke tests to verify all inner pages and anti-legacy
 
 ---
 
-## Phase 13 — Responsive & Mobile Adaptation
+## Phase 13 — Responsive & Mobile Adaptation ✅ COMPLETED
 
 **Goal:** Ensure every section works beautifully across desktop, tablet, and mobile.
 
 ### Tasks
 
-- [ ] **Desktop ≥ 1280px** — full layout, 3D, cursor, horizontal scroll
-- [ ] **Tablet 768–1279px** — simplified 3D, reduced parallax
-- [ ] **Mobile ≤ 767px** — mobile menu, swipe/snap, no cursor, tap replaces hover
-- [ ] **Touch interaction audit** (*Spec ref: §37*)
-- [ ] **Mobile motion rules** (*Spec ref: §36*) — shorter durations, smaller distances
+- [x] **Desktop ≥ 1280px** — full layout, 3D, cursor, horizontal scroll
+- [x] **Tablet 768–1279px** — simplified 3D, reduced parallax
+- [x] **Mobile ≤ 767px** — mobile menu, swipe/snap, no cursor, tap replaces hover
+- [x] **Touch interaction audit** (*Spec ref: §37*)
+- [x] **Mobile motion rules** (*Spec ref: §36*) — shorter durations, smaller distances
 
 ### Commit plan
 ```
@@ -550,20 +550,20 @@ c096429 feat(test): update smoke tests to verify all inner pages and anti-legacy
 
 ---
 
-## Phase 14 — Accessibility & Reduced Motion
+## Phase 14 — Accessibility & Reduced Motion ✅ COMPLETED
 
 **Goal:** Make the site usable for everyone.
 
 ### Tasks
 
-- [ ] **Keyboard navigation** — visible focus indicators, tab order
-- [ ] **Semantic HTML** — proper heading hierarchy, landmarks
-- [ ] **ARIA** — accessible buttons, dialog roles, labels
-- [ ] **Alt text** — all images
-- [ ] **Form labels** — all inputs
-- [ ] **Contrast** — WCAG AA minimum
-- [ ] **Reduced motion** (*Spec ref: §13*) — no parallax, instant transitions, static visuals
-- [ ] **Skip-to-content link**
+- [x] **Keyboard navigation** — visible focus indicators, tab order
+- [x] **Semantic HTML** — proper heading hierarchy, landmarks
+- [x] **ARIA** — accessible buttons, dialog roles, labels
+- [x] **Alt text** — all images
+- [x] **Form labels** — all inputs
+- [x] **Contrast** — WCAG AA minimum
+- [x] **Reduced motion** (*Spec ref: §13*) — no parallax, instant transitions, static visuals
+- [x] **Skip-to-content link**
 
 ### Commit plan
 ```
@@ -575,20 +575,20 @@ c096429 feat(test): update smoke tests to verify all inner pages and anti-legacy
 
 ---
 
-## Phase 15 — Performance & SEO
+## Phase 15 — Performance & SEO ✅ COMPLETED
 
 **Goal:** Achieve fast load times and strong search engine presence.
 
 ### Tasks
 
-- [ ] **Image optimization** — `next/image`, AVIF/WebP, lazy load
-- [ ] **3D bundle splitting** — dynamic import Three.js/R3F
-- [ ] **Font optimization** — `font-display: swap`, preload
-- [ ] **SEO metadata** — title, description, OG, Twitter cards
-- [ ] **Sitemap** — `sitemap.xml`
-- [ ] **Favicon** — proper set (SVG, apple-touch-icon, webmanifest)
-- [ ] **Lighthouse audit** — FCP < 1.5s, LCP < 2.5s, CLS < 0.1
-- [ ] **GSAP ScrollTrigger cleanup on unmount**
+- [x] **Image optimization** — `next/image`, AVIF/WebP, lazy load
+- [x] **3D bundle splitting** — dynamic import Three.js/R3F
+- [x] **Font optimization** — `font-display: swap`, preload
+- [x] **SEO metadata** — title, description, OG, Twitter cards
+- [x] **Sitemap** — `sitemap.xml`
+- [x] **Favicon** — proper set (SVG, apple-touch-icon, webmanifest)
+- [x] **Lighthouse audit** — FCP < 1.5s, LCP < 2.5s, CLS < 0.1
+- [x] **GSAP ScrollTrigger cleanup on unmount**
 
 ### Commit plan
 ```
@@ -600,29 +600,29 @@ c096429 feat(test): update smoke tests to verify all inner pages and anti-legacy
 
 ---
 
-## Phase 16 — Visual QA & Polish
+## Phase 16 — Visual QA & Polish ✅ COMPLETED
 
 **Goal:** Final comparison against reference at all viewports, motion QA, and polish.
 
 ### Tasks
 
-- [ ] **Viewport testing** at: 1440×900, 1280×800, 1024×768, 768×1024, 430×932, 390×844
+- [x] **Viewport testing** at: 1440×900, 1280×800, 1024×768, 768×1024, 430×932, 390×844
   - Navigation spacing, hero line breaks, 3D placement
   - Border alignment, image crop, CTA position
   - No overflow, no horizontal scroll except carousels
   - Text does not clip, mobile menu works
 
-- [ ] **Motion QA** (*Spec ref: §57*)
+- [x] **Motion QA** (*Spec ref: §57*)
   - Page load, hover, mouse leave, scroll down/up, fast/slow scroll
   - Resize, orientation, touch, keyboard tab
   - Reduced motion, WebGL unavailable, slow CPU
 
-- [ ] **Visual comparison pass** — side-by-side with reference site
+- [x] **Visual comparison pass** — side-by-side with reference site
   - It should feel: expensive, calm, technical, confident, intentional
 
-- [ ] **Cross-browser testing** — Chrome, Firefox, Safari, Edge
+- [x] **Cross-browser testing** — Chrome, Firefox, Safari, Edge
 
-- [ ] **Final content proofread**
+- [x] **Final content proofread**
 
 ### Commit plan
 ```
