@@ -1,7 +1,26 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useSyncExternalStore } from "react";
 import { motion, useSpring } from "framer-motion";
+
+function subscribeTouchMotion(callback) {
+  if (typeof window === "undefined") return () => {};
+  const touchQuery = window.matchMedia("(pointer: coarse)");
+  const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  touchQuery.addEventListener("change", callback);
+  motionQuery.addEventListener("change", callback);
+  return () => {
+    touchQuery.removeEventListener("change", callback);
+    motionQuery.removeEventListener("change", callback);
+  };
+}
+
+function getMagneticEnabled() {
+  if (typeof window === "undefined") return false;
+  const isTouch = window.matchMedia("(pointer: coarse)").matches;
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  return !isTouch && !prefersReduced;
+}
 
 /**
  * Editorial Subtle Magnetic Attraction Wrapper (Spec ref: §24)
@@ -15,20 +34,11 @@ export default function Magnetic({
   className = "",
 }) {
   const ref = useRef(null);
-  const [isEnabled, setIsEnabled] = useState(false);
+  const isEnabled = useSyncExternalStore(subscribeTouchMotion, getMagneticEnabled, () => false);
 
   const springConfig = { damping: 20, stiffness: 200, mass: 0.1 };
   const x = useSpring(0, springConfig);
   const y = useSpring(0, springConfig);
-
-  useEffect(() => {
-    const isTouch = window.matchMedia("(pointer: coarse)").matches;
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    setIsEnabled(!isTouch && !prefersReducedMotion);
-  }, []);
 
   const handleMouseMove = (e) => {
     if (!isEnabled || !ref.current) return;

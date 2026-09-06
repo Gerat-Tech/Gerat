@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useSyncExternalStore } from "react";
 import Navbar from "./Navbar";
 import PageLoader from "./PageLoader";
 import TransitionOverlay from "./TransitionOverlay";
@@ -8,13 +8,11 @@ import { PageTransitionProvider } from "@/context/PageTransitionContext";
 import { useNav } from "@/context/NavContext";
 import CustomCursor from "../common/CustomCursor";
 
+const emptySubscribe = () => () => {};
+
 export default function ClientWrapper({ children }) {
   const { isMenuOpen } = useNav();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
 
   if (!mounted) {
     return <div className="bg-[#050505] min-h-screen text-white">{children}</div>;

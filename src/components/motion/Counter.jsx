@@ -15,16 +15,13 @@ export default function Counter({
   decimals = 0,
   className = "",
 }) {
-  const [current, setCurrent] = useState(0);
+  const prefersReducedMotion = useReducedMotion();
+  const [current, setCurrent] = useState(() => (prefersReducedMotion ? target : 0));
   const elementRef = useRef(null);
   const hasAnimated = useRef(false);
-  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
-    if (prefersReducedMotion) {
-      setCurrent(target);
-      return;
-    }
+    if (prefersReducedMotion) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {

@@ -11,15 +11,13 @@ import Hero3DFallback from "./Hero3DFallback";
 export default function HeroDataField() {
   const canvasRef = useRef(null);
   const [hasWebGL, setHasWebGL] = useState(true);
-  const [reducedMotion, setReducedMotion] = useState(false);
+  const [reducedMotion] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  });
 
   useEffect(() => {
-    // Check reduced motion preference
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (mediaQuery.matches) {
-      setReducedMotion(true);
-      return;
-    }
+    if (reducedMotion) return;
 
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -180,7 +178,7 @@ export default function HeroDataField() {
       window.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("scroll", onScroll);
     };
-  }, []);
+  }, [reducedMotion]);
 
   if (reducedMotion || !hasWebGL) {
     return <Hero3DFallback />;

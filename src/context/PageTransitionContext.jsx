@@ -13,12 +13,17 @@ export function PageTransitionProvider({ children }) {
 
   useEffect(() => {
     // Trigger transition state on pathname change
-    setIsTransitioning(true);
+    const startId = requestAnimationFrame(() => {
+      setIsTransitioning(true);
+    });
     const timer = setTimeout(() => {
       setIsTransitioning(false);
     }, 450);
 
-    return () => clearTimeout(timer);
+    return () => {
+      cancelAnimationFrame(startId);
+      clearTimeout(timer);
+    };
   }, [pathname]);
 
   return (

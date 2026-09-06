@@ -1,7 +1,26 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useSyncExternalStore } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+
+function subscribeTouchMotion(callback) {
+  if (typeof window === "undefined") return () => {};
+  const touchQuery = window.matchMedia("(pointer: coarse)");
+  const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  touchQuery.addEventListener("change", callback);
+  motionQuery.addEventListener("change", callback);
+  return () => {
+    touchQuery.removeEventListener("change", callback);
+    motionQuery.removeEventListener("change", callback);
+  };
+}
+
+function getCursorEnabled() {
+  if (typeof window === "undefined") return false;
+  const isTouch = window.matchMedia("(pointer: coarse)").matches;
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  return !isTouch && !prefersReduced;
+}
 
 /**
  * Editorial Precision Custom Cursor (Spec ref: §22)
@@ -9,7 +28,7 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
  * Automatically disabled on touch screens and under prefers-reduced-motion.
  */
 export default function CustomCursor() {
-  const [isEnabled, setIsEnabled] = useState(false);
+  const isEnabled = useSyncExternalStore(subscribeTouchMotion, getCursorEnabled, () => false);
   const [isHovered, setIsHovered] = useState(false);
   const [cursorText, setCursorText] = useState("");
   const [isVisible, setIsVisible] = useState(false);
@@ -25,18 +44,7 @@ export default function CustomCursor() {
   const ringY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
-    // Only enable on non-touch devices and when reduced-motion is not requested
-    const isTouch = window.matchMedia("(pointer: coarse)").matches;
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    if (isTouch || prefersReducedMotion) {
-      setIsEnabled(false);
-      return;
-    }
-
-    setIsEnabled(true);
+    if (!isEnabled) return;
 
     const handleMouseMove = (e) => {
       mouseX.set(e.clientX);
@@ -79,7 +87,7 @@ export default function CustomCursor() {
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);
     };
-  }, [mouseX, mouseY, isVisible]);
+  }, [mouseX, mouseY, isVisible, isEnabled]);
 
   if (!isEnabled || !isVisible) return null;
 

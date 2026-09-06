@@ -37,7 +37,7 @@ export default function Footer() {
 
             <p className="font-roc text-base sm:text-lg text-white/70 max-w-xl leading-relaxed">
               We engineer mission-critical digital systems for businesses,
-              institutions, and public-sector operations. Let's discuss your
+              institutions, and public-sector operations. Let&apos;s discuss your
               architecture and delivery timeline.
             </p>
           </div>

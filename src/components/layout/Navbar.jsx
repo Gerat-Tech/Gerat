@@ -79,13 +79,13 @@ export default function Navbar() {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") {
-        if (contactOpen) setContactOpen(false);
+        if (isContactOpen) closeContact();
         if (isMenuOpen) setIsMenuOpen(false);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [contactOpen, isMenuOpen, setIsMenuOpen]);
+  }, [isContactOpen, closeContact, isMenuOpen, setIsMenuOpen]);
 
   return (
     <>

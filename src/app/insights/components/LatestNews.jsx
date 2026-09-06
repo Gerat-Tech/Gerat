@@ -42,7 +42,7 @@ export default function LatestNews({ activeCategory = "ALL ARTICLES" }) {
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center gap-3 font-azeret text-[9px] tracking-[0.15em] text-white/40 uppercase">
                     <span>{article.date}</span>
-                    <span>//</span>
+                    <span>{"//"}</span>
                     <span>{article.readTime}</span>
                   </div>
 

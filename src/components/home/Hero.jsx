@@ -109,11 +109,11 @@ export default function Hero() {
           <FadeUp delay={0.7} y={16}>
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-4 font-azeret text-[9px] sm:text-[10px] tracking-[0.2em] text-white/40 uppercase">
               <span>ARTIFICIAL INTELLIGENCE</span>
-              <span className="text-white/20">//</span>
+              <span className="text-white/20">{"//"}</span>
               <span>RAG SYSTEMS</span>
-              <span className="text-white/20">//</span>
+              <span className="text-white/20">{"//"}</span>
               <span>ENTERPRISE ERP</span>
-              <span className="text-white/20">//</span>
+              <span className="text-white/20">{"//"}</span>
               <span>GOVERNMENT TECH</span>
             </div>
           </FadeUp>

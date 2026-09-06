@@ -69,7 +69,7 @@ export default function TeamEthos() {
               <span className="absolute bottom-0 right-0 size-1.5 border-b border-r border-white/20 group-hover:border-accent" />
 
               <span className="font-azeret text-[11px] tracking-[0.2em] text-accent font-bold">
-                {p.num} //
+                {p.num} {"//"}
               </span>
 
               <div className="flex flex-col gap-2 my-auto pt-3">
