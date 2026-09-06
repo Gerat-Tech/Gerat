@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+/* for Whole Body: Everything will be RocGrotesk (Regular or Medium) automatically. */
+/* for a Specific Parts: Use the class font-azeret to use the Mono font. */
+
+@theme {
+  --font-roc: "RocGrotesk", sans-serif;
+  --font-azeret: "AzeretMono", monospace;
+}
+
+@font-face {
+  font-family: "RocGrotesk";
+  src: url("/assets/roc-grotesk-regular.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "RocGrotesk";
+  src: url("/assets/roc-grotesk-medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "AzeretMono";
+  src: url("/assets/azeret-mono-regular.otf") format("opentype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+body {
+  font-family: var(--font-roc) !important;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  /* 75% {
+    opacity: 0;
+  } */
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.blink-hover {
+  animation: blink 0.6s steps(2, start);
+}
+
+@keyframes glitch {
+  0% {
+    opacity: 1;
+    filter: none;
+  }
+
+  /* FAST INTENSE FLICKER AT START */
+  5% {
+    opacity: 0.1;
+    filter: brightness(2);
+  }
+  10% {
+    opacity: 1;
+    filter: none;
+  }
+
+  15% {
+    opacity: 0.2;
+    filter: brightness(2);
+  }
+  20% {
+    opacity: 1;
+    filter: none;
+  }
+
+  25% {
+    opacity: 0.3;
+    filter: contrast(2);
+  }
+  30% {
+    opacity: 1;
+    filter: none;
+  }
+
+  /* THEN STABLE */
+  100% {
+    opacity: 1;
+    filter: none;
+  }
+}
+
+.glitch-wrapper {
+  display: inline-block;
+}
+
+.glitch-wrapper:hover {
+  animation: glitch 0.1s linear 2;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* telephone custom css  */
+
+.phone-container {
+  width: 100%;
+}
+
+.phone-input {
+  width: 100% !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-size: 14px !important;
+  padding-left: 45px !important;
+}
+
+.phone-input:focus {
+  outline: none !important;
+}
+
+.phone-dropdown {
+  border: none !important;
+  background: transparent !important;
+}
+
+.phone-placeholder {
+  position: absolute;
+  left: 75px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+  font-size: 14px;
+  pointer-events: none;
+}
+html,
+body {
+  overflow-x: hidden;
+}
