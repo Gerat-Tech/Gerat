@@ -1,131 +1,147 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
+import SectionLabel from "../common/SectionLabel";
+import FadeUp from "../motion/FadeUp";
+import SplitText from "../motion/SplitText";
+
+const leaders = [
+  {
+    name: "DAWIT TEKLEBRHAN",
+    role: "FOUNDER & CHIEF EXECUTIVE OFFICER",
+    specialty: "ENTERPRISE SYSTEMS ARCHITECTURE // STRATEGY",
+    bio: "Guiding the architectural vision and engineering standards across Gerat's digital infrastructure platforms and client solutions.",
+    image: "/image/team/leadership/WQF__0000_Founder-IgorTulchinsky.webp",
+  },
+  {
+    name: "YOHANNES TADESSE",
+    role: "HEAD OF ARTIFICIAL INTELLIGENCE",
+    specialty: "RAG PIPELINES // VECTOR RETRIEVAL // LLMS",
+    bio: "Directing the applied AI laboratory, specialized RAG networks, and domain-grounded intelligence models for institutional workflows.",
+    image: "/image/team/leadership/WQF__0004_Chairman-and-Co-Founder_Amir-Husain-2.webp",
+  },
+  {
+    name: "SOLOMON KASSAHUN",
+    role: "HEAD OF ENTERPRISE ENGINEERING",
+    specialty: "DISTRIBUTED CLOUD // ERP PLATFORMS // SECURITY",
+    bio: "Overseeing cloud-native infrastructure, high-concurrency database deployments, and rigorous cryptographic verification standards.",
+    image: "/image/team/leadership/WQF__0005_CEO-and-Co-Founder_Steven-Lau.webp",
+  },
+];
 
 export default function OurLeadership() {
-  const [expandedIndex, setExpandedIndex] = useState(null);
-  const partners = [
-    {
-      name: "Igor Tulchinsky",
-      role: "Founder",
-      image: "/image/home/leadership/WQF__0000_Founder-IgorTulchinsky.webp",
-      position: "50% 33%",
-    },
-    {
-      name: "Amir Husain",
-      role: "Chairman",
-      image:
-        "/image/home/leadership/WQF__0004_Chairman-and-Co-Founder_Amir-Husain-2.webp",
-      position: "50% 27%",
-    },
+  const [activeIdx, setActiveIdx] = useState(0);
 
-    {
-      name: "Steven Lau",
-      role: "CEO",
-      image:
-        "/image/home/leadership/WQF__0005_CEO-and-Co-Founder_Steven-Lau.webp",
-
-      position: "50% 30%",
-    },
-  ];
   return (
-    <section className="w-full min-h-screen bg-black rounded-t-[2xl]">
-      <div className="flex flex-row justify-between p-8">
-        <h2 className="text-[16px] font-normal">Our Leadership</h2>
-        <h2 className="text-[16px] font-normal">Our Leadership</h2>
-        <h2 className="text-[16px] font-normal">Our Leadership</h2>
-      </div>
-      <div className=" mt-20 flex  flex-col items-center gap-[15px] text-center md:mb-[100px]">
-        <p className="max-w-[330px] text-[12px] font-azeret text-white/60 ">
-          A global network of advisors, operators and investors. The people who
-          built what’s now, helping you build what’s next.
-        </p>
-
-        <div
-          className="m-4 p2-mono text-white/70 text-[14px] relative isolate flex -translate-x-[5px] 
-            overflow-hidden transition-transform duration-400 ease-in-out group-hover:translate-x-[5px]"
-        >
-          <span className=" px-6 py-3 uppercase transition-transform duration-400 ease-in-out group-hover:-translate-y-full">
-            meet the team
-          </span>
-
-          <span className="absolute inset-0 px-6 py-3 uppercase translate-y-full transition-transform duration-400 ease-in-out group-hover:translate-y-0">
-            meet the team
-          </span>
-
-          <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white" />
-          <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white" />
-          <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-white" />
-          <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white" />
-        </div>
-      </div>
-
-      {/* part: Partners image and text  */}
-      <div className="flex flex-col gap-10">
-        {/* Top Title */}
-        <div className="md:text-4xl text-3xl font-bold mx-auto hidden max-w-[666px] text-center uppercase md:block">
-          <div className="overflow-clip">
-            <div className="transition-transform duration-500">
-              We spot trends before
-            </div>
+    <section
+      id="leadership"
+      aria-label="Leadership"
+      className="relative w-full bg-[#050505] text-white py-24 sm:py-32 border-b border-white/10"
+    >
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16 lg:mb-20">
+          <div className="flex flex-col gap-4 max-w-2xl">
+            <SectionLabel index="04" label="LEADERSHIP" />
+            <SplitText
+              text="ENGINEERING LEADERSHIP."
+              as="h2"
+              className="font-roc text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
+            />
+            <SplitText
+              text="DOMAIN EXPERIENCE."
+              as="h2"
+              wordClassName="text-accent"
+              className="font-roc text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
+            />
           </div>
-          <div className="overflow-clip">
-            <div className="transition-transform duration-500">
-              they're trends.{" "}
-              <span className="md:hidden">
-                Transform them into companies that matter.
-              </span>
-            </div>
-          </div>
-        </div>
 
-        {/* Partners Grid */}
-        <div
-          className="group/partners relative z-1 grid w-full grid-cols-1 md:grid-cols-3 md:px-0"
-          onMouseLeave={() => setExpandedIndex(null)}
-        >
-          {partners.map((partner, index) => (
-            <div
-              key={index}
-              className="relative group/card h-[400px] md:h-[480px] w-full cursor-pointer"
-              onClick={() =>
-                setExpandedIndex(index === expandedIndex ? null : index)
-              }
+          <FadeUp delay={0.3}>
+            <Link
+              href="/team"
+              className="group relative isolate inline-flex items-center font-azeret text-[11px] uppercase tracking-[0.2em] px-6 py-3 border border-white/20 hover:border-accent hover:bg-accent/10 text-white/90 hover:text-white transition-all duration-300 rounded-[2px]"
             >
-              <button className="relative isolate flex h-full w-full items-end justify-end overflow-hidden bg-[#111111] outline-hidden">
-                {/* Floating Job Title */}
-                <div
-                  className={`flex items-center gap-[10px] pr-[20px] pb-[15px] z-10 transition-transform duration-300 
-                ${expandedIndex === index ? "translate-y-0" : "md:translate-y-[100%] group-hover/card:translate-y-0"}`}
-                >
-                  <div className="bg-[#dadada] size-2.5 rounded-[3px]"></div>
-                  <p className="font-mono text-sm text-[#dadada] uppercase">
-                    {partner.role}
-                  </p>
+              <span>MEET ALL ENGINEERS & ADVISORS</span>
+              <span className="ml-2 text-white/40 group-hover:text-accent group-hover:translate-x-1 transition-all">
+                →
+              </span>
+              <span className="absolute -top-[1px] -left-[1px] size-1.5 border-t border-l border-white/40 group-hover:border-accent" />
+              <span className="absolute -bottom-[1px] -right-[1px] size-1.5 border-b border-r border-white/40 group-hover:border-accent" />
+            </Link>
+          </FadeUp>
+        </div>
+
+        {/* Editorial Leader Showcase Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          {leaders.map((leader, idx) => {
+            const isSelected = activeIdx === idx;
+            return (
+              <div
+                key={leader.name}
+                tabIndex={0}
+                onMouseEnter={() => setActiveIdx(idx)}
+                onFocus={() => setActiveIdx(idx)}
+                className={`group relative flex flex-col bg-[#0f0f0f] border rounded-[4px] overflow-hidden transition-all duration-400 p-6 sm:p-8 cursor-pointer outline-none ${
+                  isSelected
+                    ? "border-accent shadow-[0_0_24px_rgba(255,74,0,0.12)]"
+                    : "border-white/10 hover:border-white/30"
+                }`}
+              >
+                {/* Precision Corner Accents */}
+                <span
+                  className={`absolute top-0 left-0 size-2 border-t border-l transition-colors duration-300 ${
+                    isSelected ? "border-accent" : "border-white/20"
+                  }`}
+                />
+                <span
+                  className={`absolute top-0 right-0 size-2 border-t border-r transition-colors duration-300 ${
+                    isSelected ? "border-accent" : "border-white/20"
+                  }`}
+                />
+                <span
+                  className={`absolute bottom-0 left-0 size-2 border-b border-l transition-colors duration-300 ${
+                    isSelected ? "border-accent" : "border-white/20"
+                  }`}
+                />
+                <span
+                  className={`absolute bottom-0 right-0 size-2 border-b border-r transition-colors duration-300 ${
+                    isSelected ? "border-accent" : "border-white/20"
+                  }`}
+                />
+
+                {/* Portrait */}
+                <div className="relative aspect-4/5 w-full overflow-hidden bg-black/60 rounded-[2px] mb-6">
+                  <img
+                    src={leader.image}
+                    alt={leader.name}
+                    className="w-full h-full object-cover object-top grayscale contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f0f0f] via-transparent to-transparent" />
+                  <div className="absolute top-3 right-3 font-azeret text-[9px] tracking-[0.2em] text-white/50 bg-black/60 px-2 py-0.5 border border-white/10">
+                    0{idx + 1}
+                  </div>
                 </div>
 
-                {/* Background Image */}
-                <div
-                  className={`absolute inset-0 -z-1 size-full bg-cover bg-no-repeat 
-                ${expandedIndex === index}`}
-                  style={{
-                    backgroundImage: `url(${partner.image})`,
-                    backgroundPosition: partner.position,
-                  }}
-                />
-              </button>
-            </div>
-          ))}
-        </div>
-
-        {/* Bottom Title */}
-        <div className="md:text-4xl text-3xl font-bold mx-auto hidden max-w-[666px] text-center uppercase md:block">
-          <div className="overflow-clip">
-            <div>Transform them into</div>
-          </div>
-          <div className="overflow-clip">
-            <div>companies that matter.</div>
-          </div>
+                {/* Content */}
+                <div className="flex flex-col gap-2">
+                  <span className="font-azeret text-[9px] tracking-[0.2em] text-accent uppercase">
+                    {leader.role}
+                  </span>
+                  <h3 className="font-roc text-xl font-bold tracking-tight uppercase text-white">
+                    {leader.name}
+                  </h3>
+                  <span className="font-azeret text-[8px] tracking-[0.15em] text-white/40 uppercase">
+                    {leader.specialty}
+                  </span>
+                  <p className="font-roc text-xs text-white/60 leading-relaxed pt-2">
+                    {leader.bio}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

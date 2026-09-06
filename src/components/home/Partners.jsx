@@ -1,93 +1,93 @@
 "use client";
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import React from "react";
+import SectionLabel from "../common/SectionLabel";
+import FadeUp from "../motion/FadeUp";
+import SplitText from "../motion/SplitText";
+import { useNav } from "@/context/NavContext";
+
+const techStack = [
+  { name: "REACT & NEXT.JS", category: "FRONTEND & APPLICATION" },
+  { name: "PYTHON & FASTAPI", category: "AI & INTELLIGENT BACKEND" },
+  { name: "POSTGRESQL & TIMESCALE", category: "RELATIONAL & TIME-SERIES" },
+  { name: "APACHE KAFKA", category: "EVENT STREAMING & TELEMETRY" },
+  { name: "QDRANT & WEAVIATE", category: "VECTOR SEARCH & RAG" },
+  { name: "DOCKER & KUBERNETES", category: "CLOUD ORCHESTRATION" },
+  { name: "TAILWIND & GSAP", category: "CHOREOGRAPHY & MOTION" },
+  { name: "ZERO-TRUST CRYPTO", category: "SYSTEM HARDENING & AUDIT" },
+];
 
 export default function Partners() {
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    ScrollTrigger.create({
-      trigger: sectionRef.current,
-      start: "top top",
-      end: "+=200%",
-      pin: true,
-      scrub: true,
-    });
-  }, []);
+  const { openContact } = useNav();
 
   return (
     <section
-      ref={sectionRef}
-      className="w-full min-h-screen overflow-hidden bg-black py-[120px] md:py-[200px]"
+      id="ecosystem"
+      aria-label="Technology Ecosystem"
+      className="relative w-full bg-[#070707] text-white py-24 sm:py-32"
     >
-      <div className="max-w-9xl mx-auto flex justify-between">
-        {/* left side content  */}
-        <div className="px-10">
-          <div className="">
-            <h2 className=" text-[14px] font-normal mb-4 uppercase text-white/80">
-              partners
-            </h2>
-            <p className="uppercase font-normal text-[30px] max-w-[500px] text-white leading-10">
-              Partner at the edge of
-              <br />
-              what’s possible
-            </p>
-            <div className=" mt-4 mb-8 w-full max-w-[450px] h-[1px] bg-white/20 " />
-            <p className="max-w-[450px] text-[12px] font-azeret text-white/50 uppercase">
-              Join forces with the ventures that are creating new markets.
-              Partner early, transform fast, own the edge.
-            </p>
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
+        {/* Header */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 items-start">
+          <div className="lg:col-span-7 flex flex-col gap-4">
+            <SectionLabel index="06" label="TECHNOLOGY & ECOSYSTEM" />
+            <SplitText
+              text="MODERN INFRASTRUCTURE."
+              as="h2"
+              className="font-roc text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
+            />
+            <SplitText
+              text="STANDARDIZED FOUNDATIONS."
+              as="h2"
+              wordClassName="text-accent"
+              className="font-roc text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
+            />
           </div>
 
-          <div className="mt-8 ">
-            <a
-              href="https://www.worldquantfoundry.com/portfolio"
-              className="group relative isolate inline-block hover:animate-glitch-hover motion-reduce:hover:animate-none"
-            >
-              <div className="px-[20px] py-[10px]">
-                {/* DOT */}
-                <div className="bg-white button--dot size-[10px] -translate-x-[24px] rounded-[3px] opacity-0 blur-[20px] transition-all duration-400 ease-in-out group-hover:-translate-x-[5px] group-hover:opacity-100 group-hover:blur-0" />
+          <div className="lg:col-span-5 flex flex-col items-start gap-6 lg:border-l lg:border-white/10 lg:pl-10 pt-2">
+            <FadeUp delay={0.2}>
+              <p className="font-roc text-base text-white/70 leading-relaxed">
+                We build exclusively with proven, open, and battle-tested
+                technologies that guarantee vendor independence, high auditability,
+                and long-term operational viability.
+              </p>
+            </FadeUp>
 
-                {/* TEXT */}
-                <div
-                  className="p2-mono text-white relative isolate flex -translate-x-[5px] overflow-hidden transition-transform duration-400 ease-in-out 
-                      group-hover:translate-x-[5px]"
-                >
-                  <span className=" text-[12px] uppercase transition-transform duration-400 ease-in-out group-hover:-translate-y-full">
-                    partner with us
-                  </span>
-
-                  <span className="absolute inset-0 text-[12px] uppercase translate-y-full transition-transform duration-400 ease-in-out group-hover:translate-y-0">
-                    partner with us
-                  </span>
-                </div>
-              </div>
-
-              {/* CORNER  */}
-
-              <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white" />
-              <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white" />
-              <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-white" />
-              <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white" />
-            </a>
+            <FadeUp delay={0.3}>
+              <button
+                type="button"
+                onClick={openContact}
+                className="group relative isolate inline-flex items-center font-azeret text-[11px] uppercase tracking-[0.2em] px-6 py-3 bg-white text-black font-semibold hover:bg-accent hover:text-white transition-all duration-300 rounded-[2px]"
+              >
+                <span>COMMISSION A BUILD</span>
+                <span className="ml-2 group-hover:translate-x-1 transition-transform">
+                  →
+                </span>
+                <span className="absolute -top-[1px] -left-[1px] size-1.5 border-t border-l border-white group-hover:border-accent" />
+                <span className="absolute -bottom-[1px] -right-[1px] size-1.5 border-b border-r border-white group-hover:border-accent" />
+              </button>
+            </FadeUp>
           </div>
         </div>
 
-        {/* RIGHT SIDE - wave particle animation */}
-        <div>
-          <div className="h-full mr-100  flex items-center justify-center ">
-            <div className="bg-white/30 p-4 text-white">
-              <p>wave particle animation will be here</p>
-              <p>I will come back here, once the structure is ready</p>
+        {/* Tech Badges Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          {techStack.map((tech, idx) => (
+            <FadeUp key={tech.name} delay={0.06 * idx} y={16}>
+              <div className="group relative bg-[#0f0f0f] border border-white/10 hover:border-accent/60 p-6 rounded-[3px] flex flex-col justify-between min-h-[120px] transition-all duration-300">
+                <span className="absolute top-0 left-0 size-1.5 border-t border-l border-white/20 group-hover:border-accent transition-colors" />
+                <span className="absolute bottom-0 right-0 size-1.5 border-b border-r border-white/20 group-hover:border-accent transition-colors" />
 
-              <p className="mt-12 text-2xl text-blue-200">
-                Developer — Rafikul Shaikh
-              </p>
-            </div>
-          </div>
+                <span className="font-azeret text-[8px] sm:text-[9px] tracking-[0.2em] text-white/40 uppercase">
+                  {tech.category}
+                </span>
+
+                <h3 className="font-roc text-lg font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
+                  {tech.name}
+                </h3>
+              </div>
+            </FadeUp>
+          ))}
         </div>
       </div>
     </section>
