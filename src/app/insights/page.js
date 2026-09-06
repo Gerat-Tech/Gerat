@@ -1,14 +1,21 @@
+"use client";
+
+import React, { useState } from "react";
+import InsightsHero from "./components/InsightsHero";
+import LatestNews from "./components/LatestNews";
 import Footer from "@/components/layout/Footer";
-import InsightsHero from "@/app/insights/components/InsightsHero";
-import LatestNews from "@/app/insights/components/LatestNews";
 
+export default function InsightsPage() {
+  const [activeCategory, setActiveCategory] = useState("ALL ARTICLES");
 
-export default function Insight(){
-    return (
-        <div>
-           <InsightsHero/>
-           <LatestNews/>
-           <Footer/>
-        </div>
-    )
+  return (
+    <main className="bg-[#050505] min-h-screen text-white selection:bg-accent selection:text-black">
+      <InsightsHero
+        activeCategory={activeCategory}
+        onSelectCategory={setActiveCategory}
+      />
+      <LatestNews activeCategory={activeCategory} />
+      <Footer />
+    </main>
+  );
 }

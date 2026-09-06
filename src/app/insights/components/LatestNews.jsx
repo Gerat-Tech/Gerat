@@ -1,125 +1,132 @@
 "use client";
 
-import Button from "../../../components/common/Button";
+import React from "react";
+import FadeUp from "@/components/motion/FadeUp";
 
-export default function LatestNews() {
-  const news = [
-    {
-      title:
-        "WorldQuant Foundry Chairman, Amir Husain, Speaks at Future Investment Initiative",
-      desc: "WorldQuant Foundry Chairman, Amir Husain, Speaks at Future Investment Initiative 2025 on Deep Tech and AI Innovation",
-      img: "/image/LatestNews/01_Picture.webp",
-      read: "3 min read",
-      date: "Apr 16 2026",
-    },
-    {
-      title: "WorldQuant Foundry Appoints Dr. Dmitry Green",
-      desc: "WorldQuant Foundry Appoints Dr. Dmitry Green as Senior Quantum Computing Advisor to Accelerate Deep-Tech Innovation",
-      img: "/image/LatestNews/02_Advisor_Dmitry-Green.webp",
-      read: "5 min read",
-      date: "Mar 18 2026",
-      span: "md:col-span-2",
-    },
-    {
-      title: "WorldQuant Foundry Appoints Dr. Christopher Mason",
-      desc: "WorldQuant Foundry Appoints Dr. Christopher Mason as Senior Healthcare Advisor to Spearhead AI-Driven Healthcare Innovation",
-      img: "/image/LatestNews/03_Chris-Mason-hero.webp",
-      read: "3 min read",
-      date: "Jul 20 2025",
-    },
-    {
-      title: "WorldQuant Foundry Congratulates Chairman Amir Husain",
-      desc: "WorldQuant Foundry Congratulates Chairman Amir Husain on Receiving The University of Texas' Presidential Citation Award",
-      img: "/image/LatestNews/04_Amir_Husain_Hero.webp",
-      read: "4 min read",
-      date: "Jun 29 2025",
-    },
-    {
-      title: "WorldQuant Foundry Launches Alpha Deal",
-      desc: "	WorldQuant Foundry Launches Alpha Deal to Pioneer the Future of Deal Intelligence for Private Asset Investors",
-      img: "/image/LatestNews/05_Apha_deal_launch.webp",
-      read: "5 min read",
-      date: "Jun 11 2025",
-      span: "md:col-span-2",
-    },
-    {
-      title: "WorldQuant Foundry Partners with StartX Accelerator",
-      desc: "WorldQuant Foundry Partners with StartX Accelerator to Drive Entrepreneurial Innovation",
-      img: "/image/LatestNews/06_jorik-kleen.webp",
-      read: "3 min read",
-      date: "Nov 26 2024",
-    },
-    {
-      title: "WorldQuant Foundry Launches",
-      desc: "WorldQuant Foundry Launches",
-      img: "/image/LatestNews/07_worldquant-foundry-launch.webp",
-      read: "3 min read",
-      date: "Nov 5 2024",
-    },
-  ];
+const articles = [
+  {
+    id: 1,
+    title: "Architecting Deterministic RAG Pipelines for Institutional Knowledge Retrieval",
+    category: "APPLIED AI",
+    date: "AUG 2026",
+    readTime: "6 MIN READ",
+    excerpt:
+      "A deep dive into contextual document chunking, hybrid BM25 + dense vector indexing, and confidence-threshold filtering for compliance-critical environments.",
+    image: "/image/LatestNews/01_Picture.webp",
+    featured: true,
+  },
+  {
+    id: 2,
+    title: "Zero-Downtime Event Sourcing: Migrating Legacy Municipal Databases to Distributed Kafka",
+    category: "SYSTEM ARCHITECTURE",
+    date: "JUL 2026",
+    readTime: "8 MIN READ",
+    excerpt:
+      "How we decoupled multi-decade monolithic relational stores into an immutable event log without disrupting day-to-day citizen registry transactions.",
+    image: "/image/LatestNews/02_Advisor_Dmitry-Green.webp",
+  },
+  {
+    id: 3,
+    title: "Cryptographic Integrity in Civic Registries: Tamper-Evident Document Verification",
+    category: "SECURITY",
+    date: "JUN 2026",
+    readTime: "5 MIN READ",
+    excerpt:
+      "Implementing Merkle-tree validation and zero-knowledge verification proofs for inter-agency document authentication at national scale.",
+    image: "/image/LatestNews/03_Chris-Mason-hero.webp",
+  },
+  {
+    id: 4,
+    title: "Scaling High-Concurrency Enterprise ERPs Under Heavy Supply Chain Volatility",
+    category: "ENTERPRISE ERP",
+    date: "MAY 2026",
+    readTime: "7 MIN READ",
+    excerpt:
+      "Architectural strategies for distributed warehouse reconciliation, optimistic concurrency locks, and real-time inventory ledger synchronization.",
+    image: "/image/LatestNews/04_Amir_Husain_Hero.webp",
+  },
+  {
+    id: 5,
+    title: "Local LLMs vs. Cloud Endpoints: Cost, Latency, and Sovereignty in Sensitive Workflows",
+    category: "APPLIED AI",
+    date: "APR 2026",
+    readTime: "9 MIN READ",
+    excerpt:
+      "Analyzing on-premise quantized model deployments against frontier cloud APIs across latency metrics, operational cost ceilings, and institutional data privacy.",
+    image: "/image/LatestNews/05_Apha_deal_launch.webp",
+  },
+  {
+    id: 6,
+    title: "Designing Zero-Trust API Gateways for Inter-Agency Government Platforms",
+    category: "SECURITY",
+    date: "MAR 2026",
+    readTime: "6 MIN READ",
+    excerpt:
+      "Hardening public sector infrastructure through dynamic mTLS certificate rotation, token-bucket throttling, and deep semantic payload inspection.",
+    image: "/image/LatestNews/06_jorik-kleen.webp",
+  },
+];
+
+export default function LatestNews({ activeCategory = "ALL ARTICLES" }) {
+  const filteredArticles =
+    activeCategory === "ALL ARTICLES"
+      ? articles
+      : articles.filter((a) => a.category === activeCategory);
 
   return (
-    <section className="px-10  pt-[64px] pb-[176px] md:py-[80px]">
-      {/* Heading */}
-      <h2 className="text-[22px] text-white/80 border-white/80 border-b pb-[11px] uppercase">
-        Latest News
-      </h2>
+    <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 pb-24 sm:pb-36 text-white">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {filteredArticles.map((article, idx) => (
+          <FadeUp key={article.id} delay={0.08 * idx} y={24}>
+            <article className="group relative bg-[#0e0e0e] border border-white/10 hover:border-accent/60 rounded-[4px] overflow-hidden transition-all duration-300 flex flex-col justify-between h-full">
+              {/* Precision Corner Accents */}
+              <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30 group-hover:border-accent transition-colors z-20" />
+              <span className="absolute top-0 right-0 size-2 border-t border-r border-white/30 group-hover:border-accent transition-colors z-20" />
+              <span className="absolute bottom-0 left-0 size-2 border-b border-l border-white/30 group-hover:border-accent transition-colors z-20" />
+              <span className="absolute bottom-0 right-0 size-2 border-b border-r border-white/30 group-hover:border-accent transition-colors z-20" />
 
-      {/* Grid */}
-      <div className="overflow-hidden">
-        <div className="-mt-px grid pb-[80px] md:mx-[-24px] md:grid-cols-4 md:gap-y-[80px]">
-          {news.map((item, i) => (
-            <div
-              key={i}
-              className={`border-white/20 md:-mt-px md:border-l  ${item.span || ""}`}
-            >
-              <article className="group relative h-full flex flex-col py-[24px] pb-[32px] text-center md:px-[24px] md:pt-[24px] md:pb-[64px]">
-                {/* Image */}
-                <div className="relative aspect-square w-full overflow-hidden md:aspect-[304/250]">
-                  <img
-                    src={item.img}
-                    alt=""
-                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
+              {/* Image Banner */}
+              <div className="relative aspect-16/10 w-full overflow-hidden bg-black/60">
+                <img
+                  src={article.image}
+                  alt={article.title}
+                  className="w-full h-full object-cover grayscale contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0e] via-transparent to-transparent" />
+                <div className="absolute top-3 left-3 font-azeret text-[9px] tracking-[0.2em] text-accent bg-black/80 px-2.5 py-1 border border-accent/40 rounded-[1px] uppercase">
+                  {article.category}
+                </div>
+              </div>
+
+              {/* Card Body */}
+              <div className="p-6 sm:p-8 flex flex-col justify-between flex-1 gap-6">
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center gap-3 font-azeret text-[9px] tracking-[0.15em] text-white/40 uppercase">
+                    <span>{article.date}</span>
+                    <span>//</span>
+                    <span>{article.readTime}</span>
+                  </div>
+
+                  <h2 className="font-roc text-xl sm:text-2xl font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors leading-tight">
+                    {article.title}
+                  </h2>
+
+                  <p className="font-roc text-xs sm:text-sm text-white/65 leading-relaxed">
+                    {article.excerpt}
+                  </p>
                 </div>
 
-                {/* Title */}
-                <h3 className=" text-[22px] text-white/80  leading-5.5 mt-[24px] uppercase md:mt-[32px]">
-                  <a href="#" className="box-link">
-                    {item.title}
-                  </a>
-                </h3>
-
-                {/* Description */}
-                <p className=" text-[14px] text-white/50 leading-4  mt-[16px]">
-                  {item.desc}
-                </p>
-
-                {/* Meta */}
-                <div className=" text-[11px] font-azeret text-white/80 mt-[16px] flex justify-center gap-[12px] leading-none uppercase">
-                  <span>{item.read}</span>
-                  <span className="bg-white/20 w-px"></span>
-                  <span>{item.date}</span>
+                <div className="pt-4 border-t border-white/10 flex items-center justify-between font-azeret text-[10px] tracking-[0.2em] uppercase text-white/50 group-hover:text-white">
+                  <span>READ BLUEPRINT</span>
+                  <span className="text-accent group-hover:translate-x-1 transition-transform">
+                    →
+                  </span>
                 </div>
-
-                {/* Border */}
-                <div className="border-white/20 pointer-events-none absolute inset-0 border-b md:inset-x-[24px] md:border-y"></div>
-              </article>
-            </div>
-          ))}
-        </div>
-
-        {/* Button */}
-        <div className="mx-auto max-w-[260px]">
-          <Button
-            padding="px-7 py-3"
-            textColor="text-white/80"
-            bgColor="bg-white"
-            borderColor="border-white"
-          >
-            See All Latest News
-          </Button>
-        </div>
+              </div>
+            </article>
+          </FadeUp>
+        ))}
       </div>
     </section>
   );
