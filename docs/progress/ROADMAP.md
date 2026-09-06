@@ -419,27 +419,34 @@ ae0e122 feat(portfolio): rebuild portfolio Hero with discipline filters and edit
 
 ---
 
-## Phase 9 — Team, Insights & Article Pages
+## Phase 9 — Team, Insights & Inner Pages ✅ COMPLETED
 
-**Goal:** Build remaining inner pages with editorial design quality.
+**Goal:** Build remaining inner pages with editorial design quality and Gerat branding.
 
 ### Tasks
 
-- [ ] **Team page** (*Spec ref: §28*)
-  - Team hero, leadership section, founders section, advisors
+- [x] **Team page** (*Spec ref: §28, Content §6*)
+  - `TeamHero`: Editorial typography and engineering ethos statement
+  - `TeamLeadership`: Executive engineering directors and founders
+  - `AdvisorAndTeam`: Core engineering specialists across distributed backends, AI, cloud, security
+  - `TeamEthos`: 4 foundational operational principles
 
-- [ ] **Insights page** (*Spec ref: §29*)
-  - Insights hero, latest news cards grid, category filtering
+- [x] **Insights page** (*Spec ref: §29, Content §10*)
+  - `InsightsHero`: Category filters (ALL, SYSTEM ARCHITECTURE, APPLIED AI, ENTERPRISE ERP, SECURITY)
+  - `LatestNews`: 6 technical engineering blueprints and whitepapers with read time, dates, and precision corner accents
 
-- [ ] **Article detail page** (*Spec ref: §30*)
-  - Wide editorial composition: metadata column + main content + side index
-  - Mobile: single-column stacked layout
+- [x] **Services / Platform Overview page** (*Content §3, §5*)
+  - `ServicesOverview`: 4 core practices (Enterprise Architecture, Domain AI, Custom ERP, Public Sector Platforms) with deliverables and direct contact triggers
 
-### Commit plan
+- [x] **Inner page smoke tests update**
+  - Added full verification of Team, Insights, and Services components in smoke test suite
+
+### Commit history (Phase 9)
 ```
-1. feat: build team page with editorial portrait layout
-2. feat: build insights page with news card grid
-3. feat: build article detail page with editorial composition
+880cb81 feat(team): rebuild Team page with executive leadership and specialized practitioners
+5e07cc7 feat(insights): rebuild Insights page with technical blueprints and category filtering
+d0eb1f8 feat(services): rebuild platform services overview with 4 core practice pillars
+c096429 feat(test): update smoke tests to verify all inner pages and anti-legacy rules
 ```
 
 ---
