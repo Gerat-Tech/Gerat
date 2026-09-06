@@ -1,46 +1,91 @@
-# Dependencies
+# -------------------------------------------------------------
+# DEPENDENCIES
+# -------------------------------------------------------------
 node_modules/
+.pnp
+.pnp.js
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
 
-# Next.js
+# -------------------------------------------------------------
+# NEXT.JS & BUILD ARTIFACTS
+# -------------------------------------------------------------
 .next/
 out/
 build/
+dist/
+.turbo/
+.vercel/
 
-# Environment
+# -------------------------------------------------------------
+# ENVIRONMENT VARIABLES & SECRETS
+# -------------------------------------------------------------
 .env
-.env.local
+.env*.local
 .env.development.local
 .env.test.local
 .env.production.local
+*.pem
 
-# Debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# OS
-.DS_Store
-Thumbs.db
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# Coverage
-coverage/
-
-# Misc
-*.tsbuildinfo
-next-env.d.ts
-
-# Database
+# -------------------------------------------------------------
+# LOCAL DATABASE & PRISMA ARTIFACTS
+# -------------------------------------------------------------
 *.db
 *.db-journal
 *.db-wal
 *.db-shm
+*.sqlite
+*.sqlite3
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
 prisma/dev.db
+prisma/dev.db-journal
 
+# -------------------------------------------------------------
+# DEBUG & LOG FILES
+# -------------------------------------------------------------
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# -------------------------------------------------------------
+# OPERATING SYSTEMS
+# -------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# -------------------------------------------------------------
+# EDITORS & IDEs
+# -------------------------------------------------------------
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# -------------------------------------------------------------
+# TESTING & COVERAGE
+# -------------------------------------------------------------
+coverage/
+.nyc_output/
+*.lcov
+
+# -------------------------------------------------------------
+# TYPESCRIPT / MISC
+# -------------------------------------------------------------
+*.tsbuildinfo
+next-env.d.ts

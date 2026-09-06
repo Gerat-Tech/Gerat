@@ -10,6 +10,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:seed": "node prisma/seed.mjs",
+    "db:studio": "prisma studio",
     "test:smoke": "node tests/smoke/run-smoke-tests.mjs",
     "test:runtime": "node tests/smoke/dev-server-smoke.mjs",
     "test": "pnpm run test:smoke && pnpm run test:runtime"
