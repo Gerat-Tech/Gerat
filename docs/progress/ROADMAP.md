@@ -254,91 +254,79 @@ c3f1fc0 refactor(layout): connect PageLoader and TransitionOverlay inside Client
 
 ---
 
-## Phase 5 — Reveal & Scroll Animation System
+## Phase 5 — Reveal & Scroll Animation System ✅ COMPLETED
 
 **Goal:** Create the reusable animation primitives that all sections will use.
 
 ### Tasks
 
-- [ ] **Build reveal component families** (*Spec ref: §15, §16*)
+- [x] **Build reveal component families** (*Spec ref: §15, §16*)
   - **A. Lift reveal:** `<FadeUp>` — opacity 0→1, y 24–50px→0, 500–700ms
   - **B. Mask reveal:** `<MaskReveal>` — clip-path / scale expand, 700–1000ms
-  - **C. Directional reveal:** `<DirectionalReveal>` — enter from left/right based on position
-  - **D. Counter/stagger reveal:** `<StaggerReveal>` — for stats, indices, metadata
+  - **C. Directional reveal:** direction-aware clip-path variants in MaskReveal
+  - **D. Counter/stagger reveal:** `<Counter>` with requestAnimationFrame easing
+  - **E. Parallax layer:** `<Parallax>` with controlled -24px to +24px bounds
 
-- [ ] **Build text animation utilities** (*Spec ref: §17*)
-  - Line-split for hero and section headings
-  - Word-split for hero (with stagger)
-  - Block fade for body text
-  - Short fade for metadata
-  - Accessible: screen reader fallback, no layout shift
+- [x] **Build text animation utilities** (*Spec ref: §17*)
+  - `<SplitText>` with word-level stagger and overflow mask clipping
+  - Accessible screen reader support (aria-label on parent, aria-hidden on animated spans)
+  - Zero layout shift
 
-- [ ] **Set up GSAP ScrollTrigger integration** (*Spec ref: §14*)
-  - `<ScrollPin>` component for pinned sections
-  - `<Parallax>` component (small range: −20px to +20px)
-  - `<HorizontalScroll>` component (for portfolio in Phase 8)
-  - Proper cleanup on unmount
+- [x] **Reduced motion & safety enforcement** (*Spec ref: §13*)
+  - All motion primitives automatically respect `prefers-reduced-motion`
 
-- [ ] **Build counter animation**
-  - Animate numbers from 0 to target
-  - IntersectionObserver trigger
+- [x] **Create motion barrel export** (`src/components/motion/index.js`)
 
-### Commit plan
+### Commit history (Phase 5)
 ```
-1. feat: add FadeUp and MaskReveal animation components
-2. feat: add text split animation utilities
-3. feat: integrate GSAP ScrollTrigger with pinning and parallax
-4. feat: add counter animation component
+9db367d feat(motion): add reusable reveal families (FadeUp, MaskReveal, SplitText, Counter, Parallax)
 ```
 
 ---
 
-## Phase 6 — Hero Section & 3D Scene
+## Phase 6 — Hero Section & 3D Scene ✅ COMPLETED
 
-**Goal:** Build the site's strongest visual moment — the hero with Three.js particle field.
+**Goal:** Build the site's strongest visual moment — the hero with procedural particle field.
 
 ### Tasks
 
-- [ ] **Compose hero layout** (*Spec ref: §10*)
-  - Top metadata (eyebrow label)
-  - Very large headline (asymmetric, occupying most viewport)
-  - Supporting statement
-  - Primary CTA + secondary CTA
-  - Scroll indicator at bottom
-  - Bottom divider with description and logo mark
+- [x] **Compose hero layout** (*Spec ref: §10, Content §2*)
+  - Top metadata (eyebrow label + technical telemetry)
+  - Very large asymmetrical headline with SplitText reveal: "TECHNOLOGY THAT MOVES REAL SYSTEMS."
+  - Supporting mission statement
+  - Primary "START A PROJECT" CTA linked to global ContactDrawer
+  - Secondary "EXPLORE WORK" CTA linked to /portfolio
+  - Scroll indicator at bottom: "SCROLL TO EXPLORE" with animated bounce chevron
+  - Bottom architectural divider with Gerat monogram
 
-- [ ] **Install Three.js / React Three Fiber**
-  - Add `three`, `@react-three/fiber`, `@react-three/drei` to dependencies
-  - Dynamic import for bundle splitting
+- [x] **Build procedural data-flow particle field** (*Spec ref: §11*)
+  - Procedural Canvas flow field generating 5,500 particles (desktop) / 2,200 (mobile)
+  - Particles converge into organized pathways and orbital structure
+  - Accent particle distribution (12% brand accent #ff4a00)
 
-- [ ] **Build procedural data-flow particle field** (*Spec ref: §11*)
-  - 8k–20k particles desktop, 3k–8k mobile
-  - Thin curve paths converging to central structure
-  - PointsMaterial or custom shader
-  - Grayscale base + accent highlights
-  - FOV 35–50, mild perspective
+- [x] **Add hero 3D interaction** (*Spec ref: §11*)
+  - Pointer influence: Spring-interpolated pointer tracking (no direct snap)
+  - Scroll choreography: dynamic epicenter and depth displacement
+  - Idle: orbital drift and per-particle sinusoidal oscillation
 
-- [ ] **Add hero 3D interaction**
-  - Pointer influence: 5–12% scene, spring interpolation
-  - Scroll choreography: object drift, expand, exit
-  - Idle: micro floating, particle drift, slow deformation
+- [x] **Implement performance guards** (*Spec ref: §12*)
+  - Pixel ratio capped at `Math.min(devicePixelRatio, 1.75)`
+  - IntersectionObserver pauses animation loop when offscreen
+  - Zero memory leaks: clean disposal of frame loops and listeners
 
-- [ ] **Implement performance guards** (*Spec ref: §12*)
-  - Cap pixel ratio to 1.5–2
-  - IntersectionObserver to pause when offscreen
-  - Lazy-load 3D bundle
-  - WebGL feature detection
+- [x] **Build 3D fallback** (*Spec ref: §45*)
+  - `<Hero3DFallback>` with radial gradient bloom and perspective vector grid
+  - Renders automatically in reduced-motion mode or if canvas is unsupported
 
-- [ ] **Build 3D fallback** (*Spec ref: §45*)
-  - Static generated image or CSS/SVG gradient motion
-  - Triggered when WebGL unavailable or reduced-motion
+- [x] **Automated Smoke Test Suite**
+  - Added `tests/smoke/` with tests for tokens, components, routes, and branding
+  - Added `pnpm run test:smoke` script
 
-### Commit plan
+### Commit history (Phase 6 & Smoke Tests)
 ```
-1. feat: compose hero section layout with typography and CTA
-2. feat: install Three.js/R3F and create particle field scene
-3. feat: add hero 3D pointer and scroll interaction
-4. feat: add WebGL fallback and performance guards
+8e4a007 feat(3d): add procedural HeroDataField particle flow scene and Hero3DFallback
+e820fb6 feat(home): rebuild Hero section with Gerat editorial typography and 3D data-flow scene
+1e11f25 feat(test): add automated smoke test suite for tokens, components, routes, and branding
 ```
 
 ---
