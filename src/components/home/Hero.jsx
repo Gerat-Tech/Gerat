@@ -1,80 +1,139 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
-import Button from "../common/Button";
+import Link from "next/link";
+import HeroDataField from "../three/HeroDataField";
+import FadeUp from "../motion/FadeUp";
+import SplitText from "../motion/SplitText";
+import { useNav } from "@/context/NavContext";
 
+/**
+ * Editorial Deep-Tech Hero Section (Spec §10, §11, Content Replacement §2)
+ * Features asymmetrical headline typography, procedural data-flow particle scene,
+ * interactive CTA controls, and technical telemetry metadata.
+ */
 export default function Hero() {
+  const { openContact } = useNav();
+
   return (
     <section
       id="hero"
-      className="relative min-h-screen w-full bg-[#050505] text-white overflow-hidden"
+      aria-label="Introduction"
+      className="relative min-h-[100dvh] w-full bg-[#050505] text-white flex flex-col justify-between overflow-hidden pt-28 sm:pt-32 pb-10"
     >
-      {/* BACKGROUND */}
-      {/* <div className="absolute inset-0 z-0 opacity-40">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1500px] rounded-full border border-white/5" />
-      </div> */}
+      {/* Background 3D Procedural Particle Scene (Spec §11) */}
+      <HeroDataField />
 
-      {/* CENTER CONTENT */}
-      <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between  px-10 mx-auto py-16 lg:h-[640px]">
-        <motion.h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl  font-normal uppercase">
-          Forging Companies <br /> That
-        </motion.h1>
+      {/* Main Editorial Hero Content */}
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 my-auto">
+        <div className="max-w-4xl flex flex-col gap-6 sm:gap-8">
+          {/* Eyebrow Telemetry (Spec §10) */}
+          <FadeUp delay={0.1} y={16}>
+            <div className="inline-flex items-center gap-3 font-azeret text-[10px] sm:text-[11px] tracking-[0.25em] text-white/50 uppercase">
+              <span className="size-1.5 rounded-[1px] bg-accent animate-corner-pulse" />
+              <span className="text-white/80">GERAT SOFTWARE SOLUTIONS PLC</span>
+              <span className="text-white/20">|</span>
+              <span className="hidden sm:inline">SYS_REF // 2026</span>
+            </div>
+          </FadeUp>
 
-        <motion.h1 className=" mt-30 text-3xl sm:text-4xl md:text-6xl lg:text-7xl  font-normal uppercase text-right">
-          Pull The <br /> Future Forward
-        </motion.h1>
+          {/* Main Asymmetrical Headline (Spec §10, §17) */}
+          <div className="space-y-1 sm:space-y-2">
+            <SplitText
+              text="TECHNOLOGY THAT MOVES"
+              as="h1"
+              delay={0.2}
+              stagger={0.04}
+              className="font-roc text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+            />
+            <SplitText
+              text="REAL SYSTEMS."
+              as="div"
+              delay={0.35}
+              stagger={0.04}
+              wordClassName="text-accent"
+              className="font-roc text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+            />
+          </div>
+
+          {/* Supporting Statement (Content §2) */}
+          <FadeUp delay={0.45} y={24} className="max-w-2xl">
+            <p className="font-roc text-base sm:text-lg md:text-xl text-white/70 font-normal leading-relaxed">
+              We design and engineer digital systems for businesses,
+              enterprises, and public-sector operations — turning complex
+              workflows into intelligent, scalable, and resilient digital
+              products.
+            </p>
+          </FadeUp>
+
+          {/* Interactive CTA Buttons (Spec §10, §23) */}
+          <FadeUp delay={0.6} y={24}>
+            <div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-2">
+              {/* Primary Contact CTA */}
+              <button
+                type="button"
+                onClick={openContact}
+                className="group relative isolate inline-flex items-center justify-center font-azeret text-[11px] sm:text-[12px] uppercase tracking-[0.2em] px-6 sm:px-8 py-3.5 bg-white text-black font-semibold border border-white hover:bg-accent hover:border-accent hover:text-white transition-all duration-300 rounded-[2px]"
+              >
+                <span>START A PROJECT</span>
+                {/* Precision Corner Accents */}
+                <span className="absolute -top-[1px] -left-[1px] size-2 border-t border-l border-white group-hover:border-accent" />
+                <span className="absolute -top-[1px] -right-[1px] size-2 border-t border-r border-white group-hover:border-accent" />
+                <span className="absolute -bottom-[1px] -left-[1px] size-2 border-b border-l border-white group-hover:border-accent" />
+                <span className="absolute -bottom-[1px] -right-[1px] size-2 border-b border-r border-white group-hover:border-accent" />
+              </button>
+
+              {/* Secondary Portfolio CTA */}
+              <Link
+                href="/portfolio"
+                className="group relative isolate inline-flex items-center justify-center font-azeret text-[11px] sm:text-[12px] uppercase tracking-[0.2em] px-6 sm:px-8 py-3.5 bg-transparent text-white/80 hover:text-white border border-white/20 hover:border-white/60 transition-all duration-300 rounded-[2px]"
+              >
+                <span>EXPLORE WORK</span>
+                <span className="ml-2 text-white/40 group-hover:text-accent group-hover:translate-x-1 transition-all duration-300">
+                  →
+                </span>
+                <span className="absolute -top-[1px] -left-[1px] size-1.5 border-t border-l border-white/40" />
+                <span className="absolute -bottom-[1px] -right-[1px] size-1.5 border-b border-r border-white/40" />
+              </Link>
+            </div>
+          </FadeUp>
+
+          {/* Capabilities Metadata Tags (Spec §2, §4) */}
+          <FadeUp delay={0.7} y={16}>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-4 font-azeret text-[9px] sm:text-[10px] tracking-[0.2em] text-white/40 uppercase">
+              <span>ARTIFICIAL INTELLIGENCE</span>
+              <span className="text-white/20">//</span>
+              <span>RAG SYSTEMS</span>
+              <span className="text-white/20">//</span>
+              <span>ENTERPRISE ERP</span>
+              <span className="text-white/20">//</span>
+              <span>GOVERNMENT TECH</span>
+            </div>
+          </FadeUp>
+        </div>
       </div>
 
-      {/* BOTTOM FOOTER */}
-      <div className="absolute bottom-0 left-0 w-full px-8 lg:px-10 pt-10 pb-8 z-10">
-        <div className="w-full border-t border-white/40"></div>
+      {/* Bottom Architectural Anchor (Spec §10) */}
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 mt-8">
+        <div className="w-full border-t border-white/10 pt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="flex items-center gap-4 font-azeret text-[10px] tracking-[0.2em] text-white/50 uppercase">
+            <span className="animate-bounce text-accent">↓</span>
+            <span>SCROLL TO EXPLORE</span>
+          </div>
 
-        <div className="mt-4 flex flex-col lg:flex-row gap-6 lg:gap-0 justify-between items-start lg:items-center">
-          {/* CONTACT */}
-
-          <Button
-            padding="px-7 py-3"
-            textColor="text-white/80"
-            bgColor="bg-white"
-            borderColor="border-white"
-          >
-            Contact Us
-          </Button>
-
-          <div className="flex items-center justify-between gap-6 sm:gap-10 lg:gap-40">
-            {/* TEXT */}
-            <p className="max-w-[480px] text-[11px] text-white/60 font-azeret uppercase text-left leading-3.5 tracking-normal">
-              WorldQuant Foundry is a venture lab that empowers breakthrough
-              founders to pull the future forward. Capital. Connections.
-              Mentorship. Full-stack support. We deliver more than resources—we
-              create the infrastructure for scale.
+          <div className="flex items-center gap-6 text-right">
+            <p className="hidden md:block max-w-sm font-azeret text-[9px] text-white/40 uppercase tracking-[0.15em] leading-relaxed">
+              OPERATING AT THE INTERSECTION OF DEEP ENGINEERING, ARCHITECTURAL DESIGN, AND MISSION-CRITICAL SOFTWARE.
             </p>
-
-            {/* LOGO */}
-            <LogoIcon />
+            <div className="size-7 rounded-[2px] border border-white/15 bg-white/5 flex items-center justify-center text-white/80">
+              <svg className="size-3.5" viewBox="0 0 24 24" fill="none">
+                <path d="M3 5V19H19V13H11V11H21V5H3Z" fill="currentColor" />
+                <rect x="13" y="15" width="4" height="4" fill="var(--accent, #ff4a00)" />
+              </svg>
+            </div>
           </div>
         </div>
       </div>
     </section>
-  );
-}
-
-function LogoIcon() {
-  return (
-    <svg className="w-[70px] h-[70px]" viewBox="0 0 65 65" fill="none">
-      <path
-        d="M39.13 43.55C39.13 41.0371 41.1671 39 43.68 39H47.45C49.9629 39 52 36.9629 52 34.45L52 4.55C52 2.03711 54.0371 0 56.55 0L60.45 0C62.9629 0 65 2.03711 65 4.55001V34.45C65 36.9629 62.9629 39 60.45 39H56.68C54.1671 39 52.13 41.0371 52.13 43.55L52.13 60.45C52.13 62.9629 50.0929 65 47.58 65L43.68 65C41.1671 65 39.13 62.9629 39.13 60.45L39.13 43.55Z"
-        fill="currentColor"
-      />
-      <path
-        d="M13.13 43.55C13.13 41.0371 15.1671 39 17.68 39H21.45C23.9629 39 26 36.9629 26 34.45L26 4.55C26 2.03711 28.0371 0 30.55 0L34.45 0C36.9629 0 39 2.03711 39 4.55L39 34.45C39 36.9629 36.9629 39 34.45 39H30.68C28.1671 39 26.13 41.0371 26.13 43.55L26.13 60.45C26.13 62.9629 24.0929 65 21.58 65H17.68C15.1671 65 13.13 62.9629 13.13 60.45L13.13 43.55Z"
-        fill="currentColor"
-      />
-      <path
-        d="M0 4.55C0 2.0371 2.03711 0 4.55 0L8.45 0C10.9629 0 13 2.0371 13 4.55L13 21.45C13 23.9629 10.9629 26 8.45 26H4.55C2.0371 26 0 23.9629 0 21.45L0 4.55Z"
-        fill="currentColor"
-      />
-    </svg>
   );
 }

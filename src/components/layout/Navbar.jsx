@@ -13,8 +13,7 @@ import { useNav } from "@/context/NavContext";
  * corner-accent hover styling, and a full-screen mobile menu.
  */
 export default function Navbar() {
-  const [contactOpen, setContactOpen] = useState(false);
-  const { isMenuOpen, setIsMenuOpen } = useNav();
+  const { isMenuOpen, setIsMenuOpen, isContactOpen, openContact, closeContact } = useNav();
   const [hovered, setHovered] = useState(null);
   const [isVisible, setIsVisible] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -161,7 +160,7 @@ export default function Navbar() {
             <div className="hidden lg:flex items-center">
               <button
                 type="button"
-                onClick={() => setContactOpen(true)}
+                onClick={openContact}
                 className="relative group/btn font-azeret text-[11px] uppercase tracking-[0.2em] px-4 py-2 text-white/90 border border-white/20 hover:border-accent hover:text-white bg-white/5 hover:bg-accent/10 transition-all duration-300 rounded-[2px] select-none"
               >
                 <span>CONTACT</span>
@@ -251,7 +250,7 @@ export default function Navbar() {
             type="button"
             onClick={() => {
               setIsMenuOpen(false);
-              setContactOpen(true);
+              openContact();
             }}
             className="relative w-full p-4 mt-2 text-center font-azeret text-[12px] tracking-[0.2em] uppercase border border-accent/80 text-white bg-accent/20 hover:bg-accent/30 transition-all rounded-[2px]"
           >
@@ -269,7 +268,7 @@ export default function Navbar() {
       </div>
 
       {/* Global Contact Drawer */}
-      <ContactDrawer open={contactOpen} setOpen={setContactOpen} />
+      <ContactDrawer open={isContactOpen} setOpen={setIsContactOpen} />
     </>
   );
 }
