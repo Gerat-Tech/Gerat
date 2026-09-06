@@ -38,6 +38,16 @@ export async function runComponentSmokeTests() {
     "src/components/home/HowWeWork.jsx",
     "src/components/home/OurLeadership.jsx",
     "src/components/home/Partners.jsx",
+    // Team Page Components
+    "src/app/team/components/TeamHero.jsx",
+    "src/app/team/components/TeamLeadership.jsx",
+    "src/app/team/components/AdvisorAndTeam.jsx",
+    "src/app/team/components/TeamEthos.jsx",
+    // Insights Page Components
+    "src/app/insights/components/InsightsHero.jsx",
+    "src/app/insights/components/LatestNews.jsx",
+    // Services Page Components
+    "src/app/why-wqf/components/ServicesOverview.jsx",
     // Context
     "src/context/NavContext.js",
     "src/context/PageTransitionContext.jsx",

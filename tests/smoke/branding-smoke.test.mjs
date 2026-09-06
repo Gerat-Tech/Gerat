@@ -52,6 +52,24 @@ export async function runBrandingSmokeTests() {
   assert(portfolioShowcase.includes("NATIONAL DIGITAL RECORDS ENGINE"), "Portfolio showcase must contain Gerat flagship projects");
   console.log("  ✓ Portfolio page Showcase verified");
 
+  // Team page components must not contain legacy WQF copy
+  const teamHero = fs.readFileSync(path.join(root, "src/app/team/components/TeamHero.jsx"), "utf-8");
+  assert(!teamHero.includes("WorldQuant Foundry"), "Team hero must not contain legacy WQF text");
+  assert(teamHero.includes("ENGINEERED WITH RIGOR."), "Team hero must contain Gerat headline");
+  console.log("  ✓ Team page Hero verified");
+
+  // Insights page components must not contain legacy WQF copy
+  const insightsHero = fs.readFileSync(path.join(root, "src/app/insights/components/InsightsHero.jsx"), "utf-8");
+  assert(!insightsHero.includes("FOUNDRY TEAM"), "Insights hero must not contain legacy Foundry text");
+  assert(insightsHero.includes("SYSTEM ARCHITECTURE,"), "Insights hero must contain Gerat headline");
+  console.log("  ✓ Insights page Hero verified");
+
+  // Services page components must not contain legacy WQF copy
+  const services = fs.readFileSync(path.join(root, "src/app/why-wqf/components/ServicesOverview.jsx"), "utf-8");
+  assert(!services.includes("WorldQuant Foundry"), "Services page must not contain legacy WQF text");
+  assert(services.includes("PURPOSE-BUILT DIGITAL SYSTEMS."), "Services page must contain Gerat headline");
+  console.log("  ✓ Services page Overview verified");
+
   // Footer must have Gerat copyright
   const footer = fs.readFileSync(path.join(root, "src/components/layout/Footer.jsx"), "utf-8");
   assert(!footer.includes("WorldQuant"), "Footer should not contain 'WorldQuant'");
