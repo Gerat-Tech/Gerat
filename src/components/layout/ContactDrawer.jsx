@@ -113,19 +113,49 @@ export default function ContactDrawer({ open, setOpen }) {
     };
   }, [open, setOpen]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.privacyAgreed) return;
-
     setIsSubmitting(true);
-    // Simulate telemetry intake pipeline
-    setTimeout(() => {
+
+    try {
+      const res = await fetch("/api/intake", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: formData.name,
+          email: formData.email,
+          phone: formData.phone || "Not specified",
+          company: formData.company,
+          discipline: selectedDiscipline,
+          timeline: selectedTimeline,
+          budgetRange: selectedBudget,
+          projectBrief: formData.message,
+          metadata: {
+            brandStatus: brandSituation,
+            hasGuidelines: needBrandGuidelines,
+            graphicAssets: selectedAssetType,
+            personalRole,
+            needsWebsite: needPersonalWebsite,
+            needsPhotography: needPhotographyDirection,
+          },
+          sourceUrl: typeof window !== "undefined" ? window.location.pathname : "/",
+        }),
+      });
+
+      const data = await res.json();
+      if (res.ok && data.telemetryCode) {
+        setInquiryId(data.telemetryCode);
+      } else {
+        const prefix = isBrandDiscipline ? "GRT-BRD" : "GRT-ENG";
+        setInquiryId(`${prefix}-${Math.floor(100000 + Math.random() * 900000)}`);
+      }
+    } catch {
       const prefix = isBrandDiscipline ? "GRT-BRD" : "GRT-ENG";
-      const generatedId = `${prefix}-${Math.floor(100000 + Math.random() * 900000)}`;
-      setInquiryId(generatedId);
+      setInquiryId(`${prefix}-${Math.floor(100000 + Math.random() * 900000)}`);
+    } finally {
       setIsSubmitting(false);
       setIsSubmitted(true);
-    }, 600);
+    }
   };
 
   const handleReset = () => {

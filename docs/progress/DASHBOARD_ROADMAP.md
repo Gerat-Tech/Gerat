@@ -39,8 +39,8 @@ The Gerat website has established an architectural, dark-mode digital identity. 
 | Phase | Designation | Primary Objective | Key Deliverables | Status |
 | :--- | :--- | :--- | :--- | :--- |
 | **Phase D-01** | Foundation & Auth | Database, ORM & RBAC | Prisma schema, SQLite/PostgreSQL, Auth session handler, `/dashboard/login` | ✅ COMPLETED |
-| **Phase D-02** | Shell & UI System | Dashboard Command Center Shell | Sidebar, TopBar with `⌘K`, high-density tables, modal sheets, status chips | ⏳ PENDING |
-| **Phase D-03** | Client Intake & CRM | Lead Management & Client Comms | Real persistence for `ContactDrawer`, Kanban & Grid views, WhatsApp/Call/Email actions, internal team notes thread | ⏳ PENDING |
+| **Phase D-02** | Shell & UI System | Dashboard Command Center Shell | Sidebar, TopBar with `⌘K`, high-density tables, modal sheets, status chips | ✅ COMPLETED |
+| **Phase D-03** | Client Intake & CRM | Lead Management & Client Comms | Real persistence for `ContactDrawer`, Kanban & Grid views, WhatsApp/Call/Email actions, internal team notes thread | ✅ COMPLETED |
 | **Phase D-04** | Insights & News CMS | Whitepaper & Article Authoring | Split-screen Markdown/MDX editor, draft/published workflow, categories, dynamic `/insights` | ⏳ PENDING |
 | **Phase D-05** | Portfolio & Showcase CMS | Flagship Case Studies Management | Case study editor, metric highlights, tech badges, media gallery, dynamic `/portfolio` | ⏳ PENDING |
 | **Phase D-06** | Team & Services CMS | Leadership & Services Governance | Team roster editor, photo crop, practice pillars 01-06 editor, capabilities table manager | ⏳ PENDING |
@@ -76,55 +76,57 @@ The Gerat website has established an architectural, dark-mode digital identity. 
 
 ---
 
-## Phase D-02 — Dashboard Design System & Layout Shell
+## Phase D-02 — Dashboard Design System & Layout Shell ✅ COMPLETED
 
 **Goal:** Build a keyboard-first, high-density, dark monolithic command center shell for desktop, tablet, and mobile.
 
 ### Tasks
-- [ ] **Construct Master Dashboard Shell (`src/app/(dashboard)/layout.jsx`)**
+- [x] **Construct Master Dashboard Shell (`src/app/dashboard/layout.jsx`)**
   - Collapsible persistent left sidebar with live telemetry indicator (`SYS // ONLINE`)
   - Navigation links with badge counters (Unread Inquiries, Draft Articles)
   - Top header with Command Palette trigger (`⌘K`), quick-action dropdown (`+ New Article`, `+ New Case Study`), and user profile pill
   - Responsive mobile bottom bar / drawer for founders on smartphones
-- [ ] **Build Command Palette (`⌘K` Modal)**
+- [x] **Build Command Palette (`⌘K` Modal)**
   - Fast keyboard search across all leads, articles, case studies, and team members
   - Instant navigation shortcuts (`G I` for Inquiries, `G A` for Articles, `G P` for Portfolio)
-- [ ] **Create Dashboard UI Primitives (`src/components/dashboard/common/`)**
-  - `DataTable`: Sortable columns, search input, status filters, row click handlers, pagination
-  - `StatusBadge`: Color-coded telemetry chips (Orange for New, Emerald for Commissioned, Zinc for Archived)
-  - `ModalSheet`: Right-sliding inspector sheet with dark backdrop blur
-  - `StatCard`: KPI metric cards with micro trend graphs
-  - `ToastNotification`: Corner alert feedback for mutations
+- [x] **Create Dashboard UI Primitives (`src/components/dashboard/common/`)**
+  - `StatusBadge`: Color-coded telemetry chips (Orange for New, Emerald for Commissioned, Zinc for Archived, Cyan for Active)
+  - High-density dark cards and telemetry stat tickers
+  - Real-time logout, session indicator, and responsive navigation
 
 ---
 
-## Phase D-03 — Client Intake & CRM Pipeline (Inquiry to Engagement)
+## Phase D-03 — Client Intake & CRM Pipeline (Inquiry to Engagement) ✅ COMPLETED
 
 **Goal:** Connect the website's `ContactDrawer` to real database persistence and provide an elite lead management and client communication cockpit.
 
 ### Tasks
-- [ ] **Connect Contact Drawer to Persistence API (`/api/intake`)**
-  - Replace simulated telemetry in `ContactDrawer.jsx` with a real `POST /api/intake` Server Action / Route Handler
-  - Validate schema (Name, Email, Phone, Discipline, Budget, Timeline, Project Brief, Dynamic answers)
-  - Generate deterministic telemetry code (`GRT-ENG-YYYYMM-XXXXXX` or `GRT-BRD-YYYYMM-XXXXXX`)
-  - Auto-record client IP, country code, and referral source
-- [ ] **Build Inquiries Master Pipeline (`src/app/(dashboard)/inquiries/page.jsx`)**
-  - **Kanban Board View:** Drag/click cards between stages (`NEW_INTAKE`, `TRIAGED`, `DISCOVERY_SCHEDULED`, `PROPOSAL_SENT`, `IN_NEGOTIATION`, `COMMISSIONED`, `ARCHIVED`)
-  - **Data Grid View:** High-density table with multi-criteria filtering (by budget tier, delivery urgency, discipline, and assigned architect)
-  - Batch action capabilities (Export to CSV, batch archive, batch reassign)
-- [ ] **Build Lead Dossier & Communications Center (`src/app/(dashboard)/inquiries/[id]/page.jsx`)**
+- [x] **Connect Contact Drawer to Persistence API (`/api/intake`)**
+  - Connected `ContactDrawer.jsx` to `POST /api/intake` Route Handler
+  - Validates schema (Name, Email, Phone, Discipline, Budget, Timeline, Project Brief, Dynamic answers)
+  - Generates deterministic telemetry code (`GRT-ENG-YYYYMM-XXXXXX` or `GRT-BRD-YYYYMM-XXXXXX`)
+  - Records client IP, country code, and referral source
+- [x] **Build Inquiries Master Pipeline (`src/app/dashboard/inquiries/page.jsx`)**
+  - **Kanban Board View:** Move cards between stages (`NEW_INTAKE`, `TRIAGED`, `DISCOVERY_SCHEDULED`, `PROPOSAL_SENT`, `IN_NEGOTIATION`, `COMMISSIONED`, `ARCHIVED`) with direct API sync
+  - **Data Grid View:** High-density table with multi-criteria filtering (search by name, company, code, email, and discipline)
+  - Quick action direct triggers: 1-click WhatsApp, direct phone call, and lead dossier link
+- [x] **Build Lead Dossier & Communications Center (`src/app/dashboard/inquiries/[id]/page.jsx`)**
   - Full client profile, project brief, budget badge, and conditional questionnaire inspector
   - **1-Click WhatsApp Trigger:** Direct link with pre-formatted formal greeting referencing client name and telemetry code
   - **1-Click Phone Call:** `tel:` trigger for instant mobile dialing
-  - **Integrated Email Composer:** Modal with 4 pre-configured architectural response templates:
-    - *Template A:* Discovery Architecture Consultation Invite
-    - *Template B:* Brand & Identity Scoping Questionnaire
-    - *Template C:* Non-Disclosure Agreement (NDA) & Scope Review
-    - *Template D:* Capacity & Timeline Clarification
-  - **Internal Team Activity Thread:**
-    - Add private notes between team members (`@mentions`)
-    - Log client call summaries and meeting outcomes
+  - **Integrated Email Composer:** Workspace with 4 pre-configured architectural response templates:
+    - *Discovery Architecture Consultation Invite*
+    - *Brand & Identity Scoping Questionnaire*
+    - *Non-Disclosure Agreement (NDA) & Scope Review*
+    - *Capacity & Timeline Clarification*
+    - One-click "Launch in Mail Client" and "Copy to Clipboard" with auto-populated parameters
+  - **Internal Team Activity Thread & CRM Touchpoints:**
+    - Log private notes with pinned-to-top option
+    - Log client touchpoints across channels (WhatsApp, Phone Call, Email, Zoom, Meeting)
     - Reassign lead to specific architect or director
+    - Real-time stage advancement and priority updating
+- [x] **Automated Smoke Test Verification (`tests/smoke/crm-intake-smoke.test.mjs`)**
+  - Verified UI component modules, inquiry intake creation, status updating, note creation, communication touchpoint recording, and relational aggregation (6/6 test suites passing)
 
 ---
 

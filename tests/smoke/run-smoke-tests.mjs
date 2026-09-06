@@ -3,6 +3,7 @@ import { runComponentSmokeTests } from "./components-smoke.test.mjs";
 import { runRouteSmokeTests } from "./routes-smoke.test.mjs";
 import { runBrandingSmokeTests } from "./branding-smoke.test.mjs";
 import { runDashboardAuthSmokeTests } from "./dashboard-auth-smoke.test.mjs";
+import { runCrmIntakeSmokeTests } from "./crm-intake-smoke.test.mjs";
 
 async function main() {
   console.log("=================================================");
@@ -19,6 +20,7 @@ async function main() {
     { name: "Route & Layout Scaffolds", fn: runRouteSmokeTests },
     { name: "Branding & Anti-Legacy Rules", fn: runBrandingSmokeTests },
     { name: "Dashboard Database, Auth & RBAC", fn: runDashboardAuthSmokeTests },
+    { name: "CRM & Client Intake Pipeline", fn: runCrmIntakeSmokeTests },
   ];
 
   for (const suite of testSuites) {
