@@ -41,6 +41,17 @@ export async function runBrandingSmokeTests() {
   assert(!portfolio.includes("worldquantfoundry.com"), "Portfolio should not contain external WQF links");
   console.log("  ✓ Portfolio internal routing verified");
 
+  // Portfolio page components must not contain legacy WQF copy
+  const portfolioHero = fs.readFileSync(path.join(root, "src/app/portfolio/components/Hero.jsx"), "utf-8");
+  assert(!portfolioHero.includes("Born at the edge"), "Portfolio hero must not contain legacy WQF copy");
+  assert(portfolioHero.includes("PROVEN ARCHITECTURES."), "Portfolio hero must contain Gerat headline");
+  console.log("  ✓ Portfolio page Hero verified");
+
+  const portfolioShowcase = fs.readFileSync(path.join(root, "src/app/portfolio/components/PortfolioShowcase.jsx"), "utf-8");
+  assert(!portfolioShowcase.includes("ALPHA DEAL"), "Portfolio showcase must not contain legacy Alpha Deal");
+  assert(portfolioShowcase.includes("NATIONAL DIGITAL RECORDS ENGINE"), "Portfolio showcase must contain Gerat flagship projects");
+  console.log("  ✓ Portfolio page Showcase verified");
+
   // Footer must have Gerat copyright
   const footer = fs.readFileSync(path.join(root, "src/components/layout/Footer.jsx"), "utf-8");
   assert(!footer.includes("WorldQuant"), "Footer should not contain 'WorldQuant'");
