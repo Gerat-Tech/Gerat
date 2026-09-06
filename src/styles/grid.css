@@ -1,0 +1,62 @@
+/* ==========================================================================
+   Grid System (Spec §5)
+   Adaptive column system snapping elements to strict architectural edges
+   ========================================================================== */
+
+:root {
+  --grid-columns: 12;
+  --grid-gutter: 24px;
+  --grid-gap: 16px;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --grid-columns: 8;
+    --grid-gutter: 20px;
+    --grid-gap: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --grid-columns: 4;
+    --grid-gutter: 16px;
+    --grid-gap: 10px;
+  }
+}
+
+/* Master Container */
+.site-container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--grid-gutter);
+  padding-right: var(--grid-gutter);
+}
+
+/* Standardized Structural Grid */
+.system-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  column-gap: var(--grid-gap);
+}
+
+/* Hairline Grid Dividers (Spec §3.1 Level 4) */
+.hairline-border {
+  border-width: 1px;
+  border-color: var(--border-subtle);
+}
+
+.hairline-b {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.hairline-t {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.hairline-x {
+  border-left: 1px solid var(--border-subtle);
+  border-right: 1px solid var(--border-subtle);
+}
