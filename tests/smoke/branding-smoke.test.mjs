@@ -47,10 +47,12 @@ export async function runBrandingSmokeTests() {
   assert(portfolioHero.includes("PROVEN ARCHITECTURES."), "Portfolio hero must contain Gerat headline");
   console.log("  ✓ Portfolio page Hero verified");
 
+  const portfolioContent = fs.readFileSync(path.join(root, "src/content/portfolio.js"), "utf-8");
   const portfolioShowcase = fs.readFileSync(path.join(root, "src/app/portfolio/components/PortfolioShowcase.jsx"), "utf-8");
   assert(!portfolioShowcase.includes("ALPHA DEAL"), "Portfolio showcase must not contain legacy Alpha Deal");
-  assert(portfolioShowcase.includes("NATIONAL DIGITAL RECORDS ENGINE"), "Portfolio showcase must contain Gerat flagship projects");
-  console.log("  ✓ Portfolio page Showcase verified");
+  assert(portfolioContent.includes("NATIONAL DIGITAL RECORDS ENGINE"), "Portfolio content must contain Gerat flagship projects");
+  assert(portfolioShowcase.includes("@/content"), "Portfolio showcase must consume content architecture");
+  console.log("  ✓ Portfolio page Showcase & Content dataset verified");
 
   // Team page components must not contain legacy WQF copy
   const teamHero = fs.readFileSync(path.join(root, "src/app/team/components/TeamHero.jsx"), "utf-8");

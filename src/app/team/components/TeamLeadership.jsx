@@ -3,29 +3,7 @@
 import React, { useState } from "react";
 import FadeUp from "@/components/motion/FadeUp";
 
-const leadership = [
-  {
-    name: "DAWIT TEKLEBRHAN",
-    role: "FOUNDER & CHIEF EXECUTIVE OFFICER",
-    specialty: "SYSTEMS ARCHITECTURE // STRATEGY",
-    bio: "Directing the firm's architectural doctrine, technology roadmaps, and enterprise partnerships. Over a decade of experience designing scalable digital platforms across enterprise and institutional spheres.",
-    image: "/image/team/leadership/WQF__0000_Founder-IgorTulchinsky.webp",
-  },
-  {
-    name: "YOHANNES TADESSE",
-    role: "HEAD OF ARTIFICIAL INTELLIGENCE",
-    specialty: "APPLIED RAG // VECTOR RETRIEVAL // LLMS",
-    bio: "Leading Gerat's applied machine learning research and domain-grounded knowledge retrieval laboratory. Expert in high-precision semantic chunking and localized model deployment.",
-    image: "/image/team/leadership/WQF__0004_Chairman-and-Co-Founder_Amir-Husain-2.webp",
-  },
-  {
-    name: "SOLOMON KASSAHUN",
-    role: "HEAD OF ENTERPRISE ENGINEERING",
-    specialty: "DISTRIBUTED CLOUD // ERP PLATFORMS // SECURITY",
-    bio: "Overseeing high-throughput transactional backends, cloud-native deployments, and strict zero-trust cryptographic architectures for mission-critical operations.",
-    image: "/image/team/leadership/WQF__0005_CEO-and-Co-Founder_Steven-Lau.webp",
-  },
-];
+import { leadershipTeam as leadership } from "@/content";
 
 export default function TeamLeadership() {
   const [activeIdx, setActiveIdx] = useState(0);

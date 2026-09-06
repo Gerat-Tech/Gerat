@@ -3,44 +3,7 @@
 import React from "react";
 import FadeUp from "@/components/motion/FadeUp";
 
-const engineeringSpecialists = [
-  {
-    role: "PRINCIPAL SYSTEMS ARCHITECT",
-    discipline: "DISTRIBUTED BACKENDS & CONSENSUS",
-    focus: "Designing fault-tolerant PostgreSQL clusters, event brokers, and multi-region failover protocols.",
-    image: "/image/team/AdvisorAndTeam/WQF__01_Advisor_Savi-Glow-1_Health-Tech-and-Space.webp",
-  },
-  {
-    role: "STAFF APPLIED AI RESEARCHER",
-    discipline: "NEURAL RETRIEVAL & VECTOR STORES",
-    focus: "Fine-tuning contextual chunking algorithms and embedding models for domain-specific RAG platforms.",
-    image: "/image/team/AdvisorAndTeam/WQF__02_Advisor_Dmitry-Green.webp",
-  },
-  {
-    role: "LEAD CLOUD ORCHESTRATION ENGINEER",
-    discipline: "KUBERNETES & AUTOMATED DEPLOYMENT",
-    focus: "Hardening container topologies, automated zero-downtime canary rollouts, and multi-tenant security.",
-    image: "/image/team/AdvisorAndTeam/WQF__03_Advisor_Zaib-Husain_Venture-and-Robotics.webp",
-  },
-  {
-    role: "HEAD OF PRODUCT SECURITY",
-    discipline: "ZERO-TRUST ARCHITECTURE & PKI",
-    focus: "Enforcing cryptographic identity, automated static/dynamic vulnerability scans, and regulatory compliance.",
-    image: "/image/team/AdvisorAndTeam/WQF__04_Advisor_John-King-3_Chief-Marketing-Officer.webp",
-  },
-  {
-    role: "SENIOR EVENT TELEMETRY ARCHITECT",
-    discipline: "KAFKA STREAMS & TIME-SERIES",
-    focus: "Building real-time event aggregation and anomaly detection engines ingesting millions of telemetry frames.",
-    image: "/image/team/AdvisorAndTeam/WQF__05_Peter Lee.webp",
-  },
-  {
-    role: "PRINCIPAL INTERACTION ENGINEER",
-    discipline: "NEXT.JS & REACTIVE INTERFACES",
-    focus: "Architecting micro-interaction choreography, responsive layout engines, and high-density operator dashboards.",
-    image: "/image/team/AdvisorAndTeam/WQF__06_Advisor_Chris-Mason-2_Health-Tech-and-Space.webp",
-  },
-];
+import { engineeringSpecialists } from "@/content";
 
 export default function AdvisorAndTeam() {
   return (

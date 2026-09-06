@@ -3,69 +3,7 @@
 import React from "react";
 import FadeUp from "@/components/motion/FadeUp";
 
-const articles = [
-  {
-    id: 1,
-    title: "Architecting Deterministic RAG Pipelines for Institutional Knowledge Retrieval",
-    category: "APPLIED AI",
-    date: "AUG 2026",
-    readTime: "6 MIN READ",
-    excerpt:
-      "A deep dive into contextual document chunking, hybrid BM25 + dense vector indexing, and confidence-threshold filtering for compliance-critical environments.",
-    image: "/image/LatestNews/01_Picture.webp",
-    featured: true,
-  },
-  {
-    id: 2,
-    title: "Zero-Downtime Event Sourcing: Migrating Legacy Municipal Databases to Distributed Kafka",
-    category: "SYSTEM ARCHITECTURE",
-    date: "JUL 2026",
-    readTime: "8 MIN READ",
-    excerpt:
-      "How we decoupled multi-decade monolithic relational stores into an immutable event log without disrupting day-to-day citizen registry transactions.",
-    image: "/image/LatestNews/02_Advisor_Dmitry-Green.webp",
-  },
-  {
-    id: 3,
-    title: "Cryptographic Integrity in Civic Registries: Tamper-Evident Document Verification",
-    category: "SECURITY",
-    date: "JUN 2026",
-    readTime: "5 MIN READ",
-    excerpt:
-      "Implementing Merkle-tree validation and zero-knowledge verification proofs for inter-agency document authentication at national scale.",
-    image: "/image/LatestNews/03_Chris-Mason-hero.webp",
-  },
-  {
-    id: 4,
-    title: "Scaling High-Concurrency Enterprise ERPs Under Heavy Supply Chain Volatility",
-    category: "ENTERPRISE ERP",
-    date: "MAY 2026",
-    readTime: "7 MIN READ",
-    excerpt:
-      "Architectural strategies for distributed warehouse reconciliation, optimistic concurrency locks, and real-time inventory ledger synchronization.",
-    image: "/image/LatestNews/04_Amir_Husain_Hero.webp",
-  },
-  {
-    id: 5,
-    title: "Local LLMs vs. Cloud Endpoints: Cost, Latency, and Sovereignty in Sensitive Workflows",
-    category: "APPLIED AI",
-    date: "APR 2026",
-    readTime: "9 MIN READ",
-    excerpt:
-      "Analyzing on-premise quantized model deployments against frontier cloud APIs across latency metrics, operational cost ceilings, and institutional data privacy.",
-    image: "/image/LatestNews/05_Apha_deal_launch.webp",
-  },
-  {
-    id: 6,
-    title: "Designing Zero-Trust API Gateways for Inter-Agency Government Platforms",
-    category: "SECURITY",
-    date: "MAR 2026",
-    readTime: "6 MIN READ",
-    excerpt:
-      "Hardening public sector infrastructure through dynamic mTLS certificate rotation, token-bucket throttling, and deep semantic payload inspection.",
-    image: "/image/LatestNews/06_jorik-kleen.webp",
-  },
-];
+import { insightsArticles as articles } from "@/content";
 
 export default function LatestNews({ activeCategory = "ALL ARTICLES" }) {
   const filteredArticles =

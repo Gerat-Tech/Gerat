@@ -5,57 +5,7 @@ import SectionLabel from "@/components/common/SectionLabel";
 import SplitText from "@/components/motion/SplitText";
 import FadeUp from "@/components/motion/FadeUp";
 import { useNav } from "@/context/NavContext";
-
-const servicePillars = [
-  {
-    num: "01",
-    title: "ENTERPRISE SOFTWARE ARCHITECTURE",
-    tagline: "HIGH-CONCURRENCY DISTRIBUTED SYSTEMS",
-    desc: "We design and engineer resilient cloud-native architectures capable of handling complex transactional loads. Microservices, event buses, and zero-downtime database sharding.",
-    deliverables: [
-      "Fault-Tolerant Distributed Backends",
-      "Event-Driven Architecture (Kafka / RabbitMQ)",
-      "High-Performance REST & gRPC Gateways",
-      "Database Sharding & Time-Series Storage",
-    ],
-  },
-  {
-    num: "02",
-    title: "DOMAIN-GROUNDED AI & RAG NETWORKS",
-    tagline: "VERIFIABLE REASONING & SEARCH",
-    desc: "Production-grade Retrieval-Augmented Generation engines built for sensitive enterprise and institutional data. Zero hallucination tolerance with full citation audit trails.",
-    deliverables: [
-      "Custom Vector Indexing & Semantic Search",
-      "Contextual Document Parsing & Chunking",
-      "On-Premise & Localized LLM Orchestration",
-      "Deterministic Regulatory Audit Trails",
-    ],
-  },
-  {
-    num: "03",
-    title: "CUSTOM ERP & OPERATIONAL PLATFORMS",
-    tagline: "SYNCHRONIZED BUSINESS OPERATIONS",
-    desc: "Consolidate inventory, procurement, human capital, and real-time ledger accounting into a unified, high-integrity platform tailored strictly to your operational workflows.",
-    deliverables: [
-      "Automated Supply Chain Reconciliation",
-      "Multi-Entity Financial Ledger Engines",
-      "Real-Time Warehouse & Asset Tracking",
-      "Role-Based Audit & Permission Control",
-    ],
-  },
-  {
-    num: "04",
-    title: "PUBLIC-SECTOR & INSTITUTIONAL PLATFORMS",
-    tagline: "CIVIC TECH AT NATIONAL SCALE",
-    desc: "High-security digital governance infrastructure, citizen enrollment portals, and institutional document verification networks engineered for national resilience.",
-    deliverables: [
-      "Tamper-Evident Identity & Registry Systems",
-      "Inter-Agency API Data Exchange Gateways",
-      "Offline-First Progressive Web Applications",
-      "Strict Regulatory & Cryptographic Compliance",
-    ],
-  },
-];
+import { servicePillars } from "@/content";
 
 export default function ServicesOverview() {
   const { openContact } = useNav();

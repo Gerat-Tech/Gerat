@@ -6,38 +6,13 @@ import SectionLabel from "../common/SectionLabel";
 import FadeUp from "../motion/FadeUp";
 import SplitText from "../motion/SplitText";
 
-const featuredProjects = [
-  {
-    id: "01",
-    title: "NATIONAL DIGITAL RECORDS ENGINE",
-    category: "PUBLIC SECTOR & INSTITUTIONAL",
-    metric: "12M+ RECORDS // SUB-SECOND VERIFICATION",
-    description:
-      "A unified, tamper-evident digital registry engine modernizing institutional documentation, citizen registries, and multi-agency credential verification.",
-    tech: "DISTRIBUTED POSTGRES // NEXT.JS // CRYPTOGRAPHIC AUDITING",
-    image: "/image/portfolioPage/US-AUT-3.webp",
-  },
-  {
-    id: "02",
-    title: "AXIOM ENTERPRISE ERP & SUPPLY SUITE",
-    category: "ENTERPRISE SYSTEMS",
-    metric: "45% CYCLE REDUCTION // 99.99% UPTIME",
-    description:
-      "Enterprise resource planning platform managing multi-facility supply chains, automated reconciliation, and institutional operational logistics.",
-    tech: "REACT // NODE.JS // TIMESCALEDB // KAFKA",
-    image: "/image/portfolioPage/stratahub-featured.webp",
-  },
-  {
-    id: "03",
-    title: "SYNAPSE KNOWLEDGE RAG ENGINE",
-    category: "INTELLIGENT SYSTEMS & AI",
-    metric: "500K+ DOCUMENTS // 98.4% RETRIEVAL ACCURACY",
-    description:
-      "Domain-grounded retrieval architecture orchestrating localized LLMs and dense vector indexes to deliver instant, cited intelligence from institutional archives.",
-    tech: "PYTHON // FASTAPI // QDRANT // NEXT.JS",
-    image: "/image/portfolioPage/Alph-1_2026-02-17-164533_rxel.webp",
-  },
-];
+import { portfolioProjects } from "@/content";
+
+const featuredProjects = portfolioProjects.slice(0, 3).map((p, idx) => ({
+  ...p,
+  id: `0${idx + 1}`,
+  description: p.summary || p.description,
+}));
 
 export default function OurPortfolio() {
   return (
