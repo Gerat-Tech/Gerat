@@ -183,73 +183,73 @@ e44cf5a feat(design): add adaptive 12-column grid system and container utilities
 
 ---
 
-## Phase 3 — Navigation & Layout Shell
+## Phase 3 — Navigation & Layout Shell ✅ COMPLETED
 
 **Goal:** Build the navigation system matching the reference's behavior — sticky, hide-on-scroll, compact, with mobile menu.
 
 ### Tasks
 
-- [ ] **Rebuild desktop navigation**
+- [x] **Rebuild desktop navigation**
   - Logo left, nav links center/right, contact CTA right
   - Mono uppercase nav labels with text-reveal hover animation
   - Corner-accent bracket hover indicators (as seen on reference)
   - Active route marker with accent color
   - *Spec ref: §8*
 
-- [ ] **Implement sticky/hide-on-scroll behavior**
+- [x] **Implement sticky/hide-on-scroll behavior**
   - Fixed positioning with background transition on scroll
   - Hide on scroll down (past 1 viewport), show on scroll up
   - Compact mode when scrolled (logo collapses to mark)
   - 250–450ms transition duration
   - *Spec ref: §8 Sticky behavior*
 
-- [ ] **Build mobile menu**
+- [x] **Build mobile menu**
   - Full-screen overlay with clip-path reveal transition
   - Staggered link entrance animation
   - Grid-based link layout (2 columns, like reference)
   - Contact CTA enters last
   - *Spec ref: §8 Mobile*
 
-- [ ] **Create layout wrapper components**
+- [x] **Create layout wrapper components**
   - `Container` component with responsive gutters
   - `SectionLabel` component (mono uppercase with index)
 
-### Commit plan
+### Commit history (Phase 3)
 ```
-1. feat: build desktop navigation with sticky scroll behavior
-2. feat: build mobile menu with full-screen overlay transition
-3. feat: add Container and layout shell components
+36734aa feat(layout): add standardized Container and editorial SectionLabel components
+5fc175b feat(navigation): upgrade Navbar and NavItem with sticky scroll compression and active states
 ```
 
 ---
 
-## Phase 4 — Page Loader & Transitions
+## Phase 4 — Page Loader & Transitions ✅ COMPLETED
 
 **Goal:** Add premium page load experience and smooth route transitions.
 
 ### Tasks
 
-- [ ] **Create page loader** (*Spec ref: §9*)
+- [x] **Create page loader** (*Spec ref: §9*)
   - Brand mark appears → gains motion → loading completes → hero reveals
   - Total duration: 0.5–0.9s (not a long fake loader)
   - Deterministic, skip on repeat navigation
   - Reduced-motion: instant fade only
 
-- [ ] **Build route transition system** (*Spec ref: §32, §33*)
+- [x] **Build route transition system** (*Spec ref: §32, §33*)
   - `PageTransitionProvider` context with states: idle, entering, leaving, enter-complete
   - `TransitionOverlay` component
   - Old page: opacity 1→0, y 0→−10
   - New page: overlay/mask → reveal
   - 350–700ms total transition
 
-- [ ] **Wire transitions to Next.js App Router**
+- [x] **Wire transitions to Next.js App Router**
   - Intercept route changes
   - Coordinate exit → transition → enter sequence
 
-### Commit plan
+### Commit history (Phase 4)
 ```
-1. feat: add page loader with brand mark reveal
-2. feat: implement route transition system with overlay
+1199921 feat(loader): add deterministic editorial PageLoader with brand telemetry and progress sequence
+9d78944 feat(transitions): implement route transition architecture with PageTransitionContext and TransitionOverlay
+c3f1fc0 refactor(layout): connect PageLoader and TransitionOverlay inside ClientWrapper
 ```
 
 ---
