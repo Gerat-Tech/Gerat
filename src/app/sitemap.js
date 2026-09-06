@@ -12,6 +12,8 @@ export default function sitemap() {
     "/team",
     "/insights",
     "/why-wqf",
+    "/services/brand-creative",
+    "/services/personal-branding",
   ];
 
   return routes.map((route) => ({

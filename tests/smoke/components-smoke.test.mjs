@@ -36,6 +36,7 @@ export async function runComponentSmokeTests() {
     "src/components/home/Marquee.jsx",
     "src/components/home/OurEthos.jsx",
     "src/components/home/OurFocus.jsx",
+    "src/components/home/BrandCreativeSection.jsx",
     "src/components/home/OurPortfolio.jsx",
     "src/components/home/HowWeWork.jsx",
     "src/components/home/OurLeadership.jsx",

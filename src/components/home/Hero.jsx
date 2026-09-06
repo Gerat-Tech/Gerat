@@ -57,13 +57,12 @@ export default function Hero() {
             />
           </div>
 
-          {/* Supporting Statement (Content §2) */}
+          {/* Supporting Statement (Content §2 & Brand Spec §16, §39) */}
           <FadeUp delay={0.45} y={24} className="max-w-2xl">
             <p className="font-roc text-base sm:text-lg md:text-xl text-white/70 font-normal leading-relaxed">
-              We design and engineer digital systems for businesses,
-              enterprises, and public-sector operations — turning complex
-              workflows into intelligent, scalable, and resilient digital
-              products.
+              From monolithic brand identities to high-concurrency software architectures
+              and domain-grounded AI — we build the visual systems and digital
+              infrastructure that power ambitious enterprises.
             </p>
           </FadeUp>
 

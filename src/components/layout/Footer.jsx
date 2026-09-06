@@ -31,18 +31,17 @@ export default function Footer() {
             </div>
 
             <h2 className="font-roc text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92] text-white">
-              BUILD WITH <br />
-              <span className="text-accent">GERAT.</span>
+              FROM IDENTITY <br />
+              <span className="text-accent">TO INFRASTRUCTURE.</span>
             </h2>
 
             <p className="font-roc text-base sm:text-lg text-white/70 max-w-xl leading-relaxed">
-              We engineer mission-critical digital systems for businesses,
-              institutions, and public-sector operations. Let&apos;s discuss your
-              architecture and delivery timeline.
+              Have an ambitious venture, brand, or mission-critical system worth building?
+              Gerat turns complex challenges into identities and architectures people can see, use, and trust.
             </p>
           </div>
 
-          <div className="lg:col-span-4 flex flex-col items-start lg:items-end gap-6">
+          <div className="lg:col-span-4 flex flex-col items-start lg:items-end gap-4">
             <Magnetic maxDisplacement={10}>
               <button
                 type="button"
@@ -50,7 +49,7 @@ export default function Footer() {
                 data-cursor-text="CONTACT"
                 className="group relative isolate inline-flex items-center justify-center font-azeret text-[12px] uppercase tracking-[0.2em] px-8 py-4 bg-accent text-white font-bold hover:bg-white hover:text-black transition-all duration-300 rounded-[2px]"
               >
-                <span>START A CONVERSATION</span>
+                <span>START A PROJECT</span>
                 <span className="ml-2 group-hover:translate-x-1 transition-transform">
                   →
                 </span>
@@ -71,9 +70,9 @@ export default function Footer() {
       {/* Middle Navigation & Information Row */}
       <div className="w-full border-t border-white/10 bg-[#0a0a0a]">
         <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 items-start">
             {/* Brand column */}
-            <div className="md:col-span-4 flex flex-col gap-4">
+            <div className="lg:col-span-4 flex flex-col gap-4">
               <div className="flex items-center gap-3">
                 <div className="size-8 rounded-[3px] bg-white/5 border border-white/15 flex items-center justify-center text-white">
                   <svg className="size-4" viewBox="0 0 24 24" fill="none">
@@ -86,13 +85,13 @@ export default function Footer() {
                 </span>
               </div>
               <p className="font-azeret text-[10px] text-white/50 leading-relaxed uppercase tracking-[0.15em] max-w-xs">
-                GERAT SOFTWARE SOLUTIONS PLC // DEEP-TECH SOFTWARE ARCHITECTURE &
-                DIGITAL SYSTEMS.
+                GERAT SOFTWARE SOLUTIONS PLC // MONOLITHIC BRAND IDENTITIES, AI &
+                ENTERPRISE DIGITAL SYSTEMS.
               </p>
             </div>
 
             {/* Navigation links */}
-            <div className="md:col-span-4 flex flex-col gap-3">
+            <div className="lg:col-span-2 flex flex-col gap-3">
               <span className="font-azeret text-[10px] tracking-[0.2em] text-white/40 uppercase mb-1">
                 NAVIGATION
               </span>
@@ -107,28 +106,48 @@ export default function Footer() {
                     </Link>
                   </li>
                 ))}
+              </ul>
+            </div>
+
+            {/* Brand & Creative links (Spec §24) */}
+            <div className="lg:col-span-3 flex flex-col gap-3">
+              <span className="font-azeret text-[10px] tracking-[0.2em] text-accent uppercase mb-1">
+                BRAND & CREATIVE
+              </span>
+              <ul className="flex flex-col gap-2 font-azeret text-[10px] tracking-[0.15em] text-white/60 uppercase">
                 <li>
-                  <button
-                    type="button"
-                    onClick={openContact}
-                    className="font-azeret text-[11px] tracking-[0.2em] text-accent hover:text-white transition-colors uppercase text-left"
-                  >
-                    CONTACT // INITIATE PROJECT
-                  </button>
+                  <Link href="/services/brand-creative" className="hover:text-white transition-colors">
+                    • BRAND STRATEGY
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services/brand-creative" className="hover:text-white transition-colors">
+                    • LOGO & BRAND IDENTITY
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services/brand-creative" className="hover:text-white transition-colors">
+                    • GRAPHIC DESIGN & COLLATERAL
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services/personal-branding" className="hover:text-white transition-colors">
+                    • FOUNDER PERSONAL BRANDING
+                  </Link>
                 </li>
               </ul>
             </div>
 
-            {/* Focus areas */}
-            <div className="md:col-span-4 flex flex-col gap-3">
+            {/* Engineering Disciplines */}
+            <div className="lg:col-span-3 flex flex-col gap-3">
               <span className="font-azeret text-[10px] tracking-[0.2em] text-white/40 uppercase mb-1">
-                DISCIPLINES
+                ENGINEERING
               </span>
-              <ul className="font-azeret text-[10px] tracking-[0.15em] text-white/50 space-y-1.5 uppercase">
-                <li>• ENTERPRISE CLOUD ARCHITECTURE</li>
-                <li>• DOMAIN-GROUNDED RAG & AI NETWORKS</li>
-                <li>• CUSTOM ERP & TELEMETRY SYSTEMS</li>
-                <li>• INSTITUTIONAL GOVERNANCE PLATFORMS</li>
+              <ul className="font-azeret text-[10px] tracking-[0.15em] text-white/50 space-y-2 uppercase">
+                <li>• ENTERPRISE CLOUD & ERP</li>
+                <li>• DOMAIN-GROUNDED RAG & AI</li>
+                <li>• REAL-TIME TELEMETRY BUSES</li>
+                <li>• CIVIC GOVERNANCE PLATFORMS</li>
               </ul>
             </div>
           </div>

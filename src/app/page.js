@@ -2,6 +2,7 @@ import Hero from "@/components/home/Hero";
 import Marquee from "@/components/home/Marquee";
 import OurEthos from "@/components/home/OurEthos";
 import OurFocus from "@/components/home/OurFocus";
+import BrandCreativeSection from "@/components/home/BrandCreativeSection";
 import OurPortfolio from "@/components/home/OurPortfolio";
 import HowWeWork from "@/components/home/HowWeWork";
 import OurLeadership from "@/components/home/OurLeadership";
@@ -15,6 +16,7 @@ export default function Home() {
       <Marquee />
       <OurEthos />
       <OurFocus />
+      <BrandCreativeSection />
       <OurPortfolio />
       <HowWeWork />
       <OurLeadership />

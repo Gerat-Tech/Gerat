@@ -252,6 +252,29 @@ export default function Navbar() {
             })}
           </div>
 
+          {/* Creative Quick Links on Mobile */}
+          <div className="flex flex-col gap-1.5 pt-1">
+            <span className="font-azeret text-[9px] tracking-[0.2em] text-accent uppercase text-center">
+              CREATIVE & IDENTITY
+            </span>
+            <div className="grid grid-cols-2 gap-2">
+              <Link
+                href="/services/brand-creative"
+                onClick={() => setIsMenuOpen(false)}
+                className="py-2.5 px-2 text-center font-azeret text-[10px] tracking-[0.1em] uppercase border border-white/10 text-white/70 hover:text-white rounded-[2px] bg-white/[0.01]"
+              >
+                BRAND & LOGO
+              </Link>
+              <Link
+                href="/services/personal-branding"
+                onClick={() => setIsMenuOpen(false)}
+                className="py-2.5 px-2 text-center font-azeret text-[10px] tracking-[0.1em] uppercase border border-white/10 text-white/70 hover:text-white rounded-[2px] bg-white/[0.01]"
+              >
+                FOUNDER BRAND
+              </Link>
+            </div>
+          </div>
+
           {/* Full-width Contact Drawer Trigger on Mobile */}
           <button
             type="button"

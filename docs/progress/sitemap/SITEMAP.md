@@ -62,6 +62,8 @@ graph TD
     
     MainContent --> P_Home["/ (Home Page)"]
     MainContent --> P_Services["/why-wqf (Platform Services & Practices)"]
+    MainContent --> P_BrandCreative["/services/brand-creative (Brand Strategy, Logo & Graphic Design)"]
+    MainContent --> P_PersonalBrand["/services/personal-branding (Executive & Founder Personal Branding)"]
     MainContent --> P_Portfolio["/portfolio (Flagship Case Studies)"]
     MainContent --> P_Team["/team (Engineering Leadership & Specialists)"]
     MainContent --> P_Insights["/insights (Technical Whitepapers & Research)"]
@@ -78,11 +80,13 @@ graph TD
 
 | Route Path | Page Title | Rendering Strategy | Core Content / Purpose | Primary CTA |
 | :--- | :--- | :--- | :--- | :--- |
-| **`/`** | Gerat Software Solutions PLC \| Deep-Tech Software & Digital Systems | Static Pre-rendered (`○`) | Master editorial narrative: Hero 3D particles, continuous marquee, core ethos, 8-row capabilities table, 3 featured case studies, 6-stage methodology, leadership preview, and technology ecosystem. | `START A PROJECT` & `EXPLORE WORK` |
-| **`/why-wqf`** | Platform & Engineering Services \| Gerat | Static Pre-rendered (`○`) | 4 core practice pillars: Enterprise Software Architecture, Domain-Grounded AI & RAG, Custom ERP & Operational Platforms, and Public-Sector Platforms with deliverables and SLAs. | `INITIATE PROJECT` |
-| **`/portfolio`** | Selected Architectural Works \| Gerat | Static Pre-rendered (`○`) | Interactive case study showcase with category filtering (`ALL`, `ENTERPRISE ERP`, `PUBLIC SECTOR`, `AI & RAG`, `TELEMETRY`) and sticky directory sidebar. | `COMMISSION SIMILAR ARCHITECTURE` |
+| **`/`** | Gerat Software Solutions PLC \| Deep-Tech Software & Digital Systems | Static Pre-rendered (`○`) | Master editorial narrative: Hero 3D particles, continuous marquee, core ethos, 8-row capabilities table, 3 featured case studies, Brand & Creative section, 6-stage methodology, leadership preview, and technology ecosystem. | `START A PROJECT` & `EXPLORE WORK` |
+| **`/why-wqf`** | Platform & Engineering Services \| Gerat | Static Pre-rendered (`○`) | 6 core practice pillars: Enterprise Architecture, AI & RAG, Custom ERP, Public Sector, Brand Strategy & Identity Systems, and Executive Personal Branding. | `INITIATE PROJECT` |
+| **`/services/brand-creative`** | Brand Strategy, Logo Design & Creative Systems \| Gerat | Static Pre-rendered (`○`) | Dedicated brand & design service page: 6 creative disciplines, vector production formats (SVG, EPS, PDF, Print, Web), strategic packages, and FAQs. | `COMMISSION BRAND WORK` |
+| **`/services/personal-branding`** | Executive & Founder Personal Branding \| Gerat | Static Pre-rendered (`○`) | Dedicated personal branding page: 7-pillar executive framework, target leader personas, personal website architecture, and strategy consultation. | `BOOK BRAND CONSULTATION` |
+| **`/portfolio`** | Selected Architectural Works \| Gerat | Static Pre-rendered (`○`) | Interactive case study showcase with category filtering (`ALL`, `BRAND & IDENTITY`, `PERSONAL BRAND`, `ENTERPRISE ERP`, `PUBLIC SECTOR`, `AI & RAG`) and sticky directory. | `COMMISSION SIMILAR ARCHITECTURE` |
 | **`/team`** | Engineering Leadership & Team \| Gerat | Static Pre-rendered (`○`) | Profiles of Executive Architects, Specialized Engineering Practitioners (DevOps, Security, Distributed Systems, Interaction), and team engineering principles. | `JOIN ENGINEERING` |
-| **`/insights`** | Technical Insights & Whitepapers \| Gerat | Static Pre-rendered (`○`) | 6 deep-tech research publications covering sub-second consensus, zero-hallucination RAG, 120k/s telemetry ingestion, ISO-8583 banking, and zero-trust registries. | `SUBSCRIBE / CONTACT` |
+| **`/insights`** | Technical Insights & Whitepapers \| Gerat | Static Pre-rendered (`○`) | 9 deep-tech research publications covering distributed consensus, RAG, telemetry, brand systems, and executive positioning. | `SUBSCRIBE / CONTACT` |
 | **`/sitemap.xml`** | Dynamic XML Sitemap | Route Handler (`○`) | Automated index for search engine crawlers with priority weighting and change frequencies. | N/A |
 | **`/robots.txt`** | Crawler Directives | Route Handler (`○`) | Allows full site indexing with canonical link to `/sitemap.xml`. | N/A |
 | **`/icon.svg`** | SVG Application Icon | Route Handler (`○`) | High-resolution scalable browser favicon and mobile bookmark icon. | N/A |
@@ -113,6 +117,7 @@ src/content/
 - `components/home/OurEthos.jsx` (Expanding value accordion with custom SVG iconography)
 - `components/home/OurFocus.jsx` (Interactive 8-row capabilities table)
 - `components/home/OurPortfolio.jsx` (3 flagship case studies with corner accents)
+- `components/home/BrandCreativeSection.jsx` (4 monolithic creative cards + direct booking)
 - `components/home/HowWeWork.jsx` (6-step engineering methodology)
 - `components/home/OurLeadership.jsx` (Executive preview grid)
 - `components/home/Partners.jsx` (Technology infrastructure partner matrix)
@@ -124,6 +129,22 @@ src/content/
   - Section 02: Domain-Grounded AI & Enterprise RAG Systems
   - Section 03: Distributed Telemetry & Industrial IoT
   - Section 04: Public Sector & Civic Registry Infrastructure
+  - Section 05: Brand Strategy, Identity & Design Systems
+  - Section 06: Executive & Founder Personal Branding
+- `components/layout/Footer.jsx`
+
+#### 2b. Brand Strategy & Creative Systems Route (`/services/brand-creative`)
+- `app/services/brand-creative/page.js`
+  - 6 Creative Disciplines: Strategy, Logo Systems, Visual Identity, Graphic Design, Social Systems, Production Formats
+  - Production Deliverables & Vector Matrix (SVG, EPS, PDF, Print, Web)
+  - Reassurance FAQs & Strategic Packages
+- `components/layout/Footer.jsx`
+
+#### 2c. Executive & Personal Branding Route (`/services/personal-branding`)
+- `app/services/personal-branding/page.js`
+  - 7-Pillar Executive Framework: Positioning, Visual Identity, Photography Direction, LinkedIn Branding, Executive Website, Content Direction, Launch Rollout
+  - Target Leader Personas (Founders, Executives, Consultants, Tech Leaders)
+  - Case Study Spotlight (`meridian-executive`)
 - `components/layout/Footer.jsx`
 
 #### 3. Portfolio Route (`/portfolio`)

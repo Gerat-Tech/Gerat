@@ -36,24 +36,24 @@ const capabilities = [
   },
   {
     index: "05",
-    title: "REAL-TIME TELEMETRY & DATA INFRASTRUCTURE",
-    tags: "APACHE KAFKA // TIME-SERIES // STREAM ANALYTICS",
+    title: "BRAND STRATEGY, IDENTITY & DESIGN SYSTEMS",
+    tags: "VECTOR MARKS // DESIGN TOKENS // EDITORIAL GUIDELINES",
     description:
-      "Low-latency streaming architectures, operational telemetry dashboards, and high-concurrency event ingestion pipelines for critical environments.",
+      "Monolithic visual identities, design systems, and vector mark architectures that command immediate credibility and translate seamlessly from print to code.",
   },
   {
     index: "06",
+    title: "EXECUTIVE & FOUNDER PERSONAL BRANDING",
+    tags: "FOUNDER PRESENCE // EXECUTIVE SITES // THOUGHT LEADERSHIP",
+    description:
+      "Strategic positioning, visual identity, and high-impact digital presence engineered to establish founders, executives, and technology leaders as authorities.",
+  },
+  {
+    index: "07",
     title: "HIGH-PERFORMANCE WEB & MOBILE SUITES",
     tags: "NEXT.JS // REACT NATIVE // PROGRESSIVE WEB APPS",
     description:
       "Award-winning editorial web applications and cross-platform native mobile clients built with micro-interaction choreography and sub-second load times.",
-  },
-  {
-    index: "07",
-    title: "API INFRASTRUCTURES & SYSTEM INTEGRATION",
-    tags: "GRAPHQL // GRPC // REST // LEGACY BRIDGE",
-    description:
-      "Bridging mission-critical legacy databases with modern microservices through high-throughput, type-safe API gateways and transactional brokers.",
   },
   {
     index: "08",

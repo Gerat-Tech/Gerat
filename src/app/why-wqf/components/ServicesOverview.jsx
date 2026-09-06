@@ -52,7 +52,7 @@ export default function ServicesOverview() {
         </div>
 
         <div className="mt-12 pt-4 border-t border-white/10 flex items-center justify-between font-azeret text-[10px] tracking-[0.2em] text-white/40 uppercase">
-          <span>PILLARS // 04 CORE ENGINEERING PRACTICES</span>
+          <span>PILLARS // 06 CORE PRACTICES (FROM IDENTITY TO INFRASTRUCTURE)</span>
           <span>EXPLORE ARCHITECTURE ↓</span>
         </div>
       </section>
@@ -100,6 +100,28 @@ export default function ServicesOverview() {
                       </li>
                     ))}
                   </ul>
+
+                  {pillar.num === "05" && (
+                    <div className="mt-4 pt-3 border-t border-white/5">
+                      <a
+                        href="/services/brand-creative"
+                        className="inline-flex items-center gap-1.5 font-azeret text-[9px] tracking-[0.2em] uppercase text-accent hover:text-white transition-colors"
+                      >
+                        <span>VIEW BRAND & CREATIVE SPECIFICATION →</span>
+                      </a>
+                    </div>
+                  )}
+
+                  {pillar.num === "06" && (
+                    <div className="mt-4 pt-3 border-t border-white/5">
+                      <a
+                        href="/services/personal-branding"
+                        className="inline-flex items-center gap-1.5 font-azeret text-[9px] tracking-[0.2em] uppercase text-accent hover:text-white transition-colors"
+                      >
+                        <span>VIEW FOUNDER BRANDING SPECIFICATION →</span>
+                      </a>
+                    </div>
+                  )}
                 </div>
               </div>
             </FadeUp>

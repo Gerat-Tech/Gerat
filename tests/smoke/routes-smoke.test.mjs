@@ -13,6 +13,8 @@ export async function runRouteSmokeTests() {
     { file: "src/app/team/page.js", name: "TeamPage", checks: ["export default"] },
     { file: "src/app/insights/page.js", name: "InsightsPage", checks: ["export default"] },
     { file: "src/app/why-wqf/page.js", name: "WhyWqfPage", checks: ["export default"] },
+    { file: "src/app/services/brand-creative/page.js", name: "BrandCreativePage", checks: ["export default", "BRAND & CREATIVE"] },
+    { file: "src/app/services/personal-branding/page.js", name: "PersonalBrandingPage", checks: ["export default", "PERSONAL BRANDING"] },
     { file: "src/app/sitemap.js", name: "Sitemap", checks: ["export default function sitemap", "gerat.et"] },
     { file: "src/app/robots.js", name: "Robots", checks: ["export default function robots", "sitemap.xml"] },
     { file: "src/app/icon.svg", name: "Icon", checks: ["#FF4A00"] },

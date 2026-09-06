@@ -712,13 +712,13 @@ c096429 feat(test): update smoke tests to verify all inner pages and anti-legacy
 
 ---
 
-## Phase 19 — Homepage Integration ("From Identity to Infrastructure")
+## Phase 19 — Homepage Integration ("From Identity to Infrastructure") ✅ COMPLETED
 
 **Goal:** Integrate the Brand & Creative service family into the existing homepage without disrupting the dark architectural aesthetic.
 
 ### Tasks
 
-- [ ] **Create `BrandCreativeSection.jsx` (`src/components/home/BrandCreativeSection.jsx`)**
+- [x] **Create `BrandCreativeSection.jsx` (`src/components/home/BrandCreativeSection.jsx`)**
   - Eyebrow: `04 / BRAND & CREATIVE`
   - Heading: "BUILD THE PRODUCT. BUILD THE BRAND. BUILD THE PRESENCE."
   - Narrative: Connect identity to the digital experiences and software systems Gerat builds.
@@ -729,36 +729,36 @@ c096429 feat(test): update smoke tests to verify all inner pages and anti-legacy
     4. *Personal Branding*
   - CTA button: "EXPLORE BRAND & CREATIVE →" with direct drawer/page routing
 
-- [ ] **Update `Hero.jsx` & `Marquee.jsx`**
+- [x] **Update `Hero.jsx` & `Marquee.jsx`**
   - Reflect combined capability: "From Identity to Infrastructure"
   - Include creative ticker tokens (`BRAND STRATEGY // LOGO SYSTEMS // VISUAL IDENTITY // EXECUTIVE BRANDING //`)
 
-- [ ] **Update Home Capabilities Table (`OurFocus.jsx`)**
+- [x] **Update Home Capabilities Table (`OurFocus.jsx`)**
   - Integrate visual identity and creative systems into the capabilities matrix
 
-- [ ] **Update Home Final CTA & Colophon**
+- [x] **Update Home Final CTA & Colophon**
   - Heading: "HAVE AN IDEA, A BRAND, OR A SYSTEM WORTH BUILDING?"
   - Dual action buttons: `START A PROJECT` and `BOOK A BRAND CONSULTATION`
 
 ---
 
-## Phase 20 — Services Expansion & Dedicated Landing Pages
+## Phase 20 — Services Expansion & Dedicated Landing Pages ✅ COMPLETED
 
 **Goal:** Provide full editorial landing pages for clients seeking dedicated brand identity, logo, graphic design, and personal branding engagements.
 
 ### Tasks
 
-- [ ] **Update Services Overview (`src/app/why-wqf/components/ServicesOverview.jsx`)**
+- [x] **Update Services Overview (`src/app/why-wqf/components/ServicesOverview.jsx`)**
   - Incorporate Practice 05 (Brand & Design Systems) and Practice 06 (Executive Personal Branding) into the pillars deck
   - Detail concrete deliverables (Vector suites, typography guides, presentation decks, personal websites)
 
-- [ ] **Create Dedicated Brand & Creative Landing Page (`src/app/services/brand-creative/page.js`)**
+- [x] **Create Dedicated Brand & Creative Landing Page (`src/app/services/brand-creative/page.js`)**
   - Comprehensive service breakdowns for Strategy, Logo, Identity, Graphic Design, Social Systems
   - Production Deliverables & File Formats matrix (SVG, EPS, PDF, Print, Web)
   - Reassurance FAQs (Logo vs Brand, IP Ownership, Source Files, Revisions)
   - Strategic Packages overview (Launch Brand, Brand + Digital, Product Launch)
 
-- [ ] **Create Dedicated Personal Branding Landing Page (`src/app/services/personal-branding/page.js`)**
+- [x] **Create Dedicated Personal Branding Landing Page (`src/app/services/personal-branding/page.js`)**
   - Modular framework for founders and executives: Positioning, Visual Identity, Photography Direction, LinkedIn Branding, Personal Website, Content Direction, Launch Rollout
   - Persona matching (Founders, Executives, Consultants, Technology Leaders)
   - Direct booking and consultation CTA
