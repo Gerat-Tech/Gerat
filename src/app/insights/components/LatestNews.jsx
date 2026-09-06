@@ -1,11 +1,31 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import FadeUp from "@/components/motion/FadeUp";
 
-import { insightsArticles as articles } from "@/content";
+import { insightsArticles as defaultArticles } from "@/content";
 
-export default function LatestNews({ activeCategory = "ALL ARTICLES" }) {
+export default function LatestNews({ activeCategory = "ALL ARTICLES", articles: customArticles = null }) {
+  const [fetchedArticles, setFetchedArticles] = useState(null);
+
+  useEffect(() => {
+    if (customArticles) return;
+    let isMounted = true;
+    fetch("/api/articles?status=PUBLISHED")
+      .then((res) => res.json())
+      .then((data) => {
+        if (isMounted && data.success && data.articles && data.articles.length > 0) {
+          setFetchedArticles(data.articles);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      isMounted = false;
+    };
+  }, [customArticles]);
+
+  const articles = customArticles || fetchedArticles || defaultArticles;
   const filteredArticles =
     activeCategory === "ALL ARTICLES"
       ? articles
@@ -15,8 +35,11 @@ export default function LatestNews({ activeCategory = "ALL ARTICLES" }) {
     <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 pb-24 sm:pb-36 text-white">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredArticles.map((article, idx) => (
-          <FadeUp key={article.id} delay={0.08 * idx} y={24}>
-            <article className="group relative bg-[#0e0e0e] border border-white/10 hover:border-accent/60 rounded-[4px] overflow-hidden transition-all duration-300 flex flex-col justify-between h-full">
+          <FadeUp key={article.id || article.slug} delay={0.08 * idx} y={24}>
+            <Link
+              href={`/insights/${article.slug}`}
+              className="block group relative bg-[#0e0e0e] border border-white/10 hover:border-accent/60 rounded-[4px] overflow-hidden transition-all duration-300 flex flex-col justify-between h-full"
+            >
               {/* Precision Corner Accents */}
               <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30 group-hover:border-accent transition-colors z-20" />
               <span className="absolute top-0 right-0 size-2 border-t border-r border-white/30 group-hover:border-accent transition-colors z-20" />
@@ -26,7 +49,7 @@ export default function LatestNews({ activeCategory = "ALL ARTICLES" }) {
               {/* Image Banner */}
               <div className="relative aspect-16/10 w-full overflow-hidden bg-black/60">
                 <img
-                  src={article.image}
+                  src={article.coverImageUrl || article.image || "/image/LatestNews/01_Picture.webp"}
                   alt={article.title}
                   className="w-full h-full object-cover grayscale contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
                   loading="lazy"
@@ -41,9 +64,9 @@ export default function LatestNews({ activeCategory = "ALL ARTICLES" }) {
               <div className="p-6 sm:p-8 flex flex-col justify-between flex-1 gap-6">
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center gap-3 font-azeret text-[9px] tracking-[0.15em] text-white/40 uppercase">
-                    <span>{article.date}</span>
+                    <span>{article.date || (article.publishedAt ? new Date(article.publishedAt).toLocaleDateString("en-US", { month: "short", year: "numeric" }).toUpperCase() : "RECENT")}</span>
                     <span>{"//"}</span>
-                    <span>{article.readTime}</span>
+                    <span>{article.readTime || article.readingTime || "6 MIN READ"}</span>
                   </div>
 
                   <h2 className="font-roc text-xl sm:text-2xl font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors leading-tight">
@@ -62,7 +85,7 @@ export default function LatestNews({ activeCategory = "ALL ARTICLES" }) {
                   </span>
                 </div>
               </div>
-            </article>
+            </Link>
           </FadeUp>
         ))}
       </div>

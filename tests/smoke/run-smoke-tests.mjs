@@ -4,6 +4,7 @@ import { runRouteSmokeTests } from "./routes-smoke.test.mjs";
 import { runBrandingSmokeTests } from "./branding-smoke.test.mjs";
 import { runDashboardAuthSmokeTests } from "./dashboard-auth-smoke.test.mjs";
 import { runCrmIntakeSmokeTests } from "./crm-intake-smoke.test.mjs";
+import { runArticlesCmsSmokeTests } from "./articles-cms-smoke.test.mjs";
 
 async function main() {
   console.log("=================================================");
@@ -21,6 +22,7 @@ async function main() {
     { name: "Branding & Anti-Legacy Rules", fn: runBrandingSmokeTests },
     { name: "Dashboard Database, Auth & RBAC", fn: runDashboardAuthSmokeTests },
     { name: "CRM & Client Intake Pipeline", fn: runCrmIntakeSmokeTests },
+    { name: "Research & Insights CMS", fn: runArticlesCmsSmokeTests },
   ];
 
   for (const suite of testSuites) {

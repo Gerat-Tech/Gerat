@@ -41,7 +41,7 @@ The Gerat website has established an architectural, dark-mode digital identity. 
 | **Phase D-01** | Foundation & Auth | Database, ORM & RBAC | Prisma schema, SQLite/PostgreSQL, Auth session handler, `/dashboard/login` | ✅ COMPLETED |
 | **Phase D-02** | Shell & UI System | Dashboard Command Center Shell | Sidebar, TopBar with `⌘K`, high-density tables, modal sheets, status chips | ✅ COMPLETED |
 | **Phase D-03** | Client Intake & CRM | Lead Management & Client Comms | Real persistence for `ContactDrawer`, Kanban & Grid views, WhatsApp/Call/Email actions, internal team notes thread | ✅ COMPLETED |
-| **Phase D-04** | Insights & News CMS | Whitepaper & Article Authoring | Split-screen Markdown/MDX editor, draft/published workflow, categories, dynamic `/insights` | ⏳ PENDING |
+| **Phase D-04** | Insights & News CMS | Whitepaper & Article Authoring | Split-screen Markdown/MDX editor, draft/published workflow, categories, dynamic `/insights` | ✅ COMPLETED |
 | **Phase D-05** | Portfolio & Showcase CMS | Flagship Case Studies Management | Case study editor, metric highlights, tech badges, media gallery, dynamic `/portfolio` | ⏳ PENDING |
 | **Phase D-06** | Team & Services CMS | Leadership & Services Governance | Team roster editor, photo crop, practice pillars 01-06 editor, capabilities table manager | ⏳ PENDING |
 | **Phase D-07** | Telemetry, Audit & Alerts | System Hardening & Integrations | Site config (ticker, coordinates), immutable audit log, Telegram/Email alert bot, smoke tests | ⏳ PENDING |
@@ -130,27 +130,33 @@ The Gerat website has established an architectural, dark-mode digital identity. 
 
 ---
 
-## Phase D-04 — Research & Insights CMS (Technical Whitepapers & News)
+## Phase D-04 — Research & Insights CMS (Technical Whitepapers & News) ✅ COMPLETED
 
 **Goal:** Provide an editorial publishing suite for technical publications, whitepapers, and studio announcements.
 
 ### Tasks
-- [ ] **Build Articles Listing (`src/app/(dashboard)/insights/page.jsx`)**
-  - Tabbed filters: `ALL`, `PUBLISHED`, `DRAFT`, `IN_REVIEW`, `SCHEDULED`
-  - Article cards with author avatar, category chip, reading time, and quick status toggles
-- [ ] **Build Split-Screen Markdown / Rich Editor (`src/app/(dashboard)/insights/[id]/page.jsx`)**
-  - Left pane: Markdown / MDX editor with formatting shortcuts (headers, code fences, KaTeX math blocks, alerts)
-  - Right pane: Real-time rendered live preview matching `/insights` typography and styling
-  - Metadata Inspector drawer:
-    - Title, URL slug (auto-slugifier with manual override)
-    - Author selector (linked to Team Member records)
+- [x] **Build Articles Listing (`src/app/dashboard/insights/page.jsx`)**
+  - Tabbed filters: `ALL`, `PUBLISHED`, `DRAFT`, `IN_REVIEW`, `ARCHIVED`
+  - Category selector, real-time search by title, abstract, and author
+  - High-density Grid and Table view modes with thumbnail previews
+  - Quick action toggles: one-click publish/unpublish, delete with confirmation, direct link to live article
+- [x] **Build Split-Screen Markdown / Rich Editor (`src/app/dashboard/insights/[id]/page.jsx` & `/new`)**
+  - Raw markdown editor with live formatting toolbar (H1, H2, H3, bold, italic, code block, quote, bullet list, horizontal divider)
+  - Real-time rendered live preview matching `/insights` typography and dark styling
+  - Word count and automated reading time calculator (`MIN READ`)
+  - Metadata & taxonomy inspector:
+    - Title, Subtitle / Executive Abstract
+    - URL slug with lock/auto-sync from title
+    - Author selector linked to team members / users
     - Category & tags input
-    - Reading time auto-calculator
-    - Cover image upload / media picker
-    - SEO Meta description & OpenGraph preview
-- [ ] **Wire Public `/insights` Page to Dynamic Database Content**
-  - Fallback to static seed data if database is disconnected
-  - Dynamic route `/insights/[slug]` rendering full article markdown with zero build overhead
+    - Cover image URL and featured toggle
+- [x] **Wire Public `/insights` Page & Reader to Dynamic Database Content**
+  - Public reader route (`src/app/insights/[slug]/page.jsx`) rendering full markdown blueprints with zero build overhead
+  - SEO dynamic metadata generation (`generateMetadata`)
+  - Technical specification sticky sidebar and related whitepapers strip
+  - Updated `LatestNews.jsx` with dynamic database loading and static content fallback
+- [x] **Automated Smoke Test Verification (`tests/smoke/articles-cms-smoke.test.mjs`)**
+  - Verified component modules, article lifecycle transitions (`DRAFT` → `PUBLISHED`), slug lookups, relational author queries, and cleanup (7/7 test suites passing)
 
 ---
 
