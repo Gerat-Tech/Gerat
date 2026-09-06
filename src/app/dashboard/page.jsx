@@ -58,7 +58,7 @@ export default async function DashboardPage({ searchParams }) {
         title: true,
         category: true,
         readingTime: true,
-        published: true,
+        status: true,
         createdAt: true,
       },
     });
@@ -627,8 +627,8 @@ export default async function DashboardPage({ searchParams }) {
                     </td>
                     <td className="py-3 px-3 text-white/70">{art.readingTime}</td>
                     <td className="py-3 px-3">
-                      <span className={`px-2 py-0.5 rounded-[2px] font-azeret text-[9px] font-bold tracking-wider uppercase ${art.published ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40" : "bg-amber-500/20 text-amber-400 border border-amber-500/40"}`}>
-                        {art.published ? "PUBLISHED" : "DRAFT"}
+                      <span className={`px-2 py-0.5 rounded-[2px] font-azeret text-[9px] font-bold tracking-wider uppercase ${art.status === "PUBLISHED" ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40" : "bg-amber-500/20 text-amber-400 border border-amber-500/40"}`}>
+                        {art.status}
                       </span>
                     </td>
                     <td className="py-3 px-3 text-right">

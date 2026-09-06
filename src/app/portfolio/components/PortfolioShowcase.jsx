@@ -5,7 +5,7 @@ import FadeUp from "@/components/motion/FadeUp";
 import { useNav } from "@/context/NavContext";
 import { portfolioProjects as defaultProjects } from "@/content";
 
-export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES" }) {
+export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", initialProjects = null }) {
   const [activeIdx, setActiveIdx] = useState(0);
   const itemsRef = useRef([]);
   const { openContact } = useNav();
@@ -41,7 +41,12 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES" }
     };
   }, []);
 
-  const allProjects = fetchedProjects || defaultProjects;
+  const allProjects =
+    fetchedProjects && fetchedProjects.length > 0
+      ? fetchedProjects
+      : initialProjects && initialProjects.length > 0
+      ? initialProjects
+      : defaultProjects;
 
   const filteredProjects =
     activeCategory === "ALL DISCIPLINES"

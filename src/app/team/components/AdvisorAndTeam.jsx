@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import FadeUp from "@/components/motion/FadeUp";
 import { engineeringSpecialists as defaultSpecialists } from "@/content";
 
-export default function AdvisorAndTeam() {
+export default function AdvisorAndTeam({ initialSpecialists = null }) {
   const [fetchedSpecialists, setFetchedSpecialists] = useState(null);
 
   useEffect(() => {
@@ -35,7 +35,12 @@ export default function AdvisorAndTeam() {
     };
   }, []);
 
-  const engineeringSpecialists = fetchedSpecialists || defaultSpecialists;
+  const engineeringSpecialists =
+    fetchedSpecialists && fetchedSpecialists.length > 0
+      ? fetchedSpecialists
+      : initialSpecialists && initialSpecialists.length > 0
+      ? initialSpecialists
+      : defaultSpecialists;
 
   return (
     <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-16 text-white border-t border-white/10">

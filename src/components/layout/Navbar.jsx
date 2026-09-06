@@ -26,6 +26,30 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const lastScrollY = useRef(0);
   const pathname = usePathname();
+  const [announcement, setAnnouncement] = useState(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetch("/api/settings/config")
+      .then((res) => res.json())
+      .then((data) => {
+        if (isMounted && data.success && data.configMap) {
+          if (data.configMap.ANNOUNCEMENT_ENABLED === "true") {
+            setAnnouncement({
+              enabled: true,
+              text: data.configMap.ANNOUNCEMENT_TEXT || "SYSTEM ADVISORY: Q3 ARCHITECTURAL ENGAGEMENT SCHEDULE OPEN",
+              link: data.configMap.ANNOUNCEMENT_LINK || "/why-wqf",
+            });
+          } else {
+            setAnnouncement(null);
+          }
+        }
+      })
+      .catch(() => {});
+    return () => {
+      isMounted = false;
+    };
+  }, [pathname]);
 
   const navLinks = [
     { name: "SERVICES", href: "/why-wqf" },
@@ -102,6 +126,22 @@ export default function Navbar() {
           isVisible ? "translate-y-0" : "-translate-y-full"
         }`}
       >
+        {/* Global Announcement Banner from SiteConfig */}
+        {announcement?.enabled && announcement?.text && (
+          <div className="w-full bg-[#0d0d0d]/95 backdrop-blur-md border-b border-accent/40 text-[10px] sm:text-[11px] font-azeret uppercase tracking-[0.2em] py-2 px-4 text-center text-white/90 flex items-center justify-center gap-2 sm:gap-3 shadow-md">
+            <span className="inline-block size-1.5 rounded-full bg-accent animate-pulse shrink-0" />
+            <span className="truncate max-w-[70vw] sm:max-w-none">{announcement.text}</span>
+            {announcement.link && (
+              <Link
+                href={announcement.link}
+                className="text-accent hover:text-white underline underline-offset-2 transition-colors ml-1 whitespace-nowrap font-bold"
+              >
+                VIEW →
+              </Link>
+            )}
+          </div>
+        )}
+
         <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 pt-3 sm:pt-4">
           <div
             className={`mx-auto flex items-center justify-between transition-all duration-500 ease-(--ease-primary) ${

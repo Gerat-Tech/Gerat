@@ -4,17 +4,19 @@ import React, { useState, useEffect } from "react";
 import FadeUp from "@/components/motion/FadeUp";
 import { leadershipTeam as defaultLeadership } from "@/content";
 
-export default function TeamLeadership() {
+export default function TeamLeadership({ initialLeaders = null }) {
   const [activeIdx, setActiveIdx] = useState(0);
   const [fetchedLeaders, setFetchedLeaders] = useState(null);
 
   useEffect(() => {
     let isMounted = true;
-    fetch("/api/team?division=EXECUTIVE_LEADERSHIP&active=true")
+    fetch("/api/team?active=true")
       .then((res) => res.json())
       .then((data) => {
         if (isMounted && data.success && data.members && data.members.length > 0) {
-          const normalized = data.members.map((m) => ({
+          const execs = data.members.filter((m) => m.division === "EXECUTIVE_LEADERSHIP");
+          const list = execs.length > 0 ? execs : data.members.slice(0, 3);
+          const normalized = list.map((m) => ({
             name: m.name,
             role: m.roleTitle,
             specialty: m.focusTag,
@@ -31,7 +33,12 @@ export default function TeamLeadership() {
     };
   }, []);
 
-  const leadership = fetchedLeaders || defaultLeadership;
+  const leadership =
+    fetchedLeaders && fetchedLeaders.length > 0
+      ? fetchedLeaders
+      : initialLeaders && initialLeaders.length > 0
+      ? initialLeaders
+      : defaultLeadership;
 
   return (
     <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-16 text-white">

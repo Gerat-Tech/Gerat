@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import SectionLabel from "../common/SectionLabel";
 import FadeUp from "../motion/FadeUp";
 import SplitText from "../motion/SplitText";
 
-const leaders = [
+const DEFAULT_LEADERS = [
   {
     name: "DAWIT TEKLEBRHAN",
     role: "FOUNDER & CHIEF EXECUTIVE OFFICER",
@@ -30,8 +30,41 @@ const leaders = [
   },
 ];
 
-export default function OurLeadership() {
+export default function OurLeadership({ initialLeaders = null }) {
   const [activeIdx, setActiveIdx] = useState(0);
+  const [fetchedLeaders, setFetchedLeaders] = useState(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetch("/api/team?active=true")
+      .then((res) => res.json())
+      .then((data) => {
+        if (isMounted && data.success && data.members && data.members.length > 0) {
+          const execs = data.members.filter((m) => m.division === "EXECUTIVE_LEADERSHIP");
+          const list = execs.length > 0 ? execs : data.members.slice(0, 3);
+          const mapped = list.map((m) => ({
+            name: m.name,
+            role: m.roleTitle,
+            specialty: m.focusTag,
+            bio: m.bio,
+            image: m.photoUrl || "/image/team/leadership/WQF__0000_Founder-IgorTulchinsky.webp",
+          }));
+          setFetchedLeaders(mapped);
+        }
+      })
+      .catch(() => {});
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const leaders =
+    fetchedLeaders && fetchedLeaders.length > 0
+      ? fetchedLeaders
+      : initialLeaders && initialLeaders.length > 0
+      ? initialLeaders
+      : DEFAULT_LEADERS;
 
   return (
     <section

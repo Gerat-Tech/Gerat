@@ -7,7 +7,7 @@ import FadeUp from "@/components/motion/FadeUp";
 import { useNav } from "@/context/NavContext";
 import { servicePillars as defaultPillars } from "@/content";
 
-export default function ServicesOverview() {
+export default function ServicesOverview({ initialPillars = null }) {
   const { openContact } = useNav();
   const [fetchedPillars, setFetchedPillars] = useState(null);
 
@@ -46,7 +46,12 @@ export default function ServicesOverview() {
     };
   }, []);
 
-  const servicePillars = fetchedPillars || defaultPillars;
+  const servicePillars =
+    fetchedPillars && fetchedPillars.length > 0
+      ? fetchedPillars
+      : initialPillars && initialPillars.length > 0
+      ? initialPillars
+      : defaultPillars;
 
   return (
     <div className="w-full text-white">

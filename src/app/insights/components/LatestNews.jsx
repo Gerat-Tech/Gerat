@@ -10,7 +10,6 @@ export default function LatestNews({ activeCategory = "ALL ARTICLES", articles: 
   const [fetchedArticles, setFetchedArticles] = useState(null);
 
   useEffect(() => {
-    if (customArticles) return;
     let isMounted = true;
     fetch("/api/articles?status=PUBLISHED")
       .then((res) => res.json())
@@ -23,9 +22,9 @@ export default function LatestNews({ activeCategory = "ALL ARTICLES", articles: 
     return () => {
       isMounted = false;
     };
-  }, [customArticles]);
+  }, []);
 
-  const articles = customArticles || fetchedArticles || defaultArticles;
+  const articles = fetchedArticles || customArticles || defaultArticles;
   const filteredArticles =
     activeCategory === "ALL ARTICLES"
       ? articles

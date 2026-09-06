@@ -14,8 +14,8 @@ const defaultFeatured = defaultProjects.slice(0, 3).map((p, idx) => ({
   description: p.summary || p.description,
 }));
 
-export default function OurPortfolio() {
-  const [featuredProjects, setFeaturedProjects] = useState(defaultFeatured);
+export default function OurPortfolio({ initialProjects = null }) {
+  const [fetchedProjects, setFetchedProjects] = useState(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -37,7 +37,7 @@ export default function OurPortfolio() {
                 ? p.stackBadges.split(",").map((s) => s.trim())
                 : [],
           }));
-          setFeaturedProjects(mapped);
+          setFetchedProjects(mapped);
         }
       })
       .catch(() => {});
@@ -45,6 +45,14 @@ export default function OurPortfolio() {
       isMounted = false;
     };
   }, []);
+
+  const featuredProjects =
+    fetchedProjects && fetchedProjects.length > 0
+      ? fetchedProjects
+      : initialProjects && initialProjects.length > 0
+      ? initialProjects
+      : defaultFeatured;
+
   return (
     <section
       id="portfolio"
