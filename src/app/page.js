@@ -10,7 +10,7 @@ import Footer from "@/components/layout/Footer";
 
 export default function Home() {
   return (
-    <main className="bg-[#050505] min-h-screen text-white selection:bg-accent selection:text-black">
+    <div className="bg-[#050505] min-h-screen text-white selection:bg-accent selection:text-black">
       <Hero />
       <Marquee />
       <OurEthos />
@@ -20,6 +20,6 @@ export default function Home() {
       <OurLeadership />
       <Partners />
       <Footer />
-    </main>
+    </div>
   );
 }

@@ -120,3 +120,25 @@ body {
   font-size: 14px;
   pointer-events: none;
 }
+
+/* ==========================================================================
+   Accessibility: Focus States & Reduced Motion Safeguards (Spec §13, §37)
+   ========================================================================== */
+:focus-visible {
+  outline: 2px solid var(--accent, #ff4a00) !important;
+  outline-offset: 3px !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

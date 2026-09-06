@@ -13,12 +13,12 @@ export const metadata = {
 
 export default function TeamPage() {
   return (
-    <main className="bg-[#050505] min-h-screen text-white selection:bg-accent selection:text-black">
+    <div className="bg-[#050505] min-h-screen text-white selection:bg-accent selection:text-black">
       <TeamHero />
       <TeamLeadership />
       <AdvisorAndTeam />
       <TeamEthos />
       <Footer />
-    </main>
+    </div>
   );
 }

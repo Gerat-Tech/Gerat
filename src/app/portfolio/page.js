@@ -9,13 +9,13 @@ export default function PortfolioPage() {
   const [activeCategory, setActiveCategory] = useState("ALL DISCIPLINES");
 
   return (
-    <main className="bg-[#050505] min-h-screen text-white selection:bg-accent selection:text-black">
+    <div className="bg-[#050505] min-h-screen text-white selection:bg-accent selection:text-black">
       <Hero
         activeCategory={activeCategory}
         onSelectCategory={setActiveCategory}
       />
       <PortfolioShowcase activeCategory={activeCategory} />
       <Footer />
-    </main>
+    </div>
   );
 }

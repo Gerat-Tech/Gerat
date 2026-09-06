@@ -13,6 +13,9 @@ export async function runRouteSmokeTests() {
     { file: "src/app/team/page.js", name: "TeamPage", checks: ["export default"] },
     { file: "src/app/insights/page.js", name: "InsightsPage", checks: ["export default"] },
     { file: "src/app/why-wqf/page.js", name: "WhyWqfPage", checks: ["export default"] },
+    { file: "src/app/sitemap.js", name: "Sitemap", checks: ["export default function sitemap", "gerat.et"] },
+    { file: "src/app/robots.js", name: "Robots", checks: ["export default function robots", "sitemap.xml"] },
+    { file: "src/app/icon.svg", name: "Icon", checks: ["#FF4A00"] },
   ];
 
   for (const { file, name, checks } of routes) {

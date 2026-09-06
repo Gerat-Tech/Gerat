@@ -10,9 +10,9 @@ export const metadata = {
 
 export default function WhyWQF() {
   return (
-    <main className="bg-[#050505] min-h-screen text-white selection:bg-accent selection:text-black">
+    <div className="bg-[#050505] min-h-screen text-white selection:bg-accent selection:text-black">
       <ServicesOverview />
       <Footer />
-    </main>
+    </div>
   );
 }
