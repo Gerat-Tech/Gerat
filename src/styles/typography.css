@@ -1,0 +1,107 @@
+/* ==========================================================================
+   Typography System (Spec §4)
+   Precision editorial typography using Roc Grotesk and Azeret Mono
+   ========================================================================== */
+
+:root {
+  /* Type Scale */
+  --font-size-display-xl: clamp(3.75rem, 7.5vw, 7.5rem);
+  --font-size-display-l: clamp(3rem, 5.5vw, 5.5rem);
+  --font-size-h2: clamp(2.25rem, 4vw, 4.5rem);
+  --font-size-h3: clamp(1.75rem, 2.75vw, 3rem);
+  --font-size-h4: clamp(1.35rem, 1.8vw, 2rem);
+  --font-size-body-lg: clamp(1.125rem, 1.2vw, 1.35rem);
+  --font-size-body: clamp(0.95rem, 1.05vw, 1.15rem);
+  --font-size-small: 0.85rem;
+  --font-size-mono: clamp(0.72rem, 0.8vw, 0.875rem);
+  --font-size-mono-sm: 0.75rem;
+
+  /* Line Heights (Spec §4) */
+  --leading-hero: 0.92;
+  --leading-display: 0.96;
+  --leading-h2: 1.0;
+  --leading-h3: 1.08;
+  --leading-body: 1.5;
+  --leading-mono: 1.2;
+
+  /* Tracking / Letter Spacing */
+  --tracking-tightest: -0.04em;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.04em;
+  --tracking-wider: 0.08em;
+}
+
+/* Typography Utility Classes */
+.display-xl {
+  font-family: var(--font-roc);
+  font-size: var(--font-size-display-xl);
+  line-height: var(--leading-hero);
+  letter-spacing: var(--tracking-tightest);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.display-l {
+  font-family: var(--font-roc);
+  font-size: var(--font-size-display-l);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-tightest);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.heading-h2 {
+  font-family: var(--font-roc);
+  font-size: var(--font-size-h2);
+  line-height: var(--leading-h2);
+  letter-spacing: var(--tracking-tight);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.heading-h3 {
+  font-family: var(--font-roc);
+  font-size: var(--font-size-h3);
+  line-height: var(--leading-h3);
+  letter-spacing: var(--tracking-tight);
+  font-weight: 500;
+}
+
+.body-lg {
+  font-family: var(--font-roc);
+  font-size: var(--font-size-body-lg);
+  line-height: var(--leading-body);
+  color: var(--text-secondary);
+}
+
+.body-base {
+  font-family: var(--font-roc);
+  font-size: var(--font-size-body);
+  line-height: var(--leading-body);
+  color: var(--text-secondary);
+}
+
+.text-caption {
+  font-size: var(--font-size-small);
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+/* Mono Metadata & Indicators (Spec §4 Mono family) */
+.mono-label {
+  font-family: var(--font-azeret);
+  font-size: var(--font-size-mono);
+  line-height: var(--leading-mono);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+.mono-meta {
+  font-family: var(--font-azeret);
+  font-size: var(--font-size-mono-sm);
+  line-height: var(--leading-mono);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
