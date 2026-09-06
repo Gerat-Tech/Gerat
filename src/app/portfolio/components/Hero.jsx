@@ -4,16 +4,19 @@ import React from "react";
 import SectionLabel from "@/components/common/SectionLabel";
 import SplitText from "@/components/motion/SplitText";
 import FadeUp from "@/components/motion/FadeUp";
+import { portfolioProjects } from "@/content";
 
 /**
- * Editorial Portfolio Hero (Spec §18, Content Replacement §7)
+ * Editorial Portfolio Hero (Spec §18, Content Replacement §7, Phase 21)
  */
 export default function Hero({ activeCategory, onSelectCategory }) {
   const categories = [
     "ALL DISCIPLINES",
+    "BRAND & IDENTITY",
+    "PERSONAL BRAND",
     "ENTERPRISE ERP",
+    "AI & RAG",
     "PUBLIC SECTOR",
-    "AI & RAG NETWORKS",
     "TELEMETRY",
   ];
 
@@ -70,7 +73,7 @@ export default function Hero({ activeCategory, onSelectCategory }) {
 
       {/* Bottom Sub-Header Anchor */}
       <div className="mt-12 pt-4 border-t border-white/10 flex items-center justify-between font-azeret text-[10px] tracking-[0.2em] text-white/40 uppercase">
-        <span>INDEX // 06 SYSTEMS CATALOGED</span>
+        <span>INDEX // {portfolioProjects.length.toString().padStart(2, "0")} CASE STUDIES CATALOGED</span>
         <span>SCROLL TO EXPLORE ↓</span>
       </div>
     </div>

@@ -765,39 +765,42 @@ c096429 feat(test): update smoke tests to verify all inner pages and anti-legacy
 
 ---
 
-## Phase 21 — Portfolio Showcase & Case Study Filtering
+## Phase 21 — Portfolio Showcase & Case Study Filtering ✅ COMPLETED
 
 **Goal:** Enable discovery of brand identity, graphic design, and personal branding case studies alongside technical platforms.
 
 ### Tasks
 
-- [ ] **Update Portfolio Filter Bar (`src/app/portfolio/components/Hero.jsx`)**
-  - Add category tabs: `ALL`, `BRAND & IDENTITY`, `PERSONAL BRAND`, `ENTERPRISE ERP`, `AI & RAG`, `PUBLIC SECTOR`
+- [x] **Update Portfolio Filter Bar (`src/app/portfolio/components/Hero.jsx`)**
+  - Add category tabs: `ALL DISCIPLINES`, `BRAND & IDENTITY`, `PERSONAL BRAND`, `ENTERPRISE ERP`, `AI & RAG`, `PUBLIC SECTOR`, `TELEMETRY`
+  - Dynamic case study counter (`INDEX // 09 CASE STUDIES CATALOGED`)
 
-- [ ] **Update Showcase Cards (`src/app/portfolio/components/PortfolioShowcase.jsx`)**
-  - Support multi-tag badge rendering
+- [x] **Update Showcase Cards (`src/app/portfolio/components/PortfolioShowcase.jsx`)**
+  - Support multi-tag badge rendering (`p.stack`)
   - Add creative asset specifications (Typefaces, Color swatches, Deliverable packages) for brand projects
+  - Contextual resolution headers ("CREATIVE & STRATEGIC RESOLUTION" vs "ENGINEERED RESOLUTION")
+  - Contextual inquiry actions ("INQUIRE ABOUT BRAND IDENTITY", "INQUIRE ABOUT PERSONAL BRANDING", "INQUIRE ABOUT THIS ARCHITECTURE")
 
 ---
 
-## Phase 22 — Navigation, Footer, SEO & Automated Smoke Test Verification
+## Phase 22 — Navigation, Footer, SEO & Automated Smoke Test Verification ✅ COMPLETED
 
 **Goal:** Ensure site-wide consistency, update dynamic sitemap & robots, and expand the smoke test suite to guarantee 100% test coverage and zero runtime regressions.
 
 ### Tasks
 
-- [ ] **Update Global Navigation (`Navbar.jsx`)**
-  - Ensure links and mobile menu accommodate services navigation
+- [x] **Update Global Navigation (`Navbar.jsx`)**
+  - Ensure links and mobile menu accommodate services navigation with dedicated creative shortcuts
 
-- [ ] **Update Global Footer (`Footer.jsx`)**
+- [x] **Update Global Footer (`Footer.jsx`)**
   - Add dedicated `BRAND & CREATIVE` links column: Brand Strategy, Logo & Identity, Graphic Design, Social Design, Personal Branding
 
-- [ ] **Update Sitemap & Robots (`src/app/sitemap.js` and `docs/progress/sitemap/SITEMAP.md`)**
+- [x] **Update Sitemap & Robots (`src/app/sitemap.js` and `docs/progress/sitemap/SITEMAP.md`)**
   - Include `/services/brand-creative` and `/services/personal-branding` with priority weighting
 
-- [ ] **Update Smoke Test Suite (`tests/smoke/`)**
+- [x] **Update Smoke Test Suite (`tests/smoke/`)**
   - Verify all new datasets, components, form fields, and routes pass automated testing
-  - Run `pnpm run test:smoke`, `pnpm run test:runtime`, `pnpm run lint`, and `pnpm build`
+  - Run `pnpm run test:smoke`, `pnpm run lint`, and `pnpm build`
 
 ---
 

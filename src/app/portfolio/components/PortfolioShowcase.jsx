@@ -13,7 +13,12 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES" }
   const filteredProjects =
     activeCategory === "ALL DISCIPLINES"
       ? allProjects
-      : allProjects.filter((p) => p.category === activeCategory);
+      : allProjects.filter((p) => {
+          if (activeCategory === "AI & RAG" || activeCategory === "AI & RAG NETWORKS") {
+            return p.category === "AI & RAG" || p.category === "AI & RAG NETWORKS";
+          }
+          return p.category === activeCategory;
+        });
 
   // Observer to update active item in sticky sidebar
   useEffect(() => {
@@ -39,7 +44,7 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES" }
       <aside className="hidden lg:block w-72 shrink-0">
         <nav className="sticky top-28 flex flex-col gap-8 bg-[#0a0a0a] border border-white/10 p-6 rounded-[3px]">
           <div className="font-azeret text-[10px] tracking-[0.2em] text-white/40 uppercase">
-            DIRECTORY // {filteredProjects.length} SYSTEMS
+            DIRECTORY // {filteredProjects.length} CASE STUDIES
           </div>
 
           <ul className="flex flex-col gap-1.5">
@@ -71,7 +76,7 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES" }
               onClick={openContact}
               className="w-full py-3 px-4 bg-accent text-white font-azeret text-[10px] tracking-[0.2em] uppercase font-bold hover:bg-white hover:text-black transition-colors rounded-[2px]"
             >
-              COMMISSION A SYSTEM →
+              START A PROJECT →
             </button>
           </div>
         </nav>
@@ -140,7 +145,9 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES" }
 
                 <div className="flex flex-col gap-2">
                   <span className="font-azeret text-[9px] tracking-[0.2em] text-white/50 uppercase">
-                    ENGINEERED RESOLUTION
+                    {p.category === "BRAND & IDENTITY" || p.category === "PERSONAL BRAND"
+                      ? "CREATIVE & STRATEGIC RESOLUTION"
+                      : "ENGINEERED RESOLUTION"}
                   </span>
                   <p className="font-roc text-xs sm:text-sm text-white/70 leading-relaxed">
                     {p.architecture}
@@ -148,10 +155,24 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES" }
                 </div>
               </div>
 
+              {/* Stack & Deliverables Badges */}
+              {p.stack && p.stack.length > 0 && (
+                <div className="flex flex-wrap items-center gap-1.5 pt-2">
+                  {p.stack.map((item) => (
+                    <span
+                      key={item}
+                      className="font-azeret text-[9px] tracking-[0.12em] uppercase px-2.5 py-1 rounded-[2px] bg-white/[0.04] border border-white/10 text-white/70"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              )}
+
               {/* Technology & Action Row */}
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-6 border-t border-white/10">
                 <div className="font-azeret text-[9px] sm:text-[10px] tracking-[0.2em] text-white/40 uppercase">
-                  STACK: {p.tech}
+                  {p.category === "BRAND & IDENTITY" || p.category === "PERSONAL BRAND" ? "DELIVERABLES" : "STACK"}: {p.tech}
                 </div>
 
                 <button
@@ -159,7 +180,13 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES" }
                   onClick={openContact}
                   className="inline-flex items-center font-azeret text-[10px] sm:text-[11px] uppercase tracking-[0.2em] px-5 py-2.5 border border-white/20 hover:border-accent hover:bg-accent/15 text-white transition-all rounded-[2px]"
                 >
-                  <span>INQUIRE ABOUT THIS ARCHITECTURE</span>
+                  <span>
+                    {p.category === "BRAND & IDENTITY"
+                      ? "INQUIRE ABOUT BRAND IDENTITY"
+                      : p.category === "PERSONAL BRAND"
+                      ? "INQUIRE ABOUT PERSONAL BRANDING"
+                      : "INQUIRE ABOUT THIS ARCHITECTURE"}
+                  </span>
                   <span className="ml-2 text-accent">→</span>
                 </button>
               </div>

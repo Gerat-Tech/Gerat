@@ -45,14 +45,20 @@ export async function runBrandingSmokeTests() {
   const portfolioHero = fs.readFileSync(path.join(root, "src/app/portfolio/components/Hero.jsx"), "utf-8");
   assert(!portfolioHero.includes("Born at the edge"), "Portfolio hero must not contain legacy WQF copy");
   assert(portfolioHero.includes("PROVEN ARCHITECTURES."), "Portfolio hero must contain Gerat headline");
-  console.log("  ✓ Portfolio page Hero verified");
+  assert(portfolioHero.includes("BRAND & IDENTITY"), "Portfolio hero must include 'BRAND & IDENTITY' category filter");
+  assert(portfolioHero.includes("PERSONAL BRAND"), "Portfolio hero must include 'PERSONAL BRAND' category filter");
+  console.log("  ✓ Portfolio page Hero & category filters verified");
 
   const portfolioContent = fs.readFileSync(path.join(root, "src/content/portfolio.js"), "utf-8");
   const portfolioShowcase = fs.readFileSync(path.join(root, "src/app/portfolio/components/PortfolioShowcase.jsx"), "utf-8");
   assert(!portfolioShowcase.includes("ALPHA DEAL"), "Portfolio showcase must not contain legacy Alpha Deal");
   assert(portfolioContent.includes("NATIONAL DIGITAL RECORDS ENGINE"), "Portfolio content must contain Gerat flagship projects");
+  assert(portfolioContent.includes("AXIOM IDENTITY SYSTEM"), "Portfolio content must contain Axiom brand case study");
+  assert(portfolioContent.includes("meridian-executive"), "Portfolio content must contain Meridian personal brand study");
   assert(portfolioShowcase.includes("@/content"), "Portfolio showcase must consume content architecture");
-  console.log("  ✓ Portfolio page Showcase & Content dataset verified");
+  assert(portfolioShowcase.includes("CREATIVE & STRATEGIC RESOLUTION"), "Portfolio showcase must support creative resolutions");
+  assert(portfolioShowcase.includes("INQUIRE ABOUT BRAND IDENTITY"), "Portfolio showcase must provide brand inquiry actions");
+  console.log("  ✓ Portfolio page Showcase & Brand case studies verified");
 
   // Team page components must not contain legacy WQF copy
   const teamHero = fs.readFileSync(path.join(root, "src/app/team/components/TeamHero.jsx"), "utf-8");
