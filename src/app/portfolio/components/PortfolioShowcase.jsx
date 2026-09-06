@@ -3,12 +3,45 @@
 import React, { useEffect, useRef, useState } from "react";
 import FadeUp from "@/components/motion/FadeUp";
 import { useNav } from "@/context/NavContext";
-import { portfolioProjects as allProjects } from "@/content";
+import { portfolioProjects as defaultProjects } from "@/content";
 
 export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES" }) {
   const [activeIdx, setActiveIdx] = useState(0);
   const itemsRef = useRef([]);
   const { openContact } = useNav();
+  const [fetchedProjects, setFetchedProjects] = useState(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetch("/api/portfolio")
+      .then((res) => res.json())
+      .then((data) => {
+        if (isMounted && data.success && data.caseStudies && data.caseStudies.length > 0) {
+          const normalized = data.caseStudies.map((cs) => ({
+            ...cs,
+            id: cs.slug || cs.id,
+            index: cs.displayIndex,
+            image: cs.imageUrl,
+            tech: cs.techStack,
+            stack:
+              typeof cs.stackBadges === "string" && cs.stackBadges.startsWith("[")
+                ? JSON.parse(cs.stackBadges)
+                : Array.isArray(cs.stackBadges)
+                ? cs.stackBadges
+                : cs.stackBadges
+                ? cs.stackBadges.split(",").map((s) => s.trim())
+                : [],
+          }));
+          setFetchedProjects(normalized);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const allProjects = fetchedProjects || defaultProjects;
 
   const filteredProjects =
     activeCategory === "ALL DISCIPLINES"

@@ -42,7 +42,7 @@ The Gerat website has established an architectural, dark-mode digital identity. 
 | **Phase D-02** | Shell & UI System | Dashboard Command Center Shell | Sidebar, TopBar with `⌘K`, high-density tables, modal sheets, status chips | ✅ COMPLETED |
 | **Phase D-03** | Client Intake & CRM | Lead Management & Client Comms | Real persistence for `ContactDrawer`, Kanban & Grid views, WhatsApp/Call/Email actions, internal team notes thread | ✅ COMPLETED |
 | **Phase D-04** | Insights & News CMS | Whitepaper & Article Authoring | Split-screen Markdown/MDX editor, draft/published workflow, categories, dynamic `/insights` | ✅ COMPLETED |
-| **Phase D-05** | Portfolio & Showcase CMS | Flagship Case Studies Management | Case study editor, metric highlights, tech badges, media gallery, dynamic `/portfolio` | ⏳ PENDING |
+| **Phase D-05** | Portfolio & Showcase CMS | Flagship Case Studies Management | Case study editor, metric highlights, tech badges, media gallery, dynamic `/portfolio` | ✅ COMPLETED |
 | **Phase D-06** | Team & Services CMS | Leadership & Services Governance | Team roster editor, photo crop, practice pillars 01-06 editor, capabilities table manager | ⏳ PENDING |
 | **Phase D-07** | Telemetry, Audit & Alerts | System Hardening & Integrations | Site config (ticker, coordinates), immutable audit log, Telegram/Email alert bot, smoke tests | ⏳ PENDING |
 
@@ -160,24 +160,30 @@ The Gerat website has established an architectural, dark-mode digital identity. 
 
 ---
 
-## Phase D-05 — Flagship Portfolio & Product Showcase CMS
+## Phase D-05 — Flagship Portfolio & Product Showcase CMS ✅ COMPLETED
 
 **Goal:** Enable full editorial control over case studies displayed on the homepage and `/portfolio`.
 
 ### Tasks
-- [ ] **Build Portfolio Case Study Manager (`src/app/(dashboard)/portfolio/page.jsx`)**
-  - Table and card views of all 9+ case studies
-  - Reordering system to adjust display index (`01`, `02`, etc.) and homepage featured flags
-- [ ] **Build Case Study Editor (`src/app/(dashboard)/portfolio/[id]/page.jsx`)**
-  - Form fields matching `portfolioProjects`:
-    - Title, client name, category selector (`ENTERPRISE ERP`, `BRAND & IDENTITY`, etc.)
-    - Headline impact metric (e.g. `12M+ RECORDS // SUB-SECOND VERIFICATION`)
-    - Operational Problem / Challenge statement
-    - Engineered / Strategic Resolution statement
-    - Tech Stack / Deliverables tags manager (add/remove badges)
-    - Primary media image upload + gallery carousel manager
-    - Operational status selector (`PRODUCTION // ACTIVE`, `DEPLOYED // STABLE`, `LIVE // EXPANDING`)
-- [ ] **Wire Public `/portfolio` and Home Showcase to Dynamic Records**
+- [x] **Build Portfolio Case Study Manager (`src/app/dashboard/portfolio/page.jsx`)**
+  - High-density Grid and Table views of all case studies with live thumbnails and telemetry badges
+  - Quick filter tabs: `ALL`, `HOMEPAGE FEATURED`, `ENTERPRISE ERP`, `BRAND & IDENTITY`
+  - Search by title, client tags, summary, tech stack, and primary metric
+  - Quick action controls: one-click "FEATURE ON HOMEPAGE" toggle, delete with confirmation, and direct link to public showcase anchor
+  - Top action: "+ NEW CASE STUDY" composer link
+- [x] **Build Case Study Editor (`src/app/dashboard/portfolio/[id]/page.jsx` & `/new`)**
+  - Display Index, counter badge (`01 / 09`), and sort order rank
+  - Title, URL slug with lock/auto-sync, category selector (`ENTERPRISE ERP`, `BRAND & IDENTITY`, `PUBLIC SECTOR`, `AI & RAG NETWORKS`, etc.), secondary discipline line
+  - Primary headline metric chip (e.g. `12M+ RECORDS // SUB-SECOND VERIFICATION`) and detailed banner metric
+  - Executive summary, problem topology, engineered architecture, and verifiable impact
+  - Inline tech stack string and stack badges list (`Go, Kafka, PostgreSQL, Docker`)
+  - Image URL, release year, status selector, and homepage featured toggle
+  - **Live Real-Time Card Preview:** Exact rendering of the showcase card with precision corner accents, metric badge, problem vs. architecture tabs, and tech chips
+- [x] **Wire Public `/portfolio` and Home Showcase to Dynamic Database Records**
+  - Updated `src/app/portfolio/components/PortfolioShowcase.jsx` to dynamically load case studies from `/api/portfolio` with static dataset fallback
+  - Updated `src/components/home/OurPortfolio.jsx` to dynamically load featured showcase projects from `/api/portfolio?featured=true`
+- [x] **Automated Smoke Test Verification (`tests/smoke/portfolio-cms-smoke.test.mjs`)**
+  - Verified component modules, case study creation, featured toggle updates, slug resolution, and database record cleanup (8/8 test suites passing)
   - Ensure filters (`ALL`, `BRAND & IDENTITY`, `PERSONAL BRAND`, etc.) work seamlessly with database records
 
 ---

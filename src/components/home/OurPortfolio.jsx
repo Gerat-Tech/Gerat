@@ -1,20 +1,50 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import SectionLabel from "../common/SectionLabel";
 import FadeUp from "../motion/FadeUp";
 import SplitText from "../motion/SplitText";
 
-import { portfolioProjects } from "@/content";
+import { portfolioProjects as defaultProjects } from "@/content";
 
-const featuredProjects = portfolioProjects.slice(0, 3).map((p, idx) => ({
+const defaultFeatured = defaultProjects.slice(0, 3).map((p, idx) => ({
   ...p,
   id: `0${idx + 1}`,
   description: p.summary || p.description,
 }));
 
 export default function OurPortfolio() {
+  const [featuredProjects, setFeaturedProjects] = useState(defaultFeatured);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetch("/api/portfolio?featured=true")
+      .then((res) => res.json())
+      .then((data) => {
+        if (isMounted && data.success && data.caseStudies && data.caseStudies.length > 0) {
+          const mapped = data.caseStudies.slice(0, 3).map((p, idx) => ({
+            ...p,
+            id: p.displayIndex || `0${idx + 1}`,
+            image: p.imageUrl,
+            description: p.summary,
+            stack:
+              typeof p.stackBadges === "string" && p.stackBadges.startsWith("[")
+                ? JSON.parse(p.stackBadges)
+                : Array.isArray(p.stackBadges)
+                ? p.stackBadges
+                : p.stackBadges
+                ? p.stackBadges.split(",").map((s) => s.trim())
+                : [],
+          }));
+          setFeaturedProjects(mapped);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      isMounted = false;
+    };
+  }, []);
   return (
     <section
       id="portfolio"
