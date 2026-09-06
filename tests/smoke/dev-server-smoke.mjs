@@ -1,6 +1,8 @@
 import { spawn } from "child_process";
 import http from "http";
 import assert from "assert";
+import fs from "fs";
+import path from "path";
 
 const PORT = 3008;
 const BASE_URL = `http://127.0.0.1:${PORT}`;
@@ -41,6 +43,10 @@ function waitForReady(devServer, getServerLogs, maxAttempts = 60) {
 
 async function runDevServerSmokeTests() {
   console.log("▶ Starting Next.js Dev Server on port 3008 for runtime verification...");
+  try {
+    fs.rmSync(path.join(process.cwd(), ".next/dev"), { recursive: true, force: true });
+  } catch {}
+
   const devServer = spawn(
     "pnpm",
     ["exec", "next", "dev", "--port", String(PORT)],
@@ -64,6 +70,8 @@ async function runDevServerSmokeTests() {
       { path: "/team", name: "TeamPage", expected: "LEADERSHIP" },
       { path: "/insights", name: "InsightsPage", expected: "INSIGHTS" },
       { path: "/why-wqf", name: "ServicesPage", expected: "SERVICES" },
+      { path: "/services/brand-creative", name: "BrandCreativePage", expected: "BRAND STRATEGY" },
+      { path: "/services/personal-branding", name: "PersonalBrandingPage", expected: "PERSONAL BRANDING" },
     ];
 
     for (const { path, name, expected } of routes) {
