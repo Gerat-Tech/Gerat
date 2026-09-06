@@ -331,52 +331,55 @@ e820fb6 feat(home): rebuild Hero section with Gerat editorial typography and 3D 
 
 ---
 
-## Phase 7 — Home Page Sections
+## Phase 7 — Home Page Sections ✅ COMPLETED
 
 **Goal:** Build all remaining home page sections with proper motion and interaction.
 
 ### Tasks
 
-- [ ] **Ethos / Value Cards** (*Spec ref: §26*)
-  - 4 numbered value blocks
-  - Active card expands, inactive compact
-  - Desktop: vertical/horizontal accordion
-  - Mobile: stacked cards / tap-to-expand
+- [x] **Ethos / Value Cards** (*Spec ref: §26, Content §4*)
+  - 4 numbered value blocks with architectural SVG icons
+  - Active card expands (40% width on desktop), inactive compact (20%)
+  - Precision corner bracket accents, glowing active state
 
-- [ ] **Industry / Capability Grid** (*Spec ref: §27*)
-  - Full-width section with large heading
-  - 8 numbered capability rows
-  - Hover: row background changes, number shifts, description fades in
-  - Keyboard: focus = hover effect
+- [x] **Industry / Capability Grid** (*Spec ref: §27, Content §5*)
+  - Full-width section with editorial headline
+  - 8 numbered capability rows with domain tags and descriptions
+  - Interactive hover state: row illuminates, index shifts, arrow travels
+  - Full keyboard accessibility (tabIndex, outline focus)
 
-- [ ] **Marquee / Ticker** (*Spec ref: §25*)
-  - Continuous horizontal scroll: AI / RAG / ERP / WEB APPS / DATA / AUTOMATION
-  - CSS animation (no JS frame budget)
-  - Slow, linear, continuous
+- [x] **Continuous Marquee / Ticker** (*Spec ref: §25*)
+  - Continuous horizontal scroll with high-contrast mono labels
+  - Zero JS frame budget (CSS animation via motion.css), pauses on hover
 
-- [ ] **Team Preview** (*Spec ref: §28*)
-  - Editorial layout, large active portrait
-  - Navigation: 01/04 index, previous/next
-  - Clip/mask transitions
+- [x] **Selected Work & Portfolio Preview** (*Spec ref: §18, §20, Content §7*)
+  - 3 flagship case studies (National Records, Axiom ERP, Synapse RAG)
+  - Impact metrics, technical stack tags, internal routing (no external WQF links)
 
-- [ ] **Insights Preview** (*Spec ref: §29*)
-  - Latest article cards with category, date, title, read time, image
-  - Hover: image crop movement, title shift
+- [x] **How We Work Multi-Stage Engineering Process** (*Content §8*)
+  - 6-step engineering pipeline (Understand, Define, Design, Build, Validate, Evolve)
+  - Grid card deck with step indicators and corner brackets
 
-- [ ] **Future Ventures / Partners Section**
-  - Partner logos with GSAP scroll-triggered reveal
+- [x] **Team & Leadership Showcase** (*Spec ref: §28, Content §6*)
+  - Editorial portraits and domain specialties for Gerat leadership
+  - Clean internal routing to /team
 
-- [ ] **Final CTA Section** (*Spec ref: §34*)
-  - Large "BUILD WITH GERAT" heading + CTA
+- [x] **Technology Ecosystem & Partners Section** (*Spec §34, Content §9*)
+  - Architectural tech stack cards (Next.js, Python, PostgreSQL, Kafka, Qdrant, Docker)
 
-### Commit plan
+- [x] **Master Footer & Final CTA** (*Spec §34, Content §11*)
+  - Full-bleed "BUILD WITH GERAT" call-to-action connected to ContactDrawer
+  - Institutional navigation and copyright colophon
+
+### Commit history (Phase 7)
 ```
-1. feat: build ethos value cards with accordion interaction
-2. feat: add industry/capability grid with hover effects
-3. feat: add marquee ticker component
-4. feat: build team preview section with editorial layout
-5. feat: build insights preview section with article cards
-6. feat: add partners section and final CTA
+df96c77 feat(home): add continuous marquee ticker component with responsive mono labels
+65dc899 feat(home): rebuild OurEthos with expanding accordion and architectural icons
+27ff14a feat(home): rebuild OurFocus with interactive 8-row capabilities table and hover states
+840b96d feat(home): rebuild OurPortfolio with flagship digital systems case studies and internal routing
+d0342af feat(home): add HowWeWork multi-stage engineering process section
+c45f2f0 feat(home): rebuild OurLeadership and Partners sections with Gerat engineering profiles
+15e83f1 refactor(home): rebuild Footer and assemble home page flow with updated smoke tests
 ```
 
 ---
