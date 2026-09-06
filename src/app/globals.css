@@ -1,17 +1,43 @@
 @import "tailwindcss";
+@import "../styles/tokens.css";
+@import "../styles/typography.css";
+@import "../styles/motion.css";
+@import "../styles/grid.css";
 
-/* for Whole Body: Everything will be RocGrotesk (Regular or Medium) automatically. */
-/* for a Specific Parts: Use the class font-azeret to use the Mono font. */
-
+/* ==========================================================================
+   Tailwind v4 Theme Configuration
+   ========================================================================== */
 @theme {
-  --font-roc: "RocGrotesk", sans-serif;
-  --font-azeret: "AzeretMono", monospace;
+  --font-roc: "RocGrotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-azeret: "AzeretMono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --color-bg: #050505;
+  --color-bg-subtle: #0b0b0b;
+  --color-surface: #141414;
+  --color-surface-2: #1b1b1b;
+  --color-surface-3: #242424;
+
+  --color-text-primary: #f0f0f0;
+  --color-text-secondary: #c4c4c4;
+  --color-text-muted: #8e8e8e;
+  --color-text-dim: #525252;
+
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  --color-border-medium: rgba(255, 255, 255, 0.16);
+  --color-border-strong: rgba(255, 255, 255, 0.32);
+
+  --color-accent: #ff4a00;
+  --color-accent-hover: #ff6524;
+  --color-accent-subtle: rgba(255, 74, 0, 0.12);
 }
 
+/* ==========================================================================
+   Font Faces (Roc Grotesk & Azeret Mono)
+   ========================================================================== */
 @font-face {
   font-family: "RocGrotesk";
   src: url("/assets/roc-grotesk-regular.woff2") format("woff2");
-  font-weight: 600;
+  font-weight: 400;
   font-display: swap;
 }
 
@@ -29,83 +55,30 @@
   font-display: swap;
 }
 
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+html {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  scroll-behavior: smooth;
+}
+
 body {
+  background-color: var(--bg);
+  color: var(--text-primary);
   font-family: var(--font-roc) !important;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  25% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  /* 75% {
-    opacity: 0;
-  } */
-
-  100% {
-    opacity: 1;
-  }
+::selection {
+  background-color: var(--accent);
+  color: #000000;
 }
 
-.blink-hover {
-  animation: blink 0.6s steps(2, start);
-}
-
-@keyframes glitch {
-  0% {
-    opacity: 1;
-    filter: none;
-  }
-
-  /* FAST INTENSE FLICKER AT START */
-  5% {
-    opacity: 0.1;
-    filter: brightness(2);
-  }
-  10% {
-    opacity: 1;
-    filter: none;
-  }
-
-  15% {
-    opacity: 0.2;
-    filter: brightness(2);
-  }
-  20% {
-    opacity: 1;
-    filter: none;
-  }
-
-  25% {
-    opacity: 0.3;
-    filter: contrast(2);
-  }
-  30% {
-    opacity: 1;
-    filter: none;
-  }
-
-  /* THEN STABLE */
-  100% {
-    opacity: 1;
-    filter: none;
-  }
-}
-
-.glitch-wrapper {
-  display: inline-block;
-}
-
-.glitch-wrapper:hover {
-  animation: glitch 0.1s linear 2;
-}
-
+/* Scrollbar utilities */
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -115,8 +88,7 @@ body {
   scrollbar-width: none;
 }
 
-/* telephone custom css  */
-
+/* Phone input styling */
 .phone-container {
   width: 100%;
 }
@@ -147,8 +119,4 @@ body {
   color: #6b7280;
   font-size: 14px;
   pointer-events: none;
-}
-html,
-body {
-  overflow-x: hidden;
 }
