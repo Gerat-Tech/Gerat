@@ -6,6 +6,7 @@ import PageLoader from "./PageLoader";
 import TransitionOverlay from "./TransitionOverlay";
 import { PageTransitionProvider } from "@/context/PageTransitionContext";
 import { useNav } from "@/context/NavContext";
+import CustomCursor from "../common/CustomCursor";
 
 export default function ClientWrapper({ children }) {
   const { isMenuOpen } = useNav();
@@ -21,6 +22,7 @@ export default function ClientWrapper({ children }) {
 
   return (
     <PageTransitionProvider>
+      <CustomCursor />
       <PageLoader />
       <TransitionOverlay />
       <Navbar />

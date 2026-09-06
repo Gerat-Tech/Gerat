@@ -5,6 +5,7 @@ import Link from "next/link";
 import HeroDataField from "../three/HeroDataField";
 import FadeUp from "../motion/FadeUp";
 import SplitText from "../motion/SplitText";
+import Magnetic from "../motion/Magnetic";
 import { useNav } from "@/context/NavContext";
 
 /**
@@ -70,31 +71,37 @@ export default function Hero() {
           <FadeUp delay={0.6} y={24}>
             <div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-2">
               {/* Primary Contact CTA */}
-              <button
-                type="button"
-                onClick={openContact}
-                className="group relative isolate inline-flex items-center justify-center font-azeret text-[11px] sm:text-[12px] uppercase tracking-[0.2em] px-6 sm:px-8 py-3.5 bg-white text-black font-semibold border border-white hover:bg-accent hover:border-accent hover:text-white transition-all duration-300 rounded-[2px]"
-              >
-                <span>START A PROJECT</span>
-                {/* Precision Corner Accents */}
-                <span className="absolute -top-[1px] -left-[1px] size-2 border-t border-l border-white group-hover:border-accent" />
-                <span className="absolute -top-[1px] -right-[1px] size-2 border-t border-r border-white group-hover:border-accent" />
-                <span className="absolute -bottom-[1px] -left-[1px] size-2 border-b border-l border-white group-hover:border-accent" />
-                <span className="absolute -bottom-[1px] -right-[1px] size-2 border-b border-r border-white group-hover:border-accent" />
-              </button>
+              <Magnetic maxDisplacement={8}>
+                <button
+                  type="button"
+                  onClick={openContact}
+                  data-cursor-text="INQUIRE"
+                  className="group relative isolate inline-flex items-center justify-center font-azeret text-[11px] sm:text-[12px] uppercase tracking-[0.2em] px-6 sm:px-8 py-3.5 bg-white text-black font-semibold border border-white hover:bg-accent hover:border-accent hover:text-white transition-all duration-300 rounded-[2px]"
+                >
+                  <span>START A PROJECT</span>
+                  {/* Precision Corner Accents */}
+                  <span className="absolute -top-[1px] -left-[1px] size-2 border-t border-l border-white group-hover:border-accent" />
+                  <span className="absolute -top-[1px] -right-[1px] size-2 border-t border-r border-white group-hover:border-accent" />
+                  <span className="absolute -bottom-[1px] -left-[1px] size-2 border-b border-l border-white group-hover:border-accent" />
+                  <span className="absolute -bottom-[1px] -right-[1px] size-2 border-b border-r border-white group-hover:border-accent" />
+                </button>
+              </Magnetic>
 
               {/* Secondary Portfolio CTA */}
-              <Link
-                href="/portfolio"
-                className="group relative isolate inline-flex items-center justify-center font-azeret text-[11px] sm:text-[12px] uppercase tracking-[0.2em] px-6 sm:px-8 py-3.5 bg-transparent text-white/80 hover:text-white border border-white/20 hover:border-white/60 transition-all duration-300 rounded-[2px]"
-              >
-                <span>EXPLORE WORK</span>
-                <span className="ml-2 text-white/40 group-hover:text-accent group-hover:translate-x-1 transition-all duration-300">
-                  →
-                </span>
-                <span className="absolute -top-[1px] -left-[1px] size-1.5 border-t border-l border-white/40" />
-                <span className="absolute -bottom-[1px] -right-[1px] size-1.5 border-b border-r border-white/40" />
-              </Link>
+              <Magnetic maxDisplacement={8}>
+                <Link
+                  href="/portfolio"
+                  data-cursor-text="EXPLORE"
+                  className="group relative isolate inline-flex items-center justify-center font-azeret text-[11px] sm:text-[12px] uppercase tracking-[0.2em] px-6 sm:px-8 py-3.5 bg-transparent text-white/80 hover:text-white border border-white/20 hover:border-white/60 transition-all duration-300 rounded-[2px]"
+                >
+                  <span>EXPLORE WORK</span>
+                  <span className="ml-2 text-white/40 group-hover:text-accent group-hover:translate-x-1 transition-all duration-300">
+                    →
+                  </span>
+                  <span className="absolute -top-[1px] -left-[1px] size-1.5 border-t border-l border-white/40" />
+                  <span className="absolute -bottom-[1px] -right-[1px] size-1.5 border-b border-r border-white/40" />
+                </Link>
+              </Magnetic>
             </div>
           </FadeUp>
 

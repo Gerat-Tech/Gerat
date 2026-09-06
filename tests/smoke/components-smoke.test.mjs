@@ -12,12 +12,14 @@ export async function runComponentSmokeTests() {
     "src/components/common/SectionLabel.jsx",
     "src/components/common/NavItem.jsx",
     "src/components/common/Button.jsx",
+    "src/components/common/CustomCursor.jsx",
     // Motion
     "src/components/motion/FadeUp.jsx",
     "src/components/motion/MaskReveal.jsx",
     "src/components/motion/SplitText.jsx",
     "src/components/motion/Counter.jsx",
     "src/components/motion/Parallax.jsx",
+    "src/components/motion/Magnetic.jsx",
     "src/components/motion/index.js",
     // Layout
     "src/components/layout/Navbar.jsx",

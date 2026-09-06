@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { useNav } from "@/context/NavContext";
+import Magnetic from "../motion/Magnetic";
 
 /**
  * Editorial Master Footer (Spec §34, Content Replacement §11)
@@ -42,20 +43,23 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-4 flex flex-col items-start lg:items-end gap-6">
-            <button
-              type="button"
-              onClick={openContact}
-              className="group relative isolate inline-flex items-center justify-center font-azeret text-[12px] uppercase tracking-[0.2em] px-8 py-4 bg-accent text-white font-bold hover:bg-white hover:text-black transition-all duration-300 rounded-[2px]"
-            >
-              <span>START A CONVERSATION</span>
-              <span className="ml-2 group-hover:translate-x-1 transition-transform">
-                →
-              </span>
-              <span className="absolute -top-[1px] -left-[1px] size-2 border-t border-l border-white" />
-              <span className="absolute -top-[1px] -right-[1px] size-2 border-t border-r border-white" />
-              <span className="absolute -bottom-[1px] -left-[1px] size-2 border-b border-l border-white" />
-              <span className="absolute -bottom-[1px] -right-[1px] size-2 border-b border-r border-white" />
-            </button>
+            <Magnetic maxDisplacement={10}>
+              <button
+                type="button"
+                onClick={openContact}
+                data-cursor-text="CONTACT"
+                className="group relative isolate inline-flex items-center justify-center font-azeret text-[12px] uppercase tracking-[0.2em] px-8 py-4 bg-accent text-white font-bold hover:bg-white hover:text-black transition-all duration-300 rounded-[2px]"
+              >
+                <span>START A CONVERSATION</span>
+                <span className="ml-2 group-hover:translate-x-1 transition-transform">
+                  →
+                </span>
+                <span className="absolute -top-[1px] -left-[1px] size-2 border-t border-l border-white" />
+                <span className="absolute -top-[1px] -right-[1px] size-2 border-t border-r border-white" />
+                <span className="absolute -bottom-[1px] -left-[1px] size-2 border-b border-l border-white" />
+                <span className="absolute -bottom-[1px] -right-[1px] size-2 border-b border-r border-white" />
+              </button>
+            </Magnetic>
 
             <span className="font-azeret text-[10px] tracking-[0.15em] text-white/40 uppercase">
               DIRECT RESPONSE // 24-48 HOUR REVIEW
