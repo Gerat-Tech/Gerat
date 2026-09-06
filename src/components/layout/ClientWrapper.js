@@ -1,8 +1,11 @@
-
 "use client";
+
+import React, { useEffect, useState } from "react";
+import Navbar from "./Navbar";
+import PageLoader from "./PageLoader";
+import TransitionOverlay from "./TransitionOverlay";
+import { PageTransitionProvider } from "@/context/PageTransitionContext";
 import { useNav } from "@/context/NavContext";
-import Navbar from "./Navbar"; 
-import { useEffect, useState } from "react";
 
 export default function ClientWrapper({ children }) {
   const { isMenuOpen } = useNav();
@@ -12,18 +15,22 @@ export default function ClientWrapper({ children }) {
     setMounted(true);
   }, []);
 
-  // While loading, just show the children without the blur logic
-  if (!mounted) return <>{children}</>;
+  if (!mounted) {
+    return <div className="bg-[#050505] min-h-screen text-white">{children}</div>;
+  }
 
   return (
-    <>
+    <PageTransitionProvider>
+      <PageLoader />
+      <TransitionOverlay />
       <Navbar />
-      <main 
-        className={`transition-all duration-700 ease-in-out 
-          ${isMenuOpen ? "blur-xl opacity-50 pointer-events-none scale-[0.98]" : "blur-0 opacity-100"}`}
+      <div
+        className={`transition-all duration-500 ease-(--ease-primary) ${
+          isMenuOpen ? "blur-md opacity-40 pointer-events-none" : "blur-0 opacity-100"
+        }`}
       >
         {children}
-      </main>
-    </>
+      </div>
+    </PageTransitionProvider>
   );
 }
