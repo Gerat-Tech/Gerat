@@ -70,6 +70,12 @@ export async function runBrandingSmokeTests() {
   assert(services.includes("PURPOSE-BUILT DIGITAL SYSTEMS."), "Services page must contain Gerat headline");
   console.log("  ✓ Services page Overview verified");
 
+  // Contact drawer must have Gerat branding and no legacy Foundry copy
+  const contactDrawer = fs.readFileSync(path.join(root, "src/components/layout/ContactDrawer.jsx"), "utf-8");
+  assert(!contactDrawer.includes("foundry team"), "Contact drawer must not contain 'foundry team'");
+  assert(contactDrawer.includes("GERAT SOFTWARE SOLUTIONS PLC"), "Contact drawer must contain 'GERAT SOFTWARE SOLUTIONS PLC'");
+  console.log("  ✓ ContactDrawer branding verified");
+
   // Footer must have Gerat copyright
   const footer = fs.readFileSync(path.join(root, "src/components/layout/Footer.jsx"), "utf-8");
   assert(!footer.includes("WorldQuant"), "Footer should not contain 'WorldQuant'");
