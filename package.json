@@ -9,7 +9,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:smoke": "node tests/smoke/run-smoke-tests.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.38.0",
