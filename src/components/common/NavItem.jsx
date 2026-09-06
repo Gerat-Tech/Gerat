@@ -1,37 +1,85 @@
-export default function NavItem({ label, hovered, isActive, onMouseEnter }) {
+"use client";
+
+import React from "react";
+
+export default function NavItem({
+  label,
+  isActive = false,
+  isCurrent = false,
+  onMouseEnter,
+  className = "",
+}) {
   return (
     <div
       onMouseEnter={onMouseEnter}
-      className="group/button text-[12px] text-white/80 font-azeret relative isolate flex items-center
-      gap-[2px] uppercase whitespace-nowrap px-4 py-3 overflow-hidden"
+      className={`group/item relative isolate flex items-center gap-2 font-azeret text-[11px] sm:text-[12px] tracking-[0.15em] uppercase whitespace-nowrap px-4 py-2.5 transition-colors duration-300 select-none ${
+        isCurrent ? "text-white" : "text-white/70 hover:text-white"
+      } ${className}`}
     >
-      <div
-        className={`flex items-center gap-[8px] ${
-          isActive ? "animate-[blink_0.2s_linear_2]" : ""
-        }`}
-        style={{
-          filter: isActive ? "brightness(2)" : "none",
-        }}
-      >
-        {/* Square Dot */}
-        <div className="bg-white -mt-[2.5px] size-[9px] rounded-[2px] -translate-x-full opacity-0 blur-[32px] transition-all duration-500 group-hover/button:translate-x-0 group-hover/button:opacity-100 group-hover/button:blur-[0px]" />
+      <div className="flex items-center gap-2">
+        {/* Leading dot: permanently visible if current route, otherwise slides in on hover */}
+        <div
+          className={`size-[7px] rounded-[1px] transition-all duration-400 ease-(--ease-primary) ${
+            isCurrent
+              ? "bg-accent opacity-100 translate-x-0 blur-0 shadow-[0_0_8px_rgba(255,74,0,0.8)]"
+              : "bg-white -translate-x-3 opacity-0 blur-[8px] group-hover/item:translate-x-0 group-hover/item:opacity-100 group-hover/item:blur-0"
+          }`}
+          aria-hidden="true"
+        />
 
-        {/* Text animation */}
-        <div className="relative isolate flex -translate-x-[13px] overflow-hidden transition-transform duration-500 group-hover/button:translate-x-0">
-          <span className="transition-transform duration-500 group-hover/button:-translate-y-full">
+        {/* Sliding text reveal animation */}
+        <div
+          className={`relative isolate flex overflow-hidden transition-transform duration-400 ease-(--ease-primary) ${
+            isCurrent
+              ? "translate-x-0"
+              : "-translate-x-2 group-hover/item:translate-x-0"
+          }`}
+        >
+          <span className="transition-transform duration-400 ease-(--ease-primary) group-hover/item:-translate-y-full">
             {label}
           </span>
-          <span className="absolute inset-0 translate-y-full transition-transform duration-500 group-hover/button:translate-y-0">
+          <span
+            className="absolute inset-0 translate-y-full transition-transform duration-400 ease-(--ease-primary) group-hover/item:translate-y-0 text-white"
+            aria-hidden="true"
+          >
             {label}
           </span>
         </div>
       </div>
 
-      {/* Corner Accents */}
-      <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white opacity-0 transition-all duration-300 group-hover/button:opacity-100" />
-      <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white opacity-0 transition-all duration-300 group-hover/button:opacity-100" />
-      <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-white opacity-0 transition-all duration-300 group-hover/button:opacity-100" />
-      <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white opacity-0 transition-all duration-300 group-hover/button:opacity-100" />
+      {/* 4 Precision Corner Bracket Accents */}
+      <div
+        className={`absolute top-0 left-0 size-2 border-t border-l transition-opacity duration-300 ${
+          isCurrent
+            ? "border-accent opacity-100"
+            : "border-white/80 opacity-0 group-hover/item:opacity-100"
+        }`}
+        aria-hidden="true"
+      />
+      <div
+        className={`absolute top-0 right-0 size-2 border-t border-r transition-opacity duration-300 ${
+          isCurrent
+            ? "border-accent opacity-100"
+            : "border-white/80 opacity-0 group-hover/item:opacity-100"
+        }`}
+        aria-hidden="true"
+      />
+      <div
+        className={`absolute bottom-0 left-0 size-2 border-b border-l transition-opacity duration-300 ${
+          isCurrent
+            ? "border-accent opacity-100"
+            : "border-white/80 opacity-0 group-hover/item:opacity-100"
+        }`}
+        aria-hidden="true"
+      />
+      <div
+        className={`absolute bottom-0 right-0 size-2 border-b border-r transition-opacity duration-300 ${
+          isCurrent
+            ? "border-accent opacity-100"
+            : "border-white/80 opacity-0 group-hover/item:opacity-100"
+        }`}
+        aria-hidden="true"
+      />
     </div>
   );
 }

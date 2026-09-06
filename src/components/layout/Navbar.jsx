@@ -1,225 +1,302 @@
 "use client";
+
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import Link from "next/link";
-import { useEffect, useState, useRef } from "react";
+import { usePathname } from "next/navigation";
 import ContactDrawer from "./ContactDrawer";
 import NavItem from "../common/NavItem";
 import { useNav } from "@/context/NavContext";
 
+/**
+ * Editorial Navigation Bar (Spec §8)
+ * Features adaptive sticky-scroll compression, active route indicators,
+ * corner-accent hover styling, and a full-screen mobile menu.
+ */
 export default function Navbar() {
   const [contactOpen, setContactOpen] = useState(false);
   const { isMenuOpen, setIsMenuOpen } = useNav();
   const [hovered, setHovered] = useState(null);
-  const [show, setShow] = useState(true);
-  const [shrink, setShrink] = useState(false);
-
-  const lastScroll = useRef(0);
-  const isHeroVisible = useRef(true);
+  const [isVisible, setIsVisible] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const lastScrollY = useRef(0);
+  const pathname = usePathname();
 
   const navLinks = [
-    { name: "WHY WQF", href: "/why-wqf" },
+    { name: "SERVICES", href: "/why-wqf" },
     { name: "PORTFOLIO", href: "/portfolio" },
     { name: "TEAM", href: "/team" },
     { name: "INSIGHTS", href: "/insights" },
-    { name: "Contact", href: "/contact" },
   ];
 
-  useEffect(() => {
-    const hero = document.getElementById("hero");
+  // Handle scroll behavior (Spec §8: hide on scroll down past viewport, show on scroll up)
+  const handleScroll = useCallback(() => {
+    const currentY = window.scrollY;
+    const scrollDelta = currentY - lastScrollY.current;
+    const windowHeight = window.innerHeight;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        isHeroVisible.current = entry.isIntersecting;
-        if (entry.isIntersecting) setShow(true);
-        else setShow(false);
-      },
-      { threshold: 0 },
-    );
-    if (hero) observer.observe(hero);
+    // Compact mode triggers after 40px scroll
+    setIsScrolled(currentY > 40);
 
-    const handleScroll = () => {
-      const currentScroll = window.scrollY;
-      setShrink(currentScroll > 50);
-
-      if (!isHeroVisible.current) {
-        setShow(currentScroll < lastScroll.current);
+    // Hide/show logic past first viewport
+    if (currentY > windowHeight * 0.8) {
+      if (scrollDelta > 10 && !isMenuOpen) {
+        setIsVisible(false); // Scrolling down
+      } else if (scrollDelta < -10) {
+        setIsVisible(true);  // Scrolling up
       }
-      lastScroll.current = currentScroll;
-    };
+    } else {
+      setIsVisible(true);
+    }
 
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      if (hero) observer.unobserve(hero);
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+    lastScrollY.current = currentY;
   }, [isMenuOpen]);
 
   useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [isMenuOpen]);
+
+  // Close mobile menu on desktop resize
+  useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 1018) {
+      if (window.innerWidth >= 1024 && isMenuOpen) {
         setIsMenuOpen(false);
       }
     };
-
     window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [isMenuOpen, setIsMenuOpen]);
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
+  // Handle escape key to close menu or drawer
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        if (contactOpen) setContactOpen(false);
+        if (isMenuOpen) setIsMenuOpen(false);
+      }
     };
-  }, [setIsMenuOpen]);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [contactOpen, isMenuOpen, setIsMenuOpen]);
 
   return (
     <>
       <header
-        className={`fixed top-0 z-[200] bg-black transition-all duration-700 ease-in-out px-4
-           ${show ? "translate-y-4" : "-translate-y-full"}
-           ${
-             shrink
-               ? "w-[90%] md:w-[40%] left-1/2 -translate-x-1/2 rounded-[8px] bg-black/80 backdrop-blur-md shadow-2xl py-2"
-               : "w-full left-0 translate-x-0 py-2"
-           }`}
+        role="banner"
+        className={`fixed top-0 left-0 w-full z-[120] transition-all duration-400 ease-(--ease-primary) ${
+          isVisible ? "translate-y-0" : "-translate-y-full"
+        }`}
       >
-        <div className="px-2 lg:px-4">
-          <div className="flex items-center justify-between h-8">
-            {/* Logo */}
-            <Link href="/" className="text-white/80 flex items-center">
-              {shrink ? (
-                <svg
-                  className="w-[28px] h-[28px]"
-                  viewBox="0 0 65 65"
-                  fill="none"
-                >
-                  <path
-                    d="M39.13 43.55C39.13 41.0371 41.1671 39 43.68 39H47.45C49.9629 39 52 36.9629 52 34.45L52 4.55C52 2.03711 54.0371 0 56.55 0L60.45 0C62.9629 0 65 2.03711 65 4.55001V34.45C65 36.9629 62.9629 39 60.45 39H56.68C54.1671 39 52.13 41.0371 52.13 43.55L52.13 60.45C52.13 62.9629 50.0929 65 47.58 65L43.68 65C41.1671 65 39.13 62.9629 39.13 60.45L39.13 43.55Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    d="M13.13 43.55C13.13 41.0371 15.1671 39 17.68 39H21.45C23.9629 39 26 36.9629 26 34.45L26 4.55C26 2.03711 28.0371 0 30.55 0L34.45 0C36.9629 0 39 2.03711 39 4.55L39 34.45C39 36.9629 36.9629 39 34.45 39H30.68C28.1671 39 26.13 41.0371 26.13 43.55L26.13 60.45C26.13 62.9629 24.0929 65 21.58 65H17.68C15.1671 65 13.13 62.9629 13.13 60.45L13.13 43.55Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    d="M0 4.55C0 2.0371 2.03711 0 4.55 0L8.45 0C10.9629 0 13 2.0371 13 4.55L13 21.45C13 23.9629 10.9629 26 8.45 26H4.55C2.0371 26 0 23.9629 0 21.45L0 4.55Z"
-                    fill="currentColor"
-                  />
-                </svg>
-              ) : (
-                <div className="leading-tight text-[10px] tracking-widest font-bold">
-                  WORLDQUANT <br />
-                  <span className="font-normal text-gray-400">FOUNDRY</span>
-                </div>
-              )}
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 pt-3 sm:pt-4">
+          <div
+            className={`mx-auto flex items-center justify-between transition-all duration-500 ease-(--ease-primary) ${
+              isScrolled
+                ? "bg-[#111111]/85 backdrop-blur-md border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.6)] rounded-xl py-2 px-4 sm:px-6 md:w-fit"
+                : "bg-transparent border-b border-white/10 pb-3 sm:pb-4 px-2"
+            }`}
+          >
+            {/* Brand Logo */}
+            <Link
+              href="/"
+              className="flex items-center gap-3 text-white group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded-sm"
+              aria-label="Gerat Software Solutions PLC - Home"
+            >
+              {/* Gerat Monogram Icon */}
+              <div className="size-8 rounded-[4px] bg-white/5 border border-white/15 flex items-center justify-center text-white group-hover:border-accent transition-colors duration-300 shrink-0">
+                <GeratMonogram />
+              </div>
+
+              {/* Logo Typography (Collapses smoothly when scrolled in center mode) */}
+              <div
+                className={`flex flex-col overflow-hidden transition-all duration-400 ${
+                  isScrolled ? "hidden sm:flex" : "flex"
+                }`}
+              >
+                <span className="font-roc text-[14px] sm:text-[15px] font-bold tracking-[0.18em] leading-tight text-white group-hover:text-accent transition-colors">
+                  GERAT
+                </span>
+                <span className="font-azeret text-[8px] tracking-[0.22em] text-white/50 leading-tight">
+                  SOFTWARE SOLUTIONS
+                </span>
+              </div>
             </Link>
 
-            {/* Desktop Navigation (Hidden below 1018px) */}
-            <nav className="hidden min-[1018px]:block">
-              <ul className="flex flex-row gap-1">
-                {navLinks.map((link, index) => (
-                  <li key={link.name}>
-                    {link.name === "Contact" ? (
-                      <button onClick={() => setContactOpen(true)}>
+            {/* Desktop Navigation Links (>= 1024px) */}
+            <nav
+              className="hidden lg:flex items-center gap-1 mx-4"
+              aria-label="Main Navigation"
+            >
+              <ul className="flex items-center gap-1">
+                {navLinks.map((link, index) => {
+                  const isCurrent = pathname === link.href;
+                  return (
+                    <li key={link.name}>
+                      <Link
+                        href={link.href}
+                        aria-current={isCurrent ? "page" : undefined}
+                      >
                         <NavItem
                           label={link.name}
                           isActive={hovered === index}
-                          onMouseEnter={() => setHovered(index)}
-                        />
-                      </button>
-                    ) : (
-                      <Link href={link.href}>
-                        <NavItem
-                          label={link.name}
-                          isActive={hovered === index}
+                          isCurrent={isCurrent}
                           onMouseEnter={() => setHovered(index)}
                         />
                       </Link>
-                    )}
-                  </li>
-                ))}
+                    </li>
+                  );
+                })}
               </ul>
             </nav>
 
-            {/* Mobile Indicator (Shown below 1018px) */}
+            {/* Right Action: Contact CTA Button */}
+            <div className="hidden lg:flex items-center">
+              <button
+                type="button"
+                onClick={() => setContactOpen(true)}
+                className="relative group/btn font-azeret text-[11px] uppercase tracking-[0.2em] px-4 py-2 text-white/90 border border-white/20 hover:border-accent hover:text-white bg-white/5 hover:bg-accent/10 transition-all duration-300 rounded-[2px] select-none"
+              >
+                <span>CONTACT</span>
+                {/* Micro corner indicators */}
+                <span className="absolute -top-[1px] -left-[1px] size-1.5 border-t border-l border-white/60 group-hover/btn:border-accent" />
+                <span className="absolute -bottom-[1px] -right-[1px] size-1.5 border-b border-r border-white/60 group-hover/btn:border-accent" />
+              </button>
+            </div>
+
+            {/* Mobile Hamburger Toggle (< 1024px) */}
             <button
-              onClick={() => setIsMenuOpen((prev) => !prev)}
-              className="min-[1018px]:hidden flex items-center justify-center w-8 h-8   rounded-sm relative"
+              type="button"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="lg:hidden relative size-10 rounded-[3px] border border-white/15 bg-white/5 flex items-center justify-center text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent"
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMenuOpen}
             >
-              <div className="w-2 h-2 bg-white rounded-[2px]"></div>
+              <div className="size-2 bg-white rounded-[1px] group-hover:bg-accent transition-colors" />
 
-              {/* Corner Ascents */}
-              {/* Top Left */}
-              <div
-                className={`absolute top-0 left-0 w-2 h-2 border-white/60
-                ${isMenuOpen ? "border-b border-r" : "border-t border-l"}`}
+              {/* Animated Corner Brackets */}
+              <span
+                className={`absolute top-1 left-1 size-2 border-t border-l border-white/60 transition-transform duration-300 ${
+                  isMenuOpen ? "rotate-45" : ""
+                }`}
               />
-
-              {/* Top Right */}
-              <div
-                className={`absolute top-0 right-0 w-2 h-2 border-white/60
-                ${isMenuOpen ? "border-b border-l" : "border-t border-r"}`}
+              <span
+                className={`absolute top-1 right-1 size-2 border-t border-r border-white/60 transition-transform duration-300 ${
+                  isMenuOpen ? "-rotate-45" : ""
+                }`}
               />
-
-              {/* Bottom Left */}
-              <div
-                className={`absolute bottom-0 left-0 w-2 h-2 border-white/60
-                ${isMenuOpen ? "border-t border-r" : "border-b border-l"}`}
+              <span
+                className={`absolute bottom-1 left-1 size-2 border-b border-l border-white/60 transition-transform duration-300 ${
+                  isMenuOpen ? "-rotate-45" : ""
+                }`}
               />
-
-              {/* Bottom Right */}
-              <div
-                className={`absolute bottom-0 right-0 w-2 h-2 border-white/60
-                ${isMenuOpen ? "border-t border-l" : "border-b border-r"}`}
+              <span
+                className={`absolute bottom-1 right-1 size-2 border-b border-r border-white/60 transition-transform duration-300 ${
+                  isMenuOpen ? "rotate-45" : ""
+                }`}
               />
             </button>
           </div>
         </div>
       </header>
 
-      {/* Fullscreen Mobile Menu Overlay */}
+      {/* Fullscreen Mobile Menu Overlay (Spec §8 Mobile) */}
       <div
-        className={`fixed inset-0 z-[100] mt-10 border-b border-white/20 h-[40vh]  bg-black backdrop-blur-md 
-          flex flex-col p-8 
-        ${isMenuOpen ? "flex" : "hidden"}`}
+        className={`fixed inset-0 z-[110] bg-black/95 backdrop-blur-xl transition-all duration-500 ease-(--ease-primary) flex flex-col justify-between pt-24 pb-8 px-6 lg:hidden ${
+          isMenuOpen
+            ? "opacity-100 pointer-events-auto [clip-path:inset(0_0_0_0)]"
+            : "opacity-0 pointer-events-none [clip-path:inset(0_0_100%_0)]"
+        }`}
+        aria-hidden={!isMenuOpen}
       >
-        <div className="grid grid-cols-2   my-auto text-center relative  ">
-          {navLinks.map((link) => (
-            <div
-              key={link.name}
-              // className=" flex flex-col items-center justify-center"
-              className="relative  font-azeret text-[20px] flex items-center justify-center px-6 py-4 group  "
-            >
-              {/* Corners */}
-              <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/90" />
-              <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white/90" />
-              <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-white/90" />
-              <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/90" />
+        <div className="flex flex-col gap-6 my-auto max-w-md w-full mx-auto">
+          <div className="mono-meta text-center text-white/40 mb-2">
+            NAVIGATION
+          </div>
 
-              {link.name === "Contact" ? (
-                <button
-                  onClick={() => {
-                    setContactOpen(true);
-                    setIsMenuOpen(false);
-                  }}
-                  className="text-[10px] tracking-[0.3em] text-white uppercase hover:text-gray-400 transition-colors"
-                >
-                  {link.name}
-                </button>
-              ) : (
+          <div className="grid grid-cols-2 gap-3">
+            {navLinks.map((link) => {
+              const isCurrent = pathname === link.href;
+              return (
                 <Link
+                  key={link.name}
                   href={link.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="text-[10px] tracking-[0.3em] text-white uppercase hover:text-gray-400 transition-colors"
+                  className={`relative p-5 text-center font-azeret text-[12px] tracking-[0.2em] uppercase border transition-all duration-300 rounded-[2px] ${
+                    isCurrent
+                      ? "border-accent text-white bg-accent/10"
+                      : "border-white/15 text-white/80 hover:text-white hover:border-white/40 bg-white/[0.02]"
+                  }`}
                 >
+                  {/* Corner accents */}
+                  <span className="absolute top-0 left-0 size-1.5 border-t border-l border-white/50" />
+                  <span className="absolute top-0 right-0 size-1.5 border-t border-r border-white/50" />
+                  <span className="absolute bottom-0 left-0 size-1.5 border-b border-l border-white/50" />
+                  <span className="absolute bottom-0 right-0 size-1.5 border-b border-r border-white/50" />
                   {link.name}
                 </Link>
-              )}
-            </div>
-          ))}
+              );
+            })}
+          </div>
+
+          {/* Full-width Contact Drawer Trigger on Mobile */}
+          <button
+            type="button"
+            onClick={() => {
+              setIsMenuOpen(false);
+              setContactOpen(true);
+            }}
+            className="relative w-full p-4 mt-2 text-center font-azeret text-[12px] tracking-[0.2em] uppercase border border-accent/80 text-white bg-accent/20 hover:bg-accent/30 transition-all rounded-[2px]"
+          >
+            <span className="absolute top-0 left-0 size-1.5 border-t border-l border-accent" />
+            <span className="absolute top-0 right-0 size-1.5 border-t border-r border-accent" />
+            <span className="absolute bottom-0 left-0 size-1.5 border-b border-l border-accent" />
+            <span className="absolute bottom-0 right-0 size-1.5 border-b border-r border-accent" />
+            START A PROJECT / CONTACT
+          </button>
+        </div>
+
+        <div className="text-center font-azeret text-[10px] tracking-[0.15em] text-white/40 uppercase">
+          © 2026 GERAT SOFTWARE SOLUTIONS PLC
         </div>
       </div>
 
+      {/* Global Contact Drawer */}
       <ContactDrawer open={contactOpen} setOpen={setContactOpen} />
     </>
+  );
+}
+
+/**
+ * Clean architectural Gerat monogram
+ */
+function GeratMonogram() {
+  return (
+    <svg
+      className="size-5"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="M3 5V19H19V13H11V11H21V5H3Z"
+        fill="currentColor"
+      />
+      <rect
+        x="13"
+        y="15"
+        width="4"
+        height="4"
+        fill="var(--accent, #ff4a00)"
+      />
+    </svg>
   );
 }
