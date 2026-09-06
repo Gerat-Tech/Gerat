@@ -74,23 +74,23 @@
 
 ---
 
-## Phase 1 — Repository Professionalization
+## Phase 1 — Repository Professionalization ✅ COMPLETED
 
 **Goal:** Transform the raw starter into a clean, professional, well-structured repository ready for development.
 
 ### Tasks
 
-- [ ] **Create `.gitignore`**
+- [x] **Create `.gitignore`**
   - Ignore `node_modules/`, `.next/`, `out/`, `.env*`, `.DS_Store`, `*.log`, coverage, IDE files
 
-- [ ] **Clean up `package.json`**
+- [x] **Clean up `package.json`**
   - Rename `"name"` from `"worldquant"` to `"gerat-website"`
   - Update `"version"` to `"0.1.0"`
   - Add `"description"`, `"author"`, `"license"` fields
-  - Remove redundant phone-input packages (keep only `react-international-phone`)
-  - Remove duplicate lock file (keep only one package manager)
+  - Remove redundant phone-input packages (keep only `react-phone-input-2`)
+  - Remove duplicate lock file (standardized on pnpm)
 
-- [ ] **Write professional README.md**
+- [x] **Write professional README.md**
   - Project name, description, and purpose
   - Tech stack overview
   - Prerequisites and setup instructions
@@ -99,38 +99,39 @@
   - Design reference link
   - License / copyright
 
-- [ ] **Clean dead code from `layout.js`**
+- [x] **Clean dead code from `layout.js`**
   - Remove commented-out code block
   - Add proper `metadata` export for SEO
 
-- [ ] **Remove boilerplate files**
+- [x] **Remove boilerplate files**
   - Delete unused SVGs from `/public/` (`file.svg`, `globe.svg`, `next.svg`, `vercel.svg`, `window.svg`)
-  - Verify `CLAUDE.md` is intentional or remove
+  - Configured git tracking for all core project files
 
-- [ ] **Add `.editorconfig`**
+- [x] **Add `.editorconfig`**
   - Consistent formatting across editors
 
-- [ ] **Make initial git commit**
-  - Stage all cleaned files
+- [x] **Make initial git commit**
+  - Staged all cleaned files in granular, professional commits
 
-### Commit plan
+### Commit history (Phase 1)
 ```
-1. chore: add .gitignore
-2. chore: clean package.json and remove duplicate lock file
-3. docs: replace boilerplate README with professional project documentation
-4. chore: remove dead code and unused boilerplate assets
-5. chore: add .editorconfig for consistent formatting
+15cb500 chore: add comprehensive .gitignore
+9f3394b chore: rebrand package.json and standardize on pnpm
+7cedf45 docs: replace boilerplate README with professional project documentation
+19c9654 chore: add .editorconfig for consistent formatting
+1d394de chore: add configuration files and design specifications
+a22bbbb chore: track base application code and clean assets
 ```
 
 ---
 
-## Phase 2 — Design Foundation
+## Phase 2 — Design Foundation ✅ COMPLETED
 
 **Goal:** Establish the design system that every component will build on — tokens, typography, grid, and spacing.
 
 ### Tasks
 
-- [ ] **Create design token CSS file** (`src/styles/tokens.css`)
+- [x] **Create design token CSS file** (`src/styles/tokens.css`)
   - Color palette: `--bg`, `--surface`, `--surface-2`, `--text`, `--muted`, `--border`, `--accent`
   - Spacing scale: 4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96, 120, 160, 200, 240
   - Border radius tokens
@@ -139,29 +140,38 @@
   - Z-index scale
   - *Spec ref: §3.1, §6, §7*
 
-- [ ] **Create typography system** (`src/styles/typography.css`)
+- [x] **Create typography system** (`src/styles/typography.css`)
   - Type scale with `clamp()`: Display XL, Display L, H2, H3, Body, Small, Mono
   - Line-height mappings per heading level
   - Font weight definitions for Roc Grotesk + Azeret Mono
   - *Spec ref: §4*
 
-- [ ] **Create motion tokens** (`src/styles/motion.css`)
+- [x] **Create motion tokens** (`src/styles/motion.css`)
   - Duration scale: fast (200ms), normal (400ms), slow (700ms), reveal (500–700ms)
   - Easing presets
   - Stagger base: 60–120ms
   - `prefers-reduced-motion` overrides at token level
   - *Spec ref: §15, §40*
 
-- [ ] **Restructure `globals.css`**
-  - Import token files
-  - Clean up phone-input CSS
-  - Add base resets
-
-- [ ] **Set up grid system**
+- [x] **Create adaptive grid system** (`src/styles/grid.css`)
   - 12-column desktop, 8-column tablet, 4-column mobile
   - Outer gutters and column gaps per breakpoint
-  - Container component or utility class
+  - Container component and hairline border utilities
   - *Spec ref: §5*
+
+- [x] **Restructure `globals.css`**
+  - Import token files (tokens, typography, motion, grid)
+  - Configure Tailwind v4 `@theme` bindings
+  - Add base resets, selection colors, and hide-scrollbar utilities
+
+### Commit history (Phase 2)
+```
+954f3e1 feat(design): add design token system for colors, spacing, and z-index
+f7401b1 feat(design): add typography system with clamp-based type scale and mono metadata
+fd7e3c3 feat(design): add motion token system with easings and reduced-motion enforcement
+e44cf5a feat(design): add adaptive 12-column grid system and container utilities
+5733ec6 refactor(styles): integrate design tokens, typography, motion, and grid into globals.css
+```
 
 ### Commit plan
 ```
