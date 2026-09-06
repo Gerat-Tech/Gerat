@@ -1,85 +1,100 @@
 "use client";
 
-import TeamCard from "@/components/common/TeamCard";
+import React from "react";
+import FadeUp from "@/components/motion/FadeUp";
 
-export default function AdvisorsAndTeam() {
-  const advisors = [
-    {
-      name: "John Doe",
-      role: "AI Advisor",
-      image:
-        "/image/team/AdvisorAndTeam/WQF__01_Advisor_Savi-Glow-1_Health-Tech-and-Space.webp",
-    },
-    {
-      name: "Jane Smith",
-      role: "Blockchain Expert",
-      image: "/image/team/AdvisorAndTeam/WQF__02_Advisor_Dmitry-Green.webp",
-    },
-    {
-      name: "Michael Lee",
-      role: "FinTech Specialist",
-      image:
-        "/image/team/AdvisorAndTeam/WQF__03_Advisor_Zaib-Husain_Venture-and-Robotics.webp",
-    },
-    {
-      name: "Sarah Khan",
-      role: "Startup Mentor",
-      image:
-        "/image/team/AdvisorAndTeam/WQF__04_Advisor_John-King-3_Chief-Marketing-Officer.webp",
-    },
-    {
-      name: "David Kim",
-      role: "Tech Strategist",
-      image: "/image/team/AdvisorAndTeam/WQF__05_Peter Lee.webp",
-    },
-    {
-      name: "Emma Wilson",
-      role: "Growth Advisor",
-      image:
-        "/image/team/AdvisorAndTeam/WQF__06_Advisor_Chris-Mason-2_Health-Tech-and-Space.webp",
-    },
-    {
-      name: "Emma Wilson",
-      role: "Growth Advisor",
-      image: "/image/team/AdvisorAndTeam/WQF__07_Advisor_Murina.webp",
-    },
-    {
-      name: "Emma Wilson",
-      role: "Growth Advisor",
-      image: "/image/team/AdvisorAndTeam/WQF__08_team-chris.webp",
-    },
-    {
-      name: "Emma Wilson",
-      role: "Growth Advisor",
-      image:
-        "/image/team/AdvisorAndTeam/WQF__09_Advisor_Nicholas-Tatonetti_Health-Tech.webp",
-    },
-    {
-      name: "Emma Wilson",
-      role: "Growth Advisor",
-      image: "/image/team/AdvisorAndTeam/WQF__10_Advisor_Kyle.webp",
-    },
-  ];
+const engineeringSpecialists = [
+  {
+    role: "PRINCIPAL SYSTEMS ARCHITECT",
+    discipline: "DISTRIBUTED BACKENDS & CONSENSUS",
+    focus: "Designing fault-tolerant PostgreSQL clusters, event brokers, and multi-region failover protocols.",
+    image: "/image/team/AdvisorAndTeam/WQF__01_Advisor_Savi-Glow-1_Health-Tech-and-Space.webp",
+  },
+  {
+    role: "STAFF APPLIED AI RESEARCHER",
+    discipline: "NEURAL RETRIEVAL & VECTOR STORES",
+    focus: "Fine-tuning contextual chunking algorithms and embedding models for domain-specific RAG platforms.",
+    image: "/image/team/AdvisorAndTeam/WQF__02_Advisor_Dmitry-Green.webp",
+  },
+  {
+    role: "LEAD CLOUD ORCHESTRATION ENGINEER",
+    discipline: "KUBERNETES & AUTOMATED DEPLOYMENT",
+    focus: "Hardening container topologies, automated zero-downtime canary rollouts, and multi-tenant security.",
+    image: "/image/team/AdvisorAndTeam/WQF__03_Advisor_Zaib-Husain_Venture-and-Robotics.webp",
+  },
+  {
+    role: "HEAD OF PRODUCT SECURITY",
+    discipline: "ZERO-TRUST ARCHITECTURE & PKI",
+    focus: "Enforcing cryptographic identity, automated static/dynamic vulnerability scans, and regulatory compliance.",
+    image: "/image/team/AdvisorAndTeam/WQF__04_Advisor_John-King-3_Chief-Marketing-Officer.webp",
+  },
+  {
+    role: "SENIOR EVENT TELEMETRY ARCHITECT",
+    discipline: "KAFKA STREAMS & TIME-SERIES",
+    focus: "Building real-time event aggregation and anomaly detection engines ingesting millions of telemetry frames.",
+    image: "/image/team/AdvisorAndTeam/WQF__05_Peter Lee.webp",
+  },
+  {
+    role: "PRINCIPAL INTERACTION ENGINEER",
+    discipline: "NEXT.JS & REACTIVE INTERFACES",
+    focus: "Architecting micro-interaction choreography, responsive layout engines, and high-density operator dashboards.",
+    image: "/image/team/AdvisorAndTeam/WQF__06_Advisor_Chris-Mason-2_Health-Tech-and-Space.webp",
+  },
+];
 
+export default function AdvisorAndTeam() {
   return (
-    <section className="mt-[120px] grid grid-cols-12 gap-y-[24px] lg:gap-x-[40px]">
-      {/* LEFT SIDE */}
-      <div className="col-span-12 lg:col-span-3 flex flex-col gap-[12px] md:py-[40px]">
-        <div className="flex items-center gap-[1ch] text-sm font-mono">
-          <h2>advisors</h2>
-          <p className="text-white/60">[06]</p>
-        </div>
-
-        <p className="text-white/60 text-sm max-w-[250px]">
-          Experts guiding innovation across AI, blockchain, fintech, and
-          emerging technologies.
-        </p>
+    <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-16 text-white border-t border-white/10">
+      <div className="flex flex-col gap-3 mb-12">
+        <span className="font-azeret text-[10px] tracking-[0.25em] text-accent uppercase">
+          02 // SPECIALIZED DISCIPLINES
+        </span>
+        <h2 className="font-roc text-3xl sm:text-4xl font-bold uppercase tracking-tight">
+          CORE ENGINEERING PRACTITIONERS
+        </h2>
       </div>
 
-      {/* RIGHT SIDE */}
-      <div className="col-span-12 lg:col-span-9 grid md:grid-cols-5 gap-[16px] md:gap-[24px]">
-        {advisors.map((advisor, index) => (
-          <TeamCard key={index} {...advisor} />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {engineeringSpecialists.map((member, idx) => (
+          <FadeUp key={member.role} delay={0.08 * idx} y={20}>
+            <div className="group relative bg-[#0a0a0a] border border-white/10 hover:border-accent/60 p-6 rounded-[3px] flex flex-col justify-between min-h-[300px] transition-all duration-300">
+              {/* Precision Corner Accents */}
+              <span className="absolute top-0 left-0 size-1.5 border-t border-l border-white/30 group-hover:border-accent transition-colors" />
+              <span className="absolute top-0 right-0 size-1.5 border-t border-r border-white/30 group-hover:border-accent transition-colors" />
+              <span className="absolute bottom-0 left-0 size-1.5 border-b border-l border-white/30 group-hover:border-accent transition-colors" />
+              <span className="absolute bottom-0 right-0 size-1.5 border-b border-r border-white/30 group-hover:border-accent transition-colors" />
+
+              {/* Photo Thumbnail + Index */}
+              <div className="flex items-center justify-between gap-4 mb-4">
+                <div className="size-16 rounded-[2px] overflow-hidden bg-black/60 shrink-0 border border-white/10">
+                  <img
+                    src={member.image}
+                    alt={member.role}
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
+                    loading="lazy"
+                  />
+                </div>
+                <span className="font-azeret text-[10px] tracking-[0.2em] text-white/40">
+                  ENG // 0{idx + 1}
+                </span>
+              </div>
+
+              {/* Content */}
+              <div className="flex flex-col gap-2 my-auto">
+                <span className="font-azeret text-[8px] tracking-[0.2em] text-accent uppercase">
+                  {member.discipline}
+                </span>
+                <h3 className="font-roc text-lg font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
+                  {member.role}
+                </h3>
+                <p className="font-roc text-xs text-white/65 leading-relaxed pt-1">
+                  {member.focus}
+                </p>
+              </div>
+
+              <div className="w-full h-[1px] bg-white/10 group-hover:bg-accent/40 transition-colors mt-4" />
+            </div>
+          </FadeUp>
         ))}
       </div>
     </section>
