@@ -1,0 +1,77 @@
+:root {
+  /* ==========================================================================
+     Color System (Spec §3.1)
+     Dark, high-contrast, editorial palette with restrained accenting
+     ========================================================================== */
+  --bg: #050505;
+  --bg-subtle: #0b0b0b;
+  --surface: #141414;
+  --surface-2: #1b1b1b;
+  --surface-3: #242424;
+
+  /* Contrast Hierarchy (Spec §3.2) */
+  --text-primary: #f0f0f0;      /* Level 1: Huge headlines, high clarity */
+  --text-secondary: #c4c4c4;    /* Level 2: Descriptions, main nav */
+  --text-muted: #8e8e8e;        /* Level 3: Metadata, captions, mono labels */
+  --text-dim: #525252;          /* Level 4: Subtle markers */
+  
+  /* Borders & Rules (Spec §3.1, §7) */
+  --border: #303030;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.16);
+  --border-strong: rgba(255, 255, 255, 0.32);
+
+  /* Brand Accent */
+  --accent: #ff4a00;
+  --accent-hover: #ff6524;
+  --accent-subtle: rgba(255, 74, 0, 0.12);
+  --accent-glow: rgba(255, 74, 0, 0.35);
+
+  /* Layout Dimensions */
+  --header-height: 64px;
+  --max-width: 1440px;
+
+  /* ==========================================================================
+     Spacing Scale (Spec §6)
+     ========================================================================== */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-30: 120px;
+  --space-40: 160px;
+  --space-50: 200px;
+  --space-60: 240px;
+
+  /* ==========================================================================
+     Shape Language & Radii (Spec §7)
+     Minimalist, precise, mostly square edges with restrained 1-4px radii
+     ========================================================================== */
+  --radius-none: 0px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-pill: 9999px;
+
+  /* ==========================================================================
+     Layering / Z-Index Scale
+     ========================================================================== */
+  --z-negative: -1;
+  --z-base: 0;
+  --z-elevated: 10;
+  --z-dropdown: 20;
+  --z-sticky: 50;
+  --z-drawer-backdrop: 80;
+  --z-drawer: 90;
+  --z-modal: 100;
+  --z-cursor: 200;
+}
