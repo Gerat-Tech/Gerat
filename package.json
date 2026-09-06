@@ -10,7 +10,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:smoke": "node tests/smoke/run-smoke-tests.mjs"
+    "test:smoke": "node tests/smoke/run-smoke-tests.mjs",
+    "test:runtime": "node tests/smoke/dev-server-smoke.mjs",
+    "test": "pnpm run test:smoke && pnpm run test:runtime"
   },
   "dependencies": {
     "framer-motion": "^12.38.0",

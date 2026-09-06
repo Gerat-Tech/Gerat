@@ -13,7 +13,14 @@ import { useNav } from "@/context/NavContext";
  * corner-accent hover styling, and a full-screen mobile menu.
  */
 export default function Navbar() {
-  const { isMenuOpen, setIsMenuOpen, isContactOpen, openContact, closeContact } = useNav();
+  const {
+    isMenuOpen,
+    setIsMenuOpen,
+    isContactOpen,
+    setIsContactOpen,
+    openContact,
+    closeContact,
+  } = useNav();
   const [hovered, setHovered] = useState(null);
   const [isVisible, setIsVisible] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
