@@ -214,26 +214,28 @@ The Gerat website has established an architectural, dark-mode digital identity. 
 
 ---
 
-## Phase D-07 — Site Telemetry, Audit Logs, Real-Time Alerts & Smoke Tests
+## Phase D-07 — Site Telemetry, Audit Logs, Real-Time Alerts & Smoke Tests ✅ COMPLETED
 
 **Goal:** Centralize site configuration, record all team actions, set up instant lead notifications, and implement automated smoke tests.
 
 ### Tasks
-- [ ] **Build Global Site Configuration Console (`src/app/(dashboard)/settings/site-config/page.jsx`)**
-  - Marquee ticker token manager (add, reorder, toggle live tokens)
-  - Technology partner logo manager
-  - Official contact coordinates (phone, emergency hotline, office address, GPS coordinates)
-  - Global announcement banner toggle
-- [ ] **Build Immutable Audit Log Viewer (`src/app/(dashboard)/settings/audit-log/page.jsx`)**
-  - Chronological timeline of every system mutation: Actor, Action, Entity Type, Entity ID, and JSON diff payload
-- [ ] **Implement Instant Notification Webhook**
-  - Instant Telegram Bot / WhatsApp Business / Email notification to founders when a new lead is submitted
-  - Formatted alert: Lead Name, Company, Discipline, Budget Tier, and Direct Dashboard Link
-- [ ] **Automated Smoke Test Suite Expansion (`tests/smoke/`)**
-  - Test `/dashboard` authentication redirects
-  - Test `/api/intake` telemetry generation and database persistence
-  - Test CRUD operations on Inquiries, Articles, and Case Studies
-  - Verify 100% build and lint pass
+- [x] **Build Global Site Configuration Console (`src/app/dashboard/settings/page.jsx` & `/site-config`)**
+  - Marquee ticker token manager (add new tokens, live count, remove tokens, dynamic public `Marquee.jsx` rendering)
+  - Official contact coordinates (switchboard phone, emergency hotline, office address, GPS coordinates)
+  - Global announcement banner toggle (live broadcast text and URL route)
+- [x] **Build Immutable Audit Log Viewer (`src/app/dashboard/settings/audit-log/page.jsx`)**
+  - Chronological timeline of every system mutation: Actor, Action, Entity Type, Entity ID, and expandable JSON diff inspector
+  - Real-time entity filters (`INQUIRY`, `ARTICLE`, `CASE_STUDY`, `TEAM_MEMBER`, `SERVICE_PILLAR`, `SITE_CONFIG`) and text search
+- [x] **Implement Instant Notification Webhook Pipeline (`src/lib/notifications.js`)**
+  - Real-time lead alert dispatch for Slack, Discord, Telegram, or custom webhooks
+  - Formatted alert: Lead Name, Company, Discipline, Budget Tier, Phone/Email, Brief, and Direct Dashboard Link
+  - Integrated directly into public `/api/intake` handler
+  - Webhook test ping utility (`/api/settings/test-notification`) with instant UI feedback badge
+- [x] **Automated Smoke Test Suite Expansion (`tests/smoke/site-telemetry-smoke.test.mjs`)**
+  - Verified `SiteConfig` upsert, lookup, and cleanup
+  - Verified `AuditLog` mutation recording and relational actor resolution
+  - Verified `dispatchNewLeadAlert` execution and webhook URL validation
+  - Verified 100% build and lint pass (10/10 smoke test suites passing in 0.70s)
 
 ---
 

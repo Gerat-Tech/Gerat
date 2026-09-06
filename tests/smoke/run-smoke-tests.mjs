@@ -7,6 +7,7 @@ import { runCrmIntakeSmokeTests } from "./crm-intake-smoke.test.mjs";
 import { runArticlesCmsSmokeTests } from "./articles-cms-smoke.test.mjs";
 import { runPortfolioCmsSmokeTests } from "./portfolio-cms-smoke.test.mjs";
 import { runTeamServicesCmsSmokeTests } from "./team-services-cms-smoke.test.mjs";
+import { runSiteTelemetrySmokeTests } from "./site-telemetry-smoke.test.mjs";
 
 async function main() {
   console.log("=================================================");
@@ -27,6 +28,7 @@ async function main() {
     { name: "Research & Insights CMS", fn: runArticlesCmsSmokeTests },
     { name: "Flagship Portfolio CMS", fn: runPortfolioCmsSmokeTests },
     { name: "Team & Services CMS", fn: runTeamServicesCmsSmokeTests },
+    { name: "Site Telemetry, Audit Logs & Alerts", fn: runSiteTelemetrySmokeTests },
   ];
 
   for (const suite of testSuites) {

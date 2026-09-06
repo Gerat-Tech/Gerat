@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { dispatchNewLeadAlert } from "@/lib/notifications";
 
 export async function POST(request) {
   try {
@@ -64,6 +65,13 @@ export async function POST(request) {
         priority: budgetRange.includes("250K+") || budgetRange.includes("150K") ? "CRITICAL_ENTERPRISE" : "MEDIUM",
       },
     });
+
+    // Dispatch real-time lead notification alert
+    try {
+      await dispatchNewLeadAlert(inquiry);
+    } catch (alertErr) {
+      console.error("Non-blocking lead alert error:", alertErr);
+    }
 
     return NextResponse.json({
       success: true,
