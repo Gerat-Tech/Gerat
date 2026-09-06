@@ -38,7 +38,7 @@ The Gerat website has established an architectural, dark-mode digital identity. 
 
 | Phase | Designation | Primary Objective | Key Deliverables | Status |
 | :--- | :--- | :--- | :--- | :--- |
-| **Phase D-01** | Foundation & Auth | Database, ORM & RBAC | Prisma schema, PostgreSQL setup, Auth session handler, `/dashboard/login` | ⏳ PENDING |
+| **Phase D-01** | Foundation & Auth | Database, ORM & RBAC | Prisma schema, SQLite/PostgreSQL, Auth session handler, `/dashboard/login` | ✅ COMPLETED |
 | **Phase D-02** | Shell & UI System | Dashboard Command Center Shell | Sidebar, TopBar with `⌘K`, high-density tables, modal sheets, status chips | ⏳ PENDING |
 | **Phase D-03** | Client Intake & CRM | Lead Management & Client Comms | Real persistence for `ContactDrawer`, Kanban & Grid views, WhatsApp/Call/Email actions, internal team notes thread | ⏳ PENDING |
 | **Phase D-04** | Insights & News CMS | Whitepaper & Article Authoring | Split-screen Markdown/MDX editor, draft/published workflow, categories, dynamic `/insights` | ⏳ PENDING |
@@ -48,31 +48,31 @@ The Gerat website has established an architectural, dark-mode digital identity. 
 
 ---
 
-## Phase D-01 — Database Foundation, ORM & Authentication (RBAC)
+## Phase D-01 — Database Foundation, ORM & Authentication (RBAC) ✅ COMPLETED
 
 **Goal:** Establish the database layer, relational models, seed data, and role-based access control protecting all administrative routes.
 
 ### Tasks
-- [ ] **Configure Database & Prisma ORM**
+- [x] **Configure Database & Prisma ORM**
   - Initialize Prisma schema in `prisma/schema.prisma` matching `docs/Dashboard.md`
-  - Configure environment variables (`DATABASE_URL`, `NEXTAUTH_SECRET`)
-  - Create initial migration for:
-    - `User`, `Inquiry`, `InquiryNote`, `InquiryCommunication`
-    - `Article`, `CaseStudy`, `TeamMember`, `ServicePillar`, `SiteConfig`, `AuditLog`
-  - Create database seed script (`prisma/seed.js`) importing existing static content from `src/content/` (`portfolio.js`, `insights.js`, `team.js`, `services.js`, `site.js`) into relational records
-- [ ] **Implement Authentication & RBAC Engine**
-  - Implement session management (NextAuth / JWT / Edge cookie session)
+  - Configure environment variables (`DATABASE_URL`, `JWT_SECRET`)
+  - Create database schema with all 10 relational models (`User`, `Inquiry`, `InquiryNote`, `InquiryCommunication`, `Article`, `CaseStudy`, `TeamMember`, `ServicePillar`, `SiteConfig`, `AuditLog`)
+  - Create database seed script (`prisma/seed.mjs`) importing existing static content from `src/content/` (`portfolio.js`, `insights.js`, `team.js`, `services.js`, `site.js`) into relational records
+- [x] **Implement Authentication & RBAC Engine**
+  - Implement session management (`src/lib/auth.js`) using `jose` and `bcryptjs`
   - Configure Role-Based Access Control:
     - `SUPER_ADMIN`
     - `OPERATIONS_LEAD`
     - `TECHNICAL_EDITOR`
     - `CREATIVE_EDITOR`
     - `VIEWER`
-  - Implement Next.js App Router middleware protecting all routes under `/dashboard/*`
-- [ ] **Build Minimalist Auth Screen (`src/app/(dashboard)/login/page.jsx`)**
+  - Implement Next.js App Router middleware (`src/middleware.js`) protecting all routes under `/dashboard/*`
+- [x] **Build Minimalist Auth Screen (`src/app/dashboard/login/page.jsx`)**
   - Dark terminal aesthetic (`#080808` canvas, `#141414` surface)
   - Azeret Mono typography, Gerat monogram emblem, high-contrast inputs
-  - Error toast feedback, session redirect handling
+  - Suspense-wrapped `LoginForm` with development role presets and error handling
+- [x] **Automated Smoke Test Verification (`tests/smoke/dashboard-auth-smoke.test.mjs`)**
+  - Verified database connectivity, administrative users, password hashing, JWT signing, RBAC logic, and seeded content records (5/5 suites passing)
 
 ---
 
