@@ -11,10 +11,15 @@ import Hero3DFallback from "./Hero3DFallback";
 export default function HeroDataField() {
   const canvasRef = useRef(null);
   const [hasWebGL, setHasWebGL] = useState(true);
-  const [reducedMotion] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  });
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.matchMedia) {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        setTimeout(() => setReducedMotion(true), 0);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (reducedMotion) return;

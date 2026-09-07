@@ -9,32 +9,33 @@ const ThemeContext = createContext({
   toggleTheme: () => {},
 });
 
-export function ThemeProvider({ children }) {
-  const [theme, setThemeState] = useState(() => {
-    if (typeof window !== "undefined") {
-      try {
-        return localStorage.getItem("gerat-dashboard-theme") || "dark";
-      } catch {
-        return "dark";
-      }
-    }
-    return "dark";
-  });
-
-  const [systemTheme, setSystemTheme] = useState(() => {
-    if (typeof window !== "undefined" && window.matchMedia) {
-      return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
-    }
-    return "dark";
-  });
+export function ThemeProvider({ initialTheme = "dark", children }) {
+  const [theme, setThemeState] = useState(initialTheme);
+  const [systemTheme, setSystemTheme] = useState(initialTheme === "light" ? "light" : "dark");
 
   useEffect(() => {
-    if (typeof window === "undefined" || !window.matchMedia) return;
-    const mq = window.matchMedia("(prefers-color-scheme: light)");
-    const handler = (e) => setSystemTheme(e.matches ? "light" : "dark");
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
+    // 1. Sync with localStorage if client had saved theme before cookie was set
+    try {
+      const stored = localStorage.getItem("gerat-dashboard-theme");
+      if (stored && stored !== theme) {
+        setTimeout(() => {
+          setThemeState(stored);
+          document.cookie = `gerat-dashboard-theme=${stored}; path=/; max-age=31536000; SameSite=Lax`;
+        }, 0);
+      } else if (!stored && theme) {
+        localStorage.setItem("gerat-dashboard-theme", theme);
+        document.cookie = `gerat-dashboard-theme=${theme}; path=/; max-age=31536000; SameSite=Lax`;
+      }
+    } catch {}
+
+    // 2. Listen for system color-scheme changes if theme is "system"
+    if (typeof window !== "undefined" && window.matchMedia) {
+      const mq = window.matchMedia("(prefers-color-scheme: light)");
+      const handler = (e) => setSystemTheme(e.matches ? "light" : "dark");
+      mq.addEventListener("change", handler);
+      return () => mq.removeEventListener("change", handler);
+    }
+  }, [theme]);
 
   const resolvedTheme = React.useMemo(() => {
     return theme === "system" ? systemTheme : theme;
@@ -43,6 +44,7 @@ export function ThemeProvider({ children }) {
   useEffect(() => {
     try {
       localStorage.setItem("gerat-dashboard-theme", theme);
+      document.cookie = `gerat-dashboard-theme=${theme}; path=/; max-age=31536000; SameSite=Lax`;
       const root = document.documentElement;
       if (resolvedTheme === "light") {
         root.classList.add("dashboard-light");
@@ -56,10 +58,21 @@ export function ThemeProvider({ children }) {
 
   const setTheme = (newTheme) => {
     setThemeState(newTheme);
+    try {
+      localStorage.setItem("gerat-dashboard-theme", newTheme);
+      document.cookie = `gerat-dashboard-theme=${newTheme}; path=/; max-age=31536000; SameSite=Lax`;
+    } catch {}
   };
 
   const toggleTheme = () => {
-    setThemeState((prev) => (prev === "dark" ? "light" : "dark"));
+    setThemeState((prev) => {
+      const next = prev === "dark" ? "light" : "dark";
+      try {
+        localStorage.setItem("gerat-dashboard-theme", next);
+        document.cookie = `gerat-dashboard-theme=${next}; path=/; max-age=31536000; SameSite=Lax`;
+      } catch {}
+      return next;
+    });
   };
 
   return (

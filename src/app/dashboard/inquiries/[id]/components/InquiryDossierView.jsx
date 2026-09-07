@@ -582,7 +582,7 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
               <div className="flex justify-between items-center py-1">
                 <span className="text-white/40 text-[9px] tracking-[0.15em]">CREATED:</span>
                 <span className="text-white/80">
-                  {new Date(inquiry.createdAt).toLocaleDateString()}
+                  {new Date(inquiry.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
                 </span>
               </div>
             </div>

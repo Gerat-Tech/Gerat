@@ -55,9 +55,9 @@ function DashboardShellInner({ user, stats = {}, children }) {
   );
 }
 
-export default function DashboardShell({ user, stats = {}, children }) {
+export default function DashboardShell({ user, stats = {}, initialTheme = "dark", children }) {
   return (
-    <ThemeProvider>
+    <ThemeProvider initialTheme={initialTheme}>
       <DashboardShellInner user={user} stats={stats}>
         {children}
       </DashboardShellInner>

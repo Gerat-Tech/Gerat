@@ -8,26 +8,22 @@ import React, { useEffect, useState } from "react";
  * Displays technical telemetry and brand mark, then lifts mask cleanly.
  */
 export default function PageLoader() {
-  const [loading, setLoading] = useState(() => {
-    if (typeof window === "undefined") return true;
-    const hasLoaded = sessionStorage.getItem("gerat_loaded");
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    return !hasLoaded && !prefersReducedMotion;
-  });
+  const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
-  const [hidden, setHidden] = useState(() => {
-    if (typeof window === "undefined") return false;
-    const hasLoaded = sessionStorage.getItem("gerat_loaded");
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    return Boolean(hasLoaded || prefersReducedMotion);
-  });
+  const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
-    if (!loading) return;
+    try {
+      const hasLoaded = sessionStorage.getItem("gerat_loaded");
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (hasLoaded || prefersReducedMotion) {
+        setTimeout(() => {
+          setLoading(false);
+          setHidden(true);
+        }, 0);
+        return;
+      }
+    } catch {}
 
     // Fast deterministic progress sequence (Spec §9: ~600ms total)
     const interval = setInterval(() => {
@@ -43,7 +39,7 @@ export default function PageLoader() {
     }, 80);
 
     return () => clearInterval(interval);
-  }, [loading]);
+  }, []);
 
   useEffect(() => {
     if (progress === 100) {

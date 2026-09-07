@@ -56,7 +56,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className="bg-[#050505] text-white selection:bg-accent selection:text-black">
         {/* Skip-to-content accessibility link (Spec ref: §37, Phase 14) */}
         <a
