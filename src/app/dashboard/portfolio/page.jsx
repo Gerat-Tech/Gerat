@@ -9,9 +9,14 @@ export const metadata = {
 };
 
 export default async function PortfolioDashboardPage() {
-  const caseStudies = await prisma.caseStudy.findMany({
-    orderBy: [{ order: "asc" }, { createdAt: "desc" }],
-  });
+  let caseStudies = [];
+  try {
+    caseStudies = await prisma.caseStudy.findMany({
+      orderBy: [{ order: "asc" }, { createdAt: "desc" }],
+    });
+  } catch (error) {
+    console.warn("PortfolioDashboardPage: unable to fetch case studies:", error.message);
+  }
 
   const total = caseStudies.length;
   const featured = caseStudies.filter((c) => c.featured).length;

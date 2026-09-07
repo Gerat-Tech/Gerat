@@ -9,9 +9,14 @@ export const metadata = {
 };
 
 export default async function ServicesDashboardPage() {
-  const pillars = await prisma.servicePillar.findMany({
-    orderBy: [{ order: "asc" }, { num: "asc" }],
-  });
+  let pillars = [];
+  try {
+    pillars = await prisma.servicePillar.findMany({
+      orderBy: [{ order: "asc" }, { num: "asc" }],
+    });
+  } catch (error) {
+    console.warn("ServicesDashboardPage: unable to fetch service pillars:", error.message);
+  }
 
   const total = pillars.length;
   const activeCount = pillars.filter((p) => p.active).length;

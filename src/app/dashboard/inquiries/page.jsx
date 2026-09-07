@@ -9,20 +9,25 @@ export const metadata = {
 };
 
 export default async function InquiriesPage() {
-  const inquiries = await prisma.inquiry.findMany({
-    orderBy: { createdAt: "desc" },
-    include: {
-      assignedTo: {
-        select: { id: true, name: true, role: true },
+  let inquiries = [];
+  try {
+    inquiries = await prisma.inquiry.findMany({
+      orderBy: { createdAt: "desc" },
+      include: {
+        assignedTo: {
+          select: { id: true, name: true, role: true },
+        },
+        notes: {
+          select: { id: true },
+        },
+        communications: {
+          select: { id: true },
+        },
       },
-      notes: {
-        select: { id: true },
-      },
-      communications: {
-        select: { id: true },
-      },
-    },
-  });
+    });
+  } catch (error) {
+    console.error("InquiriesPage fetch error:", error);
+  }
 
   // Calculate high-level pipeline stats
   const total = inquiries.length;

@@ -14,54 +14,66 @@ export default async function DashboardPage({ searchParams }) {
   // Fetch role-relevant counts
   const isOpsOrAdmin = role === "SUPER_ADMIN" || role === "OPERATIONS_LEAD";
 
-  const [
-    inquiryCount,
-    newInquiries,
-    urgentInquiries,
-    articleCount,
-    projectCount,
-    memberCount,
-  ] = await Promise.all([
-    isOpsOrAdmin ? prisma.inquiry.count() : 0,
-    isOpsOrAdmin ? prisma.inquiry.count({ where: { status: "NEW_INTAKE" } }) : 0,
-    isOpsOrAdmin ? prisma.inquiry.count({ where: { priority: "CRITICAL_ENTERPRISE" } }) : 0,
-    prisma.article.count(),
-    prisma.caseStudy.count(),
-    prisma.teamMember.count(),
-  ]);
-
+  let inquiryCount = 0;
+  let newInquiries = 0;
+  let urgentInquiries = 0;
+  let articleCount = 0;
+  let projectCount = 0;
+  let memberCount = 0;
   let recentInquiries = [];
   let recentArticles = [];
 
-  if (isOpsOrAdmin) {
-    recentInquiries = await prisma.inquiry.findMany({
-      take: 5,
-      orderBy: { createdAt: "desc" },
-      select: {
-        id: true,
-        telemetryCode: true,
-        fullName: true,
-        company: true,
-        discipline: true,
-        budgetRange: true,
-        status: true,
-        priority: true,
-        createdAt: true,
-      },
-    });
-  } else {
-    recentArticles = await prisma.article.findMany({
-      take: 5,
-      orderBy: { createdAt: "desc" },
-      select: {
-        id: true,
-        title: true,
-        category: true,
-        readingTime: true,
-        status: true,
-        createdAt: true,
-      },
-    });
+  try {
+    const counts = await Promise.all([
+      isOpsOrAdmin ? prisma.inquiry.count() : 0,
+      isOpsOrAdmin ? prisma.inquiry.count({ where: { status: "NEW_INTAKE" } }) : 0,
+      isOpsOrAdmin ? prisma.inquiry.count({ where: { priority: "CRITICAL_ENTERPRISE" } }) : 0,
+      prisma.article.count(),
+      prisma.caseStudy.count(),
+      prisma.teamMember.count(),
+    ]);
+
+    [
+      inquiryCount,
+      newInquiries,
+      urgentInquiries,
+      articleCount,
+      projectCount,
+      memberCount,
+    ] = counts;
+
+    if (isOpsOrAdmin) {
+      recentInquiries = await prisma.inquiry.findMany({
+        take: 5,
+        orderBy: { createdAt: "desc" },
+        select: {
+          id: true,
+          telemetryCode: true,
+          fullName: true,
+          company: true,
+          discipline: true,
+          budgetRange: true,
+          status: true,
+          priority: true,
+          createdAt: true,
+        },
+      });
+    } else {
+      recentArticles = await prisma.article.findMany({
+        take: 5,
+        orderBy: { createdAt: "desc" },
+        select: {
+          id: true,
+          title: true,
+          category: true,
+          readingTime: true,
+          status: true,
+          createdAt: true,
+        },
+      });
+    }
+  } catch (error) {
+    console.error("Dashboard overview data fetch error:", error);
   }
 
   // Header Title & Action Button based on Role

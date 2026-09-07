@@ -9,14 +9,19 @@ export const metadata = {
 };
 
 export default async function InsightsDashboardPage() {
-  const articles = await prisma.article.findMany({
-    orderBy: { createdAt: "desc" },
-    include: {
-      author: {
-        select: { id: true, name: true, email: true, role: true },
+  let articles = [];
+  try {
+    articles = await prisma.article.findMany({
+      orderBy: { createdAt: "desc" },
+      include: {
+        author: {
+          select: { id: true, name: true, email: true, role: true },
+        },
       },
-    },
-  });
+    });
+  } catch (error) {
+    console.error("InsightsDashboardPage fetch error:", error);
+  }
 
   const total = articles.length;
   const published = articles.filter((a) => a.status === "PUBLISHED").length;

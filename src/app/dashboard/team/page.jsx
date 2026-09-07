@@ -9,9 +9,14 @@ export const metadata = {
 };
 
 export default async function TeamDashboardPage() {
-  const members = await prisma.teamMember.findMany({
-    orderBy: [{ order: "asc" }, { createdAt: "asc" }],
-  });
+  let members = [];
+  try {
+    members = await prisma.teamMember.findMany({
+      orderBy: [{ order: "asc" }, { createdAt: "asc" }],
+    });
+  } catch (error) {
+    console.warn("TeamDashboardPage: unable to fetch team members:", error.message);
+  }
 
   const total = members.length;
   const activeCount = members.filter((m) => m.active).length;
