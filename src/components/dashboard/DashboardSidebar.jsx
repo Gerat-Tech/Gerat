@@ -27,26 +27,12 @@ function getNavItemsForRole(role) {
           ? { ...item, name: "PRACTICE PILLARS (REF)" }
           : item
       );
+    case "EDITOR":
     case "TECHNICAL_EDITOR":
+    case "CREATIVE_EDITOR":
       return ALL_NAV_ITEMS.filter((item) =>
         ["overview", "insights", "portfolio", "services"].includes(item.id)
       );
-    case "CREATIVE_EDITOR":
-      return ALL_NAV_ITEMS.filter((item) =>
-        ["overview", "portfolio", "insights", "services"].includes(item.id)
-      ).map((item) =>
-        item.id === "portfolio"
-          ? { ...item, name: "PORTFOLIO SHOWCASE" }
-          : item.id === "insights"
-          ? { ...item, name: "DESIGN INSIGHTS" }
-          : item.id === "services"
-          ? { ...item, name: "CREATIVE PILLARS" }
-          : item
-      );
-    case "VIEWER":
-      return ALL_NAV_ITEMS.filter((item) =>
-        ["overview", "insights", "portfolio", "team", "services"].includes(item.id)
-      ).map((item) => ({ ...item, name: `${item.name} (READ ONLY)` }));
     case "SUPER_ADMIN":
     default:
       return ALL_NAV_ITEMS;

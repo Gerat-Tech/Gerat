@@ -200,11 +200,11 @@ function LoginForm() {
                 QUICK-ACCESS PRESETS (TEAM ROLES):
               </span>
             </div>
-            <div className="grid grid-cols-2 gap-2 font-azeret text-[9px] tracking-[0.1em] uppercase">
+            <div className="grid grid-cols-3 gap-2 font-azeret text-[9px] tracking-[0.1em] uppercase">
               <button
                 type="button"
                 onClick={() => handleQuickFill("admin", "admin@gerat.et", "GeratAdmin2026!#")}
-                className={`py-2 px-2 border rounded-[2px] text-center transition-all flex flex-col items-center gap-0.5 ${
+                className={`py-2 px-1.5 border rounded-[2px] text-center transition-all flex flex-col items-center gap-0.5 cursor-pointer ${
                   selectedPreset === "admin"
                     ? "bg-accent/15 border-accent text-white"
                     : "bg-white/[0.03] hover:bg-white/[0.08] border-white/10 hover:border-accent/40 text-white/70 hover:text-white"
@@ -217,7 +217,7 @@ function LoginForm() {
               <button
                 type="button"
                 onClick={() => handleQuickFill("ops", "operations@gerat.et", "GeratTeam2026!#")}
-                className={`py-2 px-2 border rounded-[2px] text-center transition-all flex flex-col items-center gap-0.5 ${
+                className={`py-2 px-1.5 border rounded-[2px] text-center transition-all flex flex-col items-center gap-0.5 cursor-pointer ${
                   selectedPreset === "ops"
                     ? "bg-accent/15 border-accent text-white"
                     : "bg-white/[0.03] hover:bg-white/[0.08] border-white/10 hover:border-accent/40 text-white/70 hover:text-white"
@@ -229,28 +229,15 @@ function LoginForm() {
 
               <button
                 type="button"
-                onClick={() => handleQuickFill("tech", "architect@gerat.et", "GeratTeam2026!#")}
-                className={`py-2 px-2 border rounded-[2px] text-center transition-all flex flex-col items-center gap-0.5 ${
-                  selectedPreset === "tech"
+                onClick={() => handleQuickFill("editor", "editor@gerat.et", "GeratTeam2026!#")}
+                className={`py-2 px-1.5 border rounded-[2px] text-center transition-all flex flex-col items-center gap-0.5 cursor-pointer ${
+                  selectedPreset === "editor"
                     ? "bg-accent/15 border-accent text-white"
                     : "bg-white/[0.03] hover:bg-white/[0.08] border-white/10 hover:border-accent/40 text-white/70 hover:text-white"
                 }`}
               >
-                <span className="font-bold">TECH EDITOR</span>
-                <span className="text-[7.5px] tracking-normal text-white/40 lowercase">architect@gerat.et</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handleQuickFill("creative", "creative@gerat.et", "GeratTeam2026!#")}
-                className={`py-2 px-2 border rounded-[2px] text-center transition-all flex flex-col items-center gap-0.5 ${
-                  selectedPreset === "creative"
-                    ? "bg-accent/15 border-accent text-white"
-                    : "bg-white/[0.03] hover:bg-white/[0.08] border-white/10 hover:border-accent/40 text-white/70 hover:text-white"
-                }`}
-              >
-                <span className="font-bold">CREATIVE DIR</span>
-                <span className="text-[7.5px] tracking-normal text-white/40 lowercase">creative@gerat.et</span>
+                <span className="font-bold">EDITOR</span>
+                <span className="text-[7.5px] tracking-normal text-white/40 lowercase">editor@gerat.et</span>
               </button>
             </div>
           </div>

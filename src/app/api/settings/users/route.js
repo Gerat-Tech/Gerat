@@ -56,46 +56,80 @@ export async function POST(request) {
     }
 
     const body = await request.json();
-    const { email, name, password, role = ROLES.VIEWER, title = "", active = true } = body;
+    const rawEmail = (body.email || "").toString().trim().toLowerCase();
+    const rawName = (body.name || "").toString().trim();
+    const rawPassword = (body.password || "").toString().trim();
+    const rawTitle = (body.title || "").toString().trim();
+    const rawRole = (body.role || "").toString().trim();
+    const active = body.active !== undefined ? Boolean(body.active) : true;
 
-    if (!email || !name || !password) {
+    // Field-level validations
+    if (!rawName) {
       return NextResponse.json(
-        { error: "Missing required fields: email, name, password" },
+        { error: "Full Name is required", field: "name" },
+        { status: 400 }
+      );
+    }
+
+    if (!rawEmail) {
+      return NextResponse.json(
+        { error: "Email address is required", field: "email" },
         { status: 400 }
       );
     }
 
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (!emailRegex.test(rawEmail)) {
       return NextResponse.json(
-        { error: "Invalid email format" },
+        { error: "Invalid email format (e.g. operator@gerat.et)", field: "email" },
         { status: 400 }
       );
     }
 
+    if (!rawPassword) {
+      return NextResponse.json(
+        { error: "Passphrase is required", field: "password" },
+        { status: 400 }
+      );
+    }
+
+    if (rawPassword.length < 6) {
+      return NextResponse.json(
+        { error: "Passphrase must be at least 6 characters long", field: "password" },
+        { status: 400 }
+      );
+    }
+
+    // Validate role against 3 allowed roles
+    const validRoles = [ROLES.SUPER_ADMIN, ROLES.OPERATIONS_LEAD, ROLES.EDITOR];
+    const role = validRoles.includes(rawRole) ? rawRole : ROLES.EDITOR;
+
     // Check if user already exists
     const existing = await prisma.user.findUnique({
-      where: { email: email.toLowerCase().trim() },
+      where: { email: rawEmail },
     });
 
     if (existing) {
       return NextResponse.json(
-        { error: `User with email '${email}' already exists` },
+        {
+          error: `An operator with email '${rawEmail}' already exists in the system`,
+          field: "email",
+        },
         { status: 409 }
       );
     }
 
-    const passwordHash = await hashPassword(password);
+    const passwordHash = await hashPassword(rawPassword);
 
     const newUser = await prisma.user.create({
       data: {
-        email: email.toLowerCase().trim(),
-        name: name.trim(),
+        email: rawEmail,
+        name: rawName,
         passwordHash,
         role,
-        title: title.trim(),
-        active: Boolean(active),
+        title: rawTitle,
+        active,
       },
       select: {
         id: true,

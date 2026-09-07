@@ -11,9 +11,7 @@ export const COOKIE_NAME = "gerat_session";
 export const ROLES = {
   SUPER_ADMIN: "SUPER_ADMIN",
   OPERATIONS_LEAD: "OPERATIONS_LEAD",
-  TECHNICAL_EDITOR: "TECHNICAL_EDITOR",
-  CREATIVE_EDITOR: "CREATIVE_EDITOR",
-  VIEWER: "VIEWER",
+  EDITOR: "EDITOR",
 };
 
 /**
@@ -92,5 +90,12 @@ export async function getCurrentUser() {
 export function isAuthorized(userRole, allowedRoles) {
   if (!userRole) return false;
   if (userRole === ROLES.SUPER_ADMIN) return true; // Super Admin has access to all domains
-  return allowedRoles.includes(userRole);
+  
+  // Normalize legacy editor roles
+  const normalizedRole =
+    userRole === "TECHNICAL_EDITOR" || userRole === "CREATIVE_EDITOR"
+      ? ROLES.EDITOR
+      : userRole;
+
+  return allowedRoles.includes(normalizedRole) || allowedRoles.includes(userRole);
 }

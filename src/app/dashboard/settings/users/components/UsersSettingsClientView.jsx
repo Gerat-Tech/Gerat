@@ -6,11 +6,9 @@ import { useRouter } from "next/navigation";
 import { useTheme } from "@/context/ThemeContext";
 
 const AVAILABLE_ROLES = [
-  { id: "SUPER_ADMIN", name: "SUPER ADMIN", desc: "Full root authority, user governance, audit logs, system config", badgeClass: "bg-red-500/15 text-red-400 border-red-500/30" },
+  { id: "SUPER_ADMIN", name: "SUPER ADMIN", desc: "Full root authority, all 7 modules, user governance, audit logs, system config", badgeClass: "bg-red-500/15 text-red-400 border-red-500/30" },
   { id: "OPERATIONS_LEAD", name: "OPERATIONS LEAD", desc: "Inquiries CRM, lead triage, client communications, team directory", badgeClass: "bg-blue-500/15 text-blue-400 border-blue-500/30" },
-  { id: "TECHNICAL_EDITOR", name: "TECHNICAL EDITOR", desc: "Research publications, CMS insights, whitepapers, service pillars", badgeClass: "bg-purple-500/15 text-purple-400 border-purple-500/30" },
-  { id: "CREATIVE_EDITOR", name: "CREATIVE EDITOR", desc: "Portfolio case studies, showcases, brand assets, creative pillars", badgeClass: "bg-amber-500/15 text-amber-400 border-amber-500/30" },
-  { id: "VIEWER", name: "VIEWER (READ ONLY)", desc: "Read-only access to published content and team rosters", badgeClass: "bg-white/10 text-white/60 border-white/20" },
+  { id: "EDITOR", name: "EDITOR", desc: "Research publications, insights CMS, portfolio case studies, and practice pillars", badgeClass: "bg-purple-500/15 text-purple-400 border-purple-500/30" },
 ];
 
 export default function UsersSettingsClientView({ initialUsers = [], currentUser = null }) {
@@ -27,6 +25,7 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
   const [isRoleModalOpen, setIsRoleModalOpen] = useState(false);
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [modalError, setModalError] = useState(null);
 
   // Form states
   const [formData, setFormData] = useState({
@@ -46,7 +45,7 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
   const totalUsers = users.length;
   const superAdmins = users.filter((u) => u.role === "SUPER_ADMIN").length;
   const opsLeads = users.filter((u) => u.role === "OPERATIONS_LEAD").length;
-  const editors = users.filter((u) => ["TECHNICAL_EDITOR", "CREATIVE_EDITOR"].includes(u.role)).length;
+  const editors = users.filter((u) => ["EDITOR", "TECHNICAL_EDITOR", "CREATIVE_EDITOR"].includes(u.role)).length;
   const activeCount = users.filter((u) => u.active).length;
 
   // Filtered users
@@ -72,8 +71,24 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
   // Handle Create User
   const handleCreateUser = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    setModalError(null);
     setStatusMessage(null);
+
+    // Client-side field validations
+    if (!formData.name.trim()) {
+      setModalError({ message: "Full Name is required.", field: "name" });
+      return;
+    }
+    if (!formData.email.trim() || !formData.email.includes("@")) {
+      setModalError({ message: "Please provide a valid operator email address.", field: "email" });
+      return;
+    }
+    if (!formData.password || formData.password.length < 6) {
+      setModalError({ message: "Temporary passphrase must be at least 6 characters.", field: "password" });
+      return;
+    }
+
+    setIsSubmitting(true);
 
     try {
       const res = await fetch("/api/settings/users", {
@@ -85,13 +100,17 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
       const data = await res.json();
 
       if (!res.ok) {
-        setStatusMessage({ type: "error", text: data.error || "Failed to create user." });
+        setModalError({
+          message: data.error || "Failed to create user.",
+          field: data.field || null,
+        });
         setIsSubmitting(false);
         return;
       }
 
       setUsers([...users, data.user]);
       setIsAddModalOpen(false);
+      setModalError(null);
       setFormData({
         name: "",
         email: "",
@@ -100,10 +119,10 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
         password: "",
         active: true,
       });
-      setStatusMessage({ type: "success", text: `User ${data.user.email} provisioned successfully.` });
+      setStatusMessage({ type: "success", text: `Operator ${data.user.email} provisioned successfully with role ${data.user.role}.` });
       startTransition(() => router.refresh());
     } catch {
-      setStatusMessage({ type: "error", text: "Network error creating user." });
+      setModalError({ message: "Network error creating user. Please try again." });
     } finally {
       setIsSubmitting(false);
     }
@@ -113,6 +132,7 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
   const handleUpdateRole = async (e) => {
     e.preventDefault();
     if (!selectedUser) return;
+    setModalError(null);
     setIsSubmitting(true);
 
     try {
@@ -125,7 +145,7 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
       const data = await res.json();
 
       if (!res.ok) {
-        setStatusMessage({ type: "error", text: data.error || "Failed to update role." });
+        setModalError({ message: data.error || "Failed to update role." });
         setIsSubmitting(false);
         return;
       }
@@ -133,10 +153,11 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
       setUsers(users.map((u) => (u.id === selectedUser.id ? data.user : u)));
       setIsRoleModalOpen(false);
       setSelectedUser(null);
+      setModalError(null);
       setStatusMessage({ type: "success", text: `Role for ${data.user.email} updated to ${data.user.role}.` });
       startTransition(() => router.refresh());
     } catch {
-      setStatusMessage({ type: "error", text: "Network error updating role." });
+      setModalError({ message: "Network error updating role." });
     } finally {
       setIsSubmitting(false);
     }
@@ -145,7 +166,14 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
   // Handle Reset Password
   const handleResetPassword = async (e) => {
     e.preventDefault();
-    if (!selectedUser || !newPassword) return;
+    if (!selectedUser) return;
+    setModalError(null);
+
+    if (!newPassword || newPassword.length < 6) {
+      setModalError({ message: "New passphrase must be at least 6 characters long.", field: "password" });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -158,17 +186,18 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
       const data = await res.json();
 
       if (!res.ok) {
-        setStatusMessage({ type: "error", text: data.error || "Failed to reset password." });
+        setModalError({ message: data.error || "Failed to reset password." });
         setIsSubmitting(false);
         return;
       }
 
       setIsPasswordModalOpen(false);
       setSelectedUser(null);
+      setModalError(null);
       setNewPassword("");
       setStatusMessage({ type: "success", text: `Password for ${selectedUser.email} has been reset.` });
     } catch {
-      setStatusMessage({ type: "error", text: "Network error resetting password." });
+      setModalError({ message: "Network error resetting password." });
     } finally {
       setIsSubmitting(false);
     }
@@ -461,8 +490,8 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
       {/* Modal: Provision New Operator */}
       {isAddModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="relative w-full max-w-lg bg-[#121212] border border-white/15 p-6 sm:p-8 rounded-[3px] shadow-2xl flex flex-col gap-6">
-            <div className="flex items-center justify-between pb-4 border-b border-white/10">
+          <div className="relative w-full max-w-lg bg-[#121212] border border-white/15 p-6 sm:p-8 rounded-[3px] shadow-2xl flex flex-col gap-5">
+            <div className="flex items-center justify-between pb-3 border-b border-white/10">
               <div>
                 <span className="font-azeret text-[9px] tracking-[0.25em] text-accent uppercase">
                   SECURITY GOVERNANCE //
@@ -471,12 +500,30 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
               </div>
               <button
                 type="button"
-                onClick={() => setIsAddModalOpen(false)}
+                onClick={() => {
+                  setIsAddModalOpen(false);
+                  setModalError(null);
+                }}
                 className="text-white/40 hover:text-white font-azeret text-sm cursor-pointer"
               >
                 ✕
               </button>
             </div>
+
+            {/* In-Modal Error Alert Card */}
+            {modalError && (
+              <div className="p-3 bg-red-950/60 border border-red-500/60 rounded-[2px] flex items-start gap-2.5 text-xs text-red-200 font-azeret">
+                <span className="text-red-400 font-bold">⚠ ERROR:</span>
+                <span className="flex-1 leading-relaxed">{modalError.message}</span>
+                <button
+                  type="button"
+                  onClick={() => setModalError(null)}
+                  className="text-red-400/60 hover:text-red-300 font-bold cursor-pointer"
+                >
+                  ✕
+                </button>
+              </div>
+            )}
 
             <form onSubmit={handleCreateUser} className="flex flex-col gap-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -488,9 +535,16 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
                     type="text"
                     required
                     value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    onChange={(e) => {
+                      setFormData({ ...formData, name: e.target.value });
+                      if (modalError?.field === "name") setModalError(null);
+                    }}
                     placeholder="e.g. Samuel Bekele"
-                    className="w-full bg-black/50 border border-white/15 focus:border-accent text-white px-3 py-2 rounded-[2px] font-azeret text-xs outline-none"
+                    className={`w-full bg-black/50 border ${
+                      modalError?.field === "name"
+                        ? "border-red-500 bg-red-950/20 text-white"
+                        : "border-white/15 focus:border-accent text-white"
+                    } px-3 py-2 rounded-[2px] font-azeret text-xs outline-none transition-colors`}
                   />
                 </div>
 
@@ -502,9 +556,16 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
                     type="email"
                     required
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    onChange={(e) => {
+                      setFormData({ ...formData, email: e.target.value });
+                      if (modalError?.field === "email") setModalError(null);
+                    }}
                     placeholder="operator@gerat.et"
-                    className="w-full bg-black/50 border border-white/15 focus:border-accent text-white px-3 py-2 rounded-[2px] font-azeret text-xs outline-none"
+                    className={`w-full bg-black/50 border ${
+                      modalError?.field === "email"
+                        ? "border-red-500 bg-red-950/20 text-white"
+                        : "border-white/15 focus:border-accent text-white"
+                    } px-3 py-2 rounded-[2px] font-azeret text-xs outline-none transition-colors`}
                   />
                 </div>
               </div>
@@ -548,8 +609,11 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
                   </label>
                   <button
                     type="button"
-                    onClick={() => setFormData({ ...formData, password: generateSecurePassword() })}
-                    className="font-azeret text-[9px] tracking-[0.15em] text-accent hover:underline uppercase"
+                    onClick={() => {
+                      setFormData({ ...formData, password: generateSecurePassword() });
+                      if (modalError?.field === "password") setModalError(null);
+                    }}
+                    className="font-azeret text-[9px] tracking-[0.15em] text-accent hover:underline uppercase cursor-pointer"
                   >
                     GENERATE NEW
                   </button>
@@ -558,24 +622,34 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
                   type="text"
                   required
                   value={formData.password}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                  onChange={(e) => {
+                    setFormData({ ...formData, password: e.target.value });
+                    if (modalError?.field === "password") setModalError(null);
+                  }}
                   placeholder="Min 6 characters"
-                  className="w-full bg-black/50 border border-white/15 focus:border-accent text-white px-3 py-2 rounded-[2px] font-azeret text-xs outline-none font-mono"
+                  className={`w-full bg-black/50 border ${
+                    modalError?.field === "password"
+                      ? "border-red-500 bg-red-950/20 text-white"
+                      : "border-white/15 focus:border-accent text-white"
+                  } px-3 py-2 rounded-[2px] font-azeret text-xs outline-none font-mono transition-colors`}
                 />
               </div>
 
               <div className="flex items-center justify-end gap-3 pt-4 border-t border-white/10 font-azeret text-[10px] tracking-[0.15em] uppercase">
                 <button
                   type="button"
-                  onClick={() => setIsAddModalOpen(false)}
-                  className="py-2.5 px-4 border border-white/15 hover:bg-white/5 rounded-[2px] text-white/60 hover:text-white"
+                  onClick={() => {
+                    setIsAddModalOpen(false);
+                    setModalError(null);
+                  }}
+                  className="py-2.5 px-4 border border-white/15 hover:bg-white/5 rounded-[2px] text-white/60 hover:text-white cursor-pointer"
                 >
                   CANCEL
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="py-2.5 px-5 bg-accent hover:bg-white hover:text-black text-white font-bold rounded-[2px] transition-colors disabled:opacity-50"
+                  className="py-2.5 px-5 bg-accent hover:bg-white hover:text-black text-white font-bold rounded-[2px] transition-colors disabled:opacity-50 cursor-pointer"
                 >
                   {isSubmitting ? "PROVISIONING..." : "CONFIRM & PROVISION"}
                 </button>
@@ -598,12 +672,30 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
               </div>
               <button
                 type="button"
-                onClick={() => setIsRoleModalOpen(false)}
+                onClick={() => {
+                  setIsRoleModalOpen(false);
+                  setModalError(null);
+                }}
                 className="text-white/40 hover:text-white font-azeret text-sm cursor-pointer"
               >
                 ✕
               </button>
             </div>
+
+            {/* In-Modal Error Alert Card */}
+            {modalError && (
+              <div className="p-3 bg-red-950/60 border border-red-500/60 rounded-[2px] flex items-start gap-2.5 text-xs text-red-200 font-azeret">
+                <span className="text-red-400 font-bold">⚠ ERROR:</span>
+                <span className="flex-1 leading-relaxed">{modalError.message}</span>
+                <button
+                  type="button"
+                  onClick={() => setModalError(null)}
+                  className="text-red-400/60 hover:text-red-300 font-bold cursor-pointer"
+                >
+                  ✕
+                </button>
+              </div>
+            )}
 
             <div className="p-3 bg-white/[0.02] border border-white/10 rounded-[2px] font-azeret text-[10px]">
               <div className="text-white font-bold">{selectedUser.name}</div>
@@ -645,15 +737,18 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
               <div className="flex items-center justify-end gap-3 pt-4 border-t border-white/10 font-azeret text-[10px] tracking-[0.15em] uppercase">
                 <button
                   type="button"
-                  onClick={() => setIsRoleModalOpen(false)}
-                  className="py-2 px-4 border border-white/15 hover:bg-white/5 rounded-[2px] text-white/60 hover:text-white"
+                  onClick={() => {
+                    setIsRoleModalOpen(false);
+                    setModalError(null);
+                  }}
+                  className="py-2 px-4 border border-white/15 hover:bg-white/5 rounded-[2px] text-white/60 hover:text-white cursor-pointer"
                 >
                   CANCEL
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="py-2 px-5 bg-accent hover:bg-white hover:text-black text-white font-bold rounded-[2px] transition-colors disabled:opacity-50"
+                  className="py-2 px-5 bg-accent hover:bg-white hover:text-black text-white font-bold rounded-[2px] transition-colors disabled:opacity-50 cursor-pointer"
                 >
                   {isSubmitting ? "UPDATING..." : "SAVE ROLE"}
                 </button>
@@ -676,12 +771,30 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
               </div>
               <button
                 type="button"
-                onClick={() => setIsPasswordModalOpen(false)}
+                onClick={() => {
+                  setIsPasswordModalOpen(false);
+                  setModalError(null);
+                }}
                 className="text-white/40 hover:text-white font-azeret text-sm cursor-pointer"
               >
                 ✕
               </button>
             </div>
+
+            {/* In-Modal Error Alert Card */}
+            {modalError && (
+              <div className="p-3 bg-red-950/60 border border-red-500/60 rounded-[2px] flex items-start gap-2.5 text-xs text-red-200 font-azeret">
+                <span className="text-red-400 font-bold">⚠ ERROR:</span>
+                <span className="flex-1 leading-relaxed">{modalError.message}</span>
+                <button
+                  type="button"
+                  onClick={() => setModalError(null)}
+                  className="text-red-400/60 hover:text-red-300 font-bold cursor-pointer"
+                >
+                  ✕
+                </button>
+              </div>
+            )}
 
             <p className="font-roc text-xs text-white/60 leading-relaxed">
               Set a new temporary password for <strong>{selectedUser.name}</strong> ({selectedUser.email}).
@@ -695,8 +808,11 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
                   </label>
                   <button
                     type="button"
-                    onClick={() => setNewPassword(generateSecurePassword())}
-                    className="font-azeret text-[9px] tracking-[0.15em] text-accent hover:underline uppercase"
+                    onClick={() => {
+                      setNewPassword(generateSecurePassword());
+                      if (modalError?.field === "password") setModalError(null);
+                    }}
+                    className="font-azeret text-[9px] tracking-[0.15em] text-accent hover:underline uppercase cursor-pointer"
                   >
                     GENERATE NEW
                   </button>
@@ -705,24 +821,34 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
                   type="text"
                   required
                   value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
+                  onChange={(e) => {
+                    setNewPassword(e.target.value);
+                    if (modalError?.field === "password") setModalError(null);
+                  }}
                   placeholder="Min 6 characters"
-                  className="w-full bg-black/50 border border-white/15 focus:border-accent text-white px-3 py-2 rounded-[2px] font-azeret text-xs outline-none font-mono"
+                  className={`w-full bg-black/50 border ${
+                    modalError?.field === "password"
+                      ? "border-red-500 bg-red-950/20 text-white"
+                      : "border-white/15 focus:border-accent text-white"
+                  } px-3 py-2 rounded-[2px] font-azeret text-xs outline-none font-mono transition-colors`}
                 />
               </div>
 
               <div className="flex items-center justify-end gap-3 pt-4 border-t border-white/10 font-azeret text-[10px] tracking-[0.15em] uppercase">
                 <button
                   type="button"
-                  onClick={() => setIsPasswordModalOpen(false)}
-                  className="py-2 px-4 border border-white/15 hover:bg-white/5 rounded-[2px] text-white/60 hover:text-white"
+                  onClick={() => {
+                    setIsPasswordModalOpen(false);
+                    setModalError(null);
+                  }}
+                  className="py-2 px-4 border border-white/15 hover:bg-white/5 rounded-[2px] text-white/60 hover:text-white cursor-pointer"
                 >
                   CANCEL
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting || !newPassword}
-                  className="py-2 px-5 bg-accent hover:bg-white hover:text-black text-white font-bold rounded-[2px] transition-colors disabled:opacity-50"
+                  className="py-2 px-5 bg-accent hover:bg-white hover:text-black text-white font-bold rounded-[2px] transition-colors disabled:opacity-50 cursor-pointer"
                 >
                   {isSubmitting ? "SAVING..." : "OVERWRITE PASSPHRASE"}
                 </button>

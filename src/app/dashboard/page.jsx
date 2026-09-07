@@ -78,7 +78,7 @@ export default async function DashboardPage({ searchParams }) {
 
   // Header Title & Action Button based on Role
   let cockpitTitle = "EXECUTIVE COCKPIT";
-  let cockpitSubtitle = `LOGGED IN AS ${user?.name || "ARCHITECT"} // STUDIO MASTER COMMAND`;
+  let cockpitSubtitle = `LOGGED IN AS ${user?.name || "SUPER ADMIN"} // STUDIO MASTER COMMAND`;
   let headerAction = (
     <Link
       href="/dashboard/inquiries"
@@ -101,27 +101,15 @@ export default async function DashboardPage({ searchParams }) {
         <span>→</span>
       </Link>
     );
-  } else if (role === "TECHNICAL_EDITOR") {
-    cockpitTitle = "ENGINEERING COCKPIT";
-    cockpitSubtitle = `LOGGED IN AS ${user?.name || "LEAD ARCHITECT"} // RESEARCH & TECHNICAL CMS`;
+  } else if (role === "EDITOR" || role === "TECHNICAL_EDITOR" || role === "CREATIVE_EDITOR") {
+    cockpitTitle = "EDITORIAL & CONTENT COCKPIT";
+    cockpitSubtitle = `LOGGED IN AS ${user?.name || "EDITOR"} // RESEARCH PUBLICATIONS & PORTFOLIO SHOWCASES`;
     headerAction = (
       <Link
         href="/dashboard/insights/new"
         className="w-fit py-2 px-4 bg-accent hover:bg-black hover:text-white text-white font-azeret text-[10px] tracking-[0.15em] uppercase font-bold transition-all rounded-[2px] flex items-center gap-2"
       >
-        <span>+ AUTHOR NEW WHITEPAPER</span>
-        <span>→</span>
-      </Link>
-    );
-  } else if (role === "CREATIVE_EDITOR") {
-    cockpitTitle = "CREATIVE COCKPIT";
-    cockpitSubtitle = `LOGGED IN AS ${user?.name || "CREATIVE DIRECTOR"} // BRAND SHOWCASE & ASSET CMS`;
-    headerAction = (
-      <Link
-        href="/dashboard/portfolio/new"
-        className="w-fit py-2 px-4 bg-accent hover:bg-black hover:text-white text-white font-azeret text-[10px] tracking-[0.15em] uppercase font-bold transition-all rounded-[2px] flex items-center gap-2"
-      >
-        <span>+ CREATE CASE STUDY</span>
+        <span>+ AUTHOR NEW ARTICLE</span>
         <span>→</span>
       </Link>
     );
@@ -231,12 +219,12 @@ export default async function DashboardPage({ searchParams }) {
               </div>
             </div>
           </>
-        ) : role === "TECHNICAL_EDITOR" ? (
+        ) : (role === "EDITOR" || role === "TECHNICAL_EDITOR" || role === "CREATIVE_EDITOR") ? (
           <>
             <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
               <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
               <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                RESEARCH WHITEPAPERS
+                RESEARCH ARTICLES
               </div>
               <div className="font-roc text-3xl sm:text-4xl font-bold text-white mt-1">
                 {articleCount.toString().padStart(2, "0")}
@@ -249,7 +237,7 @@ export default async function DashboardPage({ searchParams }) {
             <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
               <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
               <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                ENGINEERING CASE STUDIES
+                CASE STUDIES & SHOWCASES
               </div>
               <div className="font-roc text-3xl sm:text-4xl font-bold text-white mt-1">
                 {projectCount.toString().padStart(2, "0")}
@@ -262,80 +250,26 @@ export default async function DashboardPage({ searchParams }) {
             <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
               <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
               <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                TECHNICAL PILLARS
+                PRACTICE PILLARS
               </div>
               <div className="font-roc text-3xl sm:text-4xl font-bold text-white mt-1">
                 03
               </div>
               <div className="font-azeret text-[9px] tracking-[0.15em] text-white/50 mt-2">
-                SYSTEMS, AI & CLOUD
+                CAPABILITIES & PACKAGES
               </div>
             </div>
 
             <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
               <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
               <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                ACTIVE PRACTITIONERS
+                TEAM PRACTITIONERS
               </div>
               <div className="font-roc text-3xl sm:text-4xl font-bold text-white mt-1">
                 {memberCount.toString().padStart(2, "0")}
               </div>
               <div className="font-azeret text-[9px] tracking-[0.15em] text-white/50 mt-2">
-                ENGINEERING ROSTER
-              </div>
-            </div>
-          </>
-        ) : role === "CREATIVE_EDITOR" ? (
-          <>
-            <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
-              <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                PORTFOLIO WORKS
-              </div>
-              <div className="font-roc text-3xl sm:text-4xl font-bold text-white mt-1">
-                {projectCount.toString().padStart(2, "0")}
-              </div>
-              <div className="font-azeret text-[9px] tracking-[0.15em] text-emerald-500 mt-2">
-                ACTIVE CASE STUDIES
-              </div>
-            </div>
-
-            <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
-              <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                DESIGN INSIGHTS
-              </div>
-              <div className="font-roc text-3xl sm:text-4xl font-bold text-white mt-1">
-                {articleCount.toString().padStart(2, "0")}
-              </div>
-              <div className="font-azeret text-[9px] tracking-[0.15em] text-accent mt-2">
-                CREATIVE ESSAYS LIVE
-              </div>
-            </div>
-
-            <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
-              <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                CREATIVE PILLARS
-              </div>
-              <div className="font-roc text-3xl sm:text-4xl font-bold text-white mt-1">
-                03
-              </div>
-              <div className="font-azeret text-[9px] tracking-[0.15em] text-white/50 mt-2">
-                BRAND, TOKENS & ADVISORY
-              </div>
-            </div>
-
-            <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
-              <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                CREATIVE DIRECTORS
-              </div>
-              <div className="font-roc text-3xl sm:text-4xl font-bold text-white mt-1">
-                {memberCount.toString().padStart(2, "0")}
-              </div>
-              <div className="font-azeret text-[9px] tracking-[0.15em] text-white/50 mt-2">
-                STUDIO PRACTITIONERS
+                STUDIO ROSTER
               </div>
             </div>
           </>

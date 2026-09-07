@@ -45,18 +45,31 @@ export async function PATCH(request, context) {
       }
       updateData.active = active;
     }
-    if (role && Object.values(ROLES).includes(role)) {
-      // Prevent demoting oneself
-      if (id === currentUser.id && role !== ROLES.SUPER_ADMIN) {
+    if (role) {
+      const normalizedRole =
+        role === "TECHNICAL_EDITOR" || role === "CREATIVE_EDITOR"
+          ? ROLES.EDITOR
+          : role;
+
+      if ([ROLES.SUPER_ADMIN, ROLES.OPERATIONS_LEAD, ROLES.EDITOR].includes(normalizedRole)) {
+        // Prevent demoting oneself
+        if (id === currentUser.id && normalizedRole !== ROLES.SUPER_ADMIN) {
+          return NextResponse.json(
+            { error: "Cannot change your own role away from Super Admin" },
+            { status: 400 }
+          );
+        }
+        updateData.role = normalizedRole;
+      }
+    }
+    if (password && typeof password === "string") {
+      if (password.trim().length < 6) {
         return NextResponse.json(
-          { error: "Cannot change your own role away from Super Admin" },
+          { error: "New passphrase must be at least 6 characters long", field: "password" },
           { status: 400 }
         );
       }
-      updateData.role = role;
-    }
-    if (password && typeof password === "string" && password.length >= 6) {
-      updateData.passwordHash = await hashPassword(password);
+      updateData.passwordHash = await hashPassword(password.trim());
     }
 
     const updatedUser = await prisma.user.update({

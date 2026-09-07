@@ -587,3 +587,47 @@ html.dashboard-light .dashboard-shell .bg-red-950\/40 {
   border-color: #FCA5A5 !important;
 }
 
+/* ==========================================================================
+   Dashboard Light Mode High-Contrast Hover Rules
+   Ensures buttons and interactive elements turn dark (#0B0F17) with white text
+   on hover in light mode rather than washing out to pure white.
+   ========================================================================== */
+html.light .dashboard-shell .hover\:bg-white:hover,
+html.site-light .hover\:bg-white:hover,
+html.dashboard-light .dashboard-shell .hover\:bg-white:hover,
+html.dashboard-light .hover\:bg-white:hover {
+  background-color: #0B0F17 !important;
+  color: #FFFFFF !important;
+}
+
+html.light .dashboard-shell .hover\:bg-white\/5:hover,
+html.light .dashboard-shell .hover\:bg-white\/\[0\.08\]:hover,
+html.light .dashboard-shell .hover\:bg-white\/10:hover,
+html.light .dashboard-shell .hover\:bg-white\/20:hover,
+html.site-light .hover\:bg-white\/5:hover,
+html.site-light .hover\:bg-white\/\[0\.08\]:hover,
+html.site-light .hover\:bg-white\/10:hover,
+html.site-light .hover\:bg-white\/20:hover,
+html.dashboard-light .dashboard-shell .hover\:bg-white\/5:hover,
+html.dashboard-light .dashboard-shell .hover\:bg-white\/\[0\.08\]:hover,
+html.dashboard-light .dashboard-shell .hover\:bg-white\/10:hover,
+html.dashboard-light .dashboard-shell .hover\:bg-white\/20:hover {
+  background-color: #CBD2DC !important;
+  color: #0B0F17 !important;
+}
+
+html.light .dashboard-shell .hover\:text-white:hover,
+html.site-light .hover\:text-white:hover,
+html.dashboard-light .dashboard-shell .hover\:text-white:hover,
+html.dashboard-light .hover\:text-white:hover {
+  color: #0B0F17 !important;
+}
+
+html.light .dashboard-shell .bg-accent.hover\:bg-white:hover,
+html.dashboard-light .dashboard-shell .bg-accent.hover\:bg-white:hover,
+html.site-light .bg-accent.hover\:bg-white:hover {
+  background-color: #0B0F17 !important;
+  color: #FFFFFF !important;
+}
+
+

@@ -31,8 +31,6 @@ export async function PATCH(request, { params }) {
       !isAuthorized(user.role, [
         ROLES.SUPER_ADMIN,
         ROLES.OPERATIONS_LEAD,
-        ROLES.TECHNICAL_EDITOR,
-        ROLES.CREATIVE_EDITOR,
       ])
     ) {
       return NextResponse.json({ error: "Forbidden: Insufficient privileges." }, { status: 403 });
