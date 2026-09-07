@@ -31,7 +31,7 @@ function getNavItemsForRole(role) {
     case "TECHNICAL_EDITOR":
     case "CREATIVE_EDITOR":
       return ALL_NAV_ITEMS.filter((item) =>
-        ["overview", "insights", "portfolio", "services"].includes(item.id)
+        ["overview", "insights", "portfolio"].includes(item.id)
       );
     case "SUPER_ADMIN":
     default:

@@ -29,7 +29,7 @@ function getActionsForRole(role) {
     case "TECHNICAL_EDITOR":
     case "CREATIVE_EDITOR":
       return ALL_ACTIONS.filter((a) =>
-        ["insights", "portfolio", "services", "site"].includes(a.id)
+        ["insights", "portfolio", "site"].includes(a.id)
       );
     case "SUPER_ADMIN":
     default:
