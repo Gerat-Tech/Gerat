@@ -97,12 +97,12 @@ export default function ServicesClientView({ initialPillars = [] }) {
 
         {/* Public view shortcut */}
         <a
-          href="/why-wqf"
+          href="/services"
           target="_blank"
           rel="noopener noreferrer"
           className="font-azeret text-[10px] tracking-[0.15em] text-white/50 hover:text-accent uppercase flex items-center gap-1"
         >
-          <span>VIEW LIVE /WHY-WQF PAGE</span>
+          <span>VIEW LIVE /SERVICES PAGE</span>
           <span>↗</span>
         </a>
       </div>

@@ -41,7 +41,7 @@ export default function Navbar() {
             setAnnouncement({
               enabled: true,
               text: data.configMap.ANNOUNCEMENT_TEXT || "SYSTEM ADVISORY: Q3 ARCHITECTURAL ENGAGEMENT SCHEDULE OPEN",
-              link: data.configMap.ANNOUNCEMENT_LINK || "/why-wqf",
+              link: data.configMap.ANNOUNCEMENT_LINK || "/services",
             });
           } else {
             setAnnouncement(null);
@@ -55,7 +55,7 @@ export default function Navbar() {
   }, [pathname]);
 
   const navLinks = [
-    { name: "SERVICES", href: "/why-wqf" },
+    { name: "SERVICES", href: "/services" },
     { name: "PORTFOLIO", href: "/portfolio" },
     { name: "TEAM", href: "/team" },
     { name: "INSIGHTS", href: "/insights" },

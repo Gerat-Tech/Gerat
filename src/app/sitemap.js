@@ -11,7 +11,7 @@ export default function sitemap() {
     "/portfolio",
     "/team",
     "/insights",
-    "/why-wqf",
+    "/services",
     "/services/brand-creative",
     "/services/personal-branding",
   ];

@@ -63,7 +63,7 @@ export default async function ServicesDashboardPage() {
 
         <div className="bg-[#121212] border border-white/10 p-4 rounded-[3px]">
           <div className="font-azeret text-[9px] tracking-[0.2em] text-emerald-400 uppercase">
-            ACTIVE ON /WHY-WQF
+            ACTIVE ON /SERVICES
           </div>
           <div className="font-roc text-2xl sm:text-3xl font-bold text-emerald-400 mt-1">
             {activeCount.toString().padStart(2, "0")}

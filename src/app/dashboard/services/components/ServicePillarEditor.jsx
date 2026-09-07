@@ -245,7 +245,7 @@ export default function ServicePillarEditor({ initialData = null, isNew = false 
                 className="w-full bg-black/60 border border-white/15 p-3 text-white font-mono text-xs rounded-[2px] focus:border-accent outline-none leading-relaxed"
               />
               <span className="font-azeret text-[9px] text-white/40 mt-1 block">
-                Line breaks will automatically parse into the bulleted checklist on the public /why-wqf page.
+                Line breaks will automatically parse into the bulleted checklist on the public /services page.
               </span>
             </div>
 
