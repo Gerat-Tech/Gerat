@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
-const ACTIONS = [
+const ALL_ACTIONS = [
   { id: "inquiries", title: "Go to Inquiries Pipeline", section: "Navigation", shortcut: "G I", href: "/dashboard/inquiries" },
   { id: "insights", title: "Go to Research & Insights", section: "Navigation", shortcut: "G A", href: "/dashboard/insights" },
   { id: "portfolio", title: "Go to Portfolio Works", section: "Navigation", shortcut: "G P", href: "/dashboard/portfolio" },
@@ -13,13 +13,39 @@ const ACTIONS = [
   { id: "site", title: "View Public Website", section: "External", shortcut: "V W", href: "/" },
 ];
 
-export default function CommandPalette({ isOpen, onClose }) {
+function getActionsForRole(role) {
+  switch (role) {
+    case "OPERATIONS_LEAD":
+      return ALL_ACTIONS.filter((a) =>
+        ["inquiries", "team", "services", "site"].includes(a.id)
+      ).map((a) =>
+        a.id === "team"
+          ? { ...a, title: "Go to Team Directory (Ref)" }
+          : a.id === "services"
+          ? { ...a, title: "Go to Practice Scope (Ref)" }
+          : a
+      );
+    case "EDITOR":
+    case "TECHNICAL_EDITOR":
+    case "CREATIVE_EDITOR":
+      return ALL_ACTIONS.filter((a) =>
+        ["insights", "portfolio", "services", "site"].includes(a.id)
+      );
+    case "SUPER_ADMIN":
+    default:
+      return ALL_ACTIONS;
+  }
+}
+
+export default function CommandPalette({ user = null, isOpen, onClose }) {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef(null);
 
-  const filteredActions = ACTIONS.filter((item) =>
+  const availableActions = getActionsForRole(user?.role);
+
+  const filteredActions = availableActions.filter((item) =>
     item.title.toLowerCase().includes(query.toLowerCase()) ||
     item.section.toLowerCase().includes(query.toLowerCase())
   );

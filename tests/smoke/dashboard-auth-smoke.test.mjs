@@ -112,9 +112,34 @@ export async function runDashboardAuthSmokeTests() {
   const testPassValid = await verifyPassword("SecurePass2026!#", provisionedUser.passwordHash);
   assert(testPassValid === true, "Provisioned user password authentication failed");
 
+  // Verify Self-Service Password Reset Logic & Audit Logging
+  const updatedPassHash = await hashPassword("NewRotatedPass2026!#");
+  await prisma.user.update({
+    where: { id: provisionedUser.id },
+    data: { passwordHash: updatedPassHash },
+  });
+  const updatedUser = await prisma.user.findUnique({ where: { id: provisionedUser.id } });
+  const oldPassFails = await verifyPassword("SecurePass2026!#", updatedUser.passwordHash);
+  assert(oldPassFails === false, "Old password should fail after self-service password update");
+  const newPassSucceeds = await verifyPassword("NewRotatedPass2026!#", updatedUser.passwordHash);
+  assert(newPassSucceeds === true, "New password must succeed after self-service password update");
+
+  // Create Audit Log with diff JSON
+  const auditEntry = await prisma.auditLog.create({
+    data: {
+      action: "USER_SELF_PASSWORD_RESET",
+      entityType: "User",
+      entityId: provisionedUser.id,
+      actorId: provisionedUser.id,
+      diff: JSON.stringify({ email: provisionedUser.email, role: provisionedUser.role }),
+    },
+  });
+  assert(auditEntry.id, "Audit log must be created successfully");
+  await prisma.auditLog.delete({ where: { id: auditEntry.id } });
+
   // Clean up test user
   await prisma.user.delete({ where: { id: provisionedUser.id } });
-  console.log("  ✓ User provisioning lifecycle verified (create, hash, authenticate, cleanup)");
+  console.log("  ✓ User provisioning and self-service password lifecycle verified (create, hash, update password, audit log, cleanup)");
 
   // 7. Verify Content Seed Records in DB
   const [projectCount, articleCount, memberCount, pillarCount, inquiryCount] =

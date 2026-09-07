@@ -94,7 +94,7 @@ export async function PATCH(request, context) {
         entityType: "User",
         entityId: updatedUser.id,
         actorId: currentUser.id,
-        details: JSON.stringify({
+        diff: JSON.stringify({
           targetUser: updatedUser.email,
           previousRole: existingUser.role,
           newRole: updatedUser.role,
@@ -155,7 +155,7 @@ export async function DELETE(request, context) {
         entityType: "User",
         entityId: id,
         actorId: currentUser.id,
-        details: JSON.stringify({ targetEmail: user.email, targetRole: user.role }),
+        diff: JSON.stringify({ targetEmail: user.email, targetRole: user.role }),
       },
     });
 

@@ -150,7 +150,7 @@ export async function POST(request) {
         entityType: "User",
         entityId: newUser.id,
         actorId: currentUser.id,
-        details: JSON.stringify({
+        diff: JSON.stringify({
           createdUser: newUser.email,
           role: newUser.role,
           name: newUser.name,

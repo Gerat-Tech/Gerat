@@ -26,6 +26,10 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [modalError, setModalError] = useState(null);
+  const [provisionedResult, setProvisionedResult] = useState(null); // { user, password }
+  const [copiedAll, setCopiedAll] = useState(false);
+  const [copiedSinglePass, setCopiedSinglePass] = useState(false);
+  const [showPassphrase, setShowPassphrase] = useState(true);
 
   // Form states
   const [formData, setFormData] = useState({
@@ -68,6 +72,38 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
     return `Gerat${pass}!`;
   };
 
+  // Helper for Dispatch Text
+  const getDispatchMessage = () => {
+    if (!provisionedResult) return "";
+    const origin = typeof window !== "undefined" ? window.location.origin : "";
+    return `Gerat Mission Control Access Credentials:
+Operator: ${provisionedResult.user.name}
+Role: ${provisionedResult.user.role.replace("_", " ")}
+Login URL: ${origin}/login
+Email / Username: ${provisionedResult.user.email}
+Temporary Passphrase: ${provisionedResult.password}
+
+Please log in and update your passphrase upon first access.`;
+  };
+
+  const handleCopyAll = async () => {
+    try {
+      const msg = getDispatchMessage();
+      await navigator.clipboard.writeText(msg);
+      setCopiedAll(true);
+      setTimeout(() => setCopiedAll(false), 2500);
+    } catch {}
+  };
+
+  const handleCopyPass = async () => {
+    if (!provisionedResult) return;
+    try {
+      await navigator.clipboard.writeText(provisionedResult.password);
+      setCopiedSinglePass(true);
+      setTimeout(() => setCopiedSinglePass(false), 2000);
+    } catch {}
+  };
+
   // Handle Create User
   const handleCreateUser = async (e) => {
     e.preventDefault();
@@ -89,6 +125,7 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
     }
 
     setIsSubmitting(true);
+    const createdPassword = formData.password;
 
     try {
       const res = await fetch("/api/settings/users", {
@@ -111,6 +148,10 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
       setUsers([...users, data.user]);
       setIsAddModalOpen(false);
       setModalError(null);
+      setProvisionedResult({
+        user: data.user,
+        password: createdPassword,
+      });
       setFormData({
         name: "",
         email: "",
@@ -487,16 +528,174 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
         </div>
       </div>
 
+      {/* Modal: Operator Provisioned & Multi-Channel Dispatch */}
+      {provisionedResult && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div
+            className={`relative w-full max-w-lg ${
+              isLight ? "bg-white border-[#D1D5DB] text-[#0D0F12]" : "bg-[#121212] border-white/15 text-white"
+            } border p-6 sm:p-8 rounded-[3px] shadow-2xl flex flex-col gap-5 animate-in fade-in zoom-in-95 duration-200`}
+          >
+            {/* Header */}
+            <div className={`flex items-center justify-between pb-3 border-b ${isLight ? "border-[#E5E7EB]" : "border-white/10"}`}>
+              <div>
+                <span className="font-azeret text-[9px] tracking-[0.25em] text-emerald-500 uppercase font-bold flex items-center gap-1.5">
+                  <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+                  SECURITY CLEARANCE ISSUED //
+                </span>
+                <h2 className="font-roc text-xl font-bold uppercase mt-0.5">DISPATCH OPERATOR CREDENTIALS</h2>
+              </div>
+              <button
+                type="button"
+                onClick={() => setProvisionedResult(null)}
+                className={`font-azeret text-sm cursor-pointer ${isLight ? "text-black/40 hover:text-black" : "text-white/40 hover:text-white"}`}
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Instruction Notice */}
+            <p className={`font-sans text-xs ${isLight ? "text-[#4B5563]" : "text-white/70"} leading-relaxed`}>
+              Operator <strong>{provisionedResult.user.name}</strong> ({provisionedResult.user.email}) has been provisioned as{" "}
+              <strong className="text-accent">{provisionedResult.user.role.replace("_", " ")}</strong>. Send them their credentials via one of the channels below or copy the credentials directly.
+            </p>
+
+            {/* Credentials Card */}
+            <div
+              className={`p-4 rounded-[2px] border font-azeret text-xs space-y-2.5 ${
+                isLight ? "bg-[#F9FAFB] border-[#E5E7EB]" : "bg-white/[0.03] border-white/10"
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <span className={`text-[10px] tracking-[0.15em] uppercase ${isLight ? "text-[#6B7280]" : "text-white/40"}`}>
+                  OPERATOR NAME:
+                </span>
+                <span className="font-bold">{provisionedResult.user.name}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className={`text-[10px] tracking-[0.15em] uppercase ${isLight ? "text-[#6B7280]" : "text-white/40"}`}>
+                  EMAIL / USERNAME:
+                </span>
+                <span className="font-mono">{provisionedResult.user.email}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className={`text-[10px] tracking-[0.15em] uppercase ${isLight ? "text-[#6B7280]" : "text-white/40"}`}>
+                  ASSIGNED ROLE:
+                </span>
+                <span className={`px-2 py-0.5 rounded-[2px] text-[9px] font-bold border ${getBadgeStyle(provisionedResult.user.role)}`}>
+                  {provisionedResult.user.role.replace("_", " ")}
+                </span>
+              </div>
+              <div className={`pt-2 border-t ${isLight ? "border-[#E5E7EB]" : "border-white/10"} flex items-center justify-between`}>
+                <span className={`text-[10px] tracking-[0.15em] uppercase ${isLight ? "text-[#6B7280]" : "text-white/40"}`}>
+                  TEMPORARY PASSPHRASE:
+                </span>
+                <div className="flex items-center gap-2 font-mono">
+                  <span className="font-bold text-accent">
+                    {showPassphrase ? provisionedResult.password : "••••••••••••"}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setShowPassphrase(!showPassphrase)}
+                    className={`text-[10px] underline cursor-pointer ${isLight ? "text-[#6B7280] hover:text-black" : "text-white/40 hover:text-white"}`}
+                  >
+                    {showPassphrase ? "HIDE" : "SHOW"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleCopyPass}
+                    className="text-[10px] px-1.5 py-0.5 rounded bg-accent/15 border border-accent/30 text-accent hover:bg-accent hover:text-white font-bold cursor-pointer transition-colors"
+                  >
+                    {copiedSinglePass ? "COPIED!" : "COPY"}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* 1-Click Multi-Channel Dispatch Actions */}
+            <div className="flex flex-col gap-2.5">
+              <span className={`font-azeret text-[9px] tracking-[0.2em] uppercase font-bold ${isLight ? "text-[#6B7280]" : "text-white/40"}`}>
+                1-CLICK DISPATCH CHANNELS:
+              </span>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                {/* WhatsApp */}
+                <a
+                  href={`https://wa.me/?text=${encodeURIComponent(getDispatchMessage())}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 py-2.5 px-3 bg-[#25D366] hover:bg-[#1EBE5D] text-black font-azeret text-[10px] tracking-[0.15em] font-bold uppercase rounded-[2px] transition-colors shadow-sm cursor-pointer"
+                >
+                  <span>💬</span>
+                  <span>WHATSAPP</span>
+                </a>
+
+                {/* Email (mailto:) */}
+                <a
+                  href={`mailto:${provisionedResult.user.email}?subject=${encodeURIComponent(
+                    "Gerat Mission Control Account Credentials"
+                  )}&body=${encodeURIComponent(getDispatchMessage())}`}
+                  className="flex items-center justify-center gap-2 py-2.5 px-3 bg-[#0284C7] hover:bg-[#0369A1] text-white font-azeret text-[10px] tracking-[0.15em] font-bold uppercase rounded-[2px] transition-colors shadow-sm cursor-pointer"
+                >
+                  <span>✉</span>
+                  <span>EMAIL CLIENT</span>
+                </a>
+
+                {/* SMS (sms:) */}
+                <a
+                  href={`sms:?body=${encodeURIComponent(getDispatchMessage())}`}
+                  className="flex items-center justify-center gap-2 py-2.5 px-3 bg-[#7C3AED] hover:bg-[#6D28D9] text-white font-azeret text-[10px] tracking-[0.15em] font-bold uppercase rounded-[2px] transition-colors shadow-sm cursor-pointer"
+                >
+                  <span>📱</span>
+                  <span>PHONE / SMS</span>
+                </a>
+              </div>
+
+              {/* Copy Full Credentials */}
+              <button
+                type="button"
+                onClick={handleCopyAll}
+                className={`w-full py-2.5 px-4 rounded-[2px] font-azeret text-[10px] tracking-[0.15em] uppercase font-bold border transition-colors flex items-center justify-center gap-2 cursor-pointer ${
+                  copiedAll
+                    ? "bg-emerald-950/60 border-emerald-500 text-emerald-300"
+                    : isLight
+                    ? "bg-[#F3F4F6] border-[#D1D5DB] text-[#1F242E] hover:bg-[#E5E7EB]"
+                    : "bg-white/5 border-white/15 text-white hover:bg-white/10"
+                }`}
+              >
+                <span>{copiedAll ? "✓" : "📋"}</span>
+                <span>{copiedAll ? "ALL CREDENTIALS COPIED TO CLIPBOARD" : "COPY ALL CREDENTIALS TO CLIPBOARD"}</span>
+              </button>
+            </div>
+
+            {/* Footer */}
+            <div className={`pt-3 border-t flex justify-end ${isLight ? "border-[#E5E7EB]" : "border-white/10"}`}>
+              <button
+                type="button"
+                onClick={() => setProvisionedResult(null)}
+                className="py-2 px-6 bg-accent hover:bg-white hover:text-black text-white font-azeret text-[10px] tracking-[0.15em] font-bold uppercase rounded-[2px] transition-colors cursor-pointer"
+              >
+                ACKNOWLEDGE & CLOSE
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Modal: Provision New Operator */}
       {isAddModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="relative w-full max-w-lg bg-[#121212] border border-white/15 p-6 sm:p-8 rounded-[3px] shadow-2xl flex flex-col gap-5">
-            <div className="flex items-center justify-between pb-3 border-b border-white/10">
+          <div
+            className={`relative w-full max-w-lg ${
+              isLight ? "bg-white border-[#D1D5DB] text-[#0D0F12]" : "bg-[#121212] border-white/15 text-white"
+            } border p-6 sm:p-8 rounded-[3px] shadow-2xl flex flex-col gap-5`}
+          >
+            <div className={`flex items-center justify-between pb-3 border-b ${isLight ? "border-[#E5E7EB]" : "border-white/10"}`}>
               <div>
-                <span className="font-azeret text-[9px] tracking-[0.25em] text-accent uppercase">
+                <span className="font-azeret text-[9px] tracking-[0.25em] text-accent uppercase font-bold">
                   SECURITY GOVERNANCE //
                 </span>
-                <h2 className="font-roc text-xl font-bold uppercase text-white">PROVISION OPERATOR</h2>
+                <h2 className="font-roc text-xl font-bold uppercase mt-0.5">PROVISION OPERATOR</h2>
               </div>
               <button
                 type="button"
@@ -504,7 +703,7 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
                   setIsAddModalOpen(false);
                   setModalError(null);
                 }}
-                className="text-white/40 hover:text-white font-azeret text-sm cursor-pointer"
+                className={`font-azeret text-sm cursor-pointer ${isLight ? "text-black/40 hover:text-black" : "text-white/40 hover:text-white"}`}
               >
                 ✕
               </button>
@@ -528,7 +727,7 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
             <form onSubmit={handleCreateUser} className="flex flex-col gap-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-1.5">
-                  <label className="font-azeret text-[9px] tracking-[0.15em] text-white/60 uppercase">
+                  <label className={`font-azeret text-[9px] tracking-[0.15em] uppercase ${isLight ? "text-[#4B5563]" : "text-white/60"}`}>
                     FULL NAME *
                   </label>
                   <input
@@ -540,16 +739,18 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
                       if (modalError?.field === "name") setModalError(null);
                     }}
                     placeholder="e.g. Samuel Bekele"
-                    className={`w-full bg-black/50 border ${
+                    className={`w-full border ${
                       modalError?.field === "name"
                         ? "border-red-500 bg-red-950/20 text-white"
-                        : "border-white/15 focus:border-accent text-white"
+                        : isLight
+                        ? "bg-[#F9FAFB] border-[#D1D5DB] focus:border-accent text-[#0D0F12]"
+                        : "bg-black/50 border-white/15 focus:border-accent text-white"
                     } px-3 py-2 rounded-[2px] font-azeret text-xs outline-none transition-colors`}
                   />
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label className="font-azeret text-[9px] tracking-[0.15em] text-white/60 uppercase">
+                  <label className={`font-azeret text-[9px] tracking-[0.15em] uppercase ${isLight ? "text-[#4B5563]" : "text-white/60"}`}>
                     EMAIL ADDRESS *
                   </label>
                   <input
@@ -561,10 +762,12 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
                       if (modalError?.field === "email") setModalError(null);
                     }}
                     placeholder="operator@gerat.et"
-                    className={`w-full bg-black/50 border ${
+                    className={`w-full border ${
                       modalError?.field === "email"
                         ? "border-red-500 bg-red-950/20 text-white"
-                        : "border-white/15 focus:border-accent text-white"
+                        : isLight
+                        ? "bg-[#F9FAFB] border-[#D1D5DB] focus:border-accent text-[#0D0F12]"
+                        : "bg-black/50 border-white/15 focus:border-accent text-white"
                     } px-3 py-2 rounded-[2px] font-azeret text-xs outline-none transition-colors`}
                   />
                 </div>
@@ -572,7 +775,7 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-1.5">
-                  <label className="font-azeret text-[9px] tracking-[0.15em] text-white/60 uppercase">
+                  <label className={`font-azeret text-[9px] tracking-[0.15em] uppercase ${isLight ? "text-[#4B5563]" : "text-white/60"}`}>
                     ROLE TITLE / DESIGNATION
                   </label>
                   <input
@@ -580,18 +783,26 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                     placeholder="e.g. Solutions Architect"
-                    className="w-full bg-black/50 border border-white/15 focus:border-accent text-white px-3 py-2 rounded-[2px] font-azeret text-xs outline-none"
+                    className={`w-full border ${
+                      isLight
+                        ? "bg-[#F9FAFB] border-[#D1D5DB] focus:border-accent text-[#0D0F12]"
+                        : "bg-black/50 border-white/15 focus:border-accent text-white"
+                    } px-3 py-2 rounded-[2px] font-azeret text-xs outline-none`}
                   />
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label className="font-azeret text-[9px] tracking-[0.15em] text-white/60 uppercase">
+                  <label className={`font-azeret text-[9px] tracking-[0.15em] uppercase ${isLight ? "text-[#4B5563]" : "text-white/60"}`}>
                     RBAC ROLE *
                   </label>
                   <select
                     value={formData.role}
                     onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                    className="w-full bg-black/50 border border-white/15 focus:border-accent text-white px-3 py-2 rounded-[2px] font-azeret text-xs outline-none uppercase"
+                    className={`w-full border ${
+                      isLight
+                        ? "bg-[#F9FAFB] border-[#D1D5DB] focus:border-accent text-[#0D0F12]"
+                        : "bg-black/50 border-white/15 focus:border-accent text-white"
+                    } px-3 py-2 rounded-[2px] font-azeret text-xs outline-none uppercase`}
                   >
                     {AVAILABLE_ROLES.map((r) => (
                       <option key={r.id} value={r.id}>
@@ -604,7 +815,7 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
 
               <div className="flex flex-col gap-1.5">
                 <div className="flex items-center justify-between">
-                  <label className="font-azeret text-[9px] tracking-[0.15em] text-white/60 uppercase">
+                  <label className={`font-azeret text-[9px] tracking-[0.15em] uppercase ${isLight ? "text-[#4B5563]" : "text-white/60"}`}>
                     TEMPORARY PASSPHRASE *
                   </label>
                   <button
@@ -627,22 +838,26 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
                     if (modalError?.field === "password") setModalError(null);
                   }}
                   placeholder="Min 6 characters"
-                  className={`w-full bg-black/50 border ${
+                  className={`w-full border ${
                     modalError?.field === "password"
                       ? "border-red-500 bg-red-950/20 text-white"
-                      : "border-white/15 focus:border-accent text-white"
+                      : isLight
+                      ? "bg-[#F9FAFB] border-[#D1D5DB] focus:border-accent text-[#0D0F12]"
+                      : "bg-black/50 border-white/15 focus:border-accent text-white"
                   } px-3 py-2 rounded-[2px] font-azeret text-xs outline-none font-mono transition-colors`}
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-3 pt-4 border-t border-white/10 font-azeret text-[10px] tracking-[0.15em] uppercase">
+              <div className={`flex items-center justify-end gap-3 pt-4 border-t ${isLight ? "border-[#E5E7EB]" : "border-white/10"} font-azeret text-[10px] tracking-[0.15em] uppercase`}>
                 <button
                   type="button"
                   onClick={() => {
                     setIsAddModalOpen(false);
                     setModalError(null);
                   }}
-                  className="py-2.5 px-4 border border-white/15 hover:bg-white/5 rounded-[2px] text-white/60 hover:text-white cursor-pointer"
+                  className={`py-2.5 px-4 border rounded-[2px] cursor-pointer transition-colors ${
+                    isLight ? "border-[#D1D5DB] hover:bg-black/5 text-[#4B5563]" : "border-white/15 hover:bg-white/5 text-white/60 hover:text-white"
+                  }`}
                 >
                   CANCEL
                 </button>
@@ -662,13 +877,17 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
       {/* Modal: Change Role */}
       {isRoleModalOpen && selectedUser && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="relative w-full max-w-md bg-[#121212] border border-white/15 p-6 sm:p-8 rounded-[3px] shadow-2xl flex flex-col gap-5">
-            <div className="flex items-center justify-between pb-3 border-b border-white/10">
+          <div
+            className={`relative w-full max-w-md ${
+              isLight ? "bg-white border-[#D1D5DB] text-[#0D0F12]" : "bg-[#121212] border-white/15 text-white"
+            } border p-6 sm:p-8 rounded-[3px] shadow-2xl flex flex-col gap-5`}
+          >
+            <div className={`flex items-center justify-between pb-3 border-b ${isLight ? "border-[#E5E7EB]" : "border-white/10"}`}>
               <div>
-                <span className="font-azeret text-[9px] tracking-[0.25em] text-accent uppercase">
+                <span className="font-azeret text-[9px] tracking-[0.25em] text-accent uppercase font-bold">
                   RBAC MUTATION //
                 </span>
-                <h2 className="font-roc text-lg font-bold uppercase text-white">REASSIGN ROLE</h2>
+                <h2 className="font-roc text-lg font-bold uppercase mt-0.5">REASSIGN ROLE</h2>
               </div>
               <button
                 type="button"
@@ -676,7 +895,7 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
                   setIsRoleModalOpen(false);
                   setModalError(null);
                 }}
-                className="text-white/40 hover:text-white font-azeret text-sm cursor-pointer"
+                className={`font-azeret text-sm cursor-pointer ${isLight ? "text-black/40 hover:text-black" : "text-white/40 hover:text-white"}`}
               >
                 ✕
               </button>
@@ -697,14 +916,14 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
               </div>
             )}
 
-            <div className="p-3 bg-white/[0.02] border border-white/10 rounded-[2px] font-azeret text-[10px]">
-              <div className="text-white font-bold">{selectedUser.name}</div>
-              <div className="text-white/50">{selectedUser.email}</div>
+            <div className={`p-3 rounded-[2px] font-azeret text-[10px] border ${isLight ? "bg-[#F9FAFB] border-[#E5E7EB]" : "bg-white/[0.02] border-white/10"}`}>
+              <div className="font-bold">{selectedUser.name}</div>
+              <div className={isLight ? "text-[#6B7280]" : "text-white/50"}>{selectedUser.email}</div>
             </div>
 
             <form onSubmit={handleUpdateRole} className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
-                <label className="font-azeret text-[9px] tracking-[0.15em] text-white/60 uppercase">
+                <label className={`font-azeret text-[9px] tracking-[0.15em] uppercase ${isLight ? "text-[#4B5563]" : "text-white/60"}`}>
                   SELECT NEW RBAC ROLE:
                 </label>
                 <div className="flex flex-col gap-2">
@@ -714,6 +933,8 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
                       className={`p-3 border rounded-[2px] flex items-start gap-3 cursor-pointer transition-colors ${
                         newRole === r.id
                           ? "bg-accent/10 border-accent text-white"
+                          : isLight
+                          ? "bg-[#F9FAFB] border-[#E5E7EB] text-[#1F242E] hover:bg-[#F3F4F6]"
                           : "bg-white/[0.02] border-white/10 text-white/70 hover:bg-white/[0.05]"
                       }`}
                     >
@@ -727,21 +948,25 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
                       />
                       <div>
                         <div className="font-azeret text-[10px] font-bold uppercase">{r.name}</div>
-                        <div className="font-sans text-[11px] text-white/50 leading-relaxed">{r.desc}</div>
+                        <div className={`font-sans text-[11px] leading-relaxed ${isLight ? "text-[#6B7280]" : "text-white/50"}`}>
+                          {r.desc}
+                        </div>
                       </div>
                     </label>
                   ))}
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-3 pt-4 border-t border-white/10 font-azeret text-[10px] tracking-[0.15em] uppercase">
+              <div className={`flex items-center justify-end gap-3 pt-4 border-t ${isLight ? "border-[#E5E7EB]" : "border-white/10"} font-azeret text-[10px] tracking-[0.15em] uppercase`}>
                 <button
                   type="button"
                   onClick={() => {
                     setIsRoleModalOpen(false);
                     setModalError(null);
                   }}
-                  className="py-2 px-4 border border-white/15 hover:bg-white/5 rounded-[2px] text-white/60 hover:text-white cursor-pointer"
+                  className={`py-2 px-4 border rounded-[2px] cursor-pointer transition-colors ${
+                    isLight ? "border-[#D1D5DB] hover:bg-black/5 text-[#4B5563]" : "border-white/15 hover:bg-white/5 text-white/60 hover:text-white"
+                  }`}
                 >
                   CANCEL
                 </button>
@@ -761,13 +986,17 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
       {/* Modal: Reset Password */}
       {isPasswordModalOpen && selectedUser && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="relative w-full max-w-md bg-[#121212] border border-white/15 p-6 sm:p-8 rounded-[3px] shadow-2xl flex flex-col gap-5">
-            <div className="flex items-center justify-between pb-3 border-b border-white/10">
+          <div
+            className={`relative w-full max-w-md ${
+              isLight ? "bg-white border-[#D1D5DB] text-[#0D0F12]" : "bg-[#121212] border-white/15 text-white"
+            } border p-6 sm:p-8 rounded-[3px] shadow-2xl flex flex-col gap-5`}
+          >
+            <div className={`flex items-center justify-between pb-3 border-b ${isLight ? "border-[#E5E7EB]" : "border-white/10"}`}>
               <div>
-                <span className="font-azeret text-[9px] tracking-[0.25em] text-accent uppercase">
+                <span className="font-azeret text-[9px] tracking-[0.25em] text-accent uppercase font-bold">
                   SECURITY KEY //
                 </span>
-                <h2 className="font-roc text-lg font-bold uppercase text-white">RESET PASSPHRASE</h2>
+                <h2 className="font-roc text-lg font-bold uppercase mt-0.5">RESET PASSPHRASE</h2>
               </div>
               <button
                 type="button"
@@ -775,7 +1004,7 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
                   setIsPasswordModalOpen(false);
                   setModalError(null);
                 }}
-                className="text-white/40 hover:text-white font-azeret text-sm cursor-pointer"
+                className={`font-azeret text-sm cursor-pointer ${isLight ? "text-black/40 hover:text-black" : "text-white/40 hover:text-white"}`}
               >
                 ✕
               </button>
@@ -796,14 +1025,14 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
               </div>
             )}
 
-            <p className="font-roc text-xs text-white/60 leading-relaxed">
+            <p className={`font-roc text-xs leading-relaxed ${isLight ? "text-[#4B5563]" : "text-white/60"}`}>
               Set a new temporary password for <strong>{selectedUser.name}</strong> ({selectedUser.email}).
             </p>
 
             <form onSubmit={handleResetPassword} className="flex flex-col gap-4">
               <div className="flex flex-col gap-1.5">
                 <div className="flex items-center justify-between">
-                  <label className="font-azeret text-[9px] tracking-[0.15em] text-white/60 uppercase">
+                  <label className={`font-azeret text-[9px] tracking-[0.15em] uppercase ${isLight ? "text-[#4B5563]" : "text-white/60"}`}>
                     NEW PASSPHRASE
                   </label>
                   <button
@@ -826,22 +1055,26 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
                     if (modalError?.field === "password") setModalError(null);
                   }}
                   placeholder="Min 6 characters"
-                  className={`w-full bg-black/50 border ${
+                  className={`w-full border ${
                     modalError?.field === "password"
                       ? "border-red-500 bg-red-950/20 text-white"
-                      : "border-white/15 focus:border-accent text-white"
+                      : isLight
+                      ? "bg-[#F9FAFB] border-[#D1D5DB] focus:border-accent text-[#0D0F12]"
+                      : "bg-black/50 border-white/15 focus:border-accent text-white"
                   } px-3 py-2 rounded-[2px] font-azeret text-xs outline-none font-mono transition-colors`}
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-3 pt-4 border-t border-white/10 font-azeret text-[10px] tracking-[0.15em] uppercase">
+              <div className={`flex items-center justify-end gap-3 pt-4 border-t ${isLight ? "border-[#E5E7EB]" : "border-white/10"} font-azeret text-[10px] tracking-[0.15em] uppercase`}>
                 <button
                   type="button"
                   onClick={() => {
                     setIsPasswordModalOpen(false);
                     setModalError(null);
                   }}
-                  className="py-2 px-4 border border-white/15 hover:bg-white/5 rounded-[2px] text-white/60 hover:text-white cursor-pointer"
+                  className={`py-2 px-4 border rounded-[2px] cursor-pointer transition-colors ${
+                    isLight ? "border-[#D1D5DB] hover:bg-black/5 text-[#4B5563]" : "border-white/15 hover:bg-white/5 text-white/60 hover:text-white"
+                  }`}
                 >
                   CANCEL
                 </button>
