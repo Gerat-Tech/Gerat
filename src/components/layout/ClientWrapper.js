@@ -18,7 +18,7 @@ export default function ClientWrapper({ children }) {
   const mounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
 
   if (!mounted) {
-    return <div className="bg-[#050505] min-h-screen text-white">{children}</div>;
+    return <div className="bg-[var(--bg)] min-h-screen text-[var(--text-primary)]">{children}</div>;
   }
 
   // Dashboard routes render their own dedicated shell without public floating navbar

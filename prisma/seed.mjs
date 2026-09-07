@@ -57,7 +57,20 @@ async function main() {
     },
   });
 
-  console.log("  ✓ Created/verified 3 administrative users (Super Admin, Ops Lead, Tech Editor)");
+  const creativeEditor = await prisma.user.upsert({
+    where: { email: "creative@gerat.et" },
+    update: {},
+    create: {
+      email: "creative@gerat.et",
+      name: "Brand & Creative Director",
+      passwordHash: teamPassword,
+      role: "CREATIVE_EDITOR",
+      title: "Design Systems & Creative Lead",
+      active: true,
+    },
+  });
+
+  console.log("  ✓ Created/verified 4 administrative users (Super Admin, Ops Lead, Tech Editor, Creative Editor)");
 
   // 2. Seed Portfolio Case Studies
   let projectOrder = 1;

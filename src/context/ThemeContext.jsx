@@ -16,14 +16,17 @@ export function ThemeProvider({ initialTheme = "dark", children }) {
   useEffect(() => {
     // 1. Sync with localStorage if client had saved theme before cookie was set
     try {
-      const stored = localStorage.getItem("gerat-dashboard-theme");
+      const stored = localStorage.getItem("gerat-theme") || localStorage.getItem("gerat-dashboard-theme");
       if (stored && stored !== theme) {
         setTimeout(() => {
           setThemeState(stored);
+          document.cookie = `gerat-theme=${stored}; path=/; max-age=31536000; SameSite=Lax`;
           document.cookie = `gerat-dashboard-theme=${stored}; path=/; max-age=31536000; SameSite=Lax`;
         }, 0);
       } else if (!stored && theme) {
+        localStorage.setItem("gerat-theme", theme);
         localStorage.setItem("gerat-dashboard-theme", theme);
+        document.cookie = `gerat-theme=${theme}; path=/; max-age=31536000; SameSite=Lax`;
         document.cookie = `gerat-dashboard-theme=${theme}; path=/; max-age=31536000; SameSite=Lax`;
       }
     } catch {}
@@ -43,15 +46,17 @@ export function ThemeProvider({ initialTheme = "dark", children }) {
 
   useEffect(() => {
     try {
+      localStorage.setItem("gerat-theme", theme);
       localStorage.setItem("gerat-dashboard-theme", theme);
+      document.cookie = `gerat-theme=${theme}; path=/; max-age=31536000; SameSite=Lax`;
       document.cookie = `gerat-dashboard-theme=${theme}; path=/; max-age=31536000; SameSite=Lax`;
       const root = document.documentElement;
       if (resolvedTheme === "light") {
-        root.classList.add("dashboard-light");
-        root.classList.remove("dashboard-dark");
+        root.classList.add("light", "site-light", "dashboard-light");
+        root.classList.remove("dark", "site-dark", "dashboard-dark");
       } else {
-        root.classList.add("dashboard-dark");
-        root.classList.remove("dashboard-light");
+        root.classList.add("dark", "site-dark", "dashboard-dark");
+        root.classList.remove("light", "site-light", "dashboard-light");
       }
     } catch {}
   }, [theme, resolvedTheme]);
@@ -59,7 +64,9 @@ export function ThemeProvider({ initialTheme = "dark", children }) {
   const setTheme = (newTheme) => {
     setThemeState(newTheme);
     try {
+      localStorage.setItem("gerat-theme", newTheme);
       localStorage.setItem("gerat-dashboard-theme", newTheme);
+      document.cookie = `gerat-theme=${newTheme}; path=/; max-age=31536000; SameSite=Lax`;
       document.cookie = `gerat-dashboard-theme=${newTheme}; path=/; max-age=31536000; SameSite=Lax`;
     } catch {}
   };
@@ -68,7 +75,9 @@ export function ThemeProvider({ initialTheme = "dark", children }) {
     setThemeState((prev) => {
       const next = prev === "dark" ? "light" : "dark";
       try {
+        localStorage.setItem("gerat-theme", next);
         localStorage.setItem("gerat-dashboard-theme", next);
+        document.cookie = `gerat-theme=${next}; path=/; max-age=31536000; SameSite=Lax`;
         document.cookie = `gerat-dashboard-theme=${next}; path=/; max-age=31536000; SameSite=Lax`;
       } catch {}
       return next;

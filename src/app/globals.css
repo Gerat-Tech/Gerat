@@ -144,58 +144,129 @@ body {
 }
 
 /* ==========================================================================
-   Dashboard Monolithic Theme & Universal Light Mode Overhaul
+   Universal Light & Dark Mode System (Public Website & Mission Control)
    User Requirements:
-   - Light Mode: texts must be dark (#0A0C10 / #1F242E / #4B5565).
-   - Light Mode: card backgrounds must be a gray kind of thing (#E4E7EB / #DDE2E8).
-   - Light Mode: canvas background is soft architectural gray (#F0F2F5).
-   - Dark Mode: stays pitch obsidian (#080808) with high-density tech surfaces.
+   - Light Mode: texts must be dark (#0B0F17 / #1F242E / #4B5565).
+   - Light Mode: card backgrounds must be a gray kind of thing (#E2E6EC / #DDE2E8).
+   - Light Mode: canvas background is soft architectural cool-gray (#F0F2F5).
+   - Dark Mode: stays pitch obsidian (#050505 / #080808) with high-density tech surfaces.
    ========================================================================== */
 
 /* Universal Light Mode Variables */
+html.light,
+html.site-light,
 html.dashboard-light {
   --dash-bg: #F0F2F5;
-  --dash-card: #E4E7EB;
-  --dash-card-hover: #D8DCE2;
+  --dash-card: #E2E6EC;
+  --dash-card-hover: #D8DEE6;
   --dash-card-subtle: #DDE2E8;
   --dash-border: #CBD2DC;
-  --dash-border-subtle: #D8DCE2;
-  --dash-text-heading: #0A0C10;
+  --dash-border-subtle: #D8DEE6;
+  --dash-text-heading: #0B0F17;
   --dash-text-body: #1F242E;
   --dash-text-muted: #4B5565;
-  --dash-text-dim: #697586;
+  --dash-text-dim: #6B7280;
   --dash-input-bg: #FFFFFF;
   --dash-input-border: #BCC5D1;
-  --dash-input-text: #0A0C10;
+  --dash-input-text: #0B0F17;
 }
 
-/* Light mode container */
+/* Light mode root background and text */
+html.light body,
+html.site-light body,
 html.dashboard-light .dashboard-shell {
   background-color: #F0F2F5 !important;
   color: #1F242E !important;
 }
 
-/* Card backgrounds: Gray kind of thing as requested */
+/* Deep Canvas / Page Backgrounds in Light Mode */
+html.light .bg-\[\#050505\],
+html.light .bg-\[\#080808\],
+html.light .bg-\[\#0a0a0a\],
+html.light .bg-\[\#0b0b0b\],
+html.light .bg-\[\#0d0d0d\],
+html.light .bg-\[\#0e0e0e\],
+html.site-light .bg-\[\#050505\],
+html.site-light .bg-\[\#080808\],
+html.site-light .bg-\[\#0a0a0a\],
+html.site-light .bg-\[\#0b0b0b\],
+html.site-light .bg-\[\#0d0d0d\],
+html.site-light .bg-\[\#0e0e0e\],
+html.dashboard-light .bg-\[\#050505\],
+html.dashboard-light .bg-\[\#080808\],
+html.dashboard-light .bg-\[\#0d0d0d\] {
+  background-color: #F0F2F5 !important;
+}
+
+/* Card surfaces: Gray kind of thing as requested */
+html.light .bg-\[\#121212\],
+html.light .bg-\[\#111111\],
+html.light .bg-\[\#141414\],
+html.light .bg-\[\#161616\],
+html.light .bg-\[\#181818\],
+html.light .bg-\[\#1a1a1a\],
+html.light .bg-\[\#1c1c1c\],
+html.light .bg-\[\#202020\],
+html.light .bg-\[\#222222\],
+html.light .bg-black\/30,
+html.light .bg-black\/40,
+html.light .bg-black\/50,
+html.light .bg-black\/60,
+html.light .bg-black\/70,
+html.light .bg-black\/80,
+html.light .bg-black\/90,
+html.site-light .bg-\[\#121212\],
+html.site-light .bg-\[\#111111\],
+html.site-light .bg-\[\#141414\],
+html.site-light .bg-\[\#161616\],
+html.site-light .bg-\[\#181818\],
+html.site-light .bg-\[\#1a1a1a\],
+html.site-light .bg-\[\#1c1c1c\],
+html.site-light .bg-\[\#202020\],
+html.site-light .bg-\[\#222222\],
+html.site-light .bg-black\/30,
+html.site-light .bg-black\/40,
+html.site-light .bg-black\/50,
+html.site-light .bg-black\/60,
+html.site-light .bg-black\/70,
+html.site-light .bg-black\/80,
+html.site-light .bg-black\/90,
 html.dashboard-light .dashboard-shell .bg-\[\#121212\],
 html.dashboard-light .dashboard-shell .bg-\[\#111111\],
 html.dashboard-light .dashboard-shell .bg-\[\#141414\],
-html.dashboard-light .dashboard-shell .bg-\[\#0d0d0d\],
-html.dashboard-light .dashboard-shell .bg-\[\#0e0e0e\],
 html.dashboard-light .dashboard-shell .bg-\[\#181818\],
 html.dashboard-light .dashboard-shell .bg-black\/40,
 html.dashboard-light .dashboard-shell .bg-black\/50,
 html.dashboard-light .dashboard-shell .bg-black\/60,
 html.dashboard-light .dashboard-shell .bg-black\/80 {
-  background-color: #E4E7EB !important;
+  background-color: #E2E6EC !important;
 }
 
 /* Interactive card hover */
+html.light .bg-\[\#121212\]:hover,
+html.light .bg-\[\#141414\]:hover,
+html.site-light .bg-\[\#121212\]:hover,
+html.site-light .bg-\[\#141414\]:hover,
 html.dashboard-light .dashboard-shell .bg-\[\#121212\]:hover,
 html.dashboard-light .dashboard-shell .bg-\[\#141414\]:hover {
-  background-color: #D8DCE2 !important;
+  background-color: #D8DEE6 !important;
 }
 
 /* Subtle / Inset elements */
+html.light .bg-white\/\[0\.01\],
+html.light .bg-white\/\[0\.02\],
+html.light .bg-white\/\[0\.03\],
+html.light .bg-white\/\[0\.04\],
+html.light .bg-white\/\[0\.05\],
+html.light .bg-white\/5,
+html.light .bg-white\/10,
+html.site-light .bg-white\/\[0\.01\],
+html.site-light .bg-white\/\[0\.02\],
+html.site-light .bg-white\/\[0\.03\],
+html.site-light .bg-white\/\[0\.04\],
+html.site-light .bg-white\/\[0\.05\],
+html.site-light .bg-white\/5,
+html.site-light .bg-white\/10,
 html.dashboard-light .dashboard-shell .bg-white\/\[0\.02\],
 html.dashboard-light .dashboard-shell .bg-white\/\[0\.03\],
 html.dashboard-light .dashboard-shell .bg-white\/\[0\.05\],
@@ -205,6 +276,18 @@ html.dashboard-light .dashboard-shell .bg-white\/10 {
 }
 
 /* Borders in Light Mode */
+html.light .border-white\/5,
+html.light .border-white\/10,
+html.light .border-white\/15,
+html.light .border-white\/20,
+html.light .border-white\/30,
+html.light .border-white\/40,
+html.site-light .border-white\/5,
+html.site-light .border-white\/10,
+html.site-light .border-white\/15,
+html.site-light .border-white\/20,
+html.site-light .border-white\/30,
+html.site-light .border-white\/40,
 html.dashboard-light .dashboard-shell .border-white\/5,
 html.dashboard-light .dashboard-shell .border-white\/10,
 html.dashboard-light .dashboard-shell .border-white\/15,
@@ -214,20 +297,51 @@ html.dashboard-light .dashboard-shell .border-white\/40 {
   border-color: #CBD2DC !important;
 }
 
-/* Headings and Titles in Light Mode: DARK */
+/* Headings and Titles in Light Mode: Pitch Charcoal */
+html.light h1,
+html.light h2,
+html.light h3,
+html.light h4,
+html.light h5,
+html.light h6,
+html.site-light h1,
+html.site-light h2,
+html.site-light h3,
+html.site-light h4,
+html.site-light h5,
+html.site-light h6,
 html.dashboard-light .dashboard-shell h1,
 html.dashboard-light .dashboard-shell h2,
 html.dashboard-light .dashboard-shell h3,
 html.dashboard-light .dashboard-shell h4,
 html.dashboard-light .dashboard-shell .dash-title {
-  color: #0A0C10 !important;
+  color: #0B0F17 !important;
 }
 
-/* Text in Light Mode: DARK */
+/* Text in Light Mode: Pitch Charcoal & Dark Slate */
+html.light .text-white,
+html.site-light .text-white,
 html.dashboard-light .dashboard-shell .text-white {
-  color: #0A0C10 !important;
+  color: #0B0F17 !important;
 }
 
+html.light .text-white\/80,
+html.light .text-white\/90,
+html.site-light .text-white\/80,
+html.site-light .text-white\/90,
+html.dashboard-light .dashboard-shell .text-white\/80,
+html.dashboard-light .dashboard-shell .text-white\/90 {
+  color: #1F242E !important;
+}
+
+html.light .text-white\/40,
+html.light .text-white\/50,
+html.light .text-white\/60,
+html.light .text-white\/70,
+html.site-light .text-white\/40,
+html.site-light .text-white\/50,
+html.site-light .text-white\/60,
+html.site-light .text-white\/70,
 html.dashboard-light .dashboard-shell .text-white\/40,
 html.dashboard-light .dashboard-shell .text-white\/50,
 html.dashboard-light .dashboard-shell .text-white\/60,
@@ -235,41 +349,68 @@ html.dashboard-light .dashboard-shell .text-white\/70 {
   color: #4B5565 !important;
 }
 
-html.dashboard-light .dashboard-shell .text-white\/80,
-html.dashboard-light .dashboard-shell .text-white\/90 {
-  color: #1F242E !important;
-}
-
+html.light .text-white\/20,
+html.light .text-white\/30,
+html.site-light .text-white\/20,
+html.site-light .text-white\/30,
 html.dashboard-light .dashboard-shell .text-white\/20,
 html.dashboard-light .dashboard-shell .text-white\/30 {
-  color: #697586 !important;
+  color: #6B7280 !important;
 }
 
 /* Preserve bright white text on primary accent buttons */
+html.light .bg-accent,
+html.light .bg-accent *,
+html.site-light .bg-accent,
+html.site-light .bg-accent *,
 html.dashboard-light .dashboard-shell .bg-accent,
 html.dashboard-light .dashboard-shell .bg-accent * {
   color: #FFFFFF !important;
 }
 
+/* Preserving Accent Colors */
+html.light .text-accent,
+html.site-light .text-accent {
+  color: #FF4A00 !important;
+}
+
 /* Form Controls in Light Mode */
+html.light input,
+html.light select,
+html.light textarea,
+html.site-light input,
+html.site-light select,
+html.site-light textarea,
 html.dashboard-light .dashboard-shell input,
 html.dashboard-light .dashboard-shell select,
 html.dashboard-light .dashboard-shell textarea {
   background-color: #FFFFFF !important;
-  color: #0A0C10 !important;
+  color: #0B0F17 !important;
   border-color: #BCC5D1 !important;
 }
 
+html.light input::placeholder,
+html.light textarea::placeholder,
+html.site-light input::placeholder,
+html.site-light textarea::placeholder,
 html.dashboard-light .dashboard-shell input::placeholder,
 html.dashboard-light .dashboard-shell textarea::placeholder {
-  color: #697586 !important;
+  color: #6B7280 !important;
+}
+
+/* Contact Drawer & Modal Backdrop in Light Mode */
+html.light [role="dialog"],
+html.site-light [role="dialog"] {
+  background-color: #E2E6EC !important;
+  color: #0B0F17 !important;
+  border-color: #CBD2DC !important;
 }
 
 /* Sidebar styling in Light Mode */
 html.dashboard-light .dashboard-shell aside {
   background-color: #E6E9EE !important;
   border-color: #CBD2DC !important;
-  color: #0A0C10 !important;
+  color: #0B0F17 !important;
 }
 
 /* Header in Light Mode */
@@ -279,21 +420,32 @@ html.dashboard-light .dashboard-shell header {
 }
 
 /* Status Badges in Light Mode */
+html.light .bg-emerald-950\/40,
+html.site-light .bg-emerald-950\/40,
 html.dashboard-light .dashboard-shell .bg-emerald-950\/40 {
   background-color: #D1FAE5 !important;
   color: #065F46 !important;
   border-color: #6EE7B7 !important;
 }
+
+html.light .bg-blue-950\/40,
+html.site-light .bg-blue-950\/40,
 html.dashboard-light .dashboard-shell .bg-blue-950\/40 {
   background-color: #DBEAFE !important;
   color: #1E40AF !important;
   border-color: #93C5FD !important;
 }
+
+html.light .bg-amber-950\/40,
+html.site-light .bg-amber-950\/40,
 html.dashboard-light .dashboard-shell .bg-amber-950\/40 {
   background-color: #FEF3C7 !important;
   color: #92400E !important;
   border-color: #FCD34D !important;
 }
+
+html.light .bg-red-950\/40,
+html.site-light .bg-red-950\/40,
 html.dashboard-light .dashboard-shell .bg-red-950\/40 {
   background-color: #FEE2E2 !important;
   color: #991B1B !important;

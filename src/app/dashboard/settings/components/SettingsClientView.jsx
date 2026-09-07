@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { useTheme } from "@/context/ThemeContext";
 
 const DEFAULT_MARQUEE_TOKENS = [
@@ -381,6 +382,18 @@ export default function SettingsClientView({
         >
           04 // IMMUTABLE AUDIT LOG
         </button>
+
+        <Link
+          href="/dashboard/settings/users"
+          className={`py-2 px-3.5 rounded-[2px] transition-colors flex items-center gap-1.5 ${
+            isLight
+              ? "bg-black/5 hover:bg-black/10 text-accent font-bold"
+              : "bg-white/5 hover:bg-white/10 text-accent font-bold"
+          }`}
+        >
+          <span>05 // USER & ROLE GOVERNANCE</span>
+          <span>→</span>
+        </Link>
       </div>
 
       {/* TAB 1: SITE CONFIG & LOCATION PRESETS */}
