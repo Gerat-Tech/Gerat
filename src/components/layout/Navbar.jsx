@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import ContactDrawer from "./ContactDrawer";
 import NavItem from "../common/NavItem";
 import { useNav } from "@/context/NavContext";
+import { useTheme } from "@/context/ThemeContext";
 
 /**
  * Editorial Navigation Bar (Spec §8)
@@ -21,6 +22,8 @@ export default function Navbar() {
     openContact,
     closeContact,
   } = useNav();
+  const { resolvedTheme, toggleTheme } = useTheme();
+  const isLight = resolvedTheme === "light";
   const [hovered, setHovered] = useState(null);
   const [isVisible, setIsVisible] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -38,7 +41,7 @@ export default function Navbar() {
             setAnnouncement({
               enabled: true,
               text: data.configMap.ANNOUNCEMENT_TEXT || "SYSTEM ADVISORY: Q3 ARCHITECTURAL ENGAGEMENT SCHEDULE OPEN",
-              link: data.configMap.ANNOUNCEMENT_LINK || "/why-wqf",
+              link: data.configMap.ANNOUNCEMENT_LINK || "/services",
             });
           } else {
             setAnnouncement(null);
@@ -52,7 +55,7 @@ export default function Navbar() {
   }, [pathname]);
 
   const navLinks = [
-    { name: "SERVICES", href: "/why-wqf" },
+    { name: "SERVICES", href: "/services" },
     { name: "PORTFOLIO", href: "/portfolio" },
     { name: "TEAM", href: "/team" },
     { name: "INSIGHTS", href: "/insights" },
@@ -203,12 +206,44 @@ export default function Navbar() {
               </ul>
             </nav>
 
-            {/* Right Action: Contact CTA Button */}
-            <div className="hidden lg:flex items-center">
+            {/* Right Action: Theme Switcher & Contact CTA Button */}
+            <div className="hidden lg:flex items-center gap-2">
+              <button
+                type="button"
+                onClick={toggleTheme}
+                aria-label={isLight ? "Switch to dark theme" : "Switch to light theme"}
+                title={isLight ? "Switch to dark theme" : "Switch to light theme"}
+                className={`size-8 rounded-[2px] border flex items-center justify-center transition-colors cursor-pointer ${
+                  isLight
+                    ? "border-[#CBD2DC] hover:border-accent text-[#0B0F17] hover:text-accent bg-black/5"
+                    : "border-white/20 hover:border-accent text-white/80 hover:text-white bg-white/5"
+                }`}
+              >
+                {isLight ? (
+                  /* Moon Icon for switching to Dark */
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-3.5">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                  </svg>
+                ) : (
+                  /* Sun Icon for switching to Light */
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-3.5">
+                    <circle cx="12" cy="12" r="5" />
+                    <line x1="12" y1="1" x2="12" y2="3" />
+                    <line x1="12" y1="21" x2="12" y2="23" />
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                    <line x1="1" y1="12" x2="3" y2="12" />
+                    <line x1="21" y1="12" x2="23" y2="12" />
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                  </svg>
+                )}
+              </button>
+
               <button
                 type="button"
                 onClick={openContact}
-                className="relative group/btn font-azeret text-[11px] uppercase tracking-[0.2em] px-4 py-2 text-white/90 border border-white/20 hover:border-accent hover:text-white bg-white/5 hover:bg-accent/10 transition-all duration-300 rounded-[2px] select-none"
+                className="relative group/btn font-azeret text-[11px] uppercase tracking-[0.2em] px-4 py-2 text-white/90 border border-white/20 hover:border-accent hover:text-white bg-white/5 hover:bg-accent/10 transition-all duration-300 rounded-[2px] select-none cursor-pointer"
               >
                 <span>CONTACT</span>
                 {/* Micro corner indicators */}
@@ -315,6 +350,41 @@ export default function Navbar() {
             </div>
           </div>
 
+          {/* Theme Selector on Mobile */}
+          <div className="flex items-center justify-between p-3 border border-white/10 rounded-[2px] bg-white/[0.02]">
+            <span className="font-azeret text-[10px] tracking-[0.15em] text-white/50 uppercase">
+              APPEARANCE THEME:
+            </span>
+            <div className="flex items-center gap-1 font-azeret text-[10px] uppercase">
+              <button
+                type="button"
+                onClick={() => {
+                  if (isLight) toggleTheme();
+                }}
+                className={`py-1 px-2.5 rounded-[2px] border transition-colors ${
+                  !isLight
+                    ? "bg-accent text-white border-accent font-bold"
+                    : "border-white/15 text-white/60 hover:text-white"
+                }`}
+              >
+                DARK
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  if (!isLight) toggleTheme();
+                }}
+                className={`py-1 px-2.5 rounded-[2px] border transition-colors ${
+                  isLight
+                    ? "bg-accent text-white border-accent font-bold"
+                    : "border-white/15 text-white/60 hover:text-white"
+                }`}
+              >
+                LIGHT
+              </button>
+            </div>
+          </div>
+
           {/* Full-width Contact Drawer Trigger on Mobile */}
           <button
             type="button"
@@ -322,7 +392,7 @@ export default function Navbar() {
               setIsMenuOpen(false);
               openContact();
             }}
-            className="relative w-full p-4 mt-2 text-center font-azeret text-[12px] tracking-[0.2em] uppercase border border-accent/80 text-white bg-accent/20 hover:bg-accent/30 transition-all rounded-[2px]"
+            className="relative w-full p-4 mt-1 text-center font-azeret text-[12px] tracking-[0.2em] uppercase border border-accent/80 text-white bg-accent/20 hover:bg-accent/30 transition-all rounded-[2px]"
           >
             <span className="absolute top-0 left-0 size-1.5 border-t border-l border-accent" />
             <span className="absolute top-0 right-0 size-1.5 border-t border-r border-accent" />

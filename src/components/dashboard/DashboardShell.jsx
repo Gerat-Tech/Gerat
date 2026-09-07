@@ -48,6 +48,7 @@ function DashboardShellInner({ user, stats = {}, children }) {
 
       {/* Global Command Palette (⌘K) */}
       <CommandPalette
+        user={user}
         isOpen={isCommandOpen}
         onClose={() => setIsCommandOpen(false)}
       />

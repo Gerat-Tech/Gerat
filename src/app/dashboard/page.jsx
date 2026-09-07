@@ -13,11 +13,14 @@ export default async function DashboardPage({ searchParams }) {
 
   // Fetch role-relevant counts
   const isOpsOrAdmin = role === "SUPER_ADMIN" || role === "OPERATIONS_LEAD";
+  const isEditor = role === "EDITOR" || role === "TECHNICAL_EDITOR" || role === "CREATIVE_EDITOR";
 
   let inquiryCount = 0;
   let newInquiries = 0;
   let urgentInquiries = 0;
   let articleCount = 0;
+  let publishedCount = 0;
+  let draftCount = 0;
   let projectCount = 0;
   let memberCount = 0;
   let recentInquiries = [];
@@ -29,6 +32,8 @@ export default async function DashboardPage({ searchParams }) {
       isOpsOrAdmin ? prisma.inquiry.count({ where: { status: "NEW_INTAKE" } }) : 0,
       isOpsOrAdmin ? prisma.inquiry.count({ where: { priority: "CRITICAL_ENTERPRISE" } }) : 0,
       prisma.article.count(),
+      isEditor ? prisma.article.count({ where: { status: "PUBLISHED" } }) : 0,
+      isEditor ? prisma.article.count({ where: { status: "DRAFT" } }) : 0,
       prisma.caseStudy.count(),
       prisma.teamMember.count(),
     ]);
@@ -38,6 +43,8 @@ export default async function DashboardPage({ searchParams }) {
       newInquiries,
       urgentInquiries,
       articleCount,
+      publishedCount,
+      draftCount,
       projectCount,
       memberCount,
     ] = counts;
@@ -78,7 +85,7 @@ export default async function DashboardPage({ searchParams }) {
 
   // Header Title & Action Button based on Role
   let cockpitTitle = "EXECUTIVE COCKPIT";
-  let cockpitSubtitle = `LOGGED IN AS ${user?.name || "ARCHITECT"} // STUDIO MASTER COMMAND`;
+  let cockpitSubtitle = `LOGGED IN AS ${user?.name || "SUPER ADMIN"} // STUDIO MASTER COMMAND`;
   let headerAction = (
     <Link
       href="/dashboard/inquiries"
@@ -101,27 +108,15 @@ export default async function DashboardPage({ searchParams }) {
         <span>→</span>
       </Link>
     );
-  } else if (role === "TECHNICAL_EDITOR") {
-    cockpitTitle = "ENGINEERING COCKPIT";
-    cockpitSubtitle = `LOGGED IN AS ${user?.name || "LEAD ARCHITECT"} // RESEARCH & TECHNICAL CMS`;
+  } else if (role === "EDITOR" || role === "TECHNICAL_EDITOR" || role === "CREATIVE_EDITOR") {
+    cockpitTitle = "EDITORIAL & CONTENT COCKPIT";
+    cockpitSubtitle = `LOGGED IN AS ${user?.name || "EDITOR"} // RESEARCH PUBLICATIONS & PORTFOLIO SHOWCASES`;
     headerAction = (
       <Link
         href="/dashboard/insights/new"
         className="w-fit py-2 px-4 bg-accent hover:bg-black hover:text-white text-white font-azeret text-[10px] tracking-[0.15em] uppercase font-bold transition-all rounded-[2px] flex items-center gap-2"
       >
-        <span>+ AUTHOR NEW WHITEPAPER</span>
-        <span>→</span>
-      </Link>
-    );
-  } else if (role === "CREATIVE_EDITOR") {
-    cockpitTitle = "CREATIVE COCKPIT";
-    cockpitSubtitle = `LOGGED IN AS ${user?.name || "CREATIVE DIRECTOR"} // BRAND SHOWCASE & ASSET CMS`;
-    headerAction = (
-      <Link
-        href="/dashboard/portfolio/new"
-        className="w-fit py-2 px-4 bg-accent hover:bg-black hover:text-white text-white font-azeret text-[10px] tracking-[0.15em] uppercase font-bold transition-all rounded-[2px] flex items-center gap-2"
-      >
-        <span>+ CREATE CASE STUDY</span>
+        <span>+ AUTHOR NEW ARTICLE</span>
         <span>→</span>
       </Link>
     );
@@ -231,111 +226,57 @@ export default async function DashboardPage({ searchParams }) {
               </div>
             </div>
           </>
-        ) : role === "TECHNICAL_EDITOR" ? (
+        ) : isEditor ? (
           <>
             <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
               <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
               <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                RESEARCH WHITEPAPERS
+                TOTAL PUBLICATIONS
               </div>
               <div className="font-roc text-3xl sm:text-4xl font-bold text-white mt-1">
                 {articleCount.toString().padStart(2, "0")}
               </div>
-              <div className="font-azeret text-[9px] tracking-[0.15em] text-emerald-500 mt-2">
-                PUBLICATIONS LIVE
+              <div className="font-azeret text-[9px] tracking-[0.15em] text-white/50 mt-2">
+                RESEARCH PAPERS & POSTS
               </div>
             </div>
 
             <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
               <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
               <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                ENGINEERING CASE STUDIES
+                PUBLISHED ARTICLES
               </div>
-              <div className="font-roc text-3xl sm:text-4xl font-bold text-white mt-1">
+              <div className="font-roc text-3xl sm:text-4xl font-bold text-emerald-400 mt-1">
+                {publishedCount.toString().padStart(2, "0")}
+              </div>
+              <div className="font-azeret text-[9px] tracking-[0.15em] text-emerald-500 mt-2">
+                LIVE ON WEBSITE
+              </div>
+            </div>
+
+            <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
+              <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
+              <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
+                DRAFTS IN PROGRESS
+              </div>
+              <div className="font-roc text-3xl sm:text-4xl font-bold text-amber-400 mt-1">
+                {draftCount.toString().padStart(2, "0")}
+              </div>
+              <div className="font-azeret text-[9px] tracking-[0.15em] text-amber-500 mt-2">
+                PENDING EDITORIAL REVIEW
+              </div>
+            </div>
+
+            <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
+              <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
+              <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
+                PORTFOLIO CASE STUDIES
+              </div>
+              <div className="font-roc text-3xl sm:text-4xl font-bold text-accent mt-1">
                 {projectCount.toString().padStart(2, "0")}
               </div>
               <div className="font-azeret text-[9px] tracking-[0.15em] text-accent mt-2">
                 ACTIVE SHOWCASES
-              </div>
-            </div>
-
-            <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
-              <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                TECHNICAL PILLARS
-              </div>
-              <div className="font-roc text-3xl sm:text-4xl font-bold text-white mt-1">
-                03
-              </div>
-              <div className="font-azeret text-[9px] tracking-[0.15em] text-white/50 mt-2">
-                SYSTEMS, AI & CLOUD
-              </div>
-            </div>
-
-            <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
-              <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                ACTIVE PRACTITIONERS
-              </div>
-              <div className="font-roc text-3xl sm:text-4xl font-bold text-white mt-1">
-                {memberCount.toString().padStart(2, "0")}
-              </div>
-              <div className="font-azeret text-[9px] tracking-[0.15em] text-white/50 mt-2">
-                ENGINEERING ROSTER
-              </div>
-            </div>
-          </>
-        ) : role === "CREATIVE_EDITOR" ? (
-          <>
-            <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
-              <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                PORTFOLIO WORKS
-              </div>
-              <div className="font-roc text-3xl sm:text-4xl font-bold text-white mt-1">
-                {projectCount.toString().padStart(2, "0")}
-              </div>
-              <div className="font-azeret text-[9px] tracking-[0.15em] text-emerald-500 mt-2">
-                ACTIVE CASE STUDIES
-              </div>
-            </div>
-
-            <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
-              <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                DESIGN INSIGHTS
-              </div>
-              <div className="font-roc text-3xl sm:text-4xl font-bold text-white mt-1">
-                {articleCount.toString().padStart(2, "0")}
-              </div>
-              <div className="font-azeret text-[9px] tracking-[0.15em] text-accent mt-2">
-                CREATIVE ESSAYS LIVE
-              </div>
-            </div>
-
-            <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
-              <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                CREATIVE PILLARS
-              </div>
-              <div className="font-roc text-3xl sm:text-4xl font-bold text-white mt-1">
-                03
-              </div>
-              <div className="font-azeret text-[9px] tracking-[0.15em] text-white/50 mt-2">
-                BRAND, TOKENS & ADVISORY
-              </div>
-            </div>
-
-            <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
-              <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                CREATIVE DIRECTORS
-              </div>
-              <div className="font-roc text-3xl sm:text-4xl font-bold text-white mt-1">
-                {memberCount.toString().padStart(2, "0")}
-              </div>
-              <div className="font-azeret text-[9px] tracking-[0.15em] text-white/50 mt-2">
-                STUDIO PRACTITIONERS
               </div>
             </div>
           </>
@@ -422,14 +363,14 @@ export default async function DashboardPage({ searchParams }) {
           </Link>
         )}
 
-        {/* Module 02: Research & Insights (SUPER_ADMIN, TECHNICAL_EDITOR, CREATIVE_EDITOR, VIEWER) */}
-        {role !== "OPERATIONS_LEAD" && (
+        {/* Module 02: Research & Insights (SUPER_ADMIN, EDITOR) */}
+        {(role === "SUPER_ADMIN" || isEditor) && (
           <Link
             href="/dashboard/insights"
             className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all"
           >
             <span className="font-azeret text-[9px] tracking-[0.2em] text-accent uppercase">
-              MODULE 02 // CMS
+              MODULE {isEditor ? "01" : "02"} // CMS
             </span>
             <h2 className="font-roc text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
               RESEARCH & INSIGHTS PUBLISHING
@@ -444,14 +385,14 @@ export default async function DashboardPage({ searchParams }) {
           </Link>
         )}
 
-        {/* Module 03: Portfolio & Showcase (SUPER_ADMIN, TECHNICAL_EDITOR, CREATIVE_EDITOR, VIEWER) */}
-        {role !== "OPERATIONS_LEAD" && (
+        {/* Module 03: Portfolio & Showcase (SUPER_ADMIN, EDITOR) */}
+        {(role === "SUPER_ADMIN" || isEditor) && (
           <Link
             href="/dashboard/portfolio"
             className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all"
           >
             <span className="font-azeret text-[9px] tracking-[0.2em] text-accent uppercase">
-              MODULE 03 // CMS
+              MODULE {isEditor ? "02" : "03"} // CMS
             </span>
             <h2 className="font-roc text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
               PORTFOLIO & PRODUCTS
@@ -466,8 +407,8 @@ export default async function DashboardPage({ searchParams }) {
           </Link>
         )}
 
-        {/* Module 04: Team & Roster (SUPER_ADMIN, OPERATIONS_LEAD, VIEWER) */}
-        {(role === "SUPER_ADMIN" || role === "OPERATIONS_LEAD" || role === "VIEWER") && (
+        {/* Module 04: Team & Roster (SUPER_ADMIN, OPERATIONS_LEAD) */}
+        {(role === "SUPER_ADMIN" || role === "OPERATIONS_LEAD") && (
           <Link
             href="/dashboard/team"
             className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all"
@@ -490,27 +431,29 @@ export default async function DashboardPage({ searchParams }) {
           </Link>
         )}
 
-        {/* Module 05: Practice Pillars (All Roles, adapted) */}
-        <Link
-          href="/dashboard/services"
-          className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all"
-        >
-          <span className="font-azeret text-[9px] tracking-[0.2em] text-accent uppercase">
-            MODULE 05 // {role === "OPERATIONS_LEAD" ? "REF" : "CMS"}
-          </span>
-          <h2 className="font-roc text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
-            {role === "OPERATIONS_LEAD" ? "PRACTICE PILLARS & SCOPE" : "PRACTICE PILLARS & SERVICES"}
-          </h2>
-          <p className="font-roc text-xs text-white/60 mt-2 leading-relaxed">
-            {role === "OPERATIONS_LEAD"
-              ? "Reference the 6 practice pillars and deliverables matrix when scoping client proposals."
-              : "Edit the 6 practice pillars, capabilities table matrix, and creative service packages."}
-          </p>
-          <div className="mt-4 flex items-center gap-2 font-azeret text-[10px] tracking-[0.15em] text-white/40 group-hover:text-white uppercase transition-colors">
-            <span>{role === "OPERATIONS_LEAD" ? "VIEW PILLARS" : "MANAGE SERVICES"}</span>
-            <span>→</span>
-          </div>
-        </Link>
+        {/* Module 05: Practice Pillars (SUPER_ADMIN, OPERATIONS_LEAD) */}
+        {(role === "SUPER_ADMIN" || role === "OPERATIONS_LEAD") && (
+          <Link
+            href="/dashboard/services"
+            className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all"
+          >
+            <span className="font-azeret text-[9px] tracking-[0.2em] text-accent uppercase">
+              MODULE 05 // {role === "OPERATIONS_LEAD" ? "REF" : "CMS"}
+            </span>
+            <h2 className="font-roc text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
+              {role === "OPERATIONS_LEAD" ? "PRACTICE PILLARS & SCOPE" : "PRACTICE PILLARS & SERVICES"}
+            </h2>
+            <p className="font-roc text-xs text-white/60 mt-2 leading-relaxed">
+              {role === "OPERATIONS_LEAD"
+                ? "Reference the 6 practice pillars and deliverables matrix when scoping client proposals."
+                : "Edit the 6 practice pillars, capabilities table matrix, and creative service packages."}
+            </p>
+            <div className="mt-4 flex items-center gap-2 font-azeret text-[10px] tracking-[0.15em] text-white/40 group-hover:text-white uppercase transition-colors">
+              <span>{role === "OPERATIONS_LEAD" ? "VIEW PILLARS" : "MANAGE SERVICES"}</span>
+              <span>→</span>
+            </div>
+          </Link>
+        )}
 
         {/* Module 06: System Settings (STRICTLY SUPER_ADMIN ONLY) */}
         {role === "SUPER_ADMIN" && (

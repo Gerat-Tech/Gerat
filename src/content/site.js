@@ -23,7 +23,7 @@ export const siteConfig = {
     headquarters: "Bole Subcity, Addis Ababa, Ethiopia",
   },
   navLinks: [
-    { name: "SERVICES", href: "/why-wqf" },
+    { name: "SERVICES", href: "/services" },
     { name: "PORTFOLIO", href: "/portfolio" },
     { name: "TEAM", href: "/team" },
     { name: "INSIGHTS", href: "/insights" },

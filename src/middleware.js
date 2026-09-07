@@ -55,17 +55,20 @@ export async function middleware(request) {
           "/dashboard/team",
           "/dashboard/services",
         ],
+        EDITOR: [
+          "/dashboard",
+          "/dashboard/insights",
+          "/dashboard/portfolio",
+        ],
         TECHNICAL_EDITOR: [
           "/dashboard",
           "/dashboard/insights",
           "/dashboard/portfolio",
-          "/dashboard/services",
         ],
         CREATIVE_EDITOR: [
           "/dashboard",
           "/dashboard/portfolio",
           "/dashboard/insights",
-          "/dashboard/services",
         ],
         VIEWER: [
           "/dashboard",

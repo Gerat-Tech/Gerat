@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { useTheme } from "@/context/ThemeContext";
 
 const DEFAULT_MARQUEE_TOKENS = [
@@ -137,7 +138,7 @@ export default function SettingsClientView({
     OFFICE_COORDINATES: initialConfigs.OFFICE_COORDINATES || "8.9954° N, 38.7889° E // BOLE",
     ANNOUNCEMENT_ENABLED: initialConfigs.ANNOUNCEMENT_ENABLED === "true",
     ANNOUNCEMENT_TEXT: initialConfigs.ANNOUNCEMENT_TEXT || "SYSTEM ADVISORY: Q3 ARCHITECTURAL ENGAGEMENT SCHEDULE OPEN",
-    ANNOUNCEMENT_LINK: initialConfigs.ANNOUNCEMENT_LINK || "/why-wqf",
+    ANNOUNCEMENT_LINK: initialConfigs.ANNOUNCEMENT_LINK || "/services",
     NOTIFICATION_ENABLED: initialConfigs.NOTIFICATION_ENABLED !== "false",
     NOTIFICATION_WEBHOOK_URL: initialConfigs.NOTIFICATION_WEBHOOK_URL || "",
     NOTIFICATION_CHAT_ID: initialConfigs.NOTIFICATION_CHAT_ID || "",
@@ -381,6 +382,18 @@ export default function SettingsClientView({
         >
           04 // IMMUTABLE AUDIT LOG
         </button>
+
+        <Link
+          href="/dashboard/settings/users"
+          className={`py-2 px-3.5 rounded-[2px] transition-colors flex items-center gap-1.5 ${
+            isLight
+              ? "bg-black/5 hover:bg-black/10 text-accent font-bold"
+              : "bg-white/5 hover:bg-white/10 text-accent font-bold"
+          }`}
+        >
+          <span>05 // USER & ROLE GOVERNANCE</span>
+          <span>→</span>
+        </Link>
       </div>
 
       {/* TAB 1: SITE CONFIG & LOCATION PRESETS */}
@@ -583,7 +596,7 @@ export default function SettingsClientView({
                 </label>
                 <input
                   type="text"
-                  placeholder="/why-wqf or /services/brand-creative"
+                  placeholder="/services or /services/brand-creative"
                   value={configs.ANNOUNCEMENT_LINK}
                   onChange={(e) => setConfigs({ ...configs, ANNOUNCEMENT_LINK: e.target.value })}
                   className={`w-full border px-3 py-2 font-mono text-xs rounded-[2px] focus:border-accent outline-none ${

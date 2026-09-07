@@ -14,6 +14,9 @@ function LoginForm() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [selectedPreset, setSelectedPreset] = useState("");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -42,9 +45,10 @@ function LoginForm() {
     }
   };
 
-  const handleQuickFill = (presetEmail, presetPass) => {
+  const handleQuickFill = (presetKey, presetEmail, presetPass) => {
     setEmail(presetEmail);
     setPassword(presetPass);
+    setSelectedPreset(presetKey);
     setError("");
   };
 
@@ -128,29 +132,46 @@ function LoginForm() {
                 required
                 autoComplete="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setSelectedPreset("");
+                }}
                 placeholder="name@gerat.et"
                 className="w-full bg-black/50 border border-white/15 focus:border-accent text-white px-3.5 py-2.5 rounded-[2px] font-azeret text-xs placeholder:text-white/20 outline-none transition-colors"
               />
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <label
-                htmlFor="password"
-                className="font-azeret text-[10px] tracking-[0.15em] text-white/60 uppercase"
-              >
-                SECURITY PASSPHRASE
-              </label>
-              <input
-                id="password"
-                type="password"
-                required
-                autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••••••"
-                className="w-full bg-black/50 border border-white/15 focus:border-accent text-white px-3.5 py-2.5 rounded-[2px] font-azeret text-xs placeholder:text-white/20 outline-none transition-colors"
-              />
+              <div className="flex items-center justify-between">
+                <label
+                  htmlFor="password"
+                  className="font-azeret text-[10px] tracking-[0.15em] text-white/60 uppercase"
+                >
+                  SECURITY PASSPHRASE
+                </label>
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="font-azeret text-[9px] tracking-[0.15em] text-white/40 hover:text-accent uppercase transition-colors"
+                >
+                  {showPassword ? "HIDE" : "SHOW"}
+                </button>
+              </div>
+              <div className="relative">
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  required
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setSelectedPreset("");
+                  }}
+                  placeholder="••••••••••••"
+                  className="w-full bg-black/50 border border-white/15 focus:border-accent text-white px-3.5 py-2.5 rounded-[2px] font-azeret text-xs placeholder:text-white/20 outline-none transition-colors"
+                />
+              </div>
             </div>
 
             <button
@@ -173,31 +194,50 @@ function LoginForm() {
           </form>
 
           {/* Development Quick-Fill Helpers */}
-          <div className="mt-8 pt-6 border-t border-white/10 flex flex-col gap-2">
-            <span className="font-azeret text-[9px] tracking-[0.2em] text-white/30 uppercase">
-              QUICK-ACCESS PRESETS (TEAM ROLES):
-            </span>
-            <div className="grid grid-cols-3 gap-1.5 font-azeret text-[9px] tracking-[0.1em] uppercase">
+          <div className="mt-8 pt-6 border-t border-white/10 flex flex-col gap-2.5">
+            <div className="flex items-center justify-between">
+              <span className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
+                QUICK-ACCESS PRESETS (TEAM ROLES):
+              </span>
+            </div>
+            <div className="grid grid-cols-3 gap-2 font-azeret text-[9px] tracking-[0.1em] uppercase">
               <button
                 type="button"
-                onClick={() => handleQuickFill("admin@gerat.et", "GeratAdmin2026!#")}
-                className="py-1.5 px-2 bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-accent/40 rounded-[2px] text-white/70 hover:text-white text-center transition-colors"
+                onClick={() => handleQuickFill("admin", "admin@gerat.et", "GeratAdmin2026!#")}
+                className={`py-2 px-1.5 border rounded-[2px] text-center transition-all flex flex-col items-center gap-0.5 cursor-pointer ${
+                  selectedPreset === "admin"
+                    ? "bg-accent/15 border-accent text-white"
+                    : "bg-white/[0.03] hover:bg-white/[0.08] border-white/10 hover:border-accent/40 text-white/70 hover:text-white"
+                }`}
               >
-                SUPER ADMIN
+                <span className="font-bold">SUPER ADMIN</span>
+                <span className="text-[7.5px] tracking-normal text-white/40 lowercase">admin@gerat.et</span>
               </button>
+
               <button
                 type="button"
-                onClick={() => handleQuickFill("operations@gerat.et", "GeratTeam2026!#")}
-                className="py-1.5 px-2 bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-accent/40 rounded-[2px] text-white/70 hover:text-white text-center transition-colors"
+                onClick={() => handleQuickFill("ops", "operations@gerat.et", "GeratTeam2026!#")}
+                className={`py-2 px-1.5 border rounded-[2px] text-center transition-all flex flex-col items-center gap-0.5 cursor-pointer ${
+                  selectedPreset === "ops"
+                    ? "bg-accent/15 border-accent text-white"
+                    : "bg-white/[0.03] hover:bg-white/[0.08] border-white/10 hover:border-accent/40 text-white/70 hover:text-white"
+                }`}
               >
-                OPS LEAD
+                <span className="font-bold">OPS LEAD</span>
+                <span className="text-[7.5px] tracking-normal text-white/40 lowercase">operations@gerat.et</span>
               </button>
+
               <button
                 type="button"
-                onClick={() => handleQuickFill("architect@gerat.et", "GeratTeam2026!#")}
-                className="py-1.5 px-2 bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-accent/40 rounded-[2px] text-white/70 hover:text-white text-center transition-colors"
+                onClick={() => handleQuickFill("editor", "editor@gerat.et", "GeratTeam2026!#")}
+                className={`py-2 px-1.5 border rounded-[2px] text-center transition-all flex flex-col items-center gap-0.5 cursor-pointer ${
+                  selectedPreset === "editor"
+                    ? "bg-accent/15 border-accent text-white"
+                    : "bg-white/[0.03] hover:bg-white/[0.08] border-white/10 hover:border-accent/40 text-white/70 hover:text-white"
+                }`}
               >
-                TECH LEAD
+                <span className="font-bold">EDITOR</span>
+                <span className="text-[7.5px] tracking-normal text-white/40 lowercase">editor@gerat.et</span>
               </button>
             </div>
           </div>

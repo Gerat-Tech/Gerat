@@ -75,3 +75,38 @@
   --z-modal: 100;
   --z-cursor: 200;
 }
+
+/* ==========================================================================
+   Universal Light Mode Color Tokens (Spec §3.1 + Architectural Gray System)
+   Canvas: #F0F2F5 (soft cool gray)
+   Cards: #E2E6EC (medium gray cards)
+   Elevated / Hover: #D8DEE6
+   Text Primary: #0B0F17 (high contrast dark charcoal)
+   Text Secondary: #1F242E
+   Text Muted: #4B5565
+   Text Dim: #6B7280
+   Borders: #CBD2DC
+   ========================================================================== */
+html.light,
+html.site-light {
+  --bg: #F0F2F5;
+  --bg-subtle: #E8ECF2;
+  --surface: #E2E6EC;
+  --surface-2: #D8DEE6;
+  --surface-3: #CBD2DC;
+
+  --text-primary: #0B0F17;
+  --text-secondary: #1F242E;
+  --text-muted: #4B5565;
+  --text-dim: #6B7280;
+
+  --border: #CBD2DC;
+  --border-subtle: rgba(11, 15, 23, 0.10);
+  --border-medium: rgba(11, 15, 23, 0.20);
+  --border-strong: rgba(11, 15, 23, 0.40);
+
+  --accent: #FF4A00;
+  --accent-hover: #E03E00;
+  --accent-subtle: rgba(255, 74, 0, 0.12);
+  --accent-glow: rgba(255, 74, 0, 0.25);
+}

@@ -1,5 +1,7 @@
 import "./globals.css";
+import { cookies } from "next/headers";
 import { NavProvider } from "@/context/NavContext";
+import { ThemeProvider } from "@/context/ThemeContext";
 import ClientWrapper from "@/components/layout/ClientWrapper";
 
 export const metadata = {
@@ -54,10 +56,18 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const cookieStore = await cookies();
+  const themeCookie = cookieStore.get("gerat-theme")?.value || cookieStore.get("gerat-dashboard-theme")?.value || "dark";
+  const initialTheme = themeCookie === "light" ? "light" : "dark";
+
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <body className="bg-[#050505] text-white selection:bg-accent selection:text-black">
+    <html
+      lang="en"
+      className={`scroll-smooth ${initialTheme === "light" ? "light site-light dashboard-light" : "dark site-dark dashboard-dark"}`}
+      suppressHydrationWarning
+    >
+      <body className="bg-[var(--bg)] text-[var(--text-primary)] selection:bg-accent selection:text-black min-h-screen transition-colors duration-200">
         {/* Skip-to-content accessibility link (Spec ref: §37, Phase 14) */}
         <a
           href="#main-content"
@@ -66,13 +76,15 @@ export default function RootLayout({ children }) {
           Skip to main content
         </a>
 
-        <NavProvider>
-          <ClientWrapper>
-            <main id="main-content" tabIndex="-1" className="outline-none min-h-screen">
-              {children}
-            </main>
-          </ClientWrapper>
-        </NavProvider>
+        <ThemeProvider initialTheme={initialTheme}>
+          <NavProvider>
+            <ClientWrapper>
+              <main id="main-content" tabIndex="-1" className="outline-none min-h-screen">
+                {children}
+              </main>
+            </ClientWrapper>
+          </NavProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -14,13 +14,17 @@ const prisma = new PrismaClient();
 async function main() {
   console.log("🌱 Seeding Gerat Mission Control database...");
 
-  // 1. Seed Users (Super Admin, Operations Lead, Technical Editor)
+  // 1. Seed Users (Super Admin, Operations Lead, Editor)
   const adminPassword = await bcrypt.hash("GeratAdmin2026!#", 10);
   const teamPassword = await bcrypt.hash("GeratTeam2026!#", 10);
 
   const superAdmin = await prisma.user.upsert({
     where: { email: "admin@gerat.et" },
-    update: {},
+    update: {
+      passwordHash: adminPassword,
+      role: "SUPER_ADMIN",
+      active: true,
+    },
     create: {
       email: "admin@gerat.et",
       name: "Dawit (Principal Architect)",
@@ -33,7 +37,11 @@ async function main() {
 
   const opsLead = await prisma.user.upsert({
     where: { email: "operations@gerat.et" },
-    update: {},
+    update: {
+      passwordHash: teamPassword,
+      role: "OPERATIONS_LEAD",
+      active: true,
+    },
     create: {
       email: "operations@gerat.et",
       name: "Client Operations Lead",
@@ -44,20 +52,24 @@ async function main() {
     },
   });
 
-  const techEditor = await prisma.user.upsert({
-    where: { email: "architect@gerat.et" },
-    update: {},
-    create: {
-      email: "architect@gerat.et",
-      name: "Lead Systems Architect",
+  const editor = await prisma.user.upsert({
+    where: { email: "editor@gerat.et" },
+    update: {
       passwordHash: teamPassword,
-      role: "TECHNICAL_EDITOR",
-      title: "Staff Infrastructure Architect",
+      role: "EDITOR",
+      active: true,
+    },
+    create: {
+      email: "editor@gerat.et",
+      name: "Content & Editorial Lead",
+      passwordHash: teamPassword,
+      role: "EDITOR",
+      title: "Content & Publications Director",
       active: true,
     },
   });
 
-  console.log("  ✓ Created/verified 3 administrative users (Super Admin, Ops Lead, Tech Editor)");
+  console.log("  ✓ Created/verified 3 administrative users (Super Admin, Ops Lead, Editor)");
 
   // 2. Seed Portfolio Case Studies
   let projectOrder = 1;
