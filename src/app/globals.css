@@ -8,10 +8,8 @@
    Tailwind v4 Theme Configuration
    ========================================================================== */
 @theme {
-  --font-artific: "Artific", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-parkinsans: "Parkinsans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-roc: "Artific", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-azeret: "Parkinsans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-artific: var(--font-artific), "Artific", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-parkinsans: var(--font-parkinsans), "Parkinsans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   --color-bg: #0d0706;
   --color-bg-subtle: #140c0a;
@@ -127,28 +125,6 @@
   font-display: swap;
 }
 
-/* Backward-compatibility aliases for legacy font-face declarations */
-@font-face {
-  font-family: "RocGrotesk";
-  src: url("/fonts/artific-regular.woff2") format("woff2");
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "RocGrotesk";
-  src: url("/fonts/artific-semibold.woff2") format("woff2");
-  font-weight: 500 700;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "AzeretMono";
-  src: url("/fonts/Parkinsans-Regular.woff2") format("woff2");
-  font-weight: 400 700;
-  font-display: swap;
-}
-
 /* ==========================================================================
    Base Styles
    ========================================================================== */
@@ -161,7 +137,7 @@ html {
 body {
   background-color: var(--bg);
   color: var(--text-primary);
-  font-family: var(--font-parkinsans), var(--font-artific), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-family: var(--font-parkinsans), "Parkinsans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

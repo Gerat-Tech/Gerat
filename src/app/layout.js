@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { NavProvider } from "@/context/NavContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import ClientWrapper from "@/components/layout/ClientWrapper";
+import { artific, parkinsans } from "./fonts";
 
 export const metadata = {
   metadataBase: new URL("https://www.gerat.com"),
@@ -39,7 +40,7 @@ export const metadata = {
         url: "/brand/og-image.jpg",
         width: 1920,
         height: 1080,
-        alt: "Gerat Software Solution // Deep-Tech Software & Digital Systems",
+        alt: "Gerat Software Solution · Deep-Tech Software & Digital Systems",
       },
     ],
   },
@@ -85,7 +86,7 @@ export default async function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`scroll-smooth ${initialTheme === "light" ? "light site-light dashboard-light" : "dark site-dark dashboard-dark"}`}
+      className={`scroll-smooth ${artific.variable} ${parkinsans.variable} ${initialTheme === "light" ? "light site-light dashboard-light" : "dark site-dark dashboard-dark"}`}
       suppressHydrationWarning
     >
       <head>
