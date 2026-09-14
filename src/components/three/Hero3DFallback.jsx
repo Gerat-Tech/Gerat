@@ -30,7 +30,7 @@ export default function Hero3DFallback() {
           >
             <stop offset="0%" stopColor="#ea5b15" stopOpacity="0.25" />
             <stop offset="50%" stopColor="#ea5b15" stopOpacity="0.05" />
-            <stop offset="100%" stopColor="#050505" stopOpacity="0" />
+            <stop offset="100%" stopColor="#0D0706" stopOpacity="0" />
           </radialGradient>
           <linearGradient id="gridLine" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#ffffff" stopOpacity="0.08" />
