@@ -3,6 +3,7 @@
 import React, { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import GeratLogo from "@/components/common/GeratLogo";
 
 function LoginForm() {
   const router = useRouter();
@@ -58,22 +59,15 @@ function LoginForm() {
       <header className="w-full max-w-5xl mx-auto flex items-center justify-between py-4 border-b border-white/10">
         <Link
           href="/"
-          className="flex items-center gap-3 group text-white/80 hover:text-white transition-colors"
+          className="flex items-center gap-3 group text-white/80 hover:text-white transition-colors py-1"
+          aria-label="Gerat Home"
         >
-          <div className="size-7 rounded-[2px] bg-white/5 border border-white/15 flex items-center justify-center text-white group-hover:border-accent transition-colors">
-            <svg
-              viewBox="150 150 180 180"
-              fill="none"
-              className="size-4"
-              aria-hidden="true"
-            >
-              <path d="M175 190L240 255L305 190" stroke="currentColor" strokeWidth="18" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M190 220L240 270L290 220" stroke="currentColor" strokeWidth="18" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M205 250L240 285L275 250" stroke="var(--accent, #ea5b15)" strokeWidth="18" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-          <span className="font-parkinsans text-[11px] tracking-[0.2em] uppercase font-semibold">
-            GERAT // MISSION CONTROL
+          <GeratLogo
+            variant="badge"
+            className="h-7 w-auto text-white group-hover:text-accent transition-colors duration-300"
+          />
+          <span className="font-parkinsans text-[11px] tracking-[0.2em] uppercase font-semibold text-white/50 group-hover:text-white transition-colors">
+            Mission Control
           </span>
         </Link>
 
@@ -95,13 +89,13 @@ function LoginForm() {
           {/* Form Header */}
           <div className="flex flex-col gap-2 mb-8">
             <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase">
-              OPERATIONS ACCESS //
+              INTERNAL PORTAL ACCESS
             </span>
             <h1 className="font-artific text-2xl sm:text-3xl font-semibold tracking-tight uppercase text-white">
               TEAM AUTHENTICATION
             </h1>
             <p className="font-parkinsans text-xs sm:text-sm text-white/50 leading-relaxed">
-              Enter authorized credentials to access internal CRM telemetry, client communications, and CMS publishing tools.
+              Enter authorized credentials to access internal CRM records, client communications, and publishing tools.
             </p>
           </div>
 

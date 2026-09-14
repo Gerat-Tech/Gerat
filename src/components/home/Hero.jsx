@@ -6,6 +6,7 @@ import HeroDataField from "../three/HeroDataField";
 import FadeUp from "../motion/FadeUp";
 import SplitText from "../motion/SplitText";
 import Magnetic from "../motion/Magnetic";
+import GeratLogo from "../common/GeratLogo";
 import { useNav } from "@/context/NavContext";
 
 /**
@@ -33,8 +34,8 @@ export default function Hero() {
             <div className="inline-flex items-center gap-3 font-parkinsans text-[10px] sm:text-[11px] tracking-[0.25em] text-white/50 uppercase">
               <span className="size-1.5 rounded-[1px] bg-accent animate-corner-pulse" />
               <span className="text-white/80">GERAT SOFTWARE SOLUTION</span>
-              <span className="text-white/20">|</span>
-              <span className="hidden sm:inline">SYS_REF // 2026</span>
+              <span className="text-white/20">·</span>
+              <span className="hidden sm:inline">ADDIS ABABA · EST. 2026</span>
             </div>
           </FadeUp>
 
@@ -108,11 +109,11 @@ export default function Hero() {
           <FadeUp delay={0.7} y={16}>
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-4 font-parkinsans text-[9px] sm:text-[10px] tracking-[0.2em] text-white/40 uppercase">
               <span>ARTIFICIAL INTELLIGENCE</span>
-              <span className="text-white/20">{"//"}</span>
+              <span className="text-white/20">·</span>
               <span>RAG SYSTEMS</span>
-              <span className="text-white/20">{"//"}</span>
+              <span className="text-white/20">·</span>
               <span>ENTERPRISE ERP</span>
-              <span className="text-white/20">{"//"}</span>
+              <span className="text-white/20">·</span>
               <span>GOVERNMENT TECH</span>
             </div>
           </FadeUp>
@@ -131,11 +132,8 @@ export default function Hero() {
             <p className="hidden md:block max-w-sm font-parkinsans text-[9px] text-white/40 uppercase tracking-[0.15em] leading-relaxed">
               OPERATING AT THE INTERSECTION OF DEEP ENGINEERING, ARCHITECTURAL DESIGN, AND MISSION-CRITICAL SOFTWARE.
             </p>
-            <div className="size-7 rounded-[2px] border border-white/15 bg-white/5 flex items-center justify-center text-white/80">
-              <svg className="size-3.5" viewBox="0 0 24 24" fill="none">
-                <path d="M3 5V19H19V13H11V11H21V5H3Z" fill="currentColor" />
-                <rect x="13" y="15" width="4" height="4" fill="var(--accent, #ea5b15)" />
-              </svg>
+            <div className="size-7 rounded-[2px] border border-white/15 bg-white/5 flex items-center justify-center text-accent">
+              <GeratLogo variant="mark" className="size-4 text-accent" />
             </div>
           </div>
         </div>

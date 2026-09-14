@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { useNav } from "@/context/NavContext";
 import Magnetic from "../motion/Magnetic";
+import GeratLogo from "../common/GeratLogo";
 
 /**
  * Editorial Master Footer (Spec §34, Content Replacement §11)
@@ -61,7 +62,7 @@ export default function Footer() {
             </Magnetic>
 
             <span className="font-parkinsans text-[10px] tracking-[0.15em] text-white/40 uppercase">
-              DIRECT RESPONSE // 24-48 HOUR REVIEW
+              DIRECT RESPONSE · 24-48 HOUR REVIEW
             </span>
           </div>
         </div>
@@ -73,30 +74,11 @@ export default function Footer() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 items-start">
             {/* Brand column */}
             <div className="lg:col-span-4 flex flex-col gap-4">
-              <div className="flex items-center gap-3">
-                <div className="size-8 rounded-[3px] bg-white/5 border border-white/15 flex items-center justify-center text-white">
-                  <svg className="size-5" viewBox="150 150 180 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path
-                      d="M306.66,219.97v17.34c-29.32,0-53.09-20.88-53.09-46.64h-27.15c0,25.76-23.77,46.64-53.09,46.64v-17.34c29.32,0,53.09-20.88,53.09-46.64h27.15c0,25.76,23.77,46.64,53.09,46.64Z"
-                      fill="currentColor"
-                    />
-                    <path
-                      d="M306.66,254.65v17.34c-29.32,0-53.09-20.88-53.09-46.64h-27.15c0,25.76-23.77,46.64-53.09,46.64v-17.34c29.32,0,53.09-20.88,53.09-46.64h27.15c0,25.76,23.77,46.64,53.09,46.64Z"
-                      fill="currentColor"
-                    />
-                    <path
-                      d="M306.66,289.33v17.34c-29.32,0-53.09-20.88-53.09-46.64h-27.15c0,25.76-23.77,46.64-53.09,46.64v-17.34c29.32,0,53.09-20.88,53.09-46.64h27.15c0,25.76,23.77,46.64,53.09,46.64Z"
-                      fill="var(--accent, #ea5b15)"
-                    />
-                  </svg>
-                </div>
-                <span className="font-artific text-lg font-bold tracking-[0.18em] text-white">
-                  GERAT
-                </span>
-              </div>
+              <Link href="/" className="inline-block focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded-sm" aria-label="Gerat Software Solution">
+                <GeratLogo variant="badge" className="h-8 w-auto text-white hover:text-accent transition-colors duration-300" />
+              </Link>
               <p className="font-parkinsans text-[10px] text-white/50 leading-relaxed uppercase tracking-[0.15em] max-w-xs">
-                GERAT SOFTWARE SOLUTION // MONOLITHIC BRAND IDENTITIES, AI &
-                ENTERPRISE DIGITAL SYSTEMS.
+                MONOLITHIC BRAND IDENTITIES, DOMAIN AI & ENTERPRISE DIGITAL ARCHITECTURES.
               </p>
             </div>
 
@@ -168,9 +150,9 @@ export default function Footer() {
       <div className="w-full border-t border-white/5 bg-[var(--bg)]">
         <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-parkinsans text-[10px] tracking-[0.15em] text-white/40 uppercase">
           <div>© 2026 GERAT SOFTWARE SOLUTION. ALL RIGHTS RESERVED.</div>
-          <div className="flex items-center gap-6">
-            <span>OPERATIONAL TELEMETRY // STABLE</span>
+          <div className="flex items-center gap-2">
             <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span>ALL SYSTEMS OPERATIONAL</span>
           </div>
         </div>
       </div>

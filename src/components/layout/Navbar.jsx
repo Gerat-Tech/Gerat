@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ContactDrawer from "./ContactDrawer";
 import NavItem from "../common/NavItem";
+import GeratLogo from "../common/GeratLogo";
 import { useNav } from "@/context/NavContext";
 import { useTheme } from "@/context/ThemeContext";
 
@@ -153,30 +154,16 @@ export default function Navbar() {
                 : "bg-transparent border-b border-white/10 pb-3 sm:pb-4 px-2"
             }`}
           >
-            {/* Brand Logo */}
+            {/* Brand Logo - Official Badge Logo */}
             <Link
               href="/"
-              className="flex items-center gap-3 text-white group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded-sm"
+              className="flex items-center text-white group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded-sm py-1"
               aria-label="Gerat Software Solution - Home"
             >
-              {/* Gerat Monogram Icon */}
-              <div className="size-8 rounded-[4px] bg-white/5 border border-white/15 flex items-center justify-center text-accent group-hover:border-accent group-hover:scale-105 transition-all duration-300 shrink-0">
-                <GeratMonogram />
-              </div>
-
-              {/* Logo Typography (Collapses smoothly when scrolled in center mode) */}
-              <div
-                className={`flex flex-col overflow-hidden transition-all duration-400 ${
-                  isScrolled ? "hidden sm:flex" : "flex"
-                }`}
-              >
-                <span className="font-artific text-[14px] sm:text-[15px] font-bold tracking-[0.18em] leading-tight text-white group-hover:text-accent transition-colors">
-                  GERAT
-                </span>
-                <span className="font-parkinsans text-[8px] tracking-[0.22em] text-white/50 leading-tight">
-                  SOFTWARE SOLUTION
-                </span>
-              </div>
+              <GeratLogo
+                variant="badge"
+                className="h-8 sm:h-9 w-auto text-white group-hover:text-accent transition-colors duration-300"
+              />
             </Link>
 
             {/* Desktop Navigation Links (>= 1024px) */}
@@ -398,7 +385,7 @@ export default function Navbar() {
             <span className="absolute top-0 right-0 size-1.5 border-t border-r border-accent" />
             <span className="absolute bottom-0 left-0 size-1.5 border-b border-l border-accent" />
             <span className="absolute bottom-0 right-0 size-1.5 border-b border-r border-accent" />
-            START A PROJECT / CONTACT
+            START A PROJECT · CONTACT
           </button>
         </div>
 
@@ -410,33 +397,5 @@ export default function Navbar() {
       {/* Global Contact Drawer */}
       <ContactDrawer open={isContactOpen} setOpen={setIsContactOpen} />
     </>
-  );
-}
-
-/**
- * Official architectural Gerat standalone mark
- */
-function GeratMonogram() {
-  return (
-    <svg
-      className="size-5"
-      viewBox="150 150 180 180"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <path
-        d="M306.66,219.97v17.34c-29.32,0-53.09-20.88-53.09-46.64h-27.15c0,25.76-23.77,46.64-53.09,46.64v-17.34c29.32,0,53.09-20.88,53.09-46.64h27.15c0,25.76,23.77,46.64,53.09,46.64Z"
-        fill="currentColor"
-      />
-      <path
-        d="M306.66,254.65v17.34c-29.32,0-53.09-20.88-53.09-46.64h-27.15c0,25.76-23.77,46.64-53.09,46.64v-17.34c29.32,0,53.09-20.88,53.09-46.64h27.15c0,25.76,23.77,46.64,53.09,46.64Z"
-        fill="currentColor"
-      />
-      <path
-        d="M306.66,289.33v17.34c-29.32,0-53.09-20.88-53.09-46.64h-27.15c0,25.76-23.77,46.64-53.09,46.64v-17.34c29.32,0,53.09-20.88,53.09-46.64h27.15c0,25.76,23.77,46.64,53.09,46.64Z"
-        fill="var(--accent, #ea5b15)"
-      />
-    </svg>
   );
 }
