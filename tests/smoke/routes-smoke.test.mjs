@@ -7,7 +7,7 @@ export async function runRouteSmokeTests() {
   const root = process.cwd();
 
   const routes = [
-    { file: "src/app/layout.js", name: "RootLayout", checks: ["Gerat Software Solutions PLC", "NavProvider", "ClientWrapper"] },
+    { file: "src/app/layout.js", name: "RootLayout", checks: ["Gerat Software Solution", "NavProvider", "ClientWrapper"] },
     { file: "src/app/page.js", name: "HomePage", checks: ["Hero", "Footer"] },
     { file: "src/app/portfolio/page.js", name: "PortfolioPage", checks: ["export default"] },
     { file: "src/app/team/page.js", name: "TeamPage", checks: ["export default"] },
@@ -16,9 +16,9 @@ export async function runRouteSmokeTests() {
     { file: "src/app/services/page.js", name: "ServicesPage", checks: ["export default", "ServicesOverview"] },
     { file: "src/app/services/brand-creative/page.js", name: "BrandCreativePage", checks: ["export default", "BRAND & CREATIVE"] },
     { file: "src/app/services/personal-branding/page.js", name: "PersonalBrandingPage", checks: ["export default", "PERSONAL BRANDING"] },
-    { file: "src/app/sitemap.js", name: "Sitemap", checks: ["export default function sitemap", "gerat.et"] },
+    { file: "src/app/sitemap.js", name: "Sitemap", checks: ["export default function sitemap", "gerat.com"] },
     { file: "src/app/robots.js", name: "Robots", checks: ["export default function robots", "sitemap.xml"] },
-    { file: "src/app/icon.svg", name: "Icon", checks: ["#FF4A00"] },
+    { file: "src/app/icon.svg", name: "Icon", checks: ["#ea5b15"] },
   ];
 
   for (const { file, name, checks } of routes) {

@@ -14,7 +14,7 @@ export async function runBrandingSmokeTests() {
 
   // README must refer to Gerat
   const readme = fs.readFileSync(path.join(root, "README.md"), "utf-8");
-  assert(readme.includes("Gerat Software Solutions PLC"), "README must document Gerat Software Solutions PLC");
+  assert(readme.includes("Gerat Software Solution"), "README must document Gerat Software Solution");
   console.log("  ✓ README.md branding verified");
 
   // Navbar must not contain legacy WorldQuant Foundry text
@@ -81,7 +81,7 @@ export async function runBrandingSmokeTests() {
   // Contact drawer must have Gerat branding and brand/creative disciplines
   const contactDrawer = fs.readFileSync(path.join(root, "src/components/layout/ContactDrawer.jsx"), "utf-8");
   assert(!contactDrawer.includes("foundry team"), "Contact drawer must not contain 'foundry team'");
-  assert(contactDrawer.includes("GERAT SOFTWARE SOLUTIONS PLC"), "Contact drawer must contain 'GERAT SOFTWARE SOLUTIONS PLC'");
+  assert(contactDrawer.includes("GERAT SOFTWARE SOLUTION"), "Contact drawer must contain 'GERAT SOFTWARE SOLUTION'");
   assert(contactDrawer.includes("BRAND STRATEGY"), "Contact drawer must support 'BRAND STRATEGY'");
   assert(contactDrawer.includes("LOGO & BRAND IDENTITY"), "Contact drawer must support 'LOGO & BRAND IDENTITY'");
   assert(contactDrawer.includes("PERSONAL BRANDING"), "Contact drawer must support 'PERSONAL BRANDING'");
@@ -99,6 +99,6 @@ export async function runBrandingSmokeTests() {
   // Footer must have Gerat copyright
   const footer = fs.readFileSync(path.join(root, "src/components/layout/Footer.jsx"), "utf-8");
   assert(!footer.includes("WorldQuant"), "Footer should not contain 'WorldQuant'");
-  assert(footer.includes("GERAT SOFTWARE SOLUTIONS PLC"), "Footer must contain 'GERAT SOFTWARE SOLUTIONS PLC'");
+  assert(footer.includes("GERAT SOFTWARE SOLUTION"), "Footer must contain 'GERAT SOFTWARE SOLUTION'");
   console.log("  ✓ Footer branding verified");
 }

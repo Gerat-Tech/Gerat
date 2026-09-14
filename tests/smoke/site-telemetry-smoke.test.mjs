@@ -99,7 +99,7 @@ export async function runSiteTelemetrySmokeTests() {
     budgetRange: "250K+ ETB / Enterprise",
     timeline: "URGENT (2-4 WEEKS)",
     phone: "+251911998877",
-    email: "smoke.test@gerat.et",
+    email: "smoke.test@gerat.com",
     priority: "CRITICAL_ENTERPRISE",
     projectBrief: "Automated verification of the telemetry alert notification pipeline.",
   };
