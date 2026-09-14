@@ -1,40 +1,92 @@
 /**
  * Gerat Ethos and Operational Principles Dataset (Spec §26, Content Replacement §5)
+ * Official Brand Pillars: Support (The Tent), Bridge (The Digital World), Scalability (Built to Scale), Founders (5 Founders United)
  */
+export const brandPillars = [
+  {
+    number: "01",
+    code: "PIL-01",
+    name: "SUPPORT",
+    symbol: "THE TENT",
+    title: "UNWAVERING COMMITMENT & FOUNDATIONAL STABILITY",
+    statement:
+      "Support is our backbone. We stand behind our clients with unwavering commitment, offering guidance, reliability, and stability every step of the way.",
+    detail:
+      "Inspired by the shelter form in our brand mark, our systems provide structural security, fault-tolerant backends, and deterministic uptime for high-stakes operational environments.",
+  },
+  {
+    number: "02",
+    code: "PIL-02",
+    name: "BRIDGE",
+    symbol: "THE DIGITAL WORLD",
+    title: "CONNECTING ENTERPRISE TO THE DIGITAL REALM",
+    statement:
+      "We connect ideas to execution, traditional industries to cutting-edge technology, bridging the gap between local enterprise and global digital scale.",
+    detail:
+      "Our software bridges legacy processes and cloud-native architecture, unlocking international scalability, verified AI knowledge pipelines, and high-concurrency digital execution.",
+  },
+  {
+    number: "03",
+    code: "PIL-03",
+    name: "SCALABILITY",
+    symbol: "BUILT TO SCALE",
+    title: "EXPONENTIAL CAPACITY WITHOUT ARCHITECTURAL DECAY",
+    statement:
+      "Our solutions are engineered for growth. From modular software architecture to monolithic brand identities, everything we build scales seamlessly.",
+    detail:
+      "Reflected in the upward-stepping chevrons of our standalone mark, we build architectures that effortlessly absorb 100x traffic expansion with deterministic, verified latencies.",
+  },
+  {
+    number: "04",
+    code: "PIL-04",
+    name: "FOUNDERS",
+    symbol: "5 FOUNDERS UNITED",
+    title: "COLLECTIVE MASTERY & UNCOMPROMISING VISION",
+    statement:
+      "Five founders united by a single vision: engineering transformative software, institutional-grade infrastructure, and visionary brands for Ethiopia and the world.",
+    detail:
+      "The convergence of 5 specialized disciplines—software engineering, distributed systems, brand identity, enterprise architecture, and operational leadership—powering every delivery.",
+  },
+];
+
 export const ethosCards = [
   {
     number: "01",
     code: "VAL-01",
-    title: "ENGINEERING OVER SPECULATION",
+    pillar: "SUPPORT // THE TENT",
+    title: "SYSTEM STABILITY & RESILIENCE",
     statement:
-      "We measure value by operational durability, transaction throughput, and real-world system reliability, not hype cycles.",
+      "Support is our backbone. We measure value by operational durability, transaction throughput, and real-world system reliability.",
     detail:
       "Our software powers institutional backbones where failure is not an option. We build deterministic, mathematically verified systems that maintain integrity under peak stress.",
   },
   {
     number: "02",
     code: "VAL-02",
+    pillar: "BRIDGE // THE DIGITAL WORLD",
     title: "DEEP DOMAIN ARCHITECTURE",
     statement:
-      "We immerse directly into the workflows of the industries we serve to eliminate friction at the structural level.",
+      "We bridge the gap between traditional operations and cutting-edge digital scale, eliminating structural friction.",
     detail:
       "Off-the-shelf software inevitably fails bespoke business logic. We design tailored data models, database indices, and state machines engineered around your exact institutional domain.",
   },
   {
     number: "03",
     code: "VAL-03",
-    title: "OBSERVABILITY & TRANSPARENCY",
+    pillar: "SCALABILITY // BUILT TO SCALE",
+    title: "EXPONENTIAL ARCHITECTURAL VELOCITY",
     statement:
-      "Every transaction, query, and background process is tracked through real-time telemetry and audit logs.",
+      "From modular software architectures to monolithic brand identities, everything we engineer is built to scale seamlessly.",
     detail:
-      "Modern enterprise systems require absolute introspection. We build comprehensive telemetry pipelines and monitoring into every tier of our software architectures.",
+      "Modern enterprise systems require absolute introspection. We build comprehensive telemetry pipelines and monitoring into every tier of our scalable software architectures.",
   },
   {
     number: "04",
     code: "VAL-04",
-    title: "LONG-TERM SOVEREIGNTY",
+    pillar: "FOUNDERS // 5 FOUNDERS UNITED",
+    title: "COLLECTIVE SOVEREIGNTY & VISION",
     statement:
-      "We deliver sovereign software assets with clean code, open standards, and zero predatory vendor lock-in.",
+      "Five founders united to deliver sovereign digital assets with clean code, open standards, and zero predatory vendor lock-in.",
     detail:
       "Institutions must own their technological destiny. We architect clear interfaces, provide thorough engineering documentation, and ensure smooth operational handover.",
   },

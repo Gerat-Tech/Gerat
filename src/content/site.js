@@ -1,14 +1,15 @@
 /**
  * Site-wide configuration and telemetry metadata (Spec §49)
- * Gerat Software Solutions PLC
+ * Gerat Software Solution
  */
 export const siteConfig = {
-  name: "Gerat Software Solutions PLC",
+  name: "Gerat Software Solution",
   shortName: "GERAT",
-  legalName: "Gerat Software Solutions Public Limited Company",
+  legalName: "Gerat Software Solution",
+  domain: "https://www.gerat.com",
   tagline: "From Identity to Infrastructure",
   description:
-    "Gerat Software Solutions PLC builds monolithic brand identities, digital products, intelligent AI systems, and enterprise software architectures for high-stakes operational environments.",
+    "Gerat Software Solution builds monolithic brand identities, digital products, intelligent AI systems, and enterprise software architectures for high-stakes operational environments.",
   telemetry: {
     status: "OPERATIONAL // STABLE",
     location: "ADDIS ABABA, EAST AFRICA",
@@ -17,9 +18,9 @@ export const siteConfig = {
     reviewSla: "24-48 HOURS",
   },
   contact: {
-    inquiries: "info@gerat.et",
-    engineering: "contact@gerat.et",
-    phone: "+251 11 000 0000",
+    inquiries: "info@gerat.com",
+    engineering: "contact@gerat.com",
+    phone: "+2519 2929 8030",
     headquarters: "Bole Subcity, Addis Ababa, Ethiopia",
   },
   navLinks: [

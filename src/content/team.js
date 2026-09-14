@@ -1,26 +1,39 @@
 /**
  * Gerat Leadership & Engineering Team Dataset (Spec §30, Content Replacement §9)
+ * 5 Founders United: Executive leadership aligned with the official brand charter.
  */
 export const leadershipTeam = [
   {
-    name: "DAWIT TEKLEBRHAN",
+    name: "HRUY DANIEL",
     role: "FOUNDER & CHIEF EXECUTIVE OFFICER",
-    specialty: "SYSTEMS ARCHITECTURE // STRATEGY",
-    bio: "Directing the firm's architectural doctrine, technology roadmaps, and enterprise partnerships. Over a decade of experience designing scalable digital platforms across enterprise and institutional spheres.",
+    specialty: "GENERAL MANAGEMENT // STRATEGY & VENTURE",
+    bio: "Directing Gerat Software Solution's strategic vision, enterprise partnerships, and operational governance. Driving transformative digital architecture and high-impact brand ventures across East Africa and international markets.",
+    email: "hruydaniel@gerat.com",
+    phone: "+2519 2929 8030",
     image: "/image/team/leadership/WQF__0000_Founder-IgorTulchinsky.webp",
   },
   {
+    name: "DAWIT TEKLEBRHAN",
+    role: "CO-FOUNDER & CHIEF TECHNOLOGY OFFICER",
+    specialty: "SYSTEMS ARCHITECTURE // COMPUTATIONAL PLATFORMS",
+    bio: "Directing the firm's architectural doctrine, engineering roadmaps, and distributed software backends. Expert in mission-critical systems and enterprise scalability.",
+    email: "dawit@gerat.com",
+    image: "/image/team/leadership/WQF__0005_CEO-and-Co-Founder_Steven-Lau.webp",
+  },
+  {
     name: "YOHANNES TADESSE",
-    role: "HEAD OF ARTIFICIAL INTELLIGENCE",
+    role: "CO-FOUNDER & HEAD OF ARTIFICIAL INTELLIGENCE",
     specialty: "APPLIED RAG // VECTOR RETRIEVAL // LLMS",
     bio: "Leading Gerat's applied machine learning research and domain-grounded knowledge retrieval laboratory. Expert in high-precision semantic chunking and localized model deployment.",
+    email: "yohannes@gerat.com",
     image: "/image/team/leadership/WQF__0004_Chairman-and-Co-Founder_Amir-Husain-2.webp",
   },
   {
     name: "SOLOMON KASSAHUN",
-    role: "HEAD OF ENTERPRISE ENGINEERING",
+    role: "CO-FOUNDER & HEAD OF ENTERPRISE ENGINEERING",
     specialty: "DISTRIBUTED CLOUD // ERP PLATFORMS // SECURITY",
     bio: "Overseeing high-throughput transactional backends, cloud-native deployments, and strict zero-trust cryptographic architectures for mission-critical operations.",
+    email: "solomon@gerat.com",
     image: "/image/team/leadership/WQF__0005_CEO-and-Co-Founder_Steven-Lau.webp",
   },
 ];
