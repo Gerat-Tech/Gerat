@@ -36,10 +36,10 @@ export const metadata = {
       "Deep-tech software engineering studio architecting mission-critical platforms, enterprise ERPs, and domain-grounded AI systems for high-stakes operational environments.",
     images: [
       {
-        url: "/image/portfolioPage/US-AUT-3.webp",
-        width: 1200,
-        height: 630,
-        alt: "Gerat Software Solution // Mission-Critical Architecture",
+        url: "/brand/og-image.jpg",
+        width: 1920,
+        height: 1080,
+        alt: "Gerat Software Solution // Deep-Tech Software & Digital Systems",
       },
     ],
   },
@@ -48,7 +48,7 @@ export const metadata = {
     title: "Gerat Software Solution | Technology That Moves Real Systems",
     description:
       "Deep-tech software engineering studio architecting mission-critical platforms, enterprise ERPs, and domain-grounded AI systems.",
-    images: ["/image/portfolioPage/US-AUT-3.webp"],
+    images: ["/brand/og-image.jpg"],
   },
   robots: {
     index: true,
