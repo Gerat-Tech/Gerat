@@ -56,6 +56,27 @@ export const metadata = {
   },
 };
 
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Gerat Software Solution",
+  url: "https://www.gerat.com",
+  logo: "https://www.gerat.com/brand/gerat-primary-orange.svg",
+  description:
+    "Deep-tech software engineering studio architecting mission-critical platforms, enterprise ERPs, and domain-grounded AI systems.",
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: "+2519 2929 8030",
+    contactType: "customer service",
+    email: "contact@gerat.com",
+  },
+  sameAs: [
+    "https://linkedin.com/company/gerat",
+    "https://github.com/gerat-technologies",
+    "https://t.me/geratsolutions",
+  ],
+};
+
 export default async function RootLayout({ children }) {
   const cookieStore = await cookies();
   const themeCookie = cookieStore.get("gerat-theme")?.value || cookieStore.get("gerat-dashboard-theme")?.value || "dark";
@@ -67,6 +88,12 @@ export default async function RootLayout({ children }) {
       className={`scroll-smooth ${initialTheme === "light" ? "light site-light dashboard-light" : "dark site-dark dashboard-dark"}`}
       suppressHydrationWarning
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+      </head>
       <body className="bg-[var(--bg)] text-[var(--text-primary)] selection:bg-accent selection:text-black min-h-screen transition-colors duration-200">
         {/* Skip-to-content accessibility link (Spec ref: §37, Phase 14) */}
         <a

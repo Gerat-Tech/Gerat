@@ -19,12 +19,18 @@ export async function generateMetadata({ params }) {
   }
 
   if (!article) {
-    return { title: "Blueprint Not Found // Gerat Software Solutions" };
+    return { title: "Blueprint Not Found | Gerat Software Solution" };
   }
 
   return {
-    title: `${article.title} // Gerat Insights`,
-    description: article.excerpt || article.subtitle || "Gerät Technical Whitepaper",
+    title: `${article.title} | Gerat Insights`,
+    description: article.excerpt || article.subtitle || "Gerat Technical Whitepaper",
+    openGraph: {
+      title: `${article.title} | Gerat Insights`,
+      description: article.excerpt || article.subtitle || "Gerat Technical Whitepaper",
+      type: "article",
+      url: `https://www.gerat.com/insights/${slug}`,
+    },
   };
 }
 
