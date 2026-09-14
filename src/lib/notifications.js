@@ -30,7 +30,7 @@ export async function dispatchNewLeadAlert(inquiry) {
       return { delivered: false, reason: "Notifications globally disabled in SiteConfig" };
     }
 
-    const dossierUrl = `${process.env.NEXT_PUBLIC_APP_URL || "https://gerat.et"}/dashboard/inquiries/${inquiry.id}`;
+    const dossierUrl = `${process.env.NEXT_PUBLIC_APP_URL || "https://www.gerat.com"}/dashboard/inquiries/${inquiry.id}`;
 
     // Format rich text alert
     const alertMessage = [
@@ -59,7 +59,7 @@ export async function dispatchNewLeadAlert(inquiry) {
           {
             title: `${inquiry.fullName} — ${inquiry.discipline}`,
             url: dossierUrl,
-            color: 16730624, // #FF4A00 Gerat Accent Spark
+            color: 15358741, // #EA5B15 Gerat Flame Accent
             fields: [
               { name: "Telemetry Code", value: inquiry.telemetryCode, inline: true },
               { name: "Budget Tier", value: inquiry.budgetRange, inline: true },
@@ -69,7 +69,7 @@ export async function dispatchNewLeadAlert(inquiry) {
               { name: "Company", value: inquiry.company || "Independent", inline: true },
               { name: "Project Scope", value: inquiry.projectBrief?.slice(0, 500) || "N/A" },
             ],
-            footer: { text: "Gerat Software Solutions PLC // Mission Control Telemetry" },
+            footer: { text: "Gerat Software Solution // Mission Control Telemetry" },
             timestamp: new Date().toISOString(),
           },
         ],

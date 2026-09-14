@@ -1,6 +1,6 @@
 /**
  * Next.js Dynamic Robots Generator (Spec Phase 15)
- * Gerat Software Solutions PLC
+ * Gerat Software Solution
  */
 export default function robots() {
   return {
@@ -8,6 +8,6 @@ export default function robots() {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://gerat.et/sitemap.xml",
+    sitemap: "https://www.gerat.com/sitemap.xml",
   };
 }

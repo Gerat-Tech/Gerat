@@ -5,10 +5,10 @@ import { ThemeProvider } from "@/context/ThemeContext";
 import ClientWrapper from "@/components/layout/ClientWrapper";
 
 export const metadata = {
-  metadataBase: new URL("https://gerat.et"),
+  metadataBase: new URL("https://www.gerat.com"),
   title: {
-    default: "Gerat Software Solutions PLC | Deep-Tech Software & Digital Systems",
-    template: "%s | Gerat Software Solutions PLC",
+    default: "Gerat Software Solution | Deep-Tech Software & Digital Systems",
+    template: "%s | Gerat Software Solution",
   },
   description:
     "Deep-tech software engineering studio architecting mission-critical platforms, enterprise ERPs, and domain-grounded AI systems for high-stakes operational environments.",
@@ -23,15 +23,15 @@ export const metadata = {
     "Addis Ababa",
     "Ethiopia",
   ],
-  authors: [{ name: "Gerat Software Solutions PLC", url: "https://gerat.et" }],
-  creator: "Gerat Software Solutions PLC",
-  publisher: "Gerat Software Solutions PLC",
+  authors: [{ name: "Gerat Software Solution", url: "https://www.gerat.com" }],
+  creator: "Gerat Software Solution",
+  publisher: "Gerat Software Solution",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://gerat.et",
-    siteName: "Gerat Software Solutions PLC",
-    title: "Gerat Software Solutions PLC | Technology That Moves Real Systems",
+    url: "https://www.gerat.com",
+    siteName: "Gerat Software Solution",
+    title: "Gerat Software Solution | Technology That Moves Real Systems",
     description:
       "Deep-tech software engineering studio architecting mission-critical platforms, enterprise ERPs, and domain-grounded AI systems for high-stakes operational environments.",
     images: [
@@ -39,13 +39,13 @@ export const metadata = {
         url: "/image/portfolioPage/US-AUT-3.webp",
         width: 1200,
         height: 630,
-        alt: "Gerat Software Solutions PLC // Mission-Critical Architecture",
+        alt: "Gerat Software Solution // Mission-Critical Architecture",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Gerat Software Solutions PLC | Technology That Moves Real Systems",
+    title: "Gerat Software Solution | Technology That Moves Real Systems",
     description:
       "Deep-tech software engineering studio architecting mission-critical platforms, enterprise ERPs, and domain-grounded AI systems.",
     images: ["/image/portfolioPage/US-AUT-3.webp"],
@@ -71,7 +71,7 @@ export default async function RootLayout({ children }) {
         {/* Skip-to-content accessibility link (Spec ref: §37, Phase 14) */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[99999] focus:px-4 focus:py-2.5 focus:bg-accent focus:text-white focus:font-azeret focus:text-[11px] focus:tracking-[0.2em] focus:uppercase focus:rounded-[2px] focus:outline-none focus:shadow-2xl"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[99999] focus:px-4 focus:py-2.5 focus:bg-accent focus:text-white focus:font-parkinsans focus:text-[11px] focus:tracking-[0.2em] focus:uppercase focus:rounded-[2px] focus:outline-none focus:shadow-2xl"
         >
           Skip to main content
         </a>

@@ -1,9 +1,9 @@
 /**
  * Next.js Dynamic Sitemap Generator (Spec Phase 15)
- * Gerat Software Solutions PLC
+ * Gerat Software Solution
  */
 export default function sitemap() {
-  const baseUrl = "https://gerat.et";
+  const baseUrl = "https://www.gerat.com";
   const lastModified = new Date().toISOString();
 
   const routes = [
