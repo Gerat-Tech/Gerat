@@ -94,7 +94,7 @@ export default function CommandPalette({ user = null, isOpen, onClose }) {
   return (
     <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-start justify-center pt-24 sm:pt-32 px-4 animate-in fade-in duration-200">
       <div
-        className="w-full max-w-xl bg-[#121212] border border-white/20 rounded-[4px] shadow-[0_24px_80px_rgba(0,0,0,0.9)] overflow-hidden"
+        className="w-full max-w-xl bg-[var(--surface)] border border-white/20 rounded-[4px] shadow-[0_24px_80px_rgba(0,0,0,0.9)] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Bar */}
@@ -113,7 +113,7 @@ export default function CommandPalette({ user = null, isOpen, onClose }) {
             placeholder="Type a command or jump to module..."
             className="w-full bg-transparent text-white font-sans text-sm placeholder:text-white/30 outline-none"
           />
-          <span className="font-azeret text-[10px] tracking-wider text-white/30 border border-white/10 px-1.5 py-0.5 rounded-[2px]">
+          <span className="font-parkinsans text-[10px] tracking-wider text-white/30 border border-white/10 px-1.5 py-0.5 rounded-[2px]">
             ESC
           </span>
         </div>
@@ -121,7 +121,7 @@ export default function CommandPalette({ user = null, isOpen, onClose }) {
         {/* Results List */}
         <div className="max-h-72 overflow-y-auto p-2 divide-y divide-white/5">
           {filteredActions.length === 0 ? (
-            <div className="p-6 text-center font-azeret text-xs text-white/40 uppercase tracking-[0.15em]">
+            <div className="p-6 text-center font-parkinsans text-xs text-white/40 uppercase tracking-[0.15em]">
               NO MATCHING COMMANDS FOUND
             </div>
           ) : (
@@ -140,12 +140,12 @@ export default function CommandPalette({ user = null, isOpen, onClose }) {
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <span className="font-azeret text-[9px] tracking-wider text-accent uppercase font-semibold">
+                    <span className="font-parkinsans text-[9px] tracking-wider text-accent uppercase font-semibold">
                       {action.section}
                     </span>
-                    <span className="font-roc text-sm font-medium">{action.title}</span>
+                    <span className="font-artific text-sm font-medium">{action.title}</span>
                   </div>
-                  <span className="font-azeret text-[10px] tracking-widest text-white/40 border border-white/10 px-2 py-0.5 rounded-[2px]">
+                  <span className="font-parkinsans text-[10px] tracking-widest text-white/40 border border-white/10 px-2 py-0.5 rounded-[2px]">
                     {action.shortcut}
                   </span>
                 </div>
@@ -155,7 +155,7 @@ export default function CommandPalette({ user = null, isOpen, onClose }) {
         </div>
 
         {/* Footer Hint */}
-        <div className="px-4 py-2 bg-white/[0.02] border-t border-white/10 flex items-center justify-between font-azeret text-[9px] tracking-wider text-white/30 uppercase">
+        <div className="px-4 py-2 bg-white/[0.02] border-t border-white/10 flex items-center justify-between font-parkinsans text-[9px] tracking-wider text-white/30 uppercase">
           <span>NAVIGATION // USE ↑↓ ARROWS</span>
           <span>SELECT // ENTER ↵</span>
         </div>

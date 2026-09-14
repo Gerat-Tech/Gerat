@@ -34,7 +34,7 @@ export default function DashboardHeader({ user, onOpenCommand, onToggleSidebar }
         className={`sticky top-0 z-30 h-16 backdrop-blur-md px-4 sm:px-8 flex items-center justify-between transition-colors duration-200 ${
           isLight
             ? "bg-white/95 border-b border-[#E2E5EB] text-[#0D0F12]"
-            : "bg-[#080808]/90 border-b border-white/10 text-white"
+            : "bg-[var(--bg)]/90 border-b border-white/10 text-white"
         }`}
       >
         {/* Left: Mobile Toggle & Command Search Trigger */}
@@ -69,7 +69,7 @@ export default function DashboardHeader({ user, onOpenCommand, onToggleSidebar }
             </svg>
             <span>Search or run command...</span>
             <kbd
-              className={`font-azeret text-[9px] tracking-wider px-1.5 py-0.5 rounded-[2px] ${
+              className={`font-parkinsans text-[9px] tracking-wider px-1.5 py-0.5 rounded-[2px] ${
                 isLight
                   ? "bg-white border border-[#D4D8E0] text-[#555D6B]"
                   : "border border-white/10 text-white/40"
@@ -86,7 +86,7 @@ export default function DashboardHeader({ user, onOpenCommand, onToggleSidebar }
           <button
             type="button"
             onClick={toggleTheme}
-            className={`flex items-center gap-1.5 py-1.5 px-2.5 rounded-[2px] font-azeret text-[9px] tracking-[0.15em] uppercase font-bold transition-colors ${
+            className={`flex items-center gap-1.5 py-1.5 px-2.5 rounded-[2px] font-parkinsans text-[9px] tracking-[0.15em] uppercase font-bold transition-colors ${
               isLight
                 ? "bg-[#F0F2F5] hover:bg-[#E4E7ED] text-[#0D0F12] border border-[#E2E5EB]"
                 : "bg-white/5 hover:bg-white/10 text-white border border-white/10"
@@ -120,7 +120,7 @@ export default function DashboardHeader({ user, onOpenCommand, onToggleSidebar }
                 setIsMenuOpen(!isMenuOpen);
                 setIsUserMenuOpen(false);
               }}
-              className="flex items-center gap-1.5 py-1.5 px-3 bg-accent text-white hover:bg-black hover:text-white font-azeret text-[10px] tracking-[0.15em] uppercase font-bold rounded-[2px] transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 py-1.5 px-3 bg-accent text-white hover:bg-black hover:text-white font-parkinsans text-[10px] tracking-[0.15em] uppercase font-bold rounded-[2px] transition-colors cursor-pointer"
             >
               <span>+ ACTION</span>
               <span className="text-[8px]">▼</span>
@@ -128,10 +128,10 @@ export default function DashboardHeader({ user, onOpenCommand, onToggleSidebar }
 
             {isMenuOpen && (
               <div
-                className={`absolute right-0 mt-2 w-52 rounded-[3px] shadow-2xl py-1 z-50 font-azeret text-[10px] tracking-wider uppercase divide-y ${
+                className={`absolute right-0 mt-2 w-52 rounded-[3px] shadow-2xl py-1 z-50 font-parkinsans text-[10px] tracking-wider uppercase divide-y ${
                   isLight
                     ? "bg-white border border-[#E2E5EB] divide-black/5"
-                    : "bg-[#141414] border border-white/15 divide-white/5"
+                    : "bg-[var(--surface)] border border-white/15 divide-white/5"
                 }`}
                 onMouseLeave={() => setIsMenuOpen(false)}
               >
@@ -300,15 +300,15 @@ export default function DashboardHeader({ user, onOpenCommand, onToggleSidebar }
                 isLight ? "border-[#E2E5EB] hover:opacity-80" : "border-white/10 hover:opacity-90"
               }`}
             >
-              <div className="size-7 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center font-azeret text-[10px] text-accent font-bold">
+              <div className="size-7 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center font-parkinsans text-[10px] text-accent font-bold">
                 {user?.name ? user.name.charAt(0).toUpperCase() : "G"}
               </div>
 
               <div className="hidden md:flex flex-col text-left">
-                <span className={`font-roc text-xs font-semibold leading-tight ${isLight ? "text-[#0D0F12]" : "text-white"}`}>
+                <span className={`font-artific text-xs font-semibold leading-tight ${isLight ? "text-[#0D0F12]" : "text-white"}`}>
                   {user?.name || "Operator"}
                 </span>
-                <span className="font-azeret text-[8px] tracking-[0.2em] text-accent uppercase font-bold">
+                <span className="font-parkinsans text-[8px] tracking-[0.2em] text-accent uppercase font-bold">
                   {role}
                 </span>
               </div>
@@ -318,21 +318,21 @@ export default function DashboardHeader({ user, onOpenCommand, onToggleSidebar }
             {/* Profile Dropdown Menu */}
             {isUserMenuOpen && (
               <div
-                className={`absolute right-0 mt-2 w-56 rounded-[3px] shadow-2xl py-1 z-50 font-azeret text-[10px] tracking-wider uppercase divide-y ${
+                className={`absolute right-0 mt-2 w-56 rounded-[3px] shadow-2xl py-1 z-50 font-parkinsans text-[10px] tracking-wider uppercase divide-y ${
                   isLight
                     ? "bg-white border border-[#E2E5EB] divide-black/5"
-                    : "bg-[#141414] border border-white/15 divide-white/5"
+                    : "bg-[var(--surface)] border border-white/15 divide-white/5"
                 }`}
                 onMouseLeave={() => setIsUserMenuOpen(false)}
               >
                 <div className="px-3.5 py-2.5 flex flex-col gap-0.5">
-                  <div className={`font-roc font-bold text-xs ${isLight ? "text-[#0D0F12]" : "text-white"}`}>
+                  <div className={`font-artific font-bold text-xs ${isLight ? "text-[#0D0F12]" : "text-white"}`}>
                     {user?.name || "Operator"}
                   </div>
                   <div className={`text-[9px] lowercase tracking-normal truncate ${isLight ? "text-[#555D6B]" : "text-white/40"}`}>
-                    {user?.email || "operator@gerat.et"}
+                    {user?.email || "operator@gerat.com"}
                   </div>
-                  <div className="font-azeret text-[8px] tracking-widest text-accent font-bold mt-1">
+                  <div className="font-parkinsans text-[8px] tracking-widest text-accent font-bold mt-1">
                     ROLE: {role}
                   </div>
                 </div>

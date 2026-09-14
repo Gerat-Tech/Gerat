@@ -72,35 +72,35 @@ export default function ChangePasswordModal({ isOpen, onClose, user }) {
     <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
       <div
         className={`relative w-full max-w-md border p-6 sm:p-8 rounded-[3px] shadow-2xl flex flex-col gap-5 ${
-          isLight ? "bg-[#E2E6EC] border-[#CBD2DC] text-[#0B0F17]" : "bg-[#121212] border-white/15 text-white"
+          isLight ? "bg-[#E2E6EC] border-[#CBD2DC] text-[#0B0F17]" : "bg-[var(--surface)] border-white/15 text-white"
         }`}
       >
         {/* Modal Header */}
         <div className={`flex items-center justify-between pb-3 border-b ${isLight ? "border-[#CBD2DC]" : "border-white/10"}`}>
           <div>
-            <span className="font-azeret text-[9px] tracking-[0.25em] text-accent uppercase">
+            <span className="font-parkinsans text-[9px] tracking-[0.25em] text-accent uppercase">
               SECURITY KEY //
             </span>
-            <h2 className="font-roc text-lg font-bold uppercase">UPDATE MY PASSPHRASE</h2>
+            <h2 className="font-artific text-lg font-bold uppercase">UPDATE MY PASSPHRASE</h2>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className={`font-azeret text-sm cursor-pointer ${isLight ? "text-black/40 hover:text-black" : "text-white/40 hover:text-white"}`}
+            className={`font-parkinsans text-sm cursor-pointer ${isLight ? "text-black/40 hover:text-black" : "text-white/40 hover:text-white"}`}
           >
             ✕
           </button>
         </div>
 
         {/* User Identity Info */}
-        <div className={`p-3 rounded-[2px] border font-azeret text-[10px] ${isLight ? "bg-white/60 border-[#CBD2DC]" : "bg-white/[0.02] border-white/10"}`}>
+        <div className={`p-3 rounded-[2px] border font-parkinsans text-[10px] ${isLight ? "bg-white/60 border-[#CBD2DC]" : "bg-white/[0.02] border-white/10"}`}>
           <div className="font-bold">{user?.name || "Operator"}</div>
-          <div className="opacity-60">{user?.email || "operator@gerat.et"}</div>
+          <div className="opacity-60">{user?.email || "operator@gerat.com"}</div>
         </div>
 
         {/* In-Modal Error Card */}
         {modalError && (
-          <div className="p-3 bg-red-950/60 border border-red-500/60 rounded-[2px] flex items-start gap-2.5 text-xs text-red-200 font-azeret">
+          <div className="p-3 bg-red-950/60 border border-red-500/60 rounded-[2px] flex items-start gap-2.5 text-xs text-red-200 font-parkinsans">
             <span className="text-red-400 font-bold">⚠ ERROR:</span>
             <span className="flex-1 leading-relaxed">{modalError.message}</span>
             <button
@@ -115,7 +115,7 @@ export default function ChangePasswordModal({ isOpen, onClose, user }) {
 
         {/* Success Message Card */}
         {successMessage && (
-          <div className="p-3 bg-emerald-950/60 border border-emerald-500/60 rounded-[2px] flex items-center gap-2.5 text-xs text-emerald-300 font-azeret">
+          <div className="p-3 bg-emerald-950/60 border border-emerald-500/60 rounded-[2px] flex items-center gap-2.5 text-xs text-emerald-300 font-parkinsans">
             <span className="text-emerald-400 font-bold">✓</span>
             <span className="flex-1">{successMessage}</span>
           </div>
@@ -125,13 +125,13 @@ export default function ChangePasswordModal({ isOpen, onClose, user }) {
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1.5">
             <div className="flex items-center justify-between">
-              <label className="font-azeret text-[9px] tracking-[0.15em] opacity-60 uppercase">
+              <label className="font-parkinsans text-[9px] tracking-[0.15em] opacity-60 uppercase">
                 CURRENT PASSPHRASE *
               </label>
               <button
                 type="button"
                 onClick={() => setShowPass(!showPass)}
-                className="font-azeret text-[8.5px] tracking-[0.1em] text-accent hover:underline uppercase cursor-pointer"
+                className="font-parkinsans text-[8.5px] tracking-[0.1em] text-accent hover:underline uppercase cursor-pointer"
               >
                 {showPass ? "HIDE" : "SHOW"}
               </button>
@@ -145,7 +145,7 @@ export default function ChangePasswordModal({ isOpen, onClose, user }) {
                 if (modalError?.field === "currentPassword") setModalError(null);
               }}
               placeholder="••••••••••••"
-              className={`w-full border px-3 py-2 rounded-[2px] font-azeret text-xs outline-none transition-colors ${
+              className={`w-full border px-3 py-2 rounded-[2px] font-parkinsans text-xs outline-none transition-colors ${
                 modalError?.field === "currentPassword"
                   ? "border-red-500 bg-red-950/20 text-red-200"
                   : isLight
@@ -156,7 +156,7 @@ export default function ChangePasswordModal({ isOpen, onClose, user }) {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="font-azeret text-[9px] tracking-[0.15em] opacity-60 uppercase">
+            <label className="font-parkinsans text-[9px] tracking-[0.15em] opacity-60 uppercase">
               NEW PASSPHRASE (MIN 6 CHARS) *
             </label>
             <input
@@ -168,7 +168,7 @@ export default function ChangePasswordModal({ isOpen, onClose, user }) {
                 if (modalError?.field === "newPassword") setModalError(null);
               }}
               placeholder="Enter new strong passphrase"
-              className={`w-full border px-3 py-2 rounded-[2px] font-azeret text-xs outline-none transition-colors ${
+              className={`w-full border px-3 py-2 rounded-[2px] font-parkinsans text-xs outline-none transition-colors ${
                 modalError?.field === "newPassword"
                   ? "border-red-500 bg-red-950/20 text-red-200"
                   : isLight
@@ -179,7 +179,7 @@ export default function ChangePasswordModal({ isOpen, onClose, user }) {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="font-azeret text-[9px] tracking-[0.15em] opacity-60 uppercase">
+            <label className="font-parkinsans text-[9px] tracking-[0.15em] opacity-60 uppercase">
               CONFIRM NEW PASSPHRASE *
             </label>
             <input
@@ -191,7 +191,7 @@ export default function ChangePasswordModal({ isOpen, onClose, user }) {
                 if (modalError?.field === "confirmPassword") setModalError(null);
               }}
               placeholder="Re-type new passphrase"
-              className={`w-full border px-3 py-2 rounded-[2px] font-azeret text-xs outline-none transition-colors ${
+              className={`w-full border px-3 py-2 rounded-[2px] font-parkinsans text-xs outline-none transition-colors ${
                 modalError?.field === "confirmPassword"
                   ? "border-red-500 bg-red-950/20 text-red-200"
                   : isLight
@@ -201,7 +201,7 @@ export default function ChangePasswordModal({ isOpen, onClose, user }) {
             />
           </div>
 
-          <div className={`flex items-center justify-end gap-3 pt-4 border-t font-azeret text-[10px] tracking-[0.15em] uppercase ${isLight ? "border-[#CBD2DC]" : "border-white/10"}`}>
+          <div className={`flex items-center justify-end gap-3 pt-4 border-t font-parkinsans text-[10px] tracking-[0.15em] uppercase ${isLight ? "border-[#CBD2DC]" : "border-white/10"}`}>
             <button
               type="button"
               onClick={onClose}

@@ -52,7 +52,7 @@ export default function DashboardSidebar({ user = null, stats = {}, isOpen = tru
       } ${
         isLight
           ? "bg-white border-r border-[#E2E5EB] text-[#0D0F12]"
-          : "bg-[#0d0d0d] border-r border-white/10 text-white"
+          : "bg-[var(--surface)] border-r border-white/10 text-white"
       }`}
     >
       {/* Top Brand & Version Block */}
@@ -66,16 +66,17 @@ export default function DashboardSidebar({ user = null, stats = {}, isOpen = tru
                   : "bg-white/5 border border-white/15 text-white group-hover:border-accent"
               }`}
             >
-              <svg viewBox="0 0 24 24" fill="none" className="size-4" aria-hidden="true">
-                <path d="M4 4H20V8H8V16H16V12H12V8H20V20H4V4Z" fill="currentColor" />
-                <rect x="17" y="13" width="3" height="3" fill="#FF4A00" />
+              <svg viewBox="150 150 180 180" fill="none" className="size-5" aria-hidden="true">
+                <path d="M175 190L240 255L305 190" stroke="currentColor" strokeWidth="18" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M190 220L240 270L290 220" stroke="currentColor" strokeWidth="18" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M205 250L240 285L275 250" stroke="var(--accent, #ea5b15)" strokeWidth="18" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
             <div>
-              <div className={`font-roc text-sm font-bold tracking-tight uppercase ${isLight ? "text-[#0D0F12]" : "text-white"}`}>
+              <div className={`font-artific text-sm font-bold tracking-tight uppercase ${isLight ? "text-[#0D0F12]" : "text-white"}`}>
                 GERAT CONTROL
               </div>
-              <div className={`font-azeret text-[9px] tracking-[0.2em] uppercase ${isLight ? "text-[#555D6B]" : "text-white/40"}`}>
+              <div className={`font-parkinsans text-[9px] tracking-[0.2em] uppercase ${isLight ? "text-[#555D6B]" : "text-white/40"}`}>
                 OPS TERMINAL // v1.0
               </div>
             </div>
@@ -91,7 +92,7 @@ export default function DashboardSidebar({ user = null, stats = {}, isOpen = tru
 
         {/* System Status Ticker */}
         <div
-          className={`px-5 py-2.5 border-b flex items-center justify-between font-azeret text-[9px] tracking-[0.15em] uppercase ${
+          className={`px-5 py-2.5 border-b flex items-center justify-between font-parkinsans text-[9px] tracking-[0.15em] uppercase ${
             isLight
               ? "bg-[#F0F2F5] border-[#E2E5EB] text-[#555D6B]"
               : "bg-black/40 border-white/5 text-white/40"
@@ -119,7 +120,7 @@ export default function DashboardSidebar({ user = null, stats = {}, isOpen = tru
                 key={item.name}
                 href={item.href}
                 onClick={onClose}
-                className={`flex items-center justify-between py-2.5 px-3 rounded-[3px] font-azeret text-[10px] tracking-[0.15em] uppercase transition-all ${
+                className={`flex items-center justify-between py-2.5 px-3 rounded-[3px] font-parkinsans text-[10px] tracking-[0.15em] uppercase transition-all ${
                   isActive
                     ? isLight
                       ? "bg-accent/10 text-[#0D0F12] border-l-2 border-accent font-bold"
@@ -147,7 +148,7 @@ export default function DashboardSidebar({ user = null, stats = {}, isOpen = tru
                 </div>
 
                 {badgeCount > 0 && (
-                  <span className="px-1.5 py-0.5 rounded-[2px] bg-accent text-white font-azeret text-[9px] font-bold">
+                  <span className="px-1.5 py-0.5 rounded-[2px] bg-accent text-white font-parkinsans text-[9px] font-bold">
                     {badgeCount}
                   </span>
                 )}
@@ -162,7 +163,7 @@ export default function DashboardSidebar({ user = null, stats = {}, isOpen = tru
         <Link
           href="/"
           target="_blank"
-          className={`w-full py-2 px-3 font-azeret text-[9px] tracking-[0.15em] uppercase rounded-[2px] flex items-center justify-between transition-colors ${
+          className={`w-full py-2 px-3 font-parkinsans text-[9px] tracking-[0.15em] uppercase rounded-[2px] flex items-center justify-between transition-colors ${
             isLight
               ? "bg-[#F0F2F5] hover:bg-[#E4E7ED] border border-[#E2E5EB] text-[#555D6B] hover:text-[#0D0F12]"
               : "bg-white/[0.02] hover:bg-white/[0.06] border border-white/10 text-white/70 hover:text-white"
