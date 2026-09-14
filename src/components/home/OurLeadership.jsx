@@ -5,30 +5,7 @@ import Link from "next/link";
 import SectionLabel from "../common/SectionLabel";
 import FadeUp from "../motion/FadeUp";
 import SplitText from "../motion/SplitText";
-
-const DEFAULT_LEADERS = [
-  {
-    name: "DAWIT TEKLEBRHAN",
-    role: "FOUNDER & CHIEF EXECUTIVE OFFICER",
-    specialty: "ENTERPRISE SYSTEMS ARCHITECTURE // STRATEGY",
-    bio: "Guiding the architectural vision and engineering standards across Gerat's digital infrastructure platforms and client solutions.",
-    image: "/image/team/leadership/WQF__0000_Founder-IgorTulchinsky.webp",
-  },
-  {
-    name: "YOHANNES TADESSE",
-    role: "HEAD OF ARTIFICIAL INTELLIGENCE",
-    specialty: "RAG PIPELINES // VECTOR RETRIEVAL // LLMS",
-    bio: "Directing the applied AI laboratory, specialized RAG networks, and domain-grounded intelligence models for institutional workflows.",
-    image: "/image/team/leadership/WQF__0004_Chairman-and-Co-Founder_Amir-Husain-2.webp",
-  },
-  {
-    name: "SOLOMON KASSAHUN",
-    role: "HEAD OF ENTERPRISE ENGINEERING",
-    specialty: "DISTRIBUTED CLOUD // ERP PLATFORMS // SECURITY",
-    bio: "Overseeing cloud-native infrastructure, high-concurrency database deployments, and rigorous cryptographic verification standards.",
-    image: "/image/team/leadership/WQF__0005_CEO-and-Co-Founder_Steven-Lau.webp",
-  },
-];
+import { leadershipTeam as DEFAULT_LEADERS } from "@/content/team";
 
 export default function OurLeadership({ initialLeaders = null }) {
   const [activeIdx, setActiveIdx] = useState(0);
@@ -41,7 +18,7 @@ export default function OurLeadership({ initialLeaders = null }) {
       .then((data) => {
         if (isMounted && data.success && data.members && data.members.length > 0) {
           const execs = data.members.filter((m) => m.division === "EXECUTIVE_LEADERSHIP");
-          const list = execs.length > 0 ? execs : data.members.slice(0, 3);
+          const list = execs.length > 0 ? execs : data.members.slice(0, 4);
           const mapped = list.map((m) => ({
             name: m.name,
             role: m.roleTitle,
@@ -70,30 +47,30 @@ export default function OurLeadership({ initialLeaders = null }) {
     <section
       id="leadership"
       aria-label="Leadership"
-      className="relative w-full bg-[#050505] text-white py-24 sm:py-32 border-b border-white/10"
+      className="relative w-full bg-[var(--bg)] text-white py-24 sm:py-32 border-b border-white/10"
     >
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16 lg:mb-20">
           <div className="flex flex-col gap-4 max-w-2xl">
-            <SectionLabel index="04" label="LEADERSHIP" />
+            <SectionLabel index="05" label="LEADERSHIP" />
             <SplitText
               text="ENGINEERING LEADERSHIP."
               as="h2"
-              className="font-roc text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
+              className="font-artific text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
             />
             <SplitText
               text="DOMAIN EXPERIENCE."
               as="h2"
               wordClassName="text-accent"
-              className="font-roc text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
+              className="font-artific text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
             />
           </div>
 
           <FadeUp delay={0.3}>
             <Link
               href="/team"
-              className="group relative isolate inline-flex items-center font-azeret text-[11px] uppercase tracking-[0.2em] px-6 py-3 border border-white/20 hover:border-accent hover:bg-accent/10 text-white/90 hover:text-white transition-all duration-300 rounded-[2px]"
+              className="group relative isolate inline-flex items-center font-parkinsans text-[11px] uppercase tracking-[0.2em] px-6 py-3 border border-white/20 hover:border-accent hover:bg-accent/10 text-white/90 hover:text-white transition-all duration-300 rounded-[2px]"
             >
               <span>MEET ALL ENGINEERS & ADVISORS</span>
               <span className="ml-2 text-white/40 group-hover:text-accent group-hover:translate-x-1 transition-all">
@@ -106,7 +83,7 @@ export default function OurLeadership({ initialLeaders = null }) {
         </div>
 
         {/* Editorial Leader Showcase Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {leaders.map((leader, idx) => {
             const isSelected = activeIdx === idx;
             return (
@@ -115,9 +92,9 @@ export default function OurLeadership({ initialLeaders = null }) {
                 tabIndex={0}
                 onMouseEnter={() => setActiveIdx(idx)}
                 onFocus={() => setActiveIdx(idx)}
-                className={`group relative flex flex-col bg-[#0f0f0f] border rounded-[4px] overflow-hidden transition-all duration-400 p-6 sm:p-8 cursor-pointer outline-none ${
+                className={`group relative flex flex-col bg-[var(--surface)] border rounded-[4px] overflow-hidden transition-all duration-400 p-6 sm:p-8 cursor-pointer outline-none ${
                   isSelected
-                    ? "border-accent shadow-[0_0_24px_rgba(255,74,0,0.12)]"
+                    ? "border-accent shadow-[0_0_24px_rgba(234,91,21,0.12)]"
                     : "border-white/10 hover:border-white/30"
                 }`}
               >
@@ -151,24 +128,24 @@ export default function OurLeadership({ initialLeaders = null }) {
                     className="w-full h-full object-cover object-top grayscale contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f0f0f] via-transparent to-transparent" />
-                  <div className="absolute top-3 right-3 font-azeret text-[9px] tracking-[0.2em] text-white/50 bg-black/60 px-2 py-0.5 border border-white/10">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--surface)] via-transparent to-transparent" />
+                  <div className="absolute top-3 right-3 font-parkinsans text-[9px] tracking-[0.2em] text-white/50 bg-black/60 px-2 py-0.5 border border-white/10">
                     0{idx + 1}
                   </div>
                 </div>
 
                 {/* Content */}
                 <div className="flex flex-col gap-2">
-                  <span className="font-azeret text-[9px] tracking-[0.2em] text-accent uppercase">
+                  <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase font-bold">
                     {leader.role}
                   </span>
-                  <h3 className="font-roc text-xl font-bold tracking-tight uppercase text-white">
+                  <h3 className="font-artific text-xl font-bold tracking-tight uppercase text-white">
                     {leader.name}
                   </h3>
-                  <span className="font-azeret text-[8px] tracking-[0.15em] text-white/40 uppercase">
+                  <span className="font-parkinsans text-[8px] tracking-[0.15em] text-white/40 uppercase">
                     {leader.specialty}
                   </span>
-                  <p className="font-roc text-xs text-white/60 leading-relaxed pt-2">
+                  <p className="font-parkinsans text-xs text-white/60 leading-relaxed pt-2">
                     {leader.bio}
                   </p>
                 </div>

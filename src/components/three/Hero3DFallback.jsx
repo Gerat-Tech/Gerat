@@ -28,8 +28,8 @@ export default function Hero3DFallback() {
             fx="65%"
             fy="45%"
           >
-            <stop offset="0%" stopColor="#ff4a00" stopOpacity="0.25" />
-            <stop offset="50%" stopColor="#ff4a00" stopOpacity="0.05" />
+            <stop offset="0%" stopColor="#ea5b15" stopOpacity="0.25" />
+            <stop offset="50%" stopColor="#ea5b15" stopOpacity="0.05" />
             <stop offset="100%" stopColor="#050505" stopOpacity="0" />
           </radialGradient>
           <linearGradient id="gridLine" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -83,10 +83,10 @@ export default function Hero3DFallback() {
         />
 
         {/* Central Core Nodes */}
-        <circle cx="900" cy="400" r="4" fill="#ff4a00" />
+        <circle cx="900" cy="400" r="4" fill="#ea5b15" />
         <circle cx="960" cy="380" r="2" fill="#ffffff" opacity="0.6" />
         <circle cx="850" cy="450" r="2.5" fill="#ffffff" opacity="0.5" />
-        <circle cx="1020" cy="430" r="3" fill="#ff4a00" opacity="0.7" />
+        <circle cx="1020" cy="430" r="3" fill="#ea5b15" opacity="0.7" />
         <circle cx="820" cy="320" r="2" fill="#ffffff" opacity="0.4" />
       </svg>
     </div>

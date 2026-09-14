@@ -71,7 +71,7 @@ export default function OurFocus() {
     <section
       id="capabilities"
       aria-label="Capabilities"
-      className="relative w-full bg-[#050505] text-white py-24 sm:py-32 border-b border-white/10"
+      className="relative w-full bg-[var(--bg)] text-white py-24 sm:py-32 border-b border-white/10"
     >
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
         {/* Section Header */}
@@ -80,16 +80,16 @@ export default function OurFocus() {
           <SplitText
             text="SPECIALIZED DISCIPLINES"
             as="h2"
-            className="font-roc text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
+            className="font-artific text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
           />
           <SplitText
             text="BUILT FOR SCALE."
             as="h2"
             wordClassName="text-accent"
-            className="font-roc text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
+            className="font-artific text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
           />
           <FadeUp delay={0.2} y={16}>
-            <p className="font-roc text-base sm:text-lg text-white/70 leading-relaxed pt-2">
+            <p className="font-parkinsans text-base sm:text-lg text-white/70 leading-relaxed pt-2">
               From high-throughput data processing to domain-grounded artificial
               intelligence, we engineer every layer with surgical precision and
               structural resilience.
@@ -123,27 +123,27 @@ export default function OurFocus() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-baseline">
                   {/* Column 1: Index */}
-                  <div className="lg:col-span-1 font-azeret text-[12px] tracking-[0.2em] text-white/40 group-hover:text-accent transition-colors">
+                  <div className="lg:col-span-1 font-parkinsans text-[12px] tracking-[0.2em] text-white/40 group-hover:text-accent transition-colors">
                     {item.index}
                   </div>
 
                   {/* Column 2: Title & Tags */}
                   <div className="lg:col-span-6 flex flex-col gap-1.5">
-                    <h3 className="font-roc text-xl sm:text-2xl font-semibold tracking-tight uppercase text-white group-hover:text-white transition-colors">
+                    <h3 className="font-artific text-xl sm:text-2xl font-semibold tracking-tight uppercase text-white group-hover:text-white transition-colors">
                       {item.title}
                     </h3>
-                    <span className="font-azeret text-[9px] sm:text-[10px] tracking-[0.2em] text-white/50 uppercase">
+                    <span className="font-parkinsans text-[9px] sm:text-[10px] tracking-[0.2em] text-white/50 uppercase">
                       {item.tags}
                     </span>
                   </div>
 
                   {/* Column 3: Description */}
-                  <div className="lg:col-span-4 font-roc text-xs sm:text-sm text-white/60 group-hover:text-white/80 leading-relaxed transition-colors">
+                  <div className="lg:col-span-4 font-parkinsans text-xs sm:text-sm text-white/60 group-hover:text-white/80 leading-relaxed transition-colors">
                     {item.description}
                   </div>
 
                   {/* Column 4: Trailing Arrow */}
-                  <div className="lg:col-span-1 flex justify-end font-azeret text-sm text-white/30 group-hover:text-accent group-hover:translate-x-1 transition-all">
+                  <div className="lg:col-span-1 flex justify-end font-parkinsans text-sm text-white/30 group-hover:text-accent group-hover:translate-x-1 transition-all">
                     →
                   </div>
                 </div>

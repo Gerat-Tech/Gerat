@@ -49,7 +49,7 @@ export default function HowWeWork() {
     <section
       id="process"
       aria-label="How We Work"
-      className="relative w-full bg-[#080808] text-white py-24 sm:py-32 border-b border-white/10"
+      className="relative w-full bg-[var(--bg)] text-white py-24 sm:py-32 border-b border-white/10"
     >
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
         {/* Header */}
@@ -58,16 +58,16 @@ export default function HowWeWork() {
           <SplitText
             text="FROM PROBLEM TO"
             as="h2"
-            className="font-roc text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
+            className="font-artific text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
           />
           <SplitText
             text="WORKING SYSTEM."
             as="h2"
             wordClassName="text-accent"
-            className="font-roc text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
+            className="font-artific text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
           />
           <FadeUp delay={0.2}>
-            <p className="font-roc text-base sm:text-lg text-white/70 leading-relaxed pt-2">
+            <p className="font-parkinsans text-base sm:text-lg text-white/70 leading-relaxed pt-2">
               A disciplined, multi-stage engineering method designed to eliminate
               ambiguity, de-risk complex integrations, and ship dependable
               software.
@@ -79,7 +79,7 @@ export default function HowWeWork() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {steps.map((item, idx) => (
             <FadeUp key={item.step} delay={0.08 * idx} y={20}>
-              <div className="group relative bg-[#101010] border border-white/10 hover:border-accent/60 p-8 rounded-[4px] flex flex-col justify-between min-h-[240px] transition-all duration-300">
+              <div className="group relative bg-[var(--surface)] border border-white/10 hover:border-accent/60 p-8 rounded-[4px] flex flex-col justify-between min-h-[240px] transition-all duration-300">
                 {/* Precision Corner Accents */}
                 <span className="absolute top-0 left-0 size-2 border-t border-l border-white/20 group-hover:border-accent transition-colors" />
                 <span className="absolute top-0 right-0 size-2 border-t border-r border-white/20 group-hover:border-accent transition-colors" />
@@ -88,7 +88,7 @@ export default function HowWeWork() {
 
                 {/* Step Index & Indicator */}
                 <div className="flex items-center justify-between">
-                  <span className="font-azeret text-[12px] tracking-[0.2em] text-accent font-bold">
+                  <span className="font-parkinsans text-[12px] tracking-[0.2em] text-accent font-bold">
                     STEP // {item.step}
                   </span>
                   <div className="size-1.5 rounded-[1px] bg-white/20 group-hover:bg-accent transition-colors" />
@@ -96,10 +96,10 @@ export default function HowWeWork() {
 
                 {/* Content */}
                 <div className="flex flex-col gap-2.5 my-auto pt-4">
-                  <h3 className="font-roc text-2xl font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
+                  <h3 className="font-artific text-2xl font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
                     {item.title}
                   </h3>
-                  <p className="font-roc text-xs sm:text-sm text-white/65 leading-relaxed">
+                  <p className="font-parkinsans text-xs sm:text-sm text-white/65 leading-relaxed">
                     {item.description}
                   </p>
                 </div>

@@ -69,7 +69,7 @@ export default function HeroDataField() {
     for (let i = 0; i < particleCount; i++) {
       const angle = Math.random() * Math.PI * 2;
       const radius = 30 + Math.pow(Math.random(), 1.5) * (Math.max(width, height) * 0.65);
-      const isAccent = Math.random() < 0.12; // 12% accent particles (#ff4a00)
+      const isAccent = Math.random() < 0.12; // 12% accent particles (#ea5b15)
 
       particles.push({
         x: centerX + Math.cos(angle) * radius,
@@ -150,7 +150,7 @@ export default function HeroDataField() {
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
 
         if (p.isAccent) {
-          ctx.fillStyle = `rgba(255, 74, 0, ${p.alpha})`;
+          ctx.fillStyle = `rgba(234, 91, 21, ${p.alpha})`;
         } else {
           ctx.fillStyle = `rgba(240, 240, 240, ${p.alpha})`;
         }
@@ -167,7 +167,7 @@ export default function HeroDataField() {
 
       ctx.beginPath();
       ctx.arc(curCenterX, curCenterY, 220, 0, Math.PI * 2);
-      ctx.strokeStyle = "rgba(255, 74, 0, 0.06)";
+      ctx.strokeStyle = "rgba(234, 91, 21, 0.06)";
       ctx.lineWidth = 1;
       ctx.stroke();
 

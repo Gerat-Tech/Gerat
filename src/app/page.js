@@ -91,7 +91,7 @@ export default async function Home() {
   }
 
   return (
-    <div className="bg-[#050505] min-h-screen text-white selection:bg-accent selection:text-black">
+    <div className="bg-[var(--bg)] min-h-screen text-[var(--text-primary)] selection:bg-accent selection:text-black">
       <Hero />
       <Marquee customItems={marqueeTokens} />
       <OurEthos />
