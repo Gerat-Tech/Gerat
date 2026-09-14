@@ -89,11 +89,11 @@ export default async function ArticleDetailPage({ params }) {
   const coverSrc = article.coverImageUrl || article.image || "/image/LatestNews/01_Picture.webp";
 
   return (
-    <div className="bg-[#050505] min-h-screen text-white selection:bg-accent selection:text-black">
+    <div className="bg-[var(--bg)] min-h-screen text-[var(--text-primary)] selection:bg-accent selection:text-black">
       {/* Article Header Hero */}
       <section className="relative w-full pt-32 sm:pt-40 pb-16 px-4 sm:px-6 md:px-8 lg:px-12 max-w-[1440px] mx-auto">
         {/* Breadcrumb navigation */}
-        <div className="flex items-center gap-2 font-azeret text-[10px] tracking-[0.2em] text-white/40 uppercase mb-8">
+        <div className="flex items-center gap-2 font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase mb-8">
           <Link href="/insights" className="hover:text-accent transition-colors">
             ← ALL BLUEPRINTS
           </Link>
@@ -102,7 +102,7 @@ export default async function ArticleDetailPage({ params }) {
         </div>
 
         {/* Article Meta Strip */}
-        <div className="flex flex-wrap items-center gap-4 font-azeret text-[10px] tracking-[0.15em] text-white/50 uppercase mb-6">
+        <div className="flex flex-wrap items-center gap-4 font-parkinsans text-[10px] tracking-[0.15em] text-white/50 uppercase mb-6">
           <span className="px-2.5 py-1 bg-accent/15 border border-accent/40 text-accent font-bold rounded-[2px]">
             {article.category}
           </span>
@@ -120,7 +120,7 @@ export default async function ArticleDetailPage({ params }) {
         </div>
 
         {/* Title & Subtitle */}
-        <h1 className="font-roc text-3xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-white max-w-5xl leading-[1.08] mb-6">
+        <h1 className="font-artific text-3xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-white max-w-5xl leading-[1.08] mb-6">
           {article.title}
         </h1>
 
@@ -132,14 +132,14 @@ export default async function ArticleDetailPage({ params }) {
 
         {/* Author Card */}
         <div className="flex items-center gap-4 pt-6 border-t border-white/10 max-w-5xl">
-          <div className="size-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center font-azeret text-xs text-white font-bold">
+          <div className="size-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center font-parkinsans text-xs text-white font-bold">
             {(article.author?.name || article.author || "GA").slice(0, 2).toUpperCase()}
           </div>
           <div>
-            <div className="font-roc text-sm font-bold uppercase text-white tracking-wide">
+            <div className="font-artific text-sm font-bold uppercase text-white tracking-wide">
               {article.author?.name || article.author || "Gerät Systems Architect"}
             </div>
-            <div className="font-azeret text-[10px] tracking-[0.15em] text-white/40 uppercase">
+            <div className="font-parkinsans text-[10px] tracking-[0.15em] text-white/40 uppercase">
               {article.author?.role || "Engineering Directorate // Addis Ababa"}
             </div>
           </div>
@@ -155,7 +155,7 @@ export default async function ArticleDetailPage({ params }) {
               alt={article.title}
               className="w-full h-full object-cover grayscale contrast-110 hover:grayscale-0 transition-all duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-60" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)] via-transparent to-transparent opacity-60" />
           </div>
         </div>
       )}
@@ -164,23 +164,23 @@ export default async function ArticleDetailPage({ params }) {
       <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-24 sm:pb-36 grid grid-cols-1 lg:grid-cols-12 gap-12">
         {/* Markdown Content Column */}
         <main className="lg:col-span-8 flex flex-col gap-8">
-          <div className="bg-[#0c0c0c] border border-white/10 p-6 sm:p-10 rounded-[4px]">
+          <div className="bg-[var(--surface)] border border-white/10 p-6 sm:p-10 rounded-[4px]">
             <MarkdownRenderer content={article.content} />
           </div>
 
           {/* Bottom Engagement Callout */}
           <div className="p-8 bg-gradient-to-r from-accent/10 to-transparent border border-accent/30 rounded-[4px] flex flex-col sm:flex-row sm:items-center justify-between gap-6">
             <div>
-              <div className="font-roc text-lg sm:text-xl font-bold uppercase text-white tracking-tight">
+              <div className="font-artific text-lg sm:text-xl font-bold uppercase text-white tracking-tight">
                 COMMISSION TECHNICAL ARCHITECTURE
               </div>
-              <p className="font-azeret text-[11px] tracking-[0.1em] text-white/60 uppercase mt-1">
+              <p className="font-parkinsans text-[11px] tracking-[0.1em] text-white/60 uppercase mt-1">
                 ALIGN WITH GERAT ENGINEERS ON DISTRIBUTED SYSTEMS & BRAND IDENTITY
               </p>
             </div>
             <Link
               href="/#contact"
-              className="px-6 py-3 bg-accent hover:bg-white hover:text-black text-black font-azeret text-xs tracking-[0.15em] font-bold uppercase rounded-[2px] transition-all shrink-0 text-center"
+              className="px-6 py-3 bg-accent hover:bg-white hover:text-black text-black font-parkinsans text-xs tracking-[0.15em] font-bold uppercase rounded-[2px] transition-all shrink-0 text-center"
             >
               INITIATE INQUIRY →
             </Link>
@@ -188,9 +188,9 @@ export default async function ArticleDetailPage({ params }) {
         </main>
 
         {/* Technical Sidebar */}
-        <aside className="lg:col-span-4 flex flex-col gap-6 font-azeret text-xs">
+        <aside className="lg:col-span-4 flex flex-col gap-6 font-parkinsans text-xs">
           {/* Blueprint Specs Card */}
-          <div className="bg-[#0e0e0e] border border-white/10 p-6 rounded-[4px] flex flex-col gap-4 sticky top-28">
+          <div className="bg-[var(--surface-raised)] border border-white/10 p-6 rounded-[4px] flex flex-col gap-4 sticky top-28">
             <div className="text-[10px] tracking-[0.2em] text-accent uppercase font-bold border-b border-white/10 pb-3">
               BLUEPRINT SPECIFICATION
             </div>
@@ -256,12 +256,12 @@ export default async function ArticleDetailPage({ params }) {
       {related.length > 0 && (
         <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-24 border-t border-white/10 pt-16">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="font-roc text-xl sm:text-2xl font-bold uppercase tracking-tight text-white">
+            <h2 className="font-artific text-xl sm:text-2xl font-bold uppercase tracking-tight text-white">
               RELATED TECHNICAL BLUEPRINTS
             </h2>
             <Link
               href="/insights"
-              className="font-azeret text-[10px] tracking-[0.2em] text-accent hover:underline uppercase"
+              className="font-parkinsans text-[10px] tracking-[0.2em] text-accent hover:underline uppercase"
             >
               VIEW ALL ARCHIVES →
             </Link>
@@ -272,17 +272,17 @@ export default async function ArticleDetailPage({ params }) {
               <Link
                 key={rel.id || rel.slug}
                 href={`/insights/${rel.slug}`}
-                className="group p-6 bg-[#0c0c0c] border border-white/10 hover:border-accent/50 rounded-[4px] transition-colors flex flex-col justify-between"
+                className="group p-6 bg-[var(--surface)] border border-white/10 hover:border-accent/50 rounded-[4px] transition-colors flex flex-col justify-between"
               >
                 <div className="flex flex-col gap-2 mb-4">
-                  <span className="font-azeret text-[9px] tracking-[0.2em] text-accent uppercase">
+                  <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
                     {rel.category}
                   </span>
-                  <h3 className="font-roc text-lg font-bold uppercase text-white group-hover:text-accent transition-colors leading-snug">
+                  <h3 className="font-artific text-lg font-bold uppercase text-white group-hover:text-accent transition-colors leading-snug">
                     {rel.title}
                   </h3>
                 </div>
-                <div className="font-azeret text-[9px] tracking-[0.15em] text-white/40 uppercase flex items-center justify-between pt-3 border-t border-white/5">
+                <div className="font-parkinsans text-[9px] tracking-[0.15em] text-white/40 uppercase flex items-center justify-between pt-3 border-t border-white/5">
                   <span>{rel.readingTime || rel.readTime || "6 MIN"}</span>
                   <span className="text-accent group-hover:translate-x-1 transition-transform">
                     READ →

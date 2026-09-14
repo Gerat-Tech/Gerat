@@ -81,7 +81,7 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", 
       {/* Sticky Navigation Sidebar (Spec §18) */}
       <aside className="hidden lg:block w-72 shrink-0">
         <nav className="sticky top-28 flex flex-col gap-8 bg-[#0a0a0a] border border-white/10 p-6 rounded-[3px]">
-          <div className="font-azeret text-[10px] tracking-[0.2em] text-white/40 uppercase">
+          <div className="font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
             DIRECTORY // {filteredProjects.length} CASE STUDIES
           </div>
 
@@ -92,7 +92,7 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", 
                 <li key={p.id}>
                   <a
                     href={`#${p.id}`}
-                    className={`group flex items-center justify-between py-2 px-3 rounded-[2px] font-azeret text-[11px] tracking-[0.15em] uppercase transition-all duration-300 ${
+                    className={`group flex items-center justify-between py-2 px-3 rounded-[2px] font-parkinsans text-[11px] tracking-[0.15em] uppercase transition-all duration-300 ${
                       isActive
                         ? "bg-accent/15 text-white border-l-2 border-accent"
                         : "text-white/50 hover:text-white hover:bg-white/[0.03]"
@@ -112,7 +112,7 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", 
             <button
               type="button"
               onClick={openContact}
-              className="w-full py-3 px-4 bg-accent text-white font-azeret text-[10px] tracking-[0.2em] uppercase font-bold hover:bg-white hover:text-black transition-colors rounded-[2px]"
+              className="w-full py-3 px-4 bg-accent text-white font-parkinsans text-[10px] tracking-[0.2em] uppercase font-bold hover:bg-white hover:text-black transition-colors rounded-[2px]"
             >
               START A PROJECT →
             </button>
@@ -146,10 +146,10 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", 
               <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0e] via-black/30 to-transparent" />
 
               <div className="absolute top-4 left-4 sm:top-6 sm:left-6 flex items-center gap-3">
-                <span className="font-azeret text-[10px] tracking-[0.2em] text-white/80 bg-black/80 backdrop-blur-md px-3 py-1 border border-white/15 rounded-[1px]">
+                <span className="font-parkinsans text-[10px] tracking-[0.2em] text-white/80 bg-black/80 backdrop-blur-md px-3 py-1 border border-white/15 rounded-[1px]">
                   {p.num}
                 </span>
-                <span className="font-azeret text-[9px] tracking-[0.2em] text-accent bg-black/80 backdrop-blur-md px-3 py-1 border border-accent/40 rounded-[1px] uppercase">
+                <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent bg-black/80 backdrop-blur-md px-3 py-1 border border-accent/40 rounded-[1px] uppercase">
                   {p.category}
                 </span>
               </div>
@@ -159,13 +159,13 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", 
             <div className="p-6 sm:p-10 flex flex-col gap-6">
               {/* Title & Impact Metric */}
               <div className="flex flex-col gap-2">
-                <span className="font-azeret text-[10px] tracking-[0.2em] text-white/40 uppercase">
+                <span className="font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
                   {p.tags}
                 </span>
-                <h2 className="font-roc text-2xl sm:text-4xl font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
+                <h2 className="font-artific text-2xl sm:text-4xl font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
                   {p.title}
                 </h2>
-                <div className="font-azeret text-[10px] sm:text-[11px] tracking-[0.15em] text-accent font-semibold pt-1">
+                <div className="font-parkinsans text-[10px] sm:text-[11px] tracking-[0.15em] text-accent font-semibold pt-1">
                   IMPACT // {p.metric}
                 </div>
               </div>
@@ -173,21 +173,21 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", 
               {/* Architecture & Problem Breakdown */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-white/10">
                 <div className="flex flex-col gap-2">
-                  <span className="font-azeret text-[9px] tracking-[0.2em] text-white/50 uppercase">
+                  <span className="font-parkinsans text-[9px] tracking-[0.2em] text-white/50 uppercase">
                     OPERATIONAL CHALLENGE
                   </span>
-                  <p className="font-roc text-xs sm:text-sm text-white/70 leading-relaxed">
+                  <p className="font-parkinsans text-xs sm:text-sm text-white/70 leading-relaxed">
                     {p.problem}
                   </p>
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <span className="font-azeret text-[9px] tracking-[0.2em] text-white/50 uppercase">
+                  <span className="font-parkinsans text-[9px] tracking-[0.2em] text-white/50 uppercase">
                     {p.category === "BRAND & IDENTITY" || p.category === "PERSONAL BRAND"
                       ? "CREATIVE & STRATEGIC RESOLUTION"
                       : "ENGINEERED RESOLUTION"}
                   </span>
-                  <p className="font-roc text-xs sm:text-sm text-white/70 leading-relaxed">
+                  <p className="font-parkinsans text-xs sm:text-sm text-white/70 leading-relaxed">
                     {p.architecture}
                   </p>
                 </div>
@@ -199,7 +199,7 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", 
                   {p.stack.map((item) => (
                     <span
                       key={item}
-                      className="font-azeret text-[9px] tracking-[0.12em] uppercase px-2.5 py-1 rounded-[2px] bg-white/[0.04] border border-white/10 text-white/70"
+                      className="font-parkinsans text-[9px] tracking-[0.12em] uppercase px-2.5 py-1 rounded-[2px] bg-white/[0.04] border border-white/10 text-white/70"
                     >
                       {item}
                     </span>
@@ -209,14 +209,14 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", 
 
               {/* Technology & Action Row */}
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-6 border-t border-white/10">
-                <div className="font-azeret text-[9px] sm:text-[10px] tracking-[0.2em] text-white/40 uppercase">
+                <div className="font-parkinsans text-[9px] sm:text-[10px] tracking-[0.2em] text-white/40 uppercase">
                   {p.category === "BRAND & IDENTITY" || p.category === "PERSONAL BRAND" ? "DELIVERABLES" : "STACK"}: {p.tech}
                 </div>
 
                 <button
                   type="button"
                   onClick={openContact}
-                  className="inline-flex items-center font-azeret text-[10px] sm:text-[11px] uppercase tracking-[0.2em] px-5 py-2.5 border border-white/20 hover:border-accent hover:bg-accent/15 text-white transition-all rounded-[2px]"
+                  className="inline-flex items-center font-parkinsans text-[10px] sm:text-[11px] uppercase tracking-[0.2em] px-5 py-2.5 border border-white/20 hover:border-accent hover:bg-accent/15 text-white transition-all rounded-[2px]"
                 >
                   <span>
                     {p.category === "BRAND & IDENTITY"

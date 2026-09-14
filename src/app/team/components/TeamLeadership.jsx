@@ -43,10 +43,10 @@ export default function TeamLeadership({ initialLeaders = null }) {
   return (
     <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-16 text-white">
       <div className="flex flex-col gap-3 mb-12">
-        <span className="font-azeret text-[10px] tracking-[0.25em] text-accent uppercase">
+        <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase">
           01 // EXECUTIVE ARCHITECTS
         </span>
-        <h2 className="font-roc text-3xl sm:text-4xl font-bold uppercase tracking-tight">
+        <h2 className="font-artific text-3xl sm:text-4xl font-bold uppercase tracking-tight">
           LEADERSHIP & ENGINEERING DIRECTORS
         </h2>
       </div>
@@ -62,7 +62,7 @@ export default function TeamLeadership({ initialLeaders = null }) {
                 onFocus={() => setActiveIdx(idx)}
                 className={`group relative flex flex-col bg-[#0d0d0d] border rounded-[4px] overflow-hidden transition-all duration-400 p-6 sm:p-8 cursor-pointer outline-none h-full ${
                   isSelected
-                    ? "border-accent shadow-[0_0_24px_rgba(255,74,0,0.15)]"
+                    ? "border-accent shadow-[0_0_24px_rgba(234,91,21,0.15)]"
                     : "border-white/10 hover:border-white/30"
                 }`}
               >
@@ -81,23 +81,23 @@ export default function TeamLeadership({ initialLeaders = null }) {
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0d0d0d] via-transparent to-transparent" />
-                  <div className="absolute top-3 right-3 font-azeret text-[9px] tracking-[0.2em] text-white/60 bg-black/70 px-2 py-0.5 border border-white/10">
+                  <div className="absolute top-3 right-3 font-parkinsans text-[9px] tracking-[0.2em] text-white/60 bg-black/70 px-2 py-0.5 border border-white/10">
                     0{idx + 1}
                   </div>
                 </div>
 
                 {/* Info */}
                 <div className="flex flex-col gap-2">
-                  <span className="font-azeret text-[9px] tracking-[0.2em] text-accent uppercase">
+                  <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
                     {leader.role}
                   </span>
-                  <h3 className="font-roc text-xl sm:text-2xl font-bold tracking-tight uppercase text-white">
+                  <h3 className="font-artific text-xl sm:text-2xl font-bold tracking-tight uppercase text-white">
                     {leader.name}
                   </h3>
-                  <span className="font-azeret text-[8px] tracking-[0.15em] text-white/40 uppercase">
+                  <span className="font-parkinsans text-[8px] tracking-[0.15em] text-white/40 uppercase">
                     {leader.specialty}
                   </span>
-                  <p className="font-roc text-xs text-white/65 leading-relaxed pt-2">
+                  <p className="font-parkinsans text-xs text-white/65 leading-relaxed pt-2">
                     {leader.bio}
                   </p>
                 </div>

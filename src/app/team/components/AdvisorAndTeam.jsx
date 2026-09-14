@@ -45,10 +45,10 @@ export default function AdvisorAndTeam({ initialSpecialists = null }) {
   return (
     <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-16 text-white border-t border-white/10">
       <div className="flex flex-col gap-3 mb-12">
-        <span className="font-azeret text-[10px] tracking-[0.25em] text-accent uppercase">
+        <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase">
           02 // SPECIALIZED DISCIPLINES
         </span>
-        <h2 className="font-roc text-3xl sm:text-4xl font-bold uppercase tracking-tight">
+        <h2 className="font-artific text-3xl sm:text-4xl font-bold uppercase tracking-tight">
           CORE ENGINEERING PRACTITIONERS
         </h2>
       </div>
@@ -73,25 +73,25 @@ export default function AdvisorAndTeam({ initialSpecialists = null }) {
                     loading="lazy"
                   />
                 </div>
-                <span className="font-azeret text-[10px] tracking-[0.2em] text-white/40">
+                <span className="font-parkinsans text-[10px] tracking-[0.2em] text-white/40">
                   ENG // 0{idx + 1}
                 </span>
               </div>
 
               {/* Content */}
               <div className="flex flex-col gap-1.5 my-auto">
-                <span className="font-azeret text-[8px] tracking-[0.2em] text-accent uppercase">
+                <span className="font-parkinsans text-[8px] tracking-[0.2em] text-accent uppercase">
                   {member.discipline}
                 </span>
-                <h3 className="font-roc text-lg font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
+                <h3 className="font-artific text-lg font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
                   {member.name || member.role}
                 </h3>
                 {member.name && member.role && member.name !== member.role && (
-                  <span className="font-azeret text-[9px] tracking-[0.15em] text-white/50 uppercase">
+                  <span className="font-parkinsans text-[9px] tracking-[0.15em] text-white/50 uppercase">
                     {member.role}
                   </span>
                 )}
-                <p className="font-roc text-xs text-white/65 leading-relaxed pt-1">
+                <p className="font-parkinsans text-xs text-white/65 leading-relaxed pt-1">
                   {member.focus}
                 </p>
               </div>
