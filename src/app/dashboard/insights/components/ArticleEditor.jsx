@@ -188,7 +188,7 @@ export default function ArticleEditor({ initialArticle = null, authors = [] }) {
     <div className="flex flex-col gap-6">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 bg-[#161616] border border-accent text-white px-4 py-3 rounded-[3px] font-azeret text-xs tracking-wider shadow-2xl flex items-center gap-2">
+        <div className="fixed bottom-6 right-6 z-50 bg-[#161616] border border-accent text-white px-4 py-3 rounded-[3px] font-parkinsans text-xs tracking-wider shadow-2xl flex items-center gap-2">
           <span className="size-2 rounded-full bg-accent animate-pulse" />
           <span>{toastMessage}</span>
         </div>
@@ -197,7 +197,7 @@ export default function ArticleEditor({ initialArticle = null, authors = [] }) {
       {/* Top Header & Publishing Actions */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/10">
         <div>
-          <div className="flex items-center gap-2 mb-1 font-azeret text-[10px] tracking-[0.15em] text-white/50">
+          <div className="flex items-center gap-2 mb-1 font-parkinsans text-[10px] tracking-[0.15em] text-white/50">
             <Link href="/dashboard/insights" className="hover:text-white transition-colors">
               ← INSIGHTS CMS
             </Link>
@@ -208,7 +208,7 @@ export default function ArticleEditor({ initialArticle = null, authors = [] }) {
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="font-roc text-2xl sm:text-3xl font-bold uppercase text-white tracking-tight">
+            <h1 className="font-artific text-2xl sm:text-3xl font-bold uppercase text-white tracking-tight">
               {title || "UNTITLED WHITE PAPER"}
             </h1>
             <StatusBadge status={status} />
@@ -216,7 +216,7 @@ export default function ArticleEditor({ initialArticle = null, authors = [] }) {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-wrap items-center gap-2 font-azeret text-[10px] tracking-[0.15em] uppercase font-bold">
+        <div className="flex flex-wrap items-center gap-2 font-parkinsans text-[10px] tracking-[0.15em] uppercase font-bold">
           {initialArticle?.slug && status === "PUBLISHED" && (
             <Link
               href={`/insights/${slug}`}
@@ -251,7 +251,7 @@ export default function ArticleEditor({ initialArticle = null, authors = [] }) {
             type="button"
             disabled={isSaving}
             onClick={() => handleSave("PUBLISHED")}
-            className="py-2 px-4 bg-accent hover:bg-[#ff5c1a] text-black rounded-[2px] transition-colors disabled:opacity-40"
+            className="py-2 px-4 bg-accent hover:bg-accent/90 text-black rounded-[2px] transition-colors disabled:opacity-40"
           >
             {isSaving ? "COMMITTING..." : "PUBLISH NOW"}
           </button>
@@ -259,7 +259,7 @@ export default function ArticleEditor({ initialArticle = null, authors = [] }) {
       </div>
 
       {/* Responsive View Tabs */}
-      <div className="flex border-b border-white/10 gap-2 font-azeret text-[10px] tracking-[0.15em] uppercase">
+      <div className="flex border-b border-white/10 gap-2 font-parkinsans text-[10px] tracking-[0.15em] uppercase">
         <button
           type="button"
           onClick={() => setActiveTab("split")}
@@ -317,7 +317,7 @@ export default function ArticleEditor({ initialArticle = null, authors = [] }) {
           {/* Document Title & Subtitle Card */}
           <div className="bg-[#121212] border border-white/10 p-5 rounded-[3px] flex flex-col gap-4">
             <div className="flex flex-col gap-1.5">
-              <label className="font-azeret text-[9px] tracking-[0.15em] text-white/40 uppercase">
+              <label className="font-parkinsans text-[9px] tracking-[0.15em] text-white/40 uppercase">
                 ARTICLE TITLE:
               </label>
               <input
@@ -326,12 +326,12 @@ export default function ArticleEditor({ initialArticle = null, authors = [] }) {
                 placeholder="e.g. ARCHITECTING SUB-SECOND AUDIT LOG CONSENSUS"
                 value={title}
                 onChange={(e) => handleTitleChange(e.target.value)}
-                className="w-full bg-black/60 border border-white/15 px-3 py-2.5 text-white font-roc text-lg font-bold uppercase rounded-[2px] focus:border-accent outline-none tracking-tight"
+                className="w-full bg-black/60 border border-white/15 px-3 py-2.5 text-white font-artific text-lg font-bold uppercase rounded-[2px] focus:border-accent outline-none tracking-tight"
               />
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <label className="font-azeret text-[9px] tracking-[0.15em] text-white/40 uppercase">
+              <label className="font-parkinsans text-[9px] tracking-[0.15em] text-white/40 uppercase">
                 SUBTITLE / EXECUTIVE ABSTRACT:
               </label>
               <input
@@ -354,7 +354,7 @@ export default function ArticleEditor({ initialArticle = null, authors = [] }) {
                 }`}
               >
                 {/* Editor Toolbar */}
-                <div className="p-2 border-b border-white/10 bg-black/40 flex flex-wrap items-center gap-1 font-azeret text-[10px]">
+                <div className="p-2 border-b border-white/10 bg-black/40 flex flex-wrap items-center gap-1 font-parkinsans text-[10px]">
                   <button
                     type="button"
                     title="Heading 1"
@@ -441,7 +441,7 @@ export default function ArticleEditor({ initialArticle = null, authors = [] }) {
                 />
 
                 {/* Editor Bottom Stats */}
-                <div className="px-4 py-2 bg-black/40 border-t border-white/5 flex items-center justify-between font-azeret text-[9px] tracking-[0.15em] text-white/40 uppercase">
+                <div className="px-4 py-2 bg-black/40 border-t border-white/5 flex items-center justify-between font-parkinsans text-[9px] tracking-[0.15em] text-white/40 uppercase">
                   <span>WORDS: {wordCount}</span>
                   <span>READ TIME: {readingTime}</span>
                 </div>
@@ -456,16 +456,16 @@ export default function ArticleEditor({ initialArticle = null, authors = [] }) {
                 }`}
               >
                 <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                  <span className="font-azeret text-[9px] tracking-[0.2em] text-accent uppercase font-bold">
+                  <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase font-bold">
                     LIVE RENDERED BLUEPRINT
                   </span>
-                  <span className="font-azeret text-[9px] text-white/40 uppercase">
+                  <span className="font-parkinsans text-[9px] text-white/40 uppercase">
                     {category}
                   </span>
                 </div>
 
                 {title && (
-                  <h1 className="font-roc text-2xl font-bold uppercase text-white tracking-tight leading-tight">
+                  <h1 className="font-artific text-2xl font-bold uppercase text-white tracking-tight leading-tight">
                     {title}
                   </h1>
                 )}
@@ -492,7 +492,7 @@ export default function ArticleEditor({ initialArticle = null, authors = [] }) {
               : "col-span-12 lg:col-span-4"
           } flex flex-col gap-4`}
         >
-          <div className="bg-[#121212] border border-white/10 p-5 rounded-[3px] flex flex-col gap-4 font-azeret text-xs">
+          <div className="bg-[#121212] border border-white/10 p-5 rounded-[3px] flex flex-col gap-4 font-parkinsans text-xs">
             <div className="flex items-center justify-between border-b border-white/10 pb-2">
               <span className="text-[10px] tracking-[0.2em] text-white/40 uppercase font-bold">
                 METADATA & TAXONOMY

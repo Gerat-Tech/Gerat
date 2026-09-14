@@ -74,7 +74,7 @@ export default function TeamClientView({ initialMembers = [] }) {
               key={tab.key}
               type="button"
               onClick={() => setDivisionFilter(tab.key)}
-              className={`py-1.5 px-3 rounded-[2px] font-azeret text-[10px] tracking-[0.15em] uppercase transition-colors ${
+              className={`py-1.5 px-3 rounded-[2px] font-parkinsans text-[10px] tracking-[0.15em] uppercase transition-colors ${
                 divisionFilter === tab.key
                   ? "bg-accent text-black font-bold"
                   : "bg-white/[0.04] hover:bg-white/10 text-white/70"
@@ -86,7 +86,7 @@ export default function TeamClientView({ initialMembers = [] }) {
         </div>
 
         {/* View Mode */}
-        <div className="flex items-center gap-2 font-azeret text-[10px] tracking-[0.15em] uppercase">
+        <div className="flex items-center gap-2 font-parkinsans text-[10px] tracking-[0.15em] uppercase">
           <button
             type="button"
             onClick={() => setViewMode("grid")}
@@ -119,7 +119,7 @@ export default function TeamClientView({ initialMembers = [] }) {
           placeholder="Search team by name, specialty, role, or biographical focus..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full bg-[#121212] border border-white/10 px-4 py-2.5 text-white font-azeret text-xs rounded-[2px] focus:border-accent outline-none"
+          className="w-full bg-[#121212] border border-white/10 px-4 py-2.5 text-white font-parkinsans text-xs rounded-[2px] focus:border-accent outline-none"
         />
       </div>
 
@@ -138,12 +138,12 @@ export default function TeamClientView({ initialMembers = [] }) {
                     alt={m.name}
                     className="w-full h-full object-cover grayscale contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300"
                   />
-                  <div className="absolute top-2.5 left-2.5 font-azeret text-[8px] tracking-[0.2em] bg-black/80 px-2 py-0.5 rounded-[2px] text-accent border border-accent/30 uppercase">
+                  <div className="absolute top-2.5 left-2.5 font-parkinsans text-[8px] tracking-[0.2em] bg-black/80 px-2 py-0.5 rounded-[2px] text-accent border border-accent/30 uppercase">
                     {m.division.replace("_", " ")}
                   </div>
                   <div className="absolute top-2.5 right-2.5">
                     <span
-                      className={`font-azeret text-[8px] tracking-wider px-2 py-0.5 rounded-[2px] uppercase font-bold ${
+                      className={`font-parkinsans text-[8px] tracking-wider px-2 py-0.5 rounded-[2px] uppercase font-bold ${
                         m.active
                           ? "bg-emerald-950/80 border border-emerald-500/40 text-emerald-400"
                           : "bg-white/10 text-white/40"
@@ -155,11 +155,11 @@ export default function TeamClientView({ initialMembers = [] }) {
                 </div>
 
                 <div className="p-5 flex flex-col gap-2.5">
-                  <h3 className="font-roc text-lg font-bold uppercase text-white group-hover:text-accent transition-colors leading-tight">
+                  <h3 className="font-artific text-lg font-bold uppercase text-white group-hover:text-accent transition-colors leading-tight">
                     {m.name}
                   </h3>
 
-                  <div className="font-azeret text-[10px] tracking-[0.1em] text-white/50 uppercase">
+                  <div className="font-parkinsans text-[10px] tracking-[0.1em] text-white/50 uppercase">
                     {m.roleTitle}
                   </div>
 
@@ -174,7 +174,7 @@ export default function TeamClientView({ initialMembers = [] }) {
               </div>
 
               {/* Footer */}
-              <div className="p-4 border-t border-white/10 bg-black/30 flex items-center justify-between font-azeret text-[9px] tracking-[0.15em] uppercase">
+              <div className="p-4 border-t border-white/10 bg-black/30 flex items-center justify-between font-parkinsans text-[9px] tracking-[0.15em] uppercase">
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
@@ -205,7 +205,7 @@ export default function TeamClientView({ initialMembers = [] }) {
           ))}
 
           {filtered.length === 0 && (
-            <div className="col-span-3 p-12 bg-[#121212] border border-white/10 rounded-[3px] text-center font-azeret text-xs text-white/40 uppercase tracking-widest">
+            <div className="col-span-3 p-12 bg-[#121212] border border-white/10 rounded-[3px] text-center font-parkinsans text-xs text-white/40 uppercase tracking-widest">
               NO ROSTER PROFILES MATCHING FILTER
             </div>
           )}
@@ -215,7 +215,7 @@ export default function TeamClientView({ initialMembers = [] }) {
       {/* TABLE VIEW */}
       {viewMode === "table" && (
         <div className="bg-[#121212] border border-white/10 rounded-[3px] overflow-x-auto">
-          <table className="w-full text-left border-collapse font-azeret text-xs">
+          <table className="w-full text-left border-collapse font-parkinsans text-xs">
             <thead>
               <tr className="border-b border-white/10 bg-black/40 text-[9px] tracking-[0.2em] text-white/40 uppercase">
                 <th className="py-3 px-4">STATUS</th>
@@ -231,7 +231,7 @@ export default function TeamClientView({ initialMembers = [] }) {
                 <tr key={m.id} className="hover:bg-white/[0.02] transition-colors">
                   <td className="py-3 px-4">
                     <span
-                      className={`font-azeret text-[8px] tracking-wider px-2 py-0.5 rounded-[2px] uppercase font-bold ${
+                      className={`font-parkinsans text-[8px] tracking-wider px-2 py-0.5 rounded-[2px] uppercase font-bold ${
                         m.active
                           ? "bg-emerald-950/80 border border-emerald-500/40 text-emerald-400"
                           : "bg-white/10 text-white/40"
@@ -241,16 +241,16 @@ export default function TeamClientView({ initialMembers = [] }) {
                     </span>
                   </td>
                   <td className="py-3 px-4">
-                    <div className="font-roc text-sm font-bold text-white uppercase">{m.name}</div>
+                    <div className="font-artific text-sm font-bold text-white uppercase">{m.name}</div>
                   </td>
-                  <td className="py-3 px-4 font-azeret text-[10px] text-white/70">{m.roleTitle}</td>
-                  <td className="py-3 px-4 font-azeret text-[9px] text-accent">
+                  <td className="py-3 px-4 font-parkinsans text-[10px] text-white/70">{m.roleTitle}</td>
+                  <td className="py-3 px-4 font-parkinsans text-[9px] text-accent">
                     {m.division.replace("_", " ")}
                   </td>
                   <td className="py-3 px-4 font-mono text-[9px] text-white/50 truncate max-w-xs">
                     {m.focusTag}
                   </td>
-                  <td className="py-3 px-4 text-right font-azeret text-[9px] tracking-wider uppercase">
+                  <td className="py-3 px-4 text-right font-parkinsans text-[9px] tracking-wider uppercase">
                     <Link
                       href={`/dashboard/team/${m.id}`}
                       className="py-1 px-2.5 bg-white/[0.05] hover:bg-white/10 border border-white/15 text-white rounded-[2px]"

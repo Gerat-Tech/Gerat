@@ -5,7 +5,7 @@ import prisma from "@/lib/prisma";
 import DashboardShell from "@/components/dashboard/DashboardShell";
 
 export const metadata = {
-  title: "Mission Control // Gerat Software Solutions PLC",
+  title: "Mission Control // Gerat Software Solution",
   description: "Operations Cockpit, CRM Telemetry, and Dynamic Content Management",
   robots: { index: false, follow: false },
 };

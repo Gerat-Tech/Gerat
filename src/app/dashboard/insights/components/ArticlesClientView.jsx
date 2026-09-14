@@ -94,7 +94,7 @@ export default function ArticlesClientView({ initialArticles = [] }) {
               key={tab.key}
               type="button"
               onClick={() => setStatusFilter(tab.key)}
-              className={`py-1.5 px-3 rounded-[2px] font-azeret text-[10px] tracking-[0.15em] uppercase transition-colors ${
+              className={`py-1.5 px-3 rounded-[2px] font-parkinsans text-[10px] tracking-[0.15em] uppercase transition-colors ${
                 statusFilter === tab.key
                   ? "bg-accent text-black font-bold"
                   : "bg-white/[0.04] hover:bg-white/10 text-white/70"
@@ -110,7 +110,7 @@ export default function ArticlesClientView({ initialArticles = [] }) {
           <button
             type="button"
             onClick={() => setViewMode("grid")}
-            className={`px-3 py-1.5 rounded-[2px] font-azeret text-[10px] tracking-[0.15em] uppercase transition-colors ${
+            className={`px-3 py-1.5 rounded-[2px] font-parkinsans text-[10px] tracking-[0.15em] uppercase transition-colors ${
               viewMode === "grid"
                 ? "bg-white/20 text-white font-bold"
                 : "bg-white/[0.03] text-white/40 hover:text-white"
@@ -121,7 +121,7 @@ export default function ArticlesClientView({ initialArticles = [] }) {
           <button
             type="button"
             onClick={() => setViewMode("table")}
-            className={`px-3 py-1.5 rounded-[2px] font-azeret text-[10px] tracking-[0.15em] uppercase transition-colors ${
+            className={`px-3 py-1.5 rounded-[2px] font-parkinsans text-[10px] tracking-[0.15em] uppercase transition-colors ${
               viewMode === "table"
                 ? "bg-white/20 text-white font-bold"
                 : "bg-white/[0.03] text-white/40 hover:text-white"
@@ -133,7 +133,7 @@ export default function ArticlesClientView({ initialArticles = [] }) {
       </div>
 
       {/* Secondary Filter: Search & Category Dropdown */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 font-azeret text-xs">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 font-parkinsans text-xs">
         <div className="sm:col-span-2">
           <input
             type="text"
@@ -177,25 +177,25 @@ export default function ArticlesClientView({ initialArticles = [] }) {
                       className="w-full h-full object-cover grayscale contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center font-azeret text-[10px] text-white/20">
+                    <div className="w-full h-full flex items-center justify-center font-parkinsans text-[10px] text-white/20">
                       NO COVER IMAGE
                     </div>
                   )}
                   <div className="absolute top-2.5 left-2.5">
                     <StatusBadge status={art.status} />
                   </div>
-                  <div className="absolute top-2.5 right-2.5 font-azeret text-[9px] tracking-[0.15em] bg-black/80 px-2 py-0.5 rounded-[2px] text-accent border border-accent/30 uppercase">
+                  <div className="absolute top-2.5 right-2.5 font-parkinsans text-[9px] tracking-[0.15em] bg-black/80 px-2 py-0.5 rounded-[2px] text-accent border border-accent/30 uppercase">
                     {art.category}
                   </div>
                 </div>
 
                 <div className="p-5 flex flex-col gap-3">
-                  <div className="flex items-center justify-between font-azeret text-[9px] tracking-[0.15em] text-white/40 uppercase">
+                  <div className="flex items-center justify-between font-parkinsans text-[9px] tracking-[0.15em] text-white/40 uppercase">
                     <span>{art.author?.name || "Gerät Architect"}</span>
                     <span>{art.readingTime || "5 MIN READ"}</span>
                   </div>
 
-                  <h2 className="font-roc text-lg font-bold uppercase text-white group-hover:text-accent transition-colors leading-tight">
+                  <h2 className="font-artific text-lg font-bold uppercase text-white group-hover:text-accent transition-colors leading-tight">
                     {art.title}
                   </h2>
 
@@ -208,7 +208,7 @@ export default function ArticlesClientView({ initialArticles = [] }) {
               </div>
 
               {/* Card Footer Actions */}
-              <div className="p-4 border-t border-white/10 bg-black/30 flex items-center justify-between font-azeret text-[9px] tracking-[0.15em] uppercase">
+              <div className="p-4 border-t border-white/10 bg-black/30 flex items-center justify-between font-parkinsans text-[9px] tracking-[0.15em] uppercase">
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
@@ -239,7 +239,7 @@ export default function ArticlesClientView({ initialArticles = [] }) {
           ))}
 
           {filtered.length === 0 && (
-            <div className="col-span-3 p-12 bg-[#121212] border border-white/10 rounded-[3px] text-center font-azeret text-xs text-white/40 uppercase tracking-widest">
+            <div className="col-span-3 p-12 bg-[#121212] border border-white/10 rounded-[3px] text-center font-parkinsans text-xs text-white/40 uppercase tracking-widest">
               NO BLUEPRINTS MATCHING SPECIFIED FILTER
             </div>
           )}
@@ -249,7 +249,7 @@ export default function ArticlesClientView({ initialArticles = [] }) {
       {/* TABLE VIEW */}
       {viewMode === "table" && (
         <div className="bg-[#121212] border border-white/10 rounded-[3px] overflow-x-auto">
-          <table className="w-full text-left border-collapse font-azeret text-xs">
+          <table className="w-full text-left border-collapse font-parkinsans text-xs">
             <thead>
               <tr className="border-b border-white/10 bg-black/40 text-[9px] tracking-[0.2em] text-white/40 uppercase">
                 <th className="py-3 px-4">STATUS</th>
@@ -267,23 +267,23 @@ export default function ArticlesClientView({ initialArticles = [] }) {
                     <StatusBadge status={art.status} />
                   </td>
                   <td className="py-3 px-4">
-                    <div className="font-roc text-sm font-bold text-white uppercase">
+                    <div className="font-artific text-sm font-bold text-white uppercase">
                       {art.title}
                     </div>
-                    <div className="font-azeret text-[9px] text-white/40 truncate max-w-sm">
+                    <div className="font-parkinsans text-[9px] text-white/40 truncate max-w-sm">
                       /{art.slug}
                     </div>
                   </td>
-                  <td className="py-3 px-4 font-azeret text-[10px] text-white/70">
+                  <td className="py-3 px-4 font-parkinsans text-[10px] text-white/70">
                     {art.category}
                   </td>
-                  <td className="py-3 px-4 font-azeret text-[10px] text-white/60">
+                  <td className="py-3 px-4 font-parkinsans text-[10px] text-white/60">
                     {art.author?.name || "Architect"}
                   </td>
-                  <td className="py-3 px-4 font-azeret text-[10px] text-white/40">
+                  <td className="py-3 px-4 font-parkinsans text-[10px] text-white/40">
                     {art.readingTime || "5 MIN READ"}
                   </td>
-                  <td className="py-3 px-4 text-right font-azeret text-[9px] tracking-wider uppercase">
+                  <td className="py-3 px-4 text-right font-parkinsans text-[9px] tracking-wider uppercase">
                     <div className="flex items-center justify-end gap-2">
                       {art.status === "PUBLISHED" && (
                         <Link

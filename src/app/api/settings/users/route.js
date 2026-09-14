@@ -82,7 +82,7 @@ export async function POST(request) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(rawEmail)) {
       return NextResponse.json(
-        { error: "Invalid email format (e.g. operator@gerat.et)", field: "email" },
+        { error: "Invalid email format (e.g. operator@gerat.com)", field: "email" },
         { status: 400 }
       );
     }
