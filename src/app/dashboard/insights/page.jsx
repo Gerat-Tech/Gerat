@@ -4,7 +4,7 @@ import prisma from "@/lib/prisma";
 import ArticlesClientView from "./components/ArticlesClientView";
 
 export const metadata = {
-  title: "Research & Insights CMS // Gerat Mission Control",
+  title: "Research & Insights CMS · Gerat Mission Control",
   description: "Publish and maintain technical whitepapers, architecture retrospectives, and field dispatches",
 };
 

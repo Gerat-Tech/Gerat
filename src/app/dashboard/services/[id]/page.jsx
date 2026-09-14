@@ -4,7 +4,7 @@ import prisma from "@/lib/prisma";
 import ServicePillarEditor from "../components/ServicePillarEditor";
 
 export const metadata = {
-  title: "Edit Practice Pillar // Gerat Mission Control",
+  title: "Edit Practice Pillar · Gerat Mission Control",
   description: "Update practice scope, deliverables, and technical architecture",
 };
 

@@ -4,7 +4,7 @@ import prisma from "@/lib/prisma";
 import PortfolioClientView from "./components/PortfolioClientView";
 
 export const metadata = {
-  title: "Portfolio & Showcase CMS // Gerat Mission Control",
+  title: "Portfolio & Showcase CMS · Gerat Mission Control",
   description: "Curate, engineer, and publish flagship case studies and product showcases",
 };
 

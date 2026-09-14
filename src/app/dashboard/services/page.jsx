@@ -4,7 +4,7 @@ import prisma from "@/lib/prisma";
 import ServicesClientView from "./components/ServicesClientView";
 
 export const metadata = {
-  title: "Practice Pillars CMS // Gerat Mission Control",
+  title: "Practice Pillars CMS · Gerat Mission Control",
   description: "Curate, engineer, and publish core service capabilities and specifications",
 };
 

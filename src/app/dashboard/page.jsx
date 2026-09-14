@@ -85,7 +85,7 @@ export default async function DashboardPage({ searchParams }) {
 
   // Header Title & Action Button based on Role
   let cockpitTitle = "EXECUTIVE COCKPIT";
-  let cockpitSubtitle = `LOGGED IN AS ${user?.name || "SUPER ADMIN"} // STUDIO MASTER COMMAND`;
+  let cockpitSubtitle = `LOGGED IN AS ${user?.name || "SUPER ADMIN"} · STUDIO MASTER COMMAND`;
   let headerAction = (
     <Link
       href="/dashboard/inquiries"
@@ -98,7 +98,7 @@ export default async function DashboardPage({ searchParams }) {
 
   if (role === "OPERATIONS_LEAD") {
     cockpitTitle = "OPERATIONS COCKPIT";
-    cockpitSubtitle = `LOGGED IN AS ${user?.name || "OPERATIONS LEAD"} // CLIENT INTAKE & COMMERCIAL PIPELINE`;
+    cockpitSubtitle = `LOGGED IN AS ${user?.name || "OPERATIONS LEAD"} · CLIENT INTAKE & COMMERCIAL PIPELINE`;
     headerAction = (
       <Link
         href="/dashboard/inquiries"
@@ -110,7 +110,7 @@ export default async function DashboardPage({ searchParams }) {
     );
   } else if (role === "EDITOR" || role === "TECHNICAL_EDITOR" || role === "CREATIVE_EDITOR") {
     cockpitTitle = "EDITORIAL & CONTENT COCKPIT";
-    cockpitSubtitle = `LOGGED IN AS ${user?.name || "EDITOR"} // RESEARCH PUBLICATIONS & PORTFOLIO SHOWCASES`;
+    cockpitSubtitle = `LOGGED IN AS ${user?.name || "EDITOR"} · RESEARCH PUBLICATIONS & PORTFOLIO SHOWCASES`;
     headerAction = (
       <Link
         href="/dashboard/insights/new"
@@ -122,7 +122,7 @@ export default async function DashboardPage({ searchParams }) {
     );
   } else if (role === "VIEWER") {
     cockpitTitle = "STUDIO OVERVIEW";
-    cockpitSubtitle = `LOGGED IN AS ${user?.name || "OBSERVER"} // INTERNAL STUDIO DIRECTORY`;
+    cockpitSubtitle = `LOGGED IN AS ${user?.name || "OBSERVER"} · INTERNAL STUDIO DIRECTORY`;
     headerAction = (
       <Link
         href="/"
@@ -348,7 +348,7 @@ export default async function DashboardPage({ searchParams }) {
             className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all"
           >
             <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
-              MODULE 01 // CRM
+              MODULE 01 · CRM
             </span>
             <h2 className="font-artific text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
               CLIENT INTAKE & COMMUNICATIONS
@@ -370,7 +370,7 @@ export default async function DashboardPage({ searchParams }) {
             className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all"
           >
             <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
-              MODULE {isEditor ? "01" : "02"} // CMS
+              MODULE {isEditor ? "01" : "02"} · CMS
             </span>
             <h2 className="font-artific text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
               RESEARCH & INSIGHTS PUBLISHING
@@ -392,7 +392,7 @@ export default async function DashboardPage({ searchParams }) {
             className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all"
           >
             <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
-              MODULE {isEditor ? "02" : "03"} // CMS
+              MODULE {isEditor ? "02" : "03"} · CMS
             </span>
             <h2 className="font-artific text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
               PORTFOLIO & PRODUCTS
@@ -414,7 +414,7 @@ export default async function DashboardPage({ searchParams }) {
             className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all"
           >
             <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
-              MODULE 04 // {role === "OPERATIONS_LEAD" ? "REF" : "CMS"}
+              MODULE 04 · {role === "OPERATIONS_LEAD" ? "REF" : "CMS"}
             </span>
             <h2 className="font-artific text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
               {role === "OPERATIONS_LEAD" ? "TEAM PRACTITIONER DIRECTORY" : "TEAM & LEADERSHIP ROSTER"}
@@ -438,7 +438,7 @@ export default async function DashboardPage({ searchParams }) {
             className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all"
           >
             <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
-              MODULE 05 // {role === "OPERATIONS_LEAD" ? "REF" : "CMS"}
+              MODULE 05 · {role === "OPERATIONS_LEAD" ? "REF" : "CMS"}
             </span>
             <h2 className="font-artific text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
               {role === "OPERATIONS_LEAD" ? "PRACTICE PILLARS & SCOPE" : "PRACTICE PILLARS & SERVICES"}
@@ -462,7 +462,7 @@ export default async function DashboardPage({ searchParams }) {
             className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all"
           >
             <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
-              MODULE 06 // SYSTEM
+              MODULE 06 · SYSTEM
             </span>
             <h2 className="font-artific text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
               TELEMETRY, RBAC & AUDIT LOGS

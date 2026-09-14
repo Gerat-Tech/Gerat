@@ -23,14 +23,14 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
   const [slug, setSlug] = useState(initialCaseStudy?.slug || "");
   const [isSlugLocked, setIsSlugLocked] = useState(Boolean(initialCaseStudy?.id));
   const [displayIndex, setDisplayIndex] = useState(initialCaseStudy?.displayIndex || "01");
-  const [num, setNum] = useState(initialCaseStudy?.num || "01 / 09");
+  const [num, setNum] = useState(initialCaseStudy?.num || "01");
   const [category, setCategory] = useState(initialCaseStudy?.category || "ENTERPRISE ERP");
   const [tags, setTags] = useState(initialCaseStudy?.tags || "ENTERPRISE LOGISTICS & OPERATIONS");
   const [metric, setMetric] = useState(
-    initialCaseStudy?.metric || "12M+ RECORDS // SUB-SECOND VERIFICATION"
+    initialCaseStudy?.metric || "12M+ RECORDS · SUB-SECOND VERIFICATION"
   );
   const [metricDetail, setMetricDetail] = useState(
-    initialCaseStudy?.metricDetail || "12M+ RECORDS SECURED // 99.999% UPTIME"
+    initialCaseStudy?.metricDetail || "12M+ RECORDS SECURED · 99.999% UPTIME"
   );
   const [summary, setSummary] = useState(
     initialCaseStudy?.summary ||
@@ -45,7 +45,7 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
       "Engineered an event-driven distributed ledger with cryptographic verification and automated reconciliation."
   );
   const [techStack, setTechStack] = useState(
-    initialCaseStudy?.techStack || "DISTRIBUTED POSTGRES // NEXT.JS // GO"
+    initialCaseStudy?.techStack || "DISTRIBUTED POSTGRES · NEXT.JS · GO"
   );
   const [stackBadges, setStackBadges] = useState(
     initialCaseStudy?.stackBadges
@@ -62,7 +62,7 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
       "Reduced processing times by 95% with zero data discrepancies across distributed nodes."
   );
   const [year, setYear] = useState(initialCaseStudy?.year || "2026");
-  const [status, setStatus] = useState(initialCaseStudy?.status || "PRODUCTION // STABLE");
+  const [status, setStatus] = useState(initialCaseStudy?.status || "PRODUCTION · STABLE");
   const [featured, setFeatured] = useState(Boolean(initialCaseStudy?.featured));
   const [order, setOrder] = useState(initialCaseStudy?.order || 1);
 
@@ -387,7 +387,7 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
                 <input
                   type="text"
                   required
-                  placeholder="12M+ RECORDS // SUB-SECOND VERIFICATION"
+                  placeholder="12M+ RECORDS · SUB-SECOND VERIFICATION"
                   value={metric}
                   onChange={(e) => setMetric(e.target.value)}
                   className="bg-black/60 border border-white/15 px-3 py-2 text-accent font-artific font-bold text-sm uppercase rounded-[2px] focus:border-accent outline-none"
@@ -400,7 +400,7 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
                 </label>
                 <input
                   type="text"
-                  placeholder="12M+ RECORDS SECURED // 99.999% UPTIME"
+                  placeholder="12M+ RECORDS SECURED · 99.999% UPTIME"
                   value={metricDetail}
                   onChange={(e) => setMetricDetail(e.target.value)}
                   className="bg-black/60 border border-white/15 px-3 py-2 text-white text-xs rounded-[2px] focus:border-accent outline-none"
@@ -474,7 +474,7 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
               </label>
               <input
                 type="text"
-                placeholder="DISTRIBUTED POSTGRES // NEXT.JS // GO"
+                placeholder="DISTRIBUTED POSTGRES · NEXT.JS · GO"
                 value={techStack}
                 onChange={(e) => setTechStack(e.target.value)}
                 className="bg-black/60 border border-white/15 px-3 py-2 text-white font-mono text-xs rounded-[2px] focus:border-accent outline-none"

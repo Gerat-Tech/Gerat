@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 import ArticleEditor from "../components/ArticleEditor";
 
 export const metadata = {
-  title: "New Whitepaper Publication // Gerat Mission Control",
+  title: "New Whitepaper Publication · Gerat Mission Control",
   description: "Compose and publish technical whitepapers and field dispatches",
 };
 

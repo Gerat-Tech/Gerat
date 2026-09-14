@@ -4,7 +4,7 @@ import prisma from "@/lib/prisma";
 import InquiriesClientView from "./components/InquiriesClientView";
 
 export const metadata = {
-  title: "Inquiries & CRM Pipeline // Gerat Mission Control",
+  title: "Inquiries & CRM Pipeline · Gerat Mission Control",
   description: "Lead Triage, Telemetry Intake, and Client Engagement Management",
 };
 

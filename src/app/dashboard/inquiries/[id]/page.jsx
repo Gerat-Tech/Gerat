@@ -11,11 +11,11 @@ export async function generateMetadata({ params }) {
   });
 
   if (!inquiry) {
-    return { title: "Inquiry Not Found // Gerat Mission Control" };
+    return { title: "Inquiry Not Found · Gerat Mission Control" };
   }
 
   return {
-    title: `${inquiry.fullName} [${inquiry.telemetryCode}] // Gerat CRM`,
+    title: `${inquiry.fullName} [${inquiry.telemetryCode}] · Gerat CRM`,
     description: `Lead Dossier and Client Communications Center for ${inquiry.fullName}`,
   };
 }

@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 import SettingsClientView from "./components/SettingsClientView";
 
 export const metadata = {
-  title: "System Control & Telemetry // Gerat Mission Control",
+  title: "System Control & Settings · Gerat Mission Control",
   description: "Manage global brand parameters, real-time alert webhooks, and immutable audit logs",
 };
 

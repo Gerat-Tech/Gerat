@@ -17,103 +17,103 @@ const DEFAULT_MARQUEE_TOKENS = [
 const LOCATION_PRESETS = [
   {
     label: "Addis Ababa — Bole Sub-City (Atlas / Medhanialem / Woreda 03)",
-    coords: "8.9954° N, 38.7889° E // BOLE",
+    coords: "8.9954° N, 38.7889° E · BOLE",
     address: "Bole Sub-City, Woreda 03, Addis Ababa, Ethiopia",
     mapQuery: "Bole, Addis Ababa, Ethiopia",
   },
   {
     label: "Addis Ababa — Kirkos Sub-City (Kazanchis / ECA / Meskel Sq)",
-    coords: "9.0125° N, 38.7612° E // KAZANCHIS",
+    coords: "9.0125° N, 38.7612° E · KAZANCHIS",
     address: "Kirkos Sub-City, Kazanchis, Addis Ababa, Ethiopia",
     mapQuery: "Kazanchis, Addis Ababa, Ethiopia",
   },
   {
     label: "Addis Ababa — Arada Sub-City (Piassa / Churchill Ave / 4 Kilo)",
-    coords: "9.0345° N, 38.7521° E // PIASSA",
+    coords: "9.0345° N, 38.7521° E · PIASSA",
     address: "Arada Sub-City, Churchill Avenue, Addis Ababa, Ethiopia",
     mapQuery: "Arada, Addis Ababa, Ethiopia",
   },
   {
     label: "Addis Ababa — Yeka Sub-City (CMC / Megenagna / Signal)",
-    coords: "9.0289° N, 38.7981° E // MEGENAGNA",
+    coords: "9.0289° N, 38.7981° E · MEGENAGNA",
     address: "Yeka Sub-City, Megenagna Corridor, Addis Ababa, Ethiopia",
     mapQuery: "Megenagna, Addis Ababa, Ethiopia",
   },
   {
     label: "Addis Ababa — Nifas Silk-Lafto (Gotera / Saris / Jomo)",
-    coords: "8.9712° N, 38.7391° E // GOTERA",
+    coords: "8.9712° N, 38.7391° E · GOTERA",
     address: "Nifas Silk-Lafto, Gotera Interchange, Addis Ababa, Ethiopia",
     mapQuery: "Gotera, Addis Ababa, Ethiopia",
   },
   {
     label: "Addis Ababa — Lideta Sub-City (Mexico Square / Balcha)",
-    coords: "9.0101° N, 38.7423° E // MEXICO",
+    coords: "9.0101° N, 38.7423° E · MEXICO",
     address: "Lideta Sub-City, Mexico Square, Addis Ababa, Ethiopia",
     mapQuery: "Mexico Square, Addis Ababa, Ethiopia",
   },
   {
     label: "Addis Ababa — Lemi Kura Sub-City (Ayat / Summit)",
-    coords: "9.0195° N, 38.8541° E // AYAT",
+    coords: "9.0195° N, 38.8541° E · AYAT",
     address: "Lemi Kura Sub-City, Ayat Zone, Addis Ababa, Ethiopia",
     mapQuery: "Ayat, Addis Ababa, Ethiopia",
   },
   {
     label: "Addis Ababa — Gulele Sub-City (AAU Campus / Shiromeda)",
-    coords: "9.0583° N, 38.7489° E // GULELE",
+    coords: "9.0583° N, 38.7489° E · GULELE",
     address: "Gulele Sub-City, Sidist Kilo Campus, Addis Ababa, Ethiopia",
     mapQuery: "Gulele, Addis Ababa, Ethiopia",
   },
   {
     label: "Addis Ababa — Kolfe Keranio (Tor Hailoch / Total)",
-    coords: "9.0089° N, 38.7189° E // TOR HAILOCH",
+    coords: "9.0089° N, 38.7189° E · TOR HAILOCH",
     address: "Kolfe Keranio Sub-City, Tor Hailoch, Addis Ababa, Ethiopia",
     mapQuery: "Tor Hailoch, Addis Ababa, Ethiopia",
   },
   {
     label: "Addis Ababa — Akaky Kaliti (Industry Zone / Kality)",
-    coords: "8.8923° N, 38.7634° E // KALITI",
+    coords: "8.8923° N, 38.7634° E · KALITI",
     address: "Akaky Kaliti Sub-City, Industrial Zone, Addis Ababa, Ethiopia",
     mapQuery: "Kality, Addis Ababa, Ethiopia",
   },
   {
     label: "Addis Ababa — Addis Ketema (Mercato / Autobis Tera)",
-    coords: "9.0312° N, 38.7345° E // MERCATO",
+    coords: "9.0312° N, 38.7345° E · MERCATO",
     address: "Addis Ketema Sub-City, Mercato, Addis Ababa, Ethiopia",
     mapQuery: "Mercato, Addis Ababa, Ethiopia",
   },
   {
     label: "Hawassa — Lake View / Industrial Park Hub",
-    coords: "7.0621° N, 38.4764° E // HAWASSA",
+    coords: "7.0621° N, 38.4764° E · HAWASSA",
     address: "Hawassa Industrial Park Boulevard, Sidama, Ethiopia",
     mapQuery: "Hawassa Industrial Park, Ethiopia",
   },
   {
     label: "Dire Dawa — Free Trade Zone / Rail Corridor",
-    coords: "9.6009° N, 41.8501° E // DIRE DAWA",
+    coords: "9.6009° N, 41.8501° E · DIRE DAWA",
     address: "Dire Dawa Free Trade Area, Dire Dawa, Ethiopia",
     mapQuery: "Dire Dawa, Ethiopia",
   },
   {
     label: "Adama / Nazret — Expressway Technology Corridor",
-    coords: "8.5414° N, 39.2689° E // ADAMA",
+    coords: "8.5414° N, 39.2689° E · ADAMA",
     address: "Expressway Highway Zone, Adama, Oromia, Ethiopia",
     mapQuery: "Adama, Ethiopia",
   },
   {
     label: "Bahir Dar — Lake Tana Innovation Center",
-    coords: "11.5936° N, 37.3908° E // BAHIR DAR",
+    coords: "11.5936° N, 37.3908° E · BAHIR DAR",
     address: "Kebele 04, Lake Tana Boulevard, Bahir Dar, Amhara, Ethiopia",
     mapQuery: "Bahir Dar, Ethiopia",
   },
   {
     label: "Mekelle — Technology Park Corridor",
-    coords: "13.4967° N, 39.4753° E // MEKELLE",
+    coords: "13.4967° N, 39.4753° E · MEKELLE",
     address: "Technology Park Zone, Mekelle, Tigray, Ethiopia",
     mapQuery: "Mekelle, Ethiopia",
   },
   {
     label: "Bishoftu / Debre Zeit — Resort & Innovation Hub",
-    coords: "8.7523° N, 38.9785° E // BISHOFTU",
+    coords: "8.7523° N, 38.9785° E · BISHOFTU",
     address: "Lake Babogaya Zone, Bishoftu, Oromia, Ethiopia",
     mapQuery: "Bishoftu, Ethiopia",
   },
@@ -135,7 +135,7 @@ export default function SettingsClientView({
     CONTACT_PHONE: initialConfigs.CONTACT_PHONE || "+251911002233",
     EMERGENCY_HOTLINE: initialConfigs.EMERGENCY_HOTLINE || "+251944556677",
     OFFICE_ADDRESS: initialConfigs.OFFICE_ADDRESS || "Bole Sub-City, Woreda 03, Addis Ababa, Ethiopia",
-    OFFICE_COORDINATES: initialConfigs.OFFICE_COORDINATES || "8.9954° N, 38.7889° E // BOLE",
+    OFFICE_COORDINATES: initialConfigs.OFFICE_COORDINATES || "8.9954° N, 38.7889° E · BOLE",
     ANNOUNCEMENT_ENABLED: initialConfigs.ANNOUNCEMENT_ENABLED === "true",
     ANNOUNCEMENT_TEXT: initialConfigs.ANNOUNCEMENT_TEXT || "SYSTEM ADVISORY: Q3 ARCHITECTURAL ENGAGEMENT SCHEDULE OPEN",
     ANNOUNCEMENT_LINK: initialConfigs.ANNOUNCEMENT_LINK || "/services",
@@ -284,7 +284,7 @@ export default function SettingsClientView({
               SYSTEM CONTROL & TELEMETRY
             </h1>
             <span className="font-parkinsans text-[9px] tracking-[0.2em] px-2 py-0.5 rounded-[2px] bg-accent/15 border border-accent/40 text-accent uppercase font-bold">
-              SYS // CONFIG
+              SYS · CONFIG
             </span>
           </div>
           <p className={`font-parkinsans text-[10px] tracking-[0.15em] uppercase mt-1 ${isLight ? "text-[#555D6B]" : "text-white/40"}`}>
@@ -338,7 +338,7 @@ export default function SettingsClientView({
               : "text-white/60 hover:text-white"
           }`}
         >
-          01 // SITE CONFIG & LOCATION
+          01 · SITE CONFIG & LOCATION
         </button>
 
         <button
@@ -352,7 +352,7 @@ export default function SettingsClientView({
               : "text-white/60 hover:text-white"
           }`}
         >
-          02 // THEME & APPEARANCE
+          02 · THEME & APPEARANCE
         </button>
 
         <button
@@ -366,7 +366,7 @@ export default function SettingsClientView({
               : "text-white/60 hover:text-white"
           }`}
         >
-          03 // ALERT WEBHOOKS
+          03 · ALERT WEBHOOKS
         </button>
 
         <button
@@ -380,7 +380,7 @@ export default function SettingsClientView({
               : "text-white/60 hover:text-white"
           }`}
         >
-          04 // IMMUTABLE AUDIT LOG
+          04 · IMMUTABLE AUDIT LOG
         </button>
 
         <Link
@@ -391,7 +391,7 @@ export default function SettingsClientView({
               : "bg-white/5 hover:bg-white/10 text-accent font-bold"
           }`}
         >
-          <span>05 // USER & ROLE GOVERNANCE</span>
+          <span>05 · USER & ROLE GOVERNANCE</span>
           <span>→</span>
         </Link>
       </div>
@@ -917,7 +917,7 @@ export default function SettingsClientView({
               }`}
             >
               <div className="text-accent font-bold">
-                🚨 NEW CLIENT LEAD REGISTERED // GRT-ENG-202609-847291
+                🚨 NEW CLIENT LEAD REGISTERED · GRT-ENG-202609-847291
               </div>
               <div className={`border-t pt-2 flex flex-col gap-1 ${isLight ? "border-[#E2E5EB] text-[#555D6B]" : "border-white/10 text-white/70"}`}>
                 <div><span className="opacity-50">Client:</span> Dr. Henok Tadesse (Apex Logistics PLC)</div>
@@ -1057,7 +1057,7 @@ export default function SettingsClientView({
                           <td colSpan={6} className={`p-4 border-b ${isLight ? "bg-[#F8F9FB] border-[#E2E5EB]" : "bg-black/60 border-white/10"}`}>
                             <div className="flex flex-col gap-1.5">
                               <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase font-bold">
-                                MUTATION DIFF PAYLOAD SNAPSHOT // {log.action}
+                                MUTATION DIFF PAYLOAD SNAPSHOT · {log.action}
                               </span>
                               <pre
                                 className={`p-3 border rounded-[2px] text-[10px] overflow-x-auto ${

@@ -4,7 +4,7 @@ import prisma from "@/lib/prisma";
 import TeamClientView from "./components/TeamClientView";
 
 export const metadata = {
-  title: "Team Roster CMS // Gerat Mission Control",
+  title: "Team Roster CMS · Gerat Mission Control",
   description: "Manage leadership, engineers, creative directors, and advisors",
 };
 

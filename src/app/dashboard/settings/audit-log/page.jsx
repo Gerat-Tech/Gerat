@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 import SettingsClientView from "../components/SettingsClientView";
 
 export const metadata = {
-  title: "Audit Log Trail // Gerat Mission Control",
+  title: "Audit Log Trail · Gerat Mission Control",
   description: "Immutable timeline of all administrative system mutations and operator actions",
 };
 

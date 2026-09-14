@@ -131,7 +131,7 @@ export default function ServicesClientView({ initialPillars = [] }) {
                 <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
                   <div className="flex items-center gap-2">
                     <span className="font-parkinsans text-xs font-bold text-accent">
-                      PRACTICE // {pillar.num}
+                      PRACTICE · {pillar.num}
                     </span>
                     <span className="font-mono text-[9px] text-white/30">
                       (ORDER: {pillar.order})

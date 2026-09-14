@@ -5,7 +5,7 @@ import { getCurrentUser, ROLES } from "@/lib/auth";
 import UsersSettingsClientView from "./components/UsersSettingsClientView";
 
 export const metadata = {
-  title: "User & Role Governance // Gerat Mission Control",
+  title: "User & Role Governance · Gerat Mission Control",
   description: "Provision team accounts, assign RBAC roles, and manage credentials without external domain dependencies",
 };
 

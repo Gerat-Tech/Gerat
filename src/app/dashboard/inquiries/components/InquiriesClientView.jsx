@@ -289,7 +289,7 @@ export default function InquiriesClientView({ initialInquiries = [] }) {
                       <td className="py-3.5 px-4 text-white">
                         <div className="font-semibold text-sm">{inq.fullName}</div>
                         <div className="text-[10px] text-white/40">
-                          {inq.company || "Direct Client"} {"//"} {inq.phone}
+                          {inq.company || "Direct Client"} {"·"} {inq.phone}
                         </div>
                       </td>
                       <td className="py-3.5 px-4 text-white/70">

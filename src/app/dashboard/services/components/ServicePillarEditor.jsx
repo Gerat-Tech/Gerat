@@ -99,9 +99,9 @@ export default function ServicePillarEditor({ initialData = null, isNew = false 
             >
               ← PRACTICE PILLARS
             </Link>
-            <span className="text-white/30 font-mono">/</span>
+            <span className="text-white/30 font-mono">·</span>
             <span className="font-parkinsans text-[10px] text-accent uppercase tracking-wider">
-              {isNew ? "NEW PILLAR CONFIGURATION" : `PILLAR ${formData.num} // ${formData.title || "UNTITLED"}`}
+              {isNew ? "NEW PILLAR CONFIGURATION" : `PILLAR ${formData.num} · ${formData.title || "UNTITLED"}`}
             </span>
           </div>
           <h1 className="font-artific text-2xl sm:text-3xl font-bold uppercase tracking-tight text-white mt-1">
@@ -140,7 +140,7 @@ export default function ServicePillarEditor({ initialData = null, isNew = false 
           {/* Section 1: Pillar Meta */}
           <div className="bg-[#121212] border border-white/10 p-6 rounded-[3px] flex flex-col gap-4">
             <div className="font-parkinsans text-[10px] tracking-[0.2em] text-accent uppercase font-bold border-b border-white/10 pb-2">
-              01 // PILLAR SPECIFICATION & POSITIONING
+              01 · PILLAR SPECIFICATION & POSITIONING
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -206,7 +206,7 @@ export default function ServicePillarEditor({ initialData = null, isNew = false 
               <input
                 type="text"
                 required
-                placeholder="ENTERPRISE ARCHITECTURE // WEB & MOBILE"
+                placeholder="ENTERPRISE ARCHITECTURE · WEB & MOBILE"
                 value={formData.tagline}
                 onChange={(e) => setFormData({ ...formData, tagline: e.target.value })}
                 className="w-full bg-black/60 border border-white/15 px-3 py-2 text-white font-mono text-xs uppercase rounded-[2px] focus:border-accent outline-none"
@@ -217,7 +217,7 @@ export default function ServicePillarEditor({ initialData = null, isNew = false 
           {/* Section 2: Narrative & Scope */}
           <div className="bg-[#121212] border border-white/10 p-6 rounded-[3px] flex flex-col gap-4">
             <div className="font-parkinsans text-[10px] tracking-[0.2em] text-accent uppercase font-bold border-b border-white/10 pb-2">
-              02 // NARRATIVE & SCOPE BREAKDOWN
+              02 · NARRATIVE & SCOPE BREAKDOWN
             </div>
 
             <div>
@@ -281,14 +281,14 @@ export default function ServicePillarEditor({ initialData = null, isNew = false 
             <div>
               <div className="flex items-center justify-between">
                 <span className="font-parkinsans text-[11px] tracking-[0.2em] text-accent font-bold">
-                  PRACTICE // {formData.num || "00"}
+                  PRACTICE · {formData.num || "00"}
                 </span>
                 <div className="size-2 rounded-[1px] bg-accent" />
               </div>
 
               <div className="flex flex-col gap-3 my-6">
                 <span className="font-parkinsans text-[9px] tracking-[0.2em] text-white/50 uppercase">
-                  {formData.tagline || "PRACTICE TAGLINE // CADRE"}
+                  {formData.tagline || "PRACTICE TAGLINE · CADRE"}
                 </span>
                 <h2 className="font-artific text-2xl font-bold tracking-tight uppercase text-white leading-tight">
                   {formData.title || "PRACTICE PILLAR TITLE"}

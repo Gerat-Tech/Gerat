@@ -20,7 +20,7 @@ export default function TeamMemberEditor({ initialMember = null }) {
     initialMember?.division || "ENGINEERING_PRACTITIONER"
   );
   const [focusTag, setFocusTag] = useState(
-    initialMember?.focusTag || "SYSTEMS ARCHITECTURE // DISTRIBUTED LEDGERS"
+    initialMember?.focusTag || "SYSTEMS ARCHITECTURE · DISTRIBUTED LEDGERS"
   );
   const [bio, setBio] = useState(
     initialMember?.bio ||
@@ -238,7 +238,7 @@ export default function TeamMemberEditor({ initialMember = null }) {
               </label>
               <input
                 type="text"
-                placeholder="SYSTEMS ARCHITECTURE // DISTRIBUTED LEDGERS"
+                placeholder="SYSTEMS ARCHITECTURE · DISTRIBUTED LEDGERS"
                 value={focusTag}
                 onChange={(e) => setFocusTag(e.target.value)}
                 className="bg-black/60 border border-white/15 px-3 py-2 text-accent font-mono text-xs rounded-[2px] focus:border-accent outline-none"

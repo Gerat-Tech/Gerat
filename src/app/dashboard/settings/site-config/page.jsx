@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 import SettingsClientView from "../components/SettingsClientView";
 
 export const metadata = {
-  title: "Site Configuration // Gerat Mission Control",
+  title: "Site Configuration · Gerat Mission Control",
   description: "Global brand coordinates, emergency hotlines, and marquee ticker tokens",
 };
 

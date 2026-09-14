@@ -239,7 +239,7 @@ function LoginForm() {
       {/* Footer Colophon */}
       <footer className="w-full max-w-5xl mx-auto py-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-2 font-parkinsans text-[10px] tracking-[0.15em] text-white/40 uppercase">
         <span>© 2026 GERAT SOFTWARE SOLUTION</span>
-        <span>CONFIDENTIAL // AUTHORIZED PERSONNEL ONLY</span>
+        <span>CONFIDENTIAL · AUTHORIZED PERSONNEL ONLY</span>
       </footer>
     </div>
   );
