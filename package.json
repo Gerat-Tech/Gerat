@@ -1,8 +1,8 @@
 {
   "name": "gerat-website",
   "version": "0.1.0",
-  "description": "Portfolio website for Gerat Software Solutions PLC",
-  "author": "Gerat Software Solutions PLC",
+  "description": "Portfolio website for Gerat Software Solution",
+  "author": "Gerat Software Solution",
   "license": "PROPRIETARY",
   "private": true,
   "packageManager": "pnpm@10.33.0",
