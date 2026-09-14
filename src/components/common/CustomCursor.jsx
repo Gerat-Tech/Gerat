@@ -122,10 +122,10 @@ export default function CustomCursor() {
           width: cursorText ? 64 : isHovered ? 44 : 26,
           height: cursorText ? 64 : isHovered ? 44 : 26,
           borderColor: isHovered
-            ? "var(--accent, #ff4a00)"
+            ? "var(--accent, #ea5b15)"
             : "rgba(255, 255, 255, 0.35)",
           backgroundColor: isHovered
-            ? "rgba(255, 74, 0, 0.08)"
+            ? "rgba(234, 91, 21, 0.08)"
             : "rgba(255, 255, 255, 0.02)",
           scale: isClicking ? 0.85 : 1,
         }}
@@ -140,7 +140,7 @@ export default function CustomCursor() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
-            className="font-azeret text-[8px] tracking-[0.2em] font-bold text-accent uppercase text-center"
+            className="font-parkinsans text-[8px] tracking-[0.2em] font-bold text-accent uppercase text-center"
           >
             {cursorText}
           </motion.span>

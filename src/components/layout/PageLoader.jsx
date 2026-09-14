@@ -64,12 +64,12 @@ export default function PageLoader() {
   return (
     <aside
       aria-label="Loading page"
-      className={`fixed inset-0 z-[500] bg-[#050505] flex flex-col items-center justify-between p-8 sm:p-12 transition-transform duration-700 ease-(--ease-primary) ${
+      className={`fixed inset-0 z-[500] bg-[var(--bg)] flex flex-col items-center justify-between p-8 sm:p-12 transition-transform duration-700 ease-(--ease-primary) ${
         loading ? "translate-y-0" : "-translate-y-full"
       }`}
     >
       {/* Top Telemetry */}
-      <div className="w-full flex items-center justify-between font-azeret text-[10px] tracking-[0.2em] text-white/40 uppercase">
+      <div className="w-full flex items-center justify-between font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
         <span>GERAT OS // v0.1</span>
         <span>SYS_INIT</span>
       </div>
@@ -83,12 +83,23 @@ export default function PageLoader() {
           {/* Geometric Emblem */}
           <svg
             className="size-8 sm:size-10 text-white"
-            viewBox="0 0 24 24"
+            viewBox="150 150 180 180"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
           >
-            <path d="M3 5V19H19V13H11V11H21V5H3Z" fill="currentColor" />
-            <rect x="13" y="15" width="4" height="4" fill="var(--accent, #ff4a00)" />
+            <path
+              d="M306.66,219.97v17.34c-29.32,0-53.09-20.88-53.09-46.64h-27.15c0,25.76-23.77,46.64-53.09,46.64v-17.34c29.32,0,53.09-20.88,53.09-46.64h27.15c0,25.76,23.77,46.64,53.09,46.64Z"
+              fill="currentColor"
+            />
+            <path
+              d="M306.66,254.65v17.34c-29.32,0-53.09-20.88-53.09-46.64h-27.15c0,25.76-23.77,46.64-53.09,46.64v-17.34c29.32,0,53.09-20.88,53.09-46.64h27.15c0,25.76,23.77,46.64,53.09,46.64Z"
+              fill="currentColor"
+            />
+            <path
+              d="M306.66,289.33v17.34c-29.32,0-53.09-20.88-53.09-46.64h-27.15c0,25.76-23.77,46.64-53.09,46.64v-17.34c29.32,0,53.09-20.88,53.09-46.64h27.15c0,25.76,23.77,46.64,53.09,46.64Z"
+              fill="var(--accent, #ea5b15)"
+            />
           </svg>
 
           {/* Precision Framing Brackets */}
@@ -99,18 +110,18 @@ export default function PageLoader() {
         </div>
 
         <div className="flex flex-col items-center gap-1.5 text-center">
-          <span className="font-roc text-[18px] sm:text-[20px] font-bold tracking-[0.2em] text-white">
+          <span className="font-artific text-[18px] sm:text-[20px] font-bold tracking-[0.2em] text-white">
             GERAT
           </span>
-          <span className="font-azeret text-[9px] sm:text-[10px] tracking-[0.25em] text-white/50 uppercase">
-            SOFTWARE SOLUTIONS PLC
+          <span className="font-parkinsans text-[9px] sm:text-[10px] tracking-[0.25em] text-white/50 uppercase">
+            SOFTWARE SOLUTION
           </span>
         </div>
       </div>
 
       {/* Bottom Progress Bar & Counter */}
       <div className="w-full max-w-xs flex flex-col gap-2">
-        <div className="flex items-center justify-between font-azeret text-[10px] tracking-[0.15em] text-white/50">
+        <div className="flex items-center justify-between font-parkinsans text-[10px] tracking-[0.15em] text-white/50">
           <span>{progress < 100 ? "CONFIGURING..." : "SYSTEM READY"}</span>
           <span className="text-accent font-bold">{progress}%</span>
         </div>

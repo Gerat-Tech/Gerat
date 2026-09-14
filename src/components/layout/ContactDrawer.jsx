@@ -194,13 +194,13 @@ export default function ContactDrawer({ open, setOpen }) {
             role="dialog"
             aria-modal="true"
             aria-label="Commission an engineering or creative engagement with Gerat"
-            className="relative z-10 w-full max-w-[640px] h-full bg-[#0a0a0a] text-white border-l border-white/10 flex flex-col shadow-2xl overflow-y-auto hide-scrollbar"
+            className="relative z-10 w-full max-w-[640px] h-full bg-[var(--surface)] text-white border-l border-white/10 flex flex-col shadow-2xl overflow-y-auto hide-scrollbar"
           >
             {/* Header / Telemetry Bar */}
-            <div className="sticky top-0 z-20 bg-[#0a0a0a]/95 backdrop-blur-md border-b border-white/10 px-6 sm:px-10 py-5 flex items-center justify-between">
+            <div className="sticky top-0 z-20 bg-[var(--surface)]/95 backdrop-blur-md border-b border-white/10 px-6 sm:px-10 py-5 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <span className="size-2 rounded-full bg-accent animate-pulse" />
-                <span className="font-azeret text-[10px] tracking-[0.25em] text-white/70 uppercase">
+                <span className="font-parkinsans text-[10px] tracking-[0.25em] text-white/70 uppercase">
                   INITIATE COMMISSION // {isBrandDiscipline ? "CREATIVE & BRAND PIPELINE" : "ENGAGEMENT PIPELINE"}
                 </span>
               </div>
@@ -223,10 +223,10 @@ export default function ContactDrawer({ open, setOpen }) {
                 <form onSubmit={handleSubmit} className="flex flex-col gap-8">
                   {/* Hero Prompt */}
                   <div className="flex flex-col gap-2">
-                    <span className="font-azeret text-[10px] tracking-[0.2em] text-accent uppercase">
-                      GERAT SOFTWARE SOLUTIONS PLC
+                    <span className="font-parkinsans text-[10px] tracking-[0.2em] text-accent uppercase">
+                      GERAT SOFTWARE SOLUTION
                     </span>
-                    <h2 className="font-roc text-3xl sm:text-4xl font-medium tracking-tight uppercase leading-[1.05]">
+                    <h2 className="font-artific text-3xl sm:text-4xl font-medium tracking-tight uppercase leading-[1.05]">
                       {isBrandDiscipline ? (
                         <>
                           TALK TO THE <br />
@@ -239,7 +239,7 @@ export default function ContactDrawer({ open, setOpen }) {
                         </>
                       )}
                     </h2>
-                    <p className="font-roc text-sm text-white/60 leading-relaxed mt-1">
+                    <p className="font-parkinsans text-sm text-white/60 leading-relaxed mt-1">
                       {isBrandDiscipline
                         ? "Strategic brand positioning, monolithic visual identity, and graphic systems connected directly to digital execution. Direct review within 24–48 hours."
                         : "Direct engineering review. We evaluate system scope, computational constraints, and deployment SLAs within 24–48 hours."}
@@ -248,7 +248,7 @@ export default function ContactDrawer({ open, setOpen }) {
 
                   {/* Discipline Selection */}
                   <div className="flex flex-col gap-3">
-                    <label className="font-azeret text-[10px] tracking-[0.2em] text-white/50 uppercase">
+                    <label className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
                       01 // SYSTEM & CREATIVE DISCIPLINE <span className="text-accent">*</span>
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -259,7 +259,7 @@ export default function ContactDrawer({ open, setOpen }) {
                             key={discipline}
                             type="button"
                             onClick={() => setSelectedDiscipline(discipline)}
-                            className={`px-3 py-2.5 text-left font-azeret text-[9px] tracking-[0.08em] border transition-all rounded-[2px] flex items-center justify-between ${
+                            className={`px-3 py-2.5 text-left font-parkinsans text-[9px] tracking-[0.08em] border transition-all rounded-[2px] flex items-center justify-between ${
                               isSelected
                                 ? "bg-accent/10 border-accent text-white font-medium"
                                 : "bg-white/[0.02] border-white/10 text-white/60 hover:border-white/30 hover:text-white"
@@ -277,7 +277,7 @@ export default function ContactDrawer({ open, setOpen }) {
 
                   {/* Core Contact Fields */}
                   <div className="flex flex-col gap-4">
-                    <label className="font-azeret text-[10px] tracking-[0.2em] text-white/50 uppercase">
+                    <label className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
                       02 // CONTACT PARAMETERS <span className="text-accent">*</span>
                     </label>
 
@@ -291,7 +291,7 @@ export default function ContactDrawer({ open, setOpen }) {
                             setFormData({ ...formData, name: e.target.value })
                           }
                           placeholder="Full Name"
-                          className="w-full bg-[#141414] border border-white/10 px-4 py-3 font-roc text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-accent transition-colors rounded-[2px]"
+                          className="w-full bg-[var(--surface-raised)] border border-white/10 px-4 py-3 font-parkinsans text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-accent transition-colors rounded-[2px]"
                         />
                       </div>
                       <div>
@@ -303,7 +303,7 @@ export default function ContactDrawer({ open, setOpen }) {
                             setFormData({ ...formData, email: e.target.value })
                           }
                           placeholder="Corporate / Work Email"
-                          className="w-full bg-[#141414] border border-white/10 px-4 py-3 font-roc text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-accent transition-colors rounded-[2px]"
+                          className="w-full bg-[var(--surface-raised)] border border-white/10 px-4 py-3 font-parkinsans text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-accent transition-colors rounded-[2px]"
                         />
                       </div>
                     </div>
@@ -318,7 +318,7 @@ export default function ContactDrawer({ open, setOpen }) {
                             setFormData({ ...formData, company: e.target.value })
                           }
                           placeholder="Company / Institution / Brand"
-                          className="w-full bg-[#141414] border border-white/10 px-4 py-3 font-roc text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-accent transition-colors rounded-[2px]"
+                          className="w-full bg-[var(--surface-raised)] border border-white/10 px-4 py-3 font-parkinsans text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-accent transition-colors rounded-[2px]"
                         />
                       </div>
                       <div>
@@ -329,7 +329,7 @@ export default function ContactDrawer({ open, setOpen }) {
                             setFormData({ ...formData, phone: e.target.value })
                           }
                           placeholder="Phone / WhatsApp (+251...)"
-                          className="w-full bg-[#141414] border border-white/10 px-4 py-3 font-roc text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-accent transition-colors rounded-[2px]"
+                          className="w-full bg-[var(--surface-raised)] border border-white/10 px-4 py-3 font-parkinsans text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-accent transition-colors rounded-[2px]"
                         />
                       </div>
                     </div>
@@ -342,11 +342,11 @@ export default function ContactDrawer({ open, setOpen }) {
                       animate={{ opacity: 1, y: 0 }}
                       className="p-4 bg-white/[0.02] border border-white/10 rounded-[2px] flex flex-col gap-3"
                     >
-                      <label className="font-azeret text-[10px] tracking-[0.2em] text-accent uppercase">
+                      <label className="font-parkinsans text-[10px] tracking-[0.2em] text-accent uppercase">
                         BRAND ARCHITECTURE SPECIFICATIONS
                       </label>
                       <div className="flex flex-col gap-2">
-                        <span className="font-azeret text-[9px] text-white/50 tracking-[0.1em] uppercase">
+                        <span className="font-parkinsans text-[9px] text-white/50 tracking-[0.1em] uppercase">
                           CURRENT STAGE
                         </span>
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -355,7 +355,7 @@ export default function ContactDrawer({ open, setOpen }) {
                               key={situation}
                               type="button"
                               onClick={() => setBrandSituation(situation)}
-                              className={`px-3 py-2 text-left font-azeret text-[9px] tracking-[0.05em] border rounded-[2px] transition-all ${
+                              className={`px-3 py-2 text-left font-parkinsans text-[9px] tracking-[0.05em] border rounded-[2px] transition-all ${
                                 brandSituation === situation
                                   ? "bg-accent/15 border-accent text-white"
                                   : "border-white/10 text-white/60 hover:text-white"
@@ -373,7 +373,7 @@ export default function ContactDrawer({ open, setOpen }) {
                           onChange={(e) => setNeedBrandGuidelines(e.target.checked)}
                           className="size-3.5 accent-accent"
                         />
-                        <span className="font-azeret text-[9px] tracking-[0.1em] text-white/70 uppercase">
+                        <span className="font-parkinsans text-[9px] tracking-[0.1em] text-white/70 uppercase">
                           Include Production Brand Guidelines & Digital Asset System
                         </span>
                       </label>
@@ -386,7 +386,7 @@ export default function ContactDrawer({ open, setOpen }) {
                       animate={{ opacity: 1, y: 0 }}
                       className="p-4 bg-white/[0.02] border border-white/10 rounded-[2px] flex flex-col gap-3"
                     >
-                      <label className="font-azeret text-[10px] tracking-[0.2em] text-accent uppercase">
+                      <label className="font-parkinsans text-[10px] tracking-[0.2em] text-accent uppercase">
                         GRAPHIC COLLATERAL FOCUS
                       </label>
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -395,7 +395,7 @@ export default function ContactDrawer({ open, setOpen }) {
                             key={asset}
                             type="button"
                             onClick={() => setSelectedAssetType(asset)}
-                            className={`px-2.5 py-2 text-left font-azeret text-[9px] tracking-[0.05em] border rounded-[2px] transition-all ${
+                            className={`px-2.5 py-2 text-left font-parkinsans text-[9px] tracking-[0.05em] border rounded-[2px] transition-all ${
                               selectedAssetType === asset
                                 ? "bg-accent/15 border-accent text-white"
                                 : "border-white/10 text-white/60 hover:text-white"
@@ -414,11 +414,11 @@ export default function ContactDrawer({ open, setOpen }) {
                       animate={{ opacity: 1, y: 0 }}
                       className="p-4 bg-white/[0.02] border border-white/10 rounded-[2px] flex flex-col gap-3"
                     >
-                      <label className="font-azeret text-[10px] tracking-[0.2em] text-accent uppercase">
+                      <label className="font-parkinsans text-[10px] tracking-[0.2em] text-accent uppercase">
                         EXECUTIVE PERSONAL BRANDING MODULES
                       </label>
                       <div className="flex flex-col gap-2">
-                        <span className="font-azeret text-[9px] text-white/50 tracking-[0.1em] uppercase">
+                        <span className="font-parkinsans text-[9px] text-white/50 tracking-[0.1em] uppercase">
                           PROFESSIONAL ROLE
                         </span>
                         <div className="grid grid-cols-2 gap-2">
@@ -427,7 +427,7 @@ export default function ContactDrawer({ open, setOpen }) {
                               key={role}
                               type="button"
                               onClick={() => setPersonalRole(role)}
-                              className={`px-2.5 py-2 text-left font-azeret text-[9px] tracking-[0.05em] border rounded-[2px] transition-all ${
+                              className={`px-2.5 py-2 text-left font-parkinsans text-[9px] tracking-[0.05em] border rounded-[2px] transition-all ${
                                 personalRole === role
                                   ? "bg-accent/15 border-accent text-white"
                                   : "border-white/10 text-white/60 hover:text-white"
@@ -446,7 +446,7 @@ export default function ContactDrawer({ open, setOpen }) {
                             onChange={(e) => setNeedPhotographyDirection(e.target.checked)}
                             className="size-3.5 accent-accent"
                           />
-                          <span className="font-azeret text-[9px] tracking-[0.1em] text-white/70 uppercase">
+                          <span className="font-parkinsans text-[9px] tracking-[0.1em] text-white/70 uppercase">
                             Photography Direction
                           </span>
                         </label>
@@ -457,7 +457,7 @@ export default function ContactDrawer({ open, setOpen }) {
                             onChange={(e) => setNeedPersonalWebsite(e.target.checked)}
                             className="size-3.5 accent-accent"
                           />
-                          <span className="font-azeret text-[9px] tracking-[0.1em] text-white/70 uppercase">
+                          <span className="font-parkinsans text-[9px] tracking-[0.1em] text-white/70 uppercase">
                             Personal Executive Site
                           </span>
                         </label>
@@ -467,7 +467,7 @@ export default function ContactDrawer({ open, setOpen }) {
 
                   {/* Timeline Selection */}
                   <div className="flex flex-col gap-3">
-                    <label className="font-azeret text-[10px] tracking-[0.2em] text-white/50 uppercase">
+                    <label className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
                       03 // DELIVERY TIMELINE
                     </label>
                     <div className="grid grid-cols-2 gap-2">
@@ -478,7 +478,7 @@ export default function ContactDrawer({ open, setOpen }) {
                             key={time}
                             type="button"
                             onClick={() => setSelectedTimeline(time)}
-                            className={`px-3 py-2 font-azeret text-[10px] tracking-[0.1em] border text-left transition-all rounded-[2px] ${
+                            className={`px-3 py-2 font-parkinsans text-[10px] tracking-[0.1em] border text-left transition-all rounded-[2px] ${
                               isSelected
                                 ? "bg-white/10 border-white text-white"
                                 : "bg-transparent border-white/10 text-white/50 hover:text-white hover:border-white/20"
@@ -493,7 +493,7 @@ export default function ContactDrawer({ open, setOpen }) {
 
                   {/* Budget Qualification */}
                   <div className="flex flex-col gap-3">
-                    <label className="font-azeret text-[10px] tracking-[0.2em] text-white/50 uppercase">
+                    <label className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
                       04 // ESTIMATED BUDGET SCALE (OPTIONAL)
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -504,7 +504,7 @@ export default function ContactDrawer({ open, setOpen }) {
                             key={budget}
                             type="button"
                             onClick={() => setSelectedBudget(budget)}
-                            className={`px-2.5 py-2 font-azeret text-[9px] tracking-[0.05em] border text-left transition-all rounded-[2px] ${
+                            className={`px-2.5 py-2 font-parkinsans text-[9px] tracking-[0.05em] border text-left transition-all rounded-[2px] ${
                               isSelected
                                 ? "bg-accent/15 border-accent text-white"
                                 : "bg-transparent border-white/10 text-white/50 hover:text-white hover:border-white/20"
@@ -519,7 +519,7 @@ export default function ContactDrawer({ open, setOpen }) {
 
                   {/* Scope Details */}
                   <div className="flex flex-col gap-3">
-                    <label className="font-azeret text-[10px] tracking-[0.2em] text-white/50 uppercase">
+                    <label className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
                       05 // {isBrandDiscipline ? "CREATIVE OBJECTIVES & CONTEXT" : "ARCHITECTURAL REQUIREMENTS"}
                     </label>
                     <textarea
@@ -533,7 +533,7 @@ export default function ContactDrawer({ open, setOpen }) {
                           ? "Describe your brand vision, target audience, aesthetic benchmarks, existing assets, or specific collateral requirements..."
                           : "Outline operational requirements, expected transaction volumes, legacy integrations, or specific target deadlines..."
                       }
-                      className="w-full bg-[#141414] border border-white/10 p-4 font-roc text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-accent transition-colors rounded-[2px] resize-none"
+                      className="w-full bg-[var(--surface-raised)] border border-white/10 p-4 font-parkinsans text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-accent transition-colors rounded-[2px] resize-none"
                     />
                   </div>
 
@@ -552,7 +552,7 @@ export default function ContactDrawer({ open, setOpen }) {
                         }
                         className="mt-0.5 size-4 accent-accent rounded-[2px] cursor-pointer"
                       />
-                      <span className="font-azeret text-[10px] tracking-[0.1em] text-white/60 uppercase leading-relaxed group-hover:text-white/80 transition-colors">
+                      <span className="font-parkinsans text-[10px] tracking-[0.1em] text-white/60 uppercase leading-relaxed group-hover:text-white/80 transition-colors">
                         I agree to direct contact from Gerat leads regarding this inquiry under confidentiality protocols.
                       </span>
                     </label>
@@ -560,7 +560,7 @@ export default function ContactDrawer({ open, setOpen }) {
                     <button
                       type="submit"
                       disabled={isSubmitting || !formData.privacyAgreed}
-                      className="group relative isolate w-full py-4 bg-accent text-white font-azeret text-xs uppercase tracking-[0.2em] font-bold hover:bg-white hover:text-black disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 rounded-[2px] flex items-center justify-center gap-2"
+                      className="group relative isolate w-full py-4 bg-accent text-white font-parkinsans text-xs uppercase tracking-[0.2em] font-bold hover:bg-white hover:text-black disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 rounded-[2px] flex items-center justify-center gap-2"
                     >
                       <span>
                         {isSubmitting ? "TRANSMITTING TELEMETRY..." : "TRANSMIT INQUIRY"}
@@ -581,13 +581,13 @@ export default function ContactDrawer({ open, setOpen }) {
                   </div>
 
                   <div className="flex flex-col gap-2">
-                    <span className="font-azeret text-[10px] tracking-[0.25em] text-accent uppercase">
+                    <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase">
                       TELEMETRY RECEIVED // {isBrandDiscipline ? "CREATIVE DISPATCH 02" : "DISPATCH QUEUE 01"}
                     </span>
-                    <h3 className="font-roc text-2xl sm:text-3xl font-medium tracking-tight uppercase">
+                    <h3 className="font-artific text-2xl sm:text-3xl font-medium tracking-tight uppercase">
                       INQUIRY LOGGED SUCCESSFULLY
                     </h3>
-                    <p className="font-roc text-sm text-white/60 max-w-sm">
+                    <p className="font-parkinsans text-sm text-white/60 max-w-sm">
                       {isBrandDiscipline
                         ? "Our creative directors and brand architects will review your parameters and follow up within 24 business hours."
                         : "Our lead software architects will review your system parameters and follow up via email within 24 business hours."}
@@ -595,7 +595,7 @@ export default function ContactDrawer({ open, setOpen }) {
                   </div>
 
                   {/* Reference Ticket Box */}
-                  <div className="w-full bg-[#141414] border border-white/10 p-4 rounded-[2px] flex flex-col gap-2 text-left font-azeret text-[11px]">
+                  <div className="w-full bg-[var(--surface-raised)] border border-white/10 p-4 rounded-[2px] flex flex-col gap-2 text-left font-parkinsans text-[11px]">
                     <div className="flex justify-between items-center text-white/50 border-b border-white/5 pb-2">
                       <span>INQUIRY REFERENCE:</span>
                       <span className="text-accent font-bold tracking-widest">
@@ -620,14 +620,14 @@ export default function ContactDrawer({ open, setOpen }) {
                     <button
                       type="button"
                       onClick={handleReset}
-                      className="flex-1 py-3 border border-white/15 bg-white/5 font-azeret text-[10px] tracking-[0.2em] uppercase hover:bg-white/10 transition-colors rounded-[2px]"
+                      className="flex-1 py-3 border border-white/15 bg-white/5 font-parkinsans text-[10px] tracking-[0.2em] uppercase hover:bg-white/10 transition-colors rounded-[2px]"
                     >
                       LOG ANOTHER REQUEST
                     </button>
                     <button
                       type="button"
                       onClick={() => setOpen(false)}
-                      className="flex-1 py-3 bg-accent text-white font-azeret text-[10px] tracking-[0.2em] uppercase font-bold hover:bg-white hover:text-black transition-colors rounded-[2px]"
+                      className="flex-1 py-3 bg-accent text-white font-parkinsans text-[10px] tracking-[0.2em] uppercase font-bold hover:bg-white hover:text-black transition-colors rounded-[2px]"
                     >
                       CLOSE DRAWER
                     </button>
@@ -636,12 +636,12 @@ export default function ContactDrawer({ open, setOpen }) {
               )}
 
               {/* Bottom Telemetry Footer */}
-              <div className="pt-8 mt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-white/40 font-azeret text-[10px] tracking-[0.15em] uppercase">
+              <div className="pt-8 mt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-white/40 font-parkinsans text-[10px] tracking-[0.15em] uppercase">
                 <div className="flex items-center gap-2">
                   <Terminal className="size-3.5 text-accent" />
                   <span>HQ: ADDIS ABABA // UTC+3</span>
                 </div>
-                <div>CONTACT: INFO@GERAT.ET</div>
+                <div>CONTACT: INFO@GERAT.COM</div>
               </div>
             </div>
           </motion.div>

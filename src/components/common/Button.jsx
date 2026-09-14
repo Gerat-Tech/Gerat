@@ -27,7 +27,7 @@ export default function Button({
 
           {/* TEXT */}
           <div
-            className={`${textColor} font-azeret relative isolate flex -translate-x-[5px] overflow-hidden transition-transform duration-400
+            className={`${textColor} font-parkinsans relative isolate flex -translate-x-[5px] overflow-hidden transition-transform duration-400
           ease-in-out group-hover:translate-x-[5px]`}
           >
             <span className=" text-[12px] uppercase transition-transform duration-400 ease-in-out group-hover:-translate-y-full">
