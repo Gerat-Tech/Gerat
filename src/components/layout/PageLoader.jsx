@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import GeratLogo from "../common/GeratLogo";
 
 /**
  * Editorial Page Loader (Spec §9)
@@ -70,8 +71,8 @@ export default function PageLoader() {
     >
       {/* Top Telemetry */}
       <div className="w-full flex items-center justify-between font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
-        <span>GERAT OS // v0.1</span>
-        <span>SYS_INIT</span>
+        <span>GERAT SOFTWARE SOLUTION</span>
+        <span>INITIALIZING</span>
       </div>
 
       {/* Center Brand Monogram & Status */}
@@ -81,26 +82,7 @@ export default function PageLoader() {
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/20 to-transparent animate-pulse" />
 
           {/* Geometric Emblem */}
-          <svg
-            className="size-8 sm:size-10 text-white"
-            viewBox="150 150 180 180"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-          >
-            <path
-              d="M306.66,219.97v17.34c-29.32,0-53.09-20.88-53.09-46.64h-27.15c0,25.76-23.77,46.64-53.09,46.64v-17.34c29.32,0,53.09-20.88,53.09-46.64h27.15c0,25.76,23.77,46.64,53.09,46.64Z"
-              fill="currentColor"
-            />
-            <path
-              d="M306.66,254.65v17.34c-29.32,0-53.09-20.88-53.09-46.64h-27.15c0,25.76-23.77,46.64-53.09,46.64v-17.34c29.32,0,53.09-20.88,53.09-46.64h27.15c0,25.76,23.77,46.64,53.09,46.64Z"
-              fill="currentColor"
-            />
-            <path
-              d="M306.66,289.33v17.34c-29.32,0-53.09-20.88-53.09-46.64h-27.15c0,25.76-23.77,46.64-53.09,46.64v-17.34c29.32,0,53.09-20.88,53.09-46.64h27.15c0,25.76,23.77,46.64,53.09,46.64Z"
-              fill="var(--accent, #ea5b15)"
-            />
-          </svg>
+          <GeratLogo variant="mark" className="size-8 sm:size-10 text-white" />
 
           {/* Precision Framing Brackets */}
           <span className="absolute -top-[1px] -left-[1px] size-2 border-t border-l border-white" />

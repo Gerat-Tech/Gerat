@@ -26,28 +26,28 @@ const EMAIL_TEMPLATES = [
   {
     id: "discovery",
     name: "Discovery Architecture Consultation Invite",
-    subject: (inq) => `Gerat Architecture // Technical Discovery Consultation [${inq.telemetryCode}]`,
+    subject: (inq) => `Gerat Architecture · Technical Discovery Consultation [${inq.telemetryCode}]`,
     body: (inq) =>
-      `Dear ${inq.fullName},\n\nThank you for initiating contact with Gerat regarding your ${inq.discipline} inquiry (${inq.telemetryCode}).\n\nOur engineering architecture team has performed a preliminary review of your brief:\n"${inq.projectBrief}"\n\nWe would like to invite you to an exploratory technical discovery session (30-45 minutes) to map system boundaries, data contracts, and architectural feasibility.\n\nPlease let us know your availability over the coming 48-72 hours, or select an operational slot directly.\n\nWarm regards,\n\nGerat Architecture & Client Services\nAddis Ababa // info@gerat.com`,
+      `Dear ${inq.fullName},\n\nThank you for initiating contact with Gerat regarding your ${inq.discipline} inquiry (${inq.telemetryCode}).\n\nOur engineering architecture team has performed a preliminary review of your brief:\n"${inq.projectBrief}"\n\nWe would like to invite you to an exploratory technical discovery session (30-45 minutes) to map system boundaries, data contracts, and architectural feasibility.\n\nPlease let us know your availability over the coming 48-72 hours, or select an operational slot directly.\n\nWarm regards,\n\nGerat Architecture & Client Services\nAddis Ababa · info@gerat.com`,
   },
   {
     id: "brand_scoping",
     name: "Brand & Identity Scoping Questionnaire",
-    subject: (inq) => `Gerat Brand Architecture // Scoping Questionnaire [${inq.telemetryCode}]`,
+    subject: (inq) => `Gerat Brand Architecture · Scoping Questionnaire [${inq.telemetryCode}]`,
     body: (inq) =>
-      `Dear ${inq.fullName},\n\nThank you for reaching out to Gerat regarding Brand Architecture & Identity (${inq.telemetryCode}).\n\nTo construct a high-fidelity visual and strategic system for ${inq.company || inq.fullName}, our design directors need to clarify several foundational vectors:\n1. Core brand pillars and market differentiation.\n2. Target demographics and primary enterprise touchpoints.\n3. Existing design debt vs. greenfield identity creation.\n\nCould you review the attached brief checklist or let us know when you have 20 minutes for a brief scoping call?\n\nSincerely,\n\nGerat Creative Direction\nAddis Ababa // brand@gerat.com`,
+      `Dear ${inq.fullName},\n\nThank you for reaching out to Gerat regarding Brand Architecture & Identity (${inq.telemetryCode}).\n\nTo construct a high-fidelity visual and strategic system for ${inq.company || inq.fullName}, our design directors need to clarify several foundational vectors:\n1. Core brand pillars and market differentiation.\n2. Target demographics and primary enterprise touchpoints.\n3. Existing design debt vs. greenfield identity creation.\n\nCould you review the attached brief checklist or let us know when you have 20 minutes for a brief scoping call?\n\nSincerely,\n\nGerat Creative Direction\nAddis Ababa · brand@gerat.com`,
   },
   {
     id: "nda_scope",
     name: "Non-Disclosure Agreement (NDA) & Scope Review",
-    subject: (inq) => `Gerat Software // Mutual NDA & Architectural Scope [${inq.telemetryCode}]`,
+    subject: (inq) => `Gerat Software · Mutual NDA & Architectural Scope [${inq.telemetryCode}]`,
     body: (inq) =>
       `Dear ${inq.fullName},\n\nIn accordance with Gerat standard operating protocol for proprietary enterprise engagements, we have generated a mutual Non-Disclosure Agreement (NDA) for your review prior to deep architectural dissection.\n\nReference: ${inq.telemetryCode}\nOrganization: ${inq.company || "Direct Engagement"}\nDiscipline: ${inq.discipline}\n\nPlease countersign and return the attached document at your earliest convenience so we may review your proprietary requirements in depth.\n\nBest regards,\n\nGerat Legal & Client Operations\nlegal@gerat.com`,
   },
   {
     id: "capacity_timeline",
     name: "Capacity & Timeline Clarification",
-    subject: (inq) => `Gerat Engineering // Pipeline Capacity & Delivery Windows [${inq.telemetryCode}]`,
+    subject: (inq) => `Gerat Engineering · Pipeline Capacity & Delivery Windows [${inq.telemetryCode}]`,
     body: (inq) =>
       `Dear ${inq.fullName},\n\nWe are currently calibrating our engineering sprint allocations for the upcoming quarter.\n\nRegarding your requested timeline (${inq.timeline}) and budget allocation (${inq.budgetRange}):\nOur lead architect would like to align on critical path milestones and staging expectations to ensure dedicated engineering velocity.\n\nAre you available for a brief 15-minute alignment call today or tomorrow?\n\nRespectfully,\n\nGerat Operations Office\nops@gerat.com`,
   },
@@ -232,7 +232,7 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
             </h1>
             {inquiry.company && (
               <span className="font-parkinsans text-xs text-white/60 tracking-wider">
-                {"// "} {inquiry.company}
+                {"· "} {inquiry.company}
               </span>
             )}
             <StatusBadge status={inquiry.status} />
@@ -744,7 +744,7 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
                   <div className="flex items-center justify-between gap-2 mb-2 font-parkinsans text-[9px] tracking-[0.15em] text-white/40 uppercase">
                     <div className="flex items-center gap-2">
                       <span className="text-white font-bold">{note.author?.name || "Architect"}</span>
-                      {note.author?.role && <span>{"// "} {note.author.role}</span>}
+                      {note.author?.role && <span>{"· "} {note.author.role}</span>}
                       {note.isPinned && (
                         <span className="px-1.5 py-0.5 bg-accent/20 text-accent font-bold rounded-[2px]">
                           PINNED

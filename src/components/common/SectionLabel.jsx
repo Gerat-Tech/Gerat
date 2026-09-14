@@ -21,7 +21,7 @@ export default function SectionLabel({
         />
       )}
       <span className="text-white/40">{index}</span>
-      <span className="text-white/20">/</span>
+      <span className="text-white/30 text-[10px]">·</span>
       <span className="text-white/90">{label}</span>
     </div>
   );

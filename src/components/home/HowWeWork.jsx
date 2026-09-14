@@ -89,7 +89,7 @@ export default function HowWeWork() {
                 {/* Step Index & Indicator */}
                 <div className="flex items-center justify-between">
                   <span className="font-parkinsans text-[12px] tracking-[0.2em] text-accent font-bold">
-                    STEP // {item.step}
+                    STEP · {item.step}
                   </span>
                   <div className="size-1.5 rounded-[1px] bg-white/20 group-hover:bg-accent transition-colors" />
                 </div>

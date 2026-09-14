@@ -15,7 +15,7 @@ const creativeCards = [
     num: "01",
     icon: Compass,
     title: "BRAND STRATEGY",
-    subtitle: "DISCOVERY // POSITIONING // AUDIENCE",
+    subtitle: "DISCOVERY · POSITIONING · AUDIENCE",
     description:
       "Define what the brand stands for, who it serves, and what makes it distinct. We engineer the strategic foundation that informs every visual and digital asset.",
     tags: ["Market Positioning", "Value Proposition", "Messaging Pillars", "Audience Mapping"],
@@ -26,7 +26,7 @@ const creativeCards = [
     num: "02",
     icon: Sparkles,
     title: "LOGO & BRAND IDENTITY",
-    subtitle: "VECTOR ARCHITECTURE // TOKENS // SCALABILITY",
+    subtitle: "VECTOR ARCHITECTURE · DESIGN TOKENS · SCALABILITY",
     description:
       "A distinctive visual architecture designed to command recognition across digital, print, and real-world touchpoints — from primary marks to typography systems.",
     tags: ["Primary/Secondary Logos", "Design Token Standards", "Typography Hierarchy", "Brand Style Guide"],
@@ -37,7 +37,7 @@ const creativeCards = [
     num: "03",
     icon: Layers,
     title: "GRAPHIC DESIGN & COLLATERAL",
-    subtitle: "CLARITY // EDITORIAL DECKS // PROFILES",
+    subtitle: "EDITORIAL DECKS · PROFILES · GUIDELINES",
     description:
       "Purpose-built visual communication that makes complex institutional information clear, credible, and visually cohesive across physical and digital formats.",
     tags: ["Corporate Profiles", "Investor Pitch Decks", "Technical Whitepapers", "Annual Reports"],
@@ -48,7 +48,7 @@ const creativeCards = [
     num: "04",
     icon: UserCheck,
     title: "PERSONAL BRANDING FOR LEADERS",
-    subtitle: "EXECUTIVE PRESENCE // AUTHORITY // NARRATIVE",
+    subtitle: "EXECUTIVE PRESENCE · AUTHORITY · NARRATIVE",
     description:
       "Turn your story and technical mastery into an authoritative digital presence. Structured positioning, visual monograms, and executive platforms for founders.",
     tags: ["Personal Monogram", "Photography Direction", "LinkedIn Architecture", "Executive Website"],
@@ -133,11 +133,11 @@ export default function BrandCreativeSection() {
                           <Icon className="size-4" />
                         </div>
                         <span className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
-                          DISCIPLINE // {card.num}
+                          DISCIPLINE · {card.num}
                         </span>
                       </div>
                       <span className="font-parkinsans text-[10px] tracking-[0.2em] text-white/30">
-                        GERAT_STUDIO
+                        GERAT STUDIO
                       </span>
                     </div>
 
@@ -197,7 +197,7 @@ export default function BrandCreativeSection() {
           <div className="flex items-center gap-3">
             <span className="size-2 rounded-full bg-emerald-400" />
             <span className="font-parkinsans text-[10px] tracking-[0.2em] text-white/60 uppercase">
-              STUDIO CAPACITY // INTAKE OPEN FOR Q4 & 2026
+              STUDIO CAPACITY · INTAKE OPEN FOR Q4 & 2026
             </span>
           </div>
 

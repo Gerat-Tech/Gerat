@@ -79,9 +79,9 @@ export default function ChangePasswordModal({ isOpen, onClose, user }) {
         <div className={`flex items-center justify-between pb-3 border-b ${isLight ? "border-[#CBD2DC]" : "border-white/10"}`}>
           <div>
             <span className="font-parkinsans text-[9px] tracking-[0.25em] text-accent uppercase">
-              SECURITY KEY //
+              SECURITY VERIFICATION
             </span>
-            <h2 className="font-artific text-lg font-bold uppercase">UPDATE MY PASSPHRASE</h2>
+            <h2 className="font-artific text-lg font-bold uppercase">UPDATE PASSWORD</h2>
           </div>
           <button
             type="button"

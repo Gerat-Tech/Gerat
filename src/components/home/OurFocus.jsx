@@ -9,56 +9,56 @@ const capabilities = [
   {
     index: "01",
     title: "ENTERPRISE SOFTWARE ARCHITECTURE",
-    tags: "DISTRIBUTED SYSTEMS // CLOUD NATIVE // HIGH-AVAILABILITY",
+    tags: "DISTRIBUTED SYSTEMS · CLOUD NATIVE · HIGH-AVAILABILITY",
     description:
       "Architecting resilient, horizontally scalable microservices and cloud backends capable of processing complex enterprise workloads with zero downtime.",
   },
   {
     index: "02",
     title: "DOMAIN-GROUNDED AI & RAG NETWORKS",
-    tags: "LOCAL LLMS // HYBRID SEARCH // VECTOR EMBEDDINGS",
+    tags: "LOCAL LLMS · HYBRID SEARCH · VECTOR EMBEDDINGS",
     description:
       "Production-grade Retrieval-Augmented Generation engines, proprietary embedding pipelines, and localized AI models grounded strictly in institutional verification.",
   },
   {
     index: "03",
     title: "CUSTOM ERP & OPERATIONAL PLATFORMS",
-    tags: "WORKFLOW AUTOMATION // LOGISTICS // FINANCIAL OPS",
+    tags: "WORKFLOW AUTOMATION · LOGISTICS · FINANCIAL OPS",
     description:
       "Purpose-built enterprise resource planning platforms unifying inventory, procurement, payroll, and real-time ledger accounting into one synchronized source of truth.",
   },
   {
     index: "04",
     title: "PUBLIC-SECTOR & INSTITUTIONAL PLATFORMS",
-    tags: "CIVIC TECH // SECURE REGISTRIES // NATIONAL SYSTEMS",
+    tags: "CIVIC TECH · SECURE REGISTRIES · NATIONAL SYSTEMS",
     description:
       "High-security digital governance infrastructure, citizen portals, and institutional document verification networks designed for national resilience.",
   },
   {
     index: "05",
     title: "BRAND STRATEGY, IDENTITY & DESIGN SYSTEMS",
-    tags: "VECTOR MARKS // DESIGN TOKENS // EDITORIAL GUIDELINES",
+    tags: "VECTOR MARKS · DESIGN TOKENS · EDITORIAL GUIDELINES",
     description:
       "Monolithic visual identities, design systems, and vector mark architectures that command immediate credibility and translate seamlessly from print to code.",
   },
   {
     index: "06",
     title: "EXECUTIVE & FOUNDER PERSONAL BRANDING",
-    tags: "FOUNDER PRESENCE // EXECUTIVE SITES // THOUGHT LEADERSHIP",
+    tags: "FOUNDER PRESENCE · EXECUTIVE SITES · THOUGHT LEADERSHIP",
     description:
       "Strategic positioning, visual identity, and high-impact digital presence engineered to establish founders, executives, and technology leaders as authorities.",
   },
   {
     index: "07",
     title: "HIGH-PERFORMANCE WEB & MOBILE SUITES",
-    tags: "NEXT.JS // REACT NATIVE // PROGRESSIVE WEB APPS",
+    tags: "NEXT.JS · REACT NATIVE · PROGRESSIVE WEB APPS",
     description:
       "Award-winning editorial web applications and cross-platform native mobile clients built with micro-interaction choreography and sub-second load times.",
   },
   {
     index: "08",
     title: "SECURITY, COMPLIANCE & ZERO-TRUST HARDENING",
-    tags: "RBAC // ISO AUDIT TRAILS // CRYPTOGRAPHIC VERIFICATION",
+    tags: "RBAC · ISO AUDIT TRAILS · CRYPTOGRAPHIC VERIFICATION",
     description:
       "Airtight cryptographic identity, fine-grained role-based access control, automated vulnerability pipelines, and institutional audit compliance.",
   },

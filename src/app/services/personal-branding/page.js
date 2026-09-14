@@ -25,7 +25,7 @@ const PERSONAL_MODULES = [
     num: "01",
     title: "EXECUTIVE POSITIONING",
     icon: Compass,
-    subtitle: "STORY // EXPERTISE // NARRATIVE",
+    subtitle: "STORY · EXPERTISE · NARRATIVE",
     description:
       "Define what you want to be known for. We map your accomplishments, audience, core message, and point of view into an undeniable positioning blueprint.",
     deliverables: [
@@ -39,7 +39,7 @@ const PERSONAL_MODULES = [
     num: "02",
     title: "PERSONAL VISUAL IDENTITY",
     icon: Sparkles,
-    subtitle: "TYPOGRAPHIC MONOGRAM // PALETTE",
+    subtitle: "TYPOGRAPHIC MONOGRAM · PALETTE",
     description:
       "A sophisticated, name-based visual system. Monogram mark, bespoke typography pairing, and color harmony designed for high-caliber credibility.",
     deliverables: [
@@ -53,7 +53,7 @@ const PERSONAL_MODULES = [
     num: "03",
     title: "PHOTOGRAPHY DIRECTION",
     icon: Camera,
-    subtitle: "EDITORIAL PORTRAITS // SHOT LISTS",
+    subtitle: "EDITORIAL PORTRAITS · SHOT LISTS",
     description:
       "Comprehensive creative direction for your photo sessions. Wardrobe guidance, location scoping, and shot lists tailored to executive publications and speaking.",
     deliverables: [
@@ -67,7 +67,7 @@ const PERSONAL_MODULES = [
     num: "04",
     title: "LINKEDIN PROFILE BRANDING",
     icon: Share2,
-    subtitle: "CONVERSION SURFACE // BANNER SYSTEM",
+    subtitle: "CONVERSION SURFACE · BANNER SYSTEM",
     description:
       "Transforming your LinkedIn profile from an analog résumé into a high-authority conversion asset that commands immediate respect from peers and investors.",
     deliverables: [
@@ -81,7 +81,7 @@ const PERSONAL_MODULES = [
     num: "05",
     title: "EXECUTIVE PERSONAL WEBSITE",
     icon: Globe,
-    subtitle: "SOVEREIGN DIGITAL ASSET // NEXT.JS",
+    subtitle: "SOVEREIGN DIGITAL ASSET · NEXT.JS",
     description:
       "A fast, bespoke personal website built on modern web standards. Houses your biography, portfolio, media appearances, speaking engagements, and contact pipeline.",
     deliverables: [
@@ -95,7 +95,7 @@ const PERSONAL_MODULES = [
     num: "06",
     title: "CONTENT & THOUGHT LEADERSHIP",
     icon: FileText,
-    subtitle: "EDITORIAL PILLARS // TEMPLATES",
+    subtitle: "EDITORIAL PILLARS · TEMPLATES",
     description:
       "Structured templates, carousel systems, and editorial calendars that empower you to publish authoritative technical insights without endless operational friction.",
     deliverables: [
@@ -109,7 +109,7 @@ const PERSONAL_MODULES = [
     num: "07",
     title: "LAUNCH & ASSET ROLLOUT",
     icon: Rocket,
-    subtitle: "STAGE // PRESS // ANNOUNCEMENT",
+    subtitle: "STAGE · PRESS · ANNOUNCEMENT",
     description:
       "A coordinated digital unveiling of your refreshed personal brand across social platforms, digital collateral, email signatures, and industry press.",
     deliverables: [
@@ -200,7 +200,7 @@ export default function PersonalBrandingPage() {
         </div>
 
         <div className="mt-16 pt-4 border-t border-white/10 flex items-center justify-between font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
-          <span>FRAMEWORK // 07 MODULAR CAPABILITY PILLARS</span>
+          <span>FRAMEWORK · 07 MODULAR CAPABILITY PILLARS</span>
           <span>DISCOVER METHODOLOGY ↓</span>
         </div>
       </section>
@@ -213,7 +213,7 @@ export default function PersonalBrandingPage() {
               <div className="p-6 bg-[var(--surface)] border border-white/10 rounded-[2px] h-full flex flex-col justify-between">
                 <div>
                   <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase font-bold">
-                    PROFILE // 0{idx + 1}
+                    PROFILE · 0{idx + 1}
                   </span>
                   <h3 className="font-artific text-lg font-medium tracking-tight uppercase text-white mt-1">
                     {p.role}
@@ -264,7 +264,7 @@ export default function PersonalBrandingPage() {
                           <Icon className="size-3.5" />
                         </div>
                         <span className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
-                          MODULE // {mod.num}
+                          MODULE · {mod.num}
                         </span>
                       </div>
                     </div>
@@ -309,7 +309,7 @@ export default function PersonalBrandingPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-7 flex flex-col gap-4">
                 <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase font-bold">
-                  FLAGSHIP CASE STUDY // {executiveCase.category}
+                  FLAGSHIP CASE STUDY · {executiveCase.category}
                 </span>
                 <h2 className="font-artific text-3xl sm:text-4xl font-medium tracking-tight uppercase text-white">
                   {executiveCase.title}

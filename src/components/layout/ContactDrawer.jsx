@@ -201,7 +201,7 @@ export default function ContactDrawer({ open, setOpen }) {
               <div className="flex items-center gap-3">
                 <span className="size-2 rounded-full bg-accent animate-pulse" />
                 <span className="font-parkinsans text-[10px] tracking-[0.25em] text-white/70 uppercase">
-                  INITIATE COMMISSION // {isBrandDiscipline ? "CREATIVE & BRAND PIPELINE" : "ENGAGEMENT PIPELINE"}
+                  INITIATE COMMISSION · {isBrandDiscipline ? "CREATIVE & BRAND" : "DIRECT ENGAGEMENT"}
                 </span>
               </div>
 
@@ -249,7 +249,7 @@ export default function ContactDrawer({ open, setOpen }) {
                   {/* Discipline Selection */}
                   <div className="flex flex-col gap-3">
                     <label className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
-                      01 // SYSTEM & CREATIVE DISCIPLINE <span className="text-accent">*</span>
+                      01 · SYSTEM & CREATIVE DISCIPLINE <span className="text-accent">*</span>
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                       {DISCIPLINES.map((discipline) => {
@@ -278,7 +278,7 @@ export default function ContactDrawer({ open, setOpen }) {
                   {/* Core Contact Fields */}
                   <div className="flex flex-col gap-4">
                     <label className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
-                      02 // CONTACT PARAMETERS <span className="text-accent">*</span>
+                      02 · CONTACT PARAMETERS <span className="text-accent">*</span>
                     </label>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -468,7 +468,7 @@ export default function ContactDrawer({ open, setOpen }) {
                   {/* Timeline Selection */}
                   <div className="flex flex-col gap-3">
                     <label className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
-                      03 // DELIVERY TIMELINE
+                      03 · DELIVERY TIMELINE
                     </label>
                     <div className="grid grid-cols-2 gap-2">
                       {TIMELINES.map((time) => {
@@ -494,7 +494,7 @@ export default function ContactDrawer({ open, setOpen }) {
                   {/* Budget Qualification */}
                   <div className="flex flex-col gap-3">
                     <label className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
-                      04 // ESTIMATED BUDGET SCALE (OPTIONAL)
+                      04 · ESTIMATED BUDGET SCALE (OPTIONAL)
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                       {BUDGET_RANGES.map((budget) => {
@@ -520,7 +520,7 @@ export default function ContactDrawer({ open, setOpen }) {
                   {/* Scope Details */}
                   <div className="flex flex-col gap-3">
                     <label className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
-                      05 // {isBrandDiscipline ? "CREATIVE OBJECTIVES & CONTEXT" : "ARCHITECTURAL REQUIREMENTS"}
+                      05 · {isBrandDiscipline ? "CREATIVE OBJECTIVES & CONTEXT" : "ARCHITECTURAL REQUIREMENTS"}
                     </label>
                     <textarea
                       rows={4}
@@ -563,7 +563,7 @@ export default function ContactDrawer({ open, setOpen }) {
                       className="group relative isolate w-full py-4 bg-accent text-white font-parkinsans text-xs uppercase tracking-[0.2em] font-bold hover:bg-white hover:text-black disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 rounded-[2px] flex items-center justify-center gap-2"
                     >
                       <span>
-                        {isSubmitting ? "TRANSMITTING TELEMETRY..." : "TRANSMIT INQUIRY"}
+                        {isSubmitting ? "SUBMITTING INQUIRY..." : "SUBMIT INQUIRY"}
                       </span>
                       <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform" />
                       <span className="absolute -top-[1px] -left-[1px] size-2 border-t border-l border-white" />
@@ -582,7 +582,7 @@ export default function ContactDrawer({ open, setOpen }) {
 
                   <div className="flex flex-col gap-2">
                     <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase">
-                      TELEMETRY RECEIVED // {isBrandDiscipline ? "CREATIVE DISPATCH 02" : "DISPATCH QUEUE 01"}
+                      INQUIRY RECEIVED · {isBrandDiscipline ? "CREATIVE DISPATCH" : "GENERAL DISPATCH"}
                     </span>
                     <h3 className="font-artific text-2xl sm:text-3xl font-medium tracking-tight uppercase">
                       INQUIRY LOGGED SUCCESSFULLY
@@ -639,7 +639,7 @@ export default function ContactDrawer({ open, setOpen }) {
               <div className="pt-8 mt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-white/40 font-parkinsans text-[10px] tracking-[0.15em] uppercase">
                 <div className="flex items-center gap-2">
                   <Terminal className="size-3.5 text-accent" />
-                  <span>HQ: ADDIS ABABA // UTC+3</span>
+                  <span>HQ: ADDIS ABABA · UTC+3</span>
                 </div>
                 <div>CONTACT: INFO@GERAT.COM</div>
               </div>

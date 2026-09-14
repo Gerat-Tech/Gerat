@@ -89,7 +89,7 @@ export default function BrandCreativePage() {
         </div>
 
         <div className="mt-16 pt-4 border-t border-white/10 flex items-center justify-between font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
-          <span>DISCIPLINES // 06 CREATIVE PRACTICES</span>
+          <span>DISCIPLINES · 06 CREATIVE PRACTICES</span>
           <span>FROM IDENTITY TO INFRASTRUCTURE ↓</span>
         </div>
       </section>
@@ -121,7 +121,7 @@ export default function BrandCreativePage() {
                 <div>
                   <div className="flex items-center justify-between pb-4 border-b border-white/10">
                     <span className="font-parkinsans text-[10px] tracking-[0.2em] text-accent font-bold">
-                      DISCIPLINE // {item.num}
+                      DISCIPLINE · {item.num}
                     </span>
                     <span className="font-parkinsans text-[9px] tracking-[0.2em] text-white/30 uppercase">
                       SPEC 2026

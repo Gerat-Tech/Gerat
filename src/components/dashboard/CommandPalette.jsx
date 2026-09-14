@@ -155,9 +155,9 @@ export default function CommandPalette({ user = null, isOpen, onClose }) {
         </div>
 
         {/* Footer Hint */}
-        <div className="px-4 py-2 bg-white/[0.02] border-t border-white/10 flex items-center justify-between font-parkinsans text-[9px] tracking-wider text-white/30 uppercase">
-          <span>NAVIGATION // USE ↑↓ ARROWS</span>
-          <span>SELECT // ENTER ↵</span>
+        <div className="px-4 py-2 bg-white/[0.02] border-t border-white/10 flex items-center justify-between font-parkinsans text-[10px] tracking-wide text-white/40">
+          <span>Navigate with ↑↓</span>
+          <span>Select with Enter ↵</span>
         </div>
       </div>
     </div>

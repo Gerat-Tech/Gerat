@@ -10,9 +10,9 @@ import { useNav } from "@/context/NavContext";
 const ethosCards = [
   {
     id: 1,
-    number: "01 / 04",
+    number: "01 · 04",
     title: "SYSTEM RESILIENCE",
-    short: "SUPPORT // THE TENT",
+    short: "SUPPORT (THE FOUNDATION)",
     description:
       "Support is our backbone. We stand behind our clients with unwavering commitment, offering guidance, structural reliability, and fault-tolerant stability every step of the way.",
     bg: "bg-[var(--surface)]",
@@ -29,9 +29,9 @@ const ethosCards = [
   },
   {
     id: 2,
-    number: "02 / 04",
+    number: "02 · 04",
     title: "DIGITAL BRIDGE",
-    short: "BRIDGE // THE DIGITAL WORLD",
+    short: "BRIDGE (DIGITAL REALITY)",
     description:
       "We connect ideas to execution, traditional industries to cutting-edge technology, bridging the gap between local enterprise and global digital scale.",
     bg: "bg-[var(--surface)]",
@@ -49,9 +49,9 @@ const ethosCards = [
   },
   {
     id: 3,
-    number: "03 / 04",
+    number: "03 · 04",
     title: "BUILT TO SCALE",
-    short: "SCALABILITY // ZERO DECAY",
+    short: "SCALABILITY (ZERO DECAY)",
     description:
       "From modular software architectures to monolithic brand identities, everything we build scales seamlessly. Architectures that effortlessly absorb exponential expansion.",
     bg: "bg-[var(--surface)]",
@@ -67,9 +67,9 @@ const ethosCards = [
   },
   {
     id: 4,
-    number: "04 / 04",
+    number: "04 · 04",
     title: "5 FOUNDERS UNITED",
-    short: "FOUNDERS // COLLECTIVE MASTERY",
+    short: "FOUNDERS (COLLECTIVE MASTERY)",
     description:
       "Five founders united by a single vision: engineering transformative software, institutional-grade infrastructure, and visionary brands with sovereign digital ownership.",
     bg: "bg-[var(--surface)]",

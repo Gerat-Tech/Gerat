@@ -20,7 +20,7 @@ export default function MarkdownRenderer({ content = "", className = "" }) {
             >
               <div className="flex items-center justify-between px-4 py-2 border-b border-white/10 bg-white/[0.03] font-parkinsans text-[9px] tracking-[0.15em] text-white/40 uppercase">
                 <span>{block.lang || "CODE"}</span>
-                <span className="text-accent">GERAT // TERMINAL</span>
+                <span className="text-accent">GERAT TERMINAL</span>
               </div>
               <pre className="p-4 overflow-x-auto text-emerald-400 leading-relaxed">
                 <code>{block.code}</code>
