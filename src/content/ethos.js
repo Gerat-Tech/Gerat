@@ -53,7 +53,7 @@ export const ethosCards = [
   {
     number: "01",
     code: "VAL-01",
-    pillar: "SUPPORT // THE TENT",
+    pillar: "Support (The Foundation)",
     title: "SYSTEM STABILITY & RESILIENCE",
     statement:
       "Support is our backbone. We measure value by operational durability, transaction throughput, and real-world system reliability.",
@@ -63,7 +63,7 @@ export const ethosCards = [
   {
     number: "02",
     code: "VAL-02",
-    pillar: "BRIDGE // THE DIGITAL WORLD",
+    pillar: "Bridge (The Digital World)",
     title: "DEEP DOMAIN ARCHITECTURE",
     statement:
       "We bridge the gap between traditional operations and cutting-edge digital scale, eliminating structural friction.",
@@ -73,7 +73,7 @@ export const ethosCards = [
   {
     number: "03",
     code: "VAL-03",
-    pillar: "SCALABILITY // BUILT TO SCALE",
+    pillar: "Scalability (Built to Scale)",
     title: "EXPONENTIAL ARCHITECTURAL VELOCITY",
     statement:
       "From modular software architectures to monolithic brand identities, everything we engineer is built to scale seamlessly.",
@@ -83,7 +83,7 @@ export const ethosCards = [
   {
     number: "04",
     code: "VAL-04",
-    pillar: "FOUNDERS // 5 FOUNDERS UNITED",
+    pillar: "Founders (Collective Mastery)",
     title: "COLLECTIVE SOVEREIGNTY & VISION",
     statement:
       "Five founders united to deliver sovereign digital assets with clean code, open standards, and zero predatory vendor lock-in.",

@@ -1,7 +1,7 @@
 import React from "react";
 
 /**
- * Lightweight, zero-dependency Markdown renderer tailored for Gerät's dark architectural aesthetics.
+ * Lightweight, zero-dependency Markdown renderer tailored for Gerat's dark architectural aesthetics.
  */
 export default function MarkdownRenderer({ content = "", className = "" }) {
   if (!content) return null;

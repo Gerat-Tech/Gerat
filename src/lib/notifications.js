@@ -34,7 +34,7 @@ export async function dispatchNewLeadAlert(inquiry) {
 
     // Format rich text alert
     const alertMessage = [
-      `🚨 *NEW CLIENT LEAD REGISTERED* // \`${inquiry.telemetryCode}\``,
+      `🚨 *NEW CLIENT LEAD REGISTERED* · \`${inquiry.telemetryCode}\``,
       `*Client:* ${inquiry.fullName} ${inquiry.company ? `(${inquiry.company})` : ""}`,
       `*Discipline:* ${inquiry.discipline}`,
       `*Budget:* ${inquiry.budgetRange} | *Timeline:* ${inquiry.timeline}`,
@@ -54,7 +54,7 @@ export async function dispatchNewLeadAlert(inquiry) {
     let payload = {};
     if (webhookUrl.includes("discord.com")) {
       payload = {
-        content: `🚨 **NEW CLIENT LEAD // ${inquiry.telemetryCode}**`,
+        content: `🚨 **NEW CLIENT LEAD · ${inquiry.telemetryCode}**`,
         embeds: [
           {
             title: `${inquiry.fullName} — ${inquiry.discipline}`,
@@ -69,7 +69,7 @@ export async function dispatchNewLeadAlert(inquiry) {
               { name: "Company", value: inquiry.company || "Independent", inline: true },
               { name: "Project Scope", value: inquiry.projectBrief?.slice(0, 500) || "N/A" },
             ],
-            footer: { text: "Gerat Software Solution // Mission Control Telemetry" },
+            footer: { text: "Gerat Software Solution · Mission Control" },
             timestamp: new Date().toISOString(),
           },
         ],
@@ -89,7 +89,7 @@ export async function dispatchNewLeadAlert(inquiry) {
             type: "header",
             text: {
               type: "plain_text",
-              text: `🚨 NEW CLIENT INTAKE // ${inquiry.telemetryCode}`,
+              text: `🚨 NEW CLIENT INTAKE · ${inquiry.telemetryCode}`,
             },
           },
           {
@@ -162,7 +162,7 @@ export async function sendTestWebhookPing(webhookUrl) {
   }
 
   const payload = {
-    text: "🛰️ *[GERAT MISSION CONTROL]* // Test Telemetry Ping: Webhook alert pipeline is active and operational.",
+    text: "🛰️ *[GERAT MISSION CONTROL]* · Webhook alert pipeline is active and operational.",
   };
 
   const controller = new AbortController();

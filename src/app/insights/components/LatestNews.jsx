@@ -64,7 +64,7 @@ export default function LatestNews({ activeCategory = "ALL ARTICLES", articles: 
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center gap-3 font-parkinsans text-[9px] tracking-[0.15em] text-white/40 uppercase">
                     <span>{article.date || (article.publishedAt ? new Date(article.publishedAt).toLocaleDateString("en-US", { month: "short", year: "numeric" }).toUpperCase() : "RECENT")}</span>
-                    <span>{"//"}</span>
+                    <span>·</span>
                     <span>{article.readTime || article.readingTime || "6 MIN READ"}</span>
                   </div>
 

@@ -6,7 +6,7 @@ export const leadershipTeam = [
   {
     name: "HRUY DANIEL",
     role: "FOUNDER & CHIEF EXECUTIVE OFFICER",
-    specialty: "GENERAL MANAGEMENT // STRATEGY & VENTURE",
+    specialty: "GENERAL MANAGEMENT · STRATEGY & VENTURE",
     bio: "Directing Gerat Software Solution's strategic vision, enterprise partnerships, and operational governance. Driving transformative digital architecture and high-impact brand ventures across East Africa and international markets.",
     email: "hruydaniel@gerat.com",
     phone: "+2519 2929 8030",
@@ -15,7 +15,7 @@ export const leadershipTeam = [
   {
     name: "DAWIT TEKLEBRHAN",
     role: "CO-FOUNDER & CHIEF TECHNOLOGY OFFICER",
-    specialty: "SYSTEMS ARCHITECTURE // COMPUTATIONAL PLATFORMS",
+    specialty: "SYSTEMS ARCHITECTURE · COMPUTATIONAL PLATFORMS",
     bio: "Directing the firm's architectural doctrine, engineering roadmaps, and distributed software backends. Expert in mission-critical systems and enterprise scalability.",
     email: "dawit@gerat.com",
     image: "/image/team/leadership/WQF__0005_CEO-and-Co-Founder_Steven-Lau.webp",
@@ -23,7 +23,7 @@ export const leadershipTeam = [
   {
     name: "YOHANNES TADESSE",
     role: "CO-FOUNDER & HEAD OF ARTIFICIAL INTELLIGENCE",
-    specialty: "APPLIED RAG // VECTOR RETRIEVAL // LLMS",
+    specialty: "APPLIED RAG · VECTOR RETRIEVAL · LLMS",
     bio: "Leading Gerat's applied machine learning research and domain-grounded knowledge retrieval laboratory. Expert in high-precision semantic chunking and localized model deployment.",
     email: "yohannes@gerat.com",
     image: "/image/team/leadership/WQF__0004_Chairman-and-Co-Founder_Amir-Husain-2.webp",
@@ -31,7 +31,7 @@ export const leadershipTeam = [
   {
     name: "SOLOMON KASSAHUN",
     role: "CO-FOUNDER & HEAD OF ENTERPRISE ENGINEERING",
-    specialty: "DISTRIBUTED CLOUD // ERP PLATFORMS // SECURITY",
+    specialty: "DISTRIBUTED CLOUD · ERP PLATFORMS · SECURITY",
     bio: "Overseeing high-throughput transactional backends, cloud-native deployments, and strict zero-trust cryptographic architectures for mission-critical operations.",
     email: "solomon@gerat.com",
     image: "/image/team/leadership/WQF__0005_CEO-and-Co-Founder_Steven-Lau.webp",

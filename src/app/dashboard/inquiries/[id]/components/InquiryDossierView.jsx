@@ -82,7 +82,7 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
   const cleanPhone = rawPhone.replace(/[^0-9]/g, "");
   const whatsappUrl = cleanPhone
     ? `https://wa.me/${cleanPhone}?text=${encodeURIComponent(
-        `Hello ${inquiry.fullName}, this is Gerät Software Solutions following up on your inquiry (${inquiry.telemetryCode}).`
+        `Hello ${inquiry.fullName}, this is Gerat Software Solution following up on your inquiry (${inquiry.telemetryCode}).`
       )}`
     : "#";
 

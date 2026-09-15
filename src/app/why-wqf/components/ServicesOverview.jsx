@@ -95,7 +95,7 @@ export default function ServicesOverview({ initialPillars = null }) {
         </div>
 
         <div className="mt-12 pt-4 border-t border-white/10 flex items-center justify-between font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
-          <span>PILLARS // 06 CORE PRACTICES (FROM IDENTITY TO INFRASTRUCTURE)</span>
+          <span>PILLARS · 06 CORE PRACTICES (FROM IDENTITY TO INFRASTRUCTURE)</span>
           <span>EXPLORE ARCHITECTURE ↓</span>
         </div>
       </section>
@@ -114,7 +114,7 @@ export default function ServicesOverview({ initialPillars = null }) {
 
                 <div className="flex items-center justify-between">
                   <span className="font-parkinsans text-[11px] tracking-[0.2em] text-accent font-bold">
-                    PRACTICE // {pillar.num}
+                    PRACTICE · {pillar.num}
                   </span>
                   <div className="size-2 rounded-[1px] bg-white/20 group-hover:bg-accent transition-colors" />
                 </div>

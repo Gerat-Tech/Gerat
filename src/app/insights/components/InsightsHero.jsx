@@ -66,7 +66,7 @@ export default function InsightsHero({ activeCategory, onSelectCategory }) {
       </div>
 
       <div className="mt-12 pt-4 border-t border-white/10 flex items-center justify-between font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
-        <span>PUBLICATIONS // TECHNICAL ARCHIVES</span>
+        <span>PUBLICATIONS · TECHNICAL ARCHIVES</span>
         <span>SCROLL TO READ ARTICLES ↓</span>
       </div>
     </div>

@@ -40,7 +40,7 @@ export default function TeamHero() {
 
       {/* Sub-Header Anchor Rule */}
       <div className="mt-12 pt-4 border-t border-white/10 flex items-center justify-between font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
-        <span>COLLECTIVE // SYSTEM ARCHITECTS & RESEARCHERS</span>
+        <span>COLLECTIVE · SYSTEM ARCHITECTS & RESEARCHERS</span>
         <span>SCROLL TO MEET THE TEAM ↓</span>
       </div>
     </div>

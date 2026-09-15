@@ -82,7 +82,7 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", 
       <aside className="hidden lg:block w-72 shrink-0">
         <nav className="sticky top-28 flex flex-col gap-8 bg-[#0a0a0a] border border-white/10 p-6 rounded-[3px]">
           <div className="font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
-            DIRECTORY // {filteredProjects.length} CASE STUDIES
+            DIRECTORY · {filteredProjects.length} CASE STUDIES
           </div>
 
           <ul className="flex flex-col gap-1.5">
@@ -166,7 +166,7 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", 
                   {p.title}
                 </h2>
                 <div className="font-parkinsans text-[10px] sm:text-[11px] tracking-[0.15em] text-accent font-semibold pt-1">
-                  IMPACT // {p.metric}
+                  IMPACT · {p.metric}
                 </div>
               </div>
 

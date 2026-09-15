@@ -290,7 +290,7 @@ Please log in and update your passphrase upon first access.`;
               href="/dashboard/settings"
               className="font-parkinsans text-[10px] tracking-[0.2em] text-white/40 hover:text-white uppercase transition-colors"
             >
-              SETTINGS //
+              SETTINGS ·
             </Link>
             <h1 className="font-artific text-2xl sm:text-3xl font-bold tracking-tight uppercase text-white">
               USER & ROLE GOVERNANCE
@@ -541,7 +541,7 @@ Please log in and update your passphrase upon first access.`;
               <div>
                 <span className="font-parkinsans text-[9px] tracking-[0.25em] text-emerald-500 uppercase font-bold flex items-center gap-1.5">
                   <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-                  SECURITY CLEARANCE ISSUED //
+                  CREDENTIALS GENERATED
                 </span>
                 <h2 className="font-artific text-xl font-bold uppercase mt-0.5">DISPATCH OPERATOR CREDENTIALS</h2>
               </div>
@@ -693,7 +693,7 @@ Please log in and update your passphrase upon first access.`;
             <div className={`flex items-center justify-between pb-3 border-b ${isLight ? "border-[#E5E7EB]" : "border-white/10"}`}>
               <div>
                 <span className="font-parkinsans text-[9px] tracking-[0.25em] text-accent uppercase font-bold">
-                  SECURITY GOVERNANCE //
+                  ACCESS CONTROL
                 </span>
                 <h2 className="font-artific text-xl font-bold uppercase mt-0.5">PROVISION OPERATOR</h2>
               </div>
@@ -885,7 +885,7 @@ Please log in and update your passphrase upon first access.`;
             <div className={`flex items-center justify-between pb-3 border-b ${isLight ? "border-[#E5E7EB]" : "border-white/10"}`}>
               <div>
                 <span className="font-parkinsans text-[9px] tracking-[0.25em] text-accent uppercase font-bold">
-                  RBAC MUTATION //
+                  ROLE ASSIGNMENT
                 </span>
                 <h2 className="font-artific text-lg font-bold uppercase mt-0.5">REASSIGN ROLE</h2>
               </div>
@@ -994,7 +994,7 @@ Please log in and update your passphrase upon first access.`;
             <div className={`flex items-center justify-between pb-3 border-b ${isLight ? "border-[#E5E7EB]" : "border-white/10"}`}>
               <div>
                 <span className="font-parkinsans text-[9px] tracking-[0.25em] text-accent uppercase font-bold">
-                  SECURITY KEY //
+                  CREDENTIAL RESET
                 </span>
                 <h2 className="font-artific text-lg font-bold uppercase mt-0.5">RESET PASSPHRASE</h2>
               </div>

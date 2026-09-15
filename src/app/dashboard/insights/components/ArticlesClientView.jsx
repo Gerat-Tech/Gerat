@@ -191,7 +191,7 @@ export default function ArticlesClientView({ initialArticles = [] }) {
 
                 <div className="p-5 flex flex-col gap-3">
                   <div className="flex items-center justify-between font-parkinsans text-[9px] tracking-[0.15em] text-white/40 uppercase">
-                    <span>{art.author?.name || "Gerät Architect"}</span>
+                    <span>{art.author?.name || "Gerat Architect"}</span>
                     <span>{art.readingTime || "5 MIN READ"}</span>
                   </div>
 

@@ -30,7 +30,7 @@ export default async function InsightsPage() {
         ...a,
         readTime: a.readingTime,
         image: a.coverImageUrl,
-        author: a.author?.name || "Gerät Engineering",
+        author: a.author?.name || "Gerat Engineering",
       }));
     }
   } catch (error) {

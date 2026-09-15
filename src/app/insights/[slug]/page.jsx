@@ -56,7 +56,7 @@ export default async function ArticleDetailPage({ params }) {
         readingTime: staticMatch.readTime,
         coverImageUrl: staticMatch.image,
         author: { name: staticMatch.author, role: "Principal Systems Architect" },
-        content: `# Executive Abstract\n\n${staticMatch.excerpt}\n\n## 1. Architectural Vector\n\n${staticMatch.summary}\n\n> "High-throughput fault-tolerant computing demands strict adherence to state machine replication and zero-trust data validation."\n\n## 2. Engineered Specifications\n\n\`\`\`go\n// Gerät Core Execution Engine\ntype TelemetryBus struct {\n    ClusterID string\n    State     StateReplicated\n    Throughput int64\n}\n\`\`\`\n\n## 3. Production Outcomes\n\n- Sub-second deterministic consensus\n- Real-time audit log immutability\n- Seamless failover across regional availability zones\n`,
+        content: `# Executive Abstract\n\n${staticMatch.excerpt}\n\n## 1. Architectural Vector\n\n${staticMatch.summary}\n\n> "High-throughput fault-tolerant computing demands strict adherence to state machine replication and zero-trust data validation."\n\n## 2. Engineered Specifications\n\n\`\`\`go\n// Gerat Core Execution Engine\ntype TelemetryBus struct {\n    ClusterID string\n    State     StateReplicated\n    Throughput int64\n}\n\`\`\`\n\n## 3. Production Outcomes\n\n- Sub-second deterministic consensus\n- Real-time audit log immutability\n- Seamless failover across regional availability zones\n`,
         tags: JSON.stringify(["SYSTEMS", "ARCHITECTURE", staticMatch.category]),
       };
     }
@@ -100,10 +100,13 @@ export default async function ArticleDetailPage({ params }) {
       <section className="relative w-full pt-32 sm:pt-40 pb-16 px-4 sm:px-6 md:px-8 lg:px-12 max-w-[1440px] mx-auto">
         {/* Breadcrumb navigation */}
         <div className="flex items-center gap-2 font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase mb-8">
-          <Link href="/insights" className="hover:text-accent transition-colors">
-            ← ALL BLUEPRINTS
+          <Link
+            href="/insights"
+            className="text-white/40 hover:text-white transition-colors"
+          >
+            INSIGHTS
           </Link>
-          <span>/</span>
+          <span className="text-white/30">·</span>
           <span className="text-accent">{article.category}</span>
         </div>
 
@@ -112,9 +115,9 @@ export default async function ArticleDetailPage({ params }) {
           <span className="px-2.5 py-1 bg-accent/15 border border-accent/40 text-accent font-bold rounded-[2px]">
             {article.category}
           </span>
-          <span>{"//"}</span>
+          <span>·</span>
           <span>{article.readingTime || article.readTime || "7 MIN READ"}</span>
-          <span>{"//"}</span>
+          <span>·</span>
           <span>
             {article.publishedAt
               ? new Date(article.publishedAt).toLocaleDateString("en-US", {
@@ -143,10 +146,10 @@ export default async function ArticleDetailPage({ params }) {
           </div>
           <div>
             <div className="font-artific text-sm font-bold uppercase text-white tracking-wide">
-              {article.author?.name || article.author || "Gerät Systems Architect"}
+              {article.author?.name || article.author || "Gerat Systems Architect"}
             </div>
             <div className="font-parkinsans text-[10px] tracking-[0.15em] text-white/40 uppercase">
-              {article.author?.role || "Engineering Directorate // Addis Ababa"}
+              {article.author?.role || "Engineering Directorate · Addis Ababa"}
             </div>
           </div>
         </div>
@@ -223,7 +226,7 @@ export default async function ArticleDetailPage({ params }) {
                   AUTHOR / ARCHITECT
                 </div>
                 <div className="text-white mt-0.5">
-                  {article.author?.name || article.author || "Gerät Systems Architect"}
+                  {article.author?.name || article.author || "Gerat Systems Architect"}
                 </div>
               </div>
 

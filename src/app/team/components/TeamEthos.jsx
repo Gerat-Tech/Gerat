@@ -35,7 +35,7 @@ export default function TeamEthos() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-16">
         <div className="lg:col-span-6 flex flex-col gap-4">
           <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase">
-            03 // OPERATIONAL DOCTRINE
+            03 · OPERATIONAL DOCTRINE
           </span>
           <h2 className="font-artific text-3xl sm:text-5xl font-bold uppercase tracking-tight leading-[0.95]">
             HOW OUR ARCHITECTS THINK & BUILD.
@@ -69,7 +69,7 @@ export default function TeamEthos() {
               <span className="absolute bottom-0 right-0 size-1.5 border-b border-r border-white/20 group-hover:border-accent" />
 
               <span className="font-parkinsans text-[11px] tracking-[0.2em] text-accent font-bold">
-                {p.num} {"//"}
+                {p.num}
               </span>
 
               <div className="flex flex-col gap-2 my-auto pt-3">

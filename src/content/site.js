@@ -11,7 +11,7 @@ export const siteConfig = {
   description:
     "Gerat Software Solution builds monolithic brand identities, digital products, intelligent AI systems, and enterprise software architectures for high-stakes operational environments.",
   telemetry: {
-    status: "OPERATIONAL // STABLE",
+    status: "ALL SYSTEMS OPERATIONAL",
     location: "ADDIS ABABA, EAST AFRICA",
     coordinates: "09°01'N 38°45'E",
     timezone: "UTC+3 (EAT)",
