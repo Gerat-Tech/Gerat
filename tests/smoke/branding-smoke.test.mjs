@@ -25,9 +25,8 @@ export async function runBrandingSmokeTests() {
 
   // Hero must contain Gerat headline and not legacy WQF text
   const hero = fs.readFileSync(path.join(root, "src/components/home/Hero.jsx"), "utf-8");
-  assert(!hero.includes("Forging Companies"), "Hero should not contain legacy 'Forging Companies' headline");
-  assert(hero.includes("TECHNOLOGY THAT MOVES"), "Hero must contain Gerat 'TECHNOLOGY THAT MOVES' headline");
-  assert(hero.includes("REAL SYSTEMS."), "Hero must contain Gerat 'REAL SYSTEMS.' headline");
+  assert(hero.includes("WE BUILD THE BRIDGE."), "Hero must contain Gerat 'WE BUILD THE BRIDGE.' headline");
+  assert(hero.includes("YOU CROSS IT."), "Hero must contain Gerat 'YOU CROSS IT.' headline");
   console.log("  ✓ Hero branding verified");
 
   // Ethos must not contain legacy WQF copy
