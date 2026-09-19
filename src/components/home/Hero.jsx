@@ -42,79 +42,74 @@ export default function Hero() {
           {/* Main Asymmetrical Headline (Spec §10, §17) */}
           <div className="space-y-1 sm:space-y-2">
             <SplitText
-              text="TECHNOLOGY THAT MOVES"
+              text="WE BUILD THE BRIDGE."
               as="h1"
               delay={0.2}
               stagger={0.04}
-              className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+              className="font-artific text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
             />
             <SplitText
-              text="REAL SYSTEMS."
+              text="YOU CROSS IT."
               as="div"
               delay={0.35}
               stagger={0.04}
               wordClassName="text-accent"
-              className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+              className="font-artific text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
             />
           </div>
 
-          {/* Supporting Statement (Content §2 & Brand Spec §16, §39) */}
+          {/* Supporting Statement (Content Guide §5, §77) */}
           <FadeUp delay={0.45} y={24} className="max-w-2xl">
             <p className="font-parkinsans text-base sm:text-lg md:text-xl text-white/70 font-normal leading-relaxed">
-              From monolithic brand identities to high-concurrency software architectures
-              and domain-grounded AI — we build the visual systems and digital
-              infrastructure that power ambitious enterprises.
+              We connect your business to the people it serves — through digital
+              experiences, intelligent tools, business systems, and strong brands.
             </p>
           </FadeUp>
 
-          {/* Interactive CTA Buttons (Spec §10, §23) */}
+          {/* Interactive CTA Buttons (Content Guide §5 & Mobile-First) */}
           <FadeUp delay={0.6} y={24}>
-            <div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-2">
-              {/* Primary Contact CTA */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-6 pt-2">
+              {/* Primary Explore Capabilities CTA */}
+              <Magnetic maxDisplacement={8}>
+                <Link
+                  href="#capabilities"
+                  data-cursor-text="EXPLORE"
+                  className="group relative isolate inline-flex items-center justify-center font-parkinsans text-[11px] sm:text-[12px] uppercase tracking-[0.2em] px-6 sm:px-8 py-3.5 bg-white text-black font-semibold border border-white hover:bg-accent hover:border-accent hover:text-white transition-all duration-300 rounded-[2px] text-center"
+                >
+                  <span>SEE WHAT WE BUILD</span>
+                  <span className="ml-2 text-black/40 group-hover:text-white group-hover:translate-x-1 transition-all duration-300">
+                    ↓
+                  </span>
+                </Link>
+              </Magnetic>
+
+              {/* Secondary Contact CTA */}
               <Magnetic maxDisplacement={8}>
                 <button
                   type="button"
                   onClick={openContact}
                   data-cursor-text="INQUIRE"
-                  className="group relative isolate inline-flex items-center justify-center font-parkinsans text-[11px] sm:text-[12px] uppercase tracking-[0.2em] px-6 sm:px-8 py-3.5 bg-white text-black font-semibold border border-white hover:bg-accent hover:border-accent hover:text-white transition-all duration-300 rounded-[2px]"
+                  className="group relative isolate inline-flex items-center justify-center font-parkinsans text-[11px] sm:text-[12px] uppercase tracking-[0.2em] px-6 sm:px-8 py-3.5 bg-transparent text-white/80 hover:text-white border border-white/20 hover:border-white/60 transition-all duration-300 rounded-[2px] text-center"
                 >
                   <span>START A PROJECT</span>
-                  {/* Precision Corner Accents */}
-                  <span className="absolute -top-[1px] -left-[1px] size-2 border-t border-l border-white group-hover:border-accent" />
-                  <span className="absolute -top-[1px] -right-[1px] size-2 border-t border-r border-white group-hover:border-accent" />
-                  <span className="absolute -bottom-[1px] -left-[1px] size-2 border-b border-l border-white group-hover:border-accent" />
-                  <span className="absolute -bottom-[1px] -right-[1px] size-2 border-b border-r border-white group-hover:border-accent" />
-                </button>
-              </Magnetic>
-
-              {/* Secondary Portfolio CTA */}
-              <Magnetic maxDisplacement={8}>
-                <Link
-                  href="/portfolio"
-                  data-cursor-text="EXPLORE"
-                  className="group relative isolate inline-flex items-center justify-center font-parkinsans text-[11px] sm:text-[12px] uppercase tracking-[0.2em] px-6 sm:px-8 py-3.5 bg-transparent text-white/80 hover:text-white border border-white/20 hover:border-white/60 transition-all duration-300 rounded-[2px]"
-                >
-                  <span>EXPLORE WORK</span>
                   <span className="ml-2 text-white/40 group-hover:text-accent group-hover:translate-x-1 transition-all duration-300">
                     →
                   </span>
-                  <span className="absolute -top-[1px] -left-[1px] size-1.5 border-t border-l border-white/40" />
-                  <span className="absolute -bottom-[1px] -right-[1px] size-1.5 border-b border-r border-white/40" />
-                </Link>
+                </button>
               </Magnetic>
             </div>
           </FadeUp>
 
-          {/* Capabilities Metadata Tags (Spec §2, §4) */}
+          {/* Capabilities Metadata Tags (Image 2 Fix — 4 Core Pillars) */}
           <FadeUp delay={0.7} y={16}>
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-4 font-parkinsans text-[9px] sm:text-[10px] tracking-[0.2em] text-white/40 uppercase">
-              <span>ARTIFICIAL INTELLIGENCE</span>
+            <div className="flex flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-2 pt-4 font-parkinsans text-[9px] sm:text-[10px] tracking-[0.2em] text-white/40 uppercase">
+              <span className="hover:text-white transition-colors">DIGITAL</span>
               <span className="text-white/20">·</span>
-              <span>RAG SYSTEMS</span>
+              <span className="hover:text-white transition-colors">INTELLIGENCE</span>
               <span className="text-white/20">·</span>
-              <span>ENTERPRISE ERP</span>
+              <span className="hover:text-white transition-colors">SYSTEMS</span>
               <span className="text-white/20">·</span>
-              <span>GOVERNMENT TECH</span>
+              <span className="hover:text-white transition-colors">BRAND</span>
             </div>
           </FadeUp>
         </div>
@@ -130,7 +125,7 @@ export default function Hero() {
 
           <div className="flex items-center gap-6 text-right">
             <p className="hidden md:block max-w-sm font-parkinsans text-[9px] text-white/40 uppercase tracking-[0.15em] leading-relaxed">
-              OPERATING AT THE INTERSECTION OF DEEP ENGINEERING, ARCHITECTURAL DESIGN, AND MISSION-CRITICAL SOFTWARE.
+              DIGITAL EXPERIENCES, INTELLIGENT TOOLS, BUSINESS SYSTEMS, AND BRAND IDENTITIES.
             </p>
             <div className="size-7 rounded-[2px] border border-white/15 bg-white/5 flex items-center justify-center text-accent">
               <GeratLogo variant="mark" className="size-4 text-accent" />

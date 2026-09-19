@@ -2,13 +2,11 @@ import React from "react";
 import prisma from "@/lib/prisma";
 import Hero from "@/components/home/Hero";
 import Marquee from "@/components/home/Marquee";
-import OurEthos from "@/components/home/OurEthos";
 import OurFocus from "@/components/home/OurFocus";
-import BrandCreativeSection from "@/components/home/BrandCreativeSection";
+import OurEthos from "@/components/home/OurEthos";
 import OurPortfolio from "@/components/home/OurPortfolio";
-import HowWeWork from "@/components/home/HowWeWork";
 import OurLeadership from "@/components/home/OurLeadership";
-import Partners from "@/components/home/Partners";
+import HowWeWork from "@/components/home/HowWeWork";
 import Footer from "@/components/layout/Footer";
 
 export const dynamic = "force-dynamic";
@@ -94,13 +92,11 @@ export default async function Home() {
     <div className="bg-[var(--bg)] min-h-screen text-[var(--text-primary)] selection:bg-accent selection:text-black">
       <Hero />
       <Marquee customItems={marqueeTokens} />
-      <OurEthos />
       <OurFocus />
-      <BrandCreativeSection />
+      <OurEthos />
       <OurPortfolio initialProjects={initialProjects} />
-      <HowWeWork />
       <OurLeadership initialLeaders={initialLeaders} />
-      <Partners />
+      <HowWeWork />
       <Footer />
     </div>
   );
