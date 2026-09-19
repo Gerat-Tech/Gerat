@@ -81,31 +81,32 @@ async function main() {
   // 2. Seed Portfolio Case Studies
   let projectOrder = 1;
   for (const p of portfolioProjects) {
+    const projectData = {
+      slug: p.id,
+      displayIndex: p.index,
+      num: p.num || `${p.index} / 09`,
+      title: p.title,
+      category: p.category,
+      tags: p.tags,
+      metric: p.metric,
+      metricDetail: p.metricDetail || p.metric,
+      summary: p.summary,
+      problem: p.problem,
+      architecture: p.architecture,
+      techStack: p.tech,
+      stackBadges: JSON.stringify(p.stack || []),
+      imageUrl: p.image,
+      galleryImages: JSON.stringify([p.image]),
+      impact: p.impact,
+      year: p.year,
+      status: p.status,
+      featured: projectOrder <= 3,
+      order: projectOrder++,
+    };
     await prisma.caseStudy.upsert({
       where: { slug: p.id },
-      update: {},
-      create: {
-        slug: p.id,
-        displayIndex: p.index,
-        num: p.num || `${p.index} / 09`,
-        title: p.title,
-        category: p.category,
-        tags: p.tags,
-        metric: p.metric,
-        metricDetail: p.metricDetail || p.metric,
-        summary: p.summary,
-        problem: p.problem,
-        architecture: p.architecture,
-        techStack: p.tech,
-        stackBadges: JSON.stringify(p.stack || []),
-        imageUrl: p.image,
-        galleryImages: JSON.stringify([p.image]),
-        impact: p.impact,
-        year: p.year,
-        status: p.status,
-        featured: projectOrder <= 3,
-        order: projectOrder++,
-      },
+      update: projectData,
+      create: projectData,
     });
   }
   console.log(`  ✓ Seeded ${portfolioProjects.length} portfolio case studies`);
@@ -177,22 +178,30 @@ async function main() {
   }
   console.log(`  ✓ Seeded ${leadershipTeam.length + engineeringSpecialists.length} team members`);
 
-  // 5. Seed Practice Pillars
+  // 5. Seed Practice Pillars (4 Core Pillars)
+  await prisma.servicePillar.deleteMany({
+    where: { num: { notIn: servicePillars.map((p) => p.num) } },
+  });
+
   let pillarOrder = 1;
   for (const p of servicePillars) {
+    const pillarData = {
+      num: p.num,
+      title: p.title,
+      tagline: p.tagline,
+      desc: p.desc,
+      deliverables: JSON.stringify(p.deliverables || []),
+      deepLink: p.deepLink || "/services",
+      order: pillarOrder++,
+      active: true,
+    };
     const existing = await prisma.servicePillar.findFirst({ where: { num: p.num } });
     if (!existing) {
-      await prisma.servicePillar.create({
-        data: {
-          num: p.num,
-          title: p.title,
-          tagline: p.tagline,
-          desc: p.desc,
-          deliverables: JSON.stringify(p.deliverables || []),
-          deepLink: p.num === "05" ? "/services/brand-creative" : p.num === "06" ? "/services/personal-branding" : "/why-wqf",
-          order: pillarOrder++,
-          active: true,
-        },
+      await prisma.servicePillar.create({ data: pillarData });
+    } else {
+      await prisma.servicePillar.update({
+        where: { id: existing.id },
+        data: pillarData,
       });
     }
   }
@@ -249,7 +258,7 @@ async function main() {
       timeline: "STANDARD (1-3 MONTHS)",
       budgetRange: "150K - 250K ETB",
       projectBrief: "We require a centralized multi-warehouse inventory reconciliation engine that integrates with local banks and automated customs declaration APIs.",
-      sourceUrl: "/why-wqf",
+      sourceUrl: "/services",
       countryCode: "ET",
       assignedToId: opsLead.id,
       notes: {

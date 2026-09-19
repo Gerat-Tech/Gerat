@@ -154,7 +154,7 @@ export async function runDashboardAuthSmokeTests() {
   assert(projectCount >= 9, `Expected at least 9 case studies, found ${projectCount}`);
   assert(articleCount >= 9, `Expected at least 9 articles, found ${articleCount}`);
   assert(memberCount >= 9, `Expected at least 9 team members, found ${memberCount}`);
-  assert(pillarCount >= 6, `Expected at least 6 service pillars, found ${pillarCount}`);
+  assert(pillarCount >= 4, `Expected at least 4 service pillars, found ${pillarCount}`);
   assert(inquiryCount >= 2, `Expected at least 2 sample inquiries, found ${inquiryCount}`);
 
   console.log(
