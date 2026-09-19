@@ -72,6 +72,9 @@ async function runDevServerSmokeTests() {
       { path: "/team", name: "TeamPage", expected: "LEADERSHIP" },
       { path: "/insights", name: "InsightsPage", expected: "INSIGHTS" },
       { path: "/services", name: "ServicesPage", expected: "SERVICES" },
+      { path: "/services/digital-experiences", name: "DigitalExperiencesPage", expected: "DIGITAL EXPERIENCES" },
+      { path: "/services/ai-tools", name: "AiToolsPage", expected: "INTELLIGENT TOOLS" },
+      { path: "/services/business-systems", name: "BusinessSystemsPage", expected: "BUSINESS SYSTEMS" },
       { path: "/services/brand-creative", name: "BrandCreativePage", expected: "BRAND STRATEGY" },
       { path: "/services/personal-branding", name: "PersonalBrandingPage", expected: "PERSONAL BRANDING" },
     ];

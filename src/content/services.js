@@ -13,7 +13,7 @@ export const servicePillars = [
       "Customer Portals & Client Dashboards",
       "Digital Products & Native Interfaces",
     ],
-    deepLink: "/services#digital",
+    deepLink: "/services/digital-experiences",
   },
   {
     num: "02",
@@ -26,7 +26,7 @@ export const servicePillars = [
       "Data Extraction & Document Automation",
       "Verified Reasoning with Audit Trails",
     ],
-    deepLink: "/services#intelligence",
+    deepLink: "/services/ai-tools",
   },
   {
     num: "03",
@@ -39,7 +39,7 @@ export const servicePillars = [
       "Inventory, Billing & Supply Systems",
       "System Integrations & API Connections",
     ],
-    deepLink: "/services#systems",
+    deepLink: "/services/business-systems",
   },
   {
     num: "04",

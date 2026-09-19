@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import SectionLabel from "@/components/common/SectionLabel";
 import SplitText from "@/components/motion/SplitText";
 import FadeUp from "@/components/motion/FadeUp";
@@ -137,17 +138,36 @@ export default function ServicesOverview({ initialPillars = null }) {
                   </ul>
 
                   {pillar.deepLink && (
-                    <div className="mt-4 pt-3 border-t border-white/5">
-                      <a
-                        href={pillar.deepLink}
-                        className="inline-flex items-center gap-1.5 font-parkinsans text-[9px] tracking-[0.2em] uppercase text-accent hover:text-white transition-colors"
+                    <div className="mt-6 pt-4 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                      <Link
+                        href={
+                          pillar.num === "01"
+                            ? "/services/digital-experiences"
+                            : pillar.num === "02"
+                            ? "/services/ai-tools"
+                            : pillar.num === "03"
+                            ? "/services/business-systems"
+                            : pillar.num === "04"
+                            ? "/services/brand-creative"
+                            : pillar.deepLink
+                        }
+                        className="inline-flex items-center gap-1.5 font-parkinsans text-[10px] tracking-[0.2em] uppercase text-accent hover:text-white font-bold transition-colors"
                       >
                         <span>
-                          {pillar.num === "04"
-                            ? "EXPLORE BRAND & CREATIVE →"
-                            : "START A PROJECT →"}
+                          {pillar.num === "01" && "EXPLORE DIGITAL →"}
+                          {pillar.num === "02" && "EXPLORE AI & TOOLS →"}
+                          {pillar.num === "03" && "EXPLORE BUSINESS SYSTEMS →"}
+                          {pillar.num === "04" && "EXPLORE BRAND & CREATIVE →"}
                         </span>
-                      </a>
+                      </Link>
+
+                      <button
+                        type="button"
+                        onClick={openContact}
+                        className="font-parkinsans text-[9px] tracking-[0.15em] uppercase text-white/50 hover:text-white transition-colors"
+                      >
+                        START PROJECT →
+                      </button>
                     </div>
                   )}
                 </div>

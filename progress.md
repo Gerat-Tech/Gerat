@@ -30,8 +30,8 @@
 | 5 | **Image 5 (`media_1789836737762.png`)** | [`src/components/layout/ContactDrawer.jsx`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/components/layout/ContactDrawer.jsx) lines 7–18 | 10 overwhelming discipline buttons causing cognitive overload. | Reduce to **4 primary options** (`Website / Digital`, `AI / Intelligent Tool`, `Business System`, `Brand & Creative`) + progressive conditional sub-options. | **DONE** (`19995bf`) |
 | 6 | **Team & Portfolio Double Slashes** | `src/app/team`, `src/app/portfolio`, Prisma seed data | Residual `//` dividers or raw slash tropes visible in rendered cards/badges. | Ensure all separators are subtle middle dots (`·`) or clean dashes. | **DONE** (`f4c2606`, `97ededa`) |
 | 7 | **Default Theme** | [`src/app/layout.js`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/app/layout.js), [`src/context/ThemeContext.jsx`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/context/ThemeContext.jsx) | Site defaults to dark mode (`#0d0706`). | Switch default to **light mode**, preserving dark mode toggle. | **DONE** (`c39ed0d`) |
-| 8 | **Image 8 (`media_1789843567340.png`)** | [`src/components/home/HowWeWork.jsx`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/components/home/HowWeWork.jsx) | "How We Work" 5 boxes look boring and static. | Build an interactive, dynamic architectural story engine ("From Blueprint to Bridge") with milestone track and animated schematics. | **PENDING** (Phase 12) |
-| 9 | **Image 9 (`media_1789843751298.png`)** | [`src/components/services/ServicesOverview.jsx`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/components/services/ServicesOverview.jsx) | Only Brand & Creative has an "Explore More" page; Pillars 1, 2, 3 have no dedicated detail pages. | Create dedicated explore pages for Digital Experiences, AI & Tools, and Business Systems; add Explore CTAs to all pillars. | **PENDING** (Phase 13) |
+| 8 | **Image 8 (`media_1789843567340.png`)** | [`src/components/home/HowWeWork.jsx`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/components/home/HowWeWork.jsx) | "How We Work" 5 boxes look boring and static. | Build an interactive, dynamic architectural story engine ("From Blueprint to Bridge") with milestone track and animated schematics. | **DONE** (`65d5a7f`) |
+| 9 | **Image 9 (`media_1789843751298.png`)** | [`src/components/services/ServicesOverview.jsx`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/components/services/ServicesOverview.jsx) | Only Brand & Creative has an "Explore More" page; Pillars 1, 2, 3 have no dedicated detail pages. | Create dedicated explore pages for Digital Experiences, AI & Tools, and Business Systems; add Explore CTAs to all pillars. | **DONE** |
 | 10 | **Image 10 (`media_1789843934501.png`)** | [`src/app/services/brand-creative/page.js`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/app/services/brand-creative/page.js) lines 161–217 | Rigid "Integrated Service Packages" section looks generic and dated. | Remove packages section; replace with dynamic Brand Transformation Story module and interactive production standards inspector. | **PENDING** (Phase 14) |
 | 11 | **Image 11 (`media_1789844201362.png`)** | Global CTAs & View Work Buttons | "BUILD YOUR BRAND" and other CTAs don't pre-select the service in ContactDrawer; "VIEW WORK" doesn't filter portfolio. | Wire dynamic preselection in `NavContext` / `ContactDrawer` and add search parameter category routing to `/portfolio`. | **PENDING** (Phase 15) |
 
@@ -263,24 +263,24 @@
 - [MODIFY] [`src/components/services/ServicesOverview.jsx`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/components/services/ServicesOverview.jsx)
 - [MODIFY] [`src/app/why-wqf/components/ServicesOverview.jsx`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/app/why-wqf/components/ServicesOverview.jsx)
 
-**Status:** PENDING IMPLEMENTATION
+**Status:** COMPLETED
 
-- [ ] **13.1. Build Digital Experiences Explore Page (`/services/digital-experiences`):**
+- [x] **13.1. Build Digital Experiences Explore Page (`/services/digital-experiences`):**
   - Headline: *“EXPERIENCES THAT CONVERT. PRODUCTS THAT SCALE.”*
   - 6 Disciplines: High-Performance Websites, Custom Web Applications, Customer Portals, Native-Feel Interfaces, E-Commerce Platforms, Self-Serve Publishing.
   - Engineering Standards: Sub-second load times, modular React architecture, responsive accessibility (WCAG 2.1 AA), and analytics.
   - Interactive FAQ & CTAs.
-- [ ] **13.2. Build AI & Intelligent Tools Explore Page (`/services/ai-tools`):**
+- [x] **13.2. Build AI & Intelligent Tools Explore Page (`/services/ai-tools`):**
   - Headline: *“PRACTICAL INTELLIGENCE. MEASURABLE BUSINESS OUTCOMES.”*
   - 6 Disciplines: Enterprise Semantic Search, Domain-Aware Assistants & Copilots, Document & Invoice Extraction, Automated Workflow Bots, Customer Support Intelligence, Custom Model API Pipes.
   - Engineering Standards: Grounded citations (zero hallucinations), strict enterprise data privacy, measurable time ROI, human-in-the-loop safeguards.
   - Interactive FAQ & CTAs.
-- [ ] **13.3. Build Business Systems Explore Page (`/services/business-systems`):**
+- [x] **13.3. Build Business Systems Explore Page (`/services/business-systems`):**
   - Headline: *“CONNECTED SYSTEMS. UNBROKEN OPERATIONS.”*
   - 6 Disciplines: Custom ERP Platforms, Inventory & Logistics Hubs, Automated Billing & Financial Systems, Internal Team Portals, Legacy Modernization, Central Database & API Architectures.
   - Engineering Standards: Tailored business logic, immutable audit trails, offline resilience, and dedicated staff training.
   - Interactive FAQ & CTAs.
-- [ ] **13.4. Update Services Datasets & Overview Cards (Image 2 Fix):**
+- [x] **13.4. Update Services Datasets & Overview Cards (Image 2 Fix):**
   - In `src/content/services.js`: Update `deepLink` for Pillars 01, 02, and 03 to point to the new dedicated pages.
   - In `ServicesOverview.jsx`: Update cards so every pillar has a dedicated `EXPLORE [PILLAR] →` button leading to its new page, alongside `START A PROJECT →`.
 
