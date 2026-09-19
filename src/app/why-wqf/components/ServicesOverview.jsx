@@ -163,7 +163,15 @@ export default function ServicesOverview({ initialPillars = null }) {
 
                       <button
                         type="button"
-                        onClick={openContact}
+                        onClick={() => {
+                          const presetMap = {
+                            "01": { discipline: "digital", subOption: "Website" },
+                            "02": { discipline: "intelligence", subOption: "AI Assistant" },
+                            "03": { discipline: "systems", subOption: "Custom ERP" },
+                            "04": { discipline: "brand", subOption: "LOGO & BRAND IDENTITY" },
+                          };
+                          openContact(presetMap[pillar.num] || { discipline: "digital" });
+                        }}
                         className="font-parkinsans text-[9px] tracking-[0.15em] uppercase text-white/50 hover:text-white transition-colors"
                       >
                         START PROJECT →

@@ -13,7 +13,7 @@ const capabilities = [
     tags: "WEBSITES · WEB APPLICATIONS · CUSTOMER PORTALS · DIGITAL PRODUCTS",
     description:
       "Websites and digital products that make your business easier to discover, understand, and use.",
-    link: "/services",
+    link: "/services/digital-experiences",
   },
   {
     index: "02",
@@ -21,7 +21,7 @@ const capabilities = [
     tags: "PRACTICAL AI · KNOWLEDGE SYSTEMS · INTELLIGENT SEARCH · AUTOMATION",
     description:
       "Practical AI that helps people find information, automate repetitive work, and make better use of what they already know.",
-    link: "/services",
+    link: "/services/ai-tools",
   },
   {
     index: "03",
@@ -29,7 +29,7 @@ const capabilities = [
     tags: "OPERATIONS PLATFORMS · ERP · WORKFLOW SYSTEMS · CUSTOM SOFTWARE",
     description:
       "Software that connects operations, people, and information so businesses can work with less friction.",
-    link: "/services",
+    link: "/services/business-systems",
   },
   {
     index: "04",

@@ -20,6 +20,7 @@ export default function Navbar() {
     setIsMenuOpen,
     isContactOpen,
     setIsContactOpen,
+    contactPreset,
     openContact,
     closeContact,
   } = useNav();
@@ -395,7 +396,7 @@ export default function Navbar() {
       </div>
 
       {/* Global Contact Drawer */}
-      <ContactDrawer open={isContactOpen} setOpen={setIsContactOpen} />
+      <ContactDrawer open={isContactOpen} setOpen={setIsContactOpen} preset={contactPreset} />
     </>
   );
 }

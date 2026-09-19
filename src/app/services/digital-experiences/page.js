@@ -189,7 +189,7 @@ export default function DigitalExperiencesPage() {
             <div className="flex flex-wrap items-center gap-4 pt-4">
               <button
                 type="button"
-                onClick={openContact}
+                onClick={() => openContact({ discipline: "digital", subOption: "Website" })}
                 className="inline-flex items-center font-parkinsans text-[11px] uppercase tracking-[0.2em] px-8 py-4 bg-accent text-white font-bold hover:bg-white hover:text-black transition-all rounded-[2px]"
               >
                 <span>START YOUR DIGITAL PROJECT</span>
@@ -197,7 +197,7 @@ export default function DigitalExperiencesPage() {
               </button>
 
               <Link
-                href="/portfolio"
+                href="/portfolio?category=ALL+DISCIPLINES"
                 className="inline-flex items-center font-parkinsans text-[11px] uppercase tracking-[0.2em] px-8 py-4 border border-white/20 bg-transparent text-white hover:border-white transition-all rounded-[2px]"
               >
                 <span>VIEW WORK</span>
@@ -265,7 +265,18 @@ export default function DigitalExperiencesPage() {
                     <div className="pt-6 mt-6 border-t border-white/5 flex items-center justify-between">
                       <button
                         type="button"
-                        onClick={openContact}
+                        onClick={() =>
+                          openContact({
+                            discipline: "digital",
+                            subOption: item.title.includes("PORTAL")
+                              ? "Customer Portal"
+                              : item.title.includes("APPLICATION")
+                              ? "Web Application"
+                              : item.title.includes("WEBSITE")
+                              ? "Website"
+                              : "Digital Product",
+                          })
+                        }
                         className="font-parkinsans text-[10px] tracking-[0.2em] text-accent hover:text-white uppercase transition-colors"
                       >
                         {item.cta} →

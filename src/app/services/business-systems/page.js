@@ -189,7 +189,7 @@ export default function BusinessSystemsPage() {
             <div className="flex flex-wrap items-center gap-4 pt-4">
               <button
                 type="button"
-                onClick={openContact}
+                onClick={() => openContact({ discipline: "systems", subOption: "Custom ERP" })}
                 className="inline-flex items-center font-parkinsans text-[11px] uppercase tracking-[0.2em] px-8 py-4 bg-accent text-white font-bold hover:bg-white hover:text-black transition-all rounded-[2px]"
               >
                 <span>MODERNIZE YOUR OPERATIONS</span>
@@ -265,7 +265,18 @@ export default function BusinessSystemsPage() {
                     <div className="pt-6 mt-6 border-t border-white/5 flex items-center justify-between">
                       <button
                         type="button"
-                        onClick={openContact}
+                        onClick={() =>
+                          openContact({
+                            discipline: "systems",
+                            subOption: item.title.includes("ERP")
+                              ? "Custom ERP"
+                              : item.title.includes("INVENTORY") || item.title.includes("LOGISTICS")
+                              ? "Operations Platform"
+                              : item.title.includes("BILLING") || item.title.includes("FINANCIAL")
+                              ? "Workflow Engine"
+                              : "Internal Software",
+                          })
+                        }
                         className="font-parkinsans text-[10px] tracking-[0.2em] text-accent hover:text-white uppercase transition-colors"
                       >
                         {item.cta} →

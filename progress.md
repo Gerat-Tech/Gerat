@@ -33,7 +33,7 @@
 | 8 | **Image 8 (`media_1789843567340.png`)** | [`src/components/home/HowWeWork.jsx`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/components/home/HowWeWork.jsx) | "How We Work" 5 boxes look boring and static. | Build an interactive, dynamic architectural story engine ("From Blueprint to Bridge") with milestone track and animated schematics. | **DONE** (`65d5a7f`) |
 | 9 | **Image 9 (`media_1789843751298.png`)** | [`src/components/services/ServicesOverview.jsx`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/components/services/ServicesOverview.jsx) | Only Brand & Creative has an "Explore More" page; Pillars 1, 2, 3 have no dedicated detail pages. | Create dedicated explore pages for Digital Experiences, AI & Tools, and Business Systems; add Explore CTAs to all pillars. | **DONE** |
 | 10 | **Image 10 (`media_1789843934501.png`)** | [`src/app/services/brand-creative/page.js`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/app/services/brand-creative/page.js) lines 161–217 | Rigid "Integrated Service Packages" section looks generic and dated. | Remove packages section; replace with dynamic Brand Transformation Story module and interactive production standards inspector. | **DONE** |
-| 11 | **Image 11 (`media_1789844201362.png`)** | Global CTAs & View Work Buttons | "BUILD YOUR BRAND" and other CTAs don't pre-select the service in ContactDrawer; "VIEW WORK" doesn't filter portfolio. | Wire dynamic preselection in `NavContext` / `ContactDrawer` and add search parameter category routing to `/portfolio`. | **PENDING** (Phase 15) |
+| 11 | **Image 11 (`media_1789844201362.png`)** | Global CTAs & View Work Buttons | "BUILD YOUR BRAND" and other CTAs don't pre-select the service in ContactDrawer; "VIEW WORK" doesn't filter portfolio. | Wire dynamic preselection in `NavContext` / `ContactDrawer` and add search parameter category routing to `/portfolio`. | **DONE** |
 
 ---
 
@@ -311,24 +311,24 @@
 - [`src/app/portfolio/components/PortfolioClientView.jsx`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/app/portfolio/components/PortfolioClientView.jsx)
 - Across service and home pages (`brand-creative`, `personal-branding`, `digital-experiences`, `ai-tools`, `business-systems`, `OurFocus`)
 
-**Status:** PENDING IMPLEMENTATION
+**Status:** COMPLETED
 
-- [ ] **15.1. NavContext & ContactDrawer Dynamic Preselection Engine (Image 4 Fix):**
-  - Enhance `openContact(preset)` in `NavContext.js` to accept `{ discipline, subOption }`.
-  - Wire `ContactDrawer.jsx` to dynamically preselect primary discipline (`brand`, `digital`, `intelligence`, `systems`, `other`) and specific sub-option (e.g. `LOGO & BRAND IDENTITY`, `BRAND STRATEGY`, `PERSONAL BRANDING`).
-- [ ] **15.2. Connect All CTA Buttons Across Site:**
+- [x] **15.1. NavContext & ContactDrawer Dynamic Preselection Engine (Image 4 Fix):**
+  - Enhanced `openContact(preset)` in `NavContext.js` to accept `{ discipline, subOption }`.
+  - Wired `ContactDrawer.jsx` to dynamically preselect primary discipline (`brand`, `digital`, `intelligence`, `systems`, `other`) and specific sub-option (e.g. `LOGO & BRAND IDENTITY`, `BRAND STRATEGY`, `PERSONAL BRANDING`).
+- [x] **15.2. Connect All CTA Buttons Across Site:**
   - Brand & Creative Hero (`BUILD YOUR BRAND →`) automatically selects `BRAND & CREATIVE` + `LOGO & BRAND IDENTITY`.
   - Brand catalog cards select specific sub-options (`BRAND STRATEGY`, `GRAPHIC DESIGN`, `PERSONAL BRANDING`).
   - Personal Branding CTAs select `BRAND & CREATIVE` + `PERSONAL BRANDING`.
   - Digital Experiences CTAs select `WEBSITE / DIGITAL PRODUCT`.
   - AI & Intelligent Tools CTAs select `AI & INTELLIGENT TOOL`.
   - Business Systems CTAs select `BUSINESS SYSTEM / ERP`.
-- [ ] **15.3. Deep Category Routing for All "VIEW WORK" Buttons:**
-  - Update `src/app/portfolio/components/PortfolioClientView.jsx` to parse `useSearchParams()` for `?category=...`.
-  - Wire "VIEW WORK" button on Brand page to `/portfolio?category=BRAND+%26+IDENTITY`.
-  - Wire "VIEW WORK" button on Personal Branding to `/portfolio?category=PERSONAL+BRAND`.
-  - Wire "VIEW WORK" button on AI page to `/portfolio?category=AI+%26+RAG`.
-  - Wire "VIEW WORK" button on Systems page to `/portfolio?category=ENTERPRISE+ERP`.
+- [x] **15.3. Deep Category Routing for All "VIEW WORK" Buttons:**
+  - Updated `src/app/portfolio/components/PortfolioClientView.jsx` to parse `useSearchParams()` for `?category=...`.
+  - Wired "VIEW WORK" button on Brand page to `/portfolio?category=BRAND+%26+IDENTITY`.
+  - Wired "VIEW WORK" button on Personal Branding to `/portfolio?category=PERSONAL+BRAND`.
+  - Wired "VIEW WORK" button on AI page to `/portfolio?category=AI+%26+RAG`.
+  - Wired "VIEW WORK" button on Systems page to `/portfolio?category=ENTERPRISE+ERP`.
 
 ---
 

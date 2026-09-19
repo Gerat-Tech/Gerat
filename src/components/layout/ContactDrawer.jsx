@@ -72,7 +72,7 @@ const PERSONAL_ROLES = [
  * Editorial Contact Drawer (Spec ref: §31 & Brand Spec §20, §21, §22)
  * Enters from right with backdrop blur, conditional question modules, and staggered field reveals.
  */
-export default function ContactDrawer({ open, setOpen }) {
+export default function ContactDrawer({ open, setOpen, preset = null }) {
   const [selectedPrimary, setSelectedPrimary] = useState(PRIMARY_DISCIPLINES[0]);
   const [selectedSubOption, setSelectedSubOption] = useState(PRIMARY_DISCIPLINES[0].subOptions[0] || "");
   const [selectedTimeline, setSelectedTimeline] = useState(TIMELINES[0]);
@@ -108,6 +108,50 @@ export default function ContactDrawer({ open, setOpen }) {
       "SOCIAL & MARKETING DESIGN",
       "PERSONAL BRANDING",
     ].includes(selectedSubOption);
+
+  // Dynamic preselection when drawer is opened with a preset
+  useEffect(() => {
+    if (!open || !preset) return;
+
+    let targetDiscipline = null;
+    let targetSub = null;
+
+    if (typeof preset === "string") {
+      targetDiscipline = preset;
+    } else if (typeof preset === "object") {
+      targetDiscipline = preset.discipline || preset.id;
+      targetSub = preset.subOption;
+    }
+
+    if (targetDiscipline) {
+      const match = PRIMARY_DISCIPLINES.find(
+        (d) =>
+          d.id.toLowerCase() === targetDiscipline.toLowerCase() ||
+          d.label.toLowerCase().includes(targetDiscipline.toLowerCase()) ||
+          targetDiscipline.toLowerCase().includes(d.id.toLowerCase())
+      );
+      if (match) {
+        setSelectedPrimary(match);
+        if (targetSub) {
+          const subMatch = match.subOptions.find(
+            (so) =>
+              so.toLowerCase() === targetSub.toLowerCase() ||
+              so.toLowerCase().includes(targetSub.toLowerCase()) ||
+              targetSub.toLowerCase().includes(so.toLowerCase())
+          );
+          if (subMatch) {
+            setSelectedSubOption(subMatch);
+          } else {
+            setSelectedSubOption(targetSub);
+          }
+        } else if (match.subOptions.length > 0) {
+          setSelectedSubOption(match.subOptions[0]);
+        } else {
+          setSelectedSubOption("");
+        }
+      }
+    }
+  }, [open, preset]);
 
   // Lock body scroll when open and handle Escape key
   useEffect(() => {

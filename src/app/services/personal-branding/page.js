@@ -180,7 +180,12 @@ export default function PersonalBrandingPage() {
             <div className="flex flex-wrap items-center gap-4 pt-4">
               <button
                 type="button"
-                onClick={openContact}
+                onClick={() =>
+                  openContact({
+                    discipline: "brand",
+                    subOption: "PERSONAL BRANDING",
+                  })
+                }
                 className="inline-flex items-center font-parkinsans text-[11px] uppercase tracking-[0.2em] px-8 py-4 bg-accent text-white font-bold hover:bg-white hover:text-black transition-all rounded-[2px]"
               >
                 <span>BUILD YOUR PERSONAL BRAND</span>
@@ -188,7 +193,7 @@ export default function PersonalBrandingPage() {
               </button>
 
               <Link
-                href="/portfolio"
+                href="/portfolio?category=PERSONAL+BRAND"
                 className="inline-flex items-center font-parkinsans text-[11px] uppercase tracking-[0.2em] px-8 py-4 border border-white/20 bg-transparent text-white hover:border-white transition-all rounded-[2px]"
               >
                 <span>VIEW PROFILES</span>
@@ -329,7 +334,7 @@ export default function PersonalBrandingPage() {
 
                 <div className="pt-4">
                   <Link
-                    href="/portfolio"
+                    href="/portfolio?category=PERSONAL+BRAND"
                     className="inline-flex items-center gap-2 font-parkinsans text-[10px] tracking-[0.2em] uppercase text-white hover:text-accent transition-colors"
                   >
                     <span>EXPLORE COMPLETE PORTFOLIO</span>
@@ -364,7 +369,12 @@ export default function PersonalBrandingPage() {
         </p>
         <button
           type="button"
-          onClick={openContact}
+          onClick={() =>
+            openContact({
+              discipline: "brand",
+              subOption: "PERSONAL BRANDING",
+            })
+          }
           className="mt-2 px-10 py-4 bg-accent text-white font-parkinsans text-xs uppercase tracking-[0.2em] font-bold hover:bg-white hover:text-black transition-all rounded-[2px]"
         >
           BOOK A PERSONAL BRAND CONSULTATION
