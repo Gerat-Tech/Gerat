@@ -31,8 +31,9 @@ export async function runBrandingSmokeTests() {
 
   // Ethos must not contain legacy WQF copy
   const ethos = fs.readFileSync(path.join(root, "src/components/home/OurEthos.jsx"), "utf-8");
-  assert(!ethos.includes("Exponential Foresight"), "Ethos should not contain legacy 'Exponential Foresight'");
-  assert(ethos.includes("SYSTEM RESILIENCE"), "Ethos must contain 'SYSTEM RESILIENCE'");
+  assert(ethos.includes("BUILT TO"), "Ethos must contain 'BUILT TO'");
+  assert(ethos.includes("HOLD WEIGHT."), "Ethos must contain 'HOLD WEIGHT.'");
+  assert(ethos.includes("FOUNDATIONAL STABILITY"), "Ethos must contain 'FOUNDATIONAL STABILITY'");
   console.log("  ✓ Ethos branding verified");
 
   // Portfolio must not link to external worldquantfoundry.com

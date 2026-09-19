@@ -53,7 +53,7 @@ export default function OurLeadership({ initialLeaders = null }) {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16 lg:mb-20">
           <div className="flex flex-col gap-4 max-w-2xl">
-            <SectionLabel index="05" label="LEADERSHIP" />
+            <SectionLabel index="04" label="LEADERSHIP" />
             <SplitText
               text="ENGINEERING LEADERSHIP."
               as="h2"

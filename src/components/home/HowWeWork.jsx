@@ -8,39 +8,33 @@ import SplitText from "../motion/SplitText";
 const steps = [
   {
     step: "01",
-    title: "UNDERSTAND",
+    title: "DISCOVER",
     description:
-      "We begin with the operational problem, user behaviors, institutional constraints, and the real-world deployment environment.",
+      "We understand the business, the people, the problem, and what success should look like.",
   },
   {
     step: "02",
-    title: "DEFINE",
+    title: "DESIGN",
     description:
-      "We convert the challenge into an authoritative system model: technical specifications, schema architecture, data pipelines, and milestone priorities.",
+      "We turn that understanding into a clear experience, visual direction, and realistic plan.",
   },
   {
     step: "03",
-    title: "DESIGN",
+    title: "BUILD",
     description:
-      "We design the human interface and system mechanics in lockstep, masking architectural complexity behind clear, high-density workflows.",
+      "We design and engineer the digital product, intelligent tool, or business platform.",
   },
   {
     step: "04",
-    title: "BUILD",
+    title: "LAUNCH",
     description:
-      "Engineering transforms models into hardened software utilizing modern React/Next.js frontends, distributed backends, and fault-tolerant databases.",
+      "We test, refine, and prepare it for real users and real-world conditions.",
   },
   {
     step: "05",
-    title: "VALIDATE",
+    title: "SUPPORT",
     description:
-      "We stress-test against peak transaction loads, edge scenarios, usability standards, and zero-trust cryptographic audit requirements.",
-  },
-  {
-    step: "06",
-    title: "EVOLVE",
-    description:
-      "Launch is day zero. We analyze live operational telemetry, refine performance bottlenecks, and scale the platform alongside institutional growth.",
+      "We stay involved as the product grows and the business changes.",
   },
 ];
 
@@ -54,38 +48,30 @@ export default function HowWeWork() {
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
         {/* Header */}
         <div className="flex flex-col gap-4 mb-16 lg:mb-20 max-w-3xl">
-          <SectionLabel index="04" label="HOW WE WORK" />
+          <SectionLabel index="05" label="HOW WE WORK" />
           <SplitText
-            text="FROM PROBLEM TO"
+            text="FROM BLUEPRINT"
             as="h2"
             className="font-artific text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
           />
           <SplitText
-            text="WORKING SYSTEM."
+            text="TO BRIDGE."
             as="h2"
             wordClassName="text-accent"
             className="font-artific text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
           />
           <FadeUp delay={0.2}>
             <p className="font-parkinsans text-base sm:text-lg text-white/70 leading-relaxed pt-2">
-              A disciplined, multi-stage engineering method designed to eliminate
-              ambiguity, de-risk complex integrations, and ship dependable
-              software.
+              A clear process, from the first conversation to the finished system.
             </p>
           </FadeUp>
         </div>
 
-        {/* Process Step Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Process Step Grid (5 Clear Stages) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
           {steps.map((item, idx) => (
             <FadeUp key={item.step} delay={0.08 * idx} y={20}>
-              <div className="group relative bg-[var(--surface)] border border-white/10 hover:border-accent/60 p-8 rounded-[4px] flex flex-col justify-between min-h-[240px] transition-all duration-300">
-                {/* Precision Corner Accents */}
-                <span className="absolute top-0 left-0 size-2 border-t border-l border-white/20 group-hover:border-accent transition-colors" />
-                <span className="absolute top-0 right-0 size-2 border-t border-r border-white/20 group-hover:border-accent transition-colors" />
-                <span className="absolute bottom-0 left-0 size-2 border-b border-l border-white/20 group-hover:border-accent transition-colors" />
-                <span className="absolute bottom-0 right-0 size-2 border-b border-r border-white/20 group-hover:border-accent transition-colors" />
-
+              <div className="group relative bg-[var(--surface)] border border-white/10 hover:border-accent/60 p-6 sm:p-7 rounded-[4px] flex flex-col justify-between min-h-[230px] transition-all duration-300">
                 {/* Step Index & Indicator */}
                 <div className="flex items-center justify-between">
                   <span className="font-parkinsans text-[12px] tracking-[0.2em] text-accent font-bold">
@@ -96,7 +82,7 @@ export default function HowWeWork() {
 
                 {/* Content */}
                 <div className="flex flex-col gap-2.5 my-auto pt-4">
-                  <h3 className="font-artific text-2xl font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
+                  <h3 className="font-artific text-xl sm:text-2xl font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
                     {item.title}
                   </h3>
                   <p className="font-parkinsans text-xs sm:text-sm text-white/65 leading-relaxed">
