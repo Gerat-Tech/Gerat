@@ -760,6 +760,15 @@ Commit changes in logical units:
 
 ---
 
+## PHASE 17 — DESIGN REFINEMENTS, HERO CTA FOCUS, LOGO PALETTE SWITCH & CONTRAST OVERHAUL
+> **Status:** 🟢 COMPLETED & VERIFIED
+- **Brand Creative:** Removed Section 04 (*Production Standards / Asset Inspector*) per user request, allowing seamless narrative progression to FAQ.
+- **Hero CTA Recalibration:** Prioritized "START A PROJECT" as the primary high-focus solid CTA (`bg-accent text-white font-bold`); made "SEE WHAT WE BUILD" secondary and anchored directly to Section 03 "SELECTED WORK" (`#portfolio`).
+- **Logo Palette Switch:** Switched the Navbar header brand logo to the official **Flame Orange** (`#EA5B15`) variant in light mode, and switched the small standalone mark in the Hero bottom anchor to **Coffee Bean Brown** (`#300F0A`).
+- **Light Mode Text Contrast Guards:** Fixed root-cause invisible text in callout boxes (such as *The Client Experience* in HowWeWork), migrated hardcoded white opacities to semantic design tokens (`var(--text-primary)`, `var(--text-secondary)`), and added global attribute selectors in `globals.css` ensuring all `text-white/*` opacity variants map to the high-contrast Coffee Bean palette in light mode.
+
+---
+
 ## RESOLVED DESIGN DECISIONS
 
 1. **Portfolio Projects:** Seed data and showcase items calibrated with honest, credible engineering scopes.
