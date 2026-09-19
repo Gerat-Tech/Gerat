@@ -56,13 +56,7 @@ export default function AdvisorAndTeam({ initialSpecialists = null }) {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {engineeringSpecialists.map((member, idx) => (
           <FadeUp key={(member.name || member.role) + idx} delay={0.08 * idx} y={20}>
-            <div className="group relative bg-[#0a0a0a] border border-white/10 hover:border-accent/60 p-6 rounded-[3px] flex flex-col justify-between min-h-[300px] transition-all duration-300">
-              {/* Precision Corner Accents */}
-              <span className="absolute top-0 left-0 size-1.5 border-t border-l border-white/30 group-hover:border-accent transition-colors" />
-              <span className="absolute top-0 right-0 size-1.5 border-t border-r border-white/30 group-hover:border-accent transition-colors" />
-              <span className="absolute bottom-0 left-0 size-1.5 border-b border-l border-white/30 group-hover:border-accent transition-colors" />
-              <span className="absolute bottom-0 right-0 size-1.5 border-b border-r border-white/30 group-hover:border-accent transition-colors" />
-
+            <div className="group relative bg-[var(--surface)] border border-white/10 hover:border-accent/60 p-6 rounded-[3px] flex flex-col justify-between min-h-[300px] transition-all duration-300">
               {/* Photo Thumbnail + Index */}
               <div className="flex items-center justify-between gap-4 mb-4">
                 <div className="size-16 rounded-[2px] overflow-hidden bg-black/60 shrink-0 border border-white/10">

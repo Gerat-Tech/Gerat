@@ -60,18 +60,12 @@ export default function TeamLeadership({ initialLeaders = null }) {
                 tabIndex={0}
                 onMouseEnter={() => setActiveIdx(idx)}
                 onFocus={() => setActiveIdx(idx)}
-                className={`group relative flex flex-col bg-[#0d0d0d] border rounded-[4px] overflow-hidden transition-all duration-400 p-6 sm:p-8 cursor-pointer outline-none h-full ${
+                className={`group relative flex flex-col bg-[var(--surface)] border rounded-[4px] overflow-hidden transition-all duration-400 p-6 sm:p-8 cursor-pointer outline-none h-full ${
                   isSelected
                     ? "border-accent shadow-[0_0_24px_rgba(234,91,21,0.15)]"
                     : "border-white/10 hover:border-white/30"
                 }`}
               >
-                {/* Precision Corner Accents */}
-                <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30 group-hover:border-accent transition-colors" />
-                <span className="absolute top-0 right-0 size-2 border-t border-r border-white/30 group-hover:border-accent transition-colors" />
-                <span className="absolute bottom-0 left-0 size-2 border-b border-l border-white/30 group-hover:border-accent transition-colors" />
-                <span className="absolute bottom-0 right-0 size-2 border-b border-r border-white/30 group-hover:border-accent transition-colors" />
-
                 {/* Portrait */}
                 <div className="relative aspect-4/5 w-full overflow-hidden bg-black/60 rounded-[2px] mb-6">
                   <img

@@ -7,23 +7,23 @@ import { useNav } from "@/context/NavContext";
 const principles = [
   {
     num: "01",
-    title: "PRODUCTION RIGOR OVER PROTOTYPES",
-    desc: "We do not ship flimsy demonstrations. Every system is built on production-hardened foundations, comprehensive automated tests, and verified recovery procedures.",
+    title: "RIGOR OVER SHORTCUTS",
+    desc: "We build on solid foundations, clean architecture, and thorough testing so software keeps working long after launch.",
   },
   {
     num: "02",
-    title: "DETERMINISTIC INTELLIGENCE",
-    desc: "AI systems must be verifiable. We design domain-grounded retrieval pipelines with strict citation accountability, transparent confidence bounds, and zero unverified hallucination.",
+    title: "PRACTICAL INTELLIGENCE",
+    desc: "AI must be reliable and useful. We design tools with verified accuracy and clear application to everyday business work.",
   },
   {
     num: "03",
-    title: "ARCHITECTURAL SOVEREIGNTY",
-    desc: "Our clients retain complete ownership of their data, algorithms, and deployed infrastructure. We champion open standards and eliminate toxic vendor lock-in.",
+    title: "FULL CLIENT OWNERSHIP",
+    desc: "Our clients retain complete ownership of their code, design assets, and systems. We build independent solutions with zero unnecessary lock-in.",
   },
   {
     num: "04",
-    title: "RADICAL TRANSPARENCY",
-    desc: "From git commit feeds to real-time build telemetry, our engineering workflows are open to our partners. Direct engineering collaboration without intermediary noise.",
+    title: "CLEAR COLLABORATION",
+    desc: "Direct communication with the people doing the work. Transparent timelines, regular updates, and clear milestones without intermediary noise.",
   },
 ];
 
@@ -35,28 +35,24 @@ export default function TeamEthos() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-16">
         <div className="lg:col-span-6 flex flex-col gap-4">
           <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase">
-            03 · OPERATIONAL DOCTRINE
+            03 · HOW WE WORK
           </span>
           <h2 className="font-artific text-3xl sm:text-5xl font-bold uppercase tracking-tight leading-[0.95]">
-            HOW OUR ARCHITECTS THINK & BUILD.
+            HOW WE THINK & BUILD.
           </h2>
         </div>
 
         <div className="lg:col-span-6 flex flex-col items-start gap-6 lg:border-l lg:border-white/10 lg:pl-10">
           <p className="font-parkinsans text-base text-white/70 leading-relaxed">
-            Engineering excellence is not an accident—it is the direct result of
-            strict architectural doctrine, uncompromising code review, and deep
-            domain respect.
+            Excellence in technology and design is the result of clear communication, thoughtful architecture, and care for what comes next.
           </p>
           <button
             type="button"
             onClick={openContact}
             className="group relative isolate inline-flex items-center font-parkinsans text-[11px] uppercase tracking-[0.2em] px-6 py-3 border border-white/20 hover:border-accent hover:bg-accent/10 text-white transition-all rounded-[2px]"
           >
-            <span>JOIN OUR ENGINEERING CORPS</span>
+            <span>START A PROJECT</span>
             <span className="ml-2 text-accent">→</span>
-            <span className="absolute -top-[1px] -left-[1px] size-1.5 border-t border-l border-white/40 group-hover:border-accent" />
-            <span className="absolute -bottom-[1px] -right-[1px] size-1.5 border-b border-r border-white/40 group-hover:border-accent" />
           </button>
         </div>
       </div>
@@ -64,10 +60,7 @@ export default function TeamEthos() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {principles.map((p, idx) => (
           <FadeUp key={p.num} delay={0.08 * idx} y={20}>
-            <div className="group relative bg-[#0c0c0c] border border-white/10 hover:border-accent/60 p-6 rounded-[3px] flex flex-col justify-between min-h-[220px] transition-all duration-300">
-              <span className="absolute top-0 left-0 size-1.5 border-t border-l border-white/20 group-hover:border-accent" />
-              <span className="absolute bottom-0 right-0 size-1.5 border-b border-r border-white/20 group-hover:border-accent" />
-
+            <div className="group relative bg-[var(--surface)] border border-white/10 hover:border-accent/60 p-6 rounded-[3px] flex flex-col justify-between min-h-[220px] transition-all duration-300">
               <span className="font-parkinsans text-[11px] tracking-[0.2em] text-accent font-bold">
                 {p.num}
               </span>
