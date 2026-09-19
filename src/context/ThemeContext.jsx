@@ -3,15 +3,15 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 const ThemeContext = createContext({
-  theme: "dark",
-  resolvedTheme: "dark",
+  theme: "light",
+  resolvedTheme: "light",
   setTheme: () => {},
   toggleTheme: () => {},
 });
 
-export function ThemeProvider({ initialTheme = "dark", children }) {
+export function ThemeProvider({ initialTheme = "light", children }) {
   const [theme, setThemeState] = useState(initialTheme);
-  const [systemTheme, setSystemTheme] = useState(initialTheme === "light" ? "light" : "dark");
+  const [systemTheme, setSystemTheme] = useState(initialTheme === "dark" ? "dark" : "light");
 
   useEffect(() => {
     // 1. Sync with localStorage if client had saved theme before cookie was set

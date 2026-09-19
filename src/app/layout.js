@@ -80,8 +80,8 @@ const organizationJsonLd = {
 
 export default async function RootLayout({ children }) {
   const cookieStore = await cookies();
-  const themeCookie = cookieStore.get("gerat-theme")?.value || cookieStore.get("gerat-dashboard-theme")?.value || "dark";
-  const initialTheme = themeCookie === "light" ? "light" : "dark";
+  const themeCookie = cookieStore.get("gerat-theme")?.value || cookieStore.get("gerat-dashboard-theme")?.value || "light";
+  const initialTheme = themeCookie === "dark" ? "dark" : "light";
 
   return (
     <html
