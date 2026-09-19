@@ -75,7 +75,7 @@ export async function runBrandingSmokeTests() {
   // Services page components must not contain legacy WQF copy
   const services = fs.readFileSync(path.join(root, "src/app/why-wqf/components/ServicesOverview.jsx"), "utf-8");
   assert(!services.includes("WorldQuant Foundry"), "Services page must not contain legacy WQF text");
-  assert(services.includes("PURPOSE-BUILT DIGITAL SYSTEMS."), "Services page must contain Gerat headline");
+  assert(services.includes("WHAT WE") && services.includes("BUILD."), "Services page must contain Gerat headline");
   console.log("  ✓ Services page Overview verified");
 
   // Contact drawer must have Gerat branding and brand/creative disciplines

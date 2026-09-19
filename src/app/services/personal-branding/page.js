@@ -149,7 +149,7 @@ export default function PersonalBrandingPage() {
       {/* Hero Section */}
       <section className="relative w-full max-w-[1440px] mx-auto pt-36 sm:pt-44 pb-20 px-4 sm:px-6 md:px-8 lg:px-10 border-b border-white/10">
         <div className="flex flex-col gap-6 max-w-4xl">
-          <SectionLabel index="05" label="EXECUTIVE PRESENCE & PERSONAL BRANDING" />
+          <SectionLabel index="04" label="PERSONAL BRANDING" />
 
           <div className="space-y-2">
             <SplitText
@@ -172,9 +172,7 @@ export default function PersonalBrandingPage() {
 
           <FadeUp delay={0.3} y={16}>
             <p className="font-parkinsans text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed">
-              We help founders, executives, consultants, and technology leaders turn their
-              life&apos;s work and technical mastery into an undeniable, recognizable personal brand
-              that opens doors to capital, partnerships, and high-stakes opportunities.
+              We help founders, executives, and leaders build a personal brand that opens doors to capital, partnerships, and high-impact opportunities.
             </p>
           </FadeUp>
 
@@ -185,7 +183,7 @@ export default function PersonalBrandingPage() {
                 onClick={openContact}
                 className="inline-flex items-center font-parkinsans text-[11px] uppercase tracking-[0.2em] px-8 py-4 bg-accent text-white font-bold hover:bg-white hover:text-black transition-all rounded-[2px]"
               >
-                <span>COMMISSION PERSONAL BRANDING</span>
+                <span>BUILD YOUR PERSONAL BRAND</span>
                 <span className="ml-2">→</span>
               </button>
 
@@ -193,14 +191,14 @@ export default function PersonalBrandingPage() {
                 href="/portfolio"
                 className="inline-flex items-center font-parkinsans text-[11px] uppercase tracking-[0.2em] px-8 py-4 border border-white/20 bg-transparent text-white hover:border-white transition-all rounded-[2px]"
               >
-                <span>VIEW EXECUTIVE PROFILES</span>
+                <span>VIEW PROFILES</span>
               </Link>
             </div>
           </FadeUp>
         </div>
 
         <div className="mt-16 pt-4 border-t border-white/10 flex items-center justify-between font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
-          <span>FRAMEWORK · 07 MODULAR CAPABILITY PILLARS</span>
+          <span>FRAMEWORK · PERSONAL BRANDING</span>
           <span>DISCOVER METHODOLOGY ↓</span>
         </div>
       </section>

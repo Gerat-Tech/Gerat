@@ -38,21 +38,21 @@ export default function BrandCreativePage() {
       {/* Hero Section */}
       <section className="relative w-full max-w-[1440px] mx-auto pt-36 sm:pt-44 pb-20 px-4 sm:px-6 md:px-8 lg:px-10 border-b border-white/10">
         <div className="flex flex-col gap-6 max-w-4xl">
-          <SectionLabel index="04" label="BRAND & CREATIVE ARCHITECTURE" />
+          <SectionLabel index="04" label="BRAND & CREATIVE" />
 
           <div className="space-y-2">
             <SplitText
-              text="MAKE THE RIGHT"
+              text="GIVE YOUR BUSINESS"
               as="h1"
               className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
             />
             <SplitText
-              text="FIRST IMPRESSION."
+              text="SOMETHING PEOPLE"
               as="div"
               className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
             />
             <SplitText
-              text="THEN MAKE IT EVERYWHERE."
+              text="CAN RECOGNIZE."
               as="div"
               wordClassName="text-accent"
               className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
@@ -61,9 +61,7 @@ export default function BrandCreativePage() {
 
           <FadeUp delay={0.3} y={16}>
             <p className="font-parkinsans text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed">
-              We engineer monolithic visual identities, precision vector logo systems, and editorial graphic
-              architectures that make businesses, products, and leaders recognizable, credible, and consistent
-              across every medium they touch.
+              We create brand identities and visual systems that make businesses clearer, more consistent, and easier to remember across every medium they touch.
             </p>
           </FadeUp>
 
@@ -74,7 +72,7 @@ export default function BrandCreativePage() {
                 onClick={openContact}
                 className="inline-flex items-center font-parkinsans text-[11px] uppercase tracking-[0.2em] px-8 py-4 bg-accent text-white font-bold hover:bg-white hover:text-black transition-all rounded-[2px]"
               >
-                <span>INITIATE BRAND ENGAGEMENT</span>
+                <span>BUILD YOUR BRAND</span>
                 <span className="ml-2">→</span>
               </button>
 
@@ -82,15 +80,15 @@ export default function BrandCreativePage() {
                 href="/portfolio"
                 className="inline-flex items-center font-parkinsans text-[11px] uppercase tracking-[0.2em] px-8 py-4 border border-white/20 bg-transparent text-white hover:border-white transition-all rounded-[2px]"
               >
-                <span>VIEW CASE STUDIES</span>
+                <span>VIEW WORK</span>
               </Link>
             </div>
           </FadeUp>
         </div>
 
         <div className="mt-16 pt-4 border-t border-white/10 flex items-center justify-between font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
-          <span>DISCIPLINES · 06 CREATIVE PRACTICES</span>
-          <span>FROM IDENTITY TO INFRASTRUCTURE ↓</span>
+          <span>SERVICES · BRAND & CREATIVE</span>
+          <span>EXPLORE SERVICES ↓</span>
         </div>
       </section>
 
@@ -104,7 +102,7 @@ export default function BrandCreativePage() {
             THE CREATIVE SERVICE FAMILY.
           </h2>
           <p className="font-parkinsans text-sm sm:text-base text-white/60 max-w-2xl">
-            Modular, high-precision design capabilities engineered to function as the front-end of product development.
+            Thoughtful design capabilities engineered to give your business credibility, presence, and consistency.
           </p>
         </div>
 
@@ -112,12 +110,6 @@ export default function BrandCreativePage() {
           {brandCreativeFamily.map((item, idx) => (
             <FadeUp key={item.id} delay={0.08 * idx} y={24}>
               <div className="group relative bg-[var(--surface)] border border-white/10 hover:border-accent/80 p-8 rounded-[2px] flex flex-col justify-between min-h-[420px] transition-all duration-300 h-full">
-                {/* Precision Corner Accents */}
-                <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30 group-hover:border-accent transition-colors" />
-                <span className="absolute top-0 right-0 size-2 border-t border-r border-white/30 group-hover:border-accent transition-colors" />
-                <span className="absolute bottom-0 left-0 size-2 border-b border-l border-white/30 group-hover:border-accent transition-colors" />
-                <span className="absolute bottom-0 right-0 size-2 border-b border-r border-white/30 group-hover:border-accent transition-colors" />
-
                 <div>
                   <div className="flex items-center justify-between pb-4 border-b border-white/10">
                     <span className="font-parkinsans text-[10px] tracking-[0.2em] text-accent font-bold">
