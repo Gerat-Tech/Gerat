@@ -69,33 +69,33 @@ export default function Hero() {
           {/* Interactive CTA Buttons (Content Guide §5 & Mobile-First) */}
           <FadeUp delay={0.6} y={24}>
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-6 pt-2">
-              {/* Primary Explore Capabilities CTA */}
-              <Magnetic maxDisplacement={8}>
-                <Link
-                  href="#capabilities"
-                  data-cursor-text="EXPLORE"
-                  className="group relative isolate inline-flex items-center justify-center font-parkinsans text-[11px] sm:text-[12px] uppercase tracking-[0.2em] px-6 sm:px-8 py-3.5 bg-white text-black font-semibold border border-white hover:bg-accent hover:border-accent hover:text-white transition-all duration-300 rounded-[2px] text-center"
-                >
-                  <span>SEE WHAT WE BUILD</span>
-                  <span className="ml-2 text-black/40 group-hover:text-white group-hover:translate-x-1 transition-all duration-300">
-                    ↓
-                  </span>
-                </Link>
-              </Magnetic>
-
-              {/* Secondary Contact CTA */}
+              {/* Primary Contact CTA - Highest Focus */}
               <Magnetic maxDisplacement={8}>
                 <button
                   type="button"
                   onClick={openContact}
                   data-cursor-text="INQUIRE"
-                  className="group relative isolate inline-flex items-center justify-center font-parkinsans text-[11px] sm:text-[12px] uppercase tracking-[0.2em] px-6 sm:px-8 py-3.5 bg-transparent text-white/80 hover:text-white border border-white/20 hover:border-white/60 transition-all duration-300 rounded-[2px] text-center"
+                  className="group relative isolate inline-flex items-center justify-center font-parkinsans text-[11px] sm:text-[12px] uppercase tracking-[0.2em] px-7 sm:px-9 py-3.5 bg-accent text-white font-bold border border-accent hover:bg-[#300F0A] hover:border-[#300F0A] transition-all duration-300 rounded-[2px] text-center shadow-md select-none cursor-pointer"
                 >
                   <span>START A PROJECT</span>
-                  <span className="ml-2 text-white/40 group-hover:text-accent group-hover:translate-x-1 transition-all duration-300">
+                  <span className="ml-2.5 transition-transform duration-300 group-hover:translate-x-1">
                     →
                   </span>
                 </button>
+              </Magnetic>
+
+              {/* Secondary Explore Work CTA - Less Focused, Links to Section 03 Selected Work */}
+              <Magnetic maxDisplacement={8}>
+                <Link
+                  href="#portfolio"
+                  data-cursor-text="EXPLORE"
+                  className="group relative isolate inline-flex items-center justify-center font-parkinsans text-[11px] sm:text-[12px] uppercase tracking-[0.2em] px-6 sm:px-8 py-3.5 bg-transparent text-white/80 hover:text-white border border-white/20 hover:border-accent hover:text-accent transition-all duration-300 rounded-[2px] text-center select-none"
+                >
+                  <span>SEE WHAT WE BUILD</span>
+                  <span className="ml-2 text-white/40 group-hover:text-accent group-hover:translate-y-0.5 transition-all duration-300">
+                    ↓
+                  </span>
+                </Link>
               </Magnetic>
             </div>
           </FadeUp>
@@ -127,8 +127,8 @@ export default function Hero() {
             <p className="hidden md:block max-w-sm font-parkinsans text-[9px] text-white/40 uppercase tracking-[0.15em] leading-relaxed">
               DIGITAL EXPERIENCES, INTELLIGENT TOOLS, BUSINESS SYSTEMS, AND BRAND IDENTITIES.
             </p>
-            <div className="size-7 rounded-[2px] border border-white/15 bg-white/5 flex items-center justify-center text-accent">
-              <GeratLogo variant="mark" className="size-4 text-accent" />
+            <div className="size-7 rounded-[2px] border border-white/15 bg-white/5 flex items-center justify-center text-[var(--text-primary)]">
+              <GeratLogo variant="mark" className="size-4 text-[var(--text-primary)]" />
             </div>
           </div>
         </div>
