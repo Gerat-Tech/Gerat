@@ -8,25 +8,7 @@ import SplitText from "@/components/motion/SplitText";
 import Footer from "@/components/layout/Footer";
 import { useNav } from "@/context/NavContext";
 import { brandCreativeFamily } from "@/content";
-import {
-  ArrowRight,
-  CheckCircle2,
-  ShieldCheck,
-  FileCheck,
-  Layers,
-  Sparkles,
-  Compass,
-  Eye,
-  Sliders,
-  Terminal,
-  Code2,
-  Cpu,
-  Share2,
-  Box,
-  Check,
-  Download,
-  Flame,
-} from "lucide-react";
+import { Flame, CheckCircle2, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 // =============================================================================
@@ -323,104 +305,6 @@ function MarketAuthorityConstellationSchematic() {
   );
 }
 
-// =============================================================================
-// PRODUCTION STANDARDS INSPECTOR DATA
-// =============================================================================
-const PRODUCTION_STANDARDS = [
-  {
-    id: "vector",
-    icon: FileCheck,
-    title: "VECTOR MASTER ASSETS",
-    badge: "RESOLUTION-INDEPENDENT",
-    tagline: "Infinite Scalability Across Billboard & Favicon",
-    summary:
-      "All master identities are engineered natively in vector geometry with mathematically merged anchors, zero stray vertices, and standardized color channels.",
-    formats: [".SVG", ".EPS", ".AI (NATIVE)", ".PDF (PRESS)"],
-    specs: [
-      "100% vector scalability from 16px favicon to 50ft highway billboard",
-      "Outlined typographic contours with no unlinked font dependencies",
-      "Tri-color channel calibrated (RGB, CMYK, and Spot Pantone)",
-      "Dark, light, and high-contrast monochrome variants included",
-    ],
-    path: "/01-master-vectors/[dark-mode, light-mode, monochrome]/",
-    sampleLabel: "VECTOR SPECIFICATION PREVIEW",
-    sampleCode: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- Resolution-independent contour. Welded bezier curves -->
-  <path d="M256 32 C140 160 96 280 256 480..." fill="#EA5B15" />
-</svg>`,
-  },
-  {
-    id: "tokens",
-    icon: Layers,
-    title: "DESIGN TOKEN LIBRARIES",
-    badge: "ENGINEERING-READY",
-    tagline: "Living Code Parity With Modern Frameworks",
-    summary:
-      "We export design variables directly into CSS variables, Tailwind configurations, and JSON design tokens ready for drop-in integration by engineering teams.",
-    formats: [".CSS", ".JSON", ".TS", "TAILWIND V4"],
-    specs: [
-      "Strict WCAG 2.1 AA & AAA verified contrast ratios",
-      "Major Third typographic scale with responsive clamp() sizing",
-      "Semantic color mapping (Surface, Borders, Text Levels 1-4)",
-      "Instant light/dark theme switching architecture",
-    ],
-    path: "/02-design-tokens/[css-variables.css, tokens.json, tailwind.config]/",
-    sampleLabel: "CSS TOKEN VARIABLE ARCHITECTURE",
-    sampleCode: `:root {
-  --color-brand-flame: #EA5B15;
-  --color-surface-ivory: #FAF6ED;
-  --font-artific: 'Artific', sans-serif;
-  --contrast-level: WCAG_AAA_PASS;
-}`,
-  },
-  {
-    id: "digital",
-    icon: Sparkles,
-    title: "DIGITAL APPLICATION SUITE",
-    badge: "MULTI-PLATFORM",
-    tagline: "High-DPI PWA & Social Manifest Systems",
-    summary:
-      "Pre-baked, pixel-fitted digital assets optimized for modern web browsers, mobile operating systems, and viral social media sharing cards.",
-    formats: [".ICO", ".PNG (1x/2x/3x)", ".WEBP", "PWA MANIFEST"],
-    specs: [
-      "Multi-resolution favicon.ico containing 16x16, 32x32, 48x48 bitmaps",
-      "Apple Touch icon (180x180) and Android Chrome icons (192x192 & 512x512)",
-      "High-converting OpenGraph social previews (1200x630 @ 2x)",
-      "SVG animated loader icons for web application boot sequences",
-    ],
-    path: "/03-digital-applications/[icons/, social-og/, webp-exports/]/",
-    sampleLabel: "WEB MANIFEST ASSET MAP",
-    sampleCode: `{
-  "appleTouchIcon": "apple-touch-icon.png",
-  "faviconIco": "favicon.ico [16, 32, 48px]",
-  "openGraphCard": "og-image-1200x630.webp",
-  "themeColor": "#EA5B15"
-}`,
-  },
-  {
-    id: "guidelines",
-    icon: ShieldCheck,
-    title: "BRAND GUIDELINES BIBLE",
-    badge: "OPERATIONAL GOVERNANCE",
-    tagline: "Enforceable Clarity for Teams & Agencies",
-    summary:
-      "A comprehensive, crystal-clear operational manual that protects your brand from distortion, dilution, or unauthorized visual modifications.",
-    formats: ["INTERACTIVE PDF", "WEB GUIDELINE REPO"],
-    specs: [
-      "Mathematical clear-space boundaries and minimum display sizes",
-      "Definitive typography pairing hierarchy and licensing notes",
-      "Approved and prohibited usage rules (Do's and Don'ts)",
-      "Photography art direction, lighting moods, and subject framing",
-    ],
-    path: "/04-brand-governance/Gerat-Brand-Manual-2026.pdf",
-    sampleLabel: "GOVERNANCE PROTOCOL EXCERPT",
-    sampleCode: `# GERAT BRAND GOVERNANCE SPEC §2026
-· CLEAR SPACE: Minimum 0.5X perimeter margin
-· MIN REPRODUCTION: 24px digital / 12mm print
-· FORBIDDEN: Unapproved gradients, drop-shadows, aspect skewing`,
-  },
-];
-
 const FAQ_ITEMS = [
   {
     q: "Why is a logo not a brand?",
@@ -443,11 +327,9 @@ const FAQ_ITEMS = [
 export default function BrandCreativePage() {
   const { openContact } = useNav();
   const [activeStoryIdx, setActiveStoryIdx] = useState(0);
-  const [activeStandardIdx, setActiveStandardIdx] = useState(0);
   const [activeFaq, setActiveFaq] = useState(null);
 
   const activeStory = TRANSFORMATION_STAGES[activeStoryIdx];
-  const activeStandard = PRODUCTION_STANDARDS[activeStandardIdx];
 
   return (
     <div className="bg-[var(--bg)] min-h-screen text-[var(--text-primary)] selection:bg-accent selection:text-black">
@@ -744,155 +626,6 @@ export default function BrandCreativePage() {
             </div>
           </motion.div>
         </AnimatePresence>
-      </section>
-
-      {/* =====================================================================
-          INTERACTIVE PRODUCTION STANDARDS ASSET INSPECTOR
-          ===================================================================== */}
-      <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-24 sm:py-32 border-b border-[var(--border-subtle)]">
-        <div className="flex flex-col gap-4 mb-16">
-          <SectionLabel index="04" label="PRODUCTION STANDARDS" />
-          <h2 className="font-artific text-3xl sm:text-5xl font-medium tracking-tight uppercase leading-[1.05]">
-            ZERO AMBIGUITY. <br />
-            <span className="text-accent">PRODUCTION-READY HANDOFF.</span>
-          </h2>
-          <p className="font-parkinsans text-sm sm:text-base text-[var(--text-secondary)] max-w-2xl leading-relaxed">
-            We do not deliver isolated images. Every brand identity engagement concludes with a comprehensive,
-            operationally structured asset repository configured for seamless cross-agency and in-house deployment.
-          </p>
-        </div>
-
-        {/* Standards Interactive Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left Column: 4 Selectable Standard Cards */}
-          <div className="lg:col-span-5 grid grid-cols-1 gap-3">
-            {PRODUCTION_STANDARDS.map((std, idx) => {
-              const IconComp = std.icon;
-              const isSelected = activeStandardIdx === idx;
-              return (
-                <button
-                  key={std.id}
-                  type="button"
-                  onClick={() => setActiveStandardIdx(idx)}
-                  className={`text-left p-5 rounded-[2px] border transition-all duration-300 min-h-[48px] ${
-                    isSelected
-                      ? "bg-[var(--surface-2)] border-accent shadow-sm"
-                      : "bg-[var(--surface)] border-[var(--border-subtle)] hover:border-[var(--border-medium)]"
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
-                      <IconComp className={`size-4 ${isSelected ? "text-accent" : "text-[var(--text-muted)]"}`} />
-                      <span className="font-parkinsans text-[10px] tracking-[0.2em] font-bold uppercase text-[var(--text-primary)]">
-                        {std.title}
-                      </span>
-                    </div>
-                    <span className="font-parkinsans text-[8px] tracking-[0.15em] text-accent uppercase font-bold bg-accent/10 px-2 py-0.5 rounded-[2px]">
-                      {std.badge}
-                    </span>
-                  </div>
-                  <p className="font-parkinsans text-xs text-[var(--text-secondary)] leading-relaxed">
-                    {std.tagline}
-                  </p>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Right Column: Live Standard Inspector Console */}
-          <div className="lg:col-span-7 bg-[var(--surface)] border border-[var(--border-subtle)] p-6 sm:p-8 rounded-[2px] flex flex-col justify-between">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeStandard.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.25 }}
-                className="space-y-6"
-              >
-                <div className="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-[var(--border-subtle)]">
-                  <div>
-                    <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase font-bold block mb-1">
-                      SPECIFICATION INSPECTOR
-                    </span>
-                    <h3 className="font-artific text-2xl font-medium tracking-tight uppercase text-[var(--text-primary)]">
-                      {activeStandard.title}
-                    </h3>
-                  </div>
-                  <div className="flex flex-wrap gap-1.5">
-                    {activeStandard.formats.map((fmt) => (
-                      <span
-                        key={fmt}
-                        className="font-parkinsans text-[9px] tracking-wider px-2 py-1 bg-[var(--bg-subtle)] border border-[var(--border-subtle)] rounded-[2px] font-mono text-[var(--text-secondary)]"
-                      >
-                        {fmt}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <p className="font-parkinsans text-sm text-[var(--text-secondary)] leading-relaxed">
-                  {activeStandard.summary}
-                </p>
-
-                {/* Technical Quality Checklist */}
-                <div>
-                  <span className="font-parkinsans text-[9px] tracking-[0.2em] text-[var(--text-dim)] uppercase block mb-3 font-semibold">
-                    QUALITY ASSURANCE CHECKLIST
-                  </span>
-                  <div className="space-y-2">
-                    {activeStandard.specs.map((sp) => (
-                      <div key={sp} className="flex items-center gap-2">
-                        <Check className="size-3.5 text-accent shrink-0" />
-                        <span className="font-parkinsans text-xs text-[var(--text-primary)]">
-                          {sp}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Delivery Path Structure */}
-                <div className="p-3 bg-[var(--bg-subtle)] border border-[var(--border-subtle)] rounded-[2px]">
-                  <span className="font-parkinsans text-[8px] tracking-[0.2em] text-[var(--text-dim)] uppercase block mb-1">
-                    STANDARDIZED FOLDER ARCHITECTURE
-                  </span>
-                  <code className="font-mono text-[11px] text-accent block">
-                    {activeStandard.path}
-                  </code>
-                </div>
-
-                {/* Code / Data Spec Preview */}
-                <div>
-                  <span className="font-parkinsans text-[8px] tracking-[0.2em] text-[var(--text-dim)] uppercase block mb-2">
-                    {activeStandard.sampleLabel}
-                  </span>
-                  <pre className="p-4 bg-[var(--bg)] border border-[var(--border-subtle)] rounded-[2px] font-mono text-[11px] text-[var(--text-secondary)] overflow-x-auto leading-relaxed">
-                    <code>{activeStandard.sampleCode}</code>
-                  </pre>
-                </div>
-
-                <div className="pt-4 border-t border-[var(--border-subtle)] flex items-center justify-between">
-                  <span className="font-parkinsans text-[10px] tracking-[0.15em] text-[var(--text-dim)] uppercase">
-                    DELIVERY SPEC · 100% AUDITED
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      openContact({
-                        discipline: "brand",
-                        subOption: activeStandard.title,
-                      })
-                    }
-                    className="font-parkinsans text-[10px] tracking-[0.2em] uppercase font-bold text-accent hover:text-[var(--text-primary)] transition-colors inline-flex items-center gap-1"
-                  >
-                    REQUEST ARCHITECTURE SAMPLE →
-                  </button>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
       </section>
 
       {/* FAQ Accordion Section */}
