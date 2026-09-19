@@ -278,15 +278,15 @@ export default function Navbar() {
 
       {/* Fullscreen Mobile Menu Overlay (Spec §8 Mobile) */}
       <div
-        className={`fixed inset-0 z-[110] bg-black/95 backdrop-blur-xl transition-all duration-500 ease-(--ease-primary) flex flex-col justify-between pt-24 pb-8 px-6 lg:hidden ${
+        className={`fixed inset-0 z-[110] bg-black/95 backdrop-blur-xl transition-all duration-500 ease-(--ease-primary) flex flex-col justify-between pt-24 pb-8 px-6 lg:hidden overflow-y-auto ${
           isMenuOpen
             ? "opacity-100 pointer-events-auto [clip-path:inset(0_0_0_0)]"
             : "opacity-0 pointer-events-none [clip-path:inset(0_0_100%_0)]"
         }`}
         aria-hidden={!isMenuOpen}
       >
-        <div className="flex flex-col gap-6 my-auto max-w-md w-full mx-auto">
-          <div className="mono-meta text-center text-white/40 mb-2">
+        <div className="flex flex-col gap-5 my-auto max-w-md w-full mx-auto">
+          <div className="mono-meta text-center text-white/40 mb-1">
             NAVIGATION
           </div>
 
@@ -298,7 +298,7 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className={`relative p-5 text-center font-parkinsans text-[12px] tracking-[0.2em] uppercase border transition-all duration-300 rounded-[2px] ${
+                  className={`relative p-4 text-center font-parkinsans text-[12px] tracking-[0.2em] uppercase border transition-all duration-300 rounded-[2px] ${
                     isCurrent
                       ? "border-accent text-white bg-accent/10"
                       : "border-white/15 text-white/80 hover:text-white hover:border-white/40 bg-white/[0.02]"
@@ -315,25 +315,39 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* Creative Quick Links on Mobile */}
+          {/* Core Disciplines Quick Links on Mobile */}
           <div className="flex flex-col gap-1.5 pt-1">
             <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase text-center">
-              CREATIVE & IDENTITY
+              CORE DISCIPLINES
             </span>
             <div className="grid grid-cols-2 gap-2">
+              <Link
+                href="/services/digital-experiences"
+                onClick={() => setIsMenuOpen(false)}
+                className="py-2.5 px-2 text-center font-parkinsans text-[10px] tracking-[0.1em] uppercase border border-white/10 text-white/70 hover:text-white rounded-[2px] bg-white/[0.01]"
+              >
+                DIGITAL
+              </Link>
+              <Link
+                href="/services/ai-tools"
+                onClick={() => setIsMenuOpen(false)}
+                className="py-2.5 px-2 text-center font-parkinsans text-[10px] tracking-[0.1em] uppercase border border-white/10 text-white/70 hover:text-white rounded-[2px] bg-white/[0.01]"
+              >
+                AI TOOLS
+              </Link>
+              <Link
+                href="/services/business-systems"
+                onClick={() => setIsMenuOpen(false)}
+                className="py-2.5 px-2 text-center font-parkinsans text-[10px] tracking-[0.1em] uppercase border border-white/10 text-white/70 hover:text-white rounded-[2px] bg-white/[0.01]"
+              >
+                SYSTEMS
+              </Link>
               <Link
                 href="/services/brand-creative"
                 onClick={() => setIsMenuOpen(false)}
                 className="py-2.5 px-2 text-center font-parkinsans text-[10px] tracking-[0.1em] uppercase border border-white/10 text-white/70 hover:text-white rounded-[2px] bg-white/[0.01]"
               >
                 BRAND & LOGO
-              </Link>
-              <Link
-                href="/services/personal-branding"
-                onClick={() => setIsMenuOpen(false)}
-                className="py-2.5 px-2 text-center font-parkinsans text-[10px] tracking-[0.1em] uppercase border border-white/10 text-white/70 hover:text-white rounded-[2px] bg-white/[0.01]"
-              >
-                FOUNDER BRAND
               </Link>
             </div>
           </div>
