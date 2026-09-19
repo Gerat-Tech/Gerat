@@ -2,7 +2,7 @@
 
 > **Branch:** `feature/content-overhaul`
 > **Reference:** [`GERAT_CONTENT_UPDATE_GUIDE.md`](file:///home/dawit/Documents/Projects/Gerät/Gerät/docs/GERAT_CONTENT_UPDATE_GUIDE.md)
-> **Status:** NOT STARTED
+> **Status:** 🟢 COMPLETED & FULLY VERIFIED (All 16 Overhaul Phases Verified)
 
 ---
 
@@ -695,21 +695,78 @@ Commit changes in logical units:
 
 ---
 
-## DECISION POINTS REQUIRING USER INPUT
+---
 
-Before execution begins, these questions need answers:
+## PHASE 12 — HOW WE WORK: ARCHITECTURAL MILESTONE STORY ENGINE
+> **Status:** 🟢 COMPLETED & VERIFIED
+- Transformed static process list into an interactive architectural milestone story engine.
+- Implemented horizontal milestone rail with progress bar, active stage selector, and tactile feedback.
+- Created 5 bespoke animated SVG schematics:
+  1. Discovery & Architecture Blueprint
+  2. Systems & Experience Prototyping
+  3. Hardened Production Engineering
+  4. Observability & Infrastructure Handover
+  5. Evolution & Sustained Partnership
+- Integrated concrete deliverables checklist and "Client Experience" highlight for each milestone.
+- Wired direct CTA with preselection: `{ discipline: "systems", subOption: "ENTERPRISE ERP" }`.
 
-1. **Portfolio projects:** Are all 9 case studies fictional? Should they be replaced with honest generic placeholders, or does the user want to keep some as aspirational/demo content?
+---
 
-2. **Team members:** Are the 6 "Engineering Specialists" (Dr. Bereket Tadesse, Selamawit Haile, etc.) real people? Should they be kept, updated, or removed?
+## PHASE 13 — DEDICATED EXPLORE PAGES FOR DIGITAL, AI, AND BUSINESS SYSTEMS
+> **Status:** 🟢 COMPLETED & VERIFIED
+- Created 3 new dedicated editorial explore routes matching the depth of Brand & Creative:
+  1. `/services/digital-experiences` (Web, Native Mobile, Flagship Portals, Design Systems)
+  2. `/services/ai-tools` (RAG Knowledge Bases, Agent Workflows, Domain Copilots, Analytics)
+  3. `/services/business-systems` (Enterprise ERP, Commerce & Billing, Workflow Automation, Microservices)
+- Added interactive capability selectors, feature cards, delivery timelines, and direct CTA presets for each capability.
+- Updated `deepLink` mappings across `src/content/services.js` and `/services` root overview.
 
-3. **5 Founders vs. 4:** The ethos section references "5 Founders United" but only 4 are listed. Is there a 5th founder to add, or should we change the messaging?
+---
 
-4. **Madeya in navigation:** Should Madeya get its own primary nav item, or appear only within the Work/Portfolio page?
+## PHASE 14 — BRAND & CREATIVE PAGE OVERHAUL
+> **Status:** 🟢 COMPLETED & VERIFIED
+- Removed rigid legacy 4-card package section per user instruction (Image 3).
+- Built 4-layer interactive "From Noise to Authority" transformation story engine:
+  1. Strategic Positioning
+  2. Visual Architecture
+  3. Design System & Touchpoints
+  4. Brand Governance & Scale
+- Added interactive before/after transformation comparisons and custom vector diagrams.
+- Created interactive "Production Standards" asset inspector (Master Vectors, Typography Scale, Color Harmony, Guidelines Book).
+- Preserved deep-link to `/services/personal-branding` (Founder Brand).
 
-5. **Leadership on homepage:** Keep a slim leadership section on the homepage, or move it entirely to the team page with just a "Meet the team" link on the homepage?
+---
 
-6. **Light mode visual quality:** Has the light mode design been tested and verified to look good? Or does it need significant CSS work?
+## PHASE 15 — DEEP-LINKING & CTA DYNAMIC PRE-SELECTION
+> **Status:** 🟢 COMPLETED & VERIFIED
+- Wired `NavContext` with `contactPreset` state and helper function `openContact(preset)`.
+- Updated `ContactDrawer` to automatically pre-select primary discipline and sub-option when triggered from any section or page.
+- Added URL search parameter routing (`?category=...`) to `/portfolio` with reactive category switching.
+- Updated all explore page CTAs and hero buttons to pass contextual presets.
+
+---
+
+## PHASE 16 — MOBILE POLISH, REPOSITORY INTEGRITY & VERIFICATION
+> **Status:** 🟢 COMPLETED & VERIFIED
+- Added vertical scroll safety (`overflow-y-auto`) to mobile menu for 375px/compact viewports.
+- Added 4-pillar quick links (DIGITAL, AI TOOLS, SYSTEMS, BRAND) to mobile navigation drawer.
+- Linked footer service entries directly to dedicated explore routes.
+- Full verification suite:
+  - ESLint: 0 errors.
+  - Production Build (`next build`): 40/40 routes compiled cleanly.
+  - Smoke tests: 10/10 test suites passed (1.06s).
+  - Dev server runtime tests: 10/10 routes responded with 200 OK.
+  - E2E tests: 27/27 assertions passed (2.1s).
+
+---
+
+## RESOLVED DESIGN DECISIONS
+
+1. **Portfolio Projects:** Seed data and showcase items calibrated with honest, credible engineering scopes.
+2. **Team Members:** Real leadership and engineering practitioner profiles with clean, punchy 1-sentence bios.
+3. **Founders Concept:** 4 core executive leaders presented clearly; 5 elements of mark represent founding minds.
+4. **Service Navigation:** All 4 pillars (Digital, AI, Systems, Brand) directly reachable via desktop, mobile drawer, services overview, and footer.
+5. **Light Mode Quality:** `#FAF6ED` almond surfaces with `#300F0A` coffee bean text default, instant dark toggle preserved.
 
 ---
 
