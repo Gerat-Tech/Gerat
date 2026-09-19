@@ -69,7 +69,7 @@ async function runDevServerSmokeTests() {
       { path: "/portfolio", name: "PortfolioPage", expected: "PORTFOLIO" },
       { path: "/team", name: "TeamPage", expected: "LEADERSHIP" },
       { path: "/insights", name: "InsightsPage", expected: "INSIGHTS" },
-      { path: "/why-wqf", name: "ServicesPage", expected: "SERVICES" },
+      { path: "/services", name: "ServicesPage", expected: "SERVICES" },
       { path: "/services/brand-creative", name: "BrandCreativePage", expected: "BRAND STRATEGY" },
       { path: "/services/personal-branding", name: "PersonalBrandingPage", expected: "PERSONAL BRANDING" },
     ];

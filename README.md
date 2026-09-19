@@ -1,15 +1,15 @@
-# GERAT SOFTWARE SOLUTIONS PLC // WEB PLATFORM & MISSION CONTROL
+# GERAT SOFTWARE SOLUTION // WEB PLATFORM & MISSION CONTROL
 
 > **Engineering Standard:** Deep-Tech Enterprise Software, Distributed Systems & Monolithic Visual Identity  
 > **Tagline:** *"From Identity to Infrastructure"*  
-> **Production Domain:** [https://gerat.et](https://gerat.et)  
-> **Operations Terminal:** [https://gerat.et/dashboard](https://gerat.et/dashboard)
+> **Production Domain:** [https://www.gerat.com](https://www.gerat.com)  
+> **Operations Terminal:** [https://www.gerat.com/dashboard](https://www.gerat.com/dashboard)
 
 ---
 
 ## 1. Executive Summary
 
-**Gerat Software Solutions PLC** builds mission-critical digital systems for enterprises, financial institutions, and public-sector operations — spanning high-concurrency architectures, localized AI/RAG knowledge networks, custom ERP platforms, and monolithic visual identity systems.
+**Gerat Software Solution** builds mission-critical digital systems for enterprises, financial institutions, and public-sector operations — spanning high-concurrency architectures, localized AI/RAG knowledge networks, custom ERP platforms, and monolithic visual identity systems.
 
 This repository contains the complete unified web platform:
 1. **Public Brand & Technical Experience:** An editorial, high-density web application built with Next.js 16, Tailwind CSS 4, Framer Motion 12, and GSAP 3.
@@ -22,11 +22,11 @@ This repository contains the complete unified web platform:
 | Layer | Technologies | Description |
 | :--- | :--- | :--- |
 | **Framework** | Next.js 16 (App Router + Turbopack) | Server Components, dynamic streaming, and server actions |
-| **Styling** | Tailwind CSS 4 | Custom design tokens, architectural grid layout, dark canvas (`#080808`) |
+| **Styling** | Tailwind CSS 4 | Custom design tokens, architectural grid layout, dark canvas (`#0D0706`), Flame accent (`#EA5B15`) |
 | **Database & ORM** | Prisma ORM 6 + SQLite / PostgreSQL | Relational data integrity, schema migrations, and type-safe client |
 | **Authentication & RBAC** | Stateless JWT (`jose`) + `bcryptjs` | Role-Based Access Control: Super Admin, Ops Lead, Tech Editor, Creative Editor |
 | **Motion & Visuals** | GSAP 3 (ScrollTrigger) + Framer Motion 12 | Precision easing, scroll parallax, and micro-interaction choreography |
-| **Typography** | Roc Grotesk + Azeret Mono | Editorial uppercase grotesque paired with monospaced technical telemetry |
+| **Typography** | Artific + Parkinsans | Artific display grotesque paired with Parkinsans technical and editorial body |
 | **Package Manager** | `pnpm` | Fast, deterministic dependency management |
 
 ---

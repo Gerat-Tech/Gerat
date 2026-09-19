@@ -26,30 +26,30 @@ const EMAIL_TEMPLATES = [
   {
     id: "discovery",
     name: "Discovery Architecture Consultation Invite",
-    subject: (inq) => `Gerät Architecture // Technical Discovery Consultation [${inq.telemetryCode}]`,
+    subject: (inq) => `Gerat Architecture · Technical Discovery Consultation [${inq.telemetryCode}]`,
     body: (inq) =>
-      `Dear ${inq.fullName},\n\nThank you for initiating contact with Gerät regarding your ${inq.discipline} inquiry (${inq.telemetryCode}).\n\nOur engineering architecture team has performed a preliminary review of your brief:\n"${inq.projectBrief}"\n\nWe would like to invite you to an exploratory technical discovery session (30-45 minutes) to map system boundaries, data contracts, and architectural feasibility.\n\nPlease let us know your availability over the coming 48-72 hours, or select an operational slot directly.\n\nWarm regards,\n\nGerät Architecture & Client Services\nAddis Ababa // info@gerat.et`,
+      `Dear ${inq.fullName},\n\nThank you for initiating contact with Gerat regarding your ${inq.discipline} inquiry (${inq.telemetryCode}).\n\nOur engineering architecture team has performed a preliminary review of your brief:\n"${inq.projectBrief}"\n\nWe would like to invite you to an exploratory technical discovery session (30-45 minutes) to map system boundaries, data contracts, and architectural feasibility.\n\nPlease let us know your availability over the coming 48-72 hours, or select an operational slot directly.\n\nWarm regards,\n\nGerat Architecture & Client Services\nAddis Ababa · info@gerat.com`,
   },
   {
     id: "brand_scoping",
     name: "Brand & Identity Scoping Questionnaire",
-    subject: (inq) => `Gerät Brand Architecture // Scoping Questionnaire [${inq.telemetryCode}]`,
+    subject: (inq) => `Gerat Brand Architecture · Scoping Questionnaire [${inq.telemetryCode}]`,
     body: (inq) =>
-      `Dear ${inq.fullName},\n\nThank you for reaching out to Gerät regarding Brand Architecture & Identity (${inq.telemetryCode}).\n\nTo construct a high-fidelity visual and strategic system for ${inq.company || inq.fullName}, our design directors need to clarify several foundational vectors:\n1. Core brand pillars and market differentiation.\n2. Target demographics and primary enterprise touchpoints.\n3. Existing design debt vs. greenfield identity creation.\n\nCould you review the attached brief checklist or let us know when you have 20 minutes for a brief scoping call?\n\nSincerely,\n\nGerät Creative Direction\nAddis Ababa // brand@gerat.et`,
+      `Dear ${inq.fullName},\n\nThank you for reaching out to Gerat regarding Brand Architecture & Identity (${inq.telemetryCode}).\n\nTo construct a high-fidelity visual and strategic system for ${inq.company || inq.fullName}, our design directors need to clarify several foundational vectors:\n1. Core brand pillars and market differentiation.\n2. Target demographics and primary enterprise touchpoints.\n3. Existing design debt vs. greenfield identity creation.\n\nCould you review the attached brief checklist or let us know when you have 20 minutes for a brief scoping call?\n\nSincerely,\n\nGerat Creative Direction\nAddis Ababa · brand@gerat.com`,
   },
   {
     id: "nda_scope",
     name: "Non-Disclosure Agreement (NDA) & Scope Review",
-    subject: (inq) => `Gerät Software // Mutual NDA & Architectural Scope [${inq.telemetryCode}]`,
+    subject: (inq) => `Gerat Software · Mutual NDA & Architectural Scope [${inq.telemetryCode}]`,
     body: (inq) =>
-      `Dear ${inq.fullName},\n\nIn accordance with Gerät standard operating protocol for proprietary enterprise engagements, we have generated a mutual Non-Disclosure Agreement (NDA) for your review prior to deep architectural dissection.\n\nReference: ${inq.telemetryCode}\nOrganization: ${inq.company || "Direct Engagement"}\nDiscipline: ${inq.discipline}\n\nPlease countersign and return the attached document at your earliest convenience so we may review your proprietary requirements in depth.\n\nBest regards,\n\nGerät Legal & Client Operations\nlegal@gerat.et`,
+      `Dear ${inq.fullName},\n\nIn accordance with Gerat standard operating protocol for proprietary enterprise engagements, we have generated a mutual Non-Disclosure Agreement (NDA) for your review prior to deep architectural dissection.\n\nReference: ${inq.telemetryCode}\nOrganization: ${inq.company || "Direct Engagement"}\nDiscipline: ${inq.discipline}\n\nPlease countersign and return the attached document at your earliest convenience so we may review your proprietary requirements in depth.\n\nBest regards,\n\nGerat Legal & Client Operations\nlegal@gerat.com`,
   },
   {
     id: "capacity_timeline",
     name: "Capacity & Timeline Clarification",
-    subject: (inq) => `Gerät Engineering // Pipeline Capacity & Delivery Windows [${inq.telemetryCode}]`,
+    subject: (inq) => `Gerat Engineering · Pipeline Capacity & Delivery Windows [${inq.telemetryCode}]`,
     body: (inq) =>
-      `Dear ${inq.fullName},\n\nWe are currently calibrating our engineering sprint allocations for the upcoming quarter.\n\nRegarding your requested timeline (${inq.timeline}) and budget allocation (${inq.budgetRange}):\nOur lead architect would like to align on critical path milestones and staging expectations to ensure dedicated engineering velocity.\n\nAre you available for a brief 15-minute alignment call today or tomorrow?\n\nRespectfully,\n\nGerät Operations Office\nops@gerat.et`,
+      `Dear ${inq.fullName},\n\nWe are currently calibrating our engineering sprint allocations for the upcoming quarter.\n\nRegarding your requested timeline (${inq.timeline}) and budget allocation (${inq.budgetRange}):\nOur lead architect would like to align on critical path milestones and staging expectations to ensure dedicated engineering velocity.\n\nAre you available for a brief 15-minute alignment call today or tomorrow?\n\nRespectfully,\n\nGerat Operations Office\nops@gerat.com`,
   },
 ];
 
@@ -82,7 +82,7 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
   const cleanPhone = rawPhone.replace(/[^0-9]/g, "");
   const whatsappUrl = cleanPhone
     ? `https://wa.me/${cleanPhone}?text=${encodeURIComponent(
-        `Hello ${inquiry.fullName}, this is Gerät Software Solutions following up on your inquiry (${inquiry.telemetryCode}).`
+        `Hello ${inquiry.fullName}, this is Gerat Software Solution following up on your inquiry (${inquiry.telemetryCode}).`
       )}`
     : "#";
 
@@ -216,23 +216,23 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
           <div className="flex items-center gap-2 mb-1">
             <Link
               href="/dashboard/inquiries"
-              className="font-azeret text-[10px] tracking-[0.15em] text-white/50 hover:text-white transition-colors"
+              className="font-parkinsans text-[10px] tracking-[0.15em] text-white/50 hover:text-white transition-colors"
             >
               ← INTAKE PIPELINE
             </Link>
             <span className="text-white/20">/</span>
-            <span className="font-azeret text-[10px] tracking-[0.15em] text-accent uppercase font-bold">
+            <span className="font-parkinsans text-[10px] tracking-[0.15em] text-accent uppercase font-bold">
               {inquiry.telemetryCode}
             </span>
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="font-roc text-2xl sm:text-3xl font-bold uppercase text-white tracking-tight">
+            <h1 className="font-artific text-2xl sm:text-3xl font-bold uppercase text-white tracking-tight">
               {inquiry.fullName}
             </h1>
             {inquiry.company && (
-              <span className="font-azeret text-xs text-white/60 tracking-wider">
-                {"// "} {inquiry.company}
+              <span className="font-parkinsans text-xs text-white/60 tracking-wider">
+                {"· "} {inquiry.company}
               </span>
             )}
             <StatusBadge status={inquiry.status} />
@@ -247,7 +247,7 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3 py-2 bg-emerald-950/40 hover:bg-emerald-900/60 border border-emerald-500/40 text-emerald-400 font-azeret text-[10px] tracking-[0.15em] uppercase rounded-[2px] transition-colors flex items-center gap-1.5"
+              className="px-3 py-2 bg-emerald-950/40 hover:bg-emerald-900/60 border border-emerald-500/40 text-emerald-400 font-parkinsans text-[10px] tracking-[0.15em] uppercase rounded-[2px] transition-colors flex items-center gap-1.5"
             >
               <svg className="size-3.5 fill-current" viewBox="0 0 24 24">
                 <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.303c-.087.087-.179.181-.077.355.101.173.45 0.742 0.965 1.202.663.591 1.221.774 1.394.861.173.087.275.072.376-.043.101-.116.433-.506.549-.679.116-.173.231-.145.39-.087s1.011.477 1.184.564c.173.087.289.13.332.202.043.072.043.419-.101.824z" />
@@ -259,7 +259,7 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
           {inquiry.phone && (
             <a
               href={`tel:${inquiry.phone}`}
-              className="px-3 py-2 bg-blue-950/40 hover:bg-blue-900/60 border border-blue-500/40 text-blue-400 font-azeret text-[10px] tracking-[0.15em] uppercase rounded-[2px] transition-colors flex items-center gap-1.5"
+              className="px-3 py-2 bg-blue-950/40 hover:bg-blue-900/60 border border-blue-500/40 text-blue-400 font-parkinsans text-[10px] tracking-[0.15em] uppercase rounded-[2px] transition-colors flex items-center gap-1.5"
             >
               <svg className="size-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
@@ -276,7 +276,7 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
           <button
             type="button"
             onClick={() => setActiveTab("emails")}
-            className="px-3 py-2 bg-white/[0.05] hover:bg-white/10 border border-white/15 text-white/80 font-azeret text-[10px] tracking-[0.15em] uppercase rounded-[2px] transition-colors flex items-center gap-1.5"
+            className="px-3 py-2 bg-white/[0.05] hover:bg-white/10 border border-white/15 text-white/80 font-parkinsans text-[10px] tracking-[0.15em] uppercase rounded-[2px] transition-colors flex items-center gap-1.5"
           >
             <svg className="size-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
@@ -296,14 +296,14 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
         <div className="flex flex-wrap items-center gap-4">
           {/* Status Select */}
           <div className="flex items-center gap-2">
-            <span className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
+            <span className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
               STATUS:
             </span>
             <select
               value={inquiry.status}
               disabled={isUpdating}
               onChange={(e) => handleUpdate({ status: e.target.value })}
-              className="bg-black/60 border border-white/20 text-white font-azeret text-xs py-1.5 px-3 rounded-[2px] focus:border-accent outline-none"
+              className="bg-black/60 border border-white/20 text-white font-parkinsans text-xs py-1.5 px-3 rounded-[2px] focus:border-accent outline-none"
             >
               {STAGES.map((s) => (
                 <option key={s.key} value={s.key}>
@@ -315,14 +315,14 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
 
           {/* Priority Select */}
           <div className="flex items-center gap-2">
-            <span className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
+            <span className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
               PRIORITY:
             </span>
             <select
               value={inquiry.priority}
               disabled={isUpdating}
               onChange={(e) => handleUpdate({ priority: e.target.value })}
-              className="bg-black/60 border border-white/20 text-white font-azeret text-xs py-1.5 px-3 rounded-[2px] focus:border-accent outline-none"
+              className="bg-black/60 border border-white/20 text-white font-parkinsans text-xs py-1.5 px-3 rounded-[2px] focus:border-accent outline-none"
             >
               {PRIORITIES.map((p) => (
                 <option key={p.key} value={p.key}>
@@ -334,14 +334,14 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
 
           {/* Assigned Lead Select */}
           <div className="flex items-center gap-2">
-            <span className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
+            <span className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
               ASSIGNED:
             </span>
             <select
               value={inquiry.assignedToId || ""}
               disabled={isUpdating}
               onChange={(e) => handleUpdate({ assignedToId: e.target.value || null })}
-              className="bg-black/60 border border-white/20 text-white font-azeret text-xs py-1.5 px-3 rounded-[2px] focus:border-accent outline-none"
+              className="bg-black/60 border border-white/20 text-white font-parkinsans text-xs py-1.5 px-3 rounded-[2px] focus:border-accent outline-none"
             >
               <option value="">UNASSIGNED</option>
               {teamMembers.map((tm) => (
@@ -353,13 +353,13 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
           </div>
         </div>
 
-        <div className="font-azeret text-[9px] tracking-[0.15em] text-white/40 uppercase">
+        <div className="font-parkinsans text-[9px] tracking-[0.15em] text-white/40 uppercase">
           INTAKE: {new Date(inquiry.createdAt).toLocaleString()}
         </div>
       </section>
 
       {/* Navigation Tabs */}
-      <div className="flex border-b border-white/10 gap-2 font-azeret text-[10px] tracking-[0.15em] uppercase">
+      <div className="flex border-b border-white/10 gap-2 font-parkinsans text-[10px] tracking-[0.15em] uppercase">
         <button
           type="button"
           onClick={() => setActiveTab("overview")}
@@ -414,13 +414,13 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
             {/* Project Brief Section */}
             <div className="bg-[#121212] border border-white/10 p-6 rounded-[3px] flex flex-col gap-4">
               <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                <span className="font-azeret text-[10px] tracking-[0.2em] text-accent uppercase font-bold">
+                <span className="font-parkinsans text-[10px] tracking-[0.2em] text-accent uppercase font-bold">
                   PROJECT BRIEF & ARCHITECTURAL INTENT
                 </span>
                 <button
                   type="button"
                   onClick={() => navigator.clipboard.writeText(inquiry.projectBrief)}
-                  className="font-azeret text-[9px] tracking-[0.15em] text-white/40 hover:text-white uppercase transition-colors"
+                  className="font-parkinsans text-[9px] tracking-[0.15em] text-white/40 hover:text-white uppercase transition-colors"
                 >
                   COPY BRIEF
                 </button>
@@ -433,28 +433,28 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
             {/* Scope & Parameters Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div className="bg-[#121212] border border-white/10 p-4 rounded-[3px]">
-                <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
+                <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
                   DISCIPLINE
                 </div>
-                <div className="font-roc text-lg font-bold text-white mt-1 uppercase">
+                <div className="font-artific text-lg font-bold text-white mt-1 uppercase">
                   {inquiry.discipline}
                 </div>
               </div>
 
               <div className="bg-[#121212] border border-white/10 p-4 rounded-[3px]">
-                <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
+                <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
                   BUDGET ALLOCATION
                 </div>
-                <div className="font-roc text-lg font-bold text-accent mt-1 uppercase">
+                <div className="font-artific text-lg font-bold text-accent mt-1 uppercase">
                   {inquiry.budgetRange}
                 </div>
               </div>
 
               <div className="bg-[#121212] border border-white/10 p-4 rounded-[3px]">
-                <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
+                <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
                   TARGET TIMELINE
                 </div>
-                <div className="font-roc text-lg font-bold text-white mt-1 uppercase">
+                <div className="font-artific text-lg font-bold text-white mt-1 uppercase">
                   {inquiry.timeline}
                 </div>
               </div>
@@ -463,14 +463,14 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
             {/* Sub-services Tags */}
             {subServicesList.length > 0 && (
               <div className="bg-[#121212] border border-white/10 p-4 rounded-[3px]">
-                <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase mb-2">
+                <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase mb-2">
                   SELECTED SUB-SERVICES & DELIVERABLES
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {subServicesList.map((svc, idx) => (
                     <span
                       key={idx}
-                      className="font-azeret text-[10px] tracking-[0.1em] px-2.5 py-1 bg-white/[0.04] border border-white/15 text-white/80 rounded-[2px]"
+                      className="font-parkinsans text-[10px] tracking-[0.1em] px-2.5 py-1 bg-white/[0.04] border border-white/15 text-white/80 rounded-[2px]"
                     >
                       {svc}
                     </span>
@@ -482,13 +482,13 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
             {/* Structured Questionnaire Answers (Metadata) */}
             {parsedMetadata && Object.keys(parsedMetadata).length > 0 && (
               <div className="bg-[#121212] border border-white/10 p-6 rounded-[3px]">
-                <div className="font-azeret text-[10px] tracking-[0.2em] text-white/40 uppercase mb-4 border-b border-white/10 pb-2">
+                <div className="font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase mb-4 border-b border-white/10 pb-2">
                   INTAKE QUESTIONNAIRE RESPONSES
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {Object.entries(parsedMetadata).map(([key, val]) => (
                     <div key={key} className="p-3 bg-black/40 border border-white/5 rounded-[2px]">
-                      <div className="font-azeret text-[9px] tracking-[0.15em] text-white/40 uppercase">
+                      <div className="font-parkinsans text-[9px] tracking-[0.15em] text-white/40 uppercase">
                         {key.replace(/([A-Z])/g, " $1").trim()}
                       </div>
                       <div className="font-sans text-xs text-white mt-1">
@@ -505,11 +505,11 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
           <div className="flex flex-col gap-6">
             {/* Contact Details Card */}
             <div className="bg-[#121212] border border-white/10 p-6 rounded-[3px] flex flex-col gap-4">
-              <span className="font-azeret text-[10px] tracking-[0.2em] text-white/40 uppercase border-b border-white/10 pb-2">
+              <span className="font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase border-b border-white/10 pb-2">
                 CLIENT CONTACT VECTORS
               </span>
 
-              <div className="space-y-3 font-azeret text-xs">
+              <div className="space-y-3 font-parkinsans text-xs">
                 <div>
                   <div className="text-[9px] tracking-[0.15em] text-white/40 uppercase">
                     FULL NAME
@@ -557,7 +557,7 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
             </div>
 
             {/* Telemetry Tracking Card */}
-            <div className="bg-[#121212] border border-white/10 p-6 rounded-[3px] flex flex-col gap-3 font-azeret text-xs">
+            <div className="bg-[#121212] border border-white/10 p-6 rounded-[3px] flex flex-col gap-3 font-parkinsans text-xs">
               <span className="text-[10px] tracking-[0.2em] text-white/40 uppercase border-b border-white/10 pb-2">
                 INTAKE TELEMETRY
               </span>
@@ -595,7 +595,7 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Left Col: Template Selector */}
           <div className="flex flex-col gap-3">
-            <span className="font-azeret text-[10px] tracking-[0.2em] text-white/40 uppercase">
+            <span className="font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
               SELECT ARCHITECTURAL TEMPLATE
             </span>
 
@@ -610,16 +610,16 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
                     : "bg-[#121212] border-white/10 hover:border-white/20"
                 }`}
               >
-                <div className="font-roc text-sm font-bold text-white uppercase">
+                <div className="font-artific text-sm font-bold text-white uppercase">
                   {tmpl.name}
                 </div>
-                <div className="font-azeret text-[9px] tracking-[0.1em] text-white/40">
+                <div className="font-parkinsans text-[9px] tracking-[0.1em] text-white/40">
                   Click to populate client variables
                 </div>
               </button>
             ))}
 
-            <div className="p-4 bg-[#121212] border border-white/10 rounded-[3px] font-azeret text-[10px] text-white/60 leading-relaxed">
+            <div className="p-4 bg-[#121212] border border-white/10 rounded-[3px] font-parkinsans text-[10px] text-white/60 leading-relaxed">
               <span className="text-accent font-bold">INFO:</span> Templates inject client name,
               discipline, and telemetry codes automatically. You can edit the text before sending or
               copying.
@@ -629,16 +629,16 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
           {/* Right 2 Cols: Email Workspace */}
           <div className="lg:col-span-2 bg-[#121212] border border-white/10 p-6 rounded-[3px] flex flex-col gap-4">
             <div className="flex items-center justify-between border-b border-white/10 pb-3">
-              <span className="font-azeret text-[10px] tracking-[0.2em] text-accent uppercase font-bold">
+              <span className="font-parkinsans text-[10px] tracking-[0.2em] text-accent uppercase font-bold">
                 COMMUNICATION DISPATCH WORKSPACE
               </span>
-              <span className="font-azeret text-[10px] text-white/40">
+              <span className="font-parkinsans text-[10px] text-white/40">
                 RECIPIENT: {inquiry.email}
               </span>
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="font-azeret text-[9px] tracking-[0.15em] text-white/40 uppercase">
+              <label className="font-parkinsans text-[9px] tracking-[0.15em] text-white/40 uppercase">
                 SUBJECT LINE:
               </label>
               <input
@@ -650,7 +650,7 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="font-azeret text-[9px] tracking-[0.15em] text-white/40 uppercase">
+              <label className="font-parkinsans text-[9px] tracking-[0.15em] text-white/40 uppercase">
                 MESSAGE BODY:
               </label>
               <textarea
@@ -666,7 +666,7 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
               <button
                 type="button"
                 onClick={handleCopyEmail}
-                className="px-4 py-2 bg-white/[0.05] hover:bg-white/10 border border-white/15 text-white font-azeret text-[10px] tracking-[0.15em] uppercase rounded-[2px] transition-colors"
+                className="px-4 py-2 bg-white/[0.05] hover:bg-white/10 border border-white/15 text-white font-parkinsans text-[10px] tracking-[0.15em] uppercase rounded-[2px] transition-colors"
               >
                 {copiedEmail ? "COPIED TO CLIPBOARD ✓" : "COPY TO CLIPBOARD"}
               </button>
@@ -676,7 +676,7 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
                   href={`mailto:${inquiry.email}?subject=${encodeURIComponent(
                     emailSubject
                   )}&body=${encodeURIComponent(emailBody)}`}
-                  className="px-4 py-2 bg-accent hover:bg-[#ff5c1a] text-black font-azeret text-[10px] tracking-[0.15em] font-bold uppercase rounded-[2px] transition-colors"
+                  className="px-4 py-2 bg-accent hover:bg-[#ff5c1a] text-black font-parkinsans text-[10px] tracking-[0.15em] font-bold uppercase rounded-[2px] transition-colors"
                 >
                   LAUNCH IN MAIL CLIENT ↗
                 </a>
@@ -691,7 +691,7 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Note Input Form */}
           <div className="bg-[#121212] border border-white/10 p-6 rounded-[3px] flex flex-col gap-4">
-            <span className="font-azeret text-[10px] tracking-[0.2em] text-accent uppercase font-bold border-b border-white/10 pb-2">
+            <span className="font-parkinsans text-[10px] tracking-[0.2em] text-accent uppercase font-bold border-b border-white/10 pb-2">
               LOG INTERNAL NOTE
             </span>
 
@@ -705,7 +705,7 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
                 className="w-full bg-black/60 border border-white/15 p-3 text-white font-sans text-xs rounded-[2px] focus:border-accent outline-none resize-none"
               />
 
-              <label className="flex items-center gap-2 font-azeret text-[10px] tracking-[0.1em] text-white/70 uppercase cursor-pointer">
+              <label className="flex items-center gap-2 font-parkinsans text-[10px] tracking-[0.1em] text-white/70 uppercase cursor-pointer">
                 <input
                   type="checkbox"
                   checked={isPinned}
@@ -718,7 +718,7 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
               <button
                 type="submit"
                 disabled={isSubmittingNote || !noteContent.trim()}
-                className="w-full py-2 bg-white/[0.08] hover:bg-white/15 border border-white/20 text-white font-azeret text-[10px] tracking-[0.15em] uppercase font-bold rounded-[2px] transition-colors disabled:opacity-40"
+                className="w-full py-2 bg-white/[0.08] hover:bg-white/15 border border-white/20 text-white font-parkinsans text-[10px] tracking-[0.15em] uppercase font-bold rounded-[2px] transition-colors disabled:opacity-40"
               >
                 {isSubmittingNote ? "COMMITTING..." : "+ ADD NOTE"}
               </button>
@@ -727,7 +727,7 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
 
           {/* Notes List */}
           <div className="lg:col-span-2 flex flex-col gap-3">
-            <span className="font-azeret text-[10px] tracking-[0.2em] text-white/40 uppercase">
+            <span className="font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
               THREAD HISTORY ({inquiry.notes?.length || 0})
             </span>
 
@@ -741,10 +741,10 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
                       : "bg-[#121212] border-white/10"
                   }`}
                 >
-                  <div className="flex items-center justify-between gap-2 mb-2 font-azeret text-[9px] tracking-[0.15em] text-white/40 uppercase">
+                  <div className="flex items-center justify-between gap-2 mb-2 font-parkinsans text-[9px] tracking-[0.15em] text-white/40 uppercase">
                     <div className="flex items-center gap-2">
                       <span className="text-white font-bold">{note.author?.name || "Architect"}</span>
-                      {note.author?.role && <span>{"// "} {note.author.role}</span>}
+                      {note.author?.role && <span>{"· "} {note.author.role}</span>}
                       {note.isPinned && (
                         <span className="px-1.5 py-0.5 bg-accent/20 text-accent font-bold rounded-[2px]">
                           PINNED
@@ -760,7 +760,7 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
                 </div>
               ))
             ) : (
-              <div className="p-8 bg-[#121212] border border-white/10 rounded-[3px] text-center font-azeret text-[10px] tracking-[0.2em] text-white/40 uppercase">
+              <div className="p-8 bg-[#121212] border border-white/10 rounded-[3px] text-center font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
                 NO INTERNAL NOTES LOGGED YET
               </div>
             )}
@@ -773,11 +773,11 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Log Communication Form */}
           <div className="bg-[#121212] border border-white/10 p-6 rounded-[3px] flex flex-col gap-4">
-            <span className="font-azeret text-[10px] tracking-[0.2em] text-accent uppercase font-bold border-b border-white/10 pb-2">
+            <span className="font-parkinsans text-[10px] tracking-[0.2em] text-accent uppercase font-bold border-b border-white/10 pb-2">
               LOG CLIENT TOUCHPOINT
             </span>
 
-            <form onSubmit={handleLogComm} className="flex flex-col gap-4 font-azeret text-xs">
+            <form onSubmit={handleLogComm} className="flex flex-col gap-4 font-parkinsans text-xs">
               <div className="flex flex-col gap-1.5">
                 <label className="text-[9px] tracking-[0.15em] text-white/40 uppercase">
                   CHANNEL:
@@ -838,7 +838,7 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
               <button
                 type="submit"
                 disabled={isSubmittingComm || !commSummary.trim()}
-                className="w-full py-2 bg-accent hover:bg-[#ff5c1a] text-black font-azeret text-[10px] tracking-[0.15em] uppercase font-bold rounded-[2px] transition-colors disabled:opacity-40 mt-2"
+                className="w-full py-2 bg-accent hover:bg-[#ff5c1a] text-black font-parkinsans text-[10px] tracking-[0.15em] uppercase font-bold rounded-[2px] transition-colors disabled:opacity-40 mt-2"
               >
                 {isSubmittingComm ? "RECORDING..." : "RECORD TOUCHPOINT"}
               </button>
@@ -847,7 +847,7 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
 
           {/* Communications Timeline */}
           <div className="lg:col-span-2 flex flex-col gap-3">
-            <span className="font-azeret text-[10px] tracking-[0.2em] text-white/40 uppercase">
+            <span className="font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
               INTERACTION LOG ({inquiry.communications?.length || 0})
             </span>
 
@@ -857,7 +857,7 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
                   key={c.id}
                   className="p-4 bg-[#121212] border border-white/10 rounded-[3px] flex flex-col gap-2"
                 >
-                  <div className="flex items-center justify-between gap-2 font-azeret text-[9px] tracking-[0.15em] text-white/40 uppercase">
+                  <div className="flex items-center justify-between gap-2 font-parkinsans text-[9px] tracking-[0.15em] text-white/40 uppercase">
                     <div className="flex items-center gap-2">
                       <span className="px-2 py-0.5 bg-white/10 text-white font-bold rounded-[2px]">
                         {c.channel.replace("_", " ")}
@@ -868,7 +868,7 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
                   </div>
 
                   {c.subject && (
-                    <div className="font-roc text-sm font-bold text-white uppercase">
+                    <div className="font-artific text-sm font-bold text-white uppercase">
                       {c.subject}
                     </div>
                   )}
@@ -876,7 +876,7 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
                   <p className="font-sans text-xs text-white/80 leading-relaxed">{c.summary}</p>
 
                   {c.outcome && (
-                    <div className="mt-1 pt-2 border-t border-white/5 font-azeret text-[10px] text-accent">
+                    <div className="mt-1 pt-2 border-t border-white/5 font-parkinsans text-[10px] text-accent">
                       <span className="text-white/40 uppercase">OUTCOME: </span>
                       {c.outcome}
                     </div>
@@ -884,7 +884,7 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
                 </div>
               ))
             ) : (
-              <div className="p-8 bg-[#121212] border border-white/10 rounded-[3px] text-center font-azeret text-[10px] tracking-[0.2em] text-white/40 uppercase">
+              <div className="p-8 bg-[#121212] border border-white/10 rounded-[3px] text-center font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
                 NO TOUCHPOINTS LOGGED FOR THIS DOSSIER
               </div>
             )}

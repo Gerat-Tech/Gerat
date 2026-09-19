@@ -6,7 +6,7 @@ import Footer from "@/components/layout/Footer";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Engineering Portfolio & Case Studies | Gerat Software Solutions PLC",
+  title: "Engineering Portfolio & Case Studies | Gerat Software Solution",
   description:
     "Explore mission-critical enterprise systems, domain-grounded AI architectures, and verified software solutions built by Gerat.",
 };
@@ -41,7 +41,7 @@ export default async function PortfolioPage() {
   }
 
   return (
-    <div className="bg-[#050505] min-h-screen text-white selection:bg-accent selection:text-black">
+    <div className="bg-[var(--bg)] min-h-screen text-[var(--text-primary)] selection:bg-accent selection:text-black">
       <PortfolioClientView initialProjects={initialProjects} />
       <Footer />
     </div>

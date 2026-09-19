@@ -9,7 +9,7 @@ import Footer from "@/components/layout/Footer";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Engineering Leadership & Team | Gerat Software Solutions PLC",
+  title: "Engineering Leadership & Team | Gerat Software Solution",
   description:
     "Meet the software architects, artificial intelligence researchers, and distributed systems engineers directing Gerat's mission-critical platforms.",
 };
@@ -51,7 +51,7 @@ export default async function TeamPage() {
   }
 
   return (
-    <div className="bg-[#050505] min-h-screen text-white selection:bg-accent selection:text-black">
+    <div className="bg-[var(--bg)] min-h-screen text-[var(--text-primary)] selection:bg-accent selection:text-black">
       <TeamHero />
       <TeamLeadership initialLeaders={initialLeaders} />
       <AdvisorAndTeam initialSpecialists={initialSpecialists} />

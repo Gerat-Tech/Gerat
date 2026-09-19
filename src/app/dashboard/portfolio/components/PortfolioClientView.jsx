@@ -95,7 +95,7 @@ export default function PortfolioClientView({ initialCaseStudies = [] }) {
               key={tab.key}
               type="button"
               onClick={() => setActiveFilter(tab.key)}
-              className={`py-1.5 px-3 rounded-[2px] font-azeret text-[10px] tracking-[0.15em] uppercase transition-colors ${
+              className={`py-1.5 px-3 rounded-[2px] font-parkinsans text-[10px] tracking-[0.15em] uppercase transition-colors ${
                 activeFilter === tab.key
                   ? "bg-accent text-black font-bold"
                   : "bg-white/[0.04] hover:bg-white/10 text-white/70"
@@ -107,7 +107,7 @@ export default function PortfolioClientView({ initialCaseStudies = [] }) {
         </div>
 
         {/* View Mode */}
-        <div className="flex items-center gap-2 font-azeret text-[10px] tracking-[0.15em] uppercase">
+        <div className="flex items-center gap-2 font-parkinsans text-[10px] tracking-[0.15em] uppercase">
           <button
             type="button"
             onClick={() => setViewMode("grid")}
@@ -134,7 +134,7 @@ export default function PortfolioClientView({ initialCaseStudies = [] }) {
       </div>
 
       {/* Secondary Search & Category Dropdown */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 font-azeret text-xs">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 font-parkinsans text-xs">
         <div className="sm:col-span-2">
           <input
             type="text"
@@ -179,11 +179,11 @@ export default function PortfolioClientView({ initialCaseStudies = [] }) {
                   <div className="absolute top-2.5 left-2.5 font-mono text-[9px] tracking-wider bg-black/80 px-2 py-0.5 rounded-[2px] text-white/90 border border-white/20">
                     {item.num || item.displayIndex}
                   </div>
-                  <div className="absolute top-2.5 right-2.5 font-azeret text-[9px] tracking-[0.15em] bg-black/80 px-2 py-0.5 rounded-[2px] text-accent border border-accent/30 uppercase">
+                  <div className="absolute top-2.5 right-2.5 font-parkinsans text-[9px] tracking-[0.15em] bg-black/80 px-2 py-0.5 rounded-[2px] text-accent border border-accent/30 uppercase">
                     {item.category}
                   </div>
                   {item.featured && (
-                    <div className="absolute bottom-2.5 left-2.5 font-azeret text-[8px] tracking-[0.2em] bg-accent text-black font-bold px-2 py-0.5 rounded-[1px] uppercase">
+                    <div className="absolute bottom-2.5 left-2.5 font-parkinsans text-[8px] tracking-[0.2em] bg-accent text-black font-bold px-2 py-0.5 rounded-[1px] uppercase">
                       HOMEPAGE
                     </div>
                   )}
@@ -191,15 +191,15 @@ export default function PortfolioClientView({ initialCaseStudies = [] }) {
 
                 {/* Body */}
                 <div className="p-5 flex flex-col gap-3">
-                  <div className="font-azeret text-[9px] tracking-[0.15em] text-white/40 uppercase">
+                  <div className="font-parkinsans text-[9px] tracking-[0.15em] text-white/40 uppercase">
                     {item.tags}
                   </div>
 
-                  <h3 className="font-roc text-lg font-bold uppercase text-white group-hover:text-accent transition-colors leading-tight">
+                  <h3 className="font-artific text-lg font-bold uppercase text-white group-hover:text-accent transition-colors leading-tight">
                     {item.title}
                   </h3>
 
-                  <div className="font-roc text-xs font-bold text-accent uppercase tracking-tight">
+                  <div className="font-artific text-xs font-bold text-accent uppercase tracking-tight">
                     {item.metric}
                   </div>
 
@@ -214,7 +214,7 @@ export default function PortfolioClientView({ initialCaseStudies = [] }) {
               </div>
 
               {/* Card Footer */}
-              <div className="p-4 border-t border-white/10 bg-black/30 flex items-center justify-between font-azeret text-[9px] tracking-[0.15em] uppercase">
+              <div className="p-4 border-t border-white/10 bg-black/30 flex items-center justify-between font-parkinsans text-[9px] tracking-[0.15em] uppercase">
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
@@ -245,7 +245,7 @@ export default function PortfolioClientView({ initialCaseStudies = [] }) {
           ))}
 
           {filtered.length === 0 && (
-            <div className="col-span-3 p-12 bg-[#121212] border border-white/10 rounded-[3px] text-center font-azeret text-xs text-white/40 uppercase tracking-widest">
+            <div className="col-span-3 p-12 bg-[#121212] border border-white/10 rounded-[3px] text-center font-parkinsans text-xs text-white/40 uppercase tracking-widest">
               NO CASE STUDIES MATCHING FILTER
             </div>
           )}
@@ -255,7 +255,7 @@ export default function PortfolioClientView({ initialCaseStudies = [] }) {
       {/* TABLE VIEW */}
       {viewMode === "table" && (
         <div className="bg-[#121212] border border-white/10 rounded-[3px] overflow-x-auto">
-          <table className="w-full text-left border-collapse font-azeret text-xs">
+          <table className="w-full text-left border-collapse font-parkinsans text-xs">
             <thead>
               <tr className="border-b border-white/10 bg-black/40 text-[9px] tracking-[0.2em] text-white/40 uppercase">
                 <th className="py-3 px-4">INDEX</th>
@@ -273,22 +273,22 @@ export default function PortfolioClientView({ initialCaseStudies = [] }) {
                     {item.displayIndex}
                   </td>
                   <td className="py-3 px-4">
-                    <div className="font-roc text-sm font-bold text-white uppercase">
+                    <div className="font-artific text-sm font-bold text-white uppercase">
                       {item.title}
                     </div>
-                    <div className="font-azeret text-[9px] text-white/40 truncate max-w-sm">
+                    <div className="font-parkinsans text-[9px] text-white/40 truncate max-w-sm">
                       {item.tags}
                     </div>
                   </td>
-                  <td className="py-3 px-4 font-azeret text-[10px] text-white/70">
+                  <td className="py-3 px-4 font-parkinsans text-[10px] text-white/70">
                     {item.category}
                   </td>
-                  <td className="py-3 px-4 font-roc text-xs font-bold text-accent">
+                  <td className="py-3 px-4 font-artific text-xs font-bold text-accent">
                     {item.metric}
                   </td>
                   <td className="py-3 px-4">
                     <span
-                      className={`font-azeret text-[9px] px-2 py-0.5 rounded-[2px] uppercase font-bold ${
+                      className={`font-parkinsans text-[9px] px-2 py-0.5 rounded-[2px] uppercase font-bold ${
                         item.featured
                           ? "bg-emerald-950/60 border border-emerald-500/40 text-emerald-400"
                           : "bg-white/5 text-white/30"
@@ -297,7 +297,7 @@ export default function PortfolioClientView({ initialCaseStudies = [] }) {
                       {item.featured ? "FEATURED" : "STANDARD"}
                     </span>
                   </td>
-                  <td className="py-3 px-4 text-right font-azeret text-[9px] tracking-wider uppercase">
+                  <td className="py-3 px-4 text-right font-parkinsans text-[9px] tracking-wider uppercase">
                     <div className="flex items-center justify-end gap-2">
                       <Link
                         href={`/portfolio#${item.slug}`}

@@ -88,7 +88,7 @@ export default function InquiriesClientView({ initialInquiries = [] }) {
           <select
             value={disciplineFilter}
             onChange={(e) => setDisciplineFilter(e.target.value)}
-            className="bg-black/50 border border-white/10 text-white px-3 py-2 rounded-[2px] font-azeret text-[10px] tracking-wider uppercase outline-none focus:border-accent"
+            className="bg-black/50 border border-white/10 text-white px-3 py-2 rounded-[2px] font-parkinsans text-[10px] tracking-wider uppercase outline-none focus:border-accent"
           >
             <option value="ALL">ALL DISCIPLINES</option>
             <option value="ARCHITECTURE">SOFTWARE ARCHITECTURE</option>
@@ -104,7 +104,7 @@ export default function InquiriesClientView({ initialInquiries = [] }) {
             <button
               type="button"
               onClick={() => setViewMode("kanban")}
-              className={`px-3 py-1.5 font-azeret text-[9px] tracking-wider uppercase rounded-[1px] transition-colors ${
+              className={`px-3 py-1.5 font-parkinsans text-[9px] tracking-wider uppercase rounded-[1px] transition-colors ${
                 viewMode === "kanban"
                   ? "bg-accent text-white font-bold"
                   : "text-white/50 hover:text-white"
@@ -115,7 +115,7 @@ export default function InquiriesClientView({ initialInquiries = [] }) {
             <button
               type="button"
               onClick={() => setViewMode("table")}
-              className={`px-3 py-1.5 font-azeret text-[9px] tracking-wider uppercase rounded-[1px] transition-colors ${
+              className={`px-3 py-1.5 font-parkinsans text-[9px] tracking-wider uppercase rounded-[1px] transition-colors ${
                 viewMode === "table"
                   ? "bg-accent text-white font-bold"
                   : "text-white/50 hover:text-white"
@@ -141,10 +141,10 @@ export default function InquiriesClientView({ initialInquiries = [] }) {
               >
                 {/* Stage Column Header */}
                 <div className={`p-3 border-b border-white/10 flex items-center justify-between border-t-2 ${stage.accent}`}>
-                  <span className="font-azeret text-[10px] tracking-[0.15em] font-semibold text-white/80 uppercase">
+                  <span className="font-parkinsans text-[10px] tracking-[0.15em] font-semibold text-white/80 uppercase">
                     {stage.label}
                   </span>
-                  <span className="font-azeret text-[10px] tracking-wider text-white/40 px-1.5 py-0.5 rounded bg-white/5">
+                  <span className="font-parkinsans text-[10px] tracking-wider text-white/40 px-1.5 py-0.5 rounded bg-white/5">
                     {stageInquiries.length}
                   </span>
                 </div>
@@ -153,7 +153,7 @@ export default function InquiriesClientView({ initialInquiries = [] }) {
                 <div className="flex-1 p-2.5 overflow-y-auto flex flex-col gap-2.5 divide-y-0">
                   {stageInquiries.length === 0 ? (
                     <div className="h-28 flex items-center justify-center border border-dashed border-white/5 rounded text-center p-3">
-                      <span className="font-azeret text-[9px] tracking-widest text-white/20 uppercase">
+                      <span className="font-parkinsans text-[9px] tracking-widest text-white/20 uppercase">
                         NO INTAKES
                       </span>
                     </div>
@@ -161,7 +161,7 @@ export default function InquiriesClientView({ initialInquiries = [] }) {
                     stageInquiries.map((inq) => {
                       const cleanPhone = inq.phone.replace(/[^0-9+]/g, "");
                       const encodedWa = encodeURIComponent(
-                        `Hello ${inq.fullName}, this is Gerat Software Solutions PLC regarding your inquiry for ${inq.discipline} (Ref: ${inq.telemetryCode}). We would like to schedule a discovery discussion.`
+                        `Hello ${inq.fullName}, this is Gerat Software Solution regarding your inquiry for ${inq.discipline} (Ref: ${inq.telemetryCode}). We would like to schedule a discovery discussion.`
                       );
 
                       return (
@@ -171,10 +171,10 @@ export default function InquiriesClientView({ initialInquiries = [] }) {
                         >
                           {/* Card Header: Code & Date */}
                           <div className="flex items-center justify-between">
-                            <span className="font-azeret text-[9px] tracking-widest text-accent font-bold">
+                            <span className="font-parkinsans text-[9px] tracking-widest text-accent font-bold">
                               {inq.telemetryCode}
                             </span>
-                            <span className="font-azeret text-[8px] tracking-wider text-white/30">
+                            <span className="font-parkinsans text-[8px] tracking-wider text-white/30">
                               {new Date(inq.createdAt).toLocaleDateString("en-US", {
                                 month: "short",
                                 day: "numeric",
@@ -184,11 +184,11 @@ export default function InquiriesClientView({ initialInquiries = [] }) {
 
                           {/* Client & Company */}
                           <div>
-                            <div className="font-roc text-sm font-semibold text-white group-hover:text-accent transition-colors leading-tight">
+                            <div className="font-artific text-sm font-semibold text-white group-hover:text-accent transition-colors leading-tight">
                               {inq.fullName}
                             </div>
                             {inq.company && (
-                              <div className="font-azeret text-[9px] tracking-wider text-white/40 truncate">
+                              <div className="font-parkinsans text-[9px] tracking-wider text-white/40 truncate">
                                 {inq.company}
                               </div>
                             )}
@@ -196,10 +196,10 @@ export default function InquiriesClientView({ initialInquiries = [] }) {
 
                           {/* Discipline & Budget */}
                           <div className="flex flex-wrap items-center gap-1.5">
-                            <span className="font-azeret text-[8px] tracking-wider px-1.5 py-0.5 rounded-[1px] bg-white/[0.04] border border-white/10 text-white/70 uppercase truncate max-w-[170px]">
+                            <span className="font-parkinsans text-[8px] tracking-wider px-1.5 py-0.5 rounded-[1px] bg-white/[0.04] border border-white/10 text-white/70 uppercase truncate max-w-[170px]">
                               {inq.discipline}
                             </span>
-                            <span className="font-azeret text-[8px] tracking-wider px-1.5 py-0.5 rounded-[1px] bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
+                            <span className="font-parkinsans text-[8px] tracking-wider px-1.5 py-0.5 rounded-[1px] bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
                               {inq.budgetRange}
                             </span>
                           </div>
@@ -215,7 +215,7 @@ export default function InquiriesClientView({ initialInquiries = [] }) {
                                 title="Chat on WhatsApp"
                                 className="size-6 bg-emerald-500/15 hover:bg-emerald-500 hover:text-black text-emerald-400 border border-emerald-500/40 rounded-[2px] flex items-center justify-center transition-colors"
                               >
-                                <span className="font-azeret text-[9px] font-bold">W</span>
+                                <span className="font-parkinsans text-[9px] font-bold">W</span>
                               </a>
 
                               {/* 1-Click Phone Call Trigger */}
@@ -224,7 +224,7 @@ export default function InquiriesClientView({ initialInquiries = [] }) {
                                 title={`Direct Dial: ${inq.phone}`}
                                 className="size-6 bg-blue-500/15 hover:bg-blue-500 hover:text-white text-blue-400 border border-blue-500/40 rounded-[2px] flex items-center justify-center transition-colors"
                               >
-                                <span className="font-azeret text-[9px] font-bold">☎</span>
+                                <span className="font-parkinsans text-[9px] font-bold">☎</span>
                               </a>
                             </div>
 
@@ -232,7 +232,7 @@ export default function InquiriesClientView({ initialInquiries = [] }) {
                               {/* Open Full Dossier */}
                               <Link
                                 href={`/dashboard/inquiries/${inq.id}`}
-                                className="py-1 px-2 bg-white/[0.04] hover:bg-white/10 text-white font-azeret text-[8px] tracking-wider uppercase rounded-[2px] transition-colors"
+                                className="py-1 px-2 bg-white/[0.04] hover:bg-white/10 text-white font-parkinsans text-[8px] tracking-wider uppercase rounded-[2px] transition-colors"
                               >
                                 DOSSIER →
                               </Link>
@@ -265,7 +265,7 @@ export default function InquiriesClientView({ initialInquiries = [] }) {
           <div className="overflow-x-auto">
             <table className="w-full text-left font-sans">
               <thead>
-                <tr className="border-b border-white/10 font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase bg-black/40">
+                <tr className="border-b border-white/10 font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase bg-black/40">
                   <th className="py-3 px-4">TELEMETRY CODE</th>
                   <th className="py-3 px-4">CLIENT NAME & COMPANY</th>
                   <th className="py-3 px-4">DISCIPLINE</th>
@@ -274,11 +274,11 @@ export default function InquiriesClientView({ initialInquiries = [] }) {
                   <th className="py-3 px-4 text-right">ACTIONS</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5 font-azeret text-xs">
+              <tbody className="divide-y divide-white/5 font-parkinsans text-xs">
                 {filtered.map((inq) => {
                   const cleanPhone = inq.phone.replace(/[^0-9+]/g, "");
                   const encodedWa = encodeURIComponent(
-                    `Hello ${inq.fullName}, this is Gerat Software Solutions PLC regarding your inquiry for ${inq.discipline} (Ref: ${inq.telemetryCode}).`
+                    `Hello ${inq.fullName}, this is Gerat Software Solution regarding your inquiry for ${inq.discipline} (Ref: ${inq.telemetryCode}).`
                   );
 
                   return (
@@ -289,7 +289,7 @@ export default function InquiriesClientView({ initialInquiries = [] }) {
                       <td className="py-3.5 px-4 text-white">
                         <div className="font-semibold text-sm">{inq.fullName}</div>
                         <div className="text-[10px] text-white/40">
-                          {inq.company || "Direct Client"} {"//"} {inq.phone}
+                          {inq.company || "Direct Client"} {"·"} {inq.phone}
                         </div>
                       </td>
                       <td className="py-3.5 px-4 text-white/70">
@@ -324,7 +324,7 @@ export default function InquiriesClientView({ initialInquiries = [] }) {
                           </a>
                           <Link
                             href={`/dashboard/inquiries/${inq.id}`}
-                            className="py-1.5 px-3 bg-white/[0.04] hover:bg-accent hover:text-black border border-white/15 text-white font-azeret text-[9px] tracking-wider uppercase rounded-[2px] transition-colors"
+                            className="py-1.5 px-3 bg-white/[0.04] hover:bg-accent hover:text-black border border-white/15 text-white font-parkinsans text-[9px] tracking-wider uppercase rounded-[2px] transition-colors"
                           >
                             OPEN DOSSIER →
                           </Link>

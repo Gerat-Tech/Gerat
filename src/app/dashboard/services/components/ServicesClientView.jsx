@@ -84,7 +84,7 @@ export default function ServicesClientView({ initialPillars = [] }) {
               key={f}
               type="button"
               onClick={() => setFilter(f)}
-              className={`py-1.5 px-3 rounded-[2px] font-azeret text-[10px] tracking-[0.15em] uppercase transition-colors ${
+              className={`py-1.5 px-3 rounded-[2px] font-parkinsans text-[10px] tracking-[0.15em] uppercase transition-colors ${
                 filter === f
                   ? "bg-accent text-black font-bold"
                   : "bg-white/[0.04] hover:bg-white/10 text-white/70"
@@ -100,7 +100,7 @@ export default function ServicesClientView({ initialPillars = [] }) {
           href="/services"
           target="_blank"
           rel="noopener noreferrer"
-          className="font-azeret text-[10px] tracking-[0.15em] text-white/50 hover:text-accent uppercase flex items-center gap-1"
+          className="font-parkinsans text-[10px] tracking-[0.15em] text-white/50 hover:text-accent uppercase flex items-center gap-1"
         >
           <span>VIEW LIVE /SERVICES PAGE</span>
           <span>↗</span>
@@ -114,7 +114,7 @@ export default function ServicesClientView({ initialPillars = [] }) {
           placeholder="Search pillars by index, title, tagline, or scope..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full bg-[#121212] border border-white/10 px-4 py-2.5 text-white font-azeret text-xs rounded-[2px] focus:border-accent outline-none"
+          className="w-full bg-[#121212] border border-white/10 px-4 py-2.5 text-white font-parkinsans text-xs rounded-[2px] focus:border-accent outline-none"
         />
       </div>
 
@@ -130,8 +130,8 @@ export default function ServicesClientView({ initialPillars = [] }) {
               <div>
                 <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
                   <div className="flex items-center gap-2">
-                    <span className="font-azeret text-xs font-bold text-accent">
-                      PRACTICE // {pillar.num}
+                    <span className="font-parkinsans text-xs font-bold text-accent">
+                      PRACTICE · {pillar.num}
                     </span>
                     <span className="font-mono text-[9px] text-white/30">
                       (ORDER: {pillar.order})
@@ -139,7 +139,7 @@ export default function ServicesClientView({ initialPillars = [] }) {
                   </div>
 
                   <span
-                    className={`font-azeret text-[8px] tracking-wider px-2 py-0.5 rounded-[2px] uppercase font-bold ${
+                    className={`font-parkinsans text-[8px] tracking-wider px-2 py-0.5 rounded-[2px] uppercase font-bold ${
                       pillar.active
                         ? "bg-emerald-950/80 border border-emerald-500/40 text-emerald-400"
                         : "bg-white/10 text-white/40"
@@ -150,10 +150,10 @@ export default function ServicesClientView({ initialPillars = [] }) {
                 </div>
 
                 <div className="flex flex-col gap-2 mb-4">
-                  <span className="font-azeret text-[9px] tracking-[0.15em] text-white/50 uppercase">
+                  <span className="font-parkinsans text-[9px] tracking-[0.15em] text-white/50 uppercase">
                     {pillar.tagline}
                   </span>
-                  <h3 className="font-roc text-lg font-bold uppercase text-white group-hover:text-accent transition-colors leading-tight">
+                  <h3 className="font-artific text-lg font-bold uppercase text-white group-hover:text-accent transition-colors leading-tight">
                     {pillar.title}
                   </h3>
                   <p className="font-sans text-xs text-white/70 line-clamp-3 leading-relaxed mt-1">
@@ -163,10 +163,10 @@ export default function ServicesClientView({ initialPillars = [] }) {
 
                 {deliverables.length > 0 && (
                   <div className="pt-3 border-t border-white/5 mb-4">
-                    <span className="font-azeret text-[8px] tracking-[0.2em] text-white/40 uppercase block mb-2">
+                    <span className="font-parkinsans text-[8px] tracking-[0.2em] text-white/40 uppercase block mb-2">
                       SAMPLE DELIVERABLES ({deliverables.length})
                     </span>
-                    <ul className="space-y-1 font-azeret text-[9px] tracking-wider text-white/50">
+                    <ul className="space-y-1 font-parkinsans text-[9px] tracking-wider text-white/50">
                       {deliverables.slice(0, 3).map((d, i) => (
                         <li key={i} className="truncate flex items-center gap-1.5">
                           <span className="text-accent">•</span>
@@ -190,7 +190,7 @@ export default function ServicesClientView({ initialPillars = [] }) {
               </div>
 
               {/* Actions Footer */}
-              <div className="pt-4 border-t border-white/10 flex items-center justify-between font-azeret text-[9px] tracking-[0.15em] uppercase">
+              <div className="pt-4 border-t border-white/10 flex items-center justify-between font-parkinsans text-[9px] tracking-[0.15em] uppercase">
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
@@ -222,7 +222,7 @@ export default function ServicesClientView({ initialPillars = [] }) {
         })}
 
         {filtered.length === 0 && (
-          <div className="col-span-3 p-12 bg-[#121212] border border-white/10 rounded-[3px] text-center font-azeret text-xs text-white/40 uppercase tracking-widest">
+          <div className="col-span-3 p-12 bg-[#121212] border border-white/10 rounded-[3px] text-center font-parkinsans text-xs text-white/40 uppercase tracking-widest">
             NO PRACTICE PILLARS MATCHING QUERY
           </div>
         )}

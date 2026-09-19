@@ -18,15 +18,22 @@ async function main() {
   const adminPassword = await bcrypt.hash("GeratAdmin2026!#", 10);
   const teamPassword = await bcrypt.hash("GeratTeam2026!#", 10);
 
+  // Migrate legacy @gerat.et user emails to official @gerat.com
+  await prisma.user.updateMany({ where: { email: "admin@gerat.et" }, data: { email: "admin@gerat.com" } });
+  await prisma.user.updateMany({ where: { email: "operations@gerat.et" }, data: { email: "operations@gerat.com" } });
+  await prisma.user.updateMany({ where: { email: "editor@gerat.et" }, data: { email: "editor@gerat.com" } });
+  await prisma.user.updateMany({ where: { email: "architect@gerat.et" }, data: { email: "architect@gerat.com" } });
+  await prisma.user.updateMany({ where: { email: "creative@gerat.et" }, data: { email: "creative@gerat.com" } });
+
   const superAdmin = await prisma.user.upsert({
-    where: { email: "admin@gerat.et" },
+    where: { email: "admin@gerat.com" },
     update: {
       passwordHash: adminPassword,
       role: "SUPER_ADMIN",
       active: true,
     },
     create: {
-      email: "admin@gerat.et",
+      email: "admin@gerat.com",
       name: "Dawit (Principal Architect)",
       passwordHash: adminPassword,
       role: "SUPER_ADMIN",
@@ -36,14 +43,14 @@ async function main() {
   });
 
   const opsLead = await prisma.user.upsert({
-    where: { email: "operations@gerat.et" },
+    where: { email: "operations@gerat.com" },
     update: {
       passwordHash: teamPassword,
       role: "OPERATIONS_LEAD",
       active: true,
     },
     create: {
-      email: "operations@gerat.et",
+      email: "operations@gerat.com",
       name: "Client Operations Lead",
       passwordHash: teamPassword,
       role: "OPERATIONS_LEAD",
@@ -53,14 +60,14 @@ async function main() {
   });
 
   const editor = await prisma.user.upsert({
-    where: { email: "editor@gerat.et" },
+    where: { email: "editor@gerat.com" },
     update: {
       passwordHash: teamPassword,
       role: "EDITOR",
       active: true,
     },
     create: {
-      email: "editor@gerat.et",
+      email: "editor@gerat.com",
       name: "Content & Editorial Lead",
       passwordHash: teamPassword,
       role: "EDITOR",
@@ -113,7 +120,7 @@ async function main() {
         title: a.title,
         subtitle: a.subtitle || null,
         category: a.category,
-        content: `# ${a.title}\n\n${a.excerpt}\n\n### Abstract & Findings\n\nThis research paper documents institutional and enterprise implementation observations by Gerat Software Solutions PLC.`,
+        content: `# ${a.title}\n\n${a.excerpt}\n\n### Abstract & Findings\n\nThis research paper documents institutional and enterprise implementation observations by Gerat Software Solution.`,
         excerpt: a.excerpt,
         readingTime: a.readTime,
         coverImageUrl: a.image,
@@ -207,7 +214,7 @@ async function main() {
     update: {},
     create: {
       key: "CONTACT_EMAIL",
-      value: siteConfig.contact.inquiries || "info@gerat.et",
+      value: siteConfig.contact.inquiries || "contact@gerat.com",
       description: "Inquiry receipt email",
     },
   });

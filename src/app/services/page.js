@@ -6,7 +6,7 @@ import Footer from "@/components/layout/Footer";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Platform & Engineering Services | Gerat Software Solutions PLC",
+  title: "Platform & Engineering Services | Gerat Software Solution",
   description:
     "Explore Gerat's core engineering practices: Enterprise Software Architecture, Domain-Grounded AI & RAG, Custom ERP, and Public-Sector Platforms.",
 };

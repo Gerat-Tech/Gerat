@@ -20,7 +20,7 @@ export default function TeamMemberEditor({ initialMember = null }) {
     initialMember?.division || "ENGINEERING_PRACTITIONER"
   );
   const [focusTag, setFocusTag] = useState(
-    initialMember?.focusTag || "SYSTEMS ARCHITECTURE // DISTRIBUTED LEDGERS"
+    initialMember?.focusTag || "SYSTEMS ARCHITECTURE · DISTRIBUTED LEDGERS"
   );
   const [bio, setBio] = useState(
     initialMember?.bio ||
@@ -116,7 +116,7 @@ export default function TeamMemberEditor({ initialMember = null }) {
     <div className="flex flex-col gap-6">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 bg-[#161616] border border-accent text-white px-4 py-3 rounded-[3px] font-azeret text-xs tracking-wider shadow-2xl flex items-center gap-2">
+        <div className="fixed bottom-6 right-6 z-50 bg-[#161616] border border-accent text-white px-4 py-3 rounded-[3px] font-parkinsans text-xs tracking-wider shadow-2xl flex items-center gap-2">
           <span className="size-2 rounded-full bg-accent animate-pulse" />
           <span>{toastMessage}</span>
         </div>
@@ -125,7 +125,7 @@ export default function TeamMemberEditor({ initialMember = null }) {
       {/* Top Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/10">
         <div>
-          <div className="flex items-center gap-2 mb-1 font-azeret text-[10px] tracking-[0.15em] text-white/50">
+          <div className="flex items-center gap-2 mb-1 font-parkinsans text-[10px] tracking-[0.15em] text-white/50">
             <Link href="/dashboard/team" className="hover:text-white transition-colors">
               ← TEAM ROSTER
             </Link>
@@ -136,16 +136,16 @@ export default function TeamMemberEditor({ initialMember = null }) {
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="font-roc text-2xl sm:text-3xl font-bold uppercase text-white tracking-tight">
+            <h1 className="font-artific text-2xl sm:text-3xl font-bold uppercase text-white tracking-tight">
               {name || "UNNAMED ARCHITECT"}
             </h1>
-            <span className="font-azeret text-[9px] tracking-[0.2em] px-2 py-0.5 rounded-[2px] bg-white/[0.05] border border-white/15 text-white/80 uppercase">
+            <span className="font-parkinsans text-[9px] tracking-[0.2em] px-2 py-0.5 rounded-[2px] bg-white/[0.05] border border-white/15 text-white/80 uppercase">
               {division.replace("_", " ")}
             </span>
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 font-azeret text-[10px] tracking-[0.15em] uppercase font-bold">
+        <div className="flex flex-wrap items-center gap-2 font-parkinsans text-[10px] tracking-[0.15em] uppercase font-bold">
           <Link
             href="/team"
             target="_blank"
@@ -169,7 +169,7 @@ export default function TeamMemberEditor({ initialMember = null }) {
             type="button"
             disabled={isSaving}
             onClick={handleSave}
-            className="py-2 px-5 bg-accent hover:bg-[#ff5c1a] text-black rounded-[2px] transition-colors disabled:opacity-40"
+            className="py-2 px-5 bg-accent hover:bg-accent/90 text-black rounded-[2px] transition-colors disabled:opacity-40"
           >
             {isSaving ? "COMMITTING..." : "SAVE PROFILE"}
           </button>
@@ -180,7 +180,7 @@ export default function TeamMemberEditor({ initialMember = null }) {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Form Controls (7 cols) */}
         <div className="lg:col-span-7 flex flex-col gap-6">
-          <div className="bg-[#121212] border border-white/10 p-5 rounded-[3px] flex flex-col gap-4 font-azeret text-xs">
+          <div className="bg-[#121212] border border-white/10 p-5 rounded-[3px] flex flex-col gap-4 font-parkinsans text-xs">
             <span className="text-[10px] tracking-[0.2em] text-accent uppercase font-bold border-b border-white/10 pb-2">
               PROFESSIONAL IDENTITY & ROLE
             </span>
@@ -195,7 +195,7 @@ export default function TeamMemberEditor({ initialMember = null }) {
                 placeholder="e.g. DAWIT TEKLEBRHAN"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="bg-black/60 border border-white/15 px-3 py-2.5 text-white font-roc text-lg font-bold uppercase rounded-[2px] focus:border-accent outline-none tracking-tight"
+                className="bg-black/60 border border-white/15 px-3 py-2.5 text-white font-artific text-lg font-bold uppercase rounded-[2px] focus:border-accent outline-none tracking-tight"
               />
             </div>
 
@@ -238,7 +238,7 @@ export default function TeamMemberEditor({ initialMember = null }) {
               </label>
               <input
                 type="text"
-                placeholder="SYSTEMS ARCHITECTURE // DISTRIBUTED LEDGERS"
+                placeholder="SYSTEMS ARCHITECTURE · DISTRIBUTED LEDGERS"
                 value={focusTag}
                 onChange={(e) => setFocusTag(e.target.value)}
                 className="bg-black/60 border border-white/15 px-3 py-2 text-accent font-mono text-xs rounded-[2px] focus:border-accent outline-none"
@@ -333,7 +333,7 @@ export default function TeamMemberEditor({ initialMember = null }) {
         {/* Right Column: Live Card Preview (5 cols) */}
         <div className="lg:col-span-5 flex flex-col gap-4">
           <div className="sticky top-28 flex flex-col gap-4">
-            <span className="font-azeret text-[10px] tracking-[0.2em] text-accent uppercase font-bold">
+            <span className="font-parkinsans text-[10px] tracking-[0.2em] text-accent uppercase font-bold">
               LIVE ROSTER CARD PREVIEW
             </span>
 
@@ -346,21 +346,21 @@ export default function TeamMemberEditor({ initialMember = null }) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0c0c0c] via-transparent to-transparent opacity-80" />
 
-                <div className="absolute top-3 left-3 font-azeret text-[9px] tracking-[0.2em] text-accent bg-black/90 px-2.5 py-0.5 border border-accent/40 rounded-[1px] uppercase">
+                <div className="absolute top-3 left-3 font-parkinsans text-[9px] tracking-[0.2em] text-accent bg-black/90 px-2.5 py-0.5 border border-accent/40 rounded-[1px] uppercase">
                   {division.replace("_", " ")}
                 </div>
 
-                <div className="absolute bottom-3 left-3 right-3 font-azeret text-[10px] tracking-wider text-accent uppercase truncate">
+                <div className="absolute bottom-3 left-3 right-3 font-parkinsans text-[10px] tracking-wider text-accent uppercase truncate">
                   {focusTag}
                 </div>
               </div>
 
               <div className="p-6 flex flex-col gap-3">
-                <h3 className="font-roc text-xl font-bold uppercase text-white tracking-tight">
+                <h3 className="font-artific text-xl font-bold uppercase text-white tracking-tight">
                   {name || "ARCHITECT NAME"}
                 </h3>
 
-                <div className="font-azeret text-[10px] tracking-[0.15em] text-white/50 uppercase">
+                <div className="font-parkinsans text-[10px] tracking-[0.15em] text-white/50 uppercase">
                   {roleTitle || "ENGINEERING LEADERSHIP"}
                 </div>
 

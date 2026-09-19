@@ -6,7 +6,7 @@ import Footer from "@/components/layout/Footer";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Research & Technical Blueprints | Gerat Software Solutions PLC",
+  title: "Research & Technical Blueprints | Gerat Software Solution",
   description:
     "Technical whitepapers, distributed systems analyses, and engineering blueprints authored by the software practitioners at Gerat.",
 };
@@ -30,7 +30,7 @@ export default async function InsightsPage() {
         ...a,
         readTime: a.readingTime,
         image: a.coverImageUrl,
-        author: a.author?.name || "Gerät Engineering",
+        author: a.author?.name || "Gerat Engineering",
       }));
     }
   } catch (error) {
@@ -38,7 +38,7 @@ export default async function InsightsPage() {
   }
 
   return (
-    <div className="bg-[#050505] min-h-screen text-white selection:bg-accent selection:text-black">
+    <div className="bg-[var(--bg)] min-h-screen text-[var(--text-primary)] selection:bg-accent selection:text-black">
       <InsightsClientView initialArticles={initialArticles} />
       <Footer />
     </div>

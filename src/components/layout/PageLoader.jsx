@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import GeratLogo from "../common/GeratLogo";
 
 /**
  * Editorial Page Loader (Spec §9)
@@ -64,14 +65,14 @@ export default function PageLoader() {
   return (
     <aside
       aria-label="Loading page"
-      className={`fixed inset-0 z-[500] bg-[#050505] flex flex-col items-center justify-between p-8 sm:p-12 transition-transform duration-700 ease-(--ease-primary) ${
+      className={`fixed inset-0 z-[500] bg-[var(--bg)] flex flex-col items-center justify-between p-8 sm:p-12 transition-transform duration-700 ease-(--ease-primary) ${
         loading ? "translate-y-0" : "-translate-y-full"
       }`}
     >
       {/* Top Telemetry */}
-      <div className="w-full flex items-center justify-between font-azeret text-[10px] tracking-[0.2em] text-white/40 uppercase">
-        <span>GERAT OS // v0.1</span>
-        <span>SYS_INIT</span>
+      <div className="w-full flex items-center justify-between font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
+        <span>GERAT SOFTWARE SOLUTION</span>
+        <span>INITIALIZING</span>
       </div>
 
       {/* Center Brand Monogram & Status */}
@@ -81,15 +82,7 @@ export default function PageLoader() {
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/20 to-transparent animate-pulse" />
 
           {/* Geometric Emblem */}
-          <svg
-            className="size-8 sm:size-10 text-white"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M3 5V19H19V13H11V11H21V5H3Z" fill="currentColor" />
-            <rect x="13" y="15" width="4" height="4" fill="var(--accent, #ff4a00)" />
-          </svg>
+          <GeratLogo variant="mark" className="size-8 sm:size-10 text-white" />
 
           {/* Precision Framing Brackets */}
           <span className="absolute -top-[1px] -left-[1px] size-2 border-t border-l border-white" />
@@ -99,18 +92,18 @@ export default function PageLoader() {
         </div>
 
         <div className="flex flex-col items-center gap-1.5 text-center">
-          <span className="font-roc text-[18px] sm:text-[20px] font-bold tracking-[0.2em] text-white">
+          <span className="font-artific text-[18px] sm:text-[20px] font-bold tracking-[0.2em] text-white">
             GERAT
           </span>
-          <span className="font-azeret text-[9px] sm:text-[10px] tracking-[0.25em] text-white/50 uppercase">
-            SOFTWARE SOLUTIONS PLC
+          <span className="font-parkinsans text-[9px] sm:text-[10px] tracking-[0.25em] text-white/50 uppercase">
+            SOFTWARE SOLUTION
           </span>
         </div>
       </div>
 
       {/* Bottom Progress Bar & Counter */}
       <div className="w-full max-w-xs flex flex-col gap-2">
-        <div className="flex items-center justify-between font-azeret text-[10px] tracking-[0.15em] text-white/50">
+        <div className="flex items-center justify-between font-parkinsans text-[10px] tracking-[0.15em] text-white/50">
           <span>{progress < 100 ? "CONFIGURING..." : "SYSTEM READY"}</span>
           <span className="text-accent font-bold">{progress}%</span>
         </div>

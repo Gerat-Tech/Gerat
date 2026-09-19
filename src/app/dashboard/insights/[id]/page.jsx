@@ -11,11 +11,11 @@ export async function generateMetadata({ params }) {
   });
 
   if (!article) {
-    return { title: "Article Not Found // Gerat Mission Control" };
+    return { title: "Article Not Found · Gerat Mission Control" };
   }
 
   return {
-    title: `Edit: ${article.title} // Gerat Mission Control`,
+    title: `Edit: ${article.title} · Gerat Mission Control`,
     description: "Edit technical whitepaper publication",
   };
 }

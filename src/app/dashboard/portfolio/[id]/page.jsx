@@ -11,11 +11,11 @@ export async function generateMetadata({ params }) {
   });
 
   if (!caseStudy) {
-    return { title: "Case Study Not Found // Gerat Mission Control" };
+    return { title: "Case Study Not Found · Gerat Mission Control" };
   }
 
   return {
-    title: `Edit: ${caseStudy.title} [${caseStudy.displayIndex}] // Gerat Mission Control`,
+    title: `Edit: ${caseStudy.title} [${caseStudy.displayIndex}] · Gerat Mission Control`,
     description: "Edit flagship portfolio case study",
   };
 }

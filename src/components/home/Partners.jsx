@@ -24,7 +24,7 @@ export default function Partners() {
     <section
       id="ecosystem"
       aria-label="Technology Ecosystem"
-      className="relative w-full bg-[#070707] text-white py-24 sm:py-32"
+      className="relative w-full bg-[var(--bg)] text-white py-24 sm:py-32"
     >
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
         {/* Header */}
@@ -34,19 +34,19 @@ export default function Partners() {
             <SplitText
               text="MODERN INFRASTRUCTURE."
               as="h2"
-              className="font-roc text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
+              className="font-artific text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
             />
             <SplitText
               text="STANDARDIZED FOUNDATIONS."
               as="h2"
               wordClassName="text-accent"
-              className="font-roc text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
+              className="font-artific text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
             />
           </div>
 
           <div className="lg:col-span-5 flex flex-col items-start gap-6 lg:border-l lg:border-white/10 lg:pl-10 pt-2">
             <FadeUp delay={0.2}>
-              <p className="font-roc text-base text-white/70 leading-relaxed">
+              <p className="font-parkinsans text-base text-white/70 leading-relaxed">
                 We build exclusively with proven, open, and battle-tested
                 technologies that guarantee vendor independence, high auditability,
                 and long-term operational viability.
@@ -57,7 +57,7 @@ export default function Partners() {
               <button
                 type="button"
                 onClick={openContact}
-                className="group relative isolate inline-flex items-center font-azeret text-[11px] uppercase tracking-[0.2em] px-6 py-3 bg-white text-black font-semibold hover:bg-accent hover:text-white transition-all duration-300 rounded-[2px]"
+                className="group relative isolate inline-flex items-center font-parkinsans text-[11px] uppercase tracking-[0.2em] px-6 py-3 bg-white text-black font-semibold hover:bg-accent hover:text-white transition-all duration-300 rounded-[2px]"
               >
                 <span>COMMISSION A BUILD</span>
                 <span className="ml-2 group-hover:translate-x-1 transition-transform">
@@ -74,15 +74,15 @@ export default function Partners() {
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
           {techStack.map((tech, idx) => (
             <FadeUp key={tech.name} delay={0.06 * idx} y={16}>
-              <div className="group relative bg-[#0f0f0f] border border-white/10 hover:border-accent/60 p-6 rounded-[3px] flex flex-col justify-between min-h-[120px] transition-all duration-300">
+              <div className="group relative bg-[var(--surface)] border border-white/10 hover:border-accent/60 p-6 rounded-[3px] flex flex-col justify-between min-h-[120px] transition-all duration-300">
                 <span className="absolute top-0 left-0 size-1.5 border-t border-l border-white/20 group-hover:border-accent transition-colors" />
                 <span className="absolute bottom-0 right-0 size-1.5 border-b border-r border-white/20 group-hover:border-accent transition-colors" />
 
-                <span className="font-azeret text-[8px] sm:text-[9px] tracking-[0.2em] text-white/40 uppercase">
+                <span className="font-parkinsans text-[8px] sm:text-[9px] tracking-[0.2em] text-white/40 uppercase">
                   {tech.category}
                 </span>
 
-                <h3 className="font-roc text-lg font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
+                <h3 className="font-artific text-lg font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
                   {tech.name}
                 </h3>
               </div>

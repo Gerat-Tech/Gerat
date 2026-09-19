@@ -1,8 +1,8 @@
 {
   "name": "gerat-website",
   "version": "0.1.0",
-  "description": "Portfolio website for Gerat Software Solutions PLC",
-  "author": "Gerat Software Solutions PLC",
+  "description": "Portfolio website for Gerat Software Solution",
+  "author": "Gerat Software Solution",
   "license": "PROPRIETARY",
   "private": true,
   "packageManager": "pnpm@10.33.0",
@@ -19,7 +19,8 @@
     "db:studio": "prisma studio",
     "test:smoke": "node tests/smoke/run-smoke-tests.mjs",
     "test:runtime": "node tests/smoke/dev-server-smoke.mjs",
-    "test": "pnpm run test:smoke && pnpm run test:runtime"
+    "test:e2e": "node tests/smoke/e2e-smoke.test.mjs",
+    "test": "pnpm run test:smoke && pnpm run test:runtime && pnpm run test:e2e"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",

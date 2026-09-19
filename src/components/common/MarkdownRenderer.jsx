@@ -1,7 +1,7 @@
 import React from "react";
 
 /**
- * Lightweight, zero-dependency Markdown renderer tailored for Gerät's dark architectural aesthetics.
+ * Lightweight, zero-dependency Markdown renderer tailored for Gerat's dark architectural aesthetics.
  */
 export default function MarkdownRenderer({ content = "", className = "" }) {
   if (!content) return null;
@@ -18,9 +18,9 @@ export default function MarkdownRenderer({ content = "", className = "" }) {
               key={idx}
               className="my-6 rounded-[3px] border border-white/15 bg-black/80 overflow-hidden font-mono text-xs"
             >
-              <div className="flex items-center justify-between px-4 py-2 border-b border-white/10 bg-white/[0.03] font-azeret text-[9px] tracking-[0.15em] text-white/40 uppercase">
+              <div className="flex items-center justify-between px-4 py-2 border-b border-white/10 bg-white/[0.03] font-parkinsans text-[9px] tracking-[0.15em] text-white/40 uppercase">
                 <span>{block.lang || "CODE"}</span>
-                <span className="text-accent">GERAT // TERMINAL</span>
+                <span className="text-accent">GERAT TERMINAL</span>
               </div>
               <pre className="p-4 overflow-x-auto text-emerald-400 leading-relaxed">
                 <code>{block.code}</code>
@@ -33,7 +33,7 @@ export default function MarkdownRenderer({ content = "", className = "" }) {
           return (
             <h1
               key={idx}
-              className="font-roc text-2xl sm:text-3xl font-bold uppercase text-white tracking-tight mt-8 mb-4 border-b border-white/10 pb-2"
+              className="font-artific text-2xl sm:text-3xl font-bold uppercase text-white tracking-tight mt-8 mb-4 border-b border-white/10 pb-2"
             >
               {renderInline(block.text)}
             </h1>
@@ -44,7 +44,7 @@ export default function MarkdownRenderer({ content = "", className = "" }) {
           return (
             <h2
               key={idx}
-              className="font-roc text-xl sm:text-2xl font-bold uppercase text-white tracking-tight mt-6 mb-3 text-accent"
+              className="font-artific text-xl sm:text-2xl font-bold uppercase text-white tracking-tight mt-6 mb-3 text-accent"
             >
               {renderInline(block.text)}
             </h2>
@@ -55,7 +55,7 @@ export default function MarkdownRenderer({ content = "", className = "" }) {
           return (
             <h3
               key={idx}
-              className="font-roc text-lg sm:text-xl font-bold uppercase text-white tracking-tight mt-5 mb-2"
+              className="font-artific text-lg sm:text-xl font-bold uppercase text-white tracking-tight mt-5 mb-2"
             >
               {renderInline(block.text)}
             </h3>
@@ -66,7 +66,7 @@ export default function MarkdownRenderer({ content = "", className = "" }) {
           return (
             <h4
               key={idx}
-              className="font-azeret text-sm font-bold uppercase text-white/90 tracking-wider mt-4 mb-2"
+              className="font-artific text-sm font-bold uppercase text-white/90 tracking-wider mt-4 mb-2"
             >
               {renderInline(block.text)}
             </h4>

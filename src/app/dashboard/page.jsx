@@ -85,11 +85,11 @@ export default async function DashboardPage({ searchParams }) {
 
   // Header Title & Action Button based on Role
   let cockpitTitle = "EXECUTIVE COCKPIT";
-  let cockpitSubtitle = `LOGGED IN AS ${user?.name || "SUPER ADMIN"} // STUDIO MASTER COMMAND`;
+  let cockpitSubtitle = `LOGGED IN AS ${user?.name || "SUPER ADMIN"} · STUDIO MASTER COMMAND`;
   let headerAction = (
     <Link
       href="/dashboard/inquiries"
-      className="w-fit py-2 px-4 bg-accent hover:bg-black hover:text-white text-white font-azeret text-[10px] tracking-[0.15em] uppercase font-bold transition-all rounded-[2px] flex items-center gap-2"
+      className="w-fit py-2 px-4 bg-accent hover:bg-black hover:text-white text-white font-parkinsans text-[10px] tracking-[0.15em] uppercase font-bold transition-all rounded-[2px] flex items-center gap-2"
     >
       <span>TRIAGE NEW LEADS ({newInquiries})</span>
       <span>→</span>
@@ -98,11 +98,11 @@ export default async function DashboardPage({ searchParams }) {
 
   if (role === "OPERATIONS_LEAD") {
     cockpitTitle = "OPERATIONS COCKPIT";
-    cockpitSubtitle = `LOGGED IN AS ${user?.name || "OPERATIONS LEAD"} // CLIENT INTAKE & COMMERCIAL PIPELINE`;
+    cockpitSubtitle = `LOGGED IN AS ${user?.name || "OPERATIONS LEAD"} · CLIENT INTAKE & COMMERCIAL PIPELINE`;
     headerAction = (
       <Link
         href="/dashboard/inquiries"
-        className="w-fit py-2 px-4 bg-accent hover:bg-black hover:text-white text-white font-azeret text-[10px] tracking-[0.15em] uppercase font-bold transition-all rounded-[2px] flex items-center gap-2"
+        className="w-fit py-2 px-4 bg-accent hover:bg-black hover:text-white text-white font-parkinsans text-[10px] tracking-[0.15em] uppercase font-bold transition-all rounded-[2px] flex items-center gap-2"
       >
         <span>OPEN KANBAN PIPELINE ({newInquiries} NEW)</span>
         <span>→</span>
@@ -110,11 +110,11 @@ export default async function DashboardPage({ searchParams }) {
     );
   } else if (role === "EDITOR" || role === "TECHNICAL_EDITOR" || role === "CREATIVE_EDITOR") {
     cockpitTitle = "EDITORIAL & CONTENT COCKPIT";
-    cockpitSubtitle = `LOGGED IN AS ${user?.name || "EDITOR"} // RESEARCH PUBLICATIONS & PORTFOLIO SHOWCASES`;
+    cockpitSubtitle = `LOGGED IN AS ${user?.name || "EDITOR"} · RESEARCH PUBLICATIONS & PORTFOLIO SHOWCASES`;
     headerAction = (
       <Link
         href="/dashboard/insights/new"
-        className="w-fit py-2 px-4 bg-accent hover:bg-black hover:text-white text-white font-azeret text-[10px] tracking-[0.15em] uppercase font-bold transition-all rounded-[2px] flex items-center gap-2"
+        className="w-fit py-2 px-4 bg-accent hover:bg-black hover:text-white text-white font-parkinsans text-[10px] tracking-[0.15em] uppercase font-bold transition-all rounded-[2px] flex items-center gap-2"
       >
         <span>+ AUTHOR NEW ARTICLE</span>
         <span>→</span>
@@ -122,12 +122,12 @@ export default async function DashboardPage({ searchParams }) {
     );
   } else if (role === "VIEWER") {
     cockpitTitle = "STUDIO OVERVIEW";
-    cockpitSubtitle = `LOGGED IN AS ${user?.name || "OBSERVER"} // INTERNAL STUDIO DIRECTORY`;
+    cockpitSubtitle = `LOGGED IN AS ${user?.name || "OBSERVER"} · INTERNAL STUDIO DIRECTORY`;
     headerAction = (
       <Link
         href="/"
         target="_blank"
-        className="w-fit py-2 px-4 bg-accent hover:bg-black hover:text-white text-white font-azeret text-[10px] tracking-[0.15em] uppercase font-bold transition-all rounded-[2px] flex items-center gap-2"
+        className="w-fit py-2 px-4 bg-accent hover:bg-black hover:text-white text-white font-parkinsans text-[10px] tracking-[0.15em] uppercase font-bold transition-all rounded-[2px] flex items-center gap-2"
       >
         <span>VIEW PUBLIC SITE</span>
         <span>↗</span>
@@ -139,7 +139,7 @@ export default async function DashboardPage({ searchParams }) {
     <div className="flex flex-col gap-8">
       {/* RBAC Unauthorized Interception Alert Banner */}
       {isUnauthorized && (
-        <div className="p-4 rounded-[3px] bg-red-500/10 border border-red-500/40 text-red-600 font-azeret text-xs flex items-center justify-between">
+        <div className="p-4 rounded-[3px] bg-red-500/10 border border-red-500/40 text-red-600 font-parkinsans text-xs flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="text-base">⛔</span>
             <span>
@@ -154,14 +154,14 @@ export default async function DashboardPage({ searchParams }) {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="font-roc text-2xl sm:text-3xl font-bold tracking-tight uppercase text-white">
+            <h1 className="font-artific text-2xl sm:text-3xl font-bold tracking-tight uppercase text-white">
               {cockpitTitle}
             </h1>
-            <span className="font-azeret text-[9px] tracking-[0.2em] px-2 py-0.5 rounded-[2px] bg-accent/15 border border-accent/40 text-accent uppercase font-bold">
+            <span className="font-parkinsans text-[9px] tracking-[0.2em] px-2 py-0.5 rounded-[2px] bg-accent/15 border border-accent/40 text-accent uppercase font-bold">
               {role}
             </span>
           </div>
-          <p className="font-azeret text-[10px] tracking-[0.15em] text-white/40 uppercase mt-1">
+          <p className="font-parkinsans text-[10px] tracking-[0.15em] text-white/40 uppercase mt-1">
             {cockpitSubtitle}
           </p>
         </div>
@@ -175,13 +175,13 @@ export default async function DashboardPage({ searchParams }) {
           <>
             <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
               <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
+              <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
                 AWAITING TRIAGE
               </div>
-              <div className="font-roc text-3xl sm:text-4xl font-bold text-accent mt-1">
+              <div className="font-artific text-3xl sm:text-4xl font-bold text-accent mt-1">
                 {newInquiries.toString().padStart(2, "0")}
               </div>
-              <div className="font-azeret text-[9px] tracking-[0.15em] text-accent mt-2 flex items-center gap-1.5">
+              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-accent mt-2 flex items-center gap-1.5">
                 <span className="size-1.5 rounded-full bg-accent animate-pulse" />
                 <span>UNREAD INTAKES</span>
               </div>
@@ -189,39 +189,39 @@ export default async function DashboardPage({ searchParams }) {
 
             <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
               <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
+              <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
                 TOTAL LEADS
               </div>
-              <div className="font-roc text-3xl sm:text-4xl font-bold text-white mt-1">
+              <div className="font-artific text-3xl sm:text-4xl font-bold text-white mt-1">
                 {inquiryCount.toString().padStart(2, "0")}
               </div>
-              <div className="font-azeret text-[9px] tracking-[0.15em] text-emerald-500 mt-2">
+              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-emerald-500 mt-2">
                 ACROSS ALL CHANNELS
               </div>
             </div>
 
             <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
               <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
+              <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
                 CRITICAL LEADS
               </div>
-              <div className="font-roc text-3xl sm:text-4xl font-bold text-white mt-1">
+              <div className="font-artific text-3xl sm:text-4xl font-bold text-white mt-1">
                 {urgentInquiries.toString().padStart(2, "0")}
               </div>
-              <div className="font-azeret text-[9px] tracking-[0.15em] text-amber-500 mt-2">
+              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-amber-500 mt-2">
                 ENTERPRISE PRIORITY
               </div>
             </div>
 
             <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
               <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
+              <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
                 TEAM ARCHITECTS
               </div>
-              <div className="font-roc text-3xl sm:text-4xl font-bold text-white mt-1">
+              <div className="font-artific text-3xl sm:text-4xl font-bold text-white mt-1">
                 {memberCount.toString().padStart(2, "0")}
               </div>
-              <div className="font-azeret text-[9px] tracking-[0.15em] text-white/50 mt-2">
+              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-white/50 mt-2">
                 AVAILABLE FOR ASSIGNMENT
               </div>
             </div>
@@ -230,52 +230,52 @@ export default async function DashboardPage({ searchParams }) {
           <>
             <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
               <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
+              <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
                 TOTAL PUBLICATIONS
               </div>
-              <div className="font-roc text-3xl sm:text-4xl font-bold text-white mt-1">
+              <div className="font-artific text-3xl sm:text-4xl font-bold text-white mt-1">
                 {articleCount.toString().padStart(2, "0")}
               </div>
-              <div className="font-azeret text-[9px] tracking-[0.15em] text-white/50 mt-2">
+              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-white/50 mt-2">
                 RESEARCH PAPERS & POSTS
               </div>
             </div>
 
             <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
               <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
+              <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
                 PUBLISHED ARTICLES
               </div>
-              <div className="font-roc text-3xl sm:text-4xl font-bold text-emerald-400 mt-1">
+              <div className="font-artific text-3xl sm:text-4xl font-bold text-emerald-400 mt-1">
                 {publishedCount.toString().padStart(2, "0")}
               </div>
-              <div className="font-azeret text-[9px] tracking-[0.15em] text-emerald-500 mt-2">
+              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-emerald-500 mt-2">
                 LIVE ON WEBSITE
               </div>
             </div>
 
             <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
               <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
+              <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
                 DRAFTS IN PROGRESS
               </div>
-              <div className="font-roc text-3xl sm:text-4xl font-bold text-amber-400 mt-1">
+              <div className="font-artific text-3xl sm:text-4xl font-bold text-amber-400 mt-1">
                 {draftCount.toString().padStart(2, "0")}
               </div>
-              <div className="font-azeret text-[9px] tracking-[0.15em] text-amber-500 mt-2">
+              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-amber-500 mt-2">
                 PENDING EDITORIAL REVIEW
               </div>
             </div>
 
             <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
               <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
+              <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
                 PORTFOLIO CASE STUDIES
               </div>
-              <div className="font-roc text-3xl sm:text-4xl font-bold text-accent mt-1">
+              <div className="font-artific text-3xl sm:text-4xl font-bold text-accent mt-1">
                 {projectCount.toString().padStart(2, "0")}
               </div>
-              <div className="font-azeret text-[9px] tracking-[0.15em] text-accent mt-2">
+              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-accent mt-2">
                 ACTIVE SHOWCASES
               </div>
             </div>
@@ -285,13 +285,13 @@ export default async function DashboardPage({ searchParams }) {
           <>
             <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
               <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
+              <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
                 TOTAL INTAKES
               </div>
-              <div className="font-roc text-3xl sm:text-4xl font-bold text-white mt-1">
+              <div className="font-artific text-3xl sm:text-4xl font-bold text-white mt-1">
                 {inquiryCount.toString().padStart(2, "0")}
               </div>
-              <div className="font-azeret text-[9px] tracking-[0.15em] text-accent mt-2 flex items-center gap-1.5">
+              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-accent mt-2 flex items-center gap-1.5">
                 <span className="size-1.5 rounded-full bg-accent animate-pulse" />
                 <span>{newInquiries} AWAITING TRIAGE</span>
               </div>
@@ -299,39 +299,39 @@ export default async function DashboardPage({ searchParams }) {
 
             <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
               <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
+              <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
                 PORTFOLIO WORKS
               </div>
-              <div className="font-roc text-3xl sm:text-4xl font-bold text-white mt-1">
+              <div className="font-artific text-3xl sm:text-4xl font-bold text-white mt-1">
                 {projectCount.toString().padStart(2, "0")}
               </div>
-              <div className="font-azeret text-[9px] tracking-[0.15em] text-emerald-500 mt-2">
+              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-emerald-500 mt-2">
                 ACTIVE CASE STUDIES
               </div>
             </div>
 
             <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
               <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
+              <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
                 RESEARCH INSIGHTS
               </div>
-              <div className="font-roc text-3xl sm:text-4xl font-bold text-white mt-1">
+              <div className="font-artific text-3xl sm:text-4xl font-bold text-white mt-1">
                 {articleCount.toString().padStart(2, "0")}
               </div>
-              <div className="font-azeret text-[9px] tracking-[0.15em] text-white/50 mt-2">
+              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-white/50 mt-2">
                 PUBLICATIONS LIVE
               </div>
             </div>
 
             <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
               <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
+              <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
                 ENGINEERING ROSTER
               </div>
-              <div className="font-roc text-3xl sm:text-4xl font-bold text-white mt-1">
+              <div className="font-artific text-3xl sm:text-4xl font-bold text-white mt-1">
                 {memberCount.toString().padStart(2, "0")}
               </div>
-              <div className="font-azeret text-[9px] tracking-[0.15em] text-white/50 mt-2">
+              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-white/50 mt-2">
                 PRACTITIONERS & LEADS
               </div>
             </div>
@@ -347,16 +347,16 @@ export default async function DashboardPage({ searchParams }) {
             href="/dashboard/inquiries"
             className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all"
           >
-            <span className="font-azeret text-[9px] tracking-[0.2em] text-accent uppercase">
-              MODULE 01 // CRM
+            <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
+              MODULE 01 · CRM
             </span>
-            <h2 className="font-roc text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
+            <h2 className="font-artific text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
               CLIENT INTAKE & COMMUNICATIONS
             </h2>
-            <p className="font-roc text-xs text-white/60 mt-2 leading-relaxed">
+            <p className="font-artific text-xs text-white/60 mt-2 leading-relaxed">
               Triage website leads, access 1-click WhatsApp and call triggers, and log team notes.
             </p>
-            <div className="mt-4 flex items-center gap-2 font-azeret text-[10px] tracking-[0.15em] text-white/40 group-hover:text-white uppercase transition-colors">
+            <div className="mt-4 flex items-center gap-2 font-parkinsans text-[10px] tracking-[0.15em] text-white/40 group-hover:text-white uppercase transition-colors">
               <span>OPEN PIPELINE</span>
               <span>→</span>
             </div>
@@ -369,16 +369,16 @@ export default async function DashboardPage({ searchParams }) {
             href="/dashboard/insights"
             className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all"
           >
-            <span className="font-azeret text-[9px] tracking-[0.2em] text-accent uppercase">
-              MODULE {isEditor ? "01" : "02"} // CMS
+            <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
+              MODULE {isEditor ? "01" : "02"} · CMS
             </span>
-            <h2 className="font-roc text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
+            <h2 className="font-artific text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
               RESEARCH & INSIGHTS PUBLISHING
             </h2>
-            <p className="font-roc text-xs text-white/60 mt-2 leading-relaxed">
+            <p className="font-artific text-xs text-white/60 mt-2 leading-relaxed">
               Author technical whitepapers with split-screen Markdown, math formulas, and code syntax.
             </p>
-            <div className="mt-4 flex items-center gap-2 font-azeret text-[10px] tracking-[0.15em] text-white/40 group-hover:text-white uppercase transition-colors">
+            <div className="mt-4 flex items-center gap-2 font-parkinsans text-[10px] tracking-[0.15em] text-white/40 group-hover:text-white uppercase transition-colors">
               <span>MANAGE ARTICLES</span>
               <span>→</span>
             </div>
@@ -391,16 +391,16 @@ export default async function DashboardPage({ searchParams }) {
             href="/dashboard/portfolio"
             className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all"
           >
-            <span className="font-azeret text-[9px] tracking-[0.2em] text-accent uppercase">
-              MODULE {isEditor ? "02" : "03"} // CMS
+            <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
+              MODULE {isEditor ? "02" : "03"} · CMS
             </span>
-            <h2 className="font-roc text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
+            <h2 className="font-artific text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
               PORTFOLIO & PRODUCTS
             </h2>
-            <p className="font-roc text-xs text-white/60 mt-2 leading-relaxed">
+            <p className="font-artific text-xs text-white/60 mt-2 leading-relaxed">
               Maintain case studies, impact metrics, tech stack badges, and vector deliverable assets.
             </p>
-            <div className="mt-4 flex items-center gap-2 font-azeret text-[10px] tracking-[0.15em] text-white/40 group-hover:text-white uppercase transition-colors">
+            <div className="mt-4 flex items-center gap-2 font-parkinsans text-[10px] tracking-[0.15em] text-white/40 group-hover:text-white uppercase transition-colors">
               <span>MANAGE SHOWCASE</span>
               <span>→</span>
             </div>
@@ -413,18 +413,18 @@ export default async function DashboardPage({ searchParams }) {
             href="/dashboard/team"
             className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all"
           >
-            <span className="font-azeret text-[9px] tracking-[0.2em] text-accent uppercase">
-              MODULE 04 // {role === "OPERATIONS_LEAD" ? "REF" : "CMS"}
+            <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
+              MODULE 04 · {role === "OPERATIONS_LEAD" ? "REF" : "CMS"}
             </span>
-            <h2 className="font-roc text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
+            <h2 className="font-artific text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
               {role === "OPERATIONS_LEAD" ? "TEAM PRACTITIONER DIRECTORY" : "TEAM & LEADERSHIP ROSTER"}
             </h2>
-            <p className="font-roc text-xs text-white/60 mt-2 leading-relaxed">
+            <p className="font-artific text-xs text-white/60 mt-2 leading-relaxed">
               {role === "OPERATIONS_LEAD"
                 ? "Reference practitioner disciplines to assign appropriate technical leads to client briefs."
                 : "Manage leadership profiles, engineering practitioner specialties, and 4:5 headshots."}
             </p>
-            <div className="mt-4 flex items-center gap-2 font-azeret text-[10px] tracking-[0.15em] text-white/40 group-hover:text-white uppercase transition-colors">
+            <div className="mt-4 flex items-center gap-2 font-parkinsans text-[10px] tracking-[0.15em] text-white/40 group-hover:text-white uppercase transition-colors">
               <span>{role === "OPERATIONS_LEAD" ? "VIEW DIRECTORY" : "MANAGE TEAM"}</span>
               <span>→</span>
             </div>
@@ -437,18 +437,18 @@ export default async function DashboardPage({ searchParams }) {
             href="/dashboard/services"
             className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all"
           >
-            <span className="font-azeret text-[9px] tracking-[0.2em] text-accent uppercase">
-              MODULE 05 // {role === "OPERATIONS_LEAD" ? "REF" : "CMS"}
+            <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
+              MODULE 05 · {role === "OPERATIONS_LEAD" ? "REF" : "CMS"}
             </span>
-            <h2 className="font-roc text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
+            <h2 className="font-artific text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
               {role === "OPERATIONS_LEAD" ? "PRACTICE PILLARS & SCOPE" : "PRACTICE PILLARS & SERVICES"}
             </h2>
-            <p className="font-roc text-xs text-white/60 mt-2 leading-relaxed">
+            <p className="font-artific text-xs text-white/60 mt-2 leading-relaxed">
               {role === "OPERATIONS_LEAD"
                 ? "Reference the 6 practice pillars and deliverables matrix when scoping client proposals."
                 : "Edit the 6 practice pillars, capabilities table matrix, and creative service packages."}
             </p>
-            <div className="mt-4 flex items-center gap-2 font-azeret text-[10px] tracking-[0.15em] text-white/40 group-hover:text-white uppercase transition-colors">
+            <div className="mt-4 flex items-center gap-2 font-parkinsans text-[10px] tracking-[0.15em] text-white/40 group-hover:text-white uppercase transition-colors">
               <span>{role === "OPERATIONS_LEAD" ? "VIEW PILLARS" : "MANAGE SERVICES"}</span>
               <span>→</span>
             </div>
@@ -461,16 +461,16 @@ export default async function DashboardPage({ searchParams }) {
             href="/dashboard/settings"
             className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all"
           >
-            <span className="font-azeret text-[9px] tracking-[0.2em] text-accent uppercase">
-              MODULE 06 // SYSTEM
+            <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
+              MODULE 06 · SYSTEM
             </span>
-            <h2 className="font-roc text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
+            <h2 className="font-artific text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
               TELEMETRY, RBAC & AUDIT LOGS
             </h2>
-            <p className="font-roc text-xs text-white/60 mt-2 leading-relaxed">
+            <p className="font-artific text-xs text-white/60 mt-2 leading-relaxed">
               Configure ticker tokens, review mutation audit trails, and manage team member access.
             </p>
-            <div className="mt-4 flex items-center gap-2 font-azeret text-[10px] tracking-[0.15em] text-white/40 group-hover:text-white uppercase transition-colors">
+            <div className="mt-4 flex items-center gap-2 font-parkinsans text-[10px] tracking-[0.15em] text-white/40 group-hover:text-white uppercase transition-colors">
               <span>SYSTEM SETTINGS</span>
               <span>→</span>
             </div>
@@ -483,16 +483,16 @@ export default async function DashboardPage({ searchParams }) {
         <section className="bg-[#121212] border border-white/10 rounded-[3px] p-6">
           <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
             <div>
-              <h3 className="font-roc text-lg font-bold uppercase text-white">
+              <h3 className="font-artific text-lg font-bold uppercase text-white">
                 RECENT INTAKE TELEMETRY
               </h3>
-              <p className="font-azeret text-[10px] tracking-[0.15em] text-white/40 uppercase">
+              <p className="font-parkinsans text-[10px] tracking-[0.15em] text-white/40 uppercase">
                 LATEST INQUIRIES RECEIVED ACROSS PLATFORM
               </p>
             </div>
             <Link
               href="/dashboard/inquiries"
-              className="font-azeret text-[10px] tracking-[0.2em] text-accent hover:underline uppercase font-bold"
+              className="font-parkinsans text-[10px] tracking-[0.2em] text-accent hover:underline uppercase font-bold"
             >
               VIEW ALL INTAKES →
             </Link>
@@ -501,7 +501,7 @@ export default async function DashboardPage({ searchParams }) {
           <div className="overflow-x-auto">
             <table className="w-full text-left font-sans">
               <thead>
-                <tr className="border-b border-white/10 font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
+                <tr className="border-b border-white/10 font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
                   <th className="py-2.5 px-3">TELEMETRY CODE</th>
                   <th className="py-2.5 px-3">CLIENT / COMPANY</th>
                   <th className="py-2.5 px-3">DISCIPLINE</th>
@@ -510,7 +510,7 @@ export default async function DashboardPage({ searchParams }) {
                   <th className="py-2.5 px-3 text-right">ACTION</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5 font-azeret text-xs">
+              <tbody className="divide-y divide-white/5 font-parkinsans text-xs">
                 {recentInquiries.map((inq) => (
                   <tr key={inq.id} className="hover:bg-white/[0.02] transition-colors">
                     <td className="py-3 px-3 text-accent font-semibold tracking-wider">
@@ -530,7 +530,7 @@ export default async function DashboardPage({ searchParams }) {
                     <td className="py-3 px-3 text-right">
                       <Link
                         href={`/dashboard/inquiries/${inq.id}`}
-                        className="inline-flex items-center px-2.5 py-1 bg-white/[0.03] hover:bg-accent hover:text-black border border-white/15 text-white/80 font-azeret text-[9px] tracking-wider uppercase rounded-[2px] transition-colors"
+                        className="inline-flex items-center px-2.5 py-1 bg-white/[0.03] hover:bg-accent hover:text-black border border-white/15 text-white/80 font-parkinsans text-[9px] tracking-wider uppercase rounded-[2px] transition-colors"
                       >
                         OPEN DOSSIER →
                       </Link>
@@ -545,16 +545,16 @@ export default async function DashboardPage({ searchParams }) {
         <section className="bg-[#121212] border border-white/10 rounded-[3px] p-6">
           <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
             <div>
-              <h3 className="font-roc text-lg font-bold uppercase text-white">
+              <h3 className="font-artific text-lg font-bold uppercase text-white">
                 RECENT STUDIO PUBLICATIONS
               </h3>
-              <p className="font-azeret text-[10px] tracking-[0.15em] text-white/40 uppercase">
+              <p className="font-parkinsans text-[10px] tracking-[0.15em] text-white/40 uppercase">
                 RESEARCH ARTICLES & ARCHITECTURAL WHITEPAPERS
               </p>
             </div>
             <Link
               href="/dashboard/insights"
-              className="font-azeret text-[10px] tracking-[0.2em] text-accent hover:underline uppercase font-bold"
+              className="font-parkinsans text-[10px] tracking-[0.2em] text-accent hover:underline uppercase font-bold"
             >
               VIEW ALL ARTICLES →
             </Link>
@@ -563,7 +563,7 @@ export default async function DashboardPage({ searchParams }) {
           <div className="overflow-x-auto">
             <table className="w-full text-left font-sans">
               <thead>
-                <tr className="border-b border-white/10 font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
+                <tr className="border-b border-white/10 font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
                   <th className="py-2.5 px-3">ARTICLE TITLE</th>
                   <th className="py-2.5 px-3">CATEGORY</th>
                   <th className="py-2.5 px-3">READ TIME</th>
@@ -571,7 +571,7 @@ export default async function DashboardPage({ searchParams }) {
                   <th className="py-2.5 px-3 text-right">ACTION</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5 font-azeret text-xs">
+              <tbody className="divide-y divide-white/5 font-parkinsans text-xs">
                 {recentArticles.map((art) => (
                   <tr key={art.id} className="hover:bg-white/[0.02] transition-colors">
                     <td className="py-3 px-3 text-white font-semibold">
@@ -582,14 +582,14 @@ export default async function DashboardPage({ searchParams }) {
                     </td>
                     <td className="py-3 px-3 text-white/70">{art.readingTime}</td>
                     <td className="py-3 px-3">
-                      <span className={`px-2 py-0.5 rounded-[2px] font-azeret text-[9px] font-bold tracking-wider uppercase ${art.status === "PUBLISHED" ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40" : "bg-amber-500/20 text-amber-400 border border-amber-500/40"}`}>
+                      <span className={`px-2 py-0.5 rounded-[2px] font-parkinsans text-[9px] font-bold tracking-wider uppercase ${art.status === "PUBLISHED" ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40" : "bg-amber-500/20 text-amber-400 border border-amber-500/40"}`}>
                         {art.status}
                       </span>
                     </td>
                     <td className="py-3 px-3 text-right">
                       <Link
                         href={`/dashboard/insights/${art.id}`}
-                        className="inline-flex items-center px-2.5 py-1 bg-white/[0.03] hover:bg-accent hover:text-black border border-white/15 text-white/80 font-azeret text-[9px] tracking-wider uppercase rounded-[2px] transition-colors"
+                        className="inline-flex items-center px-2.5 py-1 bg-white/[0.03] hover:bg-accent hover:text-black border border-white/15 text-white/80 font-parkinsans text-[9px] tracking-wider uppercase rounded-[2px] transition-colors"
                       >
                         EDIT ARTICLE →
                       </Link>

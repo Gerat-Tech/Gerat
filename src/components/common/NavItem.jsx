@@ -12,7 +12,7 @@ export default function NavItem({
   return (
     <div
       onMouseEnter={onMouseEnter}
-      className={`group/item relative isolate flex items-center gap-2 font-azeret text-[11px] sm:text-[12px] tracking-[0.15em] uppercase whitespace-nowrap px-4 py-2.5 transition-colors duration-300 select-none ${
+      className={`group/item relative isolate flex items-center gap-2 font-parkinsans text-[11px] sm:text-[12px] tracking-[0.15em] uppercase whitespace-nowrap px-4 py-2.5 transition-colors duration-300 select-none ${
         isCurrent ? "text-white" : "text-white/70 hover:text-white"
       } ${className}`}
     >
@@ -21,7 +21,7 @@ export default function NavItem({
         <div
           className={`size-[7px] rounded-[1px] transition-all duration-400 ease-(--ease-primary) ${
             isCurrent
-              ? "bg-accent opacity-100 translate-x-0 blur-0 shadow-[0_0_8px_rgba(255,74,0,0.8)]"
+              ? "bg-accent opacity-100 translate-x-0 blur-0 shadow-[0_0_8px_rgba(234,91,21,0.8)]"
               : "bg-white -translate-x-3 opacity-0 blur-[8px] group-hover/item:translate-x-0 group-hover/item:opacity-100 group-hover/item:blur-0"
           }`}
           aria-hidden="true"

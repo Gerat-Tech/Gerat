@@ -64,18 +64,18 @@ export default function ServicesOverview({ initialPillars = null }) {
             <SplitText
               text="PURPOSE-BUILT DIGITAL SYSTEMS."
               as="h1"
-              className="font-roc text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+              className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
             />
             <SplitText
               text="MISSION-CRITICAL DELIVERY."
               as="div"
               wordClassName="text-accent"
-              className="font-roc text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+              className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
             />
           </div>
 
           <FadeUp delay={0.3} y={16}>
-            <p className="font-roc text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed">
+            <p className="font-parkinsans text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed">
               We engineer bespoke digital platforms, enterprise software, and
               applied AI systems designed to solve foundational operational
               challenges for institutions, enterprises, and public services.
@@ -86,7 +86,7 @@ export default function ServicesOverview({ initialPillars = null }) {
             <button
               type="button"
               onClick={openContact}
-              className="inline-flex items-center font-azeret text-[11px] uppercase tracking-[0.2em] px-8 py-4 bg-accent text-white font-bold hover:bg-white hover:text-black transition-all rounded-[2px]"
+              className="inline-flex items-center font-parkinsans text-[11px] uppercase tracking-[0.2em] px-8 py-4 bg-accent text-white font-bold hover:bg-white hover:text-black transition-all rounded-[2px]"
             >
               <span>DISCUSS YOUR SYSTEM REQUIREMENTS</span>
               <span className="ml-2">→</span>
@@ -94,8 +94,8 @@ export default function ServicesOverview({ initialPillars = null }) {
           </FadeUp>
         </div>
 
-        <div className="mt-12 pt-4 border-t border-white/10 flex items-center justify-between font-azeret text-[10px] tracking-[0.2em] text-white/40 uppercase">
-          <span>PILLARS // 06 CORE PRACTICES (FROM IDENTITY TO INFRASTRUCTURE)</span>
+        <div className="mt-12 pt-4 border-t border-white/10 flex items-center justify-between font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
+          <span>PILLARS · 06 CORE PRACTICES (FROM IDENTITY TO INFRASTRUCTURE)</span>
           <span>EXPLORE ARCHITECTURE ↓</span>
         </div>
       </section>
@@ -113,29 +113,29 @@ export default function ServicesOverview({ initialPillars = null }) {
                 <span className="absolute bottom-0 right-0 size-2 border-b border-r border-white/30 group-hover:border-accent transition-colors" />
 
                 <div className="flex items-center justify-between">
-                  <span className="font-azeret text-[11px] tracking-[0.2em] text-accent font-bold">
-                    PRACTICE // {pillar.num}
+                  <span className="font-parkinsans text-[11px] tracking-[0.2em] text-accent font-bold">
+                    PRACTICE · {pillar.num}
                   </span>
                   <div className="size-2 rounded-[1px] bg-white/20 group-hover:bg-accent transition-colors" />
                 </div>
 
                 <div className="flex flex-col gap-3 my-6">
-                  <span className="font-azeret text-[9px] tracking-[0.2em] text-white/50 uppercase">
+                  <span className="font-parkinsans text-[9px] tracking-[0.2em] text-white/50 uppercase">
                     {pillar.tagline}
                   </span>
-                  <h2 className="font-roc text-2xl sm:text-3xl font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
+                  <h2 className="font-artific text-2xl sm:text-3xl font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
                     {pillar.title}
                   </h2>
-                  <p className="font-roc text-xs sm:text-sm text-white/70 leading-relaxed">
+                  <p className="font-parkinsans text-xs sm:text-sm text-white/70 leading-relaxed">
                     {pillar.desc}
                   </p>
                 </div>
 
                 <div className="pt-6 border-t border-white/10">
-                  <span className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase block mb-3">
+                  <span className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase block mb-3">
                     CORE DELIVERABLES
                   </span>
-                  <ul className="space-y-1.5 font-azeret text-[10px] tracking-[0.15em] text-white/60">
+                  <ul className="space-y-1.5 font-parkinsans text-[10px] tracking-[0.15em] text-white/60">
                     {(pillar.deliverables || []).map((del) => (
                       <li key={del} className="flex items-center gap-2">
                         <span className="text-accent">•</span>
@@ -153,7 +153,7 @@ export default function ServicesOverview({ initialPillars = null }) {
                             ? "/services/brand-creative"
                             : "/services/personal-branding")
                         }
-                        className="inline-flex items-center gap-1.5 font-azeret text-[9px] tracking-[0.2em] uppercase text-accent hover:text-white transition-colors"
+                        className="inline-flex items-center gap-1.5 font-parkinsans text-[9px] tracking-[0.2em] uppercase text-accent hover:text-white transition-colors"
                       >
                         <span>
                           {pillar.num === "05"

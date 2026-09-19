@@ -11,11 +11,11 @@ export async function generateMetadata({ params }) {
   });
 
   if (!member) {
-    return { title: "Team Member Not Found // Gerat Mission Control" };
+    return { title: "Team Member Not Found · Gerat Mission Control" };
   }
 
   return {
-    title: `Edit: ${member.name} // Gerat Mission Control`,
+    title: `Edit: ${member.name} · Gerat Mission Control`,
     description: `Update profile for ${member.name} (${member.roleTitle})`,
   };
 }

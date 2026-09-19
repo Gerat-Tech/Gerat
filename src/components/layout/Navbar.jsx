@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ContactDrawer from "./ContactDrawer";
 import NavItem from "../common/NavItem";
+import GeratLogo from "../common/GeratLogo";
 import { useNav } from "@/context/NavContext";
 import { useTheme } from "@/context/ThemeContext";
 
@@ -131,7 +132,7 @@ export default function Navbar() {
       >
         {/* Global Announcement Banner from SiteConfig */}
         {announcement?.enabled && announcement?.text && (
-          <div className="w-full bg-[#0d0d0d]/95 backdrop-blur-md border-b border-accent/40 text-[10px] sm:text-[11px] font-azeret uppercase tracking-[0.2em] py-2 px-4 text-center text-white/90 flex items-center justify-center gap-2 sm:gap-3 shadow-md">
+          <div className="w-full bg-[var(--surface)]/95 backdrop-blur-md border-b border-accent/40 text-[10px] sm:text-[11px] font-parkinsans uppercase tracking-[0.2em] py-2 px-4 text-center text-white/90 flex items-center justify-center gap-2 sm:gap-3 shadow-md">
             <span className="inline-block size-1.5 rounded-full bg-accent animate-pulse shrink-0" />
             <span className="truncate max-w-[70vw] sm:max-w-none">{announcement.text}</span>
             {announcement.link && (
@@ -149,34 +150,20 @@ export default function Navbar() {
           <div
             className={`mx-auto flex items-center justify-between transition-all duration-500 ease-(--ease-primary) ${
               isScrolled
-                ? "bg-[#111111]/85 backdrop-blur-md border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.6)] rounded-xl py-2 px-4 sm:px-6 md:w-fit"
+                ? "bg-[var(--surface-raised)]/85 backdrop-blur-md border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.6)] rounded-xl py-2 px-4 sm:px-6 md:w-fit"
                 : "bg-transparent border-b border-white/10 pb-3 sm:pb-4 px-2"
             }`}
           >
-            {/* Brand Logo */}
+            {/* Brand Logo - Official Badge Logo */}
             <Link
               href="/"
-              className="flex items-center gap-3 text-white group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded-sm"
-              aria-label="Gerat Software Solutions PLC - Home"
+              className="flex items-center text-white group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded-sm py-1"
+              aria-label="Gerat Software Solution - Home"
             >
-              {/* Gerat Monogram Icon */}
-              <div className="size-8 rounded-[4px] bg-white/5 border border-white/15 flex items-center justify-center text-white group-hover:border-accent transition-colors duration-300 shrink-0">
-                <GeratMonogram />
-              </div>
-
-              {/* Logo Typography (Collapses smoothly when scrolled in center mode) */}
-              <div
-                className={`flex flex-col overflow-hidden transition-all duration-400 ${
-                  isScrolled ? "hidden sm:flex" : "flex"
-                }`}
-              >
-                <span className="font-roc text-[14px] sm:text-[15px] font-bold tracking-[0.18em] leading-tight text-white group-hover:text-accent transition-colors">
-                  GERAT
-                </span>
-                <span className="font-azeret text-[8px] tracking-[0.22em] text-white/50 leading-tight">
-                  SOFTWARE SOLUTIONS
-                </span>
-              </div>
+              <GeratLogo
+                variant="badge"
+                className="h-8 sm:h-9 w-auto text-white group-hover:text-accent transition-colors duration-300"
+              />
             </Link>
 
             {/* Desktop Navigation Links (>= 1024px) */}
@@ -243,7 +230,7 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={openContact}
-                className="relative group/btn font-azeret text-[11px] uppercase tracking-[0.2em] px-4 py-2 text-white/90 border border-white/20 hover:border-accent hover:text-white bg-white/5 hover:bg-accent/10 transition-all duration-300 rounded-[2px] select-none cursor-pointer"
+                className="relative group/btn font-parkinsans text-[11px] uppercase tracking-[0.2em] px-4 py-2 text-white/90 border border-white/20 hover:border-accent hover:text-white bg-white/5 hover:bg-accent/10 transition-all duration-300 rounded-[2px] select-none cursor-pointer"
               >
                 <span>CONTACT</span>
                 {/* Micro corner indicators */}
@@ -310,7 +297,7 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className={`relative p-5 text-center font-azeret text-[12px] tracking-[0.2em] uppercase border transition-all duration-300 rounded-[2px] ${
+                  className={`relative p-5 text-center font-parkinsans text-[12px] tracking-[0.2em] uppercase border transition-all duration-300 rounded-[2px] ${
                     isCurrent
                       ? "border-accent text-white bg-accent/10"
                       : "border-white/15 text-white/80 hover:text-white hover:border-white/40 bg-white/[0.02]"
@@ -329,21 +316,21 @@ export default function Navbar() {
 
           {/* Creative Quick Links on Mobile */}
           <div className="flex flex-col gap-1.5 pt-1">
-            <span className="font-azeret text-[9px] tracking-[0.2em] text-accent uppercase text-center">
+            <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase text-center">
               CREATIVE & IDENTITY
             </span>
             <div className="grid grid-cols-2 gap-2">
               <Link
                 href="/services/brand-creative"
                 onClick={() => setIsMenuOpen(false)}
-                className="py-2.5 px-2 text-center font-azeret text-[10px] tracking-[0.1em] uppercase border border-white/10 text-white/70 hover:text-white rounded-[2px] bg-white/[0.01]"
+                className="py-2.5 px-2 text-center font-parkinsans text-[10px] tracking-[0.1em] uppercase border border-white/10 text-white/70 hover:text-white rounded-[2px] bg-white/[0.01]"
               >
                 BRAND & LOGO
               </Link>
               <Link
                 href="/services/personal-branding"
                 onClick={() => setIsMenuOpen(false)}
-                className="py-2.5 px-2 text-center font-azeret text-[10px] tracking-[0.1em] uppercase border border-white/10 text-white/70 hover:text-white rounded-[2px] bg-white/[0.01]"
+                className="py-2.5 px-2 text-center font-parkinsans text-[10px] tracking-[0.1em] uppercase border border-white/10 text-white/70 hover:text-white rounded-[2px] bg-white/[0.01]"
               >
                 FOUNDER BRAND
               </Link>
@@ -352,10 +339,10 @@ export default function Navbar() {
 
           {/* Theme Selector on Mobile */}
           <div className="flex items-center justify-between p-3 border border-white/10 rounded-[2px] bg-white/[0.02]">
-            <span className="font-azeret text-[10px] tracking-[0.15em] text-white/50 uppercase">
+            <span className="font-parkinsans text-[10px] tracking-[0.15em] text-white/50 uppercase">
               APPEARANCE THEME:
             </span>
-            <div className="flex items-center gap-1 font-azeret text-[10px] uppercase">
+            <div className="flex items-center gap-1 font-parkinsans text-[10px] uppercase">
               <button
                 type="button"
                 onClick={() => {
@@ -392,50 +379,23 @@ export default function Navbar() {
               setIsMenuOpen(false);
               openContact();
             }}
-            className="relative w-full p-4 mt-1 text-center font-azeret text-[12px] tracking-[0.2em] uppercase border border-accent/80 text-white bg-accent/20 hover:bg-accent/30 transition-all rounded-[2px]"
+            className="relative w-full p-4 mt-1 text-center font-parkinsans text-[12px] tracking-[0.2em] uppercase border border-accent/80 text-white bg-accent/20 hover:bg-accent/30 transition-all rounded-[2px]"
           >
             <span className="absolute top-0 left-0 size-1.5 border-t border-l border-accent" />
             <span className="absolute top-0 right-0 size-1.5 border-t border-r border-accent" />
             <span className="absolute bottom-0 left-0 size-1.5 border-b border-l border-accent" />
             <span className="absolute bottom-0 right-0 size-1.5 border-b border-r border-accent" />
-            START A PROJECT / CONTACT
+            START A PROJECT · CONTACT
           </button>
         </div>
 
-        <div className="text-center font-azeret text-[10px] tracking-[0.15em] text-white/40 uppercase">
-          © 2026 GERAT SOFTWARE SOLUTIONS PLC
+        <div className="text-center font-parkinsans text-[10px] tracking-[0.15em] text-white/40 uppercase">
+          © 2026 GERAT SOFTWARE SOLUTION
         </div>
       </div>
 
       {/* Global Contact Drawer */}
       <ContactDrawer open={isContactOpen} setOpen={setIsContactOpen} />
     </>
-  );
-}
-
-/**
- * Clean architectural Gerat monogram
- */
-function GeratMonogram() {
-  return (
-    <svg
-      className="size-5"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <path
-        d="M3 5V19H19V13H11V11H21V5H3Z"
-        fill="currentColor"
-      />
-      <rect
-        x="13"
-        y="15"
-        width="4"
-        height="4"
-        fill="var(--accent, #ff4a00)"
-      />
-    </svg>
   );
 }

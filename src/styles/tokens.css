@@ -1,31 +1,37 @@
 :root {
   /* ==========================================================================
-     Color System (Spec §3.1)
-     Dark, high-contrast, editorial palette with restrained accenting
+     Color System (Gerat Brand Specification)
+     Warm obsidian palette grounded in Coffee Bean (#300F0A) with Flame (#EA5B15)
      ========================================================================== */
-  --bg: #050505;
-  --bg-subtle: #0b0b0b;
-  --surface: #141414;
-  --surface-2: #1b1b1b;
-  --surface-3: #242424;
+  --bg: #0d0706;
+  --bg-subtle: #140c0a;
+  --surface: #1c120f;
+  --surface-2: #261814;
+  --surface-3: #33211c;
 
-  /* Contrast Hierarchy (Spec §3.2) */
-  --text-primary: #f0f0f0;      /* Level 1: Huge headlines, high clarity */
-  --text-secondary: #c4c4c4;    /* Level 2: Descriptions, main nav */
-  --text-muted: #8e8e8e;        /* Level 3: Metadata, captions, mono labels */
-  --text-dim: #525252;          /* Level 4: Subtle markers */
+  /* Contrast Hierarchy */
+  --text-primary: #faf6ed;      /* Level 1: Ivory cream headlines, high clarity */
+  --text-secondary: #d5c3bc;    /* Level 2: Warm Almond descriptions, main nav */
+  --text-muted: #9e8a83;        /* Level 3: Metadata, captions, mono labels */
+  --text-dim: #63534d;          /* Level 4: Subtle markers */
   
-  /* Borders & Rules (Spec §3.1, §7) */
-  --border: #303030;
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-medium: rgba(255, 255, 255, 0.16);
-  --border-strong: rgba(255, 255, 255, 0.32);
+  /* Borders & Rules */
+  --border: #38241e;
+  --border-subtle: rgba(241, 223, 217, 0.08);
+  --border-medium: rgba(241, 223, 217, 0.16);
+  --border-strong: rgba(241, 223, 217, 0.28);
 
-  /* Brand Accent */
-  --accent: #ff4a00;
-  --accent-hover: #ff6524;
-  --accent-subtle: rgba(255, 74, 0, 0.12);
-  --accent-glow: rgba(255, 74, 0, 0.35);
+  /* Brand Accent: Flame */
+  --accent: #ea5b15;
+  --accent-hover: #fa6c26;
+  --accent-subtle: rgba(234, 91, 21, 0.12);
+  --accent-glow: rgba(234, 91, 21, 0.35);
+
+  /* Brand Primitives */
+  --brand-flame: #ea5b15;
+  --brand-coffee: #300f0a;
+  --brand-almond: #f1dfd9;
+  --brand-cream: #faf6ed;
 
   /* Layout Dimensions */
   --header-height: 64px;
@@ -77,36 +83,36 @@
 }
 
 /* ==========================================================================
-   Universal Light Mode Color Tokens (Spec §3.1 + Architectural Gray System)
-   Canvas: #F0F2F5 (soft cool gray)
-   Cards: #E2E6EC (medium gray cards)
-   Elevated / Hover: #D8DEE6
-   Text Primary: #0B0F17 (high contrast dark charcoal)
-   Text Secondary: #1F242E
-   Text Muted: #4B5565
-   Text Dim: #6B7280
-   Borders: #CBD2DC
+   Universal Light Mode Color Tokens (Almond & Coffee Bean Brand System)
+   Canvas: #F1DFD9 (warm Almond neutral)
+   Cards: #FAF6ED (crisp Ivory cards for maximum clarity)
+   Elevated / Hover: #E8D5CE
+   Text Primary: #300F0A (high contrast deep Coffee Bean)
+   Text Secondary: #4E241C
+   Text Muted: #7E564E
+   Text Dim: #9B7871
+   Borders: #D0BCB4
    ========================================================================== */
 html.light,
 html.site-light {
-  --bg: #F0F2F5;
-  --bg-subtle: #E8ECF2;
-  --surface: #E2E6EC;
-  --surface-2: #D8DEE6;
-  --surface-3: #CBD2DC;
+  --bg: #F1DFD9;
+  --bg-subtle: #EADBCE;
+  --surface: #FAF6ED;
+  --surface-2: #E8D5CE;
+  --surface-3: #DFCCC4;
 
-  --text-primary: #0B0F17;
-  --text-secondary: #1F242E;
-  --text-muted: #4B5565;
-  --text-dim: #6B7280;
+  --text-primary: #300F0A;
+  --text-secondary: #4E241C;
+  --text-muted: #7E564E;
+  --text-dim: #9B7871;
 
-  --border: #CBD2DC;
-  --border-subtle: rgba(11, 15, 23, 0.10);
-  --border-medium: rgba(11, 15, 23, 0.20);
-  --border-strong: rgba(11, 15, 23, 0.40);
+  --border: #D0BCB4;
+  --border-subtle: rgba(48, 15, 10, 0.08);
+  --border-medium: rgba(48, 15, 10, 0.16);
+  --border-strong: rgba(48, 15, 10, 0.28);
 
-  --accent: #FF4A00;
-  --accent-hover: #E03E00;
-  --accent-subtle: rgba(255, 74, 0, 0.12);
-  --accent-glow: rgba(255, 74, 0, 0.25);
+  --accent: #EA5B15;
+  --accent-hover: #300F0A;
+  --accent-subtle: rgba(234, 91, 21, 0.12);
+  --accent-glow: rgba(234, 91, 21, 0.25);
 }

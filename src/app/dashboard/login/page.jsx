@@ -3,6 +3,7 @@
 import React, { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import GeratLogo from "@/components/common/GeratLogo";
 
 function LoginForm() {
   const router = useRouter();
@@ -53,33 +54,24 @@ function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#080808] text-white flex flex-col justify-between p-4 sm:p-8 font-sans selection:bg-accent selection:text-black">
+    <div className="min-h-screen w-full bg-[var(--bg)] text-white flex flex-col justify-between p-4 sm:p-8 font-sans selection:bg-accent selection:text-black">
       {/* Top Header Status */}
       <header className="w-full max-w-5xl mx-auto flex items-center justify-between py-4 border-b border-white/10">
         <Link
           href="/"
-          className="flex items-center gap-3 group text-white/80 hover:text-white transition-colors"
+          className="flex items-center gap-3 group text-white/80 hover:text-white transition-colors py-1"
+          aria-label="Gerat Home"
         >
-          <div className="size-7 rounded-[2px] bg-white/5 border border-white/15 flex items-center justify-center text-white group-hover:border-accent transition-colors">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              className="size-3.5"
-              aria-hidden="true"
-            >
-              <path
-                d="M4 4H20V8H8V16H16V12H12V8H20V20H4V4Z"
-                fill="currentColor"
-              />
-              <rect x="17" y="13" width="3" height="3" fill="#FF4A00" />
-            </svg>
-          </div>
-          <span className="font-azeret text-[11px] tracking-[0.2em] uppercase font-semibold">
-            GERAT // MISSION CONTROL
+          <GeratLogo
+            variant="badge"
+            className="h-7 w-auto text-white group-hover:text-accent transition-colors duration-300"
+          />
+          <span className="font-parkinsans text-[11px] tracking-[0.2em] uppercase font-semibold text-white/50 group-hover:text-white transition-colors">
+            Mission Control
           </span>
         </Link>
 
-        <div className="flex items-center gap-2 font-azeret text-[10px] tracking-[0.15em] text-white/40 uppercase">
+        <div className="flex items-center gap-2 font-parkinsans text-[10px] tracking-[0.15em] text-white/40 uppercase">
           <span className="inline-block size-1.5 rounded-full bg-emerald-500 animate-pulse" />
           <span>PORTAL SECURED</span>
         </div>
@@ -87,7 +79,7 @@ function LoginForm() {
 
       {/* Main Authentication Terminal */}
       <main className="w-full max-w-md mx-auto my-auto py-8">
-        <div className="relative bg-[#121212] border border-white/10 p-8 sm:p-10 rounded-[3px] shadow-[0_16px_64px_rgba(0,0,0,0.8)]">
+        <div className="relative bg-[var(--surface)] border border-white/10 p-8 sm:p-10 rounded-[3px] shadow-[0_16px_64px_rgba(0,0,0,0.8)]">
           {/* Precision Corner Hairline Accents */}
           <span className="absolute top-0 left-0 size-2.5 border-t border-l border-white/30" />
           <span className="absolute top-0 right-0 size-2.5 border-t border-r border-white/30" />
@@ -96,22 +88,22 @@ function LoginForm() {
 
           {/* Form Header */}
           <div className="flex flex-col gap-2 mb-8">
-            <span className="font-azeret text-[10px] tracking-[0.25em] text-accent uppercase">
-              OPERATIONS ACCESS //
+            <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase">
+              INTERNAL PORTAL ACCESS
             </span>
-            <h1 className="font-roc text-2xl sm:text-3xl font-semibold tracking-tight uppercase text-white">
+            <h1 className="font-artific text-2xl sm:text-3xl font-semibold tracking-tight uppercase text-white">
               TEAM AUTHENTICATION
             </h1>
-            <p className="font-roc text-xs sm:text-sm text-white/50 leading-relaxed">
-              Enter authorized credentials to access internal CRM telemetry, client communications, and CMS publishing tools.
+            <p className="font-parkinsans text-xs sm:text-sm text-white/50 leading-relaxed">
+              Enter authorized credentials to access internal CRM records, client communications, and publishing tools.
             </p>
           </div>
 
           {/* Error Alert Box */}
           {error && (
             <div className="mb-6 p-3 bg-red-950/40 border border-red-500/40 rounded-[2px] flex items-start gap-2.5 text-red-300">
-              <span className="font-azeret text-xs mt-0.5">✕</span>
-              <p className="font-azeret text-[11px] tracking-[0.05em] leading-relaxed">
+              <span className="font-parkinsans text-xs mt-0.5">✕</span>
+              <p className="font-parkinsans text-[11px] tracking-[0.05em] leading-relaxed">
                 {error}
               </p>
             </div>
@@ -122,7 +114,7 @@ function LoginForm() {
             <div className="flex flex-col gap-1.5">
               <label
                 htmlFor="email"
-                className="font-azeret text-[10px] tracking-[0.15em] text-white/60 uppercase"
+                className="font-parkinsans text-[10px] tracking-[0.15em] text-white/60 uppercase"
               >
                 OPERATIONAL EMAIL
               </label>
@@ -136,8 +128,8 @@ function LoginForm() {
                   setEmail(e.target.value);
                   setSelectedPreset("");
                 }}
-                placeholder="name@gerat.et"
-                className="w-full bg-black/50 border border-white/15 focus:border-accent text-white px-3.5 py-2.5 rounded-[2px] font-azeret text-xs placeholder:text-white/20 outline-none transition-colors"
+                placeholder="name@gerat.com"
+                className="w-full bg-black/50 border border-white/15 focus:border-accent text-white px-3.5 py-2.5 rounded-[2px] font-parkinsans text-xs placeholder:text-white/20 outline-none transition-colors"
               />
             </div>
 
@@ -145,14 +137,14 @@ function LoginForm() {
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
-                  className="font-azeret text-[10px] tracking-[0.15em] text-white/60 uppercase"
+                  className="font-parkinsans text-[10px] tracking-[0.15em] text-white/60 uppercase"
                 >
                   SECURITY PASSPHRASE
                 </label>
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="font-azeret text-[9px] tracking-[0.15em] text-white/40 hover:text-accent uppercase transition-colors"
+                  className="font-parkinsans text-[9px] tracking-[0.15em] text-white/40 hover:text-accent uppercase transition-colors"
                 >
                   {showPassword ? "HIDE" : "SHOW"}
                 </button>
@@ -169,7 +161,7 @@ function LoginForm() {
                     setSelectedPreset("");
                   }}
                   placeholder="••••••••••••"
-                  className="w-full bg-black/50 border border-white/15 focus:border-accent text-white px-3.5 py-2.5 rounded-[2px] font-azeret text-xs placeholder:text-white/20 outline-none transition-colors"
+                  className="w-full bg-black/50 border border-white/15 focus:border-accent text-white px-3.5 py-2.5 rounded-[2px] font-parkinsans text-xs placeholder:text-white/20 outline-none transition-colors"
                 />
               </div>
             </div>
@@ -177,7 +169,7 @@ function LoginForm() {
             <button
               type="submit"
               disabled={isLoading}
-              className="mt-2 w-full py-3 px-4 bg-accent hover:bg-white hover:text-black text-white font-azeret text-[11px] tracking-[0.2em] uppercase font-bold transition-all rounded-[2px] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              className="mt-2 w-full py-3 px-4 bg-accent hover:bg-white hover:text-black text-white font-parkinsans text-[11px] tracking-[0.2em] uppercase font-bold transition-all rounded-[2px] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <>
@@ -196,14 +188,14 @@ function LoginForm() {
           {/* Development Quick-Fill Helpers */}
           <div className="mt-8 pt-6 border-t border-white/10 flex flex-col gap-2.5">
             <div className="flex items-center justify-between">
-              <span className="font-azeret text-[9px] tracking-[0.2em] text-white/40 uppercase">
+              <span className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
                 QUICK-ACCESS PRESETS (TEAM ROLES):
               </span>
             </div>
-            <div className="grid grid-cols-3 gap-2 font-azeret text-[9px] tracking-[0.1em] uppercase">
+            <div className="grid grid-cols-3 gap-2 font-parkinsans text-[9px] tracking-[0.1em] uppercase">
               <button
                 type="button"
-                onClick={() => handleQuickFill("admin", "admin@gerat.et", "GeratAdmin2026!#")}
+                onClick={() => handleQuickFill("admin", "admin@gerat.com", "GeratAdmin2026!#")}
                 className={`py-2 px-1.5 border rounded-[2px] text-center transition-all flex flex-col items-center gap-0.5 cursor-pointer ${
                   selectedPreset === "admin"
                     ? "bg-accent/15 border-accent text-white"
@@ -211,12 +203,12 @@ function LoginForm() {
                 }`}
               >
                 <span className="font-bold">SUPER ADMIN</span>
-                <span className="text-[7.5px] tracking-normal text-white/40 lowercase">admin@gerat.et</span>
+                <span className="text-[7.5px] tracking-normal text-white/40 lowercase">admin@gerat.com</span>
               </button>
 
               <button
                 type="button"
-                onClick={() => handleQuickFill("ops", "operations@gerat.et", "GeratTeam2026!#")}
+                onClick={() => handleQuickFill("ops", "operations@gerat.com", "GeratTeam2026!#")}
                 className={`py-2 px-1.5 border rounded-[2px] text-center transition-all flex flex-col items-center gap-0.5 cursor-pointer ${
                   selectedPreset === "ops"
                     ? "bg-accent/15 border-accent text-white"
@@ -224,12 +216,12 @@ function LoginForm() {
                 }`}
               >
                 <span className="font-bold">OPS LEAD</span>
-                <span className="text-[7.5px] tracking-normal text-white/40 lowercase">operations@gerat.et</span>
+                <span className="text-[7.5px] tracking-normal text-white/40 lowercase">operations@gerat.com</span>
               </button>
 
               <button
                 type="button"
-                onClick={() => handleQuickFill("editor", "editor@gerat.et", "GeratTeam2026!#")}
+                onClick={() => handleQuickFill("editor", "editor@gerat.com", "GeratTeam2026!#")}
                 className={`py-2 px-1.5 border rounded-[2px] text-center transition-all flex flex-col items-center gap-0.5 cursor-pointer ${
                   selectedPreset === "editor"
                     ? "bg-accent/15 border-accent text-white"
@@ -237,7 +229,7 @@ function LoginForm() {
                 }`}
               >
                 <span className="font-bold">EDITOR</span>
-                <span className="text-[7.5px] tracking-normal text-white/40 lowercase">editor@gerat.et</span>
+                <span className="text-[7.5px] tracking-normal text-white/40 lowercase">editor@gerat.com</span>
               </button>
             </div>
           </div>
@@ -245,9 +237,9 @@ function LoginForm() {
       </main>
 
       {/* Footer Colophon */}
-      <footer className="w-full max-w-5xl mx-auto py-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-2 font-azeret text-[10px] tracking-[0.15em] text-white/40 uppercase">
-        <span>© 2026 GERAT SOFTWARE SOLUTIONS PLC</span>
-        <span>CONFIDENTIAL // AUTHORIZED PERSONNEL ONLY</span>
+      <footer className="w-full max-w-5xl mx-auto py-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-2 font-parkinsans text-[10px] tracking-[0.15em] text-white/40 uppercase">
+        <span>© 2026 GERAT SOFTWARE SOLUTION</span>
+        <span>CONFIDENTIAL · AUTHORIZED PERSONNEL ONLY</span>
       </footer>
     </div>
   );
@@ -257,7 +249,7 @@ export default function LoginPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen w-full bg-[#080808] flex items-center justify-center font-azeret text-xs text-white/40 uppercase tracking-[0.2em]">
+        <div className="min-h-screen w-full bg-[var(--bg)] flex items-center justify-center font-parkinsans text-xs text-white/40 uppercase tracking-[0.2em]">
           INITIALIZING SECURE TERMINAL...
         </div>
       }

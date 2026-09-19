@@ -20,23 +20,23 @@ export async function runDashboardAuthSmokeTests() {
   console.log(`  ✓ Database verified: ${userCount} administrative users registered`);
 
   const adminUser = await prisma.user.findUnique({
-    where: { email: "admin@gerat.et" },
+    where: { email: "admin@gerat.com" },
   });
-  assert(adminUser, "Super admin user (admin@gerat.et) must exist");
+  assert(adminUser, "Super admin user (admin@gerat.com) must exist");
   assert.strictEqual(adminUser.role, ROLES.SUPER_ADMIN, "Admin user role must be SUPER_ADMIN");
   console.log("  ✓ Super Admin user verified (role: SUPER_ADMIN)");
 
   // 2. Verify 3 Standard Seed Users (SUPER_ADMIN, OPERATIONS_LEAD, EDITOR)
   const opsUser = await prisma.user.findUnique({
-    where: { email: "operations@gerat.et" },
+    where: { email: "operations@gerat.com" },
   });
-  assert(opsUser, "Operations Lead (operations@gerat.et) must exist");
+  assert(opsUser, "Operations Lead (operations@gerat.com) must exist");
   assert.strictEqual(opsUser.role, ROLES.OPERATIONS_LEAD, "Ops user role must be OPERATIONS_LEAD");
 
   const editorUser = await prisma.user.findUnique({
-    where: { email: "editor@gerat.et" },
+    where: { email: "editor@gerat.com" },
   });
-  assert(editorUser, "Editor user (editor@gerat.et) must exist");
+  assert(editorUser, "Editor user (editor@gerat.com) must exist");
   assert.strictEqual(editorUser.role, ROLES.EDITOR, "Editor user role must be EDITOR");
   console.log("  ✓ 3 Core Administrative Roles verified (SUPER_ADMIN, OPERATIONS_LEAD, EDITOR)");
 
@@ -64,7 +64,7 @@ export async function runDashboardAuthSmokeTests() {
 
   const payload = await verifySessionToken(token);
   assert(payload !== null, "JWT session token verification failed");
-  assert.strictEqual(payload.email, "admin@gerat.et", "JWT payload email mismatch");
+  assert.strictEqual(payload.email, "admin@gerat.com", "JWT payload email mismatch");
   assert.strictEqual(payload.role, "SUPER_ADMIN", "JWT payload role mismatch");
   console.log("  ✓ JWT session token signing and verification verified");
 
@@ -92,7 +92,7 @@ export async function runDashboardAuthSmokeTests() {
   console.log("  ✓ RBAC authorization rules verified across 3 roles");
 
   // 6. Test User Provisioning Lifecycle (Create -> Verify Normalized Email & Role -> Clean Up)
-  const testEmail = `test.provision.${Date.now()}@gerat.et`;
+  const testEmail = `test.provision.${Date.now()}@gerat.com`;
   const testPasswordHash = await hashPassword("SecurePass2026!#");
   const provisionedUser = await prisma.user.create({
     data: {

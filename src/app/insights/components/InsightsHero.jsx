@@ -23,27 +23,27 @@ export default function InsightsHero({ activeCategory, onSelectCategory }) {
           <SplitText
             text="SYSTEM ARCHITECTURE,"
             as="h1"
-            className="font-roc text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+            className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
           />
           <SplitText
             text="APPLIED AI & ENGINEERING."
             as="div"
             wordClassName="text-accent"
-            className="font-roc text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+            className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
           />
         </div>
 
         <FadeUp delay={0.3} y={16}>
-          <p className="font-roc text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed">
+          <p className="font-parkinsans text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed">
             Technical analyses, architectural design patterns, and engineering
             whitepapers authored by the software practitioners at Gerat Software
-            Solutions PLC.
+            Solution.
           </p>
         </FadeUp>
 
         {/* Category Filters */}
         <FadeUp delay={0.4} y={16}>
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3 pt-4 font-azeret text-[10px] tracking-[0.2em] uppercase select-none">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 pt-4 font-parkinsans text-[10px] tracking-[0.2em] uppercase select-none">
             {categories.map((cat) => {
               const isSelected = activeCategory === cat;
               return (
@@ -65,8 +65,8 @@ export default function InsightsHero({ activeCategory, onSelectCategory }) {
         </FadeUp>
       </div>
 
-      <div className="mt-12 pt-4 border-t border-white/10 flex items-center justify-between font-azeret text-[10px] tracking-[0.2em] text-white/40 uppercase">
-        <span>PUBLICATIONS // TECHNICAL ARCHIVES</span>
+      <div className="mt-12 pt-4 border-t border-white/10 flex items-center justify-between font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
+        <span>PUBLICATIONS · TECHNICAL ARCHIVES</span>
         <span>SCROLL TO READ ARTICLES ↓</span>
       </div>
     </div>

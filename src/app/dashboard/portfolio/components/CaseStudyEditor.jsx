@@ -23,14 +23,14 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
   const [slug, setSlug] = useState(initialCaseStudy?.slug || "");
   const [isSlugLocked, setIsSlugLocked] = useState(Boolean(initialCaseStudy?.id));
   const [displayIndex, setDisplayIndex] = useState(initialCaseStudy?.displayIndex || "01");
-  const [num, setNum] = useState(initialCaseStudy?.num || "01 / 09");
+  const [num, setNum] = useState(initialCaseStudy?.num || "01");
   const [category, setCategory] = useState(initialCaseStudy?.category || "ENTERPRISE ERP");
   const [tags, setTags] = useState(initialCaseStudy?.tags || "ENTERPRISE LOGISTICS & OPERATIONS");
   const [metric, setMetric] = useState(
-    initialCaseStudy?.metric || "12M+ RECORDS // SUB-SECOND VERIFICATION"
+    initialCaseStudy?.metric || "12M+ RECORDS · SUB-SECOND VERIFICATION"
   );
   const [metricDetail, setMetricDetail] = useState(
-    initialCaseStudy?.metricDetail || "12M+ RECORDS SECURED // 99.999% UPTIME"
+    initialCaseStudy?.metricDetail || "12M+ RECORDS SECURED · 99.999% UPTIME"
   );
   const [summary, setSummary] = useState(
     initialCaseStudy?.summary ||
@@ -45,7 +45,7 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
       "Engineered an event-driven distributed ledger with cryptographic verification and automated reconciliation."
   );
   const [techStack, setTechStack] = useState(
-    initialCaseStudy?.techStack || "DISTRIBUTED POSTGRES // NEXT.JS // GO"
+    initialCaseStudy?.techStack || "DISTRIBUTED POSTGRES · NEXT.JS · GO"
   );
   const [stackBadges, setStackBadges] = useState(
     initialCaseStudy?.stackBadges
@@ -62,7 +62,7 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
       "Reduced processing times by 95% with zero data discrepancies across distributed nodes."
   );
   const [year, setYear] = useState(initialCaseStudy?.year || "2026");
-  const [status, setStatus] = useState(initialCaseStudy?.status || "PRODUCTION // STABLE");
+  const [status, setStatus] = useState(initialCaseStudy?.status || "PRODUCTION · STABLE");
   const [featured, setFeatured] = useState(Boolean(initialCaseStudy?.featured));
   const [order, setOrder] = useState(initialCaseStudy?.order || 1);
 
@@ -185,7 +185,7 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
     <div className="flex flex-col gap-6">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 bg-[#161616] border border-accent text-white px-4 py-3 rounded-[3px] font-azeret text-xs tracking-wider shadow-2xl flex items-center gap-2">
+        <div className="fixed bottom-6 right-6 z-50 bg-[#161616] border border-accent text-white px-4 py-3 rounded-[3px] font-parkinsans text-xs tracking-wider shadow-2xl flex items-center gap-2">
           <span className="size-2 rounded-full bg-accent animate-pulse" />
           <span>{toastMessage}</span>
         </div>
@@ -194,7 +194,7 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
       {/* Top Breadcrumb & Action Bar */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/10">
         <div>
-          <div className="flex items-center gap-2 mb-1 font-azeret text-[10px] tracking-[0.15em] text-white/50">
+          <div className="flex items-center gap-2 mb-1 font-parkinsans text-[10px] tracking-[0.15em] text-white/50">
             <Link href="/dashboard/portfolio" className="hover:text-white transition-colors">
               ← PORTFOLIO CMS
             </Link>
@@ -205,14 +205,14 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="font-roc text-2xl sm:text-3xl font-bold uppercase text-white tracking-tight">
+            <h1 className="font-artific text-2xl sm:text-3xl font-bold uppercase text-white tracking-tight">
               {title || "UNTITLED CASE STUDY"}
             </h1>
-            <span className="font-azeret text-[9px] tracking-[0.2em] px-2 py-0.5 rounded-[2px] bg-white/[0.05] border border-white/15 text-white/80 uppercase">
+            <span className="font-parkinsans text-[9px] tracking-[0.2em] px-2 py-0.5 rounded-[2px] bg-white/[0.05] border border-white/15 text-white/80 uppercase">
               {status}
             </span>
             {featured && (
-              <span className="font-azeret text-[9px] tracking-[0.2em] px-2 py-0.5 rounded-[2px] bg-accent/20 border border-accent/50 text-accent font-bold uppercase">
+              <span className="font-parkinsans text-[9px] tracking-[0.2em] px-2 py-0.5 rounded-[2px] bg-accent/20 border border-accent/50 text-accent font-bold uppercase">
                 FEATURED ON HOMEPAGE
               </span>
             )}
@@ -220,7 +220,7 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
         </div>
 
         {/* Action buttons */}
-        <div className="flex flex-wrap items-center gap-2 font-azeret text-[10px] tracking-[0.15em] uppercase font-bold">
+        <div className="flex flex-wrap items-center gap-2 font-parkinsans text-[10px] tracking-[0.15em] uppercase font-bold">
           <Link
             href="/portfolio"
             target="_blank"
@@ -244,7 +244,7 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
             type="button"
             disabled={isSaving}
             onClick={handleSave}
-            className="py-2 px-5 bg-accent hover:bg-[#ff5c1a] text-black rounded-[2px] transition-colors disabled:opacity-40"
+            className="py-2 px-5 bg-accent hover:bg-accent/90 text-black rounded-[2px] transition-colors disabled:opacity-40"
           >
             {isSaving ? "SAVING..." : "SAVE CASE STUDY"}
           </button>
@@ -256,7 +256,7 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
         {/* Left Column: Form Controls (7 cols) */}
         <div className="lg:col-span-7 flex flex-col gap-6">
           {/* Index & Title Section */}
-          <div className="bg-[#121212] border border-white/10 p-5 rounded-[3px] flex flex-col gap-4 font-azeret text-xs">
+          <div className="bg-[#121212] border border-white/10 p-5 rounded-[3px] flex flex-col gap-4 font-parkinsans text-xs">
             <span className="text-[10px] tracking-[0.2em] text-accent uppercase font-bold border-b border-white/10 pb-2">
               CORE IDENTIFIERS & SEQUENCING
             </span>
@@ -312,7 +312,7 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
                 placeholder="e.g. NATIONAL DIGITAL RECORDS ENGINE"
                 value={title}
                 onChange={(e) => handleTitleChange(e.target.value)}
-                className="bg-black/60 border border-white/15 px-3 py-2.5 text-white font-roc text-lg font-bold uppercase rounded-[2px] focus:border-accent outline-none tracking-tight"
+                className="bg-black/60 border border-white/15 px-3 py-2.5 text-white font-artific text-lg font-bold uppercase rounded-[2px] focus:border-accent outline-none tracking-tight"
               />
             </div>
 
@@ -374,7 +374,7 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
           </div>
 
           {/* Metrics & Architecture Section */}
-          <div className="bg-[#121212] border border-white/10 p-5 rounded-[3px] flex flex-col gap-4 font-azeret text-xs">
+          <div className="bg-[#121212] border border-white/10 p-5 rounded-[3px] flex flex-col gap-4 font-parkinsans text-xs">
             <span className="text-[10px] tracking-[0.2em] text-accent uppercase font-bold border-b border-white/10 pb-2">
               TELEMETRY METRICS & ARCHITECTURAL SPECS
             </span>
@@ -387,10 +387,10 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
                 <input
                   type="text"
                   required
-                  placeholder="12M+ RECORDS // SUB-SECOND VERIFICATION"
+                  placeholder="12M+ RECORDS · SUB-SECOND VERIFICATION"
                   value={metric}
                   onChange={(e) => setMetric(e.target.value)}
-                  className="bg-black/60 border border-white/15 px-3 py-2 text-accent font-roc font-bold text-sm uppercase rounded-[2px] focus:border-accent outline-none"
+                  className="bg-black/60 border border-white/15 px-3 py-2 text-accent font-artific font-bold text-sm uppercase rounded-[2px] focus:border-accent outline-none"
                 />
               </div>
 
@@ -400,7 +400,7 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
                 </label>
                 <input
                   type="text"
-                  placeholder="12M+ RECORDS SECURED // 99.999% UPTIME"
+                  placeholder="12M+ RECORDS SECURED · 99.999% UPTIME"
                   value={metricDetail}
                   onChange={(e) => setMetricDetail(e.target.value)}
                   className="bg-black/60 border border-white/15 px-3 py-2 text-white text-xs rounded-[2px] focus:border-accent outline-none"
@@ -463,7 +463,7 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
           </div>
 
           {/* Tech Stack & Assets */}
-          <div className="bg-[#121212] border border-white/10 p-5 rounded-[3px] flex flex-col gap-4 font-azeret text-xs">
+          <div className="bg-[#121212] border border-white/10 p-5 rounded-[3px] flex flex-col gap-4 font-parkinsans text-xs">
             <span className="text-[10px] tracking-[0.2em] text-accent uppercase font-bold border-b border-white/10 pb-2">
               TECHNOLOGY STACK & VISUAL ASSETS
             </span>
@@ -474,7 +474,7 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
               </label>
               <input
                 type="text"
-                placeholder="DISTRIBUTED POSTGRES // NEXT.JS // GO"
+                placeholder="DISTRIBUTED POSTGRES · NEXT.JS · GO"
                 value={techStack}
                 onChange={(e) => setTechStack(e.target.value)}
                 className="bg-black/60 border border-white/15 px-3 py-2 text-white font-mono text-xs rounded-[2px] focus:border-accent outline-none"
@@ -554,10 +554,10 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
         <div className="lg:col-span-5 flex flex-col gap-4">
           <div className="sticky top-28 flex flex-col gap-4">
             <div className="flex items-center justify-between">
-              <span className="font-azeret text-[10px] tracking-[0.2em] text-accent uppercase font-bold">
+              <span className="font-parkinsans text-[10px] tracking-[0.2em] text-accent uppercase font-bold">
                 LIVE SHOWCASE CARD PREVIEW
               </span>
-              <span className="font-azeret text-[9px] text-white/40 uppercase">
+              <span className="font-parkinsans text-[9px] text-white/40 uppercase">
                 INDEX: {displayIndex}
               </span>
             </div>
@@ -573,15 +573,15 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0e] via-transparent to-transparent opacity-80" />
 
-                <div className="absolute top-3 left-3 font-azeret text-[9px] tracking-[0.2em] text-accent bg-black/90 px-2 py-0.5 border border-accent/40 rounded-[1px] uppercase">
+                <div className="absolute top-3 left-3 font-parkinsans text-[9px] tracking-[0.2em] text-accent bg-black/90 px-2 py-0.5 border border-accent/40 rounded-[1px] uppercase">
                   {category}
                 </div>
 
-                <div className="absolute top-3 right-3 font-azeret text-[9px] tracking-[0.15em] text-white/70 bg-black/80 px-2 py-0.5 border border-white/20 rounded-[1px]">
+                <div className="absolute top-3 right-3 font-parkinsans text-[9px] tracking-[0.15em] text-white/70 bg-black/80 px-2 py-0.5 border border-white/20 rounded-[1px]">
                   {num}
                 </div>
 
-                <div className="absolute bottom-3 left-3 right-3 font-roc text-xs sm:text-sm font-bold tracking-tight text-accent uppercase">
+                <div className="absolute bottom-3 left-3 right-3 font-artific text-xs sm:text-sm font-bold tracking-tight text-accent uppercase">
                   {metric}
                 </div>
               </div>
@@ -589,10 +589,10 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
               {/* Card Body */}
               <div className="p-5 flex flex-col gap-4">
                 <div>
-                  <div className="font-azeret text-[9px] tracking-[0.15em] text-white/40 uppercase">
+                  <div className="font-parkinsans text-[9px] tracking-[0.15em] text-white/40 uppercase">
                     {tags}
                   </div>
-                  <h3 className="font-roc text-lg font-bold uppercase text-white tracking-tight leading-tight mt-1">
+                  <h3 className="font-artific text-lg font-bold uppercase text-white tracking-tight leading-tight mt-1">
                     {title || "TITLE PREVIEW"}
                   </h3>
                   <p className="font-sans text-xs text-white/70 leading-relaxed mt-2">
@@ -601,7 +601,7 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
                 </div>
 
                 {/* Problem vs Architecture Tab Preview */}
-                <div className="bg-black/50 border border-white/10 p-3 rounded-[3px] flex flex-col gap-2 font-azeret text-[10px]">
+                <div className="bg-black/50 border border-white/10 p-3 rounded-[3px] flex flex-col gap-2 font-parkinsans text-[10px]">
                   <div className="flex border-b border-white/10 gap-3 pb-1.5">
                     <button
                       type="button"
@@ -633,7 +633,7 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
 
                 {/* Badges Preview */}
                 {parsedBadges.length > 0 && (
-                  <div className="flex flex-wrap gap-1.5 pt-2 border-t border-white/5 font-azeret text-[9px]">
+                  <div className="flex flex-wrap gap-1.5 pt-2 border-t border-white/5 font-parkinsans text-[9px]">
                     {parsedBadges.map((b, i) => (
                       <span
                         key={i}

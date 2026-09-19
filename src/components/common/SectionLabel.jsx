@@ -12,7 +12,7 @@ export default function SectionLabel({
 }) {
   return (
     <div
-      className={`inline-flex items-center gap-3 font-azeret text-[11px] sm:text-[12px] tracking-[0.2em] text-white/60 uppercase select-none ${className}`}
+      className={`inline-flex items-center gap-3 font-parkinsans text-[11px] sm:text-[12px] tracking-[0.2em] text-white/60 uppercase select-none ${className}`}
     >
       {showDot && (
         <span
@@ -21,7 +21,7 @@ export default function SectionLabel({
         />
       )}
       <span className="text-white/40">{index}</span>
-      <span className="text-white/20">/</span>
+      <span className="text-white/30 text-[10px]">·</span>
       <span className="text-white/90">{label}</span>
     </div>
   );
