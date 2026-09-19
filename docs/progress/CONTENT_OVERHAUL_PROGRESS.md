@@ -769,6 +769,32 @@ Commit changes in logical units:
 
 ---
 
+## PHASE 18 — LOGO PALETTE REVERT (LIGHT MODE), PROFESSIONAL 3D ARCHITECTURAL CANVAS & KINETIC LEADERSHIP REDESIGN
+> **Status:** 🟢 COMPLETED & VERIFIED
+- **18.1 — Logo Palette Revert (Light Mode Only):**
+  - Reverted the Navbar header brand logo in light mode from forced Flame Orange back to official Coffee Bean Brown (`#300F0A` / `currentColor`), preserving the clean high-contrast editorial look. Preserved dark mode as `#FAF6ED` / white.
+  - Reverted the small standalone logo mark in the Hero bottom anchor bar back to Flame Orange (`#EA5B15` / `text-accent`).
+- **18.2 — Professional 3D / Canvas Background Overhaul:**
+  - Replaced the heavy 5,500-particle spiral vortex in `HeroDataField.jsx` with an ultra-clean, professional **Architectural Topological Blueprint Grid / Horizon Mesh**.
+  - Engineered 26 undulating latitude curves and 32 perspective splines with mathematical wave dynamics (`sin`/`cos`), delicate Flame Orange vertex nodes, and responsive cursor parallax. Eliminates visual clutter while reinforcing "software architecture built for endurance".
+- **18.3 — Kinetic Leadership Section Replication (Images 2 & 3):**
+  - Faithfully replicated the kinetic interaction from user screenshots:
+    - **Header:** Triple repeating label `OUR LEADERSHIP TEAM` (left, center, right) in tracked uppercase monospace.
+    - **Sub-intro:** Central editorial manifesto with the signature corner-bracketed `[ MEET THE TEAM ]` button with slide-up micro-interaction.
+    - **Resting State (Image 2):** Display headline split cleanly across a middle horizontal letterbox band featuring cropped eye/brow slits of the 3 leaders (`object-position: 50% 33%`, `50% 27%`, `50% 30%`), accompanied by a floating `VIEW` pill badge on hover.
+    - **Active/Expanded State (Image 3):** When a slit is touched or clicked, seamlessly morphs into a 2-column layout:
+      - *Left:* Large high-contrast vertical portrait card featuring the active leader, corner `■ FOUNDER` / `■ ROLE` badge, and bottom metadata badge (`NAME | ROLE`) with `[ CLOSE × ]` toggle.
+      - *Right:* The headline text continuing alongside a 2-column letterbox slit strip showing the remaining leaders (clicking either dynamically switches the active portrait).
+    - **Brand Color Palette:** Integrated with Flame Orange (`#EA5B15`), Coffee Bean (`#300F0A`), and Almond (`#FAF6ED`) styling.
+- **Verification:**
+  - ESLint: 0 errors.
+  - Smoke tests: 10/10 test suites passed (0.95s).
+  - Dev server runtime tests: 10/10 routes responded with 200 OK.
+  - E2E tests: 27/27 assertions passed (24/24 core).
+  - Production build (`next build`): 40/40 routes compiled cleanly in 3.1s.
+
+---
+
 ## RESOLVED DESIGN DECISIONS
 
 1. **Portfolio Projects:** Seed data and showcase items calibrated with honest, credible engineering scopes.

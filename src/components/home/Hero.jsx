@@ -127,8 +127,8 @@ export default function Hero() {
             <p className="hidden md:block max-w-sm font-parkinsans text-[9px] text-white/40 uppercase tracking-[0.15em] leading-relaxed">
               DIGITAL EXPERIENCES, INTELLIGENT TOOLS, BUSINESS SYSTEMS, AND BRAND IDENTITIES.
             </p>
-            <div className="size-7 rounded-[2px] border border-white/15 bg-white/5 flex items-center justify-center text-[var(--text-primary)]">
-              <GeratLogo variant="mark" className="size-4 text-[var(--text-primary)]" />
+            <div className="size-7 rounded-[2px] border border-white/15 bg-white/5 flex items-center justify-center text-accent">
+              <GeratLogo variant="mark" className="size-4 text-accent" />
             </div>
           </div>
         </div>

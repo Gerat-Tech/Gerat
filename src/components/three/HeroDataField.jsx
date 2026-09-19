@@ -4,9 +4,11 @@ import React, { useEffect, useRef, useState } from "react";
 import Hero3DFallback from "./Hero3DFallback";
 
 /**
- * Procedural Data-Flow Particle Field (Spec §11, §12)
- * High-performance generative particle simulation representing complex operations
- * converging into structured digital systems.
+ * Architectural Topological Horizon Grid (Option 1)
+ *
+ * Replaces heavy particle swarm with a serene, high-precision
+ * mathematical coordinate wireframe. Renders an undulating perspective mesh
+ * inspired by architectural blueprints and structural endurance.
  */
 export default function HeroDataField() {
   const canvasRef = useRef(null);
@@ -38,19 +40,14 @@ export default function HeroDataField() {
     let width = 0;
     let height = 0;
 
-    // Pointer target and spring-interpolated coordinates (Spec §11: 5-12% influence)
-    const pointer = { x: 0, y: 0, targetX: 0, targetY: 0 };
+    // Pointer target and spring-interpolated coordinates (5% influence for serenity)
+    const pointer = { x: 0, y: 0, targetX: 0, targetY: 0, isHovered: false };
     let scrollY = 0;
 
-    // Responsive particle count (Spec §11: 8k-12k desktop, 3k-5k mobile)
-    const isMobile = window.innerWidth < 768;
-    const particleCount = isMobile ? 2200 : 5500;
-    const particles = [];
-
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.75); // Spec §12
-      width = canvas.parentElement.offsetWidth || window.innerWidth;
-      height = canvas.parentElement.offsetHeight || window.innerHeight;
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+      width = canvas.parentElement?.offsetWidth || window.innerWidth;
+      height = canvas.parentElement?.offsetHeight || window.innerHeight;
 
       canvas.width = width * dpr;
       canvas.height = height * dpr;
@@ -62,46 +59,31 @@ export default function HeroDataField() {
     resize();
     window.addEventListener("resize", resize, { passive: true });
 
-    // Initialize particles along spiral flow trajectories
-    const centerX = width * 0.65;
-    const centerY = height * 0.45;
-
-    for (let i = 0; i < particleCount; i++) {
-      const angle = Math.random() * Math.PI * 2;
-      const radius = 30 + Math.pow(Math.random(), 1.5) * (Math.max(width, height) * 0.65);
-      const isAccent = Math.random() < 0.12; // 12% accent particles (#ea5b15)
-
-      particles.push({
-        x: centerX + Math.cos(angle) * radius,
-        y: centerY + Math.sin(angle) * radius,
-        originX: centerX + Math.cos(angle) * radius,
-        originY: centerY + Math.sin(angle) * radius,
-        radius,
-        angle,
-        speed: (0.0008 + Math.random() * 0.002) * (Math.random() < 0.5 ? 1 : -1),
-        radialSpeed: 0.15 + Math.random() * 0.35,
-        size: isAccent ? Math.random() * 2 + 1.2 : Math.random() * 1.5 + 0.6,
-        alpha: isAccent ? Math.random() * 0.7 + 0.3 : Math.random() * 0.45 + 0.1,
-        isAccent,
-        driftSeed: Math.random() * 100,
-      });
-    }
-
-    // Pointer move listener
+    // Pointer movement listener with gentle spring tracking
     const onPointerMove = (e) => {
       const rect = canvas.getBoundingClientRect();
-      pointer.targetX = (e.clientX - rect.left - width * 0.5) * 0.08;
-      pointer.targetY = (e.clientY - rect.top - height * 0.5) * 0.08;
+      const nx = (e.clientX - rect.left) / width - 0.5;
+      const ny = (e.clientY - rect.top) / height - 0.5;
+      pointer.targetX = nx * 120;
+      pointer.targetY = ny * 60;
+      pointer.isHovered = true;
+    };
+
+    const onPointerLeave = () => {
+      pointer.targetX = 0;
+      pointer.targetY = 0;
+      pointer.isHovered = false;
     };
 
     const onScroll = () => {
-      scrollY = window.scrollY * 0.15;
+      scrollY = window.scrollY * 0.12;
     };
 
     window.addEventListener("pointermove", onPointerMove, { passive: true });
+    window.addEventListener("pointerleave", onPointerLeave, { passive: true });
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    // IntersectionObserver to pause when offscreen (Spec §12)
+    // Pause rendering when offscreen
     const observer = new IntersectionObserver(
       ([entry]) => {
         isVisible = entry.isIntersecting;
@@ -109,6 +91,19 @@ export default function HeroDataField() {
       { threshold: 0 }
     );
     observer.observe(canvas);
+
+    // Grid configuration: 26 transverse rows x 32 longitudinal columns
+    const cols = 32;
+    const rows = 26;
+
+    // Pre-allocated coordinate matrices for peak rendering efficiency
+    const projectedPoints = [];
+    for (let r = 0; r < rows; r++) {
+      projectedPoints[r] = [];
+      for (let c = 0; c < cols; c++) {
+        projectedPoints[r][c] = { x: 0, y: 0, alpha: 0 };
+      }
+    }
 
     let time = 0;
 
@@ -119,57 +114,154 @@ export default function HeroDataField() {
         return;
       }
 
-      time += 0.01;
+      time += 0.008;
 
-      // Spring interpolation for pointer (Spec §11: no direct snap)
+      // Spring lerp for smooth parallax
       pointer.x += (pointer.targetX - pointer.x) * 0.05;
       pointer.y += (pointer.targetY - pointer.y) * 0.05;
 
       ctx.clearRect(0, 0, width, height);
 
-      // Current dynamic epicenter
-      const curCenterX = (width * 0.62) + pointer.x;
-      const curCenterY = (height * 0.45) + pointer.y - scrollY * 0.3;
+      // Detect light mode for adaptive stroke contrast
+      const isLightMode =
+        typeof document !== "undefined" &&
+        (document.documentElement.classList.contains("light") ||
+          document.documentElement.classList.contains("site-light"));
 
-      for (let i = 0; i < particleCount; i++) {
-        const p = particles[i];
+      const baseStrokeColor = isLightMode
+        ? "48, 15, 10" // Coffee Bean
+        : "250, 246, 237"; // Warm Almond
+      const accentColor = "234, 91, 21"; // Flame Orange
 
-        // Orbit and drift
-        p.angle += p.speed;
-        p.radius += Math.sin(time + p.driftSeed) * 0.2;
+      // Horizon epicenter (balanced slightly to the right of hero text)
+      const vanishX = width * 0.64 + pointer.x;
+      const vanishY = height * 0.36 + pointer.y - scrollY;
+      const focalLength = 380;
 
-        const targetX = curCenterX + Math.cos(p.angle) * p.radius;
-        const targetY = curCenterY + Math.sin(p.angle) * (p.radius * 0.75);
+      // 1. Calculate projected coordinates with mathematical wave elevation
+      for (let r = 0; r < rows; r++) {
+        // z advances from horizon (far) to foreground (near)
+        const zNorm = r / (rows - 1);
+        const z = 120 + Math.pow(zNorm, 1.8) * 850;
+        const scale = focalLength / (focalLength + z);
 
-        // Gentle drag toward target
-        p.x += (targetX - p.x) * 0.08;
-        p.y += (targetY - p.y) * 0.08;
+        const rowAlpha = Math.min(1, Math.pow(zNorm, 1.2));
 
-        // Render point
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        for (let c = 0; c < cols; c++) {
+          const cNorm = (c / (cols - 1)) * 2 - 1; // -1 to +1
+          const spreadWidth = width * (1.2 + zNorm * 0.8);
+          const worldX = cNorm * spreadWidth * 0.6;
 
-        if (p.isAccent) {
-          ctx.fillStyle = `rgba(234, 91, 21, ${p.alpha})`;
-        } else {
-          ctx.fillStyle = `rgba(240, 240, 240, ${p.alpha})`;
+          // Harmonic sine/cosine topological wave
+          const waveFreqX = 0.0028;
+          const waveFreqZ = 0.0042;
+          const elevation =
+            Math.sin(worldX * waveFreqX + time * 0.9) *
+              Math.cos(z * waveFreqZ + time * 0.6) *
+              36 +
+            Math.sin((worldX + z) * 0.002 + time * 0.4) * 16;
+
+          // Elevation relative to camera plane
+          const worldY = 90 + zNorm * 220 + elevation;
+
+          const screenX = vanishX + worldX * scale;
+          const screenY = vanishY + worldY * scale;
+
+          projectedPoints[r][c].x = screenX;
+          projectedPoints[r][c].y = screenY;
+          projectedPoints[r][c].alpha = rowAlpha;
         }
-
-        ctx.fill();
       }
 
-      // Draw subtle orbital rings around epicenter
-      ctx.beginPath();
-      ctx.arc(curCenterX, curCenterY, 90, 0, Math.PI * 2);
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.04)";
-      ctx.lineWidth = 1;
-      ctx.stroke();
+      // 2. Draw Transverse Curves (Latitude Elevation Contours)
+      for (let r = 0; r < rows; r++) {
+        const isAccentRow = r % 7 === 0;
+        const pts = projectedPoints[r];
+        const rowAlpha = pts[0].alpha;
 
-      ctx.beginPath();
-      ctx.arc(curCenterX, curCenterY, 220, 0, Math.PI * 2);
-      ctx.strokeStyle = "rgba(234, 91, 21, 0.06)";
-      ctx.lineWidth = 1;
-      ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(pts[0].x, pts[0].y);
+
+        for (let c = 1; c < cols; c++) {
+          // Smooth curve through points
+          const prev = pts[c - 1];
+          const curr = pts[c];
+          const midX = (prev.x + curr.x) * 0.5;
+          const midY = (prev.y + curr.y) * 0.5;
+          ctx.quadraticCurveTo(prev.x, prev.y, midX, midY);
+        }
+        ctx.lineTo(pts[cols - 1].x, pts[cols - 1].y);
+
+        if (isAccentRow) {
+          ctx.strokeStyle = `rgba(${accentColor}, ${0.12 * rowAlpha})`;
+          ctx.lineWidth = 1.2;
+        } else {
+          ctx.strokeStyle = `rgba(${baseStrokeColor}, ${0.055 * rowAlpha})`;
+          ctx.lineWidth = 0.85;
+        }
+        ctx.stroke();
+      }
+
+      // 3. Draw Longitudinal Perspective Splines (Depth Lines)
+      for (let c = 0; c < cols; c++) {
+        const isAccentCol = c % 6 === 0;
+
+        ctx.beginPath();
+        ctx.moveTo(projectedPoints[0][c].x, projectedPoints[0][c].y);
+
+        for (let r = 1; r < rows; r++) {
+          const pt = projectedPoints[r][c];
+          ctx.lineTo(pt.x, pt.y);
+        }
+
+        const colAlpha = isAccentCol ? 0.16 : 0.045;
+        ctx.strokeStyle = isAccentCol
+          ? `rgba(${accentColor}, ${colAlpha})`
+          : `rgba(${baseStrokeColor}, ${colAlpha})`;
+        ctx.lineWidth = isAccentCol ? 1.0 : 0.75;
+        ctx.stroke();
+      }
+
+      // 4. Draw Precision Vertex Nodes at Select Intersections
+      for (let r = 4; r < rows; r += 4) {
+        for (let c = 3; c < cols; c += 5) {
+          const pt = projectedPoints[r][c];
+          const pulse = 0.5 + 0.5 * Math.sin(time * 2 + r * 1.5 + c * 2.1);
+          const isOrange = (r + c) % 2 === 0;
+
+          // Subtle glowing crosshair node
+          ctx.beginPath();
+          ctx.arc(pt.x, pt.y, isOrange ? 2.0 : 1.4, 0, Math.PI * 2);
+          ctx.fillStyle = isOrange
+            ? `rgba(${accentColor}, ${0.45 * pt.alpha * pulse})`
+            : `rgba(${baseStrokeColor}, ${0.35 * pt.alpha * pulse})`;
+          ctx.fill();
+
+          // Subtle pulse ring for accent nodes
+          if (isOrange && pulse > 0.7) {
+            ctx.beginPath();
+            ctx.arc(pt.x, pt.y, 4 + pulse * 4, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(${accentColor}, ${0.12 * (1 - pulse) * pt.alpha})`;
+            ctx.lineWidth = 0.75;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // 5. Delicate ambient horizon glow
+      const glowGradient = ctx.createRadialGradient(
+        vanishX,
+        vanishY + 40,
+        10,
+        vanishX,
+        vanishY + 40,
+        width * 0.45
+      );
+      glowGradient.addColorStop(0, `rgba(${accentColor}, 0.04)`);
+      glowGradient.addColorStop(0.5, `rgba(${accentColor}, 0.01)`);
+      glowGradient.addColorStop(1, "rgba(0,0,0,0)");
+      ctx.fillStyle = glowGradient;
+      ctx.fillRect(0, 0, width, height);
 
       animationFrameId = requestAnimationFrame(render);
     };
@@ -181,6 +273,7 @@ export default function HeroDataField() {
       observer.disconnect();
       window.removeEventListener("resize", resize);
       window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerleave", onPointerLeave);
       window.removeEventListener("scroll", onScroll);
     };
   }, [reducedMotion]);
@@ -196,7 +289,7 @@ export default function HeroDataField() {
     >
       <canvas
         ref={canvasRef}
-        className="w-full h-full object-cover opacity-85"
+        className="w-full h-full object-cover opacity-90 transition-opacity duration-700"
       />
     </div>
   );

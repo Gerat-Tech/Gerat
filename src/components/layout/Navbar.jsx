@@ -155,18 +155,16 @@ export default function Navbar() {
                 : "bg-transparent border-b border-white/10 pb-3 sm:pb-4 px-2"
             }`}
           >
-            {/* Brand Logo - Official Badge Logo (Orange option in light mode) */}
+            {/* Brand Logo - Official Badge Logo */}
             <Link
               href="/"
-              className={`flex items-center group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded-sm py-1 ${
-                isLight ? "text-accent" : "text-white"
-              }`}
+              className="flex items-center text-white group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded-sm py-1"
               aria-label="Gerat Software Solution - Home"
             >
               <GeratLogo
                 variant="badge"
-                color={isLight ? "#EA5B15" : "currentColor"}
-                className="h-8 sm:h-9 w-auto text-accent group-hover:opacity-90 transition-opacity duration-300"
+                color="currentColor"
+                className="h-8 sm:h-9 w-auto text-white group-hover:text-accent transition-colors duration-300"
               />
             </Link>
 
