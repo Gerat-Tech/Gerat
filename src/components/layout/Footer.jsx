@@ -104,18 +104,18 @@ export default function Footer() {
               </span>
               <ul className="flex flex-col gap-2 font-parkinsans text-[10px] tracking-[0.15em] text-white/60 uppercase">
                 <li>
-                  <Link href="/services" className="hover:text-white transition-colors">
+                  <Link href="/services/digital-experiences" className="hover:text-white transition-colors">
                     • DIGITAL EXPERIENCES
                   </Link>
                 </li>
                 <li>
-                  <Link href="/services" className="hover:text-white transition-colors">
+                  <Link href="/services/ai-tools" className="hover:text-white transition-colors">
                     • AI & INTELLIGENT TOOLS
                   </Link>
                 </li>
                 <li>
-                  <Link href="/services" className="hover:text-white transition-colors">
-                    • BUSINESS SYSTEMS & ERP
+                  <Link href="/services/business-systems" className="hover:text-white transition-colors">
+                    • BUSINESS SYSTEMS
                   </Link>
                 </li>
                 <li>
