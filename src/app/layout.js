@@ -8,19 +8,19 @@ import { artific, parkinsans } from "./fonts";
 export const metadata = {
   metadataBase: new URL("https://www.gerat.com"),
   title: {
-    default: "Gerat Software Solution | Deep-Tech Software & Digital Systems",
+    default: "Gerat Software Solution | Digital Products, Systems & Brand",
     template: "%s | Gerat Software Solution",
   },
   description:
-    "Deep-tech software engineering studio architecting mission-critical platforms, enterprise ERPs, and domain-grounded AI systems for high-stakes operational environments.",
+    "Gerat Software Solution builds digital products, intelligent tools, business systems, and brand identities for businesses and institutions.",
   keywords: [
     "Gerat",
     "Software Solutions",
-    "Enterprise ERP",
-    "Artificial Intelligence",
-    "RAG Systems",
-    "Telemetry Pipelines",
-    "Public Sector Technology",
+    "Digital Products",
+    "Web & Mobile Apps",
+    "Intelligent Systems",
+    "Business Platforms",
+    "Brand Architecture",
     "Addis Ababa",
     "Ethiopia",
   ],
@@ -34,13 +34,13 @@ export const metadata = {
     siteName: "Gerat Software Solution",
     title: "Gerat Software Solution | Technology That Moves Real Systems",
     description:
-      "Deep-tech software engineering studio architecting mission-critical platforms, enterprise ERPs, and domain-grounded AI systems for high-stakes operational environments.",
+      "Gerat Software Solution builds digital products, intelligent tools, business systems, and brand identities for businesses and institutions.",
     images: [
       {
         url: "/brand/og-image.jpg",
         width: 1920,
         height: 1080,
-        alt: "Gerat Software Solution · Deep-Tech Software & Digital Systems",
+        alt: "Gerat Software Solution · Digital Products, Systems & Brand",
       },
     ],
   },
@@ -48,7 +48,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Gerat Software Solution | Technology That Moves Real Systems",
     description:
-      "Deep-tech software engineering studio architecting mission-critical platforms, enterprise ERPs, and domain-grounded AI systems.",
+      "Gerat Software Solution builds digital products, intelligent tools, business systems, and brand identities for businesses and institutions.",
     images: ["/brand/og-image.jpg"],
   },
   robots: {
@@ -64,7 +64,7 @@ const organizationJsonLd = {
   url: "https://www.gerat.com",
   logo: "https://www.gerat.com/brand/gerat-primary-orange.svg",
   description:
-    "Deep-tech software engineering studio architecting mission-critical platforms, enterprise ERPs, and domain-grounded AI systems.",
+    "Gerat Software Solution builds digital products, intelligent tools, business systems, and brand identities for businesses and institutions.",
   contactPoint: {
     "@type": "ContactPoint",
     telephone: "+2519 2929 8030",

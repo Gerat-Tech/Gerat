@@ -6,9 +6,9 @@ import Footer from "@/components/layout/Footer";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Engineering Portfolio & Case Studies | Gerat Software Solution",
+  title: "Portfolio & Case Studies | Gerat Software Solution",
   description:
-    "Explore mission-critical enterprise systems, domain-grounded AI architectures, and verified software solutions built by Gerat.",
+    "Explore digital products, business platforms, intelligent tools, and brand identity systems built by Gerat.",
 };
 
 export default async function PortfolioPage() {

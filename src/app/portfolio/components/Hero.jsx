@@ -41,9 +41,8 @@ export default function Hero({ activeCategory, onSelectCategory }) {
 
         <FadeUp delay={0.3} y={16}>
           <p className="font-parkinsans text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed">
-            An index of mission-critical software, custom enterprise platforms,
-            domain-grounded RAG systems, and institutional digital products
-            engineered by Gerat Software Solution.
+            An index of custom software, business platforms, intelligent tools, and
+            brand identity systems engineered by Gerat Software Solution.
           </p>
         </FadeUp>
 

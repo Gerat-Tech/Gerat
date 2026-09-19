@@ -81,7 +81,7 @@ const PERSONAL_MODULES = [
     num: "05",
     title: "EXECUTIVE PERSONAL WEBSITE",
     icon: Globe,
-    subtitle: "SOVEREIGN DIGITAL ASSET · NEXT.JS",
+    subtitle: "CUSTOM PERSONAL WEBSITE · NEXT.JS",
     description:
       "A fast, bespoke personal website built on modern web standards. Houses your biography, portfolio, media appearances, speaking engagements, and contact pipeline.",
     deliverables: [

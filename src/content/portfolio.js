@@ -58,7 +58,7 @@ export const portfolioProjects = [
     metric: "500K+ DOCUMENTS · 98.4% ACCURACY",
     metricDetail: "500K+ REGULATORY DOCUMENTS · 98.4% CITATION ACCURACY",
     summary:
-      "Domain-grounded retrieval architecture orchestrating localized LLMs and dense vector indexes to deliver instant, cited intelligence from institutional archives.",
+      "Intelligent search and retrieval system orchestrating modern language models and vector indexes to deliver instant, cited answers from complex archives.",
     problem:
       "Legal and policy research teams spent hundreds of hours manually cross-referencing conflicting institutional regulations.",
     architecture:
@@ -148,13 +148,13 @@ export const portfolioProjects = [
     category: "BRAND & IDENTITY",
     tags: "BRAND STRATEGY · VISUAL IDENTITY · DESIGN SYSTEM",
     metric: "COMPLETE DESIGN SYSTEM · 140+ ASSETS · MULTI-PLATFORM",
-    metricDetail: "MONOLITHIC IDENTITY SYSTEM · 140+ PRODUCTION ASSETS · FULL DIGITAL + PRINT SUITE",
+    metricDetail: "UNIFIED IDENTITY SYSTEM · 140+ PRODUCTION ASSETS · FULL DIGITAL + PRINT SUITE",
     summary:
       "A complete visual architecture and brand design system engineered for an industrial logistics conglomerate spanning brand guidelines, vector marks, and collateral.",
     problem:
       "Disjointed sub-brands and inconsistent marketing collateral weakened market authority and customer recognition across digital and physical operations.",
     architecture:
-      "Constructed a high-contrast monolithic visual identity, precision geometric G-glyph mark, strict tokenized typography rules, and production templates for digital and print.",
+      "Constructed a high-contrast visual identity, precision geometric mark, strict typography rules, and production templates for digital and print.",
     tech: "FIGMA · VECTOR SUITE · DESIGN TOKENS · EDITORIAL PRINT",
     stack: ["Vector Geometry", "Design Tokens", "Print Collateral", "Brand Guidelines", "Figma"],
     image: "/image/portfolioPage/stratahub-featured.webp",
