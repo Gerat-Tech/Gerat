@@ -504,9 +504,17 @@ html.dashboard-light .dashboard-shell .text-white {
 }
 
 html.light .text-white\/80,
+html.light .text-white\/85,
 html.light .text-white\/90,
+html.light .text-white\/95,
 html.site-light .text-white\/80,
+html.site-light .text-white\/85,
 html.site-light .text-white\/90,
+html.site-light .text-white\/95,
+html.light [class*="text-white\/8"],
+html.light [class*="text-white\/9"],
+html.site-light [class*="text-white\/8"],
+html.site-light [class*="text-white\/9"],
 html.dashboard-light .dashboard-shell .text-white\/80,
 html.dashboard-light .dashboard-shell .text-white\/90 {
   color: #4E241C !important;
@@ -515,9 +523,15 @@ html.dashboard-light .dashboard-shell .text-white\/90 {
 html.light .text-white\/60,
 html.light .text-white\/65,
 html.light .text-white\/70,
+html.light .text-white\/75,
 html.site-light .text-white\/60,
 html.site-light .text-white\/65,
 html.site-light .text-white\/70,
+html.site-light .text-white\/75,
+html.light [class*="text-white\/6"],
+html.light [class*="text-white\/7"],
+html.site-light [class*="text-white\/6"],
+html.site-light [class*="text-white\/7"],
 html.dashboard-light .dashboard-shell .text-white\/60,
 html.dashboard-light .dashboard-shell .text-white\/65,
 html.dashboard-light .dashboard-shell .text-white\/70 {
@@ -525,18 +539,40 @@ html.dashboard-light .dashboard-shell .text-white\/70 {
 }
 
 html.light .text-white\/40,
+html.light .text-white\/45,
 html.light .text-white\/50,
+html.light .text-white\/55,
 html.site-light .text-white\/40,
+html.site-light .text-white\/45,
 html.site-light .text-white\/50,
+html.site-light .text-white\/55,
+html.light [class*="text-white\/4"],
+html.light [class*="text-white\/5"],
+html.site-light [class*="text-white\/4"],
+html.site-light [class*="text-white\/5"],
 html.dashboard-light .dashboard-shell .text-white\/40,
 html.dashboard-light .dashboard-shell .text-white\/50 {
   color: #9B7871 !important;
 }
 
+html.light .text-white\/10,
+html.light .text-white\/15,
 html.light .text-white\/20,
+html.light .text-white\/25,
 html.light .text-white\/30,
+html.light .text-white\/35,
+html.site-light .text-white\/10,
+html.site-light .text-white\/15,
 html.site-light .text-white\/20,
+html.site-light .text-white\/25,
 html.site-light .text-white\/30,
+html.site-light .text-white\/35,
+html.light [class*="text-white\/1"],
+html.light [class*="text-white\/2"],
+html.light [class*="text-white\/3"],
+html.site-light [class*="text-white\/1"],
+html.site-light [class*="text-white\/2"],
+html.site-light [class*="text-white\/3"],
 html.dashboard-light .dashboard-shell .text-white\/20,
 html.dashboard-light .dashboard-shell .text-white\/30 {
   color: #B89E97 !important;

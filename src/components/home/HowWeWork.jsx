@@ -460,25 +460,25 @@ export default function HowWeWork() {
                     </span>
                   </div>
 
-                  <h3 className="font-artific text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight uppercase text-white mt-4 leading-[1.08]">
+                  <h3 className="font-artific text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight uppercase text-[var(--text-primary)] mt-4 leading-[1.08]">
                     {currentStage.headline}
                   </h3>
 
-                  <p className="font-parkinsans text-sm sm:text-base text-white/70 leading-relaxed mt-4">
+                  <p className="font-parkinsans text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed mt-4">
                     {currentStage.narrative}
                   </p>
                 </div>
 
                 {/* Deliverables List */}
                 <div className="pt-4 border-t border-white/10">
-                  <span className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase block mb-3 font-semibold">
+                  <span className="font-parkinsans text-[9px] tracking-[0.2em] text-[var(--text-dim)] uppercase block mb-3 font-semibold">
                     KEY MILESTONES & OUTPUTS
                   </span>
                   <ul className="space-y-2">
                     {currentStage.deliverables.map((item) => (
                       <li
                         key={item}
-                        className="flex items-start gap-2.5 font-parkinsans text-xs sm:text-sm text-white/80"
+                        className="flex items-start gap-2.5 font-parkinsans text-xs sm:text-sm text-[var(--text-secondary)]"
                       >
                         <CheckCircle2 className="size-4 text-accent shrink-0 mt-0.5" />
                         <span>{item}</span>
@@ -488,7 +488,7 @@ export default function HowWeWork() {
                 </div>
 
                 {/* Client Experience Callout */}
-                <div className="p-4 bg-accent/5 border-l-2 border-accent rounded-r-[2px] font-parkinsans text-xs sm:text-sm text-white/85 leading-relaxed">
+                <div className="p-4 bg-accent/5 border-l-2 border-accent rounded-r-[2px] font-parkinsans text-xs sm:text-sm text-[var(--text-primary)] leading-relaxed">
                   <span className="text-accent font-semibold block mb-0.5 text-[10px] tracking-[0.15em] uppercase">
                     THE CLIENT EXPERIENCE
                   </span>
