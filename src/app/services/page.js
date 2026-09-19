@@ -1,6 +1,6 @@
 import React from "react";
 import prisma from "@/lib/prisma";
-import ServicesOverview from "@/app/why-wqf/components/ServicesOverview";
+import ServicesOverview from "@/components/services/ServicesOverview";
 import Footer from "@/components/layout/Footer";
 
 export const dynamic = "force-dynamic";

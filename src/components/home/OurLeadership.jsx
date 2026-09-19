@@ -72,12 +72,10 @@ export default function OurLeadership({ initialLeaders = null }) {
               href="/team"
               className="group relative isolate inline-flex items-center font-parkinsans text-[11px] uppercase tracking-[0.2em] px-6 py-3 border border-white/20 hover:border-accent hover:bg-accent/10 text-white/90 hover:text-white transition-all duration-300 rounded-[2px]"
             >
-              <span>MEET ALL ENGINEERS & ADVISORS</span>
+              <span>MEET OUR LEADERSHIP & TEAM</span>
               <span className="ml-2 text-white/40 group-hover:text-accent group-hover:translate-x-1 transition-all">
                 →
               </span>
-              <span className="absolute -top-[1px] -left-[1px] size-1.5 border-t border-l border-white/40 group-hover:border-accent" />
-              <span className="absolute -bottom-[1px] -right-[1px] size-1.5 border-b border-r border-white/40 group-hover:border-accent" />
             </Link>
           </FadeUp>
         </div>
@@ -98,28 +96,6 @@ export default function OurLeadership({ initialLeaders = null }) {
                     : "border-white/10 hover:border-white/30"
                 }`}
               >
-                {/* Precision Corner Accents */}
-                <span
-                  className={`absolute top-0 left-0 size-2 border-t border-l transition-colors duration-300 ${
-                    isSelected ? "border-accent" : "border-white/20"
-                  }`}
-                />
-                <span
-                  className={`absolute top-0 right-0 size-2 border-t border-r transition-colors duration-300 ${
-                    isSelected ? "border-accent" : "border-white/20"
-                  }`}
-                />
-                <span
-                  className={`absolute bottom-0 left-0 size-2 border-b border-l transition-colors duration-300 ${
-                    isSelected ? "border-accent" : "border-white/20"
-                  }`}
-                />
-                <span
-                  className={`absolute bottom-0 right-0 size-2 border-b border-r transition-colors duration-300 ${
-                    isSelected ? "border-accent" : "border-white/20"
-                  }`}
-                />
-
                 {/* Portrait */}
                 <div className="relative aspect-4/5 w-full overflow-hidden bg-black/60 rounded-[2px] mb-6">
                   <img

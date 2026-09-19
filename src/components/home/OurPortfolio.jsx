@@ -65,16 +65,21 @@ export default function OurPortfolio({ initialProjects = null }) {
           <div className="flex flex-col gap-4 max-w-2xl">
             <SectionLabel index="03" label="SELECTED WORK" />
             <SplitText
-              text="PROVEN DIGITAL SYSTEMS."
+              text="WE BUILD THINGS"
               as="h2"
               className="font-artific text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
             />
             <SplitText
-              text="DEPLOYED AT SCALE."
+              text="PEOPLE ACTUALLY USE."
               as="h2"
               wordClassName="text-accent"
               className="font-artific text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
             />
+            <FadeUp delay={0.2} y={16}>
+              <p className="font-parkinsans text-base sm:text-lg text-white/70 leading-relaxed pt-2">
+                A few examples of the products, platforms, and experiences we&apos;ve helped shape.
+              </p>
+            </FadeUp>
           </div>
 
           <FadeUp delay={0.3}>
@@ -86,8 +91,6 @@ export default function OurPortfolio({ initialProjects = null }) {
               <span className="ml-2 text-white/40 group-hover:text-accent group-hover:translate-x-1 transition-all">
                 →
               </span>
-              <span className="absolute -top-[1px] -left-[1px] size-1.5 border-t border-l border-white/40 group-hover:border-accent" />
-              <span className="absolute -bottom-[1px] -right-[1px] size-1.5 border-b border-r border-white/40 group-hover:border-accent" />
             </Link>
           </FadeUp>
         </div>
@@ -100,12 +103,6 @@ export default function OurPortfolio({ initialProjects = null }) {
                 href="/portfolio"
                 className="group relative flex flex-col bg-[var(--surface)] border border-white/10 hover:border-accent/60 rounded-[4px] overflow-hidden transition-all duration-400 h-full"
               >
-                {/* Precision Corner Accents */}
-                <span className="absolute top-0 left-0 size-2 border-t border-l border-white/20 group-hover:border-accent transition-colors z-20" />
-                <span className="absolute top-0 right-0 size-2 border-t border-r border-white/20 group-hover:border-accent transition-colors z-20" />
-                <span className="absolute bottom-0 left-0 size-2 border-b border-l border-white/20 group-hover:border-accent transition-colors z-20" />
-                <span className="absolute bottom-0 right-0 size-2 border-b border-r border-white/20 group-hover:border-accent transition-colors z-20" />
-
                 {/* Media Container */}
                 <div className="relative aspect-16/10 w-full overflow-hidden bg-black/60">
                   <img
