@@ -228,7 +228,7 @@ function DigitalInterfaceBridgeSchematic() {
           <rect width="100" height="90" rx="2" fill="var(--surface-2)" stroke="var(--border-medium)" strokeWidth="1" />
           <text x="10" y="20" fill="#EA5B15" className="text-[8px] font-parkinsans font-bold tracking-wider">TOKEN LAYER</text>
           <text x="10" y="38" fill="currentColor" className="text-[7px] font-parkinsans text-[var(--text-secondary)]">--flame: #EA5B15;</text>
-          <text x="10" y="52" fill="currentColor" className="text-[7px] font-parkinsans text-[var(--text-secondary)]">--font: 'Artific';</text>
+          <text x="10" y="52" fill="currentColor" className="text-[7px] font-parkinsans text-[var(--text-secondary)]">--font: &apos;Artific&apos;;</text>
           <text x="10" y="66" fill="currentColor" className="text-[7px] font-parkinsans text-[var(--text-secondary)]">--radius: 2px;</text>
           <text x="10" y="80" fill="currentColor" className="text-[7px] font-parkinsans text-[var(--text-secondary)]">--contrast: 14.2:1;</text>
         </g>

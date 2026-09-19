@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import Hero from "./Hero";
 import PortfolioShowcase from "./PortfolioShowcase";
@@ -17,30 +17,32 @@ const KNOWN_CATEGORIES = [
 
 export default function PortfolioClientView({ initialProjects = null }) {
   const searchParams = useSearchParams();
-  const [activeCategory, setActiveCategory] = useState("ALL DISCIPLINES");
+  const paramCategory = searchParams.get("category");
 
-  useEffect(() => {
-    const cat = searchParams.get("category");
-    if (cat) {
-      const decoded = decodeURIComponent(cat).toUpperCase().trim();
-      const match = KNOWN_CATEGORIES.find(
-        (kc) =>
-          kc === decoded ||
-          kc.replace(/&/g, "AND") === decoded.replace(/&/g, "AND") ||
-          kc.includes(decoded) ||
-          decoded.includes(kc)
+  const defaultCategory = useMemo(() => {
+    if (paramCategory) {
+      const decoded = decodeURIComponent(paramCategory).toUpperCase().trim();
+      return (
+        KNOWN_CATEGORIES.find(
+          (kc) =>
+            kc === decoded ||
+            kc.replace(/&/g, "AND") === decoded.replace(/&/g, "AND") ||
+            kc.includes(decoded) ||
+            decoded.includes(kc)
+        ) || "ALL DISCIPLINES"
       );
-      if (match) {
-        setActiveCategory(match);
-      }
     }
-  }, [searchParams]);
+    return "ALL DISCIPLINES";
+  }, [paramCategory]);
+
+  const [userSelectedCategory, setUserSelectedCategory] = useState(null);
+  const activeCategory = userSelectedCategory ?? defaultCategory;
 
   return (
     <>
       <Hero
         activeCategory={activeCategory}
-        onSelectCategory={setActiveCategory}
+        onSelectCategory={setUserSelectedCategory}
       />
       <PortfolioShowcase
         activeCategory={activeCategory}

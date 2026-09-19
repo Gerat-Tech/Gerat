@@ -109,9 +109,10 @@ export default function ContactDrawer({ open, setOpen, preset = null }) {
       "PERSONAL BRANDING",
     ].includes(selectedSubOption);
 
-  // Dynamic preselection when drawer is opened with a preset
-  useEffect(() => {
-    if (!open || !preset) return;
+  // Adjust state during render when preset prop changes (React recommended pattern)
+  const [prevPreset, setPrevPreset] = useState(preset);
+  if (preset !== prevPreset && open) {
+    setPrevPreset(preset);
 
     let targetDiscipline = null;
     let targetSub = null;
@@ -151,7 +152,7 @@ export default function ContactDrawer({ open, setOpen, preset = null }) {
         }
       }
     }
-  }, [open, preset]);
+  }
 
   // Lock body scroll when open and handle Escape key
   useEffect(() => {
