@@ -42,14 +42,16 @@ function waitForReady(devServer, getServerLogs, maxAttempts = 60) {
 }
 
 async function runDevServerSmokeTests() {
-  console.log("▶ Starting Next.js Dev Server on port 3008 for runtime verification...");
+  const hasBuild = fs.existsSync(path.join(process.cwd(), ".next/BUILD_ID"));
+  const cmd = hasBuild ? "start" : "dev";
+  console.log(`▶ Starting Next.js ${cmd === "start" ? "Server" : "Dev Server"} on port ${PORT} for runtime verification...`);
   try {
     fs.rmSync(path.join(process.cwd(), ".next/dev"), { recursive: true, force: true });
   } catch {}
 
   const devServer = spawn(
     "pnpm",
-    ["exec", "next", "dev", "--port", String(PORT)],
+    ["exec", "next", cmd, "--port", String(PORT)],
     {
       env: { ...process.env, PORT: String(PORT) },
       stdio: "pipe",

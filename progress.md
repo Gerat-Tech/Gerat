@@ -30,18 +30,23 @@
 | 5 | **Image 5 (`media_1789836737762.png`)** | [`src/components/layout/ContactDrawer.jsx`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/components/layout/ContactDrawer.jsx) lines 7–18 | 10 overwhelming discipline buttons causing cognitive overload. | Reduce to **4 primary options** (`Website / Digital`, `AI / Intelligent Tool`, `Business System`, `Brand & Creative`) + progressive conditional sub-options. | **DONE** (`19995bf`) |
 | 6 | **Team & Portfolio Double Slashes** | `src/app/team`, `src/app/portfolio`, Prisma seed data | Residual `//` dividers or raw slash tropes visible in rendered cards/badges. | Ensure all separators are subtle middle dots (`·`) or clean dashes. | **DONE** (`f4c2606`, `97ededa`) |
 | 7 | **Default Theme** | [`src/app/layout.js`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/app/layout.js), [`src/context/ThemeContext.jsx`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/context/ThemeContext.jsx) | Site defaults to dark mode (`#0d0706`). | Switch default to **light mode**, preserving dark mode toggle. | **DONE** (`c39ed0d`) |
+| 8 | **Image 8 (`media_1789843567340.png`)** | [`src/components/home/HowWeWork.jsx`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/components/home/HowWeWork.jsx) | "How We Work" 5 boxes look boring and static. | Build an interactive, dynamic architectural story engine ("From Blueprint to Bridge") with milestone track and animated schematics. | **PENDING** (Phase 12) |
+| 9 | **Image 9 (`media_1789843751298.png`)** | [`src/components/services/ServicesOverview.jsx`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/components/services/ServicesOverview.jsx) | Only Brand & Creative has an "Explore More" page; Pillars 1, 2, 3 have no dedicated detail pages. | Create dedicated explore pages for Digital Experiences, AI & Tools, and Business Systems; add Explore CTAs to all pillars. | **PENDING** (Phase 13) |
+| 10 | **Image 10 (`media_1789843934501.png`)** | [`src/app/services/brand-creative/page.js`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/app/services/brand-creative/page.js) lines 161–217 | Rigid "Integrated Service Packages" section looks generic and dated. | Remove packages section; replace with dynamic Brand Transformation Story module and interactive production standards inspector. | **PENDING** (Phase 14) |
+| 11 | **Image 11 (`media_1789844201362.png`)** | Global CTAs & View Work Buttons | "BUILD YOUR BRAND" and other CTAs don't pre-select the service in ContactDrawer; "VIEW WORK" doesn't filter portfolio. | Wire dynamic preselection in `NavContext` / `ContactDrawer` and add search parameter category routing to `/portfolio`. | **PENDING** (Phase 15) |
 
 ---
 
 ## 3. MASTER IMPLEMENTATION PHASES
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                                 EXECUTION FLOW                                  │
-├─────────────────┬──────────────────┬─────────────────┬──────────────────────────┤
-│ Phase 1-3       │ Phase 4-6        │ Phase 7-8       │ Phase 9-11               │
-│ Homepage & Form │ Theme & Footer   │ Services & Data │ De-AI, Seed & Validation │
-└─────────────────┴──────────────────┴─────────────────┴──────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                                     EXECUTION FLOW                                     │
+├─────────────────┬──────────────────┬─────────────────┬──────────────────┬──────────────┤
+│ Phase 1–3       │ Phase 4–6        │ Phase 7–8       │ Phase 9–11       │ Phase 12–16  │
+│ Homepage & Form │ Theme & Footer   │ Services & Data │ De-AI & Testing  │ Interactive, │
+│                 │                  │                 │                  │ 3 Hubs, CTAs │
+└─────────────────┴──────────────────┴─────────────────┴──────────────────┴──────────────┘
 ```
 
 ---
@@ -224,6 +229,122 @@
   - `pnpm run test:e2e`: 24/24 assertions passed.
 - [x] **11.3. Clean Conventional Commits:**
   - All commits strictly conventional with zero usage of the word "phase".
+
+---
+
+### PHASE 12: INTERACTIVE PROCESS STORY ENGINE ("FROM BLUEPRINT TO BRIDGE")
+**Files:** [`src/components/home/HowWeWork.jsx`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/components/home/HowWeWork.jsx), [`src/content/ethos.js`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/content/ethos.js)
+**Status:** COMPLETED
+
+- [x] **12.1. Replace Static 5-Card Grid with Connected Bridge Stepper:**
+  - Transformed static box layout (Image 1 fix) into an interactive architectural milestone experience.
+  - Implemented a connected horizontal progress track ("The Bridge Span") linking 5 chapters: `01 DISCOVER`, `02 DESIGN`, `03 BUILD`, `04 LAUNCH`, `05 SUPPORT`.
+- [x] **12.2. Dynamic Story Beats & Deliverables Panel (Left Column):**
+  - Bold stage title, human narrative explanation of why this phase matters, tangible outputs (specifications, prototypes, code, tests, monitoring), and "The Client Experience" callout (weekly Looms, live staging, direct channel).
+  - Navigation controls: Previous / Next buttons with stage preview labels.
+- [x] **12.3. Animated Architectural Blueprint Schematics (Right Column):**
+  - Custom responsive SVG schematics representing each phase:
+    - *Discover:* Blueprint drafting grid, problem framing crosshairs, and stakeholder nodes.
+    - *Design:* Ergonomic interface layout, typography scales, and design token connections.
+    - *Build:* Interlocking structural bridge beams, modular code units, and data pipeline flow.
+    - *Launch:* Zero-downtime deployment nodes, live domain routing, and health beacons.
+    - *Support:* Resilient bridge span, continuous telemetry pulse, and growth pathways.
+- [x] **12.4. Mobile-First & Accessible Flow:**
+  - Touch-friendly horizontal step selector on mobile viewports (<768px). Full ARIA tablist/tabpanel attributes and smooth Framer Motion transitions.
+
+---
+
+### PHASE 13: 3 NEW DEDICATED SERVICE PILLAR PAGES & EXPLORE HUBS
+**Files:**
+- [NEW] [`src/app/services/digital-experiences/page.js`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/app/services/digital-experiences/page.js)
+- [NEW] [`src/app/services/ai-tools/page.js`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/app/services/ai-tools/page.js)
+- [NEW] [`src/app/services/business-systems/page.js`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/app/services/business-systems/page.js)
+- [MODIFY] [`src/content/services.js`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/content/services.js)
+- [MODIFY] [`src/components/services/ServicesOverview.jsx`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/components/services/ServicesOverview.jsx)
+- [MODIFY] [`src/app/why-wqf/components/ServicesOverview.jsx`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/app/why-wqf/components/ServicesOverview.jsx)
+
+**Status:** PENDING IMPLEMENTATION
+
+- [ ] **13.1. Build Digital Experiences Explore Page (`/services/digital-experiences`):**
+  - Headline: *“EXPERIENCES THAT CONVERT. PRODUCTS THAT SCALE.”*
+  - 6 Disciplines: High-Performance Websites, Custom Web Applications, Customer Portals, Native-Feel Interfaces, E-Commerce Platforms, Self-Serve Publishing.
+  - Engineering Standards: Sub-second load times, modular React architecture, responsive accessibility (WCAG 2.1 AA), and analytics.
+  - Interactive FAQ & CTAs.
+- [ ] **13.2. Build AI & Intelligent Tools Explore Page (`/services/ai-tools`):**
+  - Headline: *“PRACTICAL INTELLIGENCE. MEASURABLE BUSINESS OUTCOMES.”*
+  - 6 Disciplines: Enterprise Semantic Search, Domain-Aware Assistants & Copilots, Document & Invoice Extraction, Automated Workflow Bots, Customer Support Intelligence, Custom Model API Pipes.
+  - Engineering Standards: Grounded citations (zero hallucinations), strict enterprise data privacy, measurable time ROI, human-in-the-loop safeguards.
+  - Interactive FAQ & CTAs.
+- [ ] **13.3. Build Business Systems Explore Page (`/services/business-systems`):**
+  - Headline: *“CONNECTED SYSTEMS. UNBROKEN OPERATIONS.”*
+  - 6 Disciplines: Custom ERP Platforms, Inventory & Logistics Hubs, Automated Billing & Financial Systems, Internal Team Portals, Legacy Modernization, Central Database & API Architectures.
+  - Engineering Standards: Tailored business logic, immutable audit trails, offline resilience, and dedicated staff training.
+  - Interactive FAQ & CTAs.
+- [ ] **13.4. Update Services Datasets & Overview Cards (Image 2 Fix):**
+  - In `src/content/services.js`: Update `deepLink` for Pillars 01, 02, and 03 to point to the new dedicated pages.
+  - In `ServicesOverview.jsx`: Update cards so every pillar has a dedicated `EXPLORE [PILLAR] →` button leading to its new page, alongside `START A PROJECT →`.
+
+---
+
+### PHASE 14: BRAND & CREATIVE STORYTELLING & PACKAGE PRUNING
+**Files:** [`src/app/services/brand-creative/page.js`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/app/services/brand-creative/page.js), [`src/content/services.js`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/content/services.js)
+**Status:** PENDING IMPLEMENTATION
+
+- [ ] **14.1. Prune Integrated Service Packages Section (Image 3 Fix):**
+  - Remove `<section>` lines 161–217 (`STRUCTURED ENGAGEMENTS / INTEGRATED SERVICE PACKAGES.`).
+  - Preserve `export const creativeServicePackages` in `src/content/services.js` to satisfy smoke test assertions.
+- [ ] **14.2. Implement Interactive Brand Transformation Story Module:**
+  - Create **"THE BRAND TRANSFORMATION: FROM NOISE TO AUTHORITY"** interactive section.
+  - 4 interactive layers: *01 Narrative & Positioning*, *02 Visual Architecture*, *03 Digital Interfaces*, *04 Market Collateral*.
+  - Users can interactively toggle layers to inspect business impact, deliverables, and before/after transformation.
+- [ ] **14.3. Interactive Production Standards Asset Inspector:**
+  - Make the 4 production standards cards interactive with live asset format specs (Vector SVG/AI, CSS design tokens, app icon packages, brand guidelines).
+
+---
+
+### PHASE 15: INTELLIGENT CTA INTAKE ROUTING & PORTFOLIO DEEP FILTERING
+**Files:**
+- [`src/context/NavContext.js`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/context/NavContext.js)
+- [`src/components/layout/ContactDrawer.jsx`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/components/layout/ContactDrawer.jsx)
+- [`src/components/layout/Navbar.jsx`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/components/layout/Navbar.jsx)
+- [`src/app/portfolio/page.js`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/app/portfolio/page.js)
+- [`src/app/portfolio/components/PortfolioClientView.jsx`](file:///home/dawit/Documents/Projects/Gerät/Gerät/src/app/portfolio/components/PortfolioClientView.jsx)
+- Across service and home pages (`brand-creative`, `personal-branding`, `digital-experiences`, `ai-tools`, `business-systems`, `OurFocus`)
+
+**Status:** PENDING IMPLEMENTATION
+
+- [ ] **15.1. NavContext & ContactDrawer Dynamic Preselection Engine (Image 4 Fix):**
+  - Enhance `openContact(preset)` in `NavContext.js` to accept `{ discipline, subOption }`.
+  - Wire `ContactDrawer.jsx` to dynamically preselect primary discipline (`brand`, `digital`, `intelligence`, `systems`, `other`) and specific sub-option (e.g. `LOGO & BRAND IDENTITY`, `BRAND STRATEGY`, `PERSONAL BRANDING`).
+- [ ] **15.2. Connect All CTA Buttons Across Site:**
+  - Brand & Creative Hero (`BUILD YOUR BRAND →`) automatically selects `BRAND & CREATIVE` + `LOGO & BRAND IDENTITY`.
+  - Brand catalog cards select specific sub-options (`BRAND STRATEGY`, `GRAPHIC DESIGN`, `PERSONAL BRANDING`).
+  - Personal Branding CTAs select `BRAND & CREATIVE` + `PERSONAL BRANDING`.
+  - Digital Experiences CTAs select `WEBSITE / DIGITAL PRODUCT`.
+  - AI & Intelligent Tools CTAs select `AI & INTELLIGENT TOOL`.
+  - Business Systems CTAs select `BUSINESS SYSTEM / ERP`.
+- [ ] **15.3. Deep Category Routing for All "VIEW WORK" Buttons:**
+  - Update `src/app/portfolio/components/PortfolioClientView.jsx` to parse `useSearchParams()` for `?category=...`.
+  - Wire "VIEW WORK" button on Brand page to `/portfolio?category=BRAND+%26+IDENTITY`.
+  - Wire "VIEW WORK" button on Personal Branding to `/portfolio?category=PERSONAL+BRAND`.
+  - Wire "VIEW WORK" button on AI page to `/portfolio?category=AI+%26+RAG`.
+  - Wire "VIEW WORK" button on Systems page to `/portfolio?category=ENTERPRISE+ERP`.
+
+---
+
+### PHASE 16: FULL-STACK VERIFICATION, PERFORMANCE & ARCHITECTURE AUDIT
+**Files:** Whole repository
+**Status:** PENDING IMPLEMENTATION
+
+- [ ] **16.1. Build & Lint Verification:**
+  - Run `pnpm run build` to verify 40+ static and dynamic routes compile with 0 errors.
+  - Run `pnpm run lint` to verify clean code hygiene.
+- [ ] **16.2. Smoke & E2E Test Verification:**
+  - Run `pnpm run test:smoke` (10/10 suites).
+  - Run `pnpm run test:runtime` (dev server route responses).
+  - Run `pnpm run test:e2e` (e2e integration suite).
+- [ ] **16.3. Professional Git Commits:**
+  - Each phase committed with clean conventional commits without the word "phase".
 
 ---
 
