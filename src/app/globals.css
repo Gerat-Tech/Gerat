@@ -578,9 +578,38 @@ html.dashboard-light .dashboard-shell .text-white\/30 {
   color: #B89E97 !important;
 }
 
-/* Preserve crisp white/almond text on dark media, overlays, badges, and dark cinema containers in Light Mode */
+/* Preserve crisp white/almond text on dark media, overlays, badges, and dark cards in Light Mode */
 html.light [data-dark-overlay] *,
 html.light .dark-overlay-text,
+html.light [data-dark-card],
+html.light [data-dark-card] h1,
+html.light [data-dark-card] h2,
+html.light [data-dark-card] h3,
+html.light [data-dark-card] h4,
+html.light [data-dark-card] h5,
+html.light [data-dark-card] p,
+html.light [data-dark-card] span,
+html.light [data-dark-card] div,
+html.light .card-coffee,
+html.light .card-coffee h1,
+html.light .card-coffee h2,
+html.light .card-coffee h3,
+html.light .card-coffee h4,
+html.light .card-coffee p,
+html.light .card-coffee span,
+html.light .card-flame,
+html.light .card-flame h1,
+html.light .card-flame h2,
+html.light .card-flame h3,
+html.light .card-flame h4,
+html.light .card-flame p,
+html.light .card-flame span,
+html.light .bg-\[\#300F0A\] h3,
+html.light .bg-\[\#300F0A\] p,
+html.light .bg-\[\#300F0A\] span,
+html.light .bg-\[\#300f0a\] h3,
+html.light .bg-\[\#300f0a\] p,
+html.light .bg-\[\#300f0a\] span,
 html.light [class*="bg-black/"] .text-white,
 html.light [class*="bg-black/"] span,
 html.light [class*="bg-black/"] p,
@@ -591,8 +620,10 @@ html.light .force-text-white {
 }
 
 html.light [data-dark-overlay] .text-white\/70,
+html.light [data-dark-card] .card-subtext,
+html.light .card-coffee .card-subtext,
 html.light .dark-overlay-text-subtle {
-  color: rgba(250, 246, 237, 0.7) !important;
+  color: rgba(250, 246, 237, 0.85) !important;
 }
 
 /* Preserve bright white text on primary accent buttons */
