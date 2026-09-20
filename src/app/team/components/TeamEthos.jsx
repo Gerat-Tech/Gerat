@@ -35,7 +35,7 @@ export default function TeamEthos() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-16">
         <div className="lg:col-span-6 flex flex-col gap-4">
           <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase">
-            03 · HOW WE WORK
+            HOW WE WORK
           </span>
           <h2 className="font-artific text-3xl sm:text-5xl font-bold uppercase tracking-tight leading-[0.95]">
             HOW WE THINK & BUILD.

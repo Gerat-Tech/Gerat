@@ -44,7 +44,7 @@ export default function TeamLeadership({ initialLeaders = null }) {
     <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-16 text-white">
       <div className="flex flex-col gap-3 mb-12">
         <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase">
-          01 · EXECUTIVE ARCHITECTS
+          EXECUTIVE ARCHITECTS
         </span>
         <h2 className="font-artific text-3xl sm:text-4xl font-bold uppercase tracking-tight">
           LEADERSHIP & ENGINEERING DIRECTORS

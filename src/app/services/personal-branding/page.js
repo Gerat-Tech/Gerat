@@ -236,9 +236,9 @@ export default function PersonalBrandingPage() {
       </section>
 
       {/* 7 Modular Framework Pillars */}
-      <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-24 sm:py-32 border-b border-white/10">
-        <div className="flex flex-col gap-4 mb-16 max-w-3xl">
-          <SectionLabel index="06" label="THE 7-PILLAR PERSONAL BRAND ENGINE" />
+      <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-14 sm:py-18 md:py-20 border-b border-white/10">
+        <div className="flex flex-col gap-4 mb-10 sm:mb-12 max-w-3xl">
+          <SectionLabel label="THE 7-PILLAR PERSONAL BRAND ENGINE" />
           <h2 className="font-artific text-3xl sm:text-5xl font-medium tracking-tight uppercase leading-[1.05]">
             MODULAR ARCHITECTURE. <br />
             <span className="text-accent">BUILT AROUND YOUR TIME.</span>
@@ -253,7 +253,7 @@ export default function PersonalBrandingPage() {
           {PERSONAL_MODULES.map((mod, idx) => {
             const Icon = mod.icon;
             return (
-              <FadeUp key={mod.num} delay={0.08 * idx} y={24}>
+              <FadeUp key={mod.title} delay={0.08 * idx} y={24}>
                 <div className="group relative bg-[var(--surface)] border border-white/10 hover:border-accent/80 p-8 rounded-[2px] flex flex-col justify-between min-h-[380px] transition-all duration-300 h-full">
                   <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30 group-hover:border-accent transition-colors" />
                   <span className="absolute top-0 right-0 size-2 border-t border-r border-white/30 group-hover:border-accent transition-colors" />
@@ -267,7 +267,7 @@ export default function PersonalBrandingPage() {
                           <Icon className="size-3.5" />
                         </div>
                         <span className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
-                          MODULE · {mod.num}
+                          MODULE
                         </span>
                       </div>
                     </div>

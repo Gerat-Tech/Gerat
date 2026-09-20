@@ -23,7 +23,7 @@ export default function Footer() {
   return (
     <footer className="w-full bg-[var(--bg)] text-white border-t border-white/10 overflow-hidden">
       {/* Upper Master Call to Action */}
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-20 sm:py-28">
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-14 sm:py-18 md:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
           <div className="lg:col-span-8 flex flex-col gap-6">
             <div className="inline-flex items-center gap-2.5 font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase">

@@ -94,20 +94,20 @@ export default function ServicesOverview({ initialPillars = null }) {
         </div>
 
         <div className="mt-12 pt-4 border-t border-white/10 flex items-center justify-between font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
-          <span>SERVICES · 04 CORE PILLARS</span>
+          <span>SERVICES · CORE PILLARS</span>
           <span>EXPLORE WHAT WE BUILD ↓</span>
         </div>
       </section>
 
       {/* Pillars Deck */}
-      <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 pb-24 sm:pb-36">
+      <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 pb-16 sm:pb-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {servicePillars.map((pillar, idx) => (
-            <FadeUp key={pillar.num} delay={0.1 * idx} y={24}>
+            <FadeUp key={pillar.title} delay={0.1 * idx} y={24}>
               <div className="group relative bg-[var(--surface)] border border-white/10 hover:border-accent/60 p-8 sm:p-10 rounded-[4px] flex flex-col justify-between min-h-[360px] transition-all duration-300 h-full">
                 <div className="flex items-center justify-between">
                   <span className="font-parkinsans text-[11px] tracking-[0.2em] text-accent font-bold">
-                    PILLAR · {pillar.num}
+                    SERVICE PILLAR
                   </span>
                   <div className="size-2 rounded-[1px] bg-white/20 group-hover:bg-accent transition-colors" />
                 </div>

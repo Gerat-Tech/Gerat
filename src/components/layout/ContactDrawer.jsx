@@ -304,7 +304,7 @@ export default function ContactDrawer({ open, setOpen, preset = null }) {
                   {/* Discipline Selection (4 Pillars + Fallback) */}
                   <div className="flex flex-col gap-3">
                     <label className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
-                      01 · WHAT CAN WE HELP YOU BUILD? <span className="text-accent">*</span>
+                      WHAT CAN WE HELP YOU BUILD? <span className="text-accent">*</span>
                     </label>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                       {PRIMARY_DISCIPLINES.map((p) => {
@@ -370,7 +370,7 @@ export default function ContactDrawer({ open, setOpen, preset = null }) {
                   {/* Core Contact Fields */}
                   <div className="flex flex-col gap-4">
                     <label className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
-                      02 · CONTACT PARAMETERS <span className="text-accent">*</span>
+                      CONTACT PARAMETERS <span className="text-accent">*</span>
                     </label>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -560,7 +560,7 @@ export default function ContactDrawer({ open, setOpen, preset = null }) {
                   {/* Timeline Selection */}
                   <div className="flex flex-col gap-3">
                     <label className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
-                      03 · DELIVERY TIMELINE
+                      DELIVERY TIMELINE
                     </label>
                     <div className="grid grid-cols-2 gap-2">
                       {TIMELINES.map((time) => {
@@ -586,7 +586,7 @@ export default function ContactDrawer({ open, setOpen, preset = null }) {
                   {/* Budget Qualification */}
                   <div className="flex flex-col gap-3">
                     <label className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
-                      04 · ESTIMATED BUDGET SCALE (OPTIONAL)
+                      ESTIMATED BUDGET SCALE (OPTIONAL)
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                       {BUDGET_RANGES.map((budget) => {
@@ -612,7 +612,7 @@ export default function ContactDrawer({ open, setOpen, preset = null }) {
                   {/* Scope Details */}
                   <div className="flex flex-col gap-3">
                     <label className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
-                      05 · {isBrandDiscipline ? "CREATIVE OBJECTIVES & CONTEXT" : "PROJECT BRIEF"}
+                      {isBrandDiscipline ? "CREATIVE OBJECTIVES & CONTEXT" : "PROJECT BRIEF"}
                     </label>
                     <textarea
                       rows={4}

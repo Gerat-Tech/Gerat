@@ -109,7 +109,7 @@ export default function HowWeWork() {
     <section
       id="process"
       aria-label="How We Work"
-      className="relative w-full py-20 sm:py-28 md:py-36 bg-[var(--bg)] text-[var(--text-primary)] border-b border-white/10 overflow-hidden"
+      className="relative w-full py-14 sm:py-18 md:py-20 bg-[var(--bg)] text-[var(--text-primary)] border-b border-white/10 overflow-hidden"
     >
       {/* Subtle Cosmic Dot Constellation Background */}
       <div
@@ -143,9 +143,9 @@ export default function HowWeWork() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* LEFT COLUMN: 3 Large Rounded Cards (Coffee bean, Flame, Almond) */}
           <div className="lg:col-span-7 flex flex-col gap-6 sm:gap-8 w-full">
-            {cards.map((card) => (
+            {cards.map((card, idx) => (
               <div
-                key={card.number}
+                key={card.title}
                 data-dark-card={card.isDark ? "true" : undefined}
                 className={`relative flex flex-col justify-between rounded-[26px] sm:rounded-[30px] p-8 sm:p-10 md:p-12 shadow-[0_12px_40px_rgba(0,0,0,0.18)] transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_18px_48px_rgba(0,0,0,0.25)] min-h-[260px] sm:min-h-[290px] ${card.cardClass}`}
               >
@@ -160,23 +160,15 @@ export default function HowWeWork() {
                   {card.icon}
                 </div>
 
-                {/* Bottom Row: Divider, Step Index & Description */}
+                {/* Bottom Row: Divider & Description */}
                 <div className="mt-8 sm:mt-12">
                   <div className={`border-t ${card.dividerClass} pt-4 sm:pt-5`}>
-                    <div className="flex items-baseline gap-4 sm:gap-6">
-                      <span
-                        style={card.numberStyle}
-                        className="font-parkinsans text-xs sm:text-sm font-bold uppercase tracking-[0.2em] shrink-0"
-                      >
-                        {card.number}
-                      </span>
-                      <p
-                        style={card.textStyle}
-                        className="font-parkinsans text-xs sm:text-sm uppercase tracking-[0.08em] leading-relaxed card-subtext"
-                      >
-                        {card.description}
-                      </p>
-                    </div>
+                    <p
+                      style={card.textStyle}
+                      className="font-parkinsans text-xs sm:text-sm uppercase tracking-[0.08em] leading-relaxed card-subtext"
+                    >
+                      {card.description}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -187,7 +179,7 @@ export default function HowWeWork() {
           <div className="lg:col-span-5 lg:sticky lg:top-36 flex flex-col items-start gap-6 sm:gap-8 pt-2">
             {/* Small Monospace Label */}
             <div className="font-parkinsans text-[11px] sm:text-[12px] uppercase tracking-[0.25em] text-accent font-bold">
-              [05] METHODOLOGY
+              METHODOLOGY
             </div>
 
             {/* Display Headline */}

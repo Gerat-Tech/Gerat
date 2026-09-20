@@ -48,12 +48,12 @@ export default function OurFocus() {
     <section
       id="capabilities"
       aria-label="What We Build"
-      className="relative w-full bg-[var(--bg)] text-white py-24 sm:py-32 border-b border-white/10"
+      className="relative w-full bg-[var(--bg)] text-white py-14 sm:py-18 md:py-20 border-b border-white/10"
     >
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
         {/* Section Header */}
-        <div className="flex flex-col gap-4 mb-16 lg:mb-20 max-w-3xl">
-          <SectionLabel index="01" label="WHAT WE BUILD" />
+        <div className="flex flex-col gap-4 mb-10 sm:mb-12 max-w-3xl">
+          <SectionLabel label="WHAT WE BUILD" />
           <SplitText
             text="HOW WE BUILD"
             as="h2"
@@ -79,7 +79,7 @@ export default function OurFocus() {
             const isHovered = hoveredIndex === idx;
             return (
               <Link
-                key={item.index}
+                key={item.title}
                 href={item.link}
                 onMouseEnter={() => setHoveredIndex(idx)}
                 onMouseLeave={() => setHoveredIndex(null)}
@@ -98,13 +98,8 @@ export default function OurFocus() {
                 />
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 items-baseline">
-                  {/* Column 1: Index */}
-                  <div className="lg:col-span-1 font-parkinsans text-[12px] tracking-[0.2em] text-accent lg:text-white/40 group-hover:text-accent transition-colors">
-                    {item.index}
-                  </div>
-
-                  {/* Column 2: Title & Tags */}
-                  <div className="lg:col-span-5 flex flex-col gap-1.5">
+                  {/* Column 1: Title & Tags */}
+                  <div className="lg:col-span-6 flex flex-col gap-1.5">
                     <h3 className="font-artific text-xl sm:text-2xl font-semibold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
                       {item.title}
                     </h3>
@@ -113,12 +108,12 @@ export default function OurFocus() {
                     </span>
                   </div>
 
-                  {/* Column 3: Description */}
+                  {/* Column 2: Description */}
                   <div className="lg:col-span-5 font-parkinsans text-xs sm:text-sm text-white/60 group-hover:text-white/90 leading-relaxed transition-colors pt-1 lg:pt-0">
                     {item.description}
                   </div>
 
-                  {/* Column 4: Trailing Arrow */}
+                  {/* Column 3: Trailing Arrow */}
                   <div className="hidden lg:flex lg:col-span-1 justify-end font-parkinsans text-sm text-white/30 group-hover:text-accent group-hover:translate-x-1 transition-all">
                     →
                   </div>

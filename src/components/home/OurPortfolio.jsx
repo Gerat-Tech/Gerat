@@ -57,13 +57,13 @@ export default function OurPortfolio({ initialProjects = null }) {
     <section
       id="portfolio"
       aria-label="Selected Work"
-      className="relative w-full bg-[var(--bg)] text-white py-24 sm:py-32 border-b border-white/10"
+      className="relative w-full bg-[var(--bg)] text-white py-14 sm:py-18 md:py-20 border-b border-white/10"
     >
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16 lg:mb-20">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 sm:mb-12">
           <div className="flex flex-col gap-4 max-w-2xl">
-            <SectionLabel index="03" label="SELECTED WORK" />
+            <SectionLabel label="SELECTED WORK" />
             <SplitText
               text="WE BUILD THINGS"
               as="h2"
@@ -112,9 +112,6 @@ export default function OurPortfolio({ initialProjects = null }) {
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[var(--surface)] via-transparent to-transparent" />
-                  <div className="absolute top-4 left-4 font-parkinsans text-[10px] tracking-[0.2em] text-white/70 bg-black/60 px-2.5 py-1 rounded-[1px] border border-white/10">
-                    {project.id}
-                  </div>
                 </div>
 
                 {/* Card Content */}

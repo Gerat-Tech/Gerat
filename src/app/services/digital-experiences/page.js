@@ -213,8 +213,8 @@ export default function DigitalExperiencesPage() {
       </section>
 
       {/* 6 Core Disciplines Section */}
-      <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-24 sm:py-32 border-b border-white/10">
-        <div className="flex flex-col gap-4 mb-16">
+      <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-14 sm:py-18 md:py-20 border-b border-white/10">
+        <div className="flex flex-col gap-4 mb-10 sm:mb-12">
           <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase">
             CAPABILITY CATALOG
           </span>
@@ -230,12 +230,12 @@ export default function DigitalExperiencesPage() {
           {DIGITAL_DISCIPLINES.map((item, idx) => {
             const IconComp = item.icon;
             return (
-              <FadeUp key={item.num} delay={0.08 * idx} y={24}>
+              <FadeUp key={item.title} delay={0.08 * idx} y={24}>
                 <div className="group relative bg-[var(--surface)] border border-white/10 hover:border-accent/80 p-8 rounded-[2px] flex flex-col justify-between min-h-[420px] transition-all duration-300 h-full">
                   <div>
                     <div className="flex items-center justify-between pb-4 border-b border-white/10">
                       <span className="font-parkinsans text-[10px] tracking-[0.2em] text-accent font-bold">
-                        DISCIPLINE · {item.num}
+                        DISCIPLINE
                       </span>
                       <IconComp className="size-4 text-white/40 group-hover:text-accent transition-colors" />
                     </div>

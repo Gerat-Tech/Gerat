@@ -10,7 +10,6 @@ import { useNav } from "@/context/NavContext";
 const ethosCards = [
   {
     id: 1,
-    number: "01 · 04",
     title: "FOUNDATIONAL STABILITY",
     short: "FOUNDATION · STABILITY",
     description:
@@ -29,7 +28,6 @@ const ethosCards = [
   },
   {
     id: 2,
-    number: "02 · 04",
     title: "THE DIGITAL BRIDGE",
     short: "CONNECTION · THE BRIDGE",
     description:
@@ -49,7 +47,6 @@ const ethosCards = [
   },
   {
     id: 3,
-    number: "03 · 04",
     title: "BUILT TO SCALE",
     short: "GROWTH · ADAPTABILITY",
     description:
@@ -67,7 +64,6 @@ const ethosCards = [
   },
   {
     id: 4,
-    number: "04 · 04",
     title: "DEDICATED SUPPORT",
     short: "PARTNERSHIP · OWNERSHIP",
     description:
@@ -101,13 +97,13 @@ export default function OurEthos() {
     <section
       id="ethos"
       aria-label="Why Gerat"
-      className="relative w-full bg-[var(--bg)] text-white py-24 sm:py-32 border-b border-white/10"
+      className="relative w-full bg-[var(--bg)] text-white py-14 sm:py-18 md:py-20 border-b border-white/10"
     >
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
         {/* Section Header */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 lg:mb-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-10 sm:mb-12 items-start">
           <div className="lg:col-span-6 flex flex-col gap-4">
-            <SectionLabel index="02" label="WHY GERAT" />
+            <SectionLabel label="WHY GERAT" />
             <SplitText
               text="BUILT TO"
               as="h2"
@@ -171,10 +167,7 @@ export default function OurEthos() {
                 }`}
               >
                 {/* Top Card Header */}
-                <div className="flex items-center justify-between">
-                  <span className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50">
-                    {card.number}
-                  </span>
+                <div className="flex items-center justify-end">
                   <div className="size-2 rounded-[1px] bg-white/20 group-hover:bg-accent transition-colors" />
                 </div>
 

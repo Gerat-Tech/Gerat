@@ -146,9 +146,6 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", 
               <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0e] via-black/30 to-transparent" />
 
               <div className="absolute top-4 left-4 sm:top-6 sm:left-6 flex items-center gap-3">
-                <span className="font-parkinsans text-[10px] tracking-[0.2em] text-white/80 bg-black/80 backdrop-blur-md px-3 py-1 border border-white/15 rounded-[1px]">
-                  {p.num}
-                </span>
                 <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent bg-black/80 backdrop-blur-md px-3 py-1 border border-accent/40 rounded-[1px] uppercase">
                   {p.category}
                 </span>

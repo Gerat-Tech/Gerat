@@ -18,7 +18,7 @@ const TRANSFORMATION_STAGES = [
   {
     id: "positioning",
     num: "01",
-    tagline: "01 · STRATEGIC POSITIONING",
+    tagline: "STRATEGIC POSITIONING",
     title: "Finding The Uncontested Angle",
     summary:
       "Before sketching a single concept, we rigorously interrogate your market, customers, and unit economics to find an authentic, defensible position.",
@@ -38,7 +38,7 @@ const TRANSFORMATION_STAGES = [
   {
     id: "visual-identity",
     num: "02",
-    tagline: "02 · VISUAL ARCHITECTURE",
+    tagline: "VISUAL ARCHITECTURE",
     title: "The Unmistakable Visual Anchor",
     summary:
       "Crafting an indelible visual language engineered with mathematical balance, distinct silhouettes, and intentional color psychology that commands immediate recall.",
@@ -58,7 +58,7 @@ const TRANSFORMATION_STAGES = [
   {
     id: "digital-bridge",
     num: "03",
-    tagline: "03 · DIGITAL INTERFACE BRIDGES",
+    tagline: "DIGITAL INTERFACE BRIDGES",
     title: "Bridging Identity Directly To Code",
     summary:
       "Most agency brands die inside a static PDF. We translate identity rules directly into living design tokens, React components, and responsive digital products.",
@@ -78,7 +78,7 @@ const TRANSFORMATION_STAGES = [
   {
     id: "market-longevity",
     num: "04",
-    tagline: "04 · SUSTAINED AUTHORITY",
+    tagline: "SUSTAINED AUTHORITY",
     title: "Flawless Execution Everywhere",
     summary:
       "Equipping your teams with turnkey marketing collateral, investor presentations, and clear operational governance so your brand stays world-class forever.",
@@ -396,8 +396,8 @@ export default function BrandCreativePage() {
       </section>
 
       {/* 6 Core Disciplines Section */}
-      <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-24 sm:py-32 border-b border-[var(--border-subtle)]">
-        <div className="flex flex-col gap-4 mb-16">
+      <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-14 sm:py-18 md:py-20 border-b border-[var(--border-subtle)]">
+        <div className="flex flex-col gap-4 mb-10 sm:mb-12">
           <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase font-bold">
             DISCIPLINE CATALOG
           </span>
@@ -427,7 +427,7 @@ export default function BrandCreativePage() {
                   <div>
                     <div className="flex items-center justify-between pb-4 border-b border-[var(--border-subtle)]">
                       <span className="font-parkinsans text-[10px] tracking-[0.2em] text-accent font-bold">
-                        DISCIPLINE · {item.num}
+                        DISCIPLINE
                       </span>
                       <span className="font-parkinsans text-[9px] tracking-[0.2em] text-[var(--text-dim)] uppercase">
                         SPEC 2026

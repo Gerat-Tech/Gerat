@@ -94,18 +94,17 @@ export default function OurLeadership({ initialLeaders = null }) {
     <section
       id="leadership"
       aria-label="Our Leadership Team"
-      className="relative w-full min-h-screen bg-[#0d0706] text-[#faf6ed] border-t border-b border-white/10 overflow-hidden py-12 sm:py-16 md:py-24 select-none"
+      className="relative w-full bg-[#0d0706] text-[#faf6ed] border-t border-b border-white/10 overflow-hidden py-14 sm:py-18 md:py-20 select-none"
     >
       {/* Top Label Bar (1x only) */}
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 mb-12 sm:mb-16">
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 mb-8 sm:mb-10">
         <div className="flex items-center justify-between border-b border-white/10 pb-4 font-parkinsans text-[11px] sm:text-[12px] uppercase tracking-[0.25em] text-white/60">
           <span>OUR LEADERSHIP TEAM</span>
-          <span className="text-accent text-[10px] tracking-[0.2em]">[05]</span>
         </div>
       </div>
 
       {/* Intro Manifesto & Corner-Bracketed Button */}
-      <div className="w-full max-w-[640px] mx-auto px-4 text-center mb-12 sm:mb-16 flex flex-col items-center gap-6">
+      <div className="w-full max-w-[640px] mx-auto px-4 text-center mb-8 sm:mb-10 flex flex-col items-center gap-6">
         <p className="font-parkinsans text-[12px] sm:text-[13px] text-white/60 uppercase tracking-[0.16em] leading-relaxed max-w-[500px]">
           A global network of advisors, operators, and architects. The people
           who built what&apos;s now, helping you build what&apos;s next.
