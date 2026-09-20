@@ -795,6 +795,34 @@ Commit changes in logical units:
 
 ---
 
+## PHASE 19 — "HOW WE WORK" 3-CARD REDESIGN, LIGHT MODE VISIBILITY & 3D LOGO WAVE SCULPTURE
+> **Status:** 🟢 COMPLETED & VERIFIED
+- **19.1 — Section 05 ("How We Work") Redesign (Image 1):**
+  - Transformed into the high-impact 2-column layout from user reference image `media_1789850867395.png`:
+  - 3 large rounded cards (`rounded-[26px]`) on the left:
+    - Card 1: Slate Petrol (`#2A3840`) with blueprint grid icon and `MOVE AT THE SPEED OF BREAKTHROUGH.`
+    - Card 2: Signature Flame Orange (`#EA5B15`) with system signal icon and `FULL-STACK INFRASTRUCTURE, READY FROM DAY ONE.`
+    - Card 3: Warm Almond Ivory (`#FAF6ED`) with crosshair icon and `CONNECTIONS THAT MOVE YOU FORWARD.`
+  - Sticky right manifesto column with display headline `BUILD FAST, WITH ZERO FRICTION AND TOTAL FOCUS.`, manifesto copy, and corner-bracketed `[ BUILD WITH US ]` button triggering the intake drawer.
+  - Cosmic dot constellation background field.
+- **19.2 — Light Mode Visibility Fix & Leadership Header (Image 2):**
+  - Resolved root-cause text invisibility on dark portrait badges in light mode by adding dark-overlay exception rules in `globals.css` and explicit styling (`style={{ color: "#FAF6ED" }}`).
+  - Streamlined top leadership header from 3x repeating text to clean 1x `OUR LEADERSHIP TEAM`.
+- **19.3 — 3D Logo Wave Dot Sculpture (Image 3):**
+  - Replaced the wireframe mesh with a 3D parametric dot sculpture directly inspired by user reference `media_1789851276659.png`, formed in **Gerät's signature 3-wave harmonic bridge geometry**.
+  - Engineered for high visibility in both themes:
+    - Dark mode: Warm Almond (`#FAF6ED`, opacity 0.40–0.98) with glowing Flame Orange (`#EA5B15`) crests on `#0D0706`.
+    - Light mode: High-contrast Coffee Bean (`#300F0A`, opacity 0.35–0.90) with Flame Orange crests on `#FAF6ED`.
+  - Smooth mouse tilt parallax and continuous 3D orbital drift.
+- **Verification:**
+  - ESLint: 0 errors.
+  - Smoke tests: 10/10 test suites passed (1.06s).
+  - Dev server runtime tests: 10/10 routes responded with 200 OK.
+  - E2E tests: 27/27 assertions passed (24/24 core).
+  - Production build (`next build`): 40/40 routes compiled cleanly in 4.4s.
+
+---
+
 ## RESOLVED DESIGN DECISIONS
 
 1. **Portfolio Projects:** Seed data and showcase items calibrated with honest, credible engineering scopes.

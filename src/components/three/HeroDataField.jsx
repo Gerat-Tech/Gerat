@@ -4,11 +4,17 @@ import React, { useEffect, useRef, useState } from "react";
 import Hero3DFallback from "./Hero3DFallback";
 
 /**
- * Architectural Topological Horizon Grid (Option 1)
+ * 3D Parametric Logo Wave Sculpture
  *
- * Replaces heavy particle swarm with a serene, high-precision
- * mathematical coordinate wireframe. Renders an undulating perspective mesh
- * inspired by architectural blueprints and structural endurance.
+ * Modeled directly after the user's reference image (media_1789851276659.png),
+ * shaped in Gerat's iconic 3-wave harmonic bridge geometry.
+ *
+ * Renders an ordered parametric dot cloud with true 3D perspective projection,
+ * depth sorting, smooth orbital rotation, and responsive mouse parallax tilt.
+ *
+ * Engineered with high-contrast dual-mode palettes:
+ * - Dark mode: Brilliant Warm Almond (#FAF6ED) dots with vibrant Flame Orange (#EA5B15) crests.
+ * - Light mode: Crisp Coffee Bean (#300F0A) dots with Flame Orange (#EA5B15) accents.
  */
 export default function HeroDataField() {
   const canvasRef = useRef(null);
@@ -40,8 +46,8 @@ export default function HeroDataField() {
     let width = 0;
     let height = 0;
 
-    // Pointer target and spring-interpolated coordinates (5% influence for serenity)
-    const pointer = { x: 0, y: 0, targetX: 0, targetY: 0, isHovered: false };
+    // Pointer target with spring interpolation (smooth tilt parallax)
+    const pointer = { x: 0, y: 0, targetX: 0, targetY: 0 };
     let scrollY = 0;
 
     const resize = () => {
@@ -59,31 +65,27 @@ export default function HeroDataField() {
     resize();
     window.addEventListener("resize", resize, { passive: true });
 
-    // Pointer movement listener with gentle spring tracking
     const onPointerMove = (e) => {
       const rect = canvas.getBoundingClientRect();
       const nx = (e.clientX - rect.left) / width - 0.5;
       const ny = (e.clientY - rect.top) / height - 0.5;
-      pointer.targetX = nx * 120;
-      pointer.targetY = ny * 60;
-      pointer.isHovered = true;
+      pointer.targetX = nx * 1.2;
+      pointer.targetY = ny * 1.0;
     };
 
     const onPointerLeave = () => {
       pointer.targetX = 0;
       pointer.targetY = 0;
-      pointer.isHovered = false;
     };
 
     const onScroll = () => {
-      scrollY = window.scrollY * 0.12;
+      scrollY = window.scrollY * 0.15;
     };
 
     window.addEventListener("pointermove", onPointerMove, { passive: true });
     window.addEventListener("pointerleave", onPointerLeave, { passive: true });
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    // Pause rendering when offscreen
     const observer = new IntersectionObserver(
       ([entry]) => {
         isVisible = entry.isIntersecting;
@@ -92,18 +94,95 @@ export default function HeroDataField() {
     );
     observer.observe(canvas);
 
-    // Grid configuration: 26 transverse rows x 32 longitudinal columns
-    const cols = 32;
-    const rows = 26;
+    // =========================================================================
+    // Parametric 3D Point Generation: Gerat 3-Wave Harmonic Sculpture
+    // =========================================================================
+    const numRings = 52;
+    const dotsPerRing = 34;
+    const baseModelPoints = [];
 
-    // Pre-allocated coordinate matrices for peak rendering efficiency
-    const projectedPoints = [];
-    for (let r = 0; r < rows; r++) {
-      projectedPoints[r] = [];
-      for (let c = 0; c < cols; c++) {
-        projectedPoints[r][c] = { x: 0, y: 0, alpha: 0 };
+    // Generate rings along a 3D harmonic wave spine path
+    for (let r = 0; r < numRings; r++) {
+      const t = (r / numRings) * Math.PI * 2;
+
+      // 3-Wave Harmonic Spine (incorporating Gerat's 3-wave peaks)
+      const spineRadiusX = 220;
+      const spineRadiusY = 160;
+      const spineRadiusZ = 140;
+
+      // The 3-wave harmonic crests via Math.sin(3 * t)
+      const waveOffset = Math.sin(3 * t) * 60;
+
+      const spineX = Math.cos(t) * (spineRadiusX + waveOffset * 0.3);
+      const spineY = Math.sin(t) * (spineRadiusY + waveOffset * 0.5);
+      const spineZ = Math.sin(2 * t) * spineRadiusZ + Math.cos(3 * t) * 45;
+
+      // Tangent vector along spine for ring orientation
+      const dt = 0.01;
+      const tNext = t + dt;
+      const waveNext = Math.sin(3 * tNext) * 60;
+      const nextX = Math.cos(tNext) * (spineRadiusX + waveNext * 0.3);
+      const nextY = Math.sin(tNext) * (spineRadiusY + waveNext * 0.5);
+      const nextZ = Math.sin(2 * tNext) * spineRadiusZ + Math.cos(3 * tNext) * 45;
+
+      const tx = nextX - spineX;
+      const ty = nextY - spineY;
+      const tz = nextZ - spineZ;
+      const tLen = Math.hypot(tx, ty, tz) || 1;
+      const dirX = tx / tLen;
+      const dirY = ty / tLen;
+      const dirZ = tz / tLen;
+
+      // Normal vectors perpendicular to tangent
+      let normX = -dirY;
+      let normY = dirX;
+      let normZ = 0;
+      const nLen = Math.hypot(normX, normY, normZ) || 1;
+      normX /= nLen;
+      normY /= nLen;
+
+      // Binormal vector
+      const binormX = dirY * normZ - dirZ * normY;
+      const binormY = dirZ * normX - dirX * normZ;
+      const binormZ = dirX * normY - dirY * normX;
+
+      // Ring radius with 3-wave modulation
+      const ringRadius = 55 + Math.sin(3 * t) * 22;
+
+      for (let d = 0; d < dotsPerRing; d++) {
+        const theta = (d / dotsPerRing) * Math.PI * 2;
+        const cosTheta = Math.cos(theta);
+        const sinTheta = Math.sin(theta);
+
+        // Point coordinates in 3D relative to spine
+        const px = spineX + (normX * cosTheta + binormX * sinTheta) * ringRadius;
+        const py = spineY + (normY * cosTheta + binormY * sinTheta) * (ringRadius * 0.75);
+        const pz = spineZ + (normZ * cosTheta + binormZ * sinTheta) * ringRadius;
+
+        // Is this dot on the crest of the 3 waves? (Upper perimeter of the swell)
+        const isCrest = sinTheta > 0.65 && Math.sin(3 * t) > 0.2;
+        const isAccentRing = r % 8 === 0;
+
+        baseModelPoints.push({
+          x: px,
+          y: py,
+          z: pz,
+          isAccent: isCrest || (isAccentRing && d % 4 === 0),
+        });
       }
     }
+
+    // Pre-allocated rendered points for sorting
+    const renderPoints = baseModelPoints.map((p) => ({
+      x: 0,
+      y: 0,
+      z: 0,
+      screenX: 0,
+      screenY: 0,
+      size: 0,
+      alpha: 0,
+      isAccent: p.isAccent,
+    }));
 
     let time = 0;
 
@@ -114,154 +193,123 @@ export default function HeroDataField() {
         return;
       }
 
-      time += 0.008;
+      time += 0.007;
 
-      // Spring lerp for smooth parallax
+      // Smooth pointer lerp
       pointer.x += (pointer.targetX - pointer.x) * 0.05;
       pointer.y += (pointer.targetY - pointer.y) * 0.05;
 
       ctx.clearRect(0, 0, width, height);
 
-      // Detect light mode for adaptive stroke contrast
+      // Detect theme for high-contrast visibility
       const isLightMode =
         typeof document !== "undefined" &&
         (document.documentElement.classList.contains("light") ||
           document.documentElement.classList.contains("site-light"));
 
-      const baseStrokeColor = isLightMode
-        ? "48, 15, 10" // Coffee Bean
-        : "250, 246, 237"; // Warm Almond
-      const accentColor = "234, 91, 21"; // Flame Orange
+      // 3D Rotation angles: gentle orbital drift + interactive pointer tilt
+      const yaw = time * 0.45 + pointer.x * 0.65;
+      const pitch = 0.35 + Math.sin(time * 0.3) * 0.15 + pointer.y * 0.45;
+      const roll = Math.cos(time * 0.25) * 0.1;
 
-      // Horizon epicenter (balanced slightly to the right of hero text)
-      const vanishX = width * 0.64 + pointer.x;
-      const vanishY = height * 0.36 + pointer.y - scrollY;
-      const focalLength = 380;
+      const cosY = Math.cos(yaw);
+      const sinY = Math.sin(yaw);
+      const cosP = Math.cos(pitch);
+      const sinP = Math.sin(pitch);
+      const cosR = Math.cos(roll);
+      const sinR = Math.sin(roll);
 
-      // 1. Calculate projected coordinates with mathematical wave elevation
-      for (let r = 0; r < rows; r++) {
-        // z advances from horizon (far) to foreground (near)
-        const zNorm = r / (rows - 1);
-        const z = 120 + Math.pow(zNorm, 1.8) * 850;
-        const scale = focalLength / (focalLength + z);
+      // Center offset: Positioned slightly to the right to balance hero typography
+      const centerX = width * (width < 768 ? 0.5 : 0.65);
+      const centerY = height * 0.44 - scrollY;
+      const focalLength = 550;
 
-        const rowAlpha = Math.min(1, Math.pow(zNorm, 1.2));
+      // Transform, rotate & project points
+      const count = baseModelPoints.length;
+      for (let i = 0; i < count; i++) {
+        const bp = baseModelPoints[i];
+        const rp = renderPoints[i];
 
-        for (let c = 0; c < cols; c++) {
-          const cNorm = (c / (cols - 1)) * 2 - 1; // -1 to +1
-          const spreadWidth = width * (1.2 + zNorm * 0.8);
-          const worldX = cNorm * spreadWidth * 0.6;
+        // 1. Rotate Y (Yaw)
+        let x1 = bp.x * cosY + bp.z * sinY;
+        let y1 = bp.y;
+        let z1 = -bp.x * sinY + bp.z * cosY;
 
-          // Harmonic sine/cosine topological wave
-          const waveFreqX = 0.0028;
-          const waveFreqZ = 0.0042;
-          const elevation =
-            Math.sin(worldX * waveFreqX + time * 0.9) *
-              Math.cos(z * waveFreqZ + time * 0.6) *
-              36 +
-            Math.sin((worldX + z) * 0.002 + time * 0.4) * 16;
+        // 2. Rotate X (Pitch)
+        let x2 = x1;
+        let y2 = y1 * cosP - z1 * sinP;
+        let z2 = y1 * sinP + z1 * cosP;
 
-          // Elevation relative to camera plane
-          const worldY = 90 + zNorm * 220 + elevation;
+        // 3. Rotate Z (Roll)
+        let x3 = x2 * cosR - y2 * sinR;
+        let y3 = x2 * sinR + y2 * cosR;
+        let z3 = z2;
 
-          const screenX = vanishX + worldX * scale;
-          const screenY = vanishY + worldY * scale;
+        rp.x = x3;
+        rp.y = y3;
+        rp.z = z3;
 
-          projectedPoints[r][c].x = screenX;
-          projectedPoints[r][c].y = screenY;
-          projectedPoints[r][c].alpha = rowAlpha;
-        }
-      }
+        // Perspective projection
+        const scale = focalLength / (focalLength + z3 + 260);
+        rp.screenX = centerX + x3 * scale;
+        rp.screenY = centerY + y3 * scale;
 
-      // 2. Draw Transverse Curves (Latitude Elevation Contours)
-      for (let r = 0; r < rows; r++) {
-        const isAccentRow = r % 7 === 0;
-        const pts = projectedPoints[r];
-        const rowAlpha = pts[0].alpha;
+        // Depth-dependent size and opacity
+        const depthNorm = Math.max(0, Math.min(1, (z3 + 300) / 600));
+        rp.size = Math.max(1.1, (1.2 + depthNorm * 2.4) * (width < 768 ? 0.85 : 1.0));
 
-        ctx.beginPath();
-        ctx.moveTo(pts[0].x, pts[0].y);
-
-        for (let c = 1; c < cols; c++) {
-          // Smooth curve through points
-          const prev = pts[c - 1];
-          const curr = pts[c];
-          const midX = (prev.x + curr.x) * 0.5;
-          const midY = (prev.y + curr.y) * 0.5;
-          ctx.quadraticCurveTo(prev.x, prev.y, midX, midY);
-        }
-        ctx.lineTo(pts[cols - 1].x, pts[cols - 1].y);
-
-        if (isAccentRow) {
-          ctx.strokeStyle = `rgba(${accentColor}, ${0.12 * rowAlpha})`;
-          ctx.lineWidth = 1.2;
+        // Visibility opacities: high contrast in BOTH modes!
+        if (isLightMode) {
+          rp.alpha = 0.35 + depthNorm * 0.55; // 0.35 to 0.90 in Light Mode
         } else {
-          ctx.strokeStyle = `rgba(${baseStrokeColor}, ${0.055 * rowAlpha})`;
-          ctx.lineWidth = 0.85;
+          rp.alpha = 0.40 + depthNorm * 0.58; // 0.40 to 0.98 in Dark Mode
         }
-        ctx.stroke();
       }
 
-      // 3. Draw Longitudinal Perspective Splines (Depth Lines)
-      for (let c = 0; c < cols; c++) {
-        const isAccentCol = c % 6 === 0;
+      // Depth-sort points back to front for proper occlusion and depth feel
+      renderPoints.sort((a, b) => a.z - b.z);
+
+      // Ambient warm radial bloom at the core of the 3D sculpture
+      const glowGrad = ctx.createRadialGradient(
+        centerX,
+        centerY,
+        20,
+        centerX,
+        centerY,
+        Math.min(width, height) * 0.42
+      );
+      if (isLightMode) {
+        glowGrad.addColorStop(0, "rgba(234, 91, 21, 0.08)");
+        glowGrad.addColorStop(0.5, "rgba(234, 91, 21, 0.02)");
+        glowGrad.addColorStop(1, "rgba(241, 223, 217, 0)");
+      } else {
+        glowGrad.addColorStop(0, "rgba(234, 91, 21, 0.16)");
+        glowGrad.addColorStop(0.5, "rgba(234, 91, 21, 0.04)");
+        glowGrad.addColorStop(1, "rgba(13, 7, 6, 0)");
+      }
+      ctx.fillStyle = glowGrad;
+      ctx.fillRect(0, 0, width, height);
+
+      // Draw all 3D points
+      for (let i = 0; i < count; i++) {
+        const p = renderPoints[i];
 
         ctx.beginPath();
-        ctx.moveTo(projectedPoints[0][c].x, projectedPoints[0][c].y);
+        ctx.arc(p.screenX, p.screenY, p.size, 0, Math.PI * 2);
 
-        for (let r = 1; r < rows; r++) {
-          const pt = projectedPoints[r][c];
-          ctx.lineTo(pt.x, pt.y);
+        if (p.isAccent) {
+          // Vibrant Flame Orange (#EA5B15) crests and accents
+          ctx.fillStyle = `rgba(234, 91, 21, ${Math.min(1.0, p.alpha * 1.25)})`;
+        } else if (isLightMode) {
+          // Deep Coffee Bean (#300F0A) in Light Mode
+          ctx.fillStyle = `rgba(48, 15, 10, ${p.alpha})`;
+        } else {
+          // Warm Almond (#FAF6ED) in Dark Mode
+          ctx.fillStyle = `rgba(250, 246, 237, ${p.alpha})`;
         }
 
-        const colAlpha = isAccentCol ? 0.16 : 0.045;
-        ctx.strokeStyle = isAccentCol
-          ? `rgba(${accentColor}, ${colAlpha})`
-          : `rgba(${baseStrokeColor}, ${colAlpha})`;
-        ctx.lineWidth = isAccentCol ? 1.0 : 0.75;
-        ctx.stroke();
+        ctx.fill();
       }
-
-      // 4. Draw Precision Vertex Nodes at Select Intersections
-      for (let r = 4; r < rows; r += 4) {
-        for (let c = 3; c < cols; c += 5) {
-          const pt = projectedPoints[r][c];
-          const pulse = 0.5 + 0.5 * Math.sin(time * 2 + r * 1.5 + c * 2.1);
-          const isOrange = (r + c) % 2 === 0;
-
-          // Subtle glowing crosshair node
-          ctx.beginPath();
-          ctx.arc(pt.x, pt.y, isOrange ? 2.0 : 1.4, 0, Math.PI * 2);
-          ctx.fillStyle = isOrange
-            ? `rgba(${accentColor}, ${0.45 * pt.alpha * pulse})`
-            : `rgba(${baseStrokeColor}, ${0.35 * pt.alpha * pulse})`;
-          ctx.fill();
-
-          // Subtle pulse ring for accent nodes
-          if (isOrange && pulse > 0.7) {
-            ctx.beginPath();
-            ctx.arc(pt.x, pt.y, 4 + pulse * 4, 0, Math.PI * 2);
-            ctx.strokeStyle = `rgba(${accentColor}, ${0.12 * (1 - pulse) * pt.alpha})`;
-            ctx.lineWidth = 0.75;
-            ctx.stroke();
-          }
-        }
-      }
-
-      // 5. Delicate ambient horizon glow
-      const glowGradient = ctx.createRadialGradient(
-        vanishX,
-        vanishY + 40,
-        10,
-        vanishX,
-        vanishY + 40,
-        width * 0.45
-      );
-      glowGradient.addColorStop(0, `rgba(${accentColor}, 0.04)`);
-      glowGradient.addColorStop(0.5, `rgba(${accentColor}, 0.01)`);
-      glowGradient.addColorStop(1, "rgba(0,0,0,0)");
-      ctx.fillStyle = glowGradient;
-      ctx.fillRect(0, 0, width, height);
 
       animationFrameId = requestAnimationFrame(render);
     };
@@ -289,7 +337,7 @@ export default function HeroDataField() {
     >
       <canvas
         ref={canvasRef}
-        className="w-full h-full object-cover opacity-90 transition-opacity duration-700"
+        className="w-full h-full object-cover opacity-95 transition-opacity duration-700"
       />
     </div>
   );

@@ -96,12 +96,11 @@ export default function OurLeadership({ initialLeaders = null }) {
       aria-label="Our Leadership Team"
       className="relative w-full min-h-screen bg-[#0d0706] text-[#faf6ed] border-t border-b border-white/10 overflow-hidden py-12 sm:py-16 md:py-24 select-none"
     >
-      {/* Top Triple-Label Bar */}
+      {/* Top Label Bar (1x only) */}
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 mb-12 sm:mb-16">
-        <div className="flex flex-row items-center justify-between border-b border-white/10 pb-4 font-parkinsans text-[11px] sm:text-[12px] uppercase tracking-[0.25em] text-white/50">
+        <div className="flex items-center justify-between border-b border-white/10 pb-4 font-parkinsans text-[11px] sm:text-[12px] uppercase tracking-[0.25em] text-white/60">
           <span>OUR LEADERSHIP TEAM</span>
-          <span className="hidden sm:inline">OUR LEADERSHIP TEAM</span>
-          <span>OUR LEADERSHIP TEAM</span>
+          <span className="text-accent text-[10px] tracking-[0.2em]">[05]</span>
         </div>
       </div>
 
@@ -221,9 +220,15 @@ export default function OurLeadership({ initialLeaders = null }) {
                 />
 
                 {/* Top-Right Badge: [■ ROLE] */}
-                <div className="absolute bottom-4 right-4 sm:bottom-5 sm:right-5 z-10 flex items-center gap-2 bg-black/75 backdrop-blur-xs px-3 py-1.5 border border-white/20 rounded-[2px]">
+                <div
+                  data-dark-overlay="true"
+                  className="absolute bottom-4 right-4 sm:bottom-5 sm:right-5 z-10 flex items-center gap-2 bg-black/85 backdrop-blur-xs px-3 py-1.5 border border-white/25 rounded-[2px]"
+                >
                   <div className="size-2 bg-accent rounded-[1px]" />
-                  <span className="font-parkinsans text-[10px] tracking-[0.2em] text-white uppercase font-bold">
+                  <span
+                    className="font-parkinsans text-[10px] tracking-[0.2em] text-[#faf6ed] uppercase font-bold dark-overlay-text"
+                    style={{ color: "#FAF6ED" }}
+                  >
                     {activePartner.role}
                   </span>
                 </div>
