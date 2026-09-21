@@ -193,11 +193,20 @@ export default function OurLeadership({ initialLeaders = null }) {
                     </div>
 
                     {/* Bottom Metadata in Slit */}
-                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-3 flex items-end justify-between">
-                      <span className="font-parkinsans text-[10px] tracking-[0.18em] uppercase text-white/90 font-bold">
+                    <div
+                      data-dark-overlay="true"
+                      className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent p-3 flex items-end justify-between z-10 pointer-events-none"
+                    >
+                      <span
+                        className="font-parkinsans text-[10px] tracking-[0.18em] uppercase font-bold text-white dark-overlay-text force-text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]"
+                        style={{ color: "#FAF6ED" }}
+                      >
                         {partner.name}
                       </span>
-                      <span className="font-parkinsans text-[9px] tracking-[0.2em] uppercase text-accent font-bold">
+                      <span
+                        className="font-parkinsans text-[9px] tracking-[0.2em] uppercase text-accent font-bold drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] shrink-0 ml-2"
+                        style={{ color: "#EA5B15" }}
+                      >
                         {partner.role}
                       </span>
                     </div>
@@ -314,6 +323,25 @@ export default function OurLeadership({ initialLeaders = null }) {
                       </div>
 
                       <div className="absolute inset-0 bg-black/20 group-hover/slit:bg-transparent transition-colors pointer-events-none rounded-[2px]" />
+
+                      {/* Bottom Metadata in Slit */}
+                      <div
+                        data-dark-overlay="true"
+                        className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent p-2.5 sm:p-3 flex items-end justify-between z-10 pointer-events-none"
+                      >
+                        <span
+                          className="font-parkinsans text-[9px] sm:text-[10px] tracking-[0.18em] uppercase font-bold text-white dark-overlay-text force-text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]"
+                          style={{ color: "#FAF6ED" }}
+                        >
+                          {partner.name}
+                        </span>
+                        <span
+                          className="font-parkinsans text-[8px] sm:text-[9px] tracking-[0.2em] uppercase text-accent font-bold drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] shrink-0 ml-2"
+                          style={{ color: "#EA5B15" }}
+                        >
+                          {partner.role}
+                        </span>
+                      </div>
                     </div>
                   );
                 })}

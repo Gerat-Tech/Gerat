@@ -618,13 +618,43 @@ html.light .bg-\[\#300F0A\] span,
 html.light .bg-\[\#300f0a\] h3,
 html.light .bg-\[\#300f0a\] p,
 html.light .bg-\[\#300f0a\] span,
+html.light [data-dark-overlay],
+html.light [data-dark-overlay] span,
+html.light [data-dark-overlay] p,
+html.light [data-dark-overlay] .text-white,
+html.site-light [data-dark-overlay],
+html.site-light [data-dark-overlay] span,
+html.site-light [data-dark-overlay] p,
+html.site-light [data-dark-overlay] .text-white,
 html.light [class*="bg-black/"] .text-white,
 html.light [class*="bg-black/"] span,
 html.light [class*="bg-black/"] p,
+html.site-light [class*="bg-black/"] .text-white,
+html.site-light [class*="bg-black/"] span,
+html.site-light [class*="bg-black/"] p,
+html.light [class*="from-black"] span,
+html.site-light [class*="from-black"] span,
+html.light #leadership [data-dark-overlay] span,
+html.site-light #leadership [data-dark-overlay] span,
+html.light #leadership [class*="from-black"] span,
+html.site-light #leadership [class*="from-black"] span,
 html.light #leadership [class*="bg-black/"] span,
+html.site-light #leadership [class*="bg-black/"] span,
 html.light #leadership .dark-overlay-text,
-html.light .force-text-white {
+html.site-light #leadership .dark-overlay-text,
+html.light .force-text-white,
+html.site-light .force-text-white {
   color: #FAF6ED !important;
+}
+
+/* Ensure accent colors inside dark overlay remain vivid flame orange */
+html.light [data-dark-overlay] .text-accent,
+html.site-light [data-dark-overlay] .text-accent,
+html.light [class*="from-black"] .text-accent,
+html.site-light [class*="from-black"] .text-accent,
+html.light #leadership [data-dark-overlay] .text-accent,
+html.site-light #leadership [data-dark-overlay] .text-accent {
+  color: #EA5B15 !important;
 }
 
 html.light [data-dark-overlay] .text-white\/70,
