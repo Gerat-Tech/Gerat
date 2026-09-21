@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import prisma from "@/lib/prisma";
 import { getCurrentUser, isAuthorized, ROLES } from "@/lib/auth";
 import { portfolioProjects } from "@/content/index.js";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 function findStaticCaseStudy(id) {
   const normalizedId = (id || "").toLowerCase().trim();
@@ -159,6 +163,16 @@ export async function PATCH(request, { params }) {
         },
       });
 
+      // Invalidate Next.js cache so public pages immediately show updated data
+      try {
+        revalidatePath("/portfolio");
+        revalidatePath("/");
+        revalidatePath("/dashboard/portfolio");
+        revalidatePath(`/dashboard/portfolio/${targetId}`);
+      } catch (revErr) {
+        console.warn("revalidatePath warning:", revErr.message);
+      }
+
       // Record audit log
       try {
         await prisma.auditLog.create({
@@ -172,31 +186,11 @@ export async function PATCH(request, { params }) {
         });
       } catch {}
     } catch (dbErr) {
-      console.warn("DB write failed in PATCH portfolio/[id], returning resilient response:", dbErr.message);
-      const staticBase = findStaticCaseStudy(id) || {};
-      updated = {
-        id: targetId,
-        slug: data.slug || existing?.slug || staticBase.id || targetId,
-        title: data.title || existing?.title || staticBase.title || "UNTITLED CASE STUDY",
-        displayIndex: data.displayIndex || existing?.displayIndex || staticBase.index || "01",
-        num: data.num || existing?.num || staticBase.num || "01 · 09",
-        category: data.category || existing?.category || staticBase.category || "ENTERPRISE ERP",
-        tags: data.tags || existing?.tags || staticBase.tags || "",
-        metric: data.metric || existing?.metric || staticBase.metric || "",
-        metricDetail: data.metricDetail || existing?.metricDetail || staticBase.metricDetail || "",
-        summary: data.summary || existing?.summary || staticBase.summary || "",
-        problem: data.problem || existing?.problem || staticBase.problem || "",
-        architecture: data.architecture || existing?.architecture || staticBase.architecture || "",
-        techStack: data.techStack || existing?.techStack || staticBase.tech || "",
-        imageUrl: data.imageUrl || existing?.imageUrl || staticBase.image || "/image/portfolioPage/US-AUT-3.webp",
-        impact: data.impact || existing?.impact || staticBase.impact || "",
-        year: data.year || existing?.year || staticBase.year || "2026",
-        status: data.status || existing?.status || staticBase.status || "PRODUCTION · STABLE",
-        featured: data.featured !== undefined ? data.featured : existing?.featured ?? true,
-        order: data.order !== undefined ? data.order : existing?.order ?? 0,
-        createdAt: existing?.createdAt || new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
+      console.error("DB write failed in PATCH portfolio/[id]:", dbErr);
+      return NextResponse.json(
+        { error: `Database write failed: ${dbErr.message || "Failed to update case study."}` },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({ success: true, caseStudy: updated });
@@ -227,6 +221,13 @@ export async function DELETE(request, { params }) {
 
       if (existing) {
         await prisma.caseStudy.delete({ where: { id: existing.id } });
+
+        try {
+          revalidatePath("/portfolio");
+          revalidatePath("/");
+          revalidatePath("/dashboard/portfolio");
+        } catch {}
+
         try {
           await prisma.auditLog.create({
             data: {

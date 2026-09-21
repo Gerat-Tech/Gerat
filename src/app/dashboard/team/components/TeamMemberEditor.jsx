@@ -27,7 +27,7 @@ export default function TeamMemberEditor({ initialMember = null }) {
       "Directing core architectural roadmaps, high-concurrency systems, and mission-critical engineering initiatives."
   );
   const [photoUrl, setPhotoUrl] = useState(
-    initialMember?.photoUrl || "/image/team/leadership/WQF__0000_Founder-IgorTulchinsky.webp"
+    initialMember?.photoUrl || "/brand/gerat-mark-orange.svg"
   );
   const [order, setOrder] = useState(initialMember?.order || 1);
   const [active, setActive] = useState(initialMember ? initialMember.active : true);
@@ -351,7 +351,7 @@ export default function TeamMemberEditor({ initialMember = null }) {
             <div className="bg-[#0c0c0c] border border-white/15 rounded-[4px] overflow-hidden flex flex-col shadow-2xl">
               <div className="relative aspect-4/5 w-full overflow-hidden bg-black/80 border-b border-white/10">
                 <img
-                  src={photoUrl || "/image/team/leadership/WQF__0000_Founder-IgorTulchinsky.webp"}
+                  src={photoUrl || "/brand/gerat-mark-orange.svg"}
                   alt={name}
                   className="w-full h-full object-cover grayscale contrast-110"
                 />

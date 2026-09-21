@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import prisma from "@/lib/prisma";
 import { getCurrentUser, isAuthorized, ROLES } from "@/lib/auth";
 import { servicePillars } from "@/content/index.js";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 function findStaticPillar(id) {
   const cleanId = (id || "").replace(/^sp_/, "").toLowerCase();
@@ -117,6 +121,16 @@ export async function PATCH(request, { params }) {
         },
       });
 
+      // Invalidate Next.js cache so public pages immediately show updated data
+      try {
+        revalidatePath("/services");
+        revalidatePath("/");
+        revalidatePath("/dashboard/services");
+        revalidatePath(`/dashboard/services/${targetId}`);
+      } catch (revErr) {
+        console.warn("revalidatePath warning:", revErr.message);
+      }
+
       // Record audit log
       try {
         await prisma.auditLog.create({
@@ -130,21 +144,11 @@ export async function PATCH(request, { params }) {
         });
       } catch {}
     } catch (dbErr) {
-      console.warn("DB write failed in PATCH services/[id], returning resilient response:", dbErr.message);
-      const staticBase = findStaticPillar(id) || {};
-      updated = {
-        id: targetId,
-        num: data.num || existing?.num || staticBase.num || "01",
-        title: data.title || existing?.title || staticBase.title || "UNTITLED PRACTICE PILLAR",
-        tagline: data.tagline || existing?.tagline || staticBase.tagline || "ARCHITECTURAL CAPABILITY",
-        desc: data.desc || existing?.desc || staticBase.desc || "",
-        deliverables: data.deliverables || existing?.deliverables || JSON.stringify(staticBase.deliverables || []),
-        deepLink: data.deepLink || existing?.deepLink || staticBase.deepLink || "/services",
-        order: data.order !== undefined ? data.order : existing?.order ?? 1,
-        active: data.active !== undefined ? data.active : existing?.active ?? true,
-        createdAt: existing?.createdAt || new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
+      console.error("DB write failed in PATCH services/[id]:", dbErr);
+      return NextResponse.json(
+        { error: `Database write failed: ${dbErr.message || "Failed to update service pillar."}` },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({ success: true, pillar: updated });
@@ -175,6 +179,13 @@ export async function DELETE(request, { params }) {
 
       if (existing) {
         await prisma.servicePillar.delete({ where: { id: existing.id } });
+
+        try {
+          revalidatePath("/services");
+          revalidatePath("/");
+          revalidatePath("/dashboard/services");
+        } catch {}
+
         try {
           await prisma.auditLog.create({
             data: {

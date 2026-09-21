@@ -33,8 +33,8 @@ export async function generateMetadata({ params }) {
       member = await prisma.teamMember.findFirst({
         where: {
           OR: [
-            { name: { equals: id.replace(/-/g, " "), mode: "insensitive" } },
-            { name: { equals: id, mode: "insensitive" } },
+            { name: { contains: id.replace(/-/g, " ") } },
+            { name: { contains: id } },
           ],
         },
         select: { name: true, roleTitle: true },
@@ -71,8 +71,8 @@ export default async function EditTeamMemberPage({ params }) {
       member = await prisma.teamMember.findFirst({
         where: {
           OR: [
-            { name: { equals: id.replace(/-/g, " "), mode: "insensitive" } },
-            { name: { equals: id, mode: "insensitive" } },
+            { name: { contains: id.replace(/-/g, " ") } },
+            { name: { contains: id } },
           ],
         },
       });

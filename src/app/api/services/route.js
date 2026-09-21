@@ -1,8 +1,12 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import prisma from "@/lib/prisma";
 import { getCurrentUser, isAuthorized, ROLES } from "@/lib/auth";
 
 import { servicePillars } from "@/content/index.js";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export async function GET(request) {
   try {
@@ -126,6 +130,12 @@ export async function POST(request) {
           diff: JSON.stringify({ num: pillar.num, title: pillar.title }),
         },
       });
+    } catch {}
+
+    try {
+      revalidatePath("/services");
+      revalidatePath("/");
+      revalidatePath("/dashboard/services");
     } catch {}
 
     return NextResponse.json({ success: true, pillar }, { status: 201 });

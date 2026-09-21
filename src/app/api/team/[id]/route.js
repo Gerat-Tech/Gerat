@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import prisma from "@/lib/prisma";
 import { getCurrentUser, isAuthorized, ROLES } from "@/lib/auth";
 import { leadershipTeam, engineeringSpecialists } from "@/content/index.js";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 function findStaticMember(id) {
   const normalizedId = (id || "").toLowerCase().trim();
@@ -32,8 +36,8 @@ export async function GET(request, { params }) {
         member = await prisma.teamMember.findFirst({
           where: {
             OR: [
-              { name: { equals: id.replace(/-/g, " "), mode: "insensitive" } },
-              { name: { equals: id, mode: "insensitive" } },
+              { name: { contains: id.replace(/-/g, " ") } },
+              { name: { contains: id } },
             ],
           },
         });
@@ -99,8 +103,8 @@ export async function PATCH(request, { params }) {
         existing = await prisma.teamMember.findFirst({
           where: {
             OR: [
-              { name: { equals: id.replace(/-/g, " "), mode: "insensitive" } },
-              { name: { equals: id, mode: "insensitive" } },
+              { name: { contains: id.replace(/-/g, " ") } },
+              { name: { contains: id } },
             ],
           },
         });
@@ -137,7 +141,7 @@ export async function PATCH(request, { params }) {
           division: data.division || "EXECUTIVE_LEADERSHIP",
           focusTag: data.focusTag || "SYSTEMS ARCHITECTURE",
           bio: data.bio || "",
-          photoUrl: data.photoUrl || "/image/team/leadership/WQF__0000_Founder-IgorTulchinsky.webp",
+          photoUrl: data.photoUrl || "/image/team/leadership/Dawit.jpeg",
           order: data.order !== undefined ? data.order : 1,
           active: data.active !== undefined ? data.active : true,
           email: data.email || null,
@@ -146,6 +150,16 @@ export async function PATCH(request, { params }) {
           twitterUrl: data.twitterUrl || null,
         },
       });
+
+      // Invalidate Next.js cache so public pages immediately show updated data
+      try {
+        revalidatePath("/team");
+        revalidatePath("/");
+        revalidatePath("/dashboard/team");
+        revalidatePath(`/dashboard/team/${targetId}`);
+      } catch (revErr) {
+        console.warn("revalidatePath warning:", revErr.message);
+      }
 
       // Record audit log if writable
       try {
@@ -160,25 +174,13 @@ export async function PATCH(request, { params }) {
         });
       } catch {}
     } catch (dbErr) {
-      console.warn("DB write failed in PATCH team/[id], returning resilient response:", dbErr.message);
-      const staticBase = findStaticMember(id) || {};
-      updated = {
-        id: targetId,
-        name: data.name || existing?.name || staticBase.name || "HRUY DANIEL",
-        roleTitle: data.roleTitle || existing?.roleTitle || staticBase.role || "FOUNDER & CHIEF EXECUTIVE OFFICER",
-        division: data.division || existing?.division || "EXECUTIVE_LEADERSHIP",
-        focusTag: data.focusTag || existing?.focusTag || staticBase.specialty || "GENERAL MANAGEMENT · STRATEGY & VENTURE",
-        bio: data.bio || existing?.bio || staticBase.bio || "",
-        photoUrl: data.photoUrl || existing?.photoUrl || staticBase.image || "/image/team/leadership/hiruy.jpeg",
-        order: data.order !== undefined ? data.order : existing?.order || 1,
-        active: data.active !== undefined ? data.active : existing?.active ?? true,
-        email: data.email !== undefined ? data.email : existing?.email || staticBase.email || null,
-        linkedinUrl: data.linkedinUrl !== undefined ? data.linkedinUrl : existing?.linkedinUrl || staticBase.linkedinUrl || null,
-        githubUrl: data.githubUrl !== undefined ? data.githubUrl : existing?.githubUrl || staticBase.githubUrl || null,
-        twitterUrl: data.twitterUrl !== undefined ? data.twitterUrl : existing?.twitterUrl || staticBase.twitterUrl || null,
-        createdAt: existing?.createdAt || new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
+      console.error("DB write failed in PATCH team/[id]:", dbErr);
+      return NextResponse.json(
+        {
+          error: `Database write failed: ${dbErr.message || "Failed to update team member in database."}`,
+        },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({
@@ -209,14 +211,21 @@ export async function DELETE(request, { params }) {
         where: {
           OR: [
             { id },
-            { name: { equals: id.replace(/-/g, " "), mode: "insensitive" } },
-            { name: { equals: id, mode: "insensitive" } },
+            { name: { contains: id.replace(/-/g, " ") } },
+            { name: { contains: id } },
           ],
         },
       });
 
       if (existing) {
         await prisma.teamMember.delete({ where: { id: existing.id } });
+
+        try {
+          revalidatePath("/team");
+          revalidatePath("/");
+          revalidatePath("/dashboard/team");
+        } catch {}
+
         try {
           await prisma.auditLog.create({
             data: {

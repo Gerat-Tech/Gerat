@@ -134,7 +134,7 @@ export default function TeamClientView({ initialMembers = [] }) {
               <div>
                 <div className="relative aspect-4/3 bg-black/60 overflow-hidden border-b border-white/10">
                   <img
-                    src={m.photoUrl || "/image/team/leadership/WQF__0000_Founder-IgorTulchinsky.webp"}
+                    src={m.photoUrl || "/brand/gerat-mark-orange.svg"}
                     alt={m.name}
                     className="w-full h-full object-cover grayscale contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300"
                   />

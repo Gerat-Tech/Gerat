@@ -46,7 +46,7 @@ export async function runTeamServicesCmsSmokeTests() {
       division: "ENGINEERING_PRACTITIONER",
       focusTag: "RAFT CONSENSUS // EVENT SOURCING",
       bio: "Focuses on zero-copy serialization and fault-tolerant state-machine replication.",
-      photoUrl: "/image/team/leadership/WQF__0000_Founder-IgorTulchinsky.webp",
+      photoUrl: "/brand/gerat-mark-orange.svg",
       order: 99,
       active: true,
       githubUrl: "https://github.com/gerat-test",

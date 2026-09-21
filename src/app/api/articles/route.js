@@ -1,8 +1,12 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import prisma from "@/lib/prisma";
 import { getCurrentUser, isAuthorized, ROLES } from "@/lib/auth";
 
 import { insightsArticles } from "@/content/index.js";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export async function GET(request) {
   try {
@@ -183,6 +187,12 @@ export async function POST(request) {
           diff: JSON.stringify({ title: article.title, slug: article.slug, status: article.status }),
         },
       });
+    } catch {}
+
+    try {
+      revalidatePath("/articles");
+      revalidatePath("/");
+      revalidatePath("/dashboard/articles");
     } catch {}
 
     return NextResponse.json({ success: true, article }, { status: 201 });

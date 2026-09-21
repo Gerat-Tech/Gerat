@@ -1,8 +1,12 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import prisma from "@/lib/prisma";
 import { getCurrentUser, isAuthorized, ROLES } from "@/lib/auth";
 
 import { leadershipTeam, engineeringSpecialists } from "@/content/index.js";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export async function GET(request) {
   try {
@@ -127,7 +131,7 @@ export async function POST(request) {
       division = "ENGINEERING_PRACTITIONER",
       focusTag = "SYSTEMS ARCHITECTURE",
       bio = "",
-      photoUrl = "/image/team/leadership/WQF__0000_Founder-IgorTulchinsky.webp",
+      photoUrl = "/brand/gerat-mark-orange.svg",
       order = 0,
       active = true,
       email,
@@ -168,6 +172,12 @@ export async function POST(request) {
           diff: JSON.stringify({ name: member.name, role: member.roleTitle }),
         },
       });
+    } catch {}
+
+    try {
+      revalidatePath("/team");
+      revalidatePath("/");
+      revalidatePath("/dashboard/team");
     } catch {}
 
     return NextResponse.json({ success: true, member }, { status: 201 });

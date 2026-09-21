@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import prisma from "@/lib/prisma";
 import { getCurrentUser, isAuthorized, ROLES } from "@/lib/auth";
 import { insightsArticles } from "@/content/index.js";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 function findStaticArticle(id) {
   const normalizedId = (id || "").toLowerCase().trim();
@@ -154,6 +158,17 @@ export async function PATCH(request, { params }) {
         },
       });
 
+      // Invalidate Next.js cache so public pages immediately show updated data
+      try {
+        revalidatePath("/articles");
+        revalidatePath("/");
+        revalidatePath("/dashboard/articles");
+        revalidatePath(`/dashboard/articles/${targetId}`);
+        if (updated.slug) revalidatePath(`/articles/${updated.slug}`);
+      } catch (revErr) {
+        console.warn("revalidatePath warning:", revErr.message);
+      }
+
       // Record audit log
       try {
         await prisma.auditLog.create({
@@ -167,31 +182,11 @@ export async function PATCH(request, { params }) {
         });
       } catch {}
     } catch (dbErr) {
-      console.warn("DB write failed in PATCH articles/[id], returning resilient response:", dbErr.message);
-      const staticBase = findStaticArticle(id) || {};
-      updated = {
-        id: targetId,
-        slug: data.slug || existing?.slug || staticBase.slug || targetId,
-        title: data.title || existing?.title || staticBase.title || "UNTITLED ARTICLE",
-        subtitle: data.subtitle !== undefined ? data.subtitle : existing?.subtitle || staticBase.subtitle || null,
-        category: data.category || existing?.category || staticBase.category || "SYSTEM ARCHITECTURE",
-        content: data.content || existing?.content || "",
-        excerpt: data.excerpt !== undefined ? data.excerpt : existing?.excerpt || staticBase.excerpt || null,
-        readingTime: data.readingTime || existing?.readingTime || staticBase.readTime || "5 MIN READ",
-        coverImageUrl: data.coverImageUrl !== undefined ? data.coverImageUrl : existing?.coverImageUrl || staticBase.image || null,
-        tags: data.tags || existing?.tags || JSON.stringify(staticBase.tags || []),
-        status: data.status || existing?.status || "PUBLISHED",
-        featured: data.featured !== undefined ? data.featured : existing?.featured ?? false,
-        author: {
-          id: user.id,
-          name: user.name || "Dawit (Principal Architect)",
-          email: user.email || "admin@gerat.com",
-          role: user.role || "SUPER_ADMIN",
-        },
-        publishedAt: existing?.publishedAt || new Date().toISOString(),
-        createdAt: existing?.createdAt || new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
+      console.error("DB write failed in PATCH articles/[id]:", dbErr);
+      return NextResponse.json(
+        { error: `Database write failed: ${dbErr.message || "Failed to update article."}` },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({ success: true, article: updated });
@@ -222,6 +217,14 @@ export async function DELETE(request, { params }) {
 
       if (existing) {
         await prisma.article.delete({ where: { id: existing.id } });
+
+        try {
+          revalidatePath("/articles");
+          revalidatePath("/");
+          revalidatePath("/dashboard/articles");
+          if (existing.slug) revalidatePath(`/articles/${existing.slug}`);
+        } catch {}
+
         try {
           await prisma.auditLog.create({
             data: {
