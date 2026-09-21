@@ -109,7 +109,6 @@ export default function ServicesOverview({ initialPillars = null }) {
                   <span className="font-parkinsans text-[11px] tracking-[0.2em] text-accent font-bold">
                     SERVICE PILLAR
                   </span>
-                  <div className="size-2 rounded-[1px] bg-white/20 group-hover:bg-accent transition-colors" />
                 </div>
 
                 <div className="flex flex-col gap-3 my-6">
@@ -130,9 +129,8 @@ export default function ServicesOverview({ initialPillars = null }) {
                   </span>
                   <ul className="space-y-1.5 font-parkinsans text-[10px] tracking-[0.15em] text-white/60">
                     {(pillar.deliverables || []).map((del) => (
-                      <li key={del} className="flex items-center gap-2">
-                        <span className="text-accent">•</span>
-                        <span>{del}</span>
+                      <li key={del} className="hover:text-white transition-colors">
+                        {del}
                       </li>
                     ))}
                   </ul>

@@ -8,18 +8,11 @@ export default function SectionLabel({
   index, // Kept for backwards compatibility if passed, but not rendered
   label = "SECTION",
   className = "",
-  showDot = true,
 }) {
   return (
     <div
-      className={`inline-flex items-center gap-2.5 font-artific text-[11px] sm:text-[12px] tracking-[0.2em] text-[var(--text-secondary)] uppercase select-none ${className}`}
+      className={`inline-flex items-center font-artific text-[11px] sm:text-[12px] tracking-[0.2em] text-[var(--text-secondary)] uppercase select-none ${className}`}
     >
-      {showDot && (
-        <span
-          className="size-1.5 rounded-[1px] bg-accent shrink-0"
-          aria-hidden="true"
-        />
-      )}
       <span className="text-[var(--text-primary)] font-medium">{label}</span>
     </div>
   );

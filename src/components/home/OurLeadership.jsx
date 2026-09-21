@@ -185,8 +185,7 @@ export default function OurLeadership({ initialLeaders = null }) {
                           : "opacity-0 translate-y-2 scale-90"
                       }`}
                     >
-                      <div className="flex items-center gap-1.5 bg-[#EA5B15] text-white px-2.5 py-1 rounded-[2px] shadow-lg border border-white/20">
-                        <span className="size-1.5 rounded-full bg-white" />
+                      <div className="flex items-center justify-center bg-[#EA5B15] text-white px-2.5 py-1 rounded-[2px] shadow-lg border border-white/20">
                         <span className="font-parkinsans text-[9px] tracking-[0.2em] uppercase font-bold text-white">
                           VIEW
                         </span>
@@ -228,12 +227,11 @@ export default function OurLeadership({ initialLeaders = null }) {
                   className="w-full h-full object-cover grayscale contrast-115"
                 />
 
-                {/* Top-Right Badge: [■ ROLE] */}
+                {/* Top-Right Badge: [ROLE] */}
                 <div
                   data-dark-overlay="true"
-                  className="absolute bottom-4 right-4 sm:bottom-5 sm:right-5 z-10 flex items-center gap-2 bg-black/85 backdrop-blur-xs px-3 py-1.5 border border-white/25 rounded-[2px]"
+                  className="absolute bottom-4 right-4 sm:bottom-5 sm:right-5 z-10 flex items-center bg-black/85 backdrop-blur-xs px-3 py-1.5 border border-white/25 rounded-[2px]"
                 >
-                  <div className="size-2 bg-accent rounded-[1px]" />
                   <span
                     className="font-parkinsans text-[10px] tracking-[0.2em] text-[#faf6ed] uppercase font-bold dark-overlay-text"
                     style={{ color: "#FAF6ED" }}

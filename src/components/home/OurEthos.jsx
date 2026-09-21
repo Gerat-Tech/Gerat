@@ -166,11 +166,6 @@ export default function OurEthos() {
                     : "border-white/10 hover:border-white/30"
                 }`}
               >
-                {/* Top Card Header */}
-                <div className="flex items-center justify-end">
-                  <div className="size-2 rounded-[1px] bg-white/20 group-hover:bg-accent transition-colors" />
-                </div>
-
                 {/* Center Visual Icon */}
                 <div className="my-8 flex items-center justify-center py-4">
                   {card.icon}

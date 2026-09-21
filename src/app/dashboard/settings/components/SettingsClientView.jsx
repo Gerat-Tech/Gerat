@@ -729,7 +729,9 @@ export default function SettingsClientView({
                       🌙 DARK MONOLITHIC
                     </span>
                     {theme === "dark" && (
-                      <span className="size-2 rounded-full bg-accent" />
+                      <svg className="size-3 text-accent" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                        <path d="M2 6l3 3 5-5" />
+                      </svg>
                     )}
                   </div>
                   <p className="font-sans text-xs text-white/70 leading-relaxed">
@@ -760,7 +762,9 @@ export default function SettingsClientView({
                       ☀️ ARCHITECTURAL LIGHT
                     </span>
                     {theme === "light" && (
-                      <span className="size-2 rounded-full bg-accent" />
+                      <svg className="size-3 text-accent" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                        <path d="M2 6l3 3 5-5" />
+                      </svg>
                     )}
                   </div>
                   <p className="font-sans text-xs text-[#555D6B] leading-relaxed">
@@ -793,7 +797,9 @@ export default function SettingsClientView({
                       💻 SYSTEM AUTOMATIC
                     </span>
                     {theme === "system" && (
-                      <span className="size-2 rounded-full bg-accent" />
+                      <svg className="size-3 text-accent" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                        <path d="M2 6l3 3 5-5" />
+                      </svg>
                     )}
                   </div>
                   <p className={`font-sans text-xs leading-relaxed ${isLight ? "text-[#555D6B]" : "text-white/60"}`}>

@@ -57,7 +57,7 @@ export default function Marquee({ customItems = null }) {
             className="flex items-center gap-8 font-parkinsans text-[11px] sm:text-[12px] tracking-[0.25em] uppercase text-white/70 hover:text-white transition-colors"
           >
             <span>{item}</span>
-            <span className="size-1.5 rounded-[1px] bg-accent/80 shrink-0" aria-hidden="true" />
+            <span className="text-white/20 select-none font-light" aria-hidden="true">/</span>
           </div>
         ))}
       </div>

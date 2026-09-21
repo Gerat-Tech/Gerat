@@ -291,9 +291,8 @@ export default function PersonalBrandingPage() {
                     </span>
                     <ul className="space-y-1.5 font-parkinsans text-[9px] tracking-[0.08em] text-white/60">
                       {mod.deliverables.map((del) => (
-                        <li key={del} className="flex items-center gap-2">
-                          <span className="text-accent">•</span>
-                          <span>{del}</span>
+                        <li key={del} className="hover:text-white transition-colors">
+                          {del}
                         </li>
                       ))}
                     </ul>

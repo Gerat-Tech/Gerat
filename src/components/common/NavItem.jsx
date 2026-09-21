@@ -16,25 +16,9 @@ export default function NavItem({
         isCurrent ? "text-white" : "text-white/70 hover:text-white"
       } ${className}`}
     >
-      <div className="flex items-center gap-2">
-        {/* Leading dot: permanently visible if current route, otherwise slides in on hover */}
-        <div
-          className={`size-[7px] rounded-[1px] transition-all duration-400 ease-(--ease-primary) ${
-            isCurrent
-              ? "bg-accent opacity-100 translate-x-0 blur-0 shadow-[0_0_8px_rgba(234,91,21,0.8)]"
-              : "bg-white -translate-x-3 opacity-0 blur-[8px] group-hover/item:translate-x-0 group-hover/item:opacity-100 group-hover/item:blur-0"
-          }`}
-          aria-hidden="true"
-        />
-
+      <div className="flex items-center">
         {/* Sliding text reveal animation */}
-        <div
-          className={`relative isolate flex overflow-hidden transition-transform duration-400 ease-(--ease-primary) ${
-            isCurrent
-              ? "translate-x-0"
-              : "-translate-x-2 group-hover/item:translate-x-0"
-          }`}
-        >
+        <div className="relative isolate flex overflow-hidden transition-transform duration-400 ease-(--ease-primary)">
           <span className="transition-transform duration-400 ease-(--ease-primary) group-hover/item:-translate-y-full">
             {label}
           </span>

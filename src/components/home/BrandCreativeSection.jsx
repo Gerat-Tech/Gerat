@@ -194,8 +194,7 @@ export default function BrandCreativeSection() {
 
         {/* Global Section Bottom Bar & CTAs */}
         <div className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-3">
-            <span className="size-2 rounded-full bg-emerald-400" />
+          <div className="flex items-center">
             <span className="font-parkinsans text-[10px] tracking-[0.2em] text-white/60 uppercase">
               STUDIO CAPACITY · INTAKE OPEN FOR Q4 & 2026
             </span>

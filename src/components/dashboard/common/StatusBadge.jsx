@@ -46,9 +46,6 @@ export default function StatusBadge({ status, className = "" }) {
     <span
       className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-[2px] border font-parkinsans text-[9px] tracking-[0.15em] uppercase font-medium whitespace-nowrap ${style} ${className}`}
     >
-      {status === "NEW_INTAKE" && (
-        <span className="size-1 rounded-full bg-accent animate-ping" />
-      )}
       {label}
     </span>
   );

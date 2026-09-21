@@ -255,9 +255,8 @@ export default function DigitalExperiencesPage() {
                     </span>
                     <ul className="space-y-1.5 font-parkinsans text-[10px] tracking-[0.1em] text-white/60">
                       {item.deliverables.map((del) => (
-                        <li key={del} className="flex items-center gap-2">
-                          <span className="text-accent">•</span>
-                          <span>{del}</span>
+                        <li key={del} className="hover:text-white transition-colors">
+                          {del}
                         </li>
                       ))}
                     </ul>

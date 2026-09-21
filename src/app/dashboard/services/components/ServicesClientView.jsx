@@ -168,9 +168,8 @@ export default function ServicesClientView({ initialPillars = [] }) {
                     </span>
                     <ul className="space-y-1 font-parkinsans text-[9px] tracking-wider text-white/50">
                       {deliverables.slice(0, 3).map((d, i) => (
-                        <li key={i} className="truncate flex items-center gap-1.5">
-                          <span className="text-accent">•</span>
-                          <span>{d}</span>
+                        <li key={i} className="truncate text-white/60">
+                          {d}
                         </li>
                       ))}
                       {deliverables.length > 3 && (

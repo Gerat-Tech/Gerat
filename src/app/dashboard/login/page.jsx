@@ -71,8 +71,7 @@ function LoginForm() {
           </span>
         </Link>
 
-        <div className="flex items-center gap-2 font-parkinsans text-[10px] tracking-[0.15em] text-white/40 uppercase">
-          <span className="inline-block size-1.5 rounded-full bg-emerald-500" />
+        <div className="font-parkinsans text-[10px] tracking-[0.15em] text-white/40 uppercase">
           <span>PORTAL SECURED</span>
         </div>
       </header>

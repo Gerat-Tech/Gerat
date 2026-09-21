@@ -32,7 +32,6 @@ export default function Hero() {
           {/* Eyebrow Telemetry (Spec §10) */}
           <FadeUp delay={0.1} y={16}>
             <div className="inline-flex items-center gap-3 font-artific text-[10px] sm:text-[11px] tracking-[0.25em] text-white/50 uppercase font-medium">
-              <span className="size-1.5 rounded-[1px] bg-accent" />
               <span className="text-white/80">GERAT SOFTWARE SOLUTION</span>
               <span className="text-white/20">·</span>
               <span className="hidden sm:inline">ADDIS ABABA · EST. 2026</span>

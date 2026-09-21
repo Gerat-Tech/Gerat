@@ -449,9 +449,8 @@ export default function BrandCreativePage() {
                     </span>
                     <ul className="space-y-1.5 font-parkinsans text-[10px] tracking-[0.05em] text-[var(--text-secondary)]">
                       {item.deliverables.map((del) => (
-                        <li key={del} className="flex items-center gap-2">
-                          <span className="text-accent font-bold">•</span>
-                          <span>{del}</span>
+                        <li key={del} className="hover:text-[var(--text-primary)] transition-colors">
+                          {del}
                         </li>
                       ))}
                     </ul>

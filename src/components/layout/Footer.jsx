@@ -27,8 +27,7 @@ export default function Footer() {
         <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-14 sm:py-18 md:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
             <div className="lg:col-span-8 flex flex-col gap-6">
-              <div className="inline-flex items-center gap-2.5 font-artific text-[10px] sm:text-[11px] tracking-[0.25em] text-[#300F0A] uppercase font-bold">
-                <span className="size-2 rounded-[1px] bg-[#300F0A]" />
+              <div className="inline-flex items-center font-artific text-[10px] sm:text-[11px] tracking-[0.25em] text-[#300F0A] uppercase font-bold">
                 <span>START A PROJECT</span>
               </div>
 
@@ -107,22 +106,22 @@ export default function Footer() {
               <ul className="flex flex-col gap-2 font-parkinsans text-[10px] tracking-[0.15em] text-white/60 uppercase">
                 <li>
                   <Link href="/services/digital-experiences" className="hover:text-white transition-colors">
-                    • DIGITAL EXPERIENCES
+                    DIGITAL EXPERIENCES
                   </Link>
                 </li>
                 <li>
                   <Link href="/services/ai-tools" className="hover:text-white transition-colors">
-                    • AI & INTELLIGENT TOOLS
+                    AI & INTELLIGENT TOOLS
                   </Link>
                 </li>
                 <li>
                   <Link href="/services/business-systems" className="hover:text-white transition-colors">
-                    • BUSINESS SYSTEMS
+                    BUSINESS SYSTEMS
                   </Link>
                 </li>
                 <li>
                   <Link href="/services/brand-creative" className="hover:text-white transition-colors">
-                    • BRAND & CREATIVE
+                    BRAND & CREATIVE
                   </Link>
                 </li>
               </ul>

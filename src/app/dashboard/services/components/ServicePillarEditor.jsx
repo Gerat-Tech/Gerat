@@ -283,7 +283,6 @@ export default function ServicePillarEditor({ initialData = null, isNew = false 
                 <span className="font-parkinsans text-[11px] tracking-[0.2em] text-accent font-bold">
                   PRACTICE · {formData.num || "00"}
                 </span>
-                <div className="size-2 rounded-[1px] bg-accent" />
               </div>
 
               <div className="flex flex-col gap-3 my-6">
@@ -305,9 +304,8 @@ export default function ServicePillarEditor({ initialData = null, isNew = false 
                 {deliverablesArray.length > 0 ? (
                   <ul className="space-y-1.5 font-parkinsans text-[10px] tracking-[0.15em] text-white/60">
                     {deliverablesArray.map((del, i) => (
-                      <li key={i} className="flex items-center gap-2">
-                        <span className="text-accent">•</span>
-                        <span>{del}</span>
+                      <li key={i} className="text-white/70">
+                        {del}
                       </li>
                     ))}
                   </ul>

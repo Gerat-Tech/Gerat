@@ -134,7 +134,6 @@ export default function Navbar() {
         {/* Global Announcement Banner from SiteConfig */}
         {announcement?.enabled && announcement?.text && (
           <div className="w-full bg-[var(--surface)]/95 backdrop-blur-md border-b border-accent/40 text-[10px] sm:text-[11px] font-parkinsans uppercase tracking-[0.2em] py-2 px-4 text-center text-white/90 flex items-center justify-center gap-2 sm:gap-3 shadow-md">
-            <span className="inline-block size-1.5 rounded-full bg-accent shrink-0" />
             <span className="truncate max-w-[70vw] sm:max-w-none">{announcement.text}</span>
             {announcement.link && (
               <Link
@@ -245,31 +244,18 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden relative size-10 rounded-[3px] border border-white/15 bg-white/5 flex items-center justify-center text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent"
+              className="lg:hidden relative size-10 rounded-[2px] border border-white/15 bg-white/5 flex flex-col items-center justify-center gap-1.5 text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent hover:border-white/30 transition-colors"
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMenuOpen}
             >
-              <div className="size-2 bg-white rounded-[1px] group-hover:bg-accent transition-colors" />
-
-              {/* Animated Corner Brackets */}
               <span
-                className={`absolute top-1 left-1 size-2 border-t border-l border-white/60 transition-transform duration-300 ${
-                  isMenuOpen ? "rotate-45" : ""
+                className={`w-4 h-[1.5px] bg-white transition-all duration-300 ${
+                  isMenuOpen ? "rotate-45 translate-y-[3.75px]" : ""
                 }`}
               />
               <span
-                className={`absolute top-1 right-1 size-2 border-t border-r border-white/60 transition-transform duration-300 ${
-                  isMenuOpen ? "-rotate-45" : ""
-                }`}
-              />
-              <span
-                className={`absolute bottom-1 left-1 size-2 border-b border-l border-white/60 transition-transform duration-300 ${
-                  isMenuOpen ? "-rotate-45" : ""
-                }`}
-              />
-              <span
-                className={`absolute bottom-1 right-1 size-2 border-b border-r border-white/60 transition-transform duration-300 ${
-                  isMenuOpen ? "rotate-45" : ""
+                className={`w-4 h-[1.5px] bg-white transition-all duration-300 ${
+                  isMenuOpen ? "-rotate-45 -translate-y-[3.75px]" : ""
                 }`}
               />
             </button>

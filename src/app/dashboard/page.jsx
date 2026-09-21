@@ -181,8 +181,7 @@ export default async function DashboardPage({ searchParams }) {
               <div className="font-artific text-3xl sm:text-4xl font-bold text-accent mt-1">
                 {newInquiries.toString().padStart(2, "0")}
               </div>
-              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-accent mt-2 flex items-center gap-1.5">
-                <span className="size-1.5 rounded-full bg-accent" />
+              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-accent mt-2">
                 <span>UNREAD INTAKES</span>
               </div>
             </div>
@@ -291,8 +290,7 @@ export default async function DashboardPage({ searchParams }) {
               <div className="font-artific text-3xl sm:text-4xl font-bold text-white mt-1">
                 {inquiryCount.toString().padStart(2, "0")}
               </div>
-              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-accent mt-2 flex items-center gap-1.5">
-                <span className="size-1.5 rounded-full bg-accent" />
+              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-accent mt-2">
                 <span>{newInquiries} AWAITING TRIAGE</span>
               </div>
             </div>

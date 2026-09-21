@@ -468,17 +468,12 @@ Please log in and update your passphrase upon first access.`;
                           type="button"
                           disabled={isSelf}
                           onClick={() => handleToggleActive(user)}
-                          className={`inline-flex items-center gap-1.5 font-parkinsans text-[9px] tracking-[0.15em] px-2 py-0.5 rounded-[2px] border font-bold uppercase transition-colors ${
+                          className={`inline-flex items-center font-parkinsans text-[9px] tracking-[0.15em] px-2 py-0.5 rounded-[2px] border font-bold uppercase transition-colors ${
                             user.active
                               ? "bg-emerald-950/40 text-emerald-400 border-emerald-500/30 hover:border-emerald-500"
                               : "bg-red-950/40 text-red-400 border-red-500/30 hover:border-red-500"
                           } ${isSelf ? "cursor-default opacity-80" : "cursor-pointer"}`}
                         >
-                          <span
-                            className={`size-1.5 rounded-full ${
-                              user.active ? "bg-emerald-400" : "bg-red-400"
-                            }`}
-                          />
                           <span>{user.active ? "ACTIVE" : "SUSPENDED"}</span>
                         </button>
                       </td>
@@ -540,7 +535,9 @@ Please log in and update your passphrase upon first access.`;
             <div className={`flex items-center justify-between pb-3 border-b ${isLight ? "border-[#E5E7EB]" : "border-white/10"}`}>
               <div>
                 <span className="font-parkinsans text-[9px] tracking-[0.25em] text-emerald-500 uppercase font-bold flex items-center gap-1.5">
-                  <span className="size-2 rounded-full bg-emerald-500" />
+                  <svg className="size-3 text-emerald-500 shrink-0" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                    <path d="M2 6l3 3 5-5" />
+                  </svg>
                   CREDENTIALS GENERATED
                 </span>
                 <h2 className="font-parkinsans text-xl font-bold uppercase mt-0.5">DISPATCH OPERATOR CREDENTIALS</h2>

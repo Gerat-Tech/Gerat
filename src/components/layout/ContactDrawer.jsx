@@ -266,8 +266,7 @@ export default function ContactDrawer({ open, setOpen, preset = null }) {
           >
             {/* Header / Bar */}
             <div className="sticky top-0 z-20 bg-[var(--surface)]/95 backdrop-blur-md border-b border-white/10 px-6 sm:px-10 py-5 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <span className="size-2 rounded-full bg-accent shrink-0" />
+              <div className="flex items-center">
                 <span className="font-artific text-[10px] tracking-[0.25em] text-white/70 uppercase font-medium">
                   START A PROJECT · DIRECT CONSULTATION
                 </span>
@@ -327,7 +326,9 @@ export default function ContactDrawer({ open, setOpen, preset = null }) {
                               {p.label}
                             </span>
                             {isSelected && (
-                              <span className="size-1.5 rounded-full bg-accent shrink-0 ml-2" />
+                              <svg className="size-3 text-accent shrink-0 ml-2" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                                <path d="M2 6l3 3 5-5" />
+                              </svg>
                             )}
                           </button>
                         );
