@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { getCurrentUser, isAuthorized, ROLES } from "@/lib/auth";
 
+import { insightsArticles } from "@/content/index.js";
+
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -24,15 +26,60 @@ export async function GET(request) {
       ];
     }
 
-    const articles = await prisma.article.findMany({
-      where,
-      include: {
-        author: {
-          select: { id: true, name: true, email: true, role: true },
+    let articles = [];
+    try {
+      articles = await prisma.article.findMany({
+        where,
+        include: {
+          author: {
+            select: { id: true, name: true, email: true, role: true },
+          },
         },
-      },
-      orderBy: { createdAt: "desc" },
-    });
+        orderBy: { createdAt: "desc" },
+      });
+    } catch (dbErr) {
+      console.warn("Prisma article findMany failed, falling back to static content:", dbErr.message);
+    }
+
+    if (!articles || articles.length === 0) {
+      articles = insightsArticles.map((a) => ({
+        id: a.slug,
+        slug: a.slug,
+        title: a.title,
+        subtitle: a.subtitle || null,
+        category: a.category,
+        content: `# ${a.title}\n\n${a.excerpt}\n\n### Abstract & Findings\n\nThis research paper documents institutional and enterprise implementation observations by Gerat Software Solution.`,
+        excerpt: a.excerpt,
+        readingTime: a.readTime,
+        coverImageUrl: a.image,
+        tags: JSON.stringify(a.tags || []),
+        status: "PUBLISHED",
+        featured: Boolean(a.featured),
+        authorId: "usr_super_admin_gerat",
+        author: {
+          id: "usr_super_admin_gerat",
+          name: "Dawit (Principal Architect)",
+          email: "admin@gerat.com",
+          role: "SUPER_ADMIN",
+        },
+        publishedAt: a.date ? new Date(a.date).toISOString() : new Date().toISOString(),
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      }));
+
+      if (category && category !== "ALL ARTICLES") {
+        articles = articles.filter((a) => a.category === category);
+      }
+      if (search) {
+        const lower = search.toLowerCase();
+        articles = articles.filter(
+          (a) =>
+            a.title.toLowerCase().includes(lower) ||
+            (a.subtitle && a.subtitle.toLowerCase().includes(lower)) ||
+            (a.excerpt && a.excerpt.toLowerCase().includes(lower))
+        );
+      }
+    }
 
     return NextResponse.json({ success: true, articles });
   } catch (error) {

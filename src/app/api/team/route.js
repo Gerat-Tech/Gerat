@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { getCurrentUser, isAuthorized, ROLES } from "@/lib/auth";
 
+import { leadershipTeam, engineeringSpecialists } from "@/content/index.js";
+
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -25,10 +27,73 @@ export async function GET(request) {
       ];
     }
 
-    const members = await prisma.teamMember.findMany({
-      where,
-      orderBy: [{ order: "asc" }, { createdAt: "asc" }],
-    });
+    let members = [];
+    try {
+      members = await prisma.teamMember.findMany({
+        where,
+        orderBy: [{ order: "asc" }, { createdAt: "asc" }],
+      });
+    } catch (dbErr) {
+      console.warn("Prisma teamMember findMany failed, falling back to static content:", dbErr.message);
+    }
+
+    if (!members || members.length === 0) {
+      let order = 1;
+      const staticLeadership = leadershipTeam.map((m) => ({
+        id: m.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+        name: m.name,
+        roleTitle: m.role,
+        division: "EXECUTIVE_LEADERSHIP",
+        focusTag: m.specialty,
+        bio: m.bio,
+        photoUrl: m.image,
+        email: m.email || null,
+        linkedinUrl: m.linkedinUrl || null,
+        twitterUrl: m.twitterUrl || null,
+        githubUrl: m.githubUrl || null,
+        order: order++,
+        active: true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      }));
+
+      const staticEngineering = engineeringSpecialists.map((m) => ({
+        id: (m.name || m.role).toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+        name: m.name,
+        roleTitle: m.role,
+        division: "ENGINEERING_PRACTITIONER",
+        focusTag: m.discipline,
+        bio: m.focus,
+        photoUrl: m.image,
+        email: m.email || null,
+        linkedinUrl: m.linkedinUrl || null,
+        twitterUrl: m.twitterUrl || null,
+        githubUrl: m.githubUrl || null,
+        order: order++,
+        active: true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      }));
+
+      members = [...staticLeadership, ...staticEngineering];
+
+      if (division && division !== "ALL") {
+        members = members.filter((m) => m.division === division);
+      }
+      if (active === "true") {
+        members = members.filter((m) => m.active);
+      }
+      if (search) {
+        const lower = search.toLowerCase();
+        members = members.filter(
+          (m) =>
+            m.name.toLowerCase().includes(lower) ||
+            m.roleTitle.toLowerCase().includes(lower) ||
+            m.focusTag.toLowerCase().includes(lower) ||
+            m.bio.toLowerCase().includes(lower)
+        );
+      }
+    }
 
     return NextResponse.json({ success: true, members });
   } catch (error) {

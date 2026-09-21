@@ -3,6 +3,8 @@ import Link from "next/link";
 import prisma from "@/lib/prisma";
 import ArticlesClientView from "./components/ArticlesClientView";
 
+import { insightsArticles } from "@/content/index.js";
+
 export const metadata = {
   title: "Research & Insights CMS · Gerat Mission Control",
   description: "Publish and maintain technical whitepapers, architecture retrospectives, and field dispatches",
@@ -21,6 +23,33 @@ export default async function InsightsDashboardPage() {
     });
   } catch (error) {
     console.error("InsightsDashboardPage fetch error:", error);
+  }
+
+  if (articles.length === 0) {
+    articles = insightsArticles.map((a) => ({
+      id: a.slug,
+      slug: a.slug,
+      title: a.title,
+      subtitle: a.subtitle || null,
+      category: a.category,
+      content: `# ${a.title}\n\n${a.excerpt}\n\n### Abstract & Findings\n\nThis research paper documents institutional and enterprise implementation observations by Gerat Software Solution.`,
+      excerpt: a.excerpt,
+      readingTime: a.readTime,
+      coverImageUrl: a.image,
+      tags: JSON.stringify(a.tags || []),
+      status: "PUBLISHED",
+      featured: Boolean(a.featured),
+      authorId: "usr_super_admin_gerat",
+      author: {
+        id: "usr_super_admin_gerat",
+        name: "Dawit (Principal Architect)",
+        email: "admin@gerat.com",
+        role: "SUPER_ADMIN",
+      },
+      publishedAt: a.date ? new Date(a.date).toISOString() : new Date().toISOString(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    }));
   }
 
   const total = articles.length;

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { getCurrentUser, hashPassword, verifyPassword } from "@/lib/auth";
+import { getCurrentUser, hashPassword, verifyPassword, SYSTEM_PRESET_USERS } from "@/lib/auth";
 
 /**
  * POST /api/auth/change-password
@@ -42,11 +42,29 @@ export async function POST(request) {
     }
 
     // Fetch user from DB with passwordHash
-    const user = await prisma.user.findUnique({
-      where: { id: currentUser.id },
-    });
+    let user = null;
+    try {
+      user = await prisma.user.findUnique({
+        where: { id: currentUser.id },
+      });
+    } catch {}
 
     if (!user) {
+      const preset = SYSTEM_PRESET_USERS.find(
+        (p) => p.id === currentUser.id || p.email.toLowerCase() === currentUser.email?.toLowerCase()
+      );
+      if (preset) {
+        if (preset.plainPassword !== currentPassword) {
+          return NextResponse.json(
+            { error: "Current passphrase is incorrect", field: "currentPassword" },
+            { status: 400 }
+          );
+        }
+        return NextResponse.json({
+          success: true,
+          message: "Passphrase verified. Connect an external PostgreSQL database to persist changes permanently across deployments.",
+        });
+      }
       return NextResponse.json(
         { error: "Operator session account not found" },
         { status: 404 }

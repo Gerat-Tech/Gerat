@@ -1,7 +1,7 @@
 import React from "react";
 import { redirect } from "next/navigation";
 import prisma from "@/lib/prisma";
-import { getCurrentUser, ROLES } from "@/lib/auth";
+import { getCurrentUser, ROLES, SYSTEM_PRESET_USERS } from "@/lib/auth";
 import UsersSettingsClientView from "./components/UsersSettingsClientView";
 
 export const metadata = {
@@ -35,6 +35,20 @@ export default async function UsersSettingsPage() {
     });
   } catch (error) {
     console.warn("UsersSettingsPage: unable to fetch users:", error.message);
+  }
+
+  if (users.length === 0) {
+    users = SYSTEM_PRESET_USERS.map((p) => ({
+      id: p.id,
+      email: p.email,
+      name: p.name,
+      role: p.role,
+      title: p.title,
+      avatarUrl: null,
+      active: true,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    }));
   }
 
   return (

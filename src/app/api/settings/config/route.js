@@ -2,22 +2,28 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { getCurrentUser, isAuthorized, ROLES } from "@/lib/auth";
 
+import { siteConfig } from "@/content/index.js";
+
 export async function GET() {
+  let configs = [];
   try {
-    const configs = await prisma.siteConfig.findMany({
+    configs = await prisma.siteConfig.findMany({
       orderBy: { key: "asc" },
     });
-
-    const configMap = configs.reduce((acc, item) => {
-      acc[item.key] = item.value;
-      return acc;
-    }, {});
-
-    return NextResponse.json({ success: true, configs, configMap });
   } catch (error) {
-    console.error("Fetch site config error:", error);
-    return NextResponse.json({ error: "Failed to fetch site configurations." }, { status: 500 });
+    console.warn("Fetch site config from DB failed, using defaults:", error.message);
   }
+
+  const configMap = configs.reduce((acc, item) => {
+    acc[item.key] = item.value;
+    return acc;
+  }, {
+    COMPANY_NAME: siteConfig.name || "Gerat Software Solution",
+    CONTACT_EMAIL: siteConfig.contact?.inquiries || "contact@gerat.com",
+    CONTACT_PHONE: siteConfig.contact?.phone || "+251 900 000 000",
+  });
+
+  return NextResponse.json({ success: true, configs, configMap });
 }
 
 export async function POST(request) {

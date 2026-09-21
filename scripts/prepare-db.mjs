@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { execSync } from "child_process";
 
 /**
  * Automatically detects whether DATABASE_URL is PostgreSQL or SQLite,
@@ -24,6 +25,24 @@ if (fs.existsSync(schemaPath)) {
       schema = schema.replace(/provider\s*=\s*"sqlite"/g, 'provider = "postgresql"');
       fs.writeFileSync(schemaPath, schema, "utf8");
       console.log("✓ Detected PostgreSQL DATABASE_URL. Set Prisma provider to 'postgresql'.");
+    }
+
+    // Auto-migrate & seed when deploying on Vercel or CI with PostgreSQL
+    if (process.env.VERCEL || process.env.CI || process.env.AUTO_MIGRATE === "true") {
+      try {
+        console.log("⚡ Auto-migrating PostgreSQL schema and seeding initial datasets...");
+        execSync("npx prisma db push --skip-generate --accept-data-loss", {
+          stdio: "inherit",
+          timeout: 45000,
+        });
+        execSync("node prisma/seed.mjs", {
+          stdio: "inherit",
+          timeout: 45000,
+        });
+        console.log("✓ PostgreSQL auto-migration and seeding completed successfully.");
+      } catch (err) {
+        console.warn("⚠️ Database auto-migration skipped or encountered an issue:", err.message);
+      }
     }
   } else {
     if (!schema.includes('provider = "sqlite"')) {

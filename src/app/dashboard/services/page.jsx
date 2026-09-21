@@ -3,6 +3,8 @@ import Link from "next/link";
 import prisma from "@/lib/prisma";
 import ServicesClientView from "./components/ServicesClientView";
 
+import { servicePillars } from "@/content/index.js";
+
 export const metadata = {
   title: "Practice Pillars CMS · Gerat Mission Control",
   description: "Curate, engineer, and publish core service capabilities and specifications",
@@ -16,6 +18,23 @@ export default async function ServicesDashboardPage() {
     });
   } catch (error) {
     console.warn("ServicesDashboardPage: unable to fetch service pillars:", error.message);
+  }
+
+  if (pillars.length === 0) {
+    let order = 1;
+    pillars = servicePillars.map((p) => ({
+      id: `sp_${p.num}`,
+      num: p.num,
+      title: p.title,
+      tagline: p.tagline,
+      desc: p.desc,
+      deliverables: JSON.stringify(p.deliverables || []),
+      deepLink: p.deepLink || "/services",
+      order: order++,
+      active: true,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    }));
   }
 
   const total = pillars.length;

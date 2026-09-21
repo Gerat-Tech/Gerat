@@ -1,6 +1,12 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { verifyPassword, signSessionToken, COOKIE_NAME } from "@/lib/auth";
+import {
+  verifyPassword,
+  signSessionToken,
+  hashPassword,
+  COOKIE_NAME,
+  SYSTEM_PRESET_USERS,
+} from "@/lib/auth";
 
 export async function POST(request) {
   try {
@@ -15,23 +21,85 @@ export async function POST(request) {
     }
 
     const normalizedEmail = email.trim().toLowerCase();
-    const user = await prisma.user.findUnique({
-      where: { email: normalizedEmail },
-    });
+    let user = null;
+    let isDbAvailable = true;
 
-    if (!user || !user.active) {
-      return NextResponse.json(
-        { error: "Invalid credentials or account deactivated." },
-        { status: 401 }
-      );
+    try {
+      user = await prisma.user.findUnique({
+        where: { email: normalizedEmail },
+      });
+    } catch (dbErr) {
+      console.warn("Database lookup failed, falling back to preset verification:", dbErr.message);
+      isDbAvailable = false;
     }
 
-    const isValid = await verifyPassword(password, user.passwordHash);
-    if (!isValid) {
-      return NextResponse.json(
-        { error: "Invalid credentials." },
-        { status: 401 }
+    // 1. If user exists in DB, verify password hash
+    if (user) {
+      if (!user.active) {
+        return NextResponse.json(
+          { error: "Invalid credentials or account deactivated." },
+          { status: 401 }
+        );
+      }
+
+      const isValid = await verifyPassword(password, user.passwordHash);
+      if (!isValid) {
+        return NextResponse.json(
+          { error: "Invalid credentials." },
+          { status: 401 }
+        );
+      }
+    } else {
+      // 2. User not in database: check authorized system presets (supports Vercel with unseeded DB or serverless)
+      const preset = SYSTEM_PRESET_USERS.find(
+        (p) =>
+          p.email.toLowerCase() === normalizedEmail ||
+          (p.alternateEmail && p.alternateEmail.toLowerCase() === normalizedEmail)
       );
+
+      if (!preset || preset.plainPassword !== password) {
+        return NextResponse.json(
+          { error: "Invalid credentials or account deactivated." },
+          { status: 401 }
+        );
+      }
+
+      // If DB is available, auto-create the preset user in the DB
+      if (isDbAvailable) {
+        try {
+          const passwordHash = await hashPassword(password);
+          user = await prisma.user.upsert({
+            where: { email: preset.email },
+            update: {
+              passwordHash,
+              role: preset.role,
+              active: true,
+            },
+            create: {
+              email: preset.email,
+              name: preset.name,
+              passwordHash,
+              role: preset.role,
+              title: preset.title,
+              active: true,
+            },
+          });
+        } catch (seedErr) {
+          console.warn("Could not auto-persist preset user into database:", seedErr.message);
+        }
+      }
+
+      // If user is still null (e.g. read-only serverless environment), use preset object
+      if (!user) {
+        user = {
+          id: preset.id,
+          email: preset.email,
+          name: preset.name,
+          role: preset.role,
+          title: preset.title,
+          active: true,
+        };
+      }
     }
 
     // Generate JWT token
@@ -40,20 +108,23 @@ export async function POST(request) {
       email: user.email,
       name: user.name,
       role: user.role,
+      title: user.title,
     });
 
-    // Record login audit log
-    try {
-      await prisma.auditLog.create({
-        data: {
-          actorId: user.id,
-          action: "USER_LOGIN",
-          entityType: "AUTH",
-          entityId: user.id,
-          diff: JSON.stringify({ email: user.email, role: user.role }),
-        },
-      });
-    } catch {}
+    // Record login audit log if DB is writable
+    if (isDbAvailable) {
+      try {
+        await prisma.auditLog.create({
+          data: {
+            actorId: user.id,
+            action: "USER_LOGIN",
+            entityType: "AUTH",
+            entityId: user.id,
+            diff: JSON.stringify({ email: user.email, role: user.role }),
+          },
+        });
+      } catch {}
+    }
 
     const response = NextResponse.json({
       success: true,

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { getCurrentUser, ROLES, hashPassword } from "@/lib/auth";
+import { getCurrentUser, ROLES, hashPassword, SYSTEM_PRESET_USERS } from "@/lib/auth";
 
 /**
  * GET /api/settings/users
@@ -16,20 +16,39 @@ export async function GET() {
       );
     }
 
-    const users = await prisma.user.findMany({
-      orderBy: { createdAt: "asc" },
-      select: {
-        id: true,
-        email: true,
-        name: true,
-        role: true,
-        title: true,
-        avatarUrl: true,
+    let users = [];
+    try {
+      users = await prisma.user.findMany({
+        orderBy: { createdAt: "asc" },
+        select: {
+          id: true,
+          email: true,
+          name: true,
+          role: true,
+          title: true,
+          avatarUrl: true,
+          active: true,
+          createdAt: true,
+          updatedAt: true,
+        },
+      });
+    } catch (dbErr) {
+      console.warn("DB user findMany failed, falling back to preset users:", dbErr.message);
+    }
+
+    if (!users || users.length === 0) {
+      users = SYSTEM_PRESET_USERS.map((p) => ({
+        id: p.id,
+        email: p.email,
+        name: p.name,
+        role: p.role,
+        title: p.title,
+        avatarUrl: null,
         active: true,
-        createdAt: true,
-        updatedAt: true,
-      },
-    });
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      }));
+    }
 
     return NextResponse.json({ success: true, users });
   } catch (error) {

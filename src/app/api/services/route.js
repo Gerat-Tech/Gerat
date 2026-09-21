@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { getCurrentUser, isAuthorized, ROLES } from "@/lib/auth";
 
+import { servicePillars } from "@/content/index.js";
+
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -20,10 +22,42 @@ export async function GET(request) {
       ];
     }
 
-    const pillars = await prisma.servicePillar.findMany({
-      where,
-      orderBy: [{ order: "asc" }, { num: "asc" }],
-    });
+    let pillars = [];
+    try {
+      pillars = await prisma.servicePillar.findMany({
+        where,
+        orderBy: [{ order: "asc" }, { num: "asc" }],
+      });
+    } catch (dbErr) {
+      console.warn("Prisma servicePillar findMany failed, falling back to static content:", dbErr.message);
+    }
+
+    if (!pillars || pillars.length === 0) {
+      let order = 1;
+      pillars = servicePillars.map((p) => ({
+        id: `sp_${p.num}`,
+        num: p.num,
+        title: p.title,
+        tagline: p.tagline,
+        desc: p.desc,
+        deliverables: JSON.stringify(p.deliverables || []),
+        deepLink: p.deepLink || "/services",
+        order: order++,
+        active: true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      }));
+
+      if (search) {
+        const lower = search.toLowerCase();
+        pillars = pillars.filter(
+          (p) =>
+            p.title.toLowerCase().includes(lower) ||
+            p.tagline.toLowerCase().includes(lower) ||
+            p.desc.toLowerCase().includes(lower)
+        );
+      }
+    }
 
     return NextResponse.json({ success: true, pillars });
   } catch (error) {

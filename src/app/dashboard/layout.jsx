@@ -21,10 +21,12 @@ export default async function DashboardLayout({ children }) {
 
     user = await getCurrentUser();
     if (user) {
-      const newInquiries = await prisma.inquiry.count({
-        where: { status: "NEW_INTAKE" },
-      });
-      stats.newInquiries = newInquiries;
+      try {
+        const newInquiries = await prisma.inquiry.count({
+          where: { status: "NEW_INTAKE" },
+        });
+        stats.newInquiries = newInquiries;
+      } catch {}
     }
   } catch {}
 

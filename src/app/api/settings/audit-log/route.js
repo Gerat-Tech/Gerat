@@ -23,25 +23,33 @@ export async function GET(request) {
     if (entityType && entityType !== "ALL") where.entityType = entityType;
     if (action && action !== "ALL") where.action = action;
 
-    const [logs, total] = await Promise.all([
-      prisma.auditLog.findMany({
-        where,
-        take: limit,
-        skip: offset,
-        orderBy: { createdAt: "desc" },
-        include: {
-          actor: {
-            select: {
-              id: true,
-              name: true,
-              email: true,
-              role: true,
+    let logs = [];
+    let total = 0;
+    try {
+      const results = await Promise.all([
+        prisma.auditLog.findMany({
+          where,
+          take: limit,
+          skip: offset,
+          orderBy: { createdAt: "desc" },
+          include: {
+            actor: {
+              select: {
+                id: true,
+                name: true,
+                email: true,
+                role: true,
+              },
             },
           },
-        },
-      }),
-      prisma.auditLog.count({ where }),
-    ]);
+        }),
+        prisma.auditLog.count({ where }),
+      ]);
+      logs = results[0];
+      total = results[1];
+    } catch (dbErr) {
+      console.warn("DB auditLog query failed:", dbErr.message);
+    }
 
     return NextResponse.json({
       success: true,

@@ -3,6 +3,8 @@ import Link from "next/link";
 import prisma from "@/lib/prisma";
 import TeamClientView from "./components/TeamClientView";
 
+import { leadershipTeam, engineeringSpecialists } from "@/content/index.js";
+
 export const metadata = {
   title: "Team Roster CMS · Gerat Mission Control",
   description: "Manage leadership, engineers, creative directors, and advisors",
@@ -16,6 +18,47 @@ export default async function TeamDashboardPage() {
     });
   } catch (error) {
     console.warn("TeamDashboardPage: unable to fetch team members:", error.message);
+  }
+
+  if (members.length === 0) {
+    let order = 1;
+    const staticLeadership = leadershipTeam.map((m) => ({
+      id: m.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+      name: m.name,
+      roleTitle: m.role,
+      division: "EXECUTIVE_LEADERSHIP",
+      focusTag: m.specialty,
+      bio: m.bio,
+      photoUrl: m.image,
+      email: m.email || null,
+      linkedinUrl: m.linkedinUrl || null,
+      twitterUrl: m.twitterUrl || null,
+      githubUrl: m.githubUrl || null,
+      order: order++,
+      active: true,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    }));
+
+    const staticEngineering = engineeringSpecialists.map((m) => ({
+      id: (m.name || m.role).toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+      name: m.name,
+      roleTitle: m.role,
+      division: "ENGINEERING_PRACTITIONER",
+      focusTag: m.discipline,
+      bio: m.focus,
+      photoUrl: m.image,
+      email: m.email || null,
+      linkedinUrl: m.linkedinUrl || null,
+      twitterUrl: m.twitterUrl || null,
+      githubUrl: m.githubUrl || null,
+      order: order++,
+      active: true,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    }));
+
+    members = [...staticLeadership, ...staticEngineering];
   }
 
   const total = members.length;

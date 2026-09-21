@@ -1,5 +1,10 @@
 import { PrismaClient } from "@prisma/client";
 
+// Guard against missing DATABASE_URL in serverless environments
+if (!process.env.DATABASE_URL) {
+  process.env.DATABASE_URL = "file:./dev.db";
+}
+
 const globalForPrisma = global;
 
 export const prisma =
