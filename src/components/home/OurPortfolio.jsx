@@ -26,8 +26,9 @@ export default function OurPortfolio({ initialProjects = null }) {
           const mapped = data.caseStudies.slice(0, 3).map((p, idx) => ({
             ...p,
             id: p.displayIndex || `0${idx + 1}`,
-            image: p.imageUrl,
-            description: p.summary,
+            image: p.imageUrl || p.image,
+            description: p.summary || p.description,
+            tech: p.techStack || p.tech || "",
             stack:
               typeof p.stackBadges === "string" && p.stackBadges.startsWith("[")
                 ? JSON.parse(p.stackBadges)
@@ -106,10 +107,13 @@ export default function OurPortfolio({ initialProjects = null }) {
                 {/* Media Container */}
                 <div className="relative aspect-16/10 w-full overflow-hidden bg-black/60">
                   <img
-                    src={project.image}
+                    src={project.image || "/image/portfolioPage/stratahub-featured.webp"}
                     alt={project.title}
                     className="w-full h-full object-cover object-center opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
                     loading="lazy"
+                    onError={(e) => {
+                      e.target.src = "/image/portfolioPage/stratahub-featured.webp";
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[var(--surface)] via-transparent to-transparent" />
                 </div>

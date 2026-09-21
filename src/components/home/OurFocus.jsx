@@ -1,14 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import SectionLabel from "../common/SectionLabel";
 import FadeUp from "../motion/FadeUp";
 import SplitText from "../motion/SplitText";
 
-const capabilities = [
+const DEFAULT_CAPABILITIES = [
   {
     index: "01",
+    num: "01",
     title: "DIGITAL EXPERIENCES",
     tags: "WEBSITES · WEB APPLICATIONS · CUSTOMER PORTALS · DIGITAL PRODUCTS",
     description:
@@ -17,6 +18,7 @@ const capabilities = [
   },
   {
     index: "02",
+    num: "02",
     title: "AI & INTELLIGENT TOOLS",
     tags: "PRACTICAL AI · KNOWLEDGE SYSTEMS · INTELLIGENT SEARCH · AUTOMATION",
     description:
@@ -25,6 +27,7 @@ const capabilities = [
   },
   {
     index: "03",
+    num: "03",
     title: "BUSINESS SYSTEMS",
     tags: "OPERATIONS PLATFORMS · ERP · WORKFLOW SYSTEMS · CUSTOM SOFTWARE",
     description:
@@ -33,6 +36,7 @@ const capabilities = [
   },
   {
     index: "04",
+    num: "04",
     title: "BRAND & CREATIVE",
     tags: "BRAND STRATEGY · LOGO & IDENTITY · GRAPHIC DESIGN · PERSONAL BRANDING",
     description:
@@ -41,8 +45,53 @@ const capabilities = [
   },
 ];
 
-export default function OurFocus() {
+export default function OurFocus({ initialPillars = null }) {
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [fetchedPillars, setFetchedPillars] = useState(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetch("/api/services?active=true")
+      .then((res) => res.json())
+      .then((data) => {
+        if (isMounted && data.success && data.pillars && data.pillars.length > 0) {
+          const normalized = data.pillars.map((p) => {
+            let dels = [];
+            if (Array.isArray(p.deliverables)) {
+              dels = p.deliverables;
+            } else if (typeof p.deliverables === "string" && p.deliverables.startsWith("[")) {
+              try {
+                dels = JSON.parse(p.deliverables);
+              } catch {
+                dels = p.deliverables.split("\n").filter(Boolean);
+              }
+            } else if (p.deliverables) {
+              dels = p.deliverables.split("\n").filter(Boolean);
+            }
+
+            return {
+              ...p,
+              index: p.num,
+              title: p.title,
+              tags: Array.isArray(dels) && dels.length > 0 ? dels.join(" · ") : p.tagline,
+              description: p.desc || p.tagline,
+              link: p.deepLink || "/services",
+            };
+          });
+          setFetchedPillars(normalized);
+        }
+      })
+      .catch(() => {});
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const capabilities =
+    (fetchedPillars && fetchedPillars.length > 0 && fetchedPillars) ||
+    (initialPillars && initialPillars.length > 0 && initialPillars) ||
+    DEFAULT_CAPABILITIES;
 
   return (
     <section
@@ -73,14 +122,14 @@ export default function OurFocus() {
           </FadeUp>
         </div>
 
-        {/* Interactive Capability Rows Table (4 Core Pillars) */}
+        {/* Interactive Capability Rows Table (Dynamic Pillars from Database) */}
         <div className="w-full border-t border-white/10">
           {capabilities.map((item, idx) => {
             const isHovered = hoveredIndex === idx;
             return (
               <Link
-                key={item.title}
-                href={item.link}
+                key={item.title || idx}
+                href={item.link || "/services"}
                 onMouseEnter={() => setHoveredIndex(idx)}
                 onMouseLeave={() => setHoveredIndex(null)}
                 onFocus={() => setHoveredIndex(idx)}

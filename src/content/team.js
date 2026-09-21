@@ -13,7 +13,7 @@ export const leadershipTeam = [
     linkedinUrl: "https://linkedin.com/company/gerat",
     twitterUrl: "https://x.com/geratsolutions",
     githubUrl: "https://github.com/gerat-technologies",
-    image: "/image/team/leadership/WQF__0000_Founder-IgorTulchinsky.webp",
+    image: "/image/team/leadership/hiruy.jpeg",
   },
   {
     name: "DAWIT TEKLEBRHAN",
@@ -24,7 +24,7 @@ export const leadershipTeam = [
     linkedinUrl: "https://linkedin.com/company/gerat",
     twitterUrl: "https://x.com/geratsolutions",
     githubUrl: "https://github.com/gerat-technologies",
-    image: "/image/team/leadership/WQF__0005_CEO-and-Co-Founder_Steven-Lau.webp",
+    image: "/image/team/leadership/Dawit.jpeg",
   },
   {
     name: "YOHANNES TADESSE",
@@ -35,7 +35,7 @@ export const leadershipTeam = [
     linkedinUrl: "https://linkedin.com/company/gerat",
     twitterUrl: "https://x.com/geratsolutions",
     githubUrl: "https://github.com/gerat-technologies",
-    image: "/image/team/leadership/WQF__0004_Chairman-and-Co-Founder_Amir-Husain-2.webp",
+    image: "/image/team/leadership/Nisiha.jpeg",
   },
   {
     name: "SOLOMON KASSAHUN",
@@ -46,7 +46,7 @@ export const leadershipTeam = [
     linkedinUrl: "https://linkedin.com/company/gerat",
     twitterUrl: "https://x.com/geratsolutions",
     githubUrl: "https://github.com/gerat-technologies",
-    image: "/image/team/leadership/WQF__0005_CEO-and-Co-Founder_Steven-Lau.webp",
+    image: "/image/team/leadership/hosea.jpeg",
   },
 ];
 
@@ -60,7 +60,7 @@ export const engineeringSpecialists = [
     linkedinUrl: "https://linkedin.com/company/gerat",
     twitterUrl: "https://x.com/geratsolutions",
     githubUrl: "https://github.com/gerat-technologies",
-    image: "/image/team/AdvisorAndTeam/WQF__01_Advisor_Savi-Glow-1_Health-Tech-and-Space.webp",
+    image: "/brand/gerat-mark-orange.svg",
   },
   {
     name: "SELAMAWIT HAILE",
@@ -71,7 +71,7 @@ export const engineeringSpecialists = [
     linkedinUrl: "https://linkedin.com/company/gerat",
     twitterUrl: "https://x.com/geratsolutions",
     githubUrl: "https://github.com/gerat-technologies",
-    image: "/image/team/AdvisorAndTeam/WQF__02_Advisor_Dmitry-Green.webp",
+    image: "/brand/gerat-mark-orange.svg",
   },
   {
     name: "MIHRET KASSAHUN",
@@ -82,7 +82,7 @@ export const engineeringSpecialists = [
     linkedinUrl: "https://linkedin.com/company/gerat",
     twitterUrl: "https://x.com/geratsolutions",
     githubUrl: "https://github.com/gerat-technologies",
-    image: "/image/team/AdvisorAndTeam/WQF__03_Advisor_Zaib-Husain_Venture-and-Robotics.webp",
+    image: "/brand/gerat-mark-orange.svg",
   },
   {
     name: "AMANUEL GIRMA",
@@ -93,7 +93,7 @@ export const engineeringSpecialists = [
     linkedinUrl: "https://linkedin.com/company/gerat",
     twitterUrl: "https://x.com/geratsolutions",
     githubUrl: "https://github.com/gerat-technologies",
-    image: "/image/team/AdvisorAndTeam/WQF__04_Advisor_John-King-3_Chief-Marketing-Officer.webp",
+    image: "/brand/gerat-mark-orange.svg",
   },
   {
     name: "PETER LEE",
@@ -104,7 +104,7 @@ export const engineeringSpecialists = [
     linkedinUrl: "https://linkedin.com/company/gerat",
     twitterUrl: "https://x.com/geratsolutions",
     githubUrl: "https://github.com/gerat-technologies",
-    image: "/image/team/AdvisorAndTeam/WQF__05_Peter Lee.webp",
+    image: "/brand/gerat-mark-orange.svg",
   },
   {
     name: "CHRIS MASON",
@@ -115,6 +115,6 @@ export const engineeringSpecialists = [
     linkedinUrl: "https://linkedin.com/company/gerat",
     twitterUrl: "https://x.com/geratsolutions",
     githubUrl: "https://github.com/gerat-technologies",
-    image: "/image/team/AdvisorAndTeam/WQF__06_Advisor_Chris-Mason-2_Health-Tech-and-Space.webp",
+    image: null,
   },
 ];

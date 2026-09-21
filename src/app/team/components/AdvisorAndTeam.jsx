@@ -26,7 +26,7 @@ export default function AdvisorAndTeam({ initialSpecialists = null }) {
               linkedinUrl: m.linkedinUrl,
               githubUrl: m.githubUrl,
               twitterUrl: m.twitterUrl,
-              image: m.photoUrl || "/image/team/advisors/WQF__0000_Advisor-MarkCarney.webp",
+              image: m.photoUrl && !m.photoUrl.includes("WQF__") ? m.photoUrl : "/brand/gerat-mark-orange.svg",
             }));
             setFetchedSpecialists(normalized);
           }
@@ -58,19 +58,37 @@ export default function AdvisorAndTeam({ initialSpecialists = null }) {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {engineeringSpecialists.map((member, idx) => (
-          <FadeUp key={(member.name || member.role) + idx} delay={0.08 * idx} y={20}>
-            <div className="group relative bg-[var(--surface)] border border-white/10 hover:border-accent/60 p-6 rounded-[3px] flex flex-col justify-between min-h-[300px] transition-all duration-300">
-              {/* Photo Thumbnail + Connect Buttons */}
-              <div className="flex items-center justify-between gap-4 mb-4">
-                <div className="size-16 rounded-[2px] overflow-hidden bg-black/60 shrink-0 border border-white/10">
-                  <img
-                    src={member.image}
-                    alt={member.name || member.role}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
-                    loading="lazy"
-                  />
-                </div>
+        {engineeringSpecialists.map((member, idx) => {
+          const hasCustomPhoto =
+            member.image &&
+            !member.image.includes("WQF__") &&
+            !member.image.includes("gerat-mark-orange");
+
+          return (
+            <FadeUp key={(member.name || member.role) + idx} delay={0.08 * idx} y={20}>
+              <div className="group relative bg-[var(--surface)] border border-white/10 hover:border-accent/60 p-6 rounded-[3px] flex flex-col justify-between min-h-[300px] transition-all duration-300">
+                {/* Photo Thumbnail + Connect Buttons */}
+                <div className="flex items-center justify-between gap-4 mb-4">
+                  <div className="size-16 rounded-[2px] overflow-hidden bg-black/60 shrink-0 border border-white/10 flex items-center justify-center">
+                    {hasCustomPhoto ? (
+                      <img
+                        src={member.image}
+                        alt={member.name || member.role}
+                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
+                        loading="lazy"
+                        onError={(e) => {
+                          e.target.src = "/brand/gerat-mark-orange.svg";
+                          e.target.className = "size-8 object-contain";
+                        }}
+                      />
+                    ) : (
+                      <img
+                        src="/brand/gerat-mark-orange.svg"
+                        alt="Gerat Engineering"
+                        className="size-8 object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+                      />
+                    )}
+                  </div>
                 {/* Connect Icons */}
                 <div className="flex items-center gap-1.5" onClick={(e) => e.stopPropagation()}>
                   {member.email && (
@@ -152,7 +170,8 @@ export default function AdvisorAndTeam({ initialSpecialists = null }) {
               <div className="w-full h-[1px] bg-white/10 group-hover:bg-accent/40 transition-colors mt-4" />
             </div>
           </FadeUp>
-        ))}
+        );
+      })}
       </div>
     </section>
   );

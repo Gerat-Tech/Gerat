@@ -14,10 +14,11 @@ export const dynamic = "force-dynamic";
 export default async function Home() {
   let initialLeaders = null;
   let initialProjects = null;
+  let initialPillars = null;
   let marqueeTokens = null;
 
   try {
-    const [teamMembers, caseStudies, siteConfigs] = await Promise.all([
+    const [teamMembers, caseStudies, servicePillars, siteConfigs] = await Promise.all([
       prisma.teamMember.findMany({
         where: { active: true },
         orderBy: [{ order: "asc" }, { createdAt: "asc" }],
@@ -27,20 +28,27 @@ export default async function Home() {
         orderBy: [{ order: "asc" }, { createdAt: "desc" }],
         take: 3,
       }),
+      prisma.servicePillar.findMany({
+        where: { active: true },
+        orderBy: [{ order: "asc" }, { num: "asc" }],
+      }),
       prisma.siteConfig.findMany(),
     ]);
 
-    // 1. Team Leadership: Prefer EXECUTIVE_LEADERSHIP, or top active members
+    // 1. Team Leadership: All active executive leaders
     const execs = teamMembers.filter((m) => m.division === "EXECUTIVE_LEADERSHIP");
-    const leadersToUse = execs.length > 0 ? execs : teamMembers.slice(0, 3);
+    const leadersToUse = execs.length > 0 ? execs : teamMembers;
     if (leadersToUse.length > 0) {
       initialLeaders = leadersToUse.map((m) => ({
         id: m.id,
         name: m.name,
         role: m.roleTitle,
+        roleTitle: m.roleTitle,
         specialty: m.focusTag,
+        tag: m.focusTag || "EXECUTIVE LEADERSHIP",
         bio: m.bio,
-        image: m.photoUrl || "/image/team/leadership/WQF__0000_Founder-IgorTulchinsky.webp",
+        image: m.photoUrl || "/image/team/leadership/Dawit.jpeg",
+        photoUrl: m.photoUrl || "/image/team/leadership/Dawit.jpeg",
       }));
     }
 
@@ -59,6 +67,7 @@ export default async function Home() {
         id: p.displayIndex || `0${idx + 1}`,
         image: p.imageUrl,
         description: p.summary,
+        tech: p.techStack || p.tech || "",
         stack:
           typeof p.stackBadges === "string" && p.stackBadges.startsWith("[")
             ? JSON.parse(p.stackBadges)
@@ -70,7 +79,35 @@ export default async function Home() {
       }));
     }
 
-    // 3. Marquee Tokens from SiteConfig
+    // 3. Service Pillars for Capabilities section
+    if (servicePillars && servicePillars.length > 0) {
+      initialPillars = servicePillars.map((p) => {
+        let dels = [];
+        if (Array.isArray(p.deliverables)) {
+          dels = p.deliverables;
+        } else if (typeof p.deliverables === "string" && p.deliverables.startsWith("[")) {
+          try {
+            dels = JSON.parse(p.deliverables);
+          } catch {
+            dels = p.deliverables.split("\n").filter(Boolean);
+          }
+        } else if (p.deliverables) {
+          dels = p.deliverables.split("\n").filter(Boolean);
+        }
+
+        return {
+          ...p,
+          index: p.num,
+          title: p.title,
+          tags: Array.isArray(dels) && dels.length > 0 ? dels.join(" · ") : p.tagline,
+          description: p.desc || p.tagline,
+          link: p.deepLink || "/services",
+          deliverables: dels,
+        };
+      });
+    }
+
+    // 4. Marquee Tokens from SiteConfig
     const configMap = siteConfigs.reduce((acc, item) => {
       acc[item.key] = item.value;
       return acc;
@@ -92,7 +129,7 @@ export default async function Home() {
     <div className="bg-[var(--bg)] min-h-screen text-[var(--text-primary)] selection:bg-accent selection:text-black">
       <Hero />
       <Marquee customItems={marqueeTokens} />
-      <OurFocus />
+      <OurFocus initialPillars={initialPillars} />
       <OurEthos />
       <OurPortfolio initialProjects={initialProjects} />
       <OurLeadership initialLeaders={initialLeaders} />

@@ -5,31 +5,44 @@ import Link from "next/link";
 
 const DEFAULT_PARTNERS = [
   {
-    id: 0,
-    name: "Igor Tulchinsky",
-    role: "Founder",
-    title: "FOUNDER & CO-ARCHITECT",
-    tag: "LEADERSHIP",
-    image: "/image/home/leadership/WQF__0000_Founder-IgorTulchinsky.webp",
-    position: "50% 33%",
+    id: "hruy-daniel",
+    name: "HRUY DANIEL",
+    role: "FOUNDER & CHIEF EXECUTIVE OFFICER",
+    title: "FOUNDER & CHIEF EXECUTIVE OFFICER",
+    tag: "STRATEGY & VENTURE",
+    bio: "Directs Gerat's vision, partnerships, and business growth, helping organizations turn strategy into reliable digital ventures.",
+    image: "/image/team/leadership/hiruy.jpeg",
+    position: "center 20%",
   },
   {
-    id: 1,
-    name: "Amir Husain",
-    role: "Chairman",
-    title: "CHAIRMAN & CO-FOUNDER",
-    tag: "GOVERNANCE",
-    image: "/image/home/leadership/WQF__0004_Chairman-and-Co-Founder_Amir-Husain-2.webp",
-    position: "50% 27%",
+    id: "dawit-teklebrhan",
+    name: "DAWIT TEKLEBRHAN",
+    role: "CO-FOUNDER & CHIEF TECHNOLOGY OFFICER",
+    title: "CO-FOUNDER & CHIEF TECHNOLOGY OFFICER",
+    tag: "SYSTEMS ARCHITECTURE",
+    bio: "Leads engineering and technical architecture, focusing on reliable digital products, intelligent tools, and business systems.",
+    image: "/image/team/leadership/Dawit.jpeg",
+    position: "center 20%",
   },
   {
-    id: 2,
-    name: "Steven Lau",
-    role: "CEO",
-    title: "CHIEF EXECUTIVE OFFICER",
-    tag: "OPERATIONS",
-    image: "/image/home/leadership/WQF__0005_CEO-and-Co-Founder_Steven-Lau.webp",
-    position: "50% 30%",
+    id: "yohannes-tadesse",
+    name: "YOHANNES TADESSE",
+    role: "CO-FOUNDER & HEAD OF ARTIFICIAL INTELLIGENCE",
+    title: "CO-FOUNDER & HEAD OF ARTIFICIAL INTELLIGENCE",
+    tag: "APPLIED AI & RAG",
+    bio: "Guides applied artificial intelligence and data systems, building practical tools that make information accessible and actionable.",
+    image: "/image/team/leadership/Nisiha.jpeg",
+    position: "center 20%",
+  },
+  {
+    id: "solomon-kassahun",
+    name: "SOLOMON KASSAHUN",
+    role: "CO-FOUNDER & HEAD OF ENTERPRISE ENGINEERING",
+    title: "CO-FOUNDER & HEAD OF ENTERPRISE ENGINEERING",
+    tag: "DISTRIBUTED CLOUD & ERP",
+    bio: "Oversees business platforms, operations engineering, and secure system integrations that keep company workflows running smoothly.",
+    image: "/image/team/leadership/hosea.jpeg",
+    position: "center 20%",
   },
 ];
 
@@ -37,10 +50,10 @@ const DEFAULT_PARTNERS = [
  * Kinetic Leadership Section
  *
  * Replicates the editorial dual-state layout:
- * - Resting state: Top triple ticker, manifesto intro with corner-bracketed button,
- *   and headline split across a 3-slit horizontal letterbox eyes crop with floating VIEW badge.
+ * - Resting state: Top manifesto intro with corner-bracketed button,
+ *   and headline split across horizontal letterbox slits with floating VIEW badge.
  * - Active state: Morphs dynamically into a 2-column layout with the active leader in full portrait
- *   on the left, and remaining leaders in letterbox slits beside the continuing headline on the right.
+ *   and full bio on the left, and remaining leaders in letterbox slits beside the continuing headline on the right.
  */
 export default function OurLeadership({ initialLeaders = null }) {
   const [expandedIndex, setExpandedIndex] = useState(null);
@@ -56,7 +69,7 @@ export default function OurLeadership({ initialLeaders = null }) {
           const execs = data.members.filter(
             (m) => m.division === "EXECUTIVE_LEADERSHIP"
           );
-          const list = execs.length > 0 ? execs : data.members.slice(0, 3);
+          const list = execs.length > 0 ? execs : data.members;
           setFetchedLeaders(list);
         }
       })
@@ -67,17 +80,26 @@ export default function OurLeadership({ initialLeaders = null }) {
     };
   }, []);
 
-  const partners = DEFAULT_PARTNERS.map((p, idx) => {
-    const override = fetchedLeaders?.[idx] || initialLeaders?.[idx];
-    if (override) {
-      return {
-        ...p,
-        name: override.name || p.name,
-        role: override.roleTitle || override.role || p.role,
-        image: p.image, // Retain calibrated eye crop position image
-      };
-    }
-    return p;
+  const rawList =
+    (fetchedLeaders && fetchedLeaders.length > 0 && fetchedLeaders) ||
+    (initialLeaders && initialLeaders.length > 0 && initialLeaders) ||
+    DEFAULT_PARTNERS;
+
+  const partners = rawList.map((leader, idx) => {
+    const defaultItem = DEFAULT_PARTNERS[idx] || DEFAULT_PARTNERS[0];
+    const resolvedImage =
+      leader.photoUrl || leader.image || defaultItem.image || "/image/team/leadership/Dawit.jpeg";
+
+    return {
+      id: leader.id || `leader-${idx}`,
+      name: leader.name || defaultItem.name,
+      role: leader.roleTitle || leader.role || defaultItem.role,
+      title: leader.roleTitle || leader.role || defaultItem.title,
+      tag: leader.focusTag || leader.specialty || leader.tag || defaultItem.tag,
+      bio: leader.bio || defaultItem.bio,
+      image: resolvedImage,
+      position: leader.position || defaultItem.position || "center 20%",
+    };
   });
 
   const activePartner =
@@ -90,24 +112,33 @@ export default function OurLeadership({ initialLeaders = null }) {
       ? partners.filter((p) => p.id !== expandedIndex)
       : [];
 
+  // Responsive grid columns based on number of leaders
+  const gridColsClass =
+    partners.length === 2
+      ? "md:grid-cols-2"
+      : partners.length === 4
+      ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-4"
+      : "grid-cols-1 md:grid-cols-3";
+
   return (
     <section
       id="leadership"
       aria-label="Our Leadership Team"
       className="relative w-full bg-[#0d0706] text-[#faf6ed] border-t border-b border-white/10 overflow-hidden py-14 sm:py-18 md:py-20 select-none"
     >
-      {/* Top Label Bar (1x only) */}
+      {/* Top Label Bar */}
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 mb-8 sm:mb-10">
         <div className="flex items-center justify-between border-b border-white/10 pb-4 font-parkinsans text-[11px] sm:text-[12px] uppercase tracking-[0.25em] text-white/60">
           <span>OUR LEADERSHIP TEAM</span>
+          <span className="text-accent text-[10px]">DIRECTORS & ARCHITECTS</span>
         </div>
       </div>
 
       {/* Intro Manifesto & Corner-Bracketed Button */}
       <div className="w-full max-w-[640px] mx-auto px-4 text-center mb-8 sm:mb-10 flex flex-col items-center gap-6">
         <p className="font-parkinsans text-[12px] sm:text-[13px] text-white/60 uppercase tracking-[0.16em] leading-relaxed max-w-[500px]">
-          A global network of advisors, operators, and architects. The people
-          who built what&apos;s now, helping you build what&apos;s next.
+          The founders and engineering directors behind Gerat. Turning technical precision
+          into dependable systems that endure.
         </p>
 
         {/* Corner-Bracketed "MEET THE TEAM" Button */}
@@ -136,7 +167,7 @@ export default function OurLeadership({ initialLeaders = null }) {
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
         {expandedIndex === null ? (
           /* ============================================================
-             RESTING STATE (Image 2): Centered Headlines + 3 Slits
+             RESTING STATE: Centered Headlines + Slits
              ============================================================ */
           <div className="flex flex-col items-center w-full">
             {/* Top Line of Headline */}
@@ -145,8 +176,8 @@ export default function OurLeadership({ initialLeaders = null }) {
               <div>BEFORE THEY&apos;RE VISIBLE.</div>
             </div>
 
-            {/* 3 Horizontal Slits Row */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 w-full max-w-[1240px] my-8 sm:my-10">
+            {/* Horizontal Slits Row */}
+            <div className={`grid ${gridColsClass} gap-4 md:gap-6 w-full max-w-[1240px] my-8 sm:my-10`}>
               {partners.map((partner) => {
                 const isHovered = hoveredIndex === partner.id;
                 return (
@@ -166,14 +197,17 @@ export default function OurLeadership({ initialLeaders = null }) {
                     aria-label={`View ${partner.name}`}
                     className="group/slit relative h-[105px] sm:h-[125px] md:h-[135px] w-full cursor-pointer rounded-[2px] overflow-visible border border-white/15 hover:border-accent transition-all duration-300 bg-[#111111] outline-hidden focus-visible:ring-1 focus-visible:ring-accent"
                   >
-                    {/* Cropped Letterbox Image focusing on eyes */}
-                    <div className="w-full h-full overflow-hidden rounded-[2px]">
+                    {/* Cropped Letterbox Image focusing on eyes/portrait */}
+                    <div className="w-full h-full overflow-hidden rounded-[2px] bg-[#1a1a1a]">
                       <img
                         src={partner.image}
                         alt={partner.name}
                         loading="lazy"
-                        className="w-full h-full object-cover grayscale contrast-125 group-hover/slit:scale-105 group-hover/slit:grayscale-0 transition-all duration-500"
+                        className="w-full h-full object-cover grayscale contrast-115 group-hover/slit:scale-105 group-hover/slit:grayscale-0 transition-all duration-500"
                         style={{ objectPosition: partner.position }}
+                        onError={(e) => {
+                          e.target.src = "/image/team/leadership/Dawit.jpeg";
+                        }}
                       />
                     </div>
 
@@ -223,7 +257,7 @@ export default function OurLeadership({ initialLeaders = null }) {
           </div>
         ) : (
           /* ============================================================
-             ACTIVE / EXPANDED STATE (Image 3): 2-Column Morph
+             ACTIVE / EXPANDED STATE: 2-Column Morph
              ============================================================ */
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center w-full max-w-[1280px] mx-auto animate-in fade-in zoom-in-95 duration-400">
             {/* Left Column: Full Portrait Card of Active Leader */}
@@ -233,7 +267,10 @@ export default function OurLeadership({ initialLeaders = null }) {
                 <img
                   src={activePartner.image}
                   alt={activePartner.name}
-                  className="w-full h-full object-cover grayscale contrast-115"
+                  className="w-full h-full object-cover object-top grayscale contrast-110"
+                  onError={(e) => {
+                    e.target.src = "/image/team/leadership/Dawit.jpeg";
+                  }}
                 />
 
                 {/* Top-Right Badge: [ROLE] */}
@@ -250,27 +287,34 @@ export default function OurLeadership({ initialLeaders = null }) {
                 </div>
               </div>
 
-              {/* Bottom Metadata Strip */}
-              <div className="w-full max-w-[460px] mt-4 flex items-center justify-between font-parkinsans text-[11px] uppercase tracking-[0.2em] text-white/70 px-1">
-                <div className="flex items-center gap-3">
-                  <span className="font-bold text-white tracking-[0.18em]">
-                    {activePartner.name}
-                  </span>
-                  <span className="text-white/25">|</span>
-                  <span className="text-accent">{activePartner.tag}</span>
-                </div>
+              {/* Bottom Metadata & Bio */}
+              <div className="w-full max-w-[460px] mt-4 flex flex-col gap-2 px-1">
+                <div className="flex items-center justify-between font-parkinsans text-[11px] uppercase tracking-[0.2em] text-white/70">
+                  <div className="flex items-center gap-3">
+                    <span className="font-bold text-white tracking-[0.18em]">
+                      {activePartner.name}
+                    </span>
+                    <span className="text-white/25">|</span>
+                    <span className="text-accent">{activePartner.tag}</span>
+                  </div>
 
-                <button
-                  onClick={() => setExpandedIndex(null)}
-                  className="text-white/40 hover:text-white transition-colors cursor-pointer text-[10px] tracking-[0.15em] hover:text-accent flex items-center gap-1"
-                  title="Close expanded view"
-                >
-                  [ CLOSE × ]
-                </button>
+                  <button
+                    onClick={() => setExpandedIndex(null)}
+                    className="text-white/40 hover:text-white transition-colors cursor-pointer text-[10px] tracking-[0.15em] hover:text-accent flex items-center gap-1"
+                    title="Close expanded view"
+                  >
+                    [ CLOSE × ]
+                  </button>
+                </div>
+                {activePartner.bio && (
+                  <p className="font-artific text-xs sm:text-sm text-white/75 leading-relaxed pt-1">
+                    {activePartner.bio}
+                  </p>
+                )}
               </div>
             </div>
 
-            {/* Right Column: Headline + Remaining 2 Slits */}
+            {/* Right Column: Headline + Remaining Slits */}
             <div className="lg:col-span-7 flex flex-col justify-center">
               {/* Top Headline */}
               <div className="font-parkinsans text-3xl sm:text-4xl md:text-5xl font-medium sm:font-semibold tracking-tight uppercase leading-[1.05] text-white">
@@ -278,8 +322,8 @@ export default function OurLeadership({ initialLeaders = null }) {
                 <div>BEFORE THEY&apos;RE VISIBLE.</div>
               </div>
 
-              {/* The Remaining 2 Letterbox Slits */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 my-6 sm:my-8">
+              {/* The Remaining Letterbox Slits */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 my-6 sm:my-8">
                 {remainingPartners.map((partner) => {
                   const isHovered = hoveredIndex === partner.id;
                   return (
@@ -299,13 +343,16 @@ export default function OurLeadership({ initialLeaders = null }) {
                       aria-label={`Switch to ${partner.name}`}
                       className="group/slit relative h-[95px] sm:h-[110px] w-full cursor-pointer rounded-[2px] overflow-visible border border-white/15 hover:border-accent transition-all duration-300 bg-[#111111] outline-hidden focus-visible:ring-1 focus-visible:ring-accent"
                     >
-                      <div className="w-full h-full overflow-hidden rounded-[2px]">
+                      <div className="w-full h-full overflow-hidden rounded-[2px] bg-[#1a1a1a]">
                         <img
                           src={partner.image}
                           alt={partner.name}
                           loading="lazy"
-                          className="w-full h-full object-cover grayscale contrast-125 group-hover/slit:scale-105 group-hover/slit:grayscale-0 transition-all duration-500"
+                          className="w-full h-full object-cover grayscale contrast-115 group-hover/slit:scale-105 group-hover/slit:grayscale-0 transition-all duration-500"
                           style={{ objectPosition: partner.position }}
+                          onError={(e) => {
+                            e.target.src = "/image/team/leadership/Dawit.jpeg";
+                          }}
                         />
                       </div>
 

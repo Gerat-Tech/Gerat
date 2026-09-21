@@ -15,7 +15,7 @@ export default function TeamLeadership({ initialLeaders = null }) {
       .then((data) => {
         if (isMounted && data.success && data.members && data.members.length > 0) {
           const execs = data.members.filter((m) => m.division === "EXECUTIVE_LEADERSHIP");
-          const list = execs.length > 0 ? execs : data.members.slice(0, 3);
+          const list = execs.length > 0 ? execs : data.members;
           const normalized = list.map((m) => ({
             name: m.name,
             role: m.roleTitle,
@@ -25,7 +25,7 @@ export default function TeamLeadership({ initialLeaders = null }) {
             linkedinUrl: m.linkedinUrl,
             githubUrl: m.githubUrl,
             twitterUrl: m.twitterUrl,
-            image: m.photoUrl || "/image/team/leadership/WQF__0000_Founder-IgorTulchinsky.webp",
+            image: m.photoUrl || "/image/team/leadership/Dawit.jpeg",
           }));
           setFetchedLeaders(normalized);
         }
@@ -44,6 +44,13 @@ export default function TeamLeadership({ initialLeaders = null }) {
       ? initialLeaders
       : defaultLeadership;
 
+  const gridColsClass =
+    leadership.length === 4
+      ? "sm:grid-cols-2 lg:grid-cols-4"
+      : leadership.length === 2
+      ? "md:grid-cols-2"
+      : "md:grid-cols-3";
+
   return (
     <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-16 text-white">
       <div className="flex flex-col gap-3 mb-12">
@@ -55,7 +62,7 @@ export default function TeamLeadership({ initialLeaders = null }) {
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+      <div className={`grid grid-cols-1 ${gridColsClass} gap-6 lg:gap-8`}>
         {leadership.map((leader, idx) => {
           const isSelected = activeIdx === idx;
           return (
@@ -78,6 +85,9 @@ export default function TeamLeadership({ initialLeaders = null }) {
                       alt={leader.name}
                       className="w-full h-full object-cover object-top grayscale contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
                       loading="lazy"
+                      onError={(e) => {
+                        e.target.src = "/image/team/leadership/Dawit.jpeg";
+                      }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0d0d0d] via-transparent to-transparent" />
                   </div>

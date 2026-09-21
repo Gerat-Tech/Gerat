@@ -169,7 +169,7 @@ async function main() {
       division: "ENGINEERING_PRACTITIONER",
       focusTag: m.discipline,
       bio: m.focus,
-      photoUrl: m.image,
+      photoUrl: m.image || "/brand/gerat-mark-orange.svg",
       email: m.email || null,
       linkedinUrl: m.linkedinUrl || null,
       twitterUrl: m.twitterUrl || null,
@@ -220,7 +220,7 @@ async function main() {
   // 6. Seed Site Configuration
   await prisma.siteConfig.upsert({
     where: { key: "COMPANY_NAME" },
-    update: {},
+    update: { value: siteConfig.name },
     create: {
       key: "COMPANY_NAME",
       value: siteConfig.name,
@@ -230,17 +230,17 @@ async function main() {
 
   await prisma.siteConfig.upsert({
     where: { key: "CONTACT_EMAIL" },
-    update: {},
+    update: { value: siteConfig.contact.inquiries || "info@gerat.com" },
     create: {
       key: "CONTACT_EMAIL",
-      value: siteConfig.contact.inquiries || "contact@gerat.com",
+      value: siteConfig.contact.inquiries || "info@gerat.com",
       description: "Inquiry receipt email",
     },
   });
 
   await prisma.siteConfig.upsert({
     where: { key: "CONTACT_PHONE" },
-    update: {},
+    update: { value: siteConfig.contact.phone },
     create: {
       key: "CONTACT_PHONE",
       value: siteConfig.contact.phone,

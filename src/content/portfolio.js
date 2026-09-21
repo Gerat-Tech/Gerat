@@ -88,7 +88,7 @@ export const portfolioProjects = [
       "Built a reliable sensor ingestion pipeline with automated threshold alerts that notify operational teams before failures happen.",
     tech: "NODE.JS · TIME-SERIES DB · REACT · WEBSOCKETS",
     stack: ["Node.js", "TimescaleDB", "React", "WebSockets", "Tailwind CSS"],
-    image: "/image/portfolioPage/US-AUT-1.webp",
+    image: "/image/portfolioPage/remix-labs-featured.webp",
     impact:
       "Prevented recurring equipment outages through early automated warning notifications and simplified dispatch.",
     year: "2024",
@@ -111,7 +111,7 @@ export const portfolioProjects = [
       "Digitized lot tracking from warehouse intake to export dispatch with automated documentation and compliance verification.",
     tech: "NEXT.JS · TYPESCRIPT · PRISMA · POSTGRESQL",
     stack: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Tailwind CSS"],
-    image: "/image/portfolioPage/US-AUT-2.webp",
+    image: "/image/portfolioPage/novyra-featured.webp",
     impact:
       "Cut export documentation turnaround times from weeks to hours, streamlining cargo clearance and reducing administrative delay.",
     year: "2025",
@@ -134,7 +134,7 @@ export const portfolioProjects = [
       "Standardized healthcare data exchange with encrypted transport and immediate clinician notification.",
     tech: "NEXT.JS · NODE.JS · POSTGRESQL · TAILWIND",
     stack: ["Next.js", "Node.js", "PostgreSQL", "Tailwind CSS"],
-    image: "/image/portfolioPage/US-AUT-4.webp",
+    image: "/image/portfolioPage/edda-featured.webp",
     impact:
       "Connected 18 diagnostic facilities, providing clinicians with instant, secure access to verified laboratory results.",
     year: "2024",
@@ -203,7 +203,7 @@ export const portfolioProjects = [
       "Crafted an executive narrative blueprint, bespoke typographic monogram mark, content framework, and personal portfolio site.",
     tech: "EXECUTIVE POSITIONING · MONOGRAM · EDITORIAL WEB · LINKEDIN ARCHITECTURE",
     stack: ["Positioning Strategy", "Typographic Monogram", "Editorial Direction", "Next.js"],
-    image: "/image/portfolioPage/US-AUT-1.webp",
+    image: "/image/portfolioPage/remix-labs-featured.webp",
     impact:
       "Elevated executive visibility across business circles, supporting inbound advisory inquiries and industry keynote invitations.",
     year: "2025",
