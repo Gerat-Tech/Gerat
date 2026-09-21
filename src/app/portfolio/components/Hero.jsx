@@ -9,7 +9,8 @@ import { portfolioProjects } from "@/content";
 /**
  * Editorial Portfolio Hero (Spec §18, Content Replacement §7, Phase 21)
  */
-export default function Hero({ activeCategory, onSelectCategory }) {
+export default function Hero({ activeCategory, onSelectCategory, totalCount = null }) {
+  const displayCount = totalCount !== null ? totalCount : portfolioProjects.length;
   const categories = [
     "ALL DISCIPLINES",
     "FEATURED",
@@ -73,7 +74,7 @@ export default function Hero({ activeCategory, onSelectCategory }) {
 
       {/* Bottom Sub-Header Anchor */}
       <div className="mt-12 pt-4 border-t border-white/10 flex items-center justify-between font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
-        <span>INDEX · {portfolioProjects.length.toString().padStart(2, "0")} CASE STUDIES CATALOGED</span>
+        <span>INDEX · {displayCount.toString().padStart(2, "0")} CASE STUDIES CATALOGED</span>
         <span>SCROLL TO EXPLORE ↓</span>
       </div>
     </div>

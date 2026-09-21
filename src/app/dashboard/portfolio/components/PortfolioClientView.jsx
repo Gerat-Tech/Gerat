@@ -65,7 +65,10 @@ export default function PortfolioClientView({ initialCaseStudies = [] }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ featured: newFeatured }),
       });
-      if (!res.ok) throw new Error("Update failed");
+      if (!res.ok) {
+        const errJson = await res.json().catch(() => ({}));
+        throw new Error(errJson.error || `Failed to update status (HTTP ${res.status})`);
+      }
       const data = await res.json();
       if (data.caseStudy) {
         setCaseStudies((prev) =>
@@ -79,9 +82,11 @@ export default function PortfolioClientView({ initialCaseStudies = [] }) {
           ? `"${target?.title || "Case study"}" is now FEATURED on the homepage.`
           : `"${target?.title || "Case study"}" UNFEATURED (removed from homepage).`
       );
-    } catch {
-      setCaseStudies(initialCaseStudies);
-      showToast("Failed to update featured status. Please try again.", true);
+    } catch (err) {
+      setCaseStudies((prev) =>
+        prev.map((c) => (c.id === id ? { ...c, featured: currentFeatured } : c))
+      );
+      showToast(err.message || "Failed to update featured status. Please try again.", true);
     } finally {
       setIsUpdating(false);
     }
@@ -94,11 +99,14 @@ export default function PortfolioClientView({ initialCaseStudies = [] }) {
     setCaseStudies((prev) => prev.filter((c) => c.id !== id));
     try {
       const res = await fetch(`/api/portfolio/${id}`, { method: "DELETE" });
-      if (!res.ok) throw new Error("Delete failed");
+      if (!res.ok) {
+        const errJson = await res.json().catch(() => ({}));
+        throw new Error(errJson.error || `Failed to delete case study (HTTP ${res.status})`);
+      }
       showToast(`Case study "${title}" removed.`);
-    } catch {
+    } catch (err) {
       setCaseStudies(initialCaseStudies);
-      showToast("Failed to delete case study.", true);
+      showToast(err.message || "Failed to delete case study.", true);
     }
   };
 

@@ -47,7 +47,7 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", 
       ? fetchedProjects
       : initialProjects !== null
       ? initialProjects
-      : defaultProjects;
+      : [];
 
   const filteredProjects =
     activeCategory === "ALL DISCIPLINES"
@@ -137,16 +137,22 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", 
             <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase font-bold">
               {activeCategory === "FEATURED"
                 ? "PORTFOLIO SPOTLIGHT // ARCHIVE NOTICE"
+                : allProjects.length === 0
+                ? "PORTFOLIO ARCHIVE // NOTICE"
                 : "PORTFOLIO STATUS // ARCHIVE NOTICE"}
             </span>
             <h3 className="font-parkinsans text-xl sm:text-2xl font-bold uppercase tracking-tight text-white">
               {activeCategory === "FEATURED"
                 ? "THERE IS NO FINISHED PROJECT FEATURED NOW"
+                : allProjects.length === 0
+                ? "THERE IS NO FINISHED PROJECT NOW"
                 : "THERE IS NO FINISHED PROJECT NOW IN THIS CADRE"}
             </h3>
             <p className="font-artific text-sm text-white/60 max-w-lg leading-relaxed">
               {activeCategory === "FEATURED"
                 ? "There are currently no finished projects marked as featured. Completed systems and case studies will be displayed here as they are spotlighted via Mission Control."
+                : allProjects.length === 0
+                ? "There are currently no finished projects published. Completed systems and case studies will be displayed here as they are published via Mission Control."
                 : "All delivered client systems and technical case studies will be displayed here as they are published."}
             </p>
           </div>

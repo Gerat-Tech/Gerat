@@ -99,8 +99,14 @@ export async function getCurrentUser() {
 
     let user = null;
     try {
-      user = await prisma.user.findUnique({
-        where: { id: payload.sub },
+      const emailFilter = payload.email ? payload.email.toLowerCase() : undefined;
+      user = await prisma.user.findFirst({
+        where: {
+          OR: [
+            { id: payload.sub },
+            ...(emailFilter ? [{ email: emailFilter }] : []),
+          ],
+        },
         select: {
           id: true,
           email: true,

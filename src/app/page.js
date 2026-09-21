@@ -80,6 +80,8 @@ export default async function Home() {
             ? p.stackBadges.split(",").map((s) => s.trim())
             : [],
       }));
+    } else {
+      initialProjects = [];
     }
 
     // 3. Service Pillars for Capabilities section

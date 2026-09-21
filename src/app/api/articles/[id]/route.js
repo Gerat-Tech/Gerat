@@ -84,7 +84,7 @@ export async function PATCH(request, { params }) {
       return NextResponse.json({ error: "Unauthorized access." }, { status: 401 });
     }
 
-    if (!isAuthorized(user.role, [ROLES.SUPER_ADMIN, ROLES.EDITOR])) {
+    if (!isAuthorized(user.role, [ROLES.SUPER_ADMIN, ROLES.OPERATIONS_LEAD, ROLES.EDITOR])) {
       return NextResponse.json({ error: "Forbidden: Insufficient privileges." }, { status: 403 });
     }
 
@@ -203,7 +203,7 @@ export async function DELETE(request, { params }) {
       return NextResponse.json({ error: "Unauthorized access." }, { status: 401 });
     }
 
-    if (!isAuthorized(user.role, [ROLES.SUPER_ADMIN, ROLES.EDITOR])) {
+    if (!isAuthorized(user.role, [ROLES.SUPER_ADMIN, ROLES.OPERATIONS_LEAD, ROLES.EDITOR])) {
       return NextResponse.json({ error: "Forbidden: Insufficient privileges to delete." }, { status: 403 });
     }
 

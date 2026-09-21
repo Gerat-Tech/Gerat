@@ -44,6 +44,7 @@ export default function PortfolioClientView({ initialProjects = null }) {
       <Hero
         activeCategory={activeCategory}
         onSelectCategory={setUserSelectedCategory}
+        totalCount={initialProjects ? initialProjects.length : null}
       />
       <PortfolioShowcase
         activeCategory={activeCategory}

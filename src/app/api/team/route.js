@@ -121,6 +121,8 @@ export async function POST(request) {
     if (
       !isAuthorized(user.role, [
         ROLES.SUPER_ADMIN,
+        ROLES.OPERATIONS_LEAD,
+        ROLES.EDITOR,
       ])
     ) {
       return NextResponse.json(

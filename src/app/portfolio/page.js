@@ -37,9 +37,12 @@ export default async function PortfolioPage() {
             ? cs.stackBadges.split(",").map((s) => s.trim())
             : [],
       }));
+    } else {
+      initialProjects = [];
     }
   } catch (error) {
     console.error("PortfolioPage SSR Prisma fetch error:", error);
+    initialProjects = [];
   }
 
   return (

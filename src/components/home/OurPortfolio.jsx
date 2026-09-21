@@ -6,14 +6,6 @@ import SectionLabel from "../common/SectionLabel";
 import FadeUp from "../motion/FadeUp";
 import SplitText from "../motion/SplitText";
 
-import { portfolioProjects as defaultProjects } from "@/content";
-
-const defaultFeatured = defaultProjects.slice(0, 3).map((p, idx) => ({
-  ...p,
-  id: `0${idx + 1}`,
-  description: p.summary || p.description,
-}));
-
 export default function OurPortfolio({ initialProjects = null }) {
   const [fetchedProjects, setFetchedProjects] = useState(null);
 
@@ -52,7 +44,7 @@ export default function OurPortfolio({ initialProjects = null }) {
       ? fetchedProjects
       : initialProjects !== null
       ? initialProjects
-      : defaultFeatured;
+      : [];
 
   // Hide the section completely on the homepage if no project is featured
   if (!featuredProjects || featuredProjects.length === 0) {
