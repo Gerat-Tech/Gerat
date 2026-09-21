@@ -57,16 +57,16 @@ export default function OurFocus() {
           <SplitText
             text="HOW WE BUILD"
             as="h2"
-            className="font-artific text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
+            className="font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium sm:font-semibold tracking-tight uppercase leading-[0.95]"
           />
           <SplitText
             text="THE BRIDGE."
             as="h2"
             wordClassName="text-accent"
-            className="font-artific text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
+            className="font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium sm:font-semibold tracking-tight uppercase leading-[0.95]"
           />
           <FadeUp delay={0.2} y={16}>
-            <p className="font-parkinsans text-base sm:text-lg text-white/70 leading-relaxed pt-2">
+            <p className="font-artific text-base sm:text-lg text-white/75 leading-relaxed pt-2">
               Every business needs a strong foundation, a clear path, and
               systems that can carry what comes next.
             </p>
@@ -100,16 +100,16 @@ export default function OurFocus() {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 items-baseline">
                   {/* Column 1: Title & Tags */}
                   <div className="lg:col-span-6 flex flex-col gap-1.5">
-                    <h3 className="font-artific text-xl sm:text-2xl font-semibold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
+                    <h3 className="font-parkinsans text-xl sm:text-2xl font-semibold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
                       {item.title}
                     </h3>
-                    <span className="font-parkinsans text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] text-white/50 uppercase">
+                    <span className="font-artific text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] text-white/50 uppercase font-medium">
                       {item.tags}
                     </span>
                   </div>
 
                   {/* Column 2: Description */}
-                  <div className="lg:col-span-5 font-parkinsans text-xs sm:text-sm text-white/60 group-hover:text-white/90 leading-relaxed transition-colors pt-1 lg:pt-0">
+                  <div className="lg:col-span-5 font-artific text-xs sm:text-sm text-white/70 group-hover:text-white/95 leading-relaxed transition-colors pt-1 lg:pt-0">
                     {item.description}
                   </div>
 

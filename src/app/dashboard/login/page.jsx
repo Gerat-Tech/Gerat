@@ -72,7 +72,7 @@ function LoginForm() {
         </Link>
 
         <div className="flex items-center gap-2 font-parkinsans text-[10px] tracking-[0.15em] text-white/40 uppercase">
-          <span className="inline-block size-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="inline-block size-1.5 rounded-full bg-emerald-500" />
           <span>PORTAL SECURED</span>
         </div>
       </header>
@@ -91,10 +91,10 @@ function LoginForm() {
             <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase">
               INTERNAL PORTAL ACCESS
             </span>
-            <h1 className="font-artific text-2xl sm:text-3xl font-semibold tracking-tight uppercase text-white">
+            <h1 className="font-parkinsans text-2xl sm:text-3xl font-semibold tracking-tight uppercase text-white">
               TEAM AUTHENTICATION
             </h1>
-            <p className="font-parkinsans text-xs sm:text-sm text-white/50 leading-relaxed">
+            <p className="font-artific text-xs sm:text-sm text-white/50 leading-relaxed">
               Enter authorized credentials to access internal CRM records, client communications, and publishing tools.
             </p>
           </div>
@@ -103,7 +103,7 @@ function LoginForm() {
           {error && (
             <div className="mb-6 p-3 bg-red-950/40 border border-red-500/40 rounded-[2px] flex items-start gap-2.5 text-red-300">
               <span className="font-parkinsans text-xs mt-0.5">✕</span>
-              <p className="font-parkinsans text-[11px] tracking-[0.05em] leading-relaxed">
+              <p className="font-artific text-[11px] tracking-[0.05em] leading-relaxed">
                 {error}
               </p>
             </div>

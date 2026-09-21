@@ -139,41 +139,51 @@ async function main() {
   let memberOrder = 1;
   for (const m of leadershipTeam) {
     const slugId = m.name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-    const existing = await prisma.teamMember.findFirst({ where: { name: m.name } });
+    const data = {
+      name: m.name,
+      roleTitle: m.role,
+      division: "EXECUTIVE_LEADERSHIP",
+      focusTag: m.specialty,
+      bio: m.bio,
+      photoUrl: m.image,
+      email: m.email || null,
+      linkedinUrl: m.linkedinUrl || null,
+      twitterUrl: m.twitterUrl || null,
+      githubUrl: m.githubUrl || null,
+      order: memberOrder++,
+      active: true,
+    };
+    const existing = await prisma.teamMember.findFirst({ where: { OR: [{ id: slugId }, { name: m.name }] } });
     if (!existing) {
-      await prisma.teamMember.create({
-        data: {
-          id: slugId,
-          name: m.name,
-          roleTitle: m.role,
-          division: "EXECUTIVE_LEADERSHIP",
-          focusTag: m.specialty,
-          bio: m.bio,
-          photoUrl: m.image,
-          order: memberOrder++,
-          active: true,
-        },
-      });
+      await prisma.teamMember.create({ data: { id: slugId, ...data } });
+    } else {
+      await prisma.teamMember.update({ where: { id: existing.id }, data });
     }
   }
 
   for (const m of engineeringSpecialists) {
-    const slugId = m.role.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-    const existing = await prisma.teamMember.findFirst({ where: { roleTitle: m.role } });
+    const slugId = (m.name || m.role).toLowerCase().replace(/[^a-z0-9]+/g, "-");
+    const data = {
+      name: m.name,
+      roleTitle: m.role,
+      division: "ENGINEERING_PRACTITIONER",
+      focusTag: m.discipline,
+      bio: m.focus,
+      photoUrl: m.image,
+      email: m.email || null,
+      linkedinUrl: m.linkedinUrl || null,
+      twitterUrl: m.twitterUrl || null,
+      githubUrl: m.githubUrl || null,
+      order: memberOrder++,
+      active: true,
+    };
+    const existing = await prisma.teamMember.findFirst({
+      where: { OR: [{ id: slugId }, { name: m.name }, { roleTitle: m.role }] },
+    });
     if (!existing) {
-      await prisma.teamMember.create({
-        data: {
-          id: slugId,
-          name: m.role,
-          roleTitle: m.role,
-          division: "ENGINEERING_PRACTITIONER",
-          focusTag: m.discipline,
-          bio: m.focus,
-          photoUrl: m.image,
-          order: memberOrder++,
-          active: true,
-        },
-      });
+      await prisma.teamMember.create({ data: { id: slugId, ...data } });
+    } else {
+      await prisma.teamMember.update({ where: { id: existing.id }, data });
     }
   }
   console.log(`  ✓ Seeded ${leadershipTeam.length + engineeringSpecialists.length} team members`);

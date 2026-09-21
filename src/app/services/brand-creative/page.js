@@ -342,23 +342,23 @@ export default function BrandCreativePage() {
             <SplitText
               text="GIVE YOUR BUSINESS"
               as="h1"
-              className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+              className="font-parkinsans text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight uppercase leading-[0.92]"
             />
             <SplitText
               text="SOMETHING PEOPLE"
               as="div"
-              className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+              className="font-parkinsans text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight uppercase leading-[0.92]"
             />
             <SplitText
               text="CAN RECOGNIZE."
               as="div"
               wordClassName="text-accent"
-              className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+              className="font-parkinsans text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight uppercase leading-[0.92]"
             />
           </div>
 
           <FadeUp delay={0.3} y={16}>
-            <p className="font-parkinsans text-base sm:text-lg text-[var(--text-secondary)] max-w-2xl leading-relaxed">
+            <p className="font-artific text-base sm:text-lg text-[var(--text-secondary)] max-w-2xl leading-relaxed">
               We create brand identities and visual systems that make businesses clearer, more consistent, and easier to remember across every medium they touch.
             </p>
           </FadeUp>
@@ -401,10 +401,10 @@ export default function BrandCreativePage() {
           <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase font-bold">
             DISCIPLINE CATALOG
           </span>
-          <h2 className="font-artific text-3xl sm:text-5xl font-medium tracking-tight uppercase">
+          <h2 className="font-parkinsans text-3xl sm:text-5xl font-semibold tracking-tight uppercase">
             THE CREATIVE SERVICE FAMILY.
           </h2>
-          <p className="font-parkinsans text-sm sm:text-base text-[var(--text-secondary)] max-w-2xl">
+          <p className="font-artific text-sm sm:text-base text-[var(--text-secondary)] max-w-2xl">
             Thoughtful design capabilities engineered to give your business credibility, presence, and consistency.
           </p>
         </div>
@@ -434,11 +434,11 @@ export default function BrandCreativePage() {
                       </span>
                     </div>
 
-                    <h3 className="font-artific text-2xl font-medium tracking-tight uppercase text-[var(--text-primary)] mt-5 transition-colors">
+                    <h3 className="font-parkinsans text-2xl font-semibold tracking-tight uppercase text-[var(--text-primary)] mt-5 transition-colors">
                       {item.title}
                     </h3>
 
-                    <p className="font-parkinsans text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed mt-2">
+                    <p className="font-artific text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed mt-2">
                       {item.longDesc}
                     </p>
                   </div>
@@ -489,10 +489,10 @@ export default function BrandCreativePage() {
       <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-24 sm:py-32 border-b border-[var(--border-subtle)]">
         <div className="flex flex-col gap-4 mb-16">
           <SectionLabel index="03" label="THE BRAND TRANSFORMATION" />
-          <h2 className="font-artific text-3xl sm:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.98]">
+          <h2 className="font-parkinsans text-3xl sm:text-5xl lg:text-6xl font-semibold tracking-tight uppercase leading-[0.98]">
             FROM NOISE TO <span className="text-accent">AUTHORITY.</span>
           </h2>
-          <p className="font-parkinsans text-sm sm:text-base text-[var(--text-secondary)] max-w-2xl leading-relaxed">
+          <p className="font-artific text-sm sm:text-base text-[var(--text-secondary)] max-w-2xl leading-relaxed">
             How we systematically transform ambitious enterprises from overlooked market noise into category-defining, recognized industry leaders.
           </p>
         </div>
@@ -523,9 +523,9 @@ export default function BrandCreativePage() {
                   >
                     STAGE {stage.num}
                   </span>
-                  {isActive && <Flame className="size-3.5 text-accent animate-pulse" />}
+                  {isActive && <Flame className="size-3.5 text-accent" />}
                 </div>
-                <div className="font-artific text-sm sm:text-base font-medium tracking-tight uppercase text-[var(--text-primary)]">
+                <div className="font-parkinsans text-sm sm:text-base font-semibold tracking-tight uppercase text-[var(--text-primary)]">
                   {stage.title}
                 </div>
               </button>
@@ -549,10 +549,10 @@ export default function BrandCreativePage() {
                 <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase font-bold block mb-2">
                   {activeStory.tagline}
                 </span>
-                <h3 className="font-artific text-2xl sm:text-4xl font-medium tracking-tight uppercase text-[var(--text-primary)] leading-tight">
+                <h3 className="font-parkinsans text-2xl sm:text-4xl font-semibold tracking-tight uppercase text-[var(--text-primary)] leading-tight">
                   {activeStory.title}
                 </h3>
-                <p className="font-parkinsans text-sm text-[var(--text-secondary)] leading-relaxed mt-4">
+                <p className="font-artific text-sm text-[var(--text-secondary)] leading-relaxed mt-4">
                   {activeStory.summary}
                 </p>
 
@@ -562,7 +562,7 @@ export default function BrandCreativePage() {
                     <span className="font-parkinsans text-[9px] tracking-[0.2em] text-[var(--text-dim)] uppercase block mb-1.5 font-bold">
                       BEFORE TRANSFORMATION
                     </span>
-                    <p className="font-parkinsans text-xs text-[var(--text-secondary)] leading-relaxed">
+                    <p className="font-artific text-xs text-[var(--text-secondary)] leading-relaxed">
                       {activeStory.before}
                     </p>
                   </div>
@@ -571,7 +571,7 @@ export default function BrandCreativePage() {
                     <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase block mb-1.5 font-bold">
                       AFTER TRANSFORMATION
                     </span>
-                    <p className="font-parkinsans text-xs text-[var(--text-primary)] leading-relaxed font-medium">
+                    <p className="font-artific text-xs text-[var(--text-primary)] leading-relaxed font-medium">
                       {activeStory.after}
                     </p>
                   </div>
@@ -616,8 +616,8 @@ export default function BrandCreativePage() {
 
             {/* Right Column: Bespoke Interactive SVG Schematic */}
             <div className="lg:col-span-6 bg-[var(--bg-subtle)] border border-[var(--border-subtle)] rounded-[2px] flex items-center justify-center p-4 relative overflow-hidden">
-              <span className="absolute top-4 right-4 font-parkinsans text-[9px] tracking-[0.2em] text-[var(--text-dim)] uppercase font-mono">
-                SCHEMATIC // STAGE {activeStory.num}
+              <span className="absolute top-4 right-4 font-parkinsans text-[9px] tracking-[0.2em] text-[var(--text-dim)] uppercase font-bold">
+                SCHEMATIC · STAGE {activeStory.num}
               </span>
               {activeStoryIdx === 0 && <PositioningRadarSchematic />}
               {activeStoryIdx === 1 && <VisualArchitectureSchematic />}
@@ -635,7 +635,7 @@ export default function BrandCreativePage() {
             <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase font-bold">
               OPERATIONAL CLARITY
             </span>
-            <h2 className="font-artific text-3xl sm:text-5xl font-medium tracking-tight uppercase">
+            <h2 className="font-parkinsans text-3xl sm:text-5xl font-semibold tracking-tight uppercase">
               FREQUENTLY ASKED QUESTIONS.
             </h2>
           </div>
@@ -651,7 +651,7 @@ export default function BrandCreativePage() {
                   <button
                     type="button"
                     onClick={() => setActiveFaq(isOpen ? null : idx)}
-                    className="w-full flex items-center justify-between text-left font-artific text-lg font-medium uppercase text-[var(--text-primary)] hover:text-accent transition-colors"
+                    className="w-full flex items-center justify-between text-left font-parkinsans text-lg font-medium uppercase text-[var(--text-primary)] hover:text-accent transition-colors"
                   >
                     <span>{faq.q}</span>
                     <span className="font-parkinsans text-xs text-accent ml-4 font-bold">
@@ -660,7 +660,7 @@ export default function BrandCreativePage() {
                   </button>
 
                   {isOpen && (
-                    <p className="font-parkinsans text-sm text-[var(--text-secondary)] leading-relaxed mt-4 pt-4 border-t border-[var(--border-subtle)]">
+                    <p className="font-artific text-sm text-[var(--text-secondary)] leading-relaxed mt-4 pt-4 border-t border-[var(--border-subtle)]">
                       {faq.a}
                     </p>
                   )}

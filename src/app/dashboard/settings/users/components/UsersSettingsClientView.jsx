@@ -292,7 +292,7 @@ Please log in and update your passphrase upon first access.`;
             >
               SETTINGS ·
             </Link>
-            <h1 className="font-artific text-2xl sm:text-3xl font-bold tracking-tight uppercase text-white">
+            <h1 className="font-parkinsans text-2xl sm:text-3xl font-semibold tracking-tight uppercase text-white">
               USER & ROLE GOVERNANCE
             </h1>
           </div>
@@ -540,10 +540,10 @@ Please log in and update your passphrase upon first access.`;
             <div className={`flex items-center justify-between pb-3 border-b ${isLight ? "border-[#E5E7EB]" : "border-white/10"}`}>
               <div>
                 <span className="font-parkinsans text-[9px] tracking-[0.25em] text-emerald-500 uppercase font-bold flex items-center gap-1.5">
-                  <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="size-2 rounded-full bg-emerald-500" />
                   CREDENTIALS GENERATED
                 </span>
-                <h2 className="font-artific text-xl font-bold uppercase mt-0.5">DISPATCH OPERATOR CREDENTIALS</h2>
+                <h2 className="font-parkinsans text-xl font-bold uppercase mt-0.5">DISPATCH OPERATOR CREDENTIALS</h2>
               </div>
               <button
                 type="button"
@@ -695,7 +695,7 @@ Please log in and update your passphrase upon first access.`;
                 <span className="font-parkinsans text-[9px] tracking-[0.25em] text-accent uppercase font-bold">
                   ACCESS CONTROL
                 </span>
-                <h2 className="font-artific text-xl font-bold uppercase mt-0.5">PROVISION OPERATOR</h2>
+                <h2 className="font-parkinsans text-xl font-bold uppercase mt-0.5">PROVISION OPERATOR</h2>
               </div>
               <button
                 type="button"
@@ -887,7 +887,7 @@ Please log in and update your passphrase upon first access.`;
                 <span className="font-parkinsans text-[9px] tracking-[0.25em] text-accent uppercase font-bold">
                   ROLE ASSIGNMENT
                 </span>
-                <h2 className="font-artific text-lg font-bold uppercase mt-0.5">REASSIGN ROLE</h2>
+                <h2 className="font-parkinsans text-lg font-bold uppercase mt-0.5">REASSIGN ROLE</h2>
               </div>
               <button
                 type="button"
@@ -996,7 +996,7 @@ Please log in and update your passphrase upon first access.`;
                 <span className="font-parkinsans text-[9px] tracking-[0.25em] text-accent uppercase font-bold">
                   CREDENTIAL RESET
                 </span>
-                <h2 className="font-artific text-lg font-bold uppercase mt-0.5">RESET PASSPHRASE</h2>
+                <h2 className="font-parkinsans text-lg font-bold uppercase mt-0.5">RESET PASSPHRASE</h2>
               </div>
               <button
                 type="button"

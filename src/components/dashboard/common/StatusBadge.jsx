@@ -2,7 +2,7 @@ import React from "react";
 
 const STATUS_STYLES = {
   // Inquiries
-  NEW_INTAKE: "bg-accent/20 border-accent text-accent animate-pulse",
+  NEW_INTAKE: "bg-accent/20 border-accent text-accent font-bold",
   TRIAGED: "bg-blue-500/15 border-blue-500/40 text-blue-400",
   DISCOVERY_SCHEDULED: "bg-purple-500/15 border-purple-500/40 text-purple-300",
   PROPOSAL_SENT: "bg-amber-500/15 border-amber-500/40 text-amber-300",

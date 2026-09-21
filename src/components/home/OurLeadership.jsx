@@ -140,7 +140,7 @@ export default function OurLeadership({ initialLeaders = null }) {
              ============================================================ */
           <div className="flex flex-col items-center w-full">
             {/* Top Line of Headline */}
-            <div className="w-full text-center max-w-[980px] font-artific text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[1.05] text-white">
+            <div className="w-full text-center max-w-[980px] font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium sm:font-semibold tracking-tight uppercase leading-[1.05] text-white">
               <div>WE ARCHITECT THE FOUNDATIONS</div>
               <div>BEFORE THEY&apos;RE VISIBLE.</div>
             </div>
@@ -163,8 +163,8 @@ export default function OurLeadership({ initialLeaders = null }) {
                     }}
                     role="button"
                     tabIndex={0}
-                    aria-label={`View full profile of ${partner.name}`}
-                    className="group/slit relative h-[110px] sm:h-[125px] md:h-[135px] w-full cursor-pointer rounded-[2px] overflow-visible border border-white/15 hover:border-accent transition-all duration-400 bg-[#111111] outline-hidden focus-visible:ring-1 focus-visible:ring-accent"
+                    aria-label={`View ${partner.name}`}
+                    className="group/slit relative h-[105px] sm:h-[125px] md:h-[135px] w-full cursor-pointer rounded-[2px] overflow-visible border border-white/15 hover:border-accent transition-all duration-300 bg-[#111111] outline-hidden focus-visible:ring-1 focus-visible:ring-accent"
                   >
                     {/* Cropped Letterbox Image focusing on eyes */}
                     <div className="w-full h-full overflow-hidden rounded-[2px]">
@@ -179,26 +179,36 @@ export default function OurLeadership({ initialLeaders = null }) {
 
                     {/* Floating Pill VIEW Badge */}
                     <div
-                      className={`absolute -top-3.5 right-4 z-20 transition-all duration-300 pointer-events-none ${
+                      className={`absolute -top-3.5 right-3 z-20 transition-all duration-300 pointer-events-none ${
                         isHovered
                           ? "opacity-100 translate-y-0 scale-100"
                           : "opacity-0 translate-y-2 scale-90"
                       }`}
                     >
-                      <span className="inline-flex items-center bg-white text-black group-hover/slit:bg-accent group-hover/slit:text-white font-parkinsans text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.5)] transition-colors">
-                        VIEW
-                      </span>
+                      <div className="flex items-center gap-1.5 bg-[#EA5B15] text-white px-2.5 py-1 rounded-[2px] shadow-lg border border-white/20">
+                        <span className="size-1.5 rounded-full bg-white" />
+                        <span className="font-parkinsans text-[9px] tracking-[0.2em] uppercase font-bold text-white">
+                          VIEW
+                        </span>
+                      </div>
                     </div>
 
-                    {/* Subtle Inset Dark Vignette */}
-                    <div className="absolute inset-0 bg-black/20 group-hover/slit:bg-transparent transition-colors pointer-events-none rounded-[2px]" />
+                    {/* Bottom Metadata in Slit */}
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-3 flex items-end justify-between">
+                      <span className="font-parkinsans text-[10px] tracking-[0.18em] uppercase text-white/90 font-bold">
+                        {partner.name}
+                      </span>
+                      <span className="font-parkinsans text-[9px] tracking-[0.2em] uppercase text-accent font-bold">
+                        {partner.role}
+                      </span>
+                    </div>
                   </div>
                 );
               })}
             </div>
 
             {/* Bottom Line of Headline */}
-            <div className="w-full text-center max-w-[980px] font-artific text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[1.05] text-white">
+            <div className="w-full text-center max-w-[980px] font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium sm:font-semibold tracking-tight uppercase leading-[1.05] text-white">
               <div>TRANSFORM THEM INTO</div>
               <div>SYSTEMS THAT ENDURE.</div>
             </div>
@@ -256,7 +266,7 @@ export default function OurLeadership({ initialLeaders = null }) {
             {/* Right Column: Headline + Remaining 2 Slits */}
             <div className="lg:col-span-7 flex flex-col justify-center">
               {/* Top Headline */}
-              <div className="font-artific text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight uppercase leading-[1.05] text-white">
+              <div className="font-parkinsans text-3xl sm:text-4xl md:text-5xl font-medium sm:font-semibold tracking-tight uppercase leading-[1.05] text-white">
                 <div>WE ARCHITECT THE FOUNDATIONS</div>
                 <div>BEFORE THEY&apos;RE VISIBLE.</div>
               </div>
@@ -312,7 +322,7 @@ export default function OurLeadership({ initialLeaders = null }) {
               </div>
 
               {/* Bottom Headline */}
-              <div className="font-artific text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight uppercase leading-[1.05] text-white">
+              <div className="font-parkinsans text-3xl sm:text-4xl md:text-5xl font-medium sm:font-semibold tracking-tight uppercase leading-[1.05] text-white">
                 <div>TRANSFORM THEM INTO</div>
                 <div>SYSTEMS THAT ENDURE.</div>
               </div>

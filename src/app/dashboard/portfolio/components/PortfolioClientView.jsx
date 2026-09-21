@@ -195,7 +195,7 @@ export default function PortfolioClientView({ initialCaseStudies = [] }) {
                     {item.tags}
                   </div>
 
-                  <h3 className="font-artific text-lg font-bold uppercase text-white group-hover:text-accent transition-colors leading-tight">
+                  <h3 className="font-parkinsans text-lg font-bold uppercase text-white group-hover:text-accent transition-colors leading-tight">
                     {item.title}
                   </h3>
 

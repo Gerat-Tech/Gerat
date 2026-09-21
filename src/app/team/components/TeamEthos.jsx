@@ -34,16 +34,16 @@ export default function TeamEthos() {
     <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-20 text-white border-t border-white/10">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-16">
         <div className="lg:col-span-6 flex flex-col gap-4">
-          <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase">
+          <span className="font-artific text-[10px] tracking-[0.25em] text-accent uppercase font-medium">
             HOW WE WORK
           </span>
-          <h2 className="font-artific text-3xl sm:text-5xl font-bold uppercase tracking-tight leading-[0.95]">
+          <h2 className="font-parkinsans text-3xl sm:text-5xl font-semibold uppercase tracking-tight leading-[0.95]">
             HOW WE THINK & BUILD.
           </h2>
         </div>
 
         <div className="lg:col-span-6 flex flex-col items-start gap-6 lg:border-l lg:border-white/10 lg:pl-10">
-          <p className="font-parkinsans text-base text-white/70 leading-relaxed">
+          <p className="font-artific text-base text-white/75 leading-relaxed">
             Excellence in technology and design is the result of clear communication, thoughtful architecture, and care for what comes next.
           </p>
           <button
@@ -61,15 +61,15 @@ export default function TeamEthos() {
         {principles.map((p, idx) => (
           <FadeUp key={p.num} delay={0.08 * idx} y={20}>
             <div className="group relative bg-[var(--surface)] border border-white/10 hover:border-accent/60 p-6 rounded-[3px] flex flex-col justify-between min-h-[220px] transition-all duration-300">
-              <span className="font-parkinsans text-[11px] tracking-[0.2em] text-accent font-bold">
+              <span className="font-artific text-[11px] tracking-[0.2em] text-accent font-medium">
                 {p.num}
               </span>
 
               <div className="flex flex-col gap-2 my-auto pt-3">
-                <h3 className="font-artific text-base font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
+                <h3 className="font-parkinsans text-base font-semibold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
                   {p.title}
                 </h3>
-                <p className="font-parkinsans text-xs text-white/60 leading-relaxed">
+                <p className="font-artific text-xs sm:text-sm text-white/70 leading-relaxed">
                   {p.desc}
                 </p>
               </div>

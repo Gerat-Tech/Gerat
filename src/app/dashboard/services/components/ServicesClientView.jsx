@@ -153,7 +153,7 @@ export default function ServicesClientView({ initialPillars = [] }) {
                   <span className="font-parkinsans text-[9px] tracking-[0.15em] text-white/50 uppercase">
                     {pillar.tagline}
                   </span>
-                  <h3 className="font-artific text-lg font-bold uppercase text-white group-hover:text-accent transition-colors leading-tight">
+                  <h3 className="font-parkinsans text-lg font-bold uppercase text-white group-hover:text-accent transition-colors leading-tight">
                     {pillar.title}
                   </h3>
                   <p className="font-sans text-xs text-white/70 line-clamp-3 leading-relaxed mt-1">

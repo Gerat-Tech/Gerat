@@ -23,18 +23,18 @@ export default function InsightsHero({ activeCategory, onSelectCategory }) {
           <SplitText
             text="SYSTEM ARCHITECTURE,"
             as="h1"
-            className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+            className="font-parkinsans text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight uppercase leading-[0.92]"
           />
           <SplitText
             text="APPLIED AI & ENGINEERING."
             as="div"
             wordClassName="text-accent"
-            className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+            className="font-parkinsans text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight uppercase leading-[0.92]"
           />
         </div>
 
         <FadeUp delay={0.3} y={16}>
-          <p className="font-parkinsans text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed">
+          <p className="font-artific text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed">
             Technical analyses, architectural design patterns, and engineering
             whitepapers authored by the software practitioners at Gerat Software
             Solution.

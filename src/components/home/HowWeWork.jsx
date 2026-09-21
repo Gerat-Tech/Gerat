@@ -153,7 +153,7 @@ export default function HowWeWork() {
                 <div className="flex items-start justify-between gap-6">
                   <h3
                     style={card.titleStyle}
-                    className="font-artific text-2xl sm:text-3xl md:text-[32px] font-bold uppercase tracking-tight leading-[1.08] max-w-[420px]"
+                    className="font-parkinsans text-2xl sm:text-3xl md:text-[32px] font-semibold uppercase tracking-tight leading-[1.08] max-w-[420px]"
                   >
                     {card.title}
                   </h3>
@@ -165,7 +165,7 @@ export default function HowWeWork() {
                   <div className={`border-t ${card.dividerClass} pt-4 sm:pt-5`}>
                     <p
                       style={card.textStyle}
-                      className="font-parkinsans text-xs sm:text-sm uppercase tracking-[0.08em] leading-relaxed card-subtext"
+                      className="font-artific text-xs sm:text-sm uppercase tracking-[0.08em] leading-relaxed card-subtext"
                     >
                       {card.description}
                     </p>
@@ -178,13 +178,13 @@ export default function HowWeWork() {
           {/* RIGHT COLUMN: Sticky Manifesto & Corner-Bracketed Button */}
           <div className="lg:col-span-5 lg:sticky lg:top-36 flex flex-col items-start gap-6 sm:gap-8 pt-2">
             {/* Small Monospace Label */}
-            <div className="font-parkinsans text-[11px] sm:text-[12px] uppercase tracking-[0.25em] text-accent font-bold">
+            <div className="font-artific text-[11px] sm:text-[12px] uppercase tracking-[0.25em] text-accent font-medium">
               METHODOLOGY
             </div>
 
             {/* Display Headline */}
             <div className="w-full">
-              <h2 className="font-artific text-3xl sm:text-4xl md:text-5xl font-bold uppercase tracking-tight leading-[1.04] text-[var(--text-primary)]">
+              <h2 className="font-parkinsans text-3xl sm:text-4xl md:text-5xl font-semibold uppercase tracking-tight leading-[1.04] text-[var(--text-primary)]">
                 WE ARCHITECT RIGOROUSLY. WE DELIVER RAPIDLY.
               </h2>
               {/* Horizontal Rule */}
@@ -192,7 +192,7 @@ export default function HowWeWork() {
             </div>
 
             {/* Monospace Manifesto Paragraph */}
-            <p className="font-parkinsans text-[11px] sm:text-[12px] uppercase tracking-[0.16em] text-[var(--text-secondary)] leading-relaxed max-w-[440px]">
+            <p className="font-artific text-[12px] sm:text-[13px] tracking-[0.04em] text-[var(--text-secondary)] leading-relaxed max-w-[440px]">
               SKIP THE FRAGILE PROTOTYPES. WE ENGINEER MISSION-CRITICAL PLATFORMS
               WITH TRANSPARENT MILESTONES AND DIRECT ACCESS TO PRINCIPAL ARCHITECTS
               FROM DAY ONE.

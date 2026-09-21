@@ -280,7 +280,7 @@ export default function SettingsClientView({
       <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b ${isLight ? "border-[#E2E5EB]" : "border-white/10"}`}>
         <div>
           <div className="flex items-center gap-2">
-            <h1 className={`font-artific text-2xl sm:text-3xl font-bold tracking-tight uppercase ${isLight ? "text-[#0D0F12]" : "text-white"}`}>
+            <h1 className={`font-parkinsans text-2xl sm:text-3xl font-semibold tracking-tight uppercase ${isLight ? "text-[#0D0F12]" : "text-white"}`}>
               SYSTEM CONTROL & TELEMETRY
             </h1>
             <span className="font-parkinsans text-[9px] tracking-[0.2em] px-2 py-0.5 rounded-[2px] bg-accent/15 border border-accent/40 text-accent uppercase font-bold">
@@ -702,7 +702,7 @@ export default function SettingsClientView({
               <span className="font-parkinsans text-[10px] tracking-[0.2em] text-accent uppercase font-bold block mb-1">
                 DASHBOARD THEME ARCHITECTURE
               </span>
-              <h2 className={`font-artific text-xl font-bold uppercase ${isLight ? "text-[#0D0F12]" : "text-white"}`}>
+              <h2 className={`font-parkinsans text-xl font-bold uppercase ${isLight ? "text-[#0D0F12]" : "text-white"}`}>
                 COLOR HARMONY & DISPLAY MODE
               </h2>
               <p className={`font-sans text-xs mt-1 max-w-3xl leading-relaxed ${isLight ? "text-[#555D6B]" : "text-white/60"}`}>

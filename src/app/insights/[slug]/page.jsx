@@ -129,12 +129,12 @@ export default async function ArticleDetailPage({ params }) {
         </div>
 
         {/* Title & Subtitle */}
-        <h1 className="font-artific text-3xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-white max-w-5xl leading-[1.08] mb-6">
+        <h1 className="font-parkinsans text-3xl sm:text-5xl lg:text-6xl font-semibold uppercase tracking-tight text-white max-w-5xl leading-[1.08] mb-6">
           {article.title}
         </h1>
 
         {article.subtitle && (
-          <p className="font-sans text-base sm:text-xl text-white/70 max-w-3xl leading-relaxed mb-8">
+          <p className="font-artific text-base sm:text-xl text-white/70 max-w-3xl leading-relaxed mb-8">
             {article.subtitle}
           </p>
         )}
@@ -145,10 +145,10 @@ export default async function ArticleDetailPage({ params }) {
             {(article.author?.name || article.author || "GA").slice(0, 2).toUpperCase()}
           </div>
           <div>
-            <div className="font-artific text-sm font-bold uppercase text-white tracking-wide">
+            <div className="font-parkinsans text-sm font-semibold uppercase text-white tracking-wide">
               {article.author?.name || article.author || "Gerat Systems Architect"}
             </div>
-            <div className="font-parkinsans text-[10px] tracking-[0.15em] text-white/40 uppercase">
+            <div className="font-artific text-[11px] tracking-[0.15em] text-white/40 uppercase">
               {article.author?.role || "Engineering Directorate · Addis Ababa"}
             </div>
           </div>
@@ -180,10 +180,10 @@ export default async function ArticleDetailPage({ params }) {
           {/* Bottom Engagement Callout */}
           <div className="p-8 bg-gradient-to-r from-accent/10 to-transparent border border-accent/30 rounded-[4px] flex flex-col sm:flex-row sm:items-center justify-between gap-6">
             <div>
-              <div className="font-artific text-lg sm:text-xl font-bold uppercase text-white tracking-tight">
+              <div className="font-parkinsans text-lg sm:text-xl font-bold uppercase text-white tracking-tight">
                 COMMISSION TECHNICAL ARCHITECTURE
               </div>
-              <p className="font-parkinsans text-[11px] tracking-[0.1em] text-white/60 uppercase mt-1">
+              <p className="font-artific text-xs sm:text-sm text-white/60 uppercase mt-1">
                 ALIGN WITH GERAT ENGINEERS ON DISTRIBUTED SYSTEMS & BRAND IDENTITY
               </p>
             </div>
@@ -198,56 +198,49 @@ export default async function ArticleDetailPage({ params }) {
 
         {/* Technical Sidebar */}
         <aside className="lg:col-span-4 flex flex-col gap-6 font-parkinsans text-xs">
-          {/* Blueprint Specs Card */}
-          <div className="bg-[var(--surface-raised)] border border-white/10 p-6 rounded-[4px] flex flex-col gap-4 sticky top-28">
+          <div className="bg-[var(--surface)] border border-white/10 p-6 rounded-[4px] flex flex-col gap-6 sticky top-28">
             <div className="text-[10px] tracking-[0.2em] text-accent uppercase font-bold border-b border-white/10 pb-3">
-              BLUEPRINT SPECIFICATION
+              SYSTEM DOSSIER · METADATA
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-4">
               <div>
-                <div className="text-[9px] tracking-[0.15em] text-white/40 uppercase">
-                  CLASSIFICATION
-                </div>
+                <div className="text-white/40 text-[9px] tracking-widest uppercase">DISCIPLINE</div>
                 <div className="text-white font-semibold mt-0.5">{article.category}</div>
               </div>
-
               <div>
-                <div className="text-[9px] tracking-[0.15em] text-white/40 uppercase">
-                  READING DURATION
-                </div>
-                <div className="text-white mt-0.5">
-                  {article.readingTime || article.readTime || "7 MIN READ"}
+                <div className="text-white/40 text-[9px] tracking-widest uppercase">READING TIME</div>
+                <div className="text-white font-semibold mt-0.5">{article.readingTime || article.readTime || "6 MINUTES"}</div>
+              </div>
+              <div>
+                <div className="text-white/40 text-[9px] tracking-widest uppercase">PUBLICATION DATE</div>
+                <div className="text-white font-semibold mt-0.5">
+                  {article.publishedAt
+                    ? new Date(article.publishedAt).toLocaleDateString("en-US", {
+                        month: "long",
+                        day: "numeric",
+                        year: "numeric",
+                      })
+                    : article.date || "RECENT"}
                 </div>
               </div>
-
-              <div>
-                <div className="text-[9px] tracking-[0.15em] text-white/40 uppercase">
-                  AUTHOR / ARCHITECT
-                </div>
-                <div className="text-white mt-0.5">
-                  {article.author?.name || article.author || "Gerat Systems Architect"}
-                </div>
-              </div>
-
-              {tagsList.length > 0 && (
-                <div>
-                  <div className="text-[9px] tracking-[0.15em] text-white/40 uppercase mb-1.5">
-                    TECHNICAL VECTORS
-                  </div>
-                  <div className="flex flex-wrap gap-1.5">
-                    {tagsList.map((tag, i) => (
-                      <span
-                        key={i}
-                        className="px-2 py-0.5 bg-white/[0.04] border border-white/15 text-[9px] tracking-wider text-white/80 rounded-[2px]"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
+
+            {tagsList.length > 0 && (
+              <div className="pt-4 border-t border-white/10">
+                <div className="text-white/40 text-[9px] tracking-widest uppercase mb-3">TOPICAL VECTORS</div>
+                <div className="flex flex-wrap gap-1.5">
+                  {tagsList.map((tag, i) => (
+                    <span
+                      key={i}
+                      className="px-2.5 py-1 bg-white/[0.04] border border-white/10 text-white/70 text-[9px] tracking-[0.1em] uppercase rounded-[2px]"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
 
             <div className="pt-4 border-t border-white/10 flex flex-col gap-2">
               <Link
@@ -265,7 +258,7 @@ export default async function ArticleDetailPage({ params }) {
       {related.length > 0 && (
         <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-24 border-t border-white/10 pt-16">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="font-artific text-xl sm:text-2xl font-bold uppercase tracking-tight text-white">
+            <h2 className="font-parkinsans text-xl sm:text-2xl font-bold uppercase tracking-tight text-white">
               RELATED TECHNICAL BLUEPRINTS
             </h2>
             <Link
@@ -287,7 +280,7 @@ export default async function ArticleDetailPage({ params }) {
                   <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
                     {rel.category}
                   </span>
-                  <h3 className="font-artific text-lg font-bold uppercase text-white group-hover:text-accent transition-colors leading-snug">
+                  <h3 className="font-parkinsans text-lg font-bold uppercase text-white group-hover:text-accent transition-colors leading-snug">
                     {rel.title}
                   </h3>
                 </div>

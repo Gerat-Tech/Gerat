@@ -267,8 +267,8 @@ export default function ContactDrawer({ open, setOpen, preset = null }) {
             {/* Header / Bar */}
             <div className="sticky top-0 z-20 bg-[var(--surface)]/95 backdrop-blur-md border-b border-white/10 px-6 sm:px-10 py-5 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <span className="size-2 rounded-full bg-accent animate-pulse" />
-                <span className="font-parkinsans text-[10px] tracking-[0.25em] text-white/70 uppercase">
+                <span className="size-2 rounded-full bg-accent shrink-0" />
+                <span className="font-artific text-[10px] tracking-[0.25em] text-white/70 uppercase font-medium">
                   START A PROJECT · DIRECT CONSULTATION
                 </span>
               </div>
@@ -279,7 +279,7 @@ export default function ContactDrawer({ open, setOpen, preset = null }) {
                 className="size-9 flex items-center justify-center border border-white/10 bg-white/5 text-white/60 hover:text-white hover:border-accent hover:bg-accent/10 transition-colors rounded-[2px]"
                 aria-label="Close contact drawer"
               >
-                <X className="size-4" />
+                ✕
               </button>
             </div>
 
@@ -289,13 +289,13 @@ export default function ContactDrawer({ open, setOpen, preset = null }) {
                 <form onSubmit={handleSubmit} className="flex flex-col gap-8">
                   {/* Hero Prompt */}
                   <div className="flex flex-col gap-2">
-                    <span className="font-parkinsans text-[10px] tracking-[0.2em] text-accent uppercase">
+                    <span className="font-artific text-[10px] tracking-[0.2em] text-accent uppercase font-medium">
                       GERAT SOFTWARE SOLUTION
                     </span>
-                    <h2 className="font-artific text-2xl sm:text-3xl font-medium tracking-tight uppercase leading-[1.1]">
+                    <h2 className="font-parkinsans text-2xl sm:text-3xl font-medium sm:font-semibold tracking-tight uppercase leading-[1.1]">
                       LET&apos;S BUILD SOMETHING THAT WORKS.
                     </h2>
-                    <p className="font-parkinsans text-xs sm:text-sm text-white/60 leading-relaxed mt-1">
+                    <p className="font-artific text-xs sm:text-sm text-white/70 leading-relaxed mt-1">
                       Tell us what you&apos;re working on. We evaluate every inquiry directly
                       and follow up within 24–48 hours.
                     </p>
@@ -669,13 +669,13 @@ export default function ContactDrawer({ open, setOpen, preset = null }) {
                   </div>
 
                   <div className="flex flex-col gap-2">
-                    <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase">
+                    <span className="font-artific text-[10px] tracking-[0.25em] text-accent uppercase font-medium">
                       INQUIRY RECEIVED · {isBrandDiscipline ? "CREATIVE DISPATCH" : "GENERAL DISPATCH"}
                     </span>
-                    <h3 className="font-artific text-2xl sm:text-3xl font-medium tracking-tight uppercase">
+                    <h3 className="font-parkinsans text-2xl sm:text-3xl font-medium sm:font-semibold tracking-tight uppercase text-white">
                       INQUIRY LOGGED SUCCESSFULLY
                     </h3>
-                    <p className="font-parkinsans text-sm text-white/60 max-w-sm">
+                    <p className="font-artific text-sm text-white/70 max-w-sm">
                       Our leads will review your requirements and follow up via email within 24–48 hours.
                     </p>
                   </div>

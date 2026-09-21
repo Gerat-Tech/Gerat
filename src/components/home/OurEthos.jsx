@@ -107,13 +107,13 @@ export default function OurEthos() {
             <SplitText
               text="BUILT TO"
               as="h2"
-              className="font-artific text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
+              className="font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium sm:font-semibold tracking-tight uppercase leading-[0.95]"
             />
             <SplitText
               text="HOLD WEIGHT."
               as="h2"
               wordClassName="text-accent"
-              className="font-artific text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
+              className="font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium sm:font-semibold tracking-tight uppercase leading-[0.95]"
             />
           </div>
 
@@ -123,7 +123,7 @@ export default function OurEthos() {
                 <p className="font-artific text-lg sm:text-xl text-white font-medium">
                   We care about what happens after the launch.
                 </p>
-                <p className="font-parkinsans text-base sm:text-lg text-white/70 leading-relaxed">
+                <p className="font-artific text-base sm:text-lg text-white/75 leading-relaxed">
                   A good website can look impressive. A good system has to keep working.
                   We build with reliability, clarity, and the next stage of your business in mind.
                 </p>
@@ -178,13 +178,13 @@ export default function OurEthos() {
 
                 {/* Bottom Card Content */}
                 <div className="flex flex-col gap-3">
-                  <span className="font-parkinsans text-[9px] tracking-[0.25em] text-accent uppercase">
+                  <span className="font-artific text-[9px] tracking-[0.25em] text-accent uppercase font-medium">
                     {card.short}
                   </span>
-                  <h3 className="font-artific text-xl sm:text-2xl font-bold tracking-tight uppercase text-white leading-tight">
+                  <h3 className="font-parkinsans text-xl sm:text-2xl font-semibold tracking-tight uppercase text-white leading-tight">
                     {card.title}
                   </h3>
-                  <p className="font-parkinsans text-xs sm:text-sm text-white/70 leading-relaxed">
+                  <p className="font-artific text-xs sm:text-sm text-white/70 leading-relaxed">
                     {card.description}
                   </p>
                 </div>

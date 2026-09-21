@@ -31,6 +31,7 @@ export default function TeamMemberEditor({ initialMember = null }) {
   );
   const [order, setOrder] = useState(initialMember?.order || 1);
   const [active, setActive] = useState(initialMember ? initialMember.active : true);
+  const [email, setEmail] = useState(initialMember?.email || "");
   const [linkedinUrl, setLinkedinUrl] = useState(initialMember?.linkedinUrl || "");
   const [githubUrl, setGithubUrl] = useState(initialMember?.githubUrl || "");
   const [twitterUrl, setTwitterUrl] = useState(initialMember?.twitterUrl || "");
@@ -60,6 +61,7 @@ export default function TeamMemberEditor({ initialMember = null }) {
       photoUrl: photoUrl.trim(),
       order: Number(order) || 0,
       active,
+      email: email.trim() || null,
       linkedinUrl: linkedinUrl.trim() || null,
       githubUrl: githubUrl.trim() || null,
       twitterUrl: twitterUrl.trim() || null,
@@ -117,7 +119,7 @@ export default function TeamMemberEditor({ initialMember = null }) {
       {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed bottom-6 right-6 z-50 bg-[#161616] border border-accent text-white px-4 py-3 rounded-[3px] font-parkinsans text-xs tracking-wider shadow-2xl flex items-center gap-2">
-          <span className="size-2 rounded-full bg-accent animate-pulse" />
+          <span className="size-2 rounded-full bg-accent" />
           <span>{toastMessage}</span>
         </div>
       )}
@@ -136,7 +138,7 @@ export default function TeamMemberEditor({ initialMember = null }) {
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="font-artific text-2xl sm:text-3xl font-bold uppercase text-white tracking-tight">
+            <h1 className="font-parkinsans text-2xl sm:text-3xl font-semibold tracking-tight uppercase text-white">
               {name || "UNNAMED ARCHITECT"}
             </h1>
             <span className="font-parkinsans text-[9px] tracking-[0.2em] px-2 py-0.5 rounded-[2px] bg-white/[0.05] border border-white/15 text-white/80 uppercase">
@@ -289,27 +291,34 @@ export default function TeamMemberEditor({ initialMember = null }) {
               <span className="text-[9px] tracking-[0.15em] text-white/40 uppercase">
                 EXTERNAL CONNECTIVITY VECTORS (OPTIONAL):
               </span>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
+                <input
+                  type="email"
+                  placeholder="Official Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="bg-black/60 border border-white/15 px-2.5 py-1.5 text-white text-xs rounded-[2px] focus:border-accent outline-none"
+                />
                 <input
                   type="text"
                   placeholder="LinkedIn URL"
                   value={linkedinUrl}
                   onChange={(e) => setLinkedinUrl(e.target.value)}
-                  className="bg-black/60 border border-white/15 px-2.5 py-1.5 text-white text-xs rounded-[2px]"
+                  className="bg-black/60 border border-white/15 px-2.5 py-1.5 text-white text-xs rounded-[2px] focus:border-accent outline-none"
                 />
                 <input
                   type="text"
                   placeholder="GitHub URL"
                   value={githubUrl}
                   onChange={(e) => setGithubUrl(e.target.value)}
-                  className="bg-black/60 border border-white/15 px-2.5 py-1.5 text-white text-xs rounded-[2px]"
+                  className="bg-black/60 border border-white/15 px-2.5 py-1.5 text-white text-xs rounded-[2px] focus:border-accent outline-none"
                 />
                 <input
                   type="text"
                   placeholder="Twitter / X URL"
                   value={twitterUrl}
                   onChange={(e) => setTwitterUrl(e.target.value)}
-                  className="bg-black/60 border border-white/15 px-2.5 py-1.5 text-white text-xs rounded-[2px]"
+                  className="bg-black/60 border border-white/15 px-2.5 py-1.5 text-white text-xs rounded-[2px] focus:border-accent outline-none"
                 />
               </div>
             </div>
@@ -333,7 +342,7 @@ export default function TeamMemberEditor({ initialMember = null }) {
         {/* Right Column: Live Card Preview (5 cols) */}
         <div className="lg:col-span-5 flex flex-col gap-4">
           <div className="sticky top-28 flex flex-col gap-4">
-            <span className="font-parkinsans text-[10px] tracking-[0.2em] text-accent uppercase font-bold">
+            <span className="font-artific text-[10px] tracking-[0.2em] text-accent uppercase font-bold">
               LIVE ROSTER CARD PREVIEW
             </span>
 
@@ -346,27 +355,39 @@ export default function TeamMemberEditor({ initialMember = null }) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0c0c0c] via-transparent to-transparent opacity-80" />
 
-                <div className="absolute top-3 left-3 font-parkinsans text-[9px] tracking-[0.2em] text-accent bg-black/90 px-2.5 py-0.5 border border-accent/40 rounded-[1px] uppercase">
+                <div className="absolute top-3 left-3 font-artific text-[9px] tracking-[0.2em] text-accent bg-black/90 px-2.5 py-0.5 border border-accent/40 rounded-[1px] uppercase">
                   {division.replace("_", " ")}
                 </div>
 
-                <div className="absolute bottom-3 left-3 right-3 font-parkinsans text-[10px] tracking-wider text-accent uppercase truncate">
+                <div className="absolute bottom-3 left-3 right-3 font-artific text-[10px] tracking-wider text-accent uppercase truncate">
                   {focusTag}
                 </div>
               </div>
 
               <div className="p-6 flex flex-col gap-3">
-                <h3 className="font-artific text-xl font-bold uppercase text-white tracking-tight">
+                <h3 className="font-parkinsans text-xl font-semibold uppercase text-white tracking-tight">
                   {name || "ARCHITECT NAME"}
                 </h3>
 
-                <div className="font-parkinsans text-[10px] tracking-[0.15em] text-white/50 uppercase">
+                <div className="font-artific text-[10px] tracking-[0.15em] text-white/50 uppercase">
                   {roleTitle || "ENGINEERING LEADERSHIP"}
                 </div>
 
-                <p className="font-sans text-xs text-white/70 leading-relaxed pt-2 border-t border-white/5">
+                <p className="font-artific text-xs text-white/70 leading-relaxed pt-2 border-t border-white/5">
                   {bio}
                 </p>
+
+                {(email || linkedinUrl || twitterUrl || githubUrl) && (
+                  <div className="flex items-center gap-2 pt-3 border-t border-white/10 text-[9px] tracking-[0.15em] text-accent uppercase font-mono">
+                    <span>CONNECT:</span>
+                    <div className="flex items-center gap-1.5 text-white/70">
+                      {email && <span>EMAIL ·</span>}
+                      {linkedinUrl && <span>LINKEDIN ·</span>}
+                      {twitterUrl && <span>X ·</span>}
+                      {githubUrl && <span>GITHUB</span>}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

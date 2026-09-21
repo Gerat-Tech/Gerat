@@ -216,12 +216,12 @@ export default function PersonalBrandingPage() {
               <div className="p-6 bg-[var(--surface)] border border-white/10 rounded-[2px] h-full flex flex-col justify-between">
                 <div>
                   <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase font-bold">
-                    PROFILE · 0{idx + 1}
+                    LEADERSHIP PROFILE
                   </span>
-                  <h3 className="font-artific text-lg font-medium tracking-tight uppercase text-white mt-1">
+                  <h3 className="font-parkinsans text-lg font-semibold tracking-tight uppercase text-white mt-1">
                     {p.role}
                   </h3>
-                  <p className="font-parkinsans text-xs text-white/60 mt-3 leading-relaxed">
+                  <p className="font-artific text-xs text-white/60 mt-3 leading-relaxed">
                     {p.benefit}
                   </p>
                 </div>
@@ -239,11 +239,11 @@ export default function PersonalBrandingPage() {
       <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-14 sm:py-18 md:py-20 border-b border-white/10">
         <div className="flex flex-col gap-4 mb-10 sm:mb-12 max-w-3xl">
           <SectionLabel label="THE 7-PILLAR PERSONAL BRAND ENGINE" />
-          <h2 className="font-artific text-3xl sm:text-5xl font-medium tracking-tight uppercase leading-[1.05]">
+          <h2 className="font-parkinsans text-3xl sm:text-5xl font-semibold tracking-tight uppercase leading-[1.05]">
             MODULAR ARCHITECTURE. <br />
             <span className="text-accent">BUILT AROUND YOUR TIME.</span>
           </h2>
-          <p className="font-parkinsans text-sm sm:text-base text-white/70 leading-relaxed">
+          <p className="font-artific text-sm sm:text-base text-white/70 leading-relaxed">
             Busy executives do not have 20 hours a week to produce content. We design high-efficiency
             systems that extract your insights with minimal time commitment while maximizing institutional impact.
           </p>
@@ -276,10 +276,10 @@ export default function PersonalBrandingPage() {
                       <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase font-bold">
                         {mod.subtitle}
                       </span>
-                      <h3 className="font-artific text-2xl font-medium tracking-tight uppercase text-white mt-1">
+                      <h3 className="font-parkinsans text-2xl font-semibold tracking-tight uppercase text-white mt-1">
                         {mod.title}
                       </h3>
-                      <p className="font-parkinsans text-xs sm:text-sm text-white/70 leading-relaxed mt-2">
+                      <p className="font-artific text-xs sm:text-sm text-white/70 leading-relaxed mt-2">
                         {mod.description}
                       </p>
                     </div>
@@ -314,10 +314,10 @@ export default function PersonalBrandingPage() {
                 <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase font-bold">
                   FLAGSHIP CASE STUDY · {executiveCase.category}
                 </span>
-                <h2 className="font-artific text-3xl sm:text-4xl font-medium tracking-tight uppercase text-white">
+                <h2 className="font-parkinsans text-3xl sm:text-4xl font-semibold tracking-tight uppercase text-white">
                   {executiveCase.title}
                 </h2>
-                <p className="font-parkinsans text-sm text-white/70 leading-relaxed max-w-xl">
+                <p className="font-artific text-sm text-white/70 leading-relaxed max-w-xl">
                   {executiveCase.summary}
                 </p>
 
@@ -345,7 +345,7 @@ export default function PersonalBrandingPage() {
 
               <div className="lg:col-span-5 bg-[var(--surface-raised)] border border-white/10 p-6 rounded-[2px] flex flex-col gap-3 font-parkinsans text-[10px]">
                 <span className="text-accent uppercase tracking-[0.2em]">CASE BREAKDOWN</span>
-                <div className="text-white/60 space-y-2 font-parkinsans text-xs">
+                <div className="text-white/60 space-y-2 font-artific text-xs">
                   <p><strong className="text-white">Challenge:</strong> {executiveCase.problem}</p>
                   <p><strong className="text-white">Solution:</strong> {executiveCase.architecture}</p>
                   <p><strong className="text-white">Result:</strong> {executiveCase.impact}</p>
@@ -361,10 +361,10 @@ export default function PersonalBrandingPage() {
         <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase">
           ELEVATE YOUR VISIBILITY
         </span>
-        <h2 className="font-artific text-3xl sm:text-5xl font-medium tracking-tight uppercase max-w-2xl">
+        <h2 className="font-parkinsans text-3xl sm:text-5xl font-semibold tracking-tight uppercase max-w-2xl">
           READY TO TURN YOUR STORY INTO AN ASSET?
         </h2>
-        <p className="font-parkinsans text-sm sm:text-base text-white/60 max-w-md">
+        <p className="font-artific text-sm sm:text-base text-white/60 max-w-md">
           Direct consultation with our executive branding directors. We map your trajectory in an introductory review.
         </p>
         <button

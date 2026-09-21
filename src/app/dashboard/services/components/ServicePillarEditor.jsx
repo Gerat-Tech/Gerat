@@ -104,7 +104,7 @@ export default function ServicePillarEditor({ initialData = null, isNew = false 
               {isNew ? "NEW PILLAR CONFIGURATION" : `PILLAR ${formData.num} · ${formData.title || "UNTITLED"}`}
             </span>
           </div>
-          <h1 className="font-artific text-2xl sm:text-3xl font-bold uppercase tracking-tight text-white mt-1">
+          <h1 className="font-parkinsans text-2xl sm:text-3xl font-semibold uppercase tracking-tight text-white mt-1">
             {isNew ? "CONFIGURE PRACTICE PILLAR" : "EDIT PRACTICE PILLAR"}
           </h1>
         </div>
@@ -290,7 +290,7 @@ export default function ServicePillarEditor({ initialData = null, isNew = false 
                 <span className="font-parkinsans text-[9px] tracking-[0.2em] text-white/50 uppercase">
                   {formData.tagline || "PRACTICE TAGLINE · CADRE"}
                 </span>
-                <h2 className="font-artific text-2xl font-bold tracking-tight uppercase text-white leading-tight">
+                <h2 className="font-parkinsans text-2xl font-bold tracking-tight uppercase text-white leading-tight">
                   {formData.title || "PRACTICE PILLAR TITLE"}
                 </h2>
                 <p className="font-artific text-xs sm:text-sm text-white/70 leading-relaxed">

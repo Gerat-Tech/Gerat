@@ -31,8 +31,8 @@ export default function Hero() {
         <div className="max-w-4xl flex flex-col gap-6 sm:gap-8">
           {/* Eyebrow Telemetry (Spec §10) */}
           <FadeUp delay={0.1} y={16}>
-            <div className="inline-flex items-center gap-3 font-parkinsans text-[10px] sm:text-[11px] tracking-[0.25em] text-white/50 uppercase">
-              <span className="size-1.5 rounded-[1px] bg-accent animate-corner-pulse" />
+            <div className="inline-flex items-center gap-3 font-artific text-[10px] sm:text-[11px] tracking-[0.25em] text-white/50 uppercase font-medium">
+              <span className="size-1.5 rounded-[1px] bg-accent" />
               <span className="text-white/80">GERAT SOFTWARE SOLUTION</span>
               <span className="text-white/20">·</span>
               <span className="hidden sm:inline">ADDIS ABABA · EST. 2026</span>
@@ -46,7 +46,7 @@ export default function Hero() {
               as="h1"
               delay={0.2}
               stagger={0.04}
-              className="font-artific text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+              className="font-parkinsans text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-medium sm:font-semibold tracking-tight uppercase leading-[0.92]"
             />
             <SplitText
               text="YOU CROSS IT."
@@ -54,13 +54,13 @@ export default function Hero() {
               delay={0.35}
               stagger={0.04}
               wordClassName="text-accent"
-              className="font-artific text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+              className="font-parkinsans text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-medium sm:font-semibold tracking-tight uppercase leading-[0.92]"
             />
           </div>
 
           {/* Supporting Statement (Content Guide §5, §77) */}
           <FadeUp delay={0.45} y={24} className="max-w-2xl">
-            <p className="font-parkinsans text-base sm:text-lg md:text-xl text-white/70 font-normal leading-relaxed">
+            <p className="font-artific text-base sm:text-lg md:text-xl text-white/80 font-normal leading-relaxed">
               We connect your business to the people it serves — through digital
               experiences, intelligent tools, business systems, and strong brands.
             </p>

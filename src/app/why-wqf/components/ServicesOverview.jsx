@@ -65,18 +65,18 @@ export default function ServicesOverview({ initialPillars = null }) {
             <SplitText
               text="WHAT WE"
               as="h1"
-              className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+              className="font-parkinsans text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight uppercase leading-[0.92]"
             />
             <SplitText
               text="BUILD."
               as="div"
               wordClassName="text-accent"
-              className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+              className="font-parkinsans text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight uppercase leading-[0.92]"
             />
           </div>
 
           <FadeUp delay={0.3} y={16}>
-            <p className="font-parkinsans text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed">
+            <p className="font-artific text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed">
               From the way your business looks to the systems behind how it works, Gerat brings brand, design, software, and intelligent technology together.
             </p>
           </FadeUp>
@@ -116,10 +116,10 @@ export default function ServicesOverview({ initialPillars = null }) {
                   <span className="font-parkinsans text-[9px] tracking-[0.2em] text-white/50 uppercase">
                     {pillar.tagline}
                   </span>
-                  <h2 className="font-artific text-2xl sm:text-3xl font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
+                  <h2 className="font-parkinsans text-2xl sm:text-3xl font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
                     {pillar.title}
                   </h2>
-                  <p className="font-parkinsans text-xs sm:text-sm text-white/70 leading-relaxed">
+                  <p className="font-artific text-xs sm:text-sm text-white/70 leading-relaxed">
                     {pillar.desc}
                   </p>
                 </div>

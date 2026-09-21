@@ -81,7 +81,7 @@ export default function ChangePasswordModal({ isOpen, onClose, user }) {
             <span className="font-parkinsans text-[9px] tracking-[0.25em] text-accent uppercase">
               SECURITY VERIFICATION
             </span>
-            <h2 className="font-artific text-lg font-bold uppercase">UPDATE PASSWORD</h2>
+            <h2 className="font-parkinsans text-lg font-bold uppercase">UPDATE PASSWORD</h2>
           </div>
           <button
             type="button"

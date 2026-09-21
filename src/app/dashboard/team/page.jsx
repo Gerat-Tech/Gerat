@@ -29,7 +29,7 @@ export default async function TeamDashboardPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="font-artific text-2xl sm:text-3xl font-bold tracking-tight uppercase text-white">
+            <h1 className="font-parkinsans text-2xl sm:text-3xl font-semibold tracking-tight uppercase text-white">
               TEAM ROSTER CMS
             </h1>
             <span className="font-parkinsans text-[9px] tracking-[0.2em] px-2 py-0.5 rounded-[2px] bg-accent/15 border border-accent/40 text-accent uppercase font-bold">

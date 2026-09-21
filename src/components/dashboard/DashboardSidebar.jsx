@@ -85,7 +85,7 @@ export default function DashboardSidebar({ user = null, stats = {}, isOpen = tru
           }`}
         >
           <span className="flex items-center gap-1.5">
-            <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="size-1.5 rounded-full bg-emerald-500" />
             <span>OPERATIONAL</span>
           </span>
           <span>MISSION CONTROL</span>

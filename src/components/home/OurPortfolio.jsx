@@ -67,16 +67,16 @@ export default function OurPortfolio({ initialProjects = null }) {
             <SplitText
               text="WE BUILD THINGS"
               as="h2"
-              className="font-artific text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
+              className="font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium sm:font-semibold tracking-tight uppercase leading-[0.95]"
             />
             <SplitText
               text="PEOPLE ACTUALLY USE."
               as="h2"
               wordClassName="text-accent"
-              className="font-artific text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
+              className="font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium sm:font-semibold tracking-tight uppercase leading-[0.95]"
             />
             <FadeUp delay={0.2} y={16}>
-              <p className="font-parkinsans text-base sm:text-lg text-white/70 leading-relaxed pt-2">
+              <p className="font-artific text-base sm:text-lg text-white/75 leading-relaxed pt-2">
                 A few examples of the products, platforms, and experiences we&apos;ve helped shape.
               </p>
             </FadeUp>
@@ -117,13 +117,13 @@ export default function OurPortfolio({ initialProjects = null }) {
                 {/* Card Content */}
                 <div className="p-6 sm:p-8 flex flex-col justify-between flex-1 gap-6">
                   <div className="flex flex-col gap-3">
-                    <div className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
+                    <div className="font-artific text-[9px] tracking-[0.2em] text-accent uppercase font-medium">
                       {project.category}
                     </div>
-                    <h3 className="font-artific text-xl font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
+                    <h3 className="font-parkinsans text-xl font-semibold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
                       {project.title}
                     </h3>
-                    <p className="font-parkinsans text-xs sm:text-sm text-white/70 leading-relaxed">
+                    <p className="font-artific text-xs sm:text-sm text-white/70 leading-relaxed">
                       {project.description}
                     </p>
                   </div>

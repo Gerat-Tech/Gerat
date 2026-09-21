@@ -22,44 +22,46 @@ export default function Footer() {
 
   return (
     <footer className="w-full bg-[var(--bg)] text-white border-t border-white/10 overflow-hidden">
-      {/* Upper Master Call to Action */}
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-14 sm:py-18 md:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
-          <div className="lg:col-span-8 flex flex-col gap-6">
-            <div className="inline-flex items-center gap-2.5 font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase">
-              <span className="size-1.5 rounded-[1px] bg-accent" />
-              <span>START A PROJECT</span>
+      {/* Upper Master Call to Action (Flame Orange Banner with White & Dark Brown Typography) */}
+      <div className="w-full bg-accent text-white border-b border-black/10">
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-14 sm:py-18 md:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
+            <div className="lg:col-span-8 flex flex-col gap-6">
+              <div className="inline-flex items-center gap-2.5 font-artific text-[10px] sm:text-[11px] tracking-[0.25em] text-[#300F0A] uppercase font-bold">
+                <span className="size-2 rounded-[1px] bg-[#300F0A]" />
+                <span>START A PROJECT</span>
+              </div>
+
+              <h2 className="font-parkinsans text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight uppercase leading-[0.94] text-white">
+                READY TO CONNECT <br />
+                <span className="text-[#300F0A] font-bold">WHAT COMES NEXT?</span>
+              </h2>
+
+              <p className="font-artific text-base sm:text-lg text-white/95 max-w-xl leading-relaxed">
+                Let&apos;s build the bridge together. We turn complex business challenges
+                into digital products, intelligent tools, business systems, and recognizable brands.
+              </p>
             </div>
 
-            <h2 className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92] text-white">
-              READY TO CONNECT <br />
-              <span className="text-accent">WHAT COMES NEXT?</span>
-            </h2>
+            <div className="lg:col-span-4 flex flex-col items-start lg:items-end gap-4">
+              <Magnetic maxDisplacement={10}>
+                <button
+                  type="button"
+                  onClick={openContact}
+                  data-cursor-text="CONTACT"
+                  className="group relative isolate inline-flex items-center justify-center font-parkinsans text-[12px] uppercase tracking-[0.2em] px-9 py-4 bg-[#300F0A] text-white font-bold hover:bg-white hover:text-[#300F0A] border border-[#300F0A] transition-all duration-300 rounded-[2px] shadow-xl"
+                >
+                  <span>START A PROJECT</span>
+                  <span className="ml-2 group-hover:translate-x-1 transition-transform">
+                    →
+                  </span>
+                </button>
+              </Magnetic>
 
-            <p className="font-parkinsans text-base sm:text-lg text-white/70 max-w-xl leading-relaxed">
-              Let&apos;s build the bridge together. We turn complex business challenges
-              into digital products, intelligent tools, business systems, and recognizable brands.
-            </p>
-          </div>
-
-          <div className="lg:col-span-4 flex flex-col items-start lg:items-end gap-4">
-            <Magnetic maxDisplacement={10}>
-              <button
-                type="button"
-                onClick={openContact}
-                data-cursor-text="CONTACT"
-                className="group relative isolate inline-flex items-center justify-center font-parkinsans text-[12px] uppercase tracking-[0.2em] px-8 py-4 bg-accent text-white font-bold hover:bg-white hover:text-black transition-all duration-300 rounded-[2px]"
-              >
-                <span>START A PROJECT</span>
-                <span className="ml-2 group-hover:translate-x-1 transition-transform">
-                  →
-                </span>
-              </button>
-            </Magnetic>
-
-            <span className="font-parkinsans text-[10px] tracking-[0.15em] text-white/40 uppercase">
-              DIRECT RESPONSE · 24-48 HOUR REVIEW
-            </span>
+              <span className="font-artific text-[10px] tracking-[0.18em] text-[#300F0A] uppercase font-bold">
+                DIRECT RESPONSE · 24-48 HOUR REVIEW
+              </span>
+            </div>
           </div>
         </div>
       </div>

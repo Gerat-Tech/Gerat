@@ -164,23 +164,23 @@ export default function BusinessSystemsPage() {
             <SplitText
               text="CONNECTED SYSTEMS."
               as="h1"
-              className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+              className="font-parkinsans text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight uppercase leading-[0.92]"
             />
             <SplitText
               text="UNBROKEN"
               as="div"
-              className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+              className="font-parkinsans text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight uppercase leading-[0.92]"
             />
             <SplitText
               text="OPERATIONS."
               as="div"
               wordClassName="text-accent"
-              className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+              className="font-parkinsans text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight uppercase leading-[0.92]"
             />
           </div>
 
           <FadeUp delay={0.3} y={16}>
-            <p className="font-parkinsans text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed">
+            <p className="font-artific text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed">
               Connected software that unites operations, inventory, and workflows so your business runs with less friction, fewer errors, and complete accountability.
             </p>
           </FadeUp>
@@ -218,10 +218,10 @@ export default function BusinessSystemsPage() {
           <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase">
             OPERATIONS CATALOG
           </span>
-          <h2 className="font-artific text-3xl sm:text-5xl font-medium tracking-tight uppercase">
+          <h2 className="font-parkinsans text-3xl sm:text-5xl font-semibold tracking-tight uppercase">
             SOFTWARE THAT SCALES WITH YOU.
           </h2>
-          <p className="font-parkinsans text-sm sm:text-base text-white/60 max-w-2xl">
+          <p className="font-artific text-sm sm:text-base text-white/60 max-w-2xl">
             Custom ERP, inventory, and workflow platforms that streamline company operations and provide complete visibility across your organization.
           </p>
         </div>
@@ -240,11 +240,11 @@ export default function BusinessSystemsPage() {
                       <IconComp className="size-4 text-white/40 group-hover:text-accent transition-colors" />
                     </div>
 
-                    <h3 className="font-artific text-2xl font-medium tracking-tight uppercase text-white mt-5 group-hover:text-white transition-colors">
+                    <h3 className="font-parkinsans text-2xl font-semibold tracking-tight uppercase text-white mt-5 group-hover:text-white transition-colors">
                       {item.title}
                     </h3>
 
-                    <p className="font-parkinsans text-xs sm:text-sm text-white/70 leading-relaxed mt-2">
+                    <p className="font-artific text-xs sm:text-sm text-white/70 leading-relaxed mt-2">
                       {item.longDesc}
                     </p>
                   </div>
@@ -295,11 +295,11 @@ export default function BusinessSystemsPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           <div className="lg:col-span-5 flex flex-col gap-4">
             <SectionLabel index="03" label="ARCHITECTURAL INTEGRITY" />
-            <h2 className="font-artific text-3xl sm:text-5xl font-medium tracking-tight uppercase leading-[1.05]">
+            <h2 className="font-parkinsans text-3xl sm:text-5xl font-semibold tracking-tight uppercase leading-[1.05]">
               STRUCTURAL STABILITY. <br />
               <span className="text-accent">BUILT TO LAST.</span>
             </h2>
-            <p className="font-parkinsans text-sm sm:text-base text-white/70 leading-relaxed">
+            <p className="font-artific text-sm sm:text-base text-white/70 leading-relaxed">
               We design business software that stands the test of time. Clean relational databases, immutable audit logs, and zero per-seat licensing penalties.
             </p>
           </div>
@@ -316,7 +316,7 @@ export default function BusinessSystemsPage() {
                   <span className="tracking-[0.2em] text-white font-bold uppercase">
                     {std.title}
                   </span>
-                  <p className="text-white/60 leading-relaxed font-parkinsans text-xs">
+                  <p className="text-white/60 leading-relaxed font-artific text-xs">
                     {std.desc}
                   </p>
                 </div>
@@ -333,7 +333,7 @@ export default function BusinessSystemsPage() {
             <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase">
               OPERATIONAL CLARITY
             </span>
-            <h2 className="font-artific text-3xl sm:text-5xl font-medium tracking-tight uppercase">
+            <h2 className="font-parkinsans text-3xl sm:text-5xl font-semibold tracking-tight uppercase">
               FREQUENTLY ASKED QUESTIONS.
             </h2>
           </div>
@@ -349,7 +349,7 @@ export default function BusinessSystemsPage() {
                   <button
                     type="button"
                     onClick={() => setActiveFaq(isOpen ? null : idx)}
-                    className="w-full flex items-center justify-between text-left font-artific text-lg font-medium uppercase text-white hover:text-accent transition-colors"
+                    className="w-full flex items-center justify-between text-left font-parkinsans text-lg font-medium uppercase text-white hover:text-accent transition-colors"
                   >
                     <span>{faq.q}</span>
                     <span className="font-parkinsans text-xs text-accent ml-4">
@@ -358,7 +358,7 @@ export default function BusinessSystemsPage() {
                   </button>
 
                   {isOpen && (
-                    <p className="font-parkinsans text-sm text-white/70 leading-relaxed mt-4 pt-4 border-t border-white/10">
+                    <p className="font-artific text-sm text-white/70 leading-relaxed mt-4 pt-4 border-t border-white/10">
                       {faq.a}
                     </p>
                   )}

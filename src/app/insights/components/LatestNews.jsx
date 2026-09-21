@@ -68,11 +68,11 @@ export default function LatestNews({ activeCategory = "ALL ARTICLES", articles: 
                     <span>{article.readTime || article.readingTime || "6 MIN READ"}</span>
                   </div>
 
-                  <h2 className="font-artific text-xl sm:text-2xl font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors leading-tight">
+                  <h2 className="font-parkinsans text-xl sm:text-2xl font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors leading-tight">
                     {article.title}
                   </h2>
 
-                  <p className="font-parkinsans text-xs sm:text-sm text-white/65 leading-relaxed">
+                  <p className="font-artific text-xs sm:text-sm text-white/65 leading-relaxed">
                     {article.excerpt}
                   </p>
                 </div>

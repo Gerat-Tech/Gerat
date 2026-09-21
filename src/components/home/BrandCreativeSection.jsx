@@ -79,23 +79,23 @@ export default function BrandCreativeSection() {
             <SplitText
               text="BUILD THE PRODUCT."
               as="h2"
-              className="font-artific text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight uppercase leading-[0.95]"
+              className="font-parkinsans text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-medium sm:font-semibold tracking-tight uppercase leading-[0.95]"
             />
             <SplitText
               text="BUILD THE BRAND."
               as="h2"
-              className="font-artific text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight uppercase leading-[0.95]"
+              className="font-parkinsans text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-medium sm:font-semibold tracking-tight uppercase leading-[0.95]"
             />
             <SplitText
               text="BUILD THE PRESENCE."
               as="h2"
               wordClassName="text-accent"
-              className="font-artific text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight uppercase leading-[0.95]"
+              className="font-parkinsans text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-medium sm:font-semibold tracking-tight uppercase leading-[0.95]"
             />
           </div>
 
           <FadeUp delay={0.2} y={16}>
-            <p className="font-parkinsans text-base sm:text-lg text-white/70 leading-relaxed pt-2 max-w-3xl">
+            <p className="font-artific text-base sm:text-lg text-white/80 leading-relaxed pt-2 max-w-3xl">
               A strong digital product starts long before the interface. We help businesses,
               products, and technology leaders define how they look, communicate, and show
               up — then connect that identity directly into the digital experiences and
@@ -143,13 +143,13 @@ export default function BrandCreativeSection() {
 
                     {/* Card Body */}
                     <div className="flex flex-col gap-3 my-6">
-                      <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase font-bold">
+                      <span className="font-artific text-[9px] tracking-[0.2em] text-accent uppercase font-medium">
                         {card.subtitle}
                       </span>
-                      <h3 className="font-artific text-2xl sm:text-3xl font-medium tracking-tight uppercase text-white group-hover:text-white transition-colors">
+                      <h3 className="font-parkinsans text-2xl sm:text-3xl font-semibold tracking-tight uppercase text-white group-hover:text-white transition-colors">
                         {card.title}
                       </h3>
-                      <p className="font-parkinsans text-sm text-white/70 leading-relaxed">
+                      <p className="font-artific text-sm text-white/70 leading-relaxed">
                         {card.description}
                       </p>
                     </div>

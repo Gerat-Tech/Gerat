@@ -134,7 +134,7 @@ export default function Navbar() {
         {/* Global Announcement Banner from SiteConfig */}
         {announcement?.enabled && announcement?.text && (
           <div className="w-full bg-[var(--surface)]/95 backdrop-blur-md border-b border-accent/40 text-[10px] sm:text-[11px] font-parkinsans uppercase tracking-[0.2em] py-2 px-4 text-center text-white/90 flex items-center justify-center gap-2 sm:gap-3 shadow-md">
-            <span className="inline-block size-1.5 rounded-full bg-accent animate-pulse shrink-0" />
+            <span className="inline-block size-1.5 rounded-full bg-accent shrink-0" />
             <span className="truncate max-w-[70vw] sm:max-w-none">{announcement.text}</span>
             {announcement.link && (
               <Link

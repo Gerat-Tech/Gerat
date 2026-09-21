@@ -164,23 +164,23 @@ export default function AiToolsPage() {
             <SplitText
               text="PRACTICAL INTELLIGENCE."
               as="h1"
-              className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+              className="font-parkinsans text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight uppercase leading-[0.92]"
             />
             <SplitText
               text="MEASURABLE BUSINESS"
               as="div"
-              className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+              className="font-parkinsans text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight uppercase leading-[0.92]"
             />
             <SplitText
               text="OUTCOMES."
               as="div"
               wordClassName="text-accent"
-              className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+              className="font-parkinsans text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight uppercase leading-[0.92]"
             />
           </div>
 
           <FadeUp delay={0.3} y={16}>
-            <p className="font-parkinsans text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed">
+            <p className="font-artific text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed">
               We build intelligent search systems, domain-aware assistants, and automated data extraction pipelines that save your team hours and turn internal knowledge into an active asset.
             </p>
           </FadeUp>
@@ -218,10 +218,10 @@ export default function AiToolsPage() {
           <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase">
             INTELLIGENCE CATALOG
           </span>
-          <h2 className="font-artific text-3xl sm:text-5xl font-medium tracking-tight uppercase">
+          <h2 className="font-parkinsans text-3xl sm:text-5xl font-semibold tracking-tight uppercase">
             AI ENGINEERED FOR REAL WORK.
           </h2>
-          <p className="font-parkinsans text-sm sm:text-base text-white/60 max-w-2xl">
+          <p className="font-artific text-sm sm:text-base text-white/60 max-w-2xl">
             Practical, dependable artificial intelligence solutions focused on operational ROI, verified citations, and reliable automation.
           </p>
         </div>
@@ -240,11 +240,11 @@ export default function AiToolsPage() {
                       <IconComp className="size-4 text-white/40 group-hover:text-accent transition-colors" />
                     </div>
 
-                    <h3 className="font-artific text-2xl font-medium tracking-tight uppercase text-white mt-5 group-hover:text-white transition-colors">
+                    <h3 className="font-parkinsans text-2xl font-semibold tracking-tight uppercase text-white mt-5 group-hover:text-white transition-colors">
                       {item.title}
                     </h3>
 
-                    <p className="font-parkinsans text-xs sm:text-sm text-white/70 leading-relaxed mt-2">
+                    <p className="font-artific text-xs sm:text-sm text-white/70 leading-relaxed mt-2">
                       {item.longDesc}
                     </p>
                   </div>
@@ -295,72 +295,70 @@ export default function AiToolsPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           <div className="lg:col-span-5 flex flex-col gap-4">
             <SectionLabel index="02" label="INTELLIGENCE PRINCIPLES" />
-            <h2 className="font-artific text-3xl sm:text-5xl font-medium tracking-tight uppercase leading-[1.05]">
-              VERIFIED TRUTH. <br />
-              <span className="text-accent">ZERO GUESSWORK.</span>
+            <h2 className="font-parkinsans text-3xl sm:text-5xl font-semibold tracking-tight uppercase leading-[1.05]">
+              VERIFIABLE DATA ARCHITECTURE & ETHICAL AI FOUNDATION.
             </h2>
-            <p className="font-parkinsans text-sm sm:text-base text-white/70 leading-relaxed">
-              We design AI systems for businesses where accuracy matters. Every generated insight is anchored in your verified documentation with complete privacy and human oversight.
+            <p className="font-artific text-sm sm:text-base text-white/70 leading-relaxed">
+              We engineer AI tools with deterministic guarantees, granular access controls, and transparent audit logs. Your enterprise data never trains public frontier models without explicit consent.
             </p>
           </div>
 
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4 font-parkinsans text-[10px]">
-            {STANDARDS.map((std) => {
-              const IconComp = std.icon;
-              return (
-                <div
-                  key={std.title}
-                  className="p-6 bg-[var(--surface)] border border-white/10 rounded-[2px] flex flex-col gap-3"
-                >
-                  <IconComp className="size-5 text-accent" />
+            {[
+              { title: "ZERO DATA CONTAMINATION", desc: "Private VPC deployments ensure enterprise intellectual property remains isolated from public training pipelines." },
+              { title: "SOURCE-ATTRIBUTED CITATIONS", desc: "Every generated insight contains cryptographic or line-item vector citations to verified sources." },
+              { title: "DETERMINISTIC FALLBACKS", desc: "Structured outputs with schema validation prevent silent hallucinations and runtime schema drift." },
+              { title: "AUDITABLE LATENCY & SPEND", desc: "Token tracking, rate limiting, and cache hit metrics monitored via real-time telemetry." },
+            ].map((card) => (
+              <div key={card.title} className="bg-[var(--surface)] border border-white/10 p-6 rounded-[2px] flex flex-col justify-between">
+                <div>
                   <span className="tracking-[0.2em] text-white font-bold uppercase">
-                    {std.title}
+                    {card.title}
                   </span>
-                  <p className="text-white/60 leading-relaxed font-parkinsans text-xs">
-                    {std.desc}
+                  <p className="text-white/60 leading-relaxed font-artific text-xs mt-2">
+                    {card.desc}
                   </p>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* FAQ Accordion Section */}
-      <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-24 sm:py-32">
-        <div className="max-w-3xl mx-auto flex flex-col gap-8">
-          <div className="text-center flex flex-col items-center gap-3">
+      {/* FAQ Section */}
+      <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-16 sm:py-24 border-b border-white/10">
+        <div className="max-w-3xl">
+          <div className="mb-10 sm:mb-12">
             <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase">
-              OPERATIONAL CLARITY
+              ARCHITECTURAL CLARITY
             </span>
-            <h2 className="font-artific text-3xl sm:text-5xl font-medium tracking-tight uppercase">
-              FREQUENTLY ASKED QUESTIONS.
+            <h2 className="font-parkinsans text-3xl sm:text-5xl font-semibold tracking-tight uppercase">
+              FREQUENTLY ASKED QUESTIONS
             </h2>
           </div>
 
-          <div className="space-y-4 pt-6">
+          <div className="divide-y divide-white/10">
             {FAQ_ITEMS.map((faq, idx) => {
               const isOpen = activeFaq === idx;
               return (
-                <div
-                  key={faq.q}
-                  className="border border-white/10 bg-[var(--surface)] p-6 rounded-[2px] transition-colors"
-                >
+                <div key={faq.q} className="py-6">
                   <button
                     type="button"
                     onClick={() => setActiveFaq(isOpen ? null : idx)}
-                    className="w-full flex items-center justify-between text-left font-artific text-lg font-medium uppercase text-white hover:text-accent transition-colors"
+                    className="w-full flex items-center justify-between text-left font-parkinsans text-lg font-medium uppercase text-white hover:text-accent transition-colors"
                   >
                     <span>{faq.q}</span>
                     <span className="font-parkinsans text-xs text-accent ml-4">
-                      {isOpen ? "−" : "+"}
+                      {isOpen ? "[−]" : "[+]"}
                     </span>
                   </button>
 
                   {isOpen && (
-                    <p className="font-parkinsans text-sm text-white/70 leading-relaxed mt-4 pt-4 border-t border-white/10">
-                      {faq.a}
-                    </p>
+                    <FadeUp duration={0.2} y={8}>
+                      <p className="font-artific text-sm text-white/70 leading-relaxed mt-4 pt-4 border-t border-white/10">
+                        {faq.a}
+                      </p>
+                    </FadeUp>
                   )}
                 </div>
               );

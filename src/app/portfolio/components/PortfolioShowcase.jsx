@@ -159,7 +159,7 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", 
                 <span className="font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
                   {p.tags}
                 </span>
-                <h2 className="font-artific text-2xl sm:text-4xl font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
+                <h2 className="font-parkinsans text-2xl sm:text-4xl font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
                   {p.title}
                 </h2>
                 <div className="font-parkinsans text-[10px] sm:text-[11px] tracking-[0.15em] text-accent font-semibold pt-1">
@@ -173,7 +173,7 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", 
                   <span className="font-parkinsans text-[9px] tracking-[0.2em] text-white/50 uppercase">
                     OPERATIONAL CHALLENGE
                   </span>
-                  <p className="font-parkinsans text-xs sm:text-sm text-white/70 leading-relaxed">
+                  <p className="font-artific text-xs sm:text-sm text-white/70 leading-relaxed">
                     {p.problem}
                   </p>
                 </div>
@@ -184,7 +184,7 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", 
                       ? "CREATIVE & STRATEGIC RESOLUTION"
                       : "ENGINEERED RESOLUTION"}
                   </span>
-                  <p className="font-parkinsans text-xs sm:text-sm text-white/70 leading-relaxed">
+                  <p className="font-artific text-xs sm:text-sm text-white/70 leading-relaxed">
                     {p.architecture}
                   </p>
                 </div>
