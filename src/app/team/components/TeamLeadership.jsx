@@ -13,7 +13,7 @@ export default function TeamLeadership({ initialLeaders = null }) {
     fetch("/api/team?active=true", { cache: "no-store" })
       .then((res) => res.json())
       .then((data) => {
-        if (isMounted && data.success && data.members && data.members.length > 0) {
+        if (isMounted && data.success && Array.isArray(data.members)) {
           const execs = data.members.filter((m) => m.division === "EXECUTIVE_LEADERSHIP");
           const list = execs.length > 0 ? execs : data.members;
           const normalized = list.map((m) => ({
@@ -38,9 +38,9 @@ export default function TeamLeadership({ initialLeaders = null }) {
   }, []);
 
   const leadership =
-    fetchedLeaders && fetchedLeaders.length > 0
+    fetchedLeaders !== null
       ? fetchedLeaders
-      : initialLeaders && initialLeaders.length > 0
+      : initialLeaders !== null
       ? initialLeaders
       : defaultLeadership;
 
@@ -64,7 +64,18 @@ export default function TeamLeadership({ initialLeaders = null }) {
         </h2>
       </div>
 
-      <div className={`grid grid-cols-1 ${gridColsClass} gap-6 lg:gap-8`}>
+      {leadership.length === 0 ? (
+        <div className="w-full py-16 px-8 rounded-[3px] border border-white/10 bg-[var(--surface)] text-center flex flex-col items-center justify-center gap-3">
+          <div className="size-2 bg-accent/60 rounded-full animate-pulse" />
+          <span className="font-artific text-[11px] tracking-[0.2em] text-white/50 uppercase font-medium">
+            NO CURRENT LEADERSHIP MEMBERS
+          </span>
+          <p className="font-parkinsans text-xs tracking-wider text-white/30 uppercase max-w-md">
+            Executive leadership roster is currently being updated. Manage active status via Mission Control.
+          </p>
+        </div>
+      ) : (
+        <div className={`grid grid-cols-1 ${gridColsClass} gap-6 lg:gap-8`}>
         {leadership.map((leader, idx) => {
           const isSelected = activeIdx === idx;
           return (
@@ -178,7 +189,8 @@ export default function TeamLeadership({ initialLeaders = null }) {
             </FadeUp>
           );
         })}
-      </div>
+        </div>
+      )}
     </section>
   );
 }

@@ -15,17 +15,18 @@ export default async function InsightsPage() {
   let initialArticles = null;
 
   try {
-    const articles = await prisma.article.findMany({
-      where: { status: "PUBLISHED" },
-      orderBy: [{ publishedAt: "desc" }, { createdAt: "desc" }],
-      include: {
-        author: {
-          select: { id: true, name: true, role: true },
+    const totalCount = await prisma.article.count();
+    if (totalCount > 0) {
+      const articles = await prisma.article.findMany({
+        where: { status: "PUBLISHED" },
+        orderBy: [{ publishedAt: "desc" }, { createdAt: "desc" }],
+        include: {
+          author: {
+            select: { id: true, name: true, role: true },
+          },
         },
-      },
-    });
+      });
 
-    if (articles && articles.length > 0) {
       initialArticles = articles.map((a) => ({
         ...a,
         readTime: a.readingTime,

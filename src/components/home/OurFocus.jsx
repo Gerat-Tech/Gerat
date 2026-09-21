@@ -51,10 +51,10 @@ export default function OurFocus({ initialPillars = null }) {
 
   useEffect(() => {
     let isMounted = true;
-    fetch("/api/services?active=true")
+    fetch("/api/services?active=true", { cache: "no-store" })
       .then((res) => res.json())
       .then((data) => {
-        if (isMounted && data.success && data.pillars && data.pillars.length > 0) {
+        if (isMounted && data.success && Array.isArray(data.pillars)) {
           const normalized = data.pillars.map((p) => {
             let dels = [];
             if (Array.isArray(p.deliverables)) {
@@ -89,9 +89,11 @@ export default function OurFocus({ initialPillars = null }) {
   }, []);
 
   const capabilities =
-    (fetchedPillars && fetchedPillars.length > 0 && fetchedPillars) ||
-    (initialPillars && initialPillars.length > 0 && initialPillars) ||
-    DEFAULT_CAPABILITIES;
+    fetchedPillars !== null
+      ? fetchedPillars
+      : initialPillars !== null
+      ? initialPillars
+      : DEFAULT_CAPABILITIES;
 
   return (
     <section
@@ -123,7 +125,18 @@ export default function OurFocus({ initialPillars = null }) {
         </div>
 
         {/* Interactive Capability Rows Table (Dynamic Pillars from Database) */}
-        <div className="w-full border-t border-white/10">
+        {capabilities.length === 0 ? (
+          <div className="w-full py-16 px-8 rounded-[3px] border border-white/10 bg-[var(--surface)] text-center flex flex-col items-center justify-center gap-3 my-8">
+            <div className="size-2 bg-accent/60 rounded-full animate-pulse" />
+            <span className="font-artific text-[11px] tracking-[0.2em] text-white/50 uppercase font-medium">
+              NO CURRENT SERVICE PILLARS PUBLISHED
+            </span>
+            <p className="font-parkinsans text-xs tracking-wider text-white/30 uppercase max-w-md">
+              Practice pillars and services are configured via Mission Control.
+            </p>
+          </div>
+        ) : (
+          <div className="w-full border-t border-white/10">
           {capabilities.map((item, idx) => {
             const isHovered = hoveredIndex === idx;
             return (
@@ -170,7 +183,8 @@ export default function OurFocus({ initialPillars = null }) {
               </Link>
             );
           })}
-        </div>
+          </div>
+        )}
 
         {/* Bottom Capabilities Link */}
         <FadeUp delay={0.3} y={16}>

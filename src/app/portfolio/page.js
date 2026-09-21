@@ -15,11 +15,13 @@ export default async function PortfolioPage() {
   let initialProjects = null;
 
   try {
-    const caseStudies = await prisma.caseStudy.findMany({
-      orderBy: [{ order: "asc" }, { createdAt: "desc" }],
-    });
+    const totalCount = await prisma.caseStudy.count();
+    if (totalCount > 0) {
+      const caseStudies = await prisma.caseStudy.findMany({
+        where: { active: true },
+        orderBy: [{ order: "asc" }, { createdAt: "desc" }],
+      });
 
-    if (caseStudies && caseStudies.length > 0) {
       initialProjects = caseStudies.map((cs) => ({
         ...cs,
         id: cs.slug || cs.id,

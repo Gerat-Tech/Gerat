@@ -15,12 +15,13 @@ export default async function ServicesPage() {
   let initialPillars = null;
 
   try {
-    const pillars = await prisma.servicePillar.findMany({
-      where: { active: true },
-      orderBy: [{ order: "asc" }, { createdAt: "asc" }],
-    });
+    const totalCount = await prisma.servicePillar.count();
+    if (totalCount > 0) {
+      const pillars = await prisma.servicePillar.findMany({
+        where: { active: true },
+        orderBy: [{ order: "asc" }, { createdAt: "asc" }],
+      });
 
-    if (pillars && pillars.length > 0) {
       initialPillars = pillars.map((p) => {
         let dels = [];
         if (Array.isArray(p.deliverables)) {

@@ -57,34 +57,11 @@ const DEFAULT_PARTNERS = [
 ];
 
 /**
- * Concise role badges for slit cards to ensure crisp presentation without collision
+ * Formats role title cleanly without overriding or replacing what is configured in the CMS
  */
-function getShortRole(role) {
+function formatRole(role) {
   if (!role) return "";
-  const upper = role.toUpperCase().trim();
-  if (upper.includes("CHIEF EXECUTIVE OFFICER") || upper.includes("CEO")) {
-    return upper.includes("CO-FOUNDER") ? "CO-FOUNDER & CEO" : "FOUNDER & CEO";
-  }
-  if (upper.includes("CHIEF OPERATING OFFICER") || upper.includes("COO")) {
-    return upper.includes("CO-FOUNDER") ? "CO-FOUNDER & COO" : "OPERATING OFFICER";
-  }
-  if (upper.includes("CHIEF TECHNOLOGY OFFICER") || upper.includes("CTO")) {
-    return upper.includes("CO-FOUNDER") ? "CO-FOUNDER & CTO" : "CHIEF TECH OFFICER";
-  }
-  if (upper.includes("ARTIFICIAL INTELLIGENCE") || upper.includes("AI")) {
-    return upper.includes("CO-FOUNDER") ? "CO-FOUNDER & HEAD OF AI" : "HEAD OF AI";
-  }
-  if (upper.includes("ENTERPRISE") || upper.includes("ERP")) {
-    return upper.includes("CO-FOUNDER") ? "CO-FOUNDER & HEAD OF ERP" : "HEAD OF ERP";
-  }
-  if (upper.length <= 22) return upper;
-  return upper
-    .replace("CHIEF TECHNOLOGY OFFICER", "CTO")
-    .replace("CHIEF OPERATING OFFICER", "COO")
-    .replace("CHIEF EXECUTIVE OFFICER", "CEO")
-    .replace("ARTIFICIAL INTELLIGENCE", "AI")
-    .replace("ENTERPRISE ENGINEERING", "ERP")
-    .slice(0, 24);
+  return role.trim().toUpperCase();
 }
 
 /**
@@ -106,7 +83,7 @@ export default function OurLeadership({ initialLeaders = null }) {
     fetch("/api/team?active=true", { cache: "no-store" })
       .then((res) => res.json())
       .then((data) => {
-        if (isMounted && data.success && data.members && data.members.length > 0) {
+        if (isMounted && data.success && Array.isArray(data.members)) {
           const execs = data.members.filter(
             (m) => m.division === "EXECUTIVE_LEADERSHIP"
           );
@@ -122,9 +99,11 @@ export default function OurLeadership({ initialLeaders = null }) {
   }, []);
 
   const rawList =
-    (fetchedLeaders && fetchedLeaders.length > 0 && fetchedLeaders) ||
-    (initialLeaders && initialLeaders.length > 0 && initialLeaders) ||
-    DEFAULT_PARTNERS;
+    fetchedLeaders !== null
+      ? fetchedLeaders
+      : initialLeaders !== null
+      ? initialLeaders
+      : DEFAULT_PARTNERS;
 
   const partners = rawList.map((leader, idx) => {
     const defaultItem = DEFAULT_PARTNERS[idx] || DEFAULT_PARTNERS[0];
@@ -220,81 +199,93 @@ export default function OurLeadership({ initialLeaders = null }) {
             </div>
 
             {/* Horizontal Slits Row */}
-            <div className={`grid ${gridColsClass} gap-3 sm:gap-4 md:gap-5 w-full max-w-[1240px] my-8 sm:my-10`}>
-              {partners.map((partner, pIdx) => {
-                const isHovered = hoveredIndex === partner.id;
-                const isLastInOdd = partners.length === 5 && pIdx === 4;
-                return (
-                  <div
-                    key={partner.id}
-                    onMouseEnter={() => setHoveredIndex(partner.id)}
-                    onMouseLeave={() => setHoveredIndex(null)}
-                    onClick={() => setExpandedIndex(partner.id)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        setExpandedIndex(partner.id);
-                      }
-                    }}
-                    role="button"
-                    tabIndex={0}
-                    aria-label={`View ${partner.name}`}
-                    className={`group/slit relative h-[115px] sm:h-[135px] md:h-[145px] w-full cursor-pointer rounded-[2px] overflow-hidden border border-white/15 hover:border-accent transition-all duration-300 bg-[#111111] outline-hidden focus-visible:ring-1 focus-visible:ring-accent ${
-                      isLastInOdd ? "col-span-2 sm:col-span-1 lg:col-span-1" : ""
-                    }`}
-                  >
-                    {/* Cropped Letterbox Image focusing on eyes/portrait */}
-                    <div className="w-full h-full overflow-hidden rounded-[2px] bg-[#1a1a1a]">
-                      <img
-                        src={partner.image}
-                        alt={partner.name}
-                        loading="lazy"
-                        className="w-full h-full object-cover grayscale contrast-115 group-hover/slit:scale-105 group-hover/slit:grayscale-0 transition-all duration-500"
-                        style={{ objectPosition: partner.position }}
-                        onError={(e) => {
-                          e.target.src = "/image/team/leadership/Dawit.jpeg";
-                        }}
-                      />
-                    </div>
-
-                    {/* Floating Pill VIEW Badge */}
+            {partners.length === 0 ? (
+              <div className="w-full max-w-[980px] mx-auto my-8 sm:my-10 py-12 px-6 rounded-[2px] border border-white/10 bg-[#111111] text-center flex flex-col items-center justify-center gap-2">
+                <div className="size-2 bg-accent/60 rounded-full animate-pulse" />
+                <span className="font-artific text-[10px] sm:text-[11px] tracking-[0.2em] text-white/50 uppercase font-medium">
+                  NO CURRENT ACTIVE MEMBERS
+                </span>
+                <p className="font-parkinsans text-[10px] sm:text-xs tracking-wider text-white/30 uppercase max-w-md">
+                  Active executive leadership roster is managed via Mission Control.
+                </p>
+              </div>
+            ) : (
+              <div className={`grid ${gridColsClass} gap-3 sm:gap-4 md:gap-5 w-full max-w-[1240px] my-8 sm:my-10`}>
+                {partners.map((partner, pIdx) => {
+                  const isHovered = hoveredIndex === partner.id;
+                  const isLastInOdd = partners.length === 5 && pIdx === 4;
+                  return (
                     <div
-                      className={`absolute top-2.5 right-2.5 z-20 transition-all duration-300 pointer-events-none ${
-                        isHovered
-                          ? "opacity-100 translate-y-0 scale-100"
-                          : "opacity-0 translate-y-1 scale-90"
+                      key={partner.id}
+                      onMouseEnter={() => setHoveredIndex(partner.id)}
+                      onMouseLeave={() => setHoveredIndex(null)}
+                      onClick={() => setExpandedIndex(partner.id)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          setExpandedIndex(partner.id);
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
+                      aria-label={`View ${partner.name}`}
+                      className={`group/slit relative h-[115px] sm:h-[135px] md:h-[145px] w-full cursor-pointer rounded-[2px] overflow-hidden border border-white/15 hover:border-accent transition-all duration-300 bg-[#111111] outline-hidden focus-visible:ring-1 focus-visible:ring-accent ${
+                        isLastInOdd ? "col-span-2 sm:col-span-1 lg:col-span-1" : ""
                       }`}
                     >
-                      <div className="flex items-center justify-center bg-[#EA5B15] text-white px-2 py-0.5 rounded-[2px] shadow-lg border border-white/20">
-                        <span className="font-parkinsans text-[8.5px] sm:text-[9px] tracking-[0.2em] uppercase font-bold text-white">
-                          VIEW
+                      {/* Cropped Letterbox Image focusing on eyes/portrait */}
+                      <div className="w-full h-full overflow-hidden rounded-[2px] bg-[#1a1a1a]">
+                        <img
+                          src={partner.image}
+                          alt={partner.name}
+                          loading="lazy"
+                          className="w-full h-full object-cover grayscale contrast-115 group-hover/slit:scale-105 group-hover/slit:grayscale-0 transition-all duration-500"
+                          style={{ objectPosition: partner.position }}
+                          onError={(e) => {
+                            e.target.src = "/image/team/leadership/Dawit.jpeg";
+                          }}
+                        />
+                      </div>
+
+                      {/* Floating Pill VIEW Badge */}
+                      <div
+                        className={`absolute top-2.5 right-2.5 z-20 transition-all duration-300 pointer-events-none ${
+                          isHovered
+                            ? "opacity-100 translate-y-0 scale-100"
+                            : "opacity-0 translate-y-1 scale-90"
+                        }`}
+                      >
+                        <div className="flex items-center justify-center bg-[#EA5B15] text-white px-2 py-0.5 rounded-[2px] shadow-lg border border-white/20">
+                          <span className="font-parkinsans text-[8.5px] sm:text-[9px] tracking-[0.2em] uppercase font-bold text-white">
+                            VIEW
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Bottom Metadata in Slit - Stacked Column so role never overlaps name */}
+                      <div
+                        data-dark-overlay="true"
+                        className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/70 to-transparent p-2.5 sm:p-3 flex flex-col justify-end z-10 pointer-events-none"
+                      >
+                        <span
+                          className="font-parkinsans text-[10px] sm:text-[11px] tracking-[0.16em] uppercase font-bold text-white dark-overlay-text force-text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] truncate"
+                          style={{ color: "#FAF6ED" }}
+                        >
+                          {partner.name}
+                        </span>
+                        <span
+                          className="font-parkinsans text-[8.5px] sm:text-[9.5px] tracking-[0.18em] uppercase text-accent font-semibold drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] truncate mt-0.5"
+                          style={{ color: "#EA5B15" }}
+                          title={partner.role}
+                        >
+                          {formatRole(partner.role)}
                         </span>
                       </div>
                     </div>
-
-                    {/* Bottom Metadata in Slit - Stacked Column so role never overlaps name */}
-                    <div
-                      data-dark-overlay="true"
-                      className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/70 to-transparent p-2.5 sm:p-3 flex flex-col justify-end z-10 pointer-events-none"
-                    >
-                      <span
-                        className="font-parkinsans text-[10px] sm:text-[11px] tracking-[0.16em] uppercase font-bold text-white dark-overlay-text force-text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] truncate"
-                        style={{ color: "#FAF6ED" }}
-                      >
-                        {partner.name}
-                      </span>
-                      <span
-                        className="font-parkinsans text-[8.5px] sm:text-[9.5px] tracking-[0.18em] uppercase text-accent font-semibold drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] truncate mt-0.5"
-                        style={{ color: "#EA5B15" }}
-                        title={partner.role}
-                      >
-                        {getShortRole(partner.role)}
-                      </span>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+                  );
+                })}
+              </div>
+            )}
 
             {/* Bottom Line of Headline */}
             <div className="w-full text-center max-w-[980px] font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium sm:font-semibold tracking-tight uppercase leading-[1.05] text-white">
@@ -438,7 +429,7 @@ export default function OurLeadership({ initialLeaders = null }) {
                           style={{ color: "#EA5B15" }}
                           title={partner.role}
                         >
-                          {getShortRole(partner.role)}
+                          {formatRole(partner.role)}
                         </span>
                       </div>
                     </div>

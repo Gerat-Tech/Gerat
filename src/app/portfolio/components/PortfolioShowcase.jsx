@@ -13,10 +13,10 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", 
 
   useEffect(() => {
     let isMounted = true;
-    fetch("/api/portfolio")
+    fetch("/api/portfolio", { cache: "no-store" })
       .then((res) => res.json())
       .then((data) => {
-        if (isMounted && data.success && data.caseStudies && data.caseStudies.length > 0) {
+        if (isMounted && data.success && Array.isArray(data.caseStudies)) {
           const normalized = data.caseStudies.map((cs) => ({
             ...cs,
             id: cs.slug || cs.id,
@@ -42,9 +42,9 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", 
   }, []);
 
   const allProjects =
-    fetchedProjects && fetchedProjects.length > 0
+    fetchedProjects !== null
       ? fetchedProjects
-      : initialProjects && initialProjects.length > 0
+      : initialProjects !== null
       ? initialProjects
       : defaultProjects;
 
@@ -122,7 +122,18 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", 
 
       {/* Main Case Study Cards Feed */}
       <div className="flex-1 flex flex-col gap-12 sm:gap-16">
-        {filteredProjects.map((p, i) => (
+        {filteredProjects.length === 0 ? (
+          <div className="w-full py-20 px-8 rounded-[4px] border border-white/10 bg-[#0e0e0e] text-center flex flex-col items-center justify-center gap-3">
+            <div className="size-2 bg-accent/60 rounded-full animate-pulse" />
+            <span className="font-artific text-[11px] tracking-[0.2em] text-white/50 uppercase font-medium">
+              NO CASE STUDIES CURRENTLY PUBLISHED IN THIS CADRE
+            </span>
+            <p className="font-parkinsans text-xs tracking-wider text-white/30 uppercase max-w-md">
+              Portfolio entries and case study visibility are managed via Mission Control.
+            </p>
+          </div>
+        ) : (
+          filteredProjects.map((p, i) => (
           <article
             key={p.id}
             id={p.id}
@@ -227,7 +238,7 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", 
               </div>
             </div>
           </article>
-        ))}
+        )))}
       </div>
     </div>
   );

@@ -11,10 +11,10 @@ export default function LatestNews({ activeCategory = "ALL ARTICLES", articles: 
 
   useEffect(() => {
     let isMounted = true;
-    fetch("/api/articles?status=PUBLISHED")
+    fetch("/api/articles?status=PUBLISHED", { cache: "no-store" })
       .then((res) => res.json())
       .then((data) => {
-        if (isMounted && data.success && data.articles && data.articles.length > 0) {
+        if (isMounted && data.success && Array.isArray(data.articles)) {
           setFetchedArticles(data.articles);
         }
       })
@@ -24,7 +24,12 @@ export default function LatestNews({ activeCategory = "ALL ARTICLES", articles: 
     };
   }, []);
 
-  const articles = fetchedArticles || customArticles || defaultArticles;
+  const articles =
+    fetchedArticles !== null
+      ? fetchedArticles
+      : customArticles !== null
+      ? customArticles
+      : defaultArticles;
   const filteredArticles =
     activeCategory === "ALL ARTICLES"
       ? articles
@@ -33,60 +38,74 @@ export default function LatestNews({ activeCategory = "ALL ARTICLES", articles: 
   return (
     <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 pb-24 sm:pb-36 text-white">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {filteredArticles.map((article, idx) => (
-          <FadeUp key={article.id || article.slug} delay={0.08 * idx} y={24}>
-            <Link
-              href={`/insights/${article.slug}`}
-              className="block group relative bg-[#0e0e0e] border border-white/10 hover:border-accent/60 rounded-[4px] overflow-hidden transition-all duration-300 flex flex-col justify-between h-full"
-            >
-              {/* Precision Corner Accents */}
-              <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30 group-hover:border-accent transition-colors z-20" />
-              <span className="absolute top-0 right-0 size-2 border-t border-r border-white/30 group-hover:border-accent transition-colors z-20" />
-              <span className="absolute bottom-0 left-0 size-2 border-b border-l border-white/30 group-hover:border-accent transition-colors z-20" />
-              <span className="absolute bottom-0 right-0 size-2 border-b border-r border-white/30 group-hover:border-accent transition-colors z-20" />
+        {filteredArticles.length === 0 ? (
+          <div className="col-span-full py-20 px-6 border border-dashed border-white/10 bg-white/[0.02] rounded-[4px] text-center flex flex-col items-center justify-center">
+            <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase mb-2">
+              DISPATCH STATUS // EMPTY CADRE
+            </span>
+            <h3 className="font-parkinsans text-lg uppercase tracking-wider text-white font-semibold mb-2">
+              NO PUBLISHED BLUEPRINTS
+            </h3>
+            <p className="font-artific text-xs text-white/50 max-w-md">
+              There are currently no published technical publications or blueprints in this category. All dispatches are managed via Mission Control.
+            </p>
+          </div>
+        ) : (
+          filteredArticles.map((article, idx) => (
+            <FadeUp key={article.id || article.slug} delay={0.08 * idx} y={24}>
+              <Link
+                href={`/insights/${article.slug}`}
+                className="block group relative bg-[#0e0e0e] border border-white/10 hover:border-accent/60 rounded-[4px] overflow-hidden transition-all duration-300 flex flex-col justify-between h-full"
+              >
+                {/* Precision Corner Accents */}
+                <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30 group-hover:border-accent transition-colors z-20" />
+                <span className="absolute top-0 right-0 size-2 border-t border-r border-white/30 group-hover:border-accent transition-colors z-20" />
+                <span className="absolute bottom-0 left-0 size-2 border-b border-l border-white/30 group-hover:border-accent transition-colors z-20" />
+                <span className="absolute bottom-0 right-0 size-2 border-b border-r border-white/30 group-hover:border-accent transition-colors z-20" />
 
-              {/* Image Banner */}
-              <div className="relative aspect-16/10 w-full overflow-hidden bg-black/60">
-                <img
-                  src={article.coverImageUrl || article.image || "/image/LatestNews/01_Picture.webp"}
-                  alt={article.title}
-                  className="w-full h-full object-cover grayscale contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0e] via-transparent to-transparent" />
-                <div className="absolute top-3 left-3 font-parkinsans text-[9px] tracking-[0.2em] text-accent bg-black/80 px-2.5 py-1 border border-accent/40 rounded-[1px] uppercase">
-                  {article.category}
+                {/* Image Banner */}
+                <div className="relative aspect-16/10 w-full overflow-hidden bg-black/60">
+                  <img
+                    src={article.coverImageUrl || article.image || "/image/LatestNews/01_Picture.webp"}
+                    alt={article.title}
+                    className="w-full h-full object-cover grayscale contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0e] via-transparent to-transparent" />
+                  <div className="absolute top-3 left-3 font-parkinsans text-[9px] tracking-[0.2em] text-accent bg-black/80 px-2.5 py-1 border border-accent/40 rounded-[1px] uppercase">
+                    {article.category}
+                  </div>
                 </div>
-              </div>
 
-              {/* Card Body */}
-              <div className="p-6 sm:p-8 flex flex-col justify-between flex-1 gap-6">
-                <div className="flex flex-col gap-3">
-                  <div className="flex items-center gap-3 font-parkinsans text-[9px] tracking-[0.15em] text-white/40 uppercase">
-                    <span>{article.date || (article.publishedAt ? new Date(article.publishedAt).toLocaleDateString("en-US", { month: "short", year: "numeric" }).toUpperCase() : "RECENT")}</span>
-                    <span>·</span>
-                    <span>{article.readTime || article.readingTime || "6 MIN READ"}</span>
+                {/* Card Body */}
+                <div className="p-6 sm:p-8 flex flex-col justify-between flex-1 gap-6">
+                  <div className="flex flex-col gap-3">
+                    <div className="flex items-center gap-3 font-parkinsans text-[9px] tracking-[0.15em] text-white/40 uppercase">
+                      <span>{article.date || (article.publishedAt ? new Date(article.publishedAt).toLocaleDateString("en-US", { month: "short", year: "numeric" }).toUpperCase() : "RECENT")}</span>
+                      <span>·</span>
+                      <span>{article.readTime || article.readingTime || "6 MIN READ"}</span>
+                    </div>
+
+                    <h2 className="font-parkinsans text-xl sm:text-2xl font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors leading-tight">
+                      {article.title}
+                    </h2>
+
+                    <p className="font-artific text-xs sm:text-sm text-white/65 leading-relaxed">
+                      {article.excerpt}
+                    </p>
                   </div>
 
-                  <h2 className="font-parkinsans text-xl sm:text-2xl font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors leading-tight">
-                    {article.title}
-                  </h2>
-
-                  <p className="font-artific text-xs sm:text-sm text-white/65 leading-relaxed">
-                    {article.excerpt}
-                  </p>
+                  <div className="pt-4 border-t border-white/10 flex items-center justify-between font-parkinsans text-[10px] tracking-[0.2em] uppercase text-white/50 group-hover:text-white">
+                    <span>READ BLUEPRINT</span>
+                    <span className="text-accent group-hover:translate-x-1 transition-transform">
+                      →
+                    </span>
+                  </div>
                 </div>
-
-                <div className="pt-4 border-t border-white/10 flex items-center justify-between font-parkinsans text-[10px] tracking-[0.2em] uppercase text-white/50 group-hover:text-white">
-                  <span>READ BLUEPRINT</span>
-                  <span className="text-accent group-hover:translate-x-1 transition-transform">
-                    →
-                  </span>
-                </div>
-              </div>
-            </Link>
-          </FadeUp>
-        ))}
+              </Link>
+            </FadeUp>
+          ))
+        )}
       </div>
     </section>
   );

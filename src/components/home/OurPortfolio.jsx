@@ -19,10 +19,10 @@ export default function OurPortfolio({ initialProjects = null }) {
 
   useEffect(() => {
     let isMounted = true;
-    fetch("/api/portfolio?featured=true")
+    fetch("/api/portfolio?featured=true", { cache: "no-store" })
       .then((res) => res.json())
       .then((data) => {
-        if (isMounted && data.success && data.caseStudies && data.caseStudies.length > 0) {
+        if (isMounted && data.success && Array.isArray(data.caseStudies)) {
           const mapped = data.caseStudies.slice(0, 3).map((p, idx) => ({
             ...p,
             id: p.displayIndex || `0${idx + 1}`,
@@ -48,9 +48,9 @@ export default function OurPortfolio({ initialProjects = null }) {
   }, []);
 
   const featuredProjects =
-    fetchedProjects && fetchedProjects.length > 0
+    fetchedProjects !== null
       ? fetchedProjects
-      : initialProjects && initialProjects.length > 0
+      : initialProjects !== null
       ? initialProjects
       : defaultFeatured;
 
@@ -97,7 +97,18 @@ export default function OurPortfolio({ initialProjects = null }) {
         </div>
 
         {/* Featured Case Study Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        {featuredProjects.length === 0 ? (
+          <div className="w-full py-16 px-8 rounded-[3px] border border-white/10 bg-[var(--surface)] text-center flex flex-col items-center justify-center gap-3">
+            <div className="size-2 bg-accent/60 rounded-full animate-pulse" />
+            <span className="font-artific text-[11px] tracking-[0.2em] text-white/50 uppercase font-medium">
+              NO FEATURED CASE STUDIES CURRENTLY PUBLISHED
+            </span>
+            <p className="font-parkinsans text-xs tracking-wider text-white/30 uppercase max-w-md">
+              Portfolio showcases are managed via Mission Control. Check back soon or browse all archives.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {featuredProjects.map((project, idx) => (
             <FadeUp key={project.id} delay={0.15 * idx} y={30}>
               <Link
@@ -144,7 +155,8 @@ export default function OurPortfolio({ initialProjects = null }) {
               </Link>
             </FadeUp>
           ))}
-        </div>
+          </div>
+        )}
       </div>
     </section>
   );

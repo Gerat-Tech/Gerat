@@ -26,17 +26,22 @@ export async function GET(request) {
       ];
     }
 
-    let pillars = [];
+    let pillars = null;
+    let dbAvailable = false;
     try {
-      pillars = await prisma.servicePillar.findMany({
-        where,
-        orderBy: [{ order: "asc" }, { num: "asc" }],
-      });
+      const totalCount = await prisma.servicePillar.count();
+      if (totalCount > 0) {
+        dbAvailable = true;
+        pillars = await prisma.servicePillar.findMany({
+          where,
+          orderBy: [{ order: "asc" }, { num: "asc" }],
+        });
+      }
     } catch (dbErr) {
       console.warn("Prisma servicePillar findMany failed, falling back to static content:", dbErr.message);
     }
 
-    if (!pillars || pillars.length === 0) {
+    if (!dbAvailable) {
       let order = 1;
       pillars = servicePillars.map((p) => ({
         id: `sp_${p.num}`,
@@ -63,7 +68,7 @@ export async function GET(request) {
       }
     }
 
-    return NextResponse.json({ success: true, pillars });
+    return NextResponse.json({ success: true, pillars: pillars || [] });
   } catch (error) {
     console.error("Fetch service pillars error:", error);
     return NextResponse.json({ error: "Failed to fetch service pillars." }, { status: 500 });

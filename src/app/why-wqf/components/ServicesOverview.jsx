@@ -14,10 +14,10 @@ export default function ServicesOverview({ initialPillars = null }) {
 
   useEffect(() => {
     let isMounted = true;
-    fetch("/api/services?active=true")
+    fetch("/api/services?active=true", { cache: "no-store" })
       .then((res) => res.json())
       .then((data) => {
-        if (isMounted && data.success && data.pillars && data.pillars.length > 0) {
+        if (isMounted && data.success && Array.isArray(data.pillars)) {
           const normalized = data.pillars.map((p) => {
             let dels = [];
             if (Array.isArray(p.deliverables)) {
@@ -48,9 +48,9 @@ export default function ServicesOverview({ initialPillars = null }) {
   }, []);
 
   const servicePillars =
-    fetchedPillars && fetchedPillars.length > 0
+    fetchedPillars !== null
       ? fetchedPillars
-      : initialPillars && initialPillars.length > 0
+      : initialPillars !== null
       ? initialPillars
       : defaultPillars;
 
@@ -102,84 +102,98 @@ export default function ServicesOverview({ initialPillars = null }) {
       {/* Pillars Deck */}
       <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 pb-16 sm:pb-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {servicePillars.map((pillar, idx) => (
-            <FadeUp key={pillar.title} delay={0.1 * idx} y={24}>
-              <div className="group relative bg-[var(--surface)] border border-white/10 hover:border-accent/60 p-8 sm:p-10 rounded-[4px] flex flex-col justify-between min-h-[360px] transition-all duration-300 h-full">
-                <div className="flex items-center justify-between">
-                  <span className="font-parkinsans text-[11px] tracking-[0.2em] text-accent font-bold">
-                    SERVICE PILLAR
-                  </span>
+          {servicePillars.length === 0 ? (
+            <div className="col-span-full py-20 px-6 border border-dashed border-white/10 bg-white/[0.02] rounded-[4px] text-center flex flex-col items-center justify-center">
+              <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase mb-2">
+                DISCIPLINE STATUS // ARCHIVED
+              </span>
+              <h3 className="font-parkinsans text-lg uppercase tracking-wider text-white font-semibold mb-2">
+                NO CURRENT SERVICE PILLARS
+              </h3>
+              <p className="font-artific text-xs text-white/50 max-w-md">
+                There are currently no active engineering pillars published. Service disciplines and offering capabilities are managed via Mission Control.
+              </p>
+            </div>
+          ) : (
+            servicePillars.map((pillar, idx) => (
+              <FadeUp key={pillar.title} delay={0.1 * idx} y={24}>
+                <div className="group relative bg-[var(--surface)] border border-white/10 hover:border-accent/60 p-8 sm:p-10 rounded-[4px] flex flex-col justify-between min-h-[360px] transition-all duration-300 h-full">
+                  <div className="flex items-center justify-between">
+                    <span className="font-parkinsans text-[11px] tracking-[0.2em] text-accent font-bold">
+                      SERVICE PILLAR
+                    </span>
+                  </div>
+
+                  <div className="flex flex-col gap-3 my-6">
+                    <span className="font-parkinsans text-[9px] tracking-[0.2em] text-white/50 uppercase">
+                      {pillar.tagline}
+                    </span>
+                    <h2 className="font-parkinsans text-2xl sm:text-3xl font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
+                      {pillar.title}
+                    </h2>
+                    <p className="font-artific text-xs sm:text-sm text-white/70 leading-relaxed">
+                      {pillar.desc}
+                    </p>
+                  </div>
+
+                  <div className="pt-6 border-t border-white/10">
+                    <span className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase block mb-3">
+                      CORE DELIVERABLES
+                    </span>
+                    <ul className="space-y-1.5 font-parkinsans text-[10px] tracking-[0.15em] text-white/60">
+                      {(pillar.deliverables || []).map((del) => (
+                        <li key={del} className="hover:text-white transition-colors">
+                          {del}
+                        </li>
+                      ))}
+                    </ul>
+
+                    {pillar.deepLink && (
+                      <div className="mt-6 pt-4 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                        <Link
+                          href={
+                            pillar.num === "01"
+                              ? "/services/digital-experiences"
+                              : pillar.num === "02"
+                              ? "/services/ai-tools"
+                              : pillar.num === "03"
+                              ? "/services/business-systems"
+                              : pillar.num === "04"
+                              ? "/services/brand-creative"
+                              : pillar.deepLink
+                          }
+                          className="inline-flex items-center gap-1.5 font-parkinsans text-[10px] tracking-[0.2em] uppercase text-accent hover:text-white font-bold transition-colors"
+                        >
+                          <span>
+                            {pillar.num === "01" && "EXPLORE DIGITAL →"}
+                            {pillar.num === "02" && "EXPLORE AI & TOOLS →"}
+                            {pillar.num === "03" && "EXPLORE BUSINESS SYSTEMS →"}
+                            {pillar.num === "04" && "EXPLORE BRAND & CREATIVE →"}
+                          </span>
+                        </Link>
+
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const presetMap = {
+                              "01": { discipline: "digital", subOption: "Website" },
+                              "02": { discipline: "intelligence", subOption: "AI Assistant" },
+                              "03": { discipline: "systems", subOption: "Custom ERP" },
+                              "04": { discipline: "brand", subOption: "LOGO & BRAND IDENTITY" },
+                            };
+                            openContact(presetMap[pillar.num] || { discipline: "digital" });
+                          }}
+                          className="font-parkinsans text-[9px] tracking-[0.15em] uppercase text-white/50 hover:text-white transition-colors"
+                        >
+                          START PROJECT →
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
-
-                <div className="flex flex-col gap-3 my-6">
-                  <span className="font-parkinsans text-[9px] tracking-[0.2em] text-white/50 uppercase">
-                    {pillar.tagline}
-                  </span>
-                  <h2 className="font-parkinsans text-2xl sm:text-3xl font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
-                    {pillar.title}
-                  </h2>
-                  <p className="font-artific text-xs sm:text-sm text-white/70 leading-relaxed">
-                    {pillar.desc}
-                  </p>
-                </div>
-
-                <div className="pt-6 border-t border-white/10">
-                  <span className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase block mb-3">
-                    CORE DELIVERABLES
-                  </span>
-                  <ul className="space-y-1.5 font-parkinsans text-[10px] tracking-[0.15em] text-white/60">
-                    {(pillar.deliverables || []).map((del) => (
-                      <li key={del} className="hover:text-white transition-colors">
-                        {del}
-                      </li>
-                    ))}
-                  </ul>
-
-                  {pillar.deepLink && (
-                    <div className="mt-6 pt-4 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                      <Link
-                        href={
-                          pillar.num === "01"
-                            ? "/services/digital-experiences"
-                            : pillar.num === "02"
-                            ? "/services/ai-tools"
-                            : pillar.num === "03"
-                            ? "/services/business-systems"
-                            : pillar.num === "04"
-                            ? "/services/brand-creative"
-                            : pillar.deepLink
-                        }
-                        className="inline-flex items-center gap-1.5 font-parkinsans text-[10px] tracking-[0.2em] uppercase text-accent hover:text-white font-bold transition-colors"
-                      >
-                        <span>
-                          {pillar.num === "01" && "EXPLORE DIGITAL →"}
-                          {pillar.num === "02" && "EXPLORE AI & TOOLS →"}
-                          {pillar.num === "03" && "EXPLORE BUSINESS SYSTEMS →"}
-                          {pillar.num === "04" && "EXPLORE BRAND & CREATIVE →"}
-                        </span>
-                      </Link>
-
-                      <button
-                        type="button"
-                        onClick={() => {
-                          const presetMap = {
-                            "01": { discipline: "digital", subOption: "Website" },
-                            "02": { discipline: "intelligence", subOption: "AI Assistant" },
-                            "03": { discipline: "systems", subOption: "Custom ERP" },
-                            "04": { discipline: "brand", subOption: "LOGO & BRAND IDENTITY" },
-                          };
-                          openContact(presetMap[pillar.num] || { discipline: "digital" });
-                        }}
-                        className="font-parkinsans text-[9px] tracking-[0.15em] uppercase text-white/50 hover:text-white transition-colors"
-                      >
-                        START PROJECT →
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </FadeUp>
-          ))}
+              </FadeUp>
+            ))
+          )}
         </div>
       </section>
     </div>

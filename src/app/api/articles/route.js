@@ -30,22 +30,27 @@ export async function GET(request) {
       ];
     }
 
-    let articles = [];
+    let articles = null;
+    let dbAvailable = false;
     try {
-      articles = await prisma.article.findMany({
-        where,
-        include: {
-          author: {
-            select: { id: true, name: true, email: true, role: true },
+      const totalCount = await prisma.article.count();
+      if (totalCount > 0) {
+        dbAvailable = true;
+        articles = await prisma.article.findMany({
+          where,
+          include: {
+            author: {
+              select: { id: true, name: true, email: true, role: true },
+            },
           },
-        },
-        orderBy: { createdAt: "desc" },
-      });
+          orderBy: { createdAt: "desc" },
+        });
+      }
     } catch (dbErr) {
       console.warn("Prisma article findMany failed, falling back to static content:", dbErr.message);
     }
 
-    if (!articles || articles.length === 0) {
+    if (!dbAvailable) {
       articles = insightsArticles.map((a) => ({
         id: a.slug,
         slug: a.slug,
@@ -85,7 +90,7 @@ export async function GET(request) {
       }
     }
 
-    return NextResponse.json({ success: true, articles });
+    return NextResponse.json({ success: true, articles: articles || [] });
   } catch (error) {
     console.error("Fetch articles error:", error);
     return NextResponse.json({ error: "Failed to fetch articles." }, { status: 500 });

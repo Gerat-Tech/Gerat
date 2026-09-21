@@ -31,17 +31,22 @@ export async function GET(request) {
       ];
     }
 
-    let members = [];
+    let members = null;
+    let dbAvailable = false;
     try {
-      members = await prisma.teamMember.findMany({
-        where,
-        orderBy: [{ order: "asc" }, { createdAt: "asc" }],
-      });
+      const totalCount = await prisma.teamMember.count();
+      if (totalCount > 0) {
+        dbAvailable = true;
+        members = await prisma.teamMember.findMany({
+          where,
+          orderBy: [{ order: "asc" }, { createdAt: "asc" }],
+        });
+      }
     } catch (dbErr) {
       console.warn("Prisma teamMember findMany failed, falling back to static content:", dbErr.message);
     }
 
-    if (!members || members.length === 0) {
+    if (!dbAvailable) {
       let order = 1;
       const staticLeadership = leadershipTeam.map((m) => ({
         id: m.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
@@ -99,7 +104,7 @@ export async function GET(request) {
       }
     }
 
-    return NextResponse.json({ success: true, members });
+    return NextResponse.json({ success: true, members: members || [] });
   } catch (error) {
     console.error("Fetch team members error:", error);
     return NextResponse.json({ error: "Failed to fetch team members." }, { status: 500 });

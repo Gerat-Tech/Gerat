@@ -9,27 +9,25 @@ export default function AdvisorAndTeam({ initialSpecialists = null }) {
 
   useEffect(() => {
     let isMounted = true;
-    fetch("/api/team?active=true")
+    fetch("/api/team?active=true", { cache: "no-store" })
       .then((res) => res.json())
       .then((data) => {
-        if (isMounted && data.success && data.members && data.members.length > 0) {
+        if (isMounted && data.success && Array.isArray(data.members)) {
           const nonExecs = data.members.filter(
             (m) => m.division !== "EXECUTIVE_LEADERSHIP"
           );
-          if (nonExecs.length > 0) {
-            const normalized = nonExecs.map((m) => ({
-              name: m.name,
-              role: m.roleTitle || m.division.replace("_", " "),
-              discipline: m.focusTag || m.division.replace("_", " "),
-              focus: m.bio,
-              email: m.email,
-              linkedinUrl: m.linkedinUrl,
-              githubUrl: m.githubUrl,
-              twitterUrl: m.twitterUrl,
-              image: m.photoUrl && !m.photoUrl.includes("WQF__") ? m.photoUrl : "/brand/gerat-mark-orange.svg",
-            }));
-            setFetchedSpecialists(normalized);
-          }
+          const normalized = nonExecs.map((m) => ({
+            name: m.name,
+            role: m.roleTitle || m.division.replace("_", " "),
+            discipline: m.focusTag || m.division.replace("_", " "),
+            focus: m.bio,
+            email: m.email,
+            linkedinUrl: m.linkedinUrl,
+            githubUrl: m.githubUrl,
+            twitterUrl: m.twitterUrl,
+            image: m.photoUrl && !m.photoUrl.includes("WQF__") ? m.photoUrl : "/brand/gerat-mark-orange.svg",
+          }));
+          setFetchedSpecialists(normalized);
         }
       })
       .catch(() => {});
@@ -40,9 +38,9 @@ export default function AdvisorAndTeam({ initialSpecialists = null }) {
   }, []);
 
   const engineeringSpecialists =
-    fetchedSpecialists && fetchedSpecialists.length > 0
+    fetchedSpecialists !== null
       ? fetchedSpecialists
-      : initialSpecialists && initialSpecialists.length > 0
+      : initialSpecialists !== null
       ? initialSpecialists
       : defaultSpecialists;
 
@@ -57,7 +55,18 @@ export default function AdvisorAndTeam({ initialSpecialists = null }) {
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {engineeringSpecialists.length === 0 ? (
+        <div className="w-full py-16 px-8 rounded-[3px] border border-white/10 bg-[var(--surface)] text-center flex flex-col items-center justify-center gap-3">
+          <div className="size-2 bg-accent/60 rounded-full animate-pulse" />
+          <span className="font-artific text-[11px] tracking-[0.2em] text-white/50 uppercase font-medium">
+            NO CURRENT PRACTITIONERS
+          </span>
+          <p className="font-parkinsans text-xs tracking-wider text-white/30 uppercase max-w-md">
+            All practitioners in this cadre are currently inactive or in transition. Team updates are managed via Mission Control.
+          </p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {engineeringSpecialists.map((member, idx) => {
           const hasCustomPhoto =
             member.image &&
@@ -172,7 +181,8 @@ export default function AdvisorAndTeam({ initialSpecialists = null }) {
           </FadeUp>
         );
       })}
-      </div>
+        </div>
+      )}
     </section>
   );
 }

@@ -18,27 +18,37 @@ export default async function Home() {
   let marqueeTokens = null;
 
   try {
-    const [teamMembers, caseStudies, servicePillars, siteConfigs] = await Promise.all([
-      prisma.teamMember.findMany({
-        where: { active: true },
-        orderBy: [{ order: "asc" }, { createdAt: "asc" }],
-      }),
-      prisma.caseStudy.findMany({
-        where: { featured: true },
-        orderBy: [{ order: "asc" }, { createdAt: "desc" }],
-        take: 3,
-      }),
-      prisma.servicePillar.findMany({
-        where: { active: true },
-        orderBy: [{ order: "asc" }, { num: "asc" }],
-      }),
-      prisma.siteConfig.findMany(),
-    ]);
+    const [totalMembers, totalStudies, totalPillars, teamMembers, caseStudies, servicePillars, siteConfigs] =
+      await Promise.all([
+        prisma.teamMember.count().catch(() => 0),
+        prisma.caseStudy.count().catch(() => 0),
+        prisma.servicePillar.count().catch(() => 0),
+        prisma.teamMember
+          .findMany({
+            where: { active: true },
+            orderBy: [{ order: "asc" }, { createdAt: "asc" }],
+          })
+          .catch(() => []),
+        prisma.caseStudy
+          .findMany({
+            where: { featured: true },
+            orderBy: [{ order: "asc" }, { createdAt: "desc" }],
+            take: 3,
+          })
+          .catch(() => []),
+        prisma.servicePillar
+          .findMany({
+            where: { active: true },
+            orderBy: [{ order: "asc" }, { num: "asc" }],
+          })
+          .catch(() => []),
+        prisma.siteConfig.findMany().catch(() => []),
+      ]);
 
     // 1. Team Leadership: All active executive leaders
-    const execs = teamMembers.filter((m) => m.division === "EXECUTIVE_LEADERSHIP");
-    const leadersToUse = execs.length > 0 ? execs : teamMembers;
-    if (leadersToUse.length > 0) {
+    if (totalMembers > 0) {
+      const execs = teamMembers.filter((m) => m.division === "EXECUTIVE_LEADERSHIP");
+      const leadersToUse = execs.length > 0 ? execs : teamMembers;
       initialLeaders = leadersToUse.map((m) => ({
         id: m.id,
         name: m.name,
@@ -53,15 +63,17 @@ export default async function Home() {
     }
 
     // 2. Portfolio Projects
-    let projectsToUse = caseStudies;
-    if (projectsToUse.length === 0) {
-      projectsToUse = await prisma.caseStudy.findMany({
-        orderBy: [{ order: "asc" }, { createdAt: "desc" }],
-        take: 3,
-      });
-    }
+    if (totalStudies > 0) {
+      let projectsToUse = caseStudies;
+      if (projectsToUse.length === 0) {
+        projectsToUse = await prisma.caseStudy
+          .findMany({
+            orderBy: [{ order: "asc" }, { createdAt: "desc" }],
+            take: 3,
+          })
+          .catch(() => []);
+      }
 
-    if (projectsToUse.length > 0) {
       initialProjects = projectsToUse.map((p, idx) => ({
         ...p,
         id: p.displayIndex || `0${idx + 1}`,
@@ -80,7 +92,7 @@ export default async function Home() {
     }
 
     // 3. Service Pillars for Capabilities section
-    if (servicePillars && servicePillars.length > 0) {
+    if (totalPillars > 0) {
       initialPillars = servicePillars.map((p) => {
         let dels = [];
         if (Array.isArray(p.deliverables)) {

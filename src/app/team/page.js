@@ -19,16 +19,20 @@ export default async function TeamPage() {
   let initialSpecialists = null;
 
   try {
-    const allMembers = await prisma.teamMember.findMany({
-      where: { active: true },
-      orderBy: [{ order: "asc" }, { createdAt: "asc" }],
-    });
+    const totalCount = await prisma.teamMember.count().catch(() => 0);
+    if (totalCount > 0) {
+      const allMembers = await prisma.teamMember
+        .findMany({
+          where: { active: true },
+          orderBy: [{ order: "asc" }, { createdAt: "asc" }],
+        })
+        .catch(() => []);
 
-    const execs = allMembers.filter((m) => m.division === "EXECUTIVE_LEADERSHIP");
-    const nonExecs = allMembers.filter((m) => m.division !== "EXECUTIVE_LEADERSHIP");
+      const execs = allMembers.filter((m) => m.division === "EXECUTIVE_LEADERSHIP");
+      const nonExecs = allMembers.filter((m) => m.division !== "EXECUTIVE_LEADERSHIP");
 
-    if (execs.length > 0) {
       initialLeaders = execs.map((m) => ({
+        id: m.id,
         name: m.name,
         role: m.roleTitle,
         specialty: m.focusTag,
@@ -39,15 +43,18 @@ export default async function TeamPage() {
         twitterUrl: m.twitterUrl,
         image: m.photoUrl || "/image/team/leadership/Dawit.jpeg",
       }));
-    }
 
-    if (nonExecs.length > 0) {
       initialSpecialists = nonExecs.map((m) => ({
+        id: m.id,
         name: m.name,
         role: m.roleTitle || m.division.replace("_", " "),
         discipline: m.focusTag || m.division.replace("_", " "),
         focus: m.bio,
-        image: m.photoUrl || "/image/team/advisors/WQF__0000_Advisor-MarkCarney.webp",
+        email: m.email,
+        linkedinUrl: m.linkedinUrl,
+        githubUrl: m.githubUrl,
+        twitterUrl: m.twitterUrl,
+        image: m.photoUrl && !m.photoUrl.includes("WQF__") ? m.photoUrl : "/brand/gerat-mark-orange.svg",
       }));
     }
   } catch (error) {

@@ -31,17 +31,22 @@ export async function GET(request) {
       ];
     }
 
-    let caseStudies = [];
+    let caseStudies = null;
+    let dbAvailable = false;
     try {
-      caseStudies = await prisma.caseStudy.findMany({
-        where,
-        orderBy: [{ order: "asc" }, { createdAt: "desc" }],
-      });
+      const totalCount = await prisma.caseStudy.count();
+      if (totalCount > 0) {
+        dbAvailable = true;
+        caseStudies = await prisma.caseStudy.findMany({
+          where,
+          orderBy: [{ order: "asc" }, { createdAt: "desc" }],
+        });
+      }
     } catch (dbErr) {
       console.warn("Prisma caseStudy findMany failed, falling back to static content:", dbErr.message);
     }
 
-    if (!caseStudies || caseStudies.length === 0) {
+    if (!dbAvailable) {
       caseStudies = portfolioProjects.map((p, idx) => ({
         id: p.id,
         slug: p.id,
@@ -86,7 +91,7 @@ export async function GET(request) {
       }
     }
 
-    return NextResponse.json({ success: true, caseStudies });
+    return NextResponse.json({ success: true, caseStudies: caseStudies || [] });
   } catch (error) {
     console.error("Fetch case studies error:", error);
     return NextResponse.json({ error: "Failed to fetch case studies." }, { status: 500 });
