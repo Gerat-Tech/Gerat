@@ -634,6 +634,66 @@ html.light .dark-overlay-text-subtle {
   color: rgba(250, 246, 237, 0.85) !important;
 }
 
+/* Preserve crisp Almond typography and subtle borders on Dark Anchor Footer in Light Mode */
+html.light [data-dark-footer],
+html.light [data-dark-footer] h1,
+html.light [data-dark-footer] h2,
+html.light [data-dark-footer] h3,
+html.light [data-dark-footer] h4,
+html.light [data-dark-footer] .text-white,
+html.site-light [data-dark-footer],
+html.site-light [data-dark-footer] h1,
+html.site-light [data-dark-footer] h2,
+html.site-light [data-dark-footer] h3,
+html.site-light [data-dark-footer] h4,
+html.site-light [data-dark-footer] .text-white {
+  color: #FAF6ED !important;
+}
+
+html.light [data-dark-footer] .text-white\/70,
+html.site-light [data-dark-footer] .text-white\/70 {
+  color: rgba(250, 246, 237, 0.85) !important;
+}
+
+html.light [data-dark-footer] .text-white\/60,
+html.light [data-dark-footer] .text-white\/65,
+html.site-light [data-dark-footer] .text-white\/60,
+html.site-light [data-dark-footer] .text-white\/65 {
+  color: rgba(250, 246, 237, 0.75) !important;
+}
+
+html.light [data-dark-footer] .text-white\/50,
+html.site-light [data-dark-footer] .text-white\/50 {
+  color: rgba(250, 246, 237, 0.65) !important;
+}
+
+html.light [data-dark-footer] .text-white\/40,
+html.light [data-dark-footer] .text-white\/30,
+html.site-light [data-dark-footer] .text-white\/40,
+html.site-light [data-dark-footer] .text-white\/30 {
+  color: rgba(250, 246, 237, 0.50) !important;
+}
+
+html.light [data-dark-footer] a:hover,
+html.site-light [data-dark-footer] a:hover {
+  color: #EA5B15 !important;
+}
+
+html.light [data-dark-footer] .text-accent,
+html.site-light [data-dark-footer] .text-accent {
+  color: #EA5B15 !important;
+}
+
+html.light [data-dark-footer] .border-white\/10,
+html.site-light [data-dark-footer] .border-white\/10 {
+  border-color: rgba(241, 223, 217, 0.12) !important;
+}
+
+html.light [data-dark-footer] .border-white\/5,
+html.site-light [data-dark-footer] .border-white\/5 {
+  border-color: rgba(241, 223, 217, 0.08) !important;
+}
+
 /* Preserve bright white text on primary accent buttons */
 html.light .bg-accent,
 html.light .bg-accent *,
