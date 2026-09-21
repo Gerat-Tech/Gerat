@@ -50,5 +50,23 @@ if (fs.existsSync(schemaPath)) {
       fs.writeFileSync(schemaPath, schema, "utf8");
       console.log("✓ Set Prisma provider to 'sqlite'.");
     }
+
+    // Auto-migrate & seed SQLite database for serverless bundle on Vercel / CI
+    if (process.env.VERCEL || process.env.CI) {
+      try {
+        console.log("⚡ Auto-migrating SQLite schema and seeding initial datasets for deployment bundle...");
+        execSync("npx prisma db push --skip-generate --accept-data-loss", {
+          stdio: "inherit",
+          timeout: 45000,
+        });
+        execSync("node prisma/seed.mjs", {
+          stdio: "inherit",
+          timeout: 45000,
+        });
+        console.log("✓ SQLite auto-migration and seeding completed successfully.");
+      } catch (err) {
+        console.warn("⚠️ SQLite auto-migration skipped or encountered an issue:", err.message);
+      }
+    }
   }
 }
