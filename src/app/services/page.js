@@ -1,14 +1,14 @@
 import React from "react";
 import prisma from "@/lib/prisma";
-import ServicesOverview from "@/app/why-wqf/components/ServicesOverview";
+import ServicesOverview from "@/components/services/ServicesOverview";
 import Footer from "@/components/layout/Footer";
 
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Platform & Engineering Services | Gerat Software Solution",
+  title: "Services · Digital, AI, Business Systems & Brand | Gerat Software Solution",
   description:
-    "Explore Gerat's core engineering practices: Enterprise Software Architecture, Domain-Grounded AI & RAG, Custom ERP, and Public-Sector Platforms.",
+    "From the way your business looks to the systems behind how it works, Gerat brings brand, design, software, and intelligent technology together.",
 };
 
 export default async function ServicesPage() {

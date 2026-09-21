@@ -9,7 +9,7 @@ export const siteConfig = {
   domain: "https://www.gerat.com",
   tagline: "From Identity to Infrastructure",
   description:
-    "Gerat Software Solution builds monolithic brand identities, digital products, intelligent AI systems, and enterprise software architectures for high-stakes operational environments.",
+    "Gerat Software Solution builds digital products, intelligent tools, business systems, and brand identities for businesses and institutions.",
   telemetry: {
     status: "ALL SYSTEMS OPERATIONAL",
     location: "ADDIS ABABA, EAST AFRICA",

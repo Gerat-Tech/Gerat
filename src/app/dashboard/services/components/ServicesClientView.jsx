@@ -153,7 +153,7 @@ export default function ServicesClientView({ initialPillars = [] }) {
                   <span className="font-parkinsans text-[9px] tracking-[0.15em] text-white/50 uppercase">
                     {pillar.tagline}
                   </span>
-                  <h3 className="font-artific text-lg font-bold uppercase text-white group-hover:text-accent transition-colors leading-tight">
+                  <h3 className="font-parkinsans text-lg font-bold uppercase text-white group-hover:text-accent transition-colors leading-tight">
                     {pillar.title}
                   </h3>
                   <p className="font-sans text-xs text-white/70 line-clamp-3 leading-relaxed mt-1">
@@ -168,9 +168,8 @@ export default function ServicesClientView({ initialPillars = [] }) {
                     </span>
                     <ul className="space-y-1 font-parkinsans text-[9px] tracking-wider text-white/50">
                       {deliverables.slice(0, 3).map((d, i) => (
-                        <li key={i} className="truncate flex items-center gap-1.5">
-                          <span className="text-accent">•</span>
-                          <span>{d}</span>
+                        <li key={i} className="truncate text-white/60">
+                          {d}
                         </li>
                       ))}
                       {deliverables.length > 3 && (

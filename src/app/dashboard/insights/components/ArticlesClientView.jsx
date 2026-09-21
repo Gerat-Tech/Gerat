@@ -195,7 +195,7 @@ export default function ArticlesClientView({ initialArticles = [] }) {
                     <span>{art.readingTime || "5 MIN READ"}</span>
                   </div>
 
-                  <h2 className="font-artific text-lg font-bold uppercase text-white group-hover:text-accent transition-colors leading-tight">
+                  <h2 className="font-parkinsans text-lg font-bold uppercase text-white group-hover:text-accent transition-colors leading-tight">
                     {art.title}
                   </h2>
 

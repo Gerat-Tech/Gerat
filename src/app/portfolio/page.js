@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import prisma from "@/lib/prisma";
 import PortfolioClientView from "./components/PortfolioClientView";
 import Footer from "@/components/layout/Footer";
@@ -6,9 +6,9 @@ import Footer from "@/components/layout/Footer";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Engineering Portfolio & Case Studies | Gerat Software Solution",
+  title: "Portfolio & Case Studies | Gerat Software Solution",
   description:
-    "Explore mission-critical enterprise systems, domain-grounded AI architectures, and verified software solutions built by Gerat.",
+    "Explore digital products, business platforms, intelligent tools, and brand identity systems built by Gerat.",
 };
 
 export default async function PortfolioPage() {
@@ -42,7 +42,9 @@ export default async function PortfolioPage() {
 
   return (
     <div className="bg-[var(--bg)] min-h-screen text-[var(--text-primary)] selection:bg-accent selection:text-black">
-      <PortfolioClientView initialProjects={initialProjects} />
+      <Suspense fallback={<div className="min-h-screen pt-40 text-center font-parkinsans text-xs text-[var(--text-muted)]">LOADING PORTFOLIO ARCHIVES...</div>}>
+        <PortfolioClientView initialProjects={initialProjects} />
+      </Suspense>
       <Footer />
     </div>
   );

@@ -81,31 +81,32 @@ async function main() {
   // 2. Seed Portfolio Case Studies
   let projectOrder = 1;
   for (const p of portfolioProjects) {
+    const projectData = {
+      slug: p.id,
+      displayIndex: p.index,
+      num: p.num || `${p.index} / 09`,
+      title: p.title,
+      category: p.category,
+      tags: p.tags,
+      metric: p.metric,
+      metricDetail: p.metricDetail || p.metric,
+      summary: p.summary,
+      problem: p.problem,
+      architecture: p.architecture,
+      techStack: p.tech,
+      stackBadges: JSON.stringify(p.stack || []),
+      imageUrl: p.image,
+      galleryImages: JSON.stringify([p.image]),
+      impact: p.impact,
+      year: p.year,
+      status: p.status,
+      featured: projectOrder <= 3,
+      order: projectOrder++,
+    };
     await prisma.caseStudy.upsert({
       where: { slug: p.id },
-      update: {},
-      create: {
-        slug: p.id,
-        displayIndex: p.index,
-        num: p.num || `${p.index} / 09`,
-        title: p.title,
-        category: p.category,
-        tags: p.tags,
-        metric: p.metric,
-        metricDetail: p.metricDetail || p.metric,
-        summary: p.summary,
-        problem: p.problem,
-        architecture: p.architecture,
-        techStack: p.tech,
-        stackBadges: JSON.stringify(p.stack || []),
-        imageUrl: p.image,
-        galleryImages: JSON.stringify([p.image]),
-        impact: p.impact,
-        year: p.year,
-        status: p.status,
-        featured: projectOrder <= 3,
-        order: projectOrder++,
-      },
+      update: projectData,
+      create: projectData,
     });
   }
   console.log(`  ✓ Seeded ${portfolioProjects.length} portfolio case studies`);
@@ -138,61 +139,79 @@ async function main() {
   let memberOrder = 1;
   for (const m of leadershipTeam) {
     const slugId = m.name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-    const existing = await prisma.teamMember.findFirst({ where: { name: m.name } });
+    const data = {
+      name: m.name,
+      roleTitle: m.role,
+      division: "EXECUTIVE_LEADERSHIP",
+      focusTag: m.specialty,
+      bio: m.bio,
+      photoUrl: m.image,
+      email: m.email || null,
+      linkedinUrl: m.linkedinUrl || null,
+      twitterUrl: m.twitterUrl || null,
+      githubUrl: m.githubUrl || null,
+      order: memberOrder++,
+      active: true,
+    };
+    const existing = await prisma.teamMember.findFirst({ where: { OR: [{ id: slugId }, { name: m.name }] } });
     if (!existing) {
-      await prisma.teamMember.create({
-        data: {
-          id: slugId,
-          name: m.name,
-          roleTitle: m.role,
-          division: "EXECUTIVE_LEADERSHIP",
-          focusTag: m.specialty,
-          bio: m.bio,
-          photoUrl: m.image,
-          order: memberOrder++,
-          active: true,
-        },
-      });
+      await prisma.teamMember.create({ data: { id: slugId, ...data } });
+    } else {
+      await prisma.teamMember.update({ where: { id: existing.id }, data });
     }
   }
 
   for (const m of engineeringSpecialists) {
-    const slugId = m.role.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-    const existing = await prisma.teamMember.findFirst({ where: { roleTitle: m.role } });
+    const slugId = (m.name || m.role).toLowerCase().replace(/[^a-z0-9]+/g, "-");
+    const data = {
+      name: m.name,
+      roleTitle: m.role,
+      division: "ENGINEERING_PRACTITIONER",
+      focusTag: m.discipline,
+      bio: m.focus,
+      photoUrl: m.image,
+      email: m.email || null,
+      linkedinUrl: m.linkedinUrl || null,
+      twitterUrl: m.twitterUrl || null,
+      githubUrl: m.githubUrl || null,
+      order: memberOrder++,
+      active: true,
+    };
+    const existing = await prisma.teamMember.findFirst({
+      where: { OR: [{ id: slugId }, { name: m.name }, { roleTitle: m.role }] },
+    });
     if (!existing) {
-      await prisma.teamMember.create({
-        data: {
-          id: slugId,
-          name: m.role,
-          roleTitle: m.role,
-          division: "ENGINEERING_PRACTITIONER",
-          focusTag: m.discipline,
-          bio: m.focus,
-          photoUrl: m.image,
-          order: memberOrder++,
-          active: true,
-        },
-      });
+      await prisma.teamMember.create({ data: { id: slugId, ...data } });
+    } else {
+      await prisma.teamMember.update({ where: { id: existing.id }, data });
     }
   }
   console.log(`  ✓ Seeded ${leadershipTeam.length + engineeringSpecialists.length} team members`);
 
-  // 5. Seed Practice Pillars
+  // 5. Seed Practice Pillars (4 Core Pillars)
+  await prisma.servicePillar.deleteMany({
+    where: { num: { notIn: servicePillars.map((p) => p.num) } },
+  });
+
   let pillarOrder = 1;
   for (const p of servicePillars) {
+    const pillarData = {
+      num: p.num,
+      title: p.title,
+      tagline: p.tagline,
+      desc: p.desc,
+      deliverables: JSON.stringify(p.deliverables || []),
+      deepLink: p.deepLink || "/services",
+      order: pillarOrder++,
+      active: true,
+    };
     const existing = await prisma.servicePillar.findFirst({ where: { num: p.num } });
     if (!existing) {
-      await prisma.servicePillar.create({
-        data: {
-          num: p.num,
-          title: p.title,
-          tagline: p.tagline,
-          desc: p.desc,
-          deliverables: JSON.stringify(p.deliverables || []),
-          deepLink: p.num === "05" ? "/services/brand-creative" : p.num === "06" ? "/services/personal-branding" : "/why-wqf",
-          order: pillarOrder++,
-          active: true,
-        },
+      await prisma.servicePillar.create({ data: pillarData });
+    } else {
+      await prisma.servicePillar.update({
+        where: { id: existing.id },
+        data: pillarData,
       });
     }
   }
@@ -249,7 +268,7 @@ async function main() {
       timeline: "STANDARD (1-3 MONTHS)",
       budgetRange: "150K - 250K ETB",
       projectBrief: "We require a centralized multi-warehouse inventory reconciliation engine that integrates with local banks and automated customs declaration APIs.",
-      sourceUrl: "/why-wqf",
+      sourceUrl: "/services",
       countryCode: "ET",
       assignedToId: opsLead.id,
       notes: {

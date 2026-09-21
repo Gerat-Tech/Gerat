@@ -280,7 +280,7 @@ export default function SettingsClientView({
       <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b ${isLight ? "border-[#E2E5EB]" : "border-white/10"}`}>
         <div>
           <div className="flex items-center gap-2">
-            <h1 className={`font-artific text-2xl sm:text-3xl font-bold tracking-tight uppercase ${isLight ? "text-[#0D0F12]" : "text-white"}`}>
+            <h1 className={`font-parkinsans text-2xl sm:text-3xl font-semibold tracking-tight uppercase ${isLight ? "text-[#0D0F12]" : "text-white"}`}>
               SYSTEM CONTROL & TELEMETRY
             </h1>
             <span className="font-parkinsans text-[9px] tracking-[0.2em] px-2 py-0.5 rounded-[2px] bg-accent/15 border border-accent/40 text-accent uppercase font-bold">
@@ -702,7 +702,7 @@ export default function SettingsClientView({
               <span className="font-parkinsans text-[10px] tracking-[0.2em] text-accent uppercase font-bold block mb-1">
                 DASHBOARD THEME ARCHITECTURE
               </span>
-              <h2 className={`font-artific text-xl font-bold uppercase ${isLight ? "text-[#0D0F12]" : "text-white"}`}>
+              <h2 className={`font-parkinsans text-xl font-bold uppercase ${isLight ? "text-[#0D0F12]" : "text-white"}`}>
                 COLOR HARMONY & DISPLAY MODE
               </h2>
               <p className={`font-sans text-xs mt-1 max-w-3xl leading-relaxed ${isLight ? "text-[#555D6B]" : "text-white/60"}`}>
@@ -729,7 +729,9 @@ export default function SettingsClientView({
                       🌙 DARK MONOLITHIC
                     </span>
                     {theme === "dark" && (
-                      <span className="size-2 rounded-full bg-accent" />
+                      <svg className="size-3 text-accent" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                        <path d="M2 6l3 3 5-5" />
+                      </svg>
                     )}
                   </div>
                   <p className="font-sans text-xs text-white/70 leading-relaxed">
@@ -760,7 +762,9 @@ export default function SettingsClientView({
                       ☀️ ARCHITECTURAL LIGHT
                     </span>
                     {theme === "light" && (
-                      <span className="size-2 rounded-full bg-accent" />
+                      <svg className="size-3 text-accent" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                        <path d="M2 6l3 3 5-5" />
+                      </svg>
                     )}
                   </div>
                   <p className="font-sans text-xs text-[#555D6B] leading-relaxed">
@@ -793,7 +797,9 @@ export default function SettingsClientView({
                       💻 SYSTEM AUTOMATIC
                     </span>
                     {theme === "system" && (
-                      <span className="size-2 rounded-full bg-accent" />
+                      <svg className="size-3 text-accent" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                        <path d="M2 6l3 3 5-5" />
+                      </svg>
                     )}
                   </div>
                   <p className={`font-sans text-xs leading-relaxed ${isLight ? "text-[#555D6B]" : "text-white/60"}`}>

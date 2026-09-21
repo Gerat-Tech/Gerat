@@ -42,14 +42,16 @@ function waitForReady(devServer, getServerLogs, maxAttempts = 60) {
 }
 
 async function runDevServerSmokeTests() {
-  console.log("▶ Starting Next.js Dev Server on port 3008 for runtime verification...");
+  const hasBuild = fs.existsSync(path.join(process.cwd(), ".next/BUILD_ID"));
+  const cmd = hasBuild ? "start" : "dev";
+  console.log(`▶ Starting Next.js ${cmd === "start" ? "Server" : "Dev Server"} on port ${PORT} for runtime verification...`);
   try {
     fs.rmSync(path.join(process.cwd(), ".next/dev"), { recursive: true, force: true });
   } catch {}
 
   const devServer = spawn(
     "pnpm",
-    ["exec", "next", "dev", "--port", String(PORT)],
+    ["exec", "next", cmd, "--port", String(PORT)],
     {
       env: { ...process.env, PORT: String(PORT) },
       stdio: "pipe",
@@ -70,6 +72,9 @@ async function runDevServerSmokeTests() {
       { path: "/team", name: "TeamPage", expected: "LEADERSHIP" },
       { path: "/insights", name: "InsightsPage", expected: "INSIGHTS" },
       { path: "/services", name: "ServicesPage", expected: "SERVICES" },
+      { path: "/services/digital-experiences", name: "DigitalExperiencesPage", expected: "DIGITAL EXPERIENCES" },
+      { path: "/services/ai-tools", name: "AiToolsPage", expected: "INTELLIGENT TOOLS" },
+      { path: "/services/business-systems", name: "BusinessSystemsPage", expected: "BUSINESS SYSTEMS" },
       { path: "/services/brand-creative", name: "BrandCreativePage", expected: "BRAND STRATEGY" },
       { path: "/services/personal-branding", name: "PersonalBrandingPage", expected: "PERSONAL BRANDING" },
     ];

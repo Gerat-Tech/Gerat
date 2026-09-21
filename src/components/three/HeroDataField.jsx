@@ -4,9 +4,17 @@ import React, { useEffect, useRef, useState } from "react";
 import Hero3DFallback from "./Hero3DFallback";
 
 /**
- * Procedural Data-Flow Particle Field (Spec §11, §12)
- * High-performance generative particle simulation representing complex operations
- * converging into structured digital systems.
+ * 3D Parametric Logo Wave Sculpture
+ *
+ * Modeled directly after the user's reference image (media_1789851276659.png),
+ * shaped in Gerat's iconic 3-wave harmonic bridge geometry.
+ *
+ * Renders an ordered parametric dot cloud with true 3D perspective projection,
+ * depth sorting, smooth orbital rotation, and responsive mouse parallax tilt.
+ *
+ * Engineered with high-contrast dual-mode palettes:
+ * - Dark mode: Brilliant Warm Almond (#FAF6ED) dots with vibrant Flame Orange (#EA5B15) crests.
+ * - Light mode: Crisp Coffee Bean (#300F0A) dots with Flame Orange (#EA5B15) accents.
  */
 export default function HeroDataField() {
   const canvasRef = useRef(null);
@@ -38,19 +46,14 @@ export default function HeroDataField() {
     let width = 0;
     let height = 0;
 
-    // Pointer target and spring-interpolated coordinates (Spec §11: 5-12% influence)
+    // Pointer target with spring interpolation (smooth tilt parallax)
     const pointer = { x: 0, y: 0, targetX: 0, targetY: 0 };
     let scrollY = 0;
 
-    // Responsive particle count (Spec §11: 8k-12k desktop, 3k-5k mobile)
-    const isMobile = window.innerWidth < 768;
-    const particleCount = isMobile ? 2200 : 5500;
-    const particles = [];
-
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.75); // Spec §12
-      width = canvas.parentElement.offsetWidth || window.innerWidth;
-      height = canvas.parentElement.offsetHeight || window.innerHeight;
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+      width = canvas.parentElement?.offsetWidth || window.innerWidth;
+      height = canvas.parentElement?.offsetHeight || window.innerHeight;
 
       canvas.width = width * dpr;
       canvas.height = height * dpr;
@@ -62,36 +65,17 @@ export default function HeroDataField() {
     resize();
     window.addEventListener("resize", resize, { passive: true });
 
-    // Initialize particles along spiral flow trajectories
-    const centerX = width * 0.65;
-    const centerY = height * 0.45;
-
-    for (let i = 0; i < particleCount; i++) {
-      const angle = Math.random() * Math.PI * 2;
-      const radius = 30 + Math.pow(Math.random(), 1.5) * (Math.max(width, height) * 0.65);
-      const isAccent = Math.random() < 0.12; // 12% accent particles (#ea5b15)
-
-      particles.push({
-        x: centerX + Math.cos(angle) * radius,
-        y: centerY + Math.sin(angle) * radius,
-        originX: centerX + Math.cos(angle) * radius,
-        originY: centerY + Math.sin(angle) * radius,
-        radius,
-        angle,
-        speed: (0.0008 + Math.random() * 0.002) * (Math.random() < 0.5 ? 1 : -1),
-        radialSpeed: 0.15 + Math.random() * 0.35,
-        size: isAccent ? Math.random() * 2 + 1.2 : Math.random() * 1.5 + 0.6,
-        alpha: isAccent ? Math.random() * 0.7 + 0.3 : Math.random() * 0.45 + 0.1,
-        isAccent,
-        driftSeed: Math.random() * 100,
-      });
-    }
-
-    // Pointer move listener
     const onPointerMove = (e) => {
       const rect = canvas.getBoundingClientRect();
-      pointer.targetX = (e.clientX - rect.left - width * 0.5) * 0.08;
-      pointer.targetY = (e.clientY - rect.top - height * 0.5) * 0.08;
+      const nx = (e.clientX - rect.left) / width - 0.5;
+      const ny = (e.clientY - rect.top) / height - 0.5;
+      pointer.targetX = nx * 1.2;
+      pointer.targetY = ny * 1.0;
+    };
+
+    const onPointerLeave = () => {
+      pointer.targetX = 0;
+      pointer.targetY = 0;
     };
 
     const onScroll = () => {
@@ -99,9 +83,9 @@ export default function HeroDataField() {
     };
 
     window.addEventListener("pointermove", onPointerMove, { passive: true });
+    window.addEventListener("pointerleave", onPointerLeave, { passive: true });
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    // IntersectionObserver to pause when offscreen (Spec §12)
     const observer = new IntersectionObserver(
       ([entry]) => {
         isVisible = entry.isIntersecting;
@@ -109,6 +93,96 @@ export default function HeroDataField() {
       { threshold: 0 }
     );
     observer.observe(canvas);
+
+    // =========================================================================
+    // Parametric 3D Point Generation: Gerat 3-Wave Harmonic Sculpture
+    // =========================================================================
+    const numRings = 52;
+    const dotsPerRing = 34;
+    const baseModelPoints = [];
+
+    // Generate rings along a 3D harmonic wave spine path
+    for (let r = 0; r < numRings; r++) {
+      const t = (r / numRings) * Math.PI * 2;
+
+      // 3-Wave Harmonic Spine (incorporating Gerat's 3-wave peaks)
+      const spineRadiusX = 220;
+      const spineRadiusY = 160;
+      const spineRadiusZ = 140;
+
+      // The 3-wave harmonic crests via Math.sin(3 * t)
+      const waveOffset = Math.sin(3 * t) * 60;
+
+      const spineX = Math.cos(t) * (spineRadiusX + waveOffset * 0.3);
+      const spineY = Math.sin(t) * (spineRadiusY + waveOffset * 0.5);
+      const spineZ = Math.sin(2 * t) * spineRadiusZ + Math.cos(3 * t) * 45;
+
+      // Tangent vector along spine for ring orientation
+      const dt = 0.01;
+      const tNext = t + dt;
+      const waveNext = Math.sin(3 * tNext) * 60;
+      const nextX = Math.cos(tNext) * (spineRadiusX + waveNext * 0.3);
+      const nextY = Math.sin(tNext) * (spineRadiusY + waveNext * 0.5);
+      const nextZ = Math.sin(2 * tNext) * spineRadiusZ + Math.cos(3 * tNext) * 45;
+
+      const tx = nextX - spineX;
+      const ty = nextY - spineY;
+      const tz = nextZ - spineZ;
+      const tLen = Math.hypot(tx, ty, tz) || 1;
+      const dirX = tx / tLen;
+      const dirY = ty / tLen;
+      const dirZ = tz / tLen;
+
+      // Normal vectors perpendicular to tangent
+      let normX = -dirY;
+      let normY = dirX;
+      let normZ = 0;
+      const nLen = Math.hypot(normX, normY, normZ) || 1;
+      normX /= nLen;
+      normY /= nLen;
+
+      // Binormal vector
+      const binormX = dirY * normZ - dirZ * normY;
+      const binormY = dirZ * normX - dirX * normZ;
+      const binormZ = dirX * normY - dirY * normX;
+
+      // Ring radius with 3-wave modulation
+      const ringRadius = 55 + Math.sin(3 * t) * 22;
+
+      for (let d = 0; d < dotsPerRing; d++) {
+        const theta = (d / dotsPerRing) * Math.PI * 2;
+        const cosTheta = Math.cos(theta);
+        const sinTheta = Math.sin(theta);
+
+        // Point coordinates in 3D relative to spine
+        const px = spineX + (normX * cosTheta + binormX * sinTheta) * ringRadius;
+        const py = spineY + (normY * cosTheta + binormY * sinTheta) * (ringRadius * 0.75);
+        const pz = spineZ + (normZ * cosTheta + binormZ * sinTheta) * ringRadius;
+
+        // Is this dot on the crest of the 3 waves? (Upper perimeter of the swell)
+        const isCrest = sinTheta > 0.65 && Math.sin(3 * t) > 0.2;
+        const isAccentRing = r % 8 === 0;
+
+        baseModelPoints.push({
+          x: px,
+          y: py,
+          z: pz,
+          isAccent: isCrest || (isAccentRing && d % 4 === 0),
+        });
+      }
+    }
+
+    // Pre-allocated rendered points for sorting
+    const renderPoints = baseModelPoints.map((p) => ({
+      x: 0,
+      y: 0,
+      z: 0,
+      screenX: 0,
+      screenY: 0,
+      size: 0,
+      alpha: 0,
+      isAccent: p.isAccent,
+    }));
 
     let time = 0;
 
@@ -119,57 +193,123 @@ export default function HeroDataField() {
         return;
       }
 
-      time += 0.01;
+      time += 0.007;
 
-      // Spring interpolation for pointer (Spec §11: no direct snap)
+      // Smooth pointer lerp
       pointer.x += (pointer.targetX - pointer.x) * 0.05;
       pointer.y += (pointer.targetY - pointer.y) * 0.05;
 
       ctx.clearRect(0, 0, width, height);
 
-      // Current dynamic epicenter
-      const curCenterX = (width * 0.62) + pointer.x;
-      const curCenterY = (height * 0.45) + pointer.y - scrollY * 0.3;
+      // Detect theme for high-contrast visibility
+      const isLightMode =
+        typeof document !== "undefined" &&
+        (document.documentElement.classList.contains("light") ||
+          document.documentElement.classList.contains("site-light"));
 
-      for (let i = 0; i < particleCount; i++) {
-        const p = particles[i];
+      // 3D Rotation angles: gentle orbital drift + interactive pointer tilt
+      const yaw = time * 0.45 + pointer.x * 0.65;
+      const pitch = 0.35 + Math.sin(time * 0.3) * 0.15 + pointer.y * 0.45;
+      const roll = Math.cos(time * 0.25) * 0.1;
 
-        // Orbit and drift
-        p.angle += p.speed;
-        p.radius += Math.sin(time + p.driftSeed) * 0.2;
+      const cosY = Math.cos(yaw);
+      const sinY = Math.sin(yaw);
+      const cosP = Math.cos(pitch);
+      const sinP = Math.sin(pitch);
+      const cosR = Math.cos(roll);
+      const sinR = Math.sin(roll);
 
-        const targetX = curCenterX + Math.cos(p.angle) * p.radius;
-        const targetY = curCenterY + Math.sin(p.angle) * (p.radius * 0.75);
+      // Center offset: Positioned slightly to the right to balance hero typography
+      const centerX = width * (width < 768 ? 0.5 : 0.65);
+      const centerY = height * 0.44 - scrollY;
+      const focalLength = 550;
 
-        // Gentle drag toward target
-        p.x += (targetX - p.x) * 0.08;
-        p.y += (targetY - p.y) * 0.08;
+      // Transform, rotate & project points
+      const count = baseModelPoints.length;
+      for (let i = 0; i < count; i++) {
+        const bp = baseModelPoints[i];
+        const rp = renderPoints[i];
 
-        // Render point
+        // 1. Rotate Y (Yaw)
+        let x1 = bp.x * cosY + bp.z * sinY;
+        let y1 = bp.y;
+        let z1 = -bp.x * sinY + bp.z * cosY;
+
+        // 2. Rotate X (Pitch)
+        let x2 = x1;
+        let y2 = y1 * cosP - z1 * sinP;
+        let z2 = y1 * sinP + z1 * cosP;
+
+        // 3. Rotate Z (Roll)
+        let x3 = x2 * cosR - y2 * sinR;
+        let y3 = x2 * sinR + y2 * cosR;
+        let z3 = z2;
+
+        rp.x = x3;
+        rp.y = y3;
+        rp.z = z3;
+
+        // Perspective projection
+        const scale = focalLength / (focalLength + z3 + 260);
+        rp.screenX = centerX + x3 * scale;
+        rp.screenY = centerY + y3 * scale;
+
+        // Depth-dependent size and opacity
+        const depthNorm = Math.max(0, Math.min(1, (z3 + 300) / 600));
+        rp.size = Math.max(1.1, (1.2 + depthNorm * 2.4) * (width < 768 ? 0.85 : 1.0));
+
+        // Visibility opacities: high contrast in BOTH modes!
+        if (isLightMode) {
+          rp.alpha = 0.35 + depthNorm * 0.55; // 0.35 to 0.90 in Light Mode
+        } else {
+          rp.alpha = 0.40 + depthNorm * 0.58; // 0.40 to 0.98 in Dark Mode
+        }
+      }
+
+      // Depth-sort points back to front for proper occlusion and depth feel
+      renderPoints.sort((a, b) => a.z - b.z);
+
+      // Ambient warm radial bloom at the core of the 3D sculpture
+      const glowGrad = ctx.createRadialGradient(
+        centerX,
+        centerY,
+        20,
+        centerX,
+        centerY,
+        Math.min(width, height) * 0.42
+      );
+      if (isLightMode) {
+        glowGrad.addColorStop(0, "rgba(234, 91, 21, 0.08)");
+        glowGrad.addColorStop(0.5, "rgba(234, 91, 21, 0.02)");
+        glowGrad.addColorStop(1, "rgba(241, 223, 217, 0)");
+      } else {
+        glowGrad.addColorStop(0, "rgba(234, 91, 21, 0.16)");
+        glowGrad.addColorStop(0.5, "rgba(234, 91, 21, 0.04)");
+        glowGrad.addColorStop(1, "rgba(13, 7, 6, 0)");
+      }
+      ctx.fillStyle = glowGrad;
+      ctx.fillRect(0, 0, width, height);
+
+      // Draw all 3D points
+      for (let i = 0; i < count; i++) {
+        const p = renderPoints[i];
+
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.arc(p.screenX, p.screenY, p.size, 0, Math.PI * 2);
 
         if (p.isAccent) {
-          ctx.fillStyle = `rgba(234, 91, 21, ${p.alpha})`;
+          // Vibrant Flame Orange (#EA5B15) crests and accents
+          ctx.fillStyle = `rgba(234, 91, 21, ${Math.min(1.0, p.alpha * 1.25)})`;
+        } else if (isLightMode) {
+          // Deep Coffee Bean (#300F0A) in Light Mode
+          ctx.fillStyle = `rgba(48, 15, 10, ${p.alpha})`;
         } else {
-          ctx.fillStyle = `rgba(240, 240, 240, ${p.alpha})`;
+          // Warm Almond (#FAF6ED) in Dark Mode
+          ctx.fillStyle = `rgba(250, 246, 237, ${p.alpha})`;
         }
 
         ctx.fill();
       }
-
-      // Draw subtle orbital rings around epicenter
-      ctx.beginPath();
-      ctx.arc(curCenterX, curCenterY, 90, 0, Math.PI * 2);
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.04)";
-      ctx.lineWidth = 1;
-      ctx.stroke();
-
-      ctx.beginPath();
-      ctx.arc(curCenterX, curCenterY, 220, 0, Math.PI * 2);
-      ctx.strokeStyle = "rgba(234, 91, 21, 0.06)";
-      ctx.lineWidth = 1;
-      ctx.stroke();
 
       animationFrameId = requestAnimationFrame(render);
     };
@@ -181,6 +321,7 @@ export default function HeroDataField() {
       observer.disconnect();
       window.removeEventListener("resize", resize);
       window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerleave", onPointerLeave);
       window.removeEventListener("scroll", onScroll);
     };
   }, [reducedMotion]);
@@ -196,7 +337,7 @@ export default function HeroDataField() {
     >
       <canvas
         ref={canvasRef}
-        className="w-full h-full object-cover opacity-85"
+        className="w-full h-full object-cover opacity-95 transition-opacity duration-700"
       />
     </div>
   );

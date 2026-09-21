@@ -148,6 +148,24 @@ async function runAllE2ETests() {
       assert(res.body.includes("SERVICES"));
     });
 
+    await test("4a. Digital Experiences route (/services/digital-experiences) renders with 200 OK", async () => {
+      const res = await request("/services/digital-experiences");
+      assert.strictEqual(res.status, 200);
+      assert(res.body.includes("DIGITAL EXPERIENCES"));
+    });
+
+    await test("4b. AI & Intelligent Tools route (/services/ai-tools) renders with 200 OK", async () => {
+      const res = await request("/services/ai-tools");
+      assert.strictEqual(res.status, 200);
+      assert(res.body.includes("INTELLIGENT TOOLS"));
+    });
+
+    await test("4c. Business Systems route (/services/business-systems) renders with 200 OK", async () => {
+      const res = await request("/services/business-systems");
+      assert.strictEqual(res.status, 200);
+      assert(res.body.includes("BUSINESS SYSTEMS"));
+    });
+
     await test("5. Brand Creative route (/services/brand-creative) renders with 200 OK", async () => {
       const res = await request("/services/brand-creative");
       assert.strictEqual(res.status, 200);

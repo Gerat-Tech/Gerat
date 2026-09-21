@@ -154,7 +154,7 @@ export default async function DashboardPage({ searchParams }) {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="font-artific text-2xl sm:text-3xl font-bold tracking-tight uppercase text-white">
+            <h1 className="font-parkinsans text-2xl sm:text-3xl font-semibold tracking-tight uppercase text-white">
               {cockpitTitle}
             </h1>
             <span className="font-parkinsans text-[9px] tracking-[0.2em] px-2 py-0.5 rounded-[2px] bg-accent/15 border border-accent/40 text-accent uppercase font-bold">
@@ -181,8 +181,7 @@ export default async function DashboardPage({ searchParams }) {
               <div className="font-artific text-3xl sm:text-4xl font-bold text-accent mt-1">
                 {newInquiries.toString().padStart(2, "0")}
               </div>
-              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-accent mt-2 flex items-center gap-1.5">
-                <span className="size-1.5 rounded-full bg-accent animate-pulse" />
+              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-accent mt-2">
                 <span>UNREAD INTAKES</span>
               </div>
             </div>
@@ -291,8 +290,7 @@ export default async function DashboardPage({ searchParams }) {
               <div className="font-artific text-3xl sm:text-4xl font-bold text-white mt-1">
                 {inquiryCount.toString().padStart(2, "0")}
               </div>
-              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-accent mt-2 flex items-center gap-1.5">
-                <span className="size-1.5 rounded-full bg-accent animate-pulse" />
+              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-accent mt-2">
                 <span>{newInquiries} AWAITING TRIAGE</span>
               </div>
             </div>
@@ -350,7 +348,7 @@ export default async function DashboardPage({ searchParams }) {
             <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
               MODULE 01 · CRM
             </span>
-            <h2 className="font-artific text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
+            <h2 className="font-parkinsans text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
               CLIENT INTAKE & COMMUNICATIONS
             </h2>
             <p className="font-artific text-xs text-white/60 mt-2 leading-relaxed">
@@ -372,7 +370,7 @@ export default async function DashboardPage({ searchParams }) {
             <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
               MODULE {isEditor ? "01" : "02"} · CMS
             </span>
-            <h2 className="font-artific text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
+            <h2 className="font-parkinsans text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
               RESEARCH & INSIGHTS PUBLISHING
             </h2>
             <p className="font-artific text-xs text-white/60 mt-2 leading-relaxed">
@@ -394,7 +392,7 @@ export default async function DashboardPage({ searchParams }) {
             <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
               MODULE {isEditor ? "02" : "03"} · CMS
             </span>
-            <h2 className="font-artific text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
+            <h2 className="font-parkinsans text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
               PORTFOLIO & PRODUCTS
             </h2>
             <p className="font-artific text-xs text-white/60 mt-2 leading-relaxed">
@@ -416,7 +414,7 @@ export default async function DashboardPage({ searchParams }) {
             <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
               MODULE 04 · {role === "OPERATIONS_LEAD" ? "REF" : "CMS"}
             </span>
-            <h2 className="font-artific text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
+            <h2 className="font-parkinsans text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
               {role === "OPERATIONS_LEAD" ? "TEAM PRACTITIONER DIRECTORY" : "TEAM & LEADERSHIP ROSTER"}
             </h2>
             <p className="font-artific text-xs text-white/60 mt-2 leading-relaxed">
@@ -440,7 +438,7 @@ export default async function DashboardPage({ searchParams }) {
             <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
               MODULE 05 · {role === "OPERATIONS_LEAD" ? "REF" : "CMS"}
             </span>
-            <h2 className="font-artific text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
+            <h2 className="font-parkinsans text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
               {role === "OPERATIONS_LEAD" ? "PRACTICE PILLARS & SCOPE" : "PRACTICE PILLARS & SERVICES"}
             </h2>
             <p className="font-artific text-xs text-white/60 mt-2 leading-relaxed">
@@ -464,7 +462,7 @@ export default async function DashboardPage({ searchParams }) {
             <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
               MODULE 06 · SYSTEM
             </span>
-            <h2 className="font-artific text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
+            <h2 className="font-parkinsans text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
               TELEMETRY, RBAC & AUDIT LOGS
             </h2>
             <p className="font-artific text-xs text-white/60 mt-2 leading-relaxed">
@@ -483,7 +481,7 @@ export default async function DashboardPage({ searchParams }) {
         <section className="bg-[#121212] border border-white/10 rounded-[3px] p-6">
           <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
             <div>
-              <h3 className="font-artific text-lg font-bold uppercase text-white">
+              <h3 className="font-parkinsans text-lg font-bold uppercase text-white">
                 RECENT INTAKE TELEMETRY
               </h3>
               <p className="font-parkinsans text-[10px] tracking-[0.15em] text-white/40 uppercase">
@@ -545,7 +543,7 @@ export default async function DashboardPage({ searchParams }) {
         <section className="bg-[#121212] border border-white/10 rounded-[3px] p-6">
           <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
             <div>
-              <h3 className="font-artific text-lg font-bold uppercase text-white">
+              <h3 className="font-parkinsans text-lg font-bold uppercase text-white">
                 RECENT STUDIO PUBLICATIONS
               </h3>
               <p className="font-parkinsans text-[10px] tracking-[0.15em] text-white/40 uppercase">

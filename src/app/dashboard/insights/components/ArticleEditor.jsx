@@ -189,7 +189,9 @@ export default function ArticleEditor({ initialArticle = null, authors = [] }) {
       {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed bottom-6 right-6 z-50 bg-[#161616] border border-accent text-white px-4 py-3 rounded-[3px] font-parkinsans text-xs tracking-wider shadow-2xl flex items-center gap-2">
-          <span className="size-2 rounded-full bg-accent animate-pulse" />
+          <svg className="size-3 text-accent shrink-0" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+            <path d="M2 6l3 3 5-5" />
+          </svg>
           <span>{toastMessage}</span>
         </div>
       )}
@@ -208,7 +210,7 @@ export default function ArticleEditor({ initialArticle = null, authors = [] }) {
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="font-artific text-2xl sm:text-3xl font-bold uppercase text-white tracking-tight">
+            <h1 className="font-parkinsans text-2xl sm:text-3xl font-semibold tracking-tight uppercase text-white">
               {title || "UNTITLED WHITE PAPER"}
             </h1>
             <StatusBadge status={status} />
@@ -465,7 +467,7 @@ export default function ArticleEditor({ initialArticle = null, authors = [] }) {
                 </div>
 
                 {title && (
-                  <h1 className="font-artific text-2xl font-bold uppercase text-white tracking-tight leading-tight">
+                  <h1 className="font-parkinsans text-2xl font-bold uppercase text-white tracking-tight leading-tight">
                     {title}
                   </h1>
                 )}

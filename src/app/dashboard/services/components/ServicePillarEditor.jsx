@@ -104,7 +104,7 @@ export default function ServicePillarEditor({ initialData = null, isNew = false 
               {isNew ? "NEW PILLAR CONFIGURATION" : `PILLAR ${formData.num} · ${formData.title || "UNTITLED"}`}
             </span>
           </div>
-          <h1 className="font-artific text-2xl sm:text-3xl font-bold uppercase tracking-tight text-white mt-1">
+          <h1 className="font-parkinsans text-2xl sm:text-3xl font-semibold uppercase tracking-tight text-white mt-1">
             {isNew ? "CONFIGURE PRACTICE PILLAR" : "EDIT PRACTICE PILLAR"}
           </h1>
         </div>
@@ -283,14 +283,13 @@ export default function ServicePillarEditor({ initialData = null, isNew = false 
                 <span className="font-parkinsans text-[11px] tracking-[0.2em] text-accent font-bold">
                   PRACTICE · {formData.num || "00"}
                 </span>
-                <div className="size-2 rounded-[1px] bg-accent" />
               </div>
 
               <div className="flex flex-col gap-3 my-6">
                 <span className="font-parkinsans text-[9px] tracking-[0.2em] text-white/50 uppercase">
                   {formData.tagline || "PRACTICE TAGLINE · CADRE"}
                 </span>
-                <h2 className="font-artific text-2xl font-bold tracking-tight uppercase text-white leading-tight">
+                <h2 className="font-parkinsans text-2xl font-bold tracking-tight uppercase text-white leading-tight">
                   {formData.title || "PRACTICE PILLAR TITLE"}
                 </h2>
                 <p className="font-artific text-xs sm:text-sm text-white/70 leading-relaxed">
@@ -305,9 +304,8 @@ export default function ServicePillarEditor({ initialData = null, isNew = false 
                 {deliverablesArray.length > 0 ? (
                   <ul className="space-y-1.5 font-parkinsans text-[10px] tracking-[0.15em] text-white/60">
                     {deliverablesArray.map((del, i) => (
-                      <li key={i} className="flex items-center gap-2">
-                        <span className="text-accent">•</span>
-                        <span>{del}</span>
+                      <li key={i} className="text-white/70">
+                        {del}
                       </li>
                     ))}
                   </ul>

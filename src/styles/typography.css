@@ -39,7 +39,7 @@
 
 /* Typography Utility Classes */
 .display-xl {
-  font-family: var(--font-artific);
+  font-family: var(--font-parkinsans);
   font-size: var(--font-size-display-xl);
   line-height: var(--leading-hero);
   letter-spacing: var(--tracking-tightest);
@@ -48,7 +48,7 @@
 }
 
 .display-l {
-  font-family: var(--font-artific);
+  font-family: var(--font-parkinsans);
   font-size: var(--font-size-display-l);
   line-height: var(--leading-display);
   letter-spacing: var(--tracking-tightest);
@@ -57,7 +57,7 @@
 }
 
 .heading-h2 {
-  font-family: var(--font-artific);
+  font-family: var(--font-parkinsans);
   font-size: var(--font-size-h2);
   line-height: var(--leading-h2);
   letter-spacing: var(--tracking-tight);
@@ -66,7 +66,7 @@
 }
 
 .heading-h3 {
-  font-family: var(--font-artific);
+  font-family: var(--font-parkinsans);
   font-size: var(--font-size-h3);
   line-height: var(--leading-h3);
   letter-spacing: var(--tracking-tight);
@@ -74,21 +74,21 @@
 }
 
 .body-lg {
-  font-family: var(--font-parkinsans);
+  font-family: var(--font-artific);
   font-size: var(--font-size-body-lg);
   line-height: var(--leading-body);
   color: var(--text-secondary);
 }
 
 .body-base {
-  font-family: var(--font-parkinsans);
+  font-family: var(--font-artific);
   font-size: var(--font-size-body);
   line-height: var(--leading-body);
   color: var(--text-secondary);
 }
 
 .text-caption {
-  font-family: var(--font-parkinsans);
+  font-family: var(--font-artific);
   font-size: var(--font-size-small);
   line-height: 1.4;
   color: var(--text-muted);

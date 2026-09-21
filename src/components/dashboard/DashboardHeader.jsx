@@ -91,7 +91,7 @@ export default function DashboardHeader({ user, onOpenCommand, onToggleSidebar }
                 ? "bg-[#F0F2F5] hover:bg-[#E4E7ED] text-[#0D0F12] border border-[#E2E5EB]"
                 : "bg-white/5 hover:bg-white/10 text-white border border-white/10"
             }`}
-            title={isLight ? "Switch to Dark Monolithic Mode" : "Switch to Architectural Light Mode"}
+            title={isLight ? "Switch to Dark Mode" : "Switch to Light Mode"}
             aria-label="Toggle Theme"
           >
             {isLight ? (

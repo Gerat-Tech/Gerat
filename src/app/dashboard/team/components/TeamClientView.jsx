@@ -155,11 +155,11 @@ export default function TeamClientView({ initialMembers = [] }) {
                 </div>
 
                 <div className="p-5 flex flex-col gap-2.5">
-                  <h3 className="font-artific text-lg font-bold uppercase text-white group-hover:text-accent transition-colors leading-tight">
+                  <h3 className="font-parkinsans text-lg font-semibold uppercase text-white group-hover:text-accent transition-colors leading-tight">
                     {m.name}
                   </h3>
 
-                  <div className="font-parkinsans text-[10px] tracking-[0.1em] text-white/50 uppercase">
+                  <div className="font-artific text-[10px] tracking-[0.1em] text-white/50 uppercase">
                     {m.roleTitle}
                   </div>
 
@@ -167,9 +167,18 @@ export default function TeamClientView({ initialMembers = [] }) {
                     {m.focusTag}
                   </div>
 
-                  <p className="font-sans text-xs text-white/60 line-clamp-2 leading-relaxed pt-2 border-t border-white/5">
+                  <p className="font-artific text-xs text-white/60 line-clamp-2 leading-relaxed pt-2 border-t border-white/5">
                     {m.bio}
                   </p>
+
+                  {(m.email || m.linkedinUrl || m.twitterUrl || m.githubUrl) && (
+                    <div className="flex flex-wrap items-center gap-1.5 pt-2 font-mono text-[8.5px] text-white/50 uppercase">
+                      {m.email && <span className="px-1.5 py-0.5 bg-white/5 border border-white/10 rounded-[1px] text-accent">EMAIL</span>}
+                      {m.linkedinUrl && <span className="px-1.5 py-0.5 bg-white/5 border border-white/10 rounded-[1px]">IN</span>}
+                      {m.twitterUrl && <span className="px-1.5 py-0.5 bg-white/5 border border-white/10 rounded-[1px]">X</span>}
+                      {m.githubUrl && <span className="px-1.5 py-0.5 bg-white/5 border border-white/10 rounded-[1px]">GIT</span>}
+                    </div>
+                  )}
                 </div>
               </div>
 

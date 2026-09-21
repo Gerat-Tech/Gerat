@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import SectionLabel from "../common/SectionLabel";
 import FadeUp from "../motion/FadeUp";
 import SplitText from "../motion/SplitText";
@@ -8,59 +9,35 @@ import SplitText from "../motion/SplitText";
 const capabilities = [
   {
     index: "01",
-    title: "ENTERPRISE SOFTWARE ARCHITECTURE",
-    tags: "DISTRIBUTED SYSTEMS · CLOUD NATIVE · HIGH-AVAILABILITY",
+    title: "DIGITAL EXPERIENCES",
+    tags: "WEBSITES · WEB APPLICATIONS · CUSTOMER PORTALS · DIGITAL PRODUCTS",
     description:
-      "Architecting resilient, horizontally scalable microservices and cloud backends capable of processing complex enterprise workloads with zero downtime.",
+      "Websites and digital products that make your business easier to discover, understand, and use.",
+    link: "/services/digital-experiences",
   },
   {
     index: "02",
-    title: "DOMAIN-GROUNDED AI & RAG NETWORKS",
-    tags: "LOCAL LLMS · HYBRID SEARCH · VECTOR EMBEDDINGS",
+    title: "AI & INTELLIGENT TOOLS",
+    tags: "PRACTICAL AI · KNOWLEDGE SYSTEMS · INTELLIGENT SEARCH · AUTOMATION",
     description:
-      "Production-grade Retrieval-Augmented Generation engines, proprietary embedding pipelines, and localized AI models grounded strictly in institutional verification.",
+      "Practical AI that helps people find information, automate repetitive work, and make better use of what they already know.",
+    link: "/services/ai-tools",
   },
   {
     index: "03",
-    title: "CUSTOM ERP & OPERATIONAL PLATFORMS",
-    tags: "WORKFLOW AUTOMATION · LOGISTICS · FINANCIAL OPS",
+    title: "BUSINESS SYSTEMS",
+    tags: "OPERATIONS PLATFORMS · ERP · WORKFLOW SYSTEMS · CUSTOM SOFTWARE",
     description:
-      "Purpose-built enterprise resource planning platforms unifying inventory, procurement, payroll, and real-time ledger accounting into one synchronized source of truth.",
+      "Software that connects operations, people, and information so businesses can work with less friction.",
+    link: "/services/business-systems",
   },
   {
     index: "04",
-    title: "PUBLIC-SECTOR & INSTITUTIONAL PLATFORMS",
-    tags: "CIVIC TECH · SECURE REGISTRIES · NATIONAL SYSTEMS",
+    title: "BRAND & CREATIVE",
+    tags: "BRAND STRATEGY · LOGO & IDENTITY · GRAPHIC DESIGN · PERSONAL BRANDING",
     description:
-      "High-security digital governance infrastructure, citizen portals, and institutional document verification networks designed for national resilience.",
-  },
-  {
-    index: "05",
-    title: "BRAND STRATEGY, IDENTITY & DESIGN SYSTEMS",
-    tags: "VECTOR MARKS · DESIGN TOKENS · EDITORIAL GUIDELINES",
-    description:
-      "Monolithic visual identities, design systems, and vector mark architectures that command immediate credibility and translate seamlessly from print to code.",
-  },
-  {
-    index: "06",
-    title: "EXECUTIVE & FOUNDER PERSONAL BRANDING",
-    tags: "FOUNDER PRESENCE · EXECUTIVE SITES · THOUGHT LEADERSHIP",
-    description:
-      "Strategic positioning, visual identity, and high-impact digital presence engineered to establish founders, executives, and technology leaders as authorities.",
-  },
-  {
-    index: "07",
-    title: "HIGH-PERFORMANCE WEB & MOBILE SUITES",
-    tags: "NEXT.JS · REACT NATIVE · PROGRESSIVE WEB APPS",
-    description:
-      "Award-winning editorial web applications and cross-platform native mobile clients built with micro-interaction choreography and sub-second load times.",
-  },
-  {
-    index: "08",
-    title: "SECURITY, COMPLIANCE & ZERO-TRUST HARDENING",
-    tags: "RBAC · ISO AUDIT TRAILS · CRYPTOGRAPHIC VERIFICATION",
-    description:
-      "Airtight cryptographic identity, fine-grained role-based access control, automated vulnerability pipelines, and institutional audit compliance.",
+      "A clear identity that helps people recognize your business — from the logo to the way it shows up online.",
+    link: "/services/brand-creative",
   },
 ];
 
@@ -70,46 +47,45 @@ export default function OurFocus() {
   return (
     <section
       id="capabilities"
-      aria-label="Capabilities"
-      className="relative w-full bg-[var(--bg)] text-white py-24 sm:py-32 border-b border-white/10"
+      aria-label="What We Build"
+      className="relative w-full bg-[var(--bg)] text-white py-14 sm:py-18 md:py-20 border-b border-white/10"
     >
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
         {/* Section Header */}
-        <div className="flex flex-col gap-4 mb-16 lg:mb-20 max-w-3xl">
-          <SectionLabel index="02" label="CAPABILITIES" />
+        <div className="flex flex-col gap-4 mb-10 sm:mb-12 max-w-3xl">
+          <SectionLabel label="WHAT WE BUILD" />
           <SplitText
-            text="SPECIALIZED DISCIPLINES"
+            text="HOW WE BUILD"
             as="h2"
-            className="font-artific text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
+            className="font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium sm:font-semibold tracking-tight uppercase leading-[0.95]"
           />
           <SplitText
-            text="BUILT FOR SCALE."
+            text="THE BRIDGE."
             as="h2"
             wordClassName="text-accent"
-            className="font-artific text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
+            className="font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium sm:font-semibold tracking-tight uppercase leading-[0.95]"
           />
           <FadeUp delay={0.2} y={16}>
-            <p className="font-parkinsans text-base sm:text-lg text-white/70 leading-relaxed pt-2">
-              From high-throughput data processing to domain-grounded artificial
-              intelligence, we engineer every layer with surgical precision and
-              structural resilience.
+            <p className="font-artific text-base sm:text-lg text-white/75 leading-relaxed pt-2">
+              Every business needs a strong foundation, a clear path, and
+              systems that can carry what comes next.
             </p>
           </FadeUp>
         </div>
 
-        {/* Interactive Capability Rows Table (Spec §27) */}
+        {/* Interactive Capability Rows Table (4 Core Pillars) */}
         <div className="w-full border-t border-white/10">
           {capabilities.map((item, idx) => {
             const isHovered = hoveredIndex === idx;
             return (
-              <div
-                key={item.index}
-                tabIndex={0}
+              <Link
+                key={item.title}
+                href={item.link}
                 onMouseEnter={() => setHoveredIndex(idx)}
                 onMouseLeave={() => setHoveredIndex(null)}
                 onFocus={() => setHoveredIndex(idx)}
                 onBlur={() => setHoveredIndex(null)}
-                className={`group relative border-b border-white/10 py-6 sm:py-8 px-4 sm:px-6 transition-all duration-300 cursor-pointer outline-none ${
+                className={`group relative block border-b border-white/10 py-6 sm:py-8 px-4 sm:px-6 transition-all duration-300 outline-none ${
                   isHovered ? "bg-white/[0.03]" : "bg-transparent"
                 }`}
               >
@@ -121,36 +97,44 @@ export default function OurFocus() {
                   aria-hidden="true"
                 />
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-baseline">
-                  {/* Column 1: Index */}
-                  <div className="lg:col-span-1 font-parkinsans text-[12px] tracking-[0.2em] text-white/40 group-hover:text-accent transition-colors">
-                    {item.index}
-                  </div>
-
-                  {/* Column 2: Title & Tags */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 items-baseline">
+                  {/* Column 1: Title & Tags */}
                   <div className="lg:col-span-6 flex flex-col gap-1.5">
-                    <h3 className="font-artific text-xl sm:text-2xl font-semibold tracking-tight uppercase text-white group-hover:text-white transition-colors">
+                    <h3 className="font-parkinsans text-xl sm:text-2xl font-semibold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
                       {item.title}
                     </h3>
-                    <span className="font-parkinsans text-[9px] sm:text-[10px] tracking-[0.2em] text-white/50 uppercase">
+                    <span className="font-artific text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] text-white/50 uppercase font-medium">
                       {item.tags}
                     </span>
                   </div>
 
-                  {/* Column 3: Description */}
-                  <div className="lg:col-span-4 font-parkinsans text-xs sm:text-sm text-white/60 group-hover:text-white/80 leading-relaxed transition-colors">
+                  {/* Column 2: Description */}
+                  <div className="lg:col-span-5 font-artific text-xs sm:text-sm text-white/70 group-hover:text-white/95 leading-relaxed transition-colors pt-1 lg:pt-0">
                     {item.description}
                   </div>
 
-                  {/* Column 4: Trailing Arrow */}
-                  <div className="lg:col-span-1 flex justify-end font-parkinsans text-sm text-white/30 group-hover:text-accent group-hover:translate-x-1 transition-all">
+                  {/* Column 3: Trailing Arrow */}
+                  <div className="hidden lg:flex lg:col-span-1 justify-end font-parkinsans text-sm text-white/30 group-hover:text-accent group-hover:translate-x-1 transition-all">
                     →
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
+
+        {/* Bottom Capabilities Link */}
+        <FadeUp delay={0.3} y={16}>
+          <div className="mt-8 sm:mt-10 flex items-center justify-between">
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-2 font-parkinsans text-[11px] sm:text-[12px] uppercase tracking-[0.2em] text-white/60 hover:text-white transition-colors"
+            >
+              <span>EXPLORE ALL SERVICES & SOLUTIONS</span>
+              <span className="text-accent">→</span>
+            </Link>
+          </div>
+        </FadeUp>
       </div>
     </section>
   );

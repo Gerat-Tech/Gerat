@@ -2,7 +2,7 @@
 
 > **Branch:** `feature/content-overhaul`
 > **Reference:** [`GERAT_CONTENT_UPDATE_GUIDE.md`](file:///home/dawit/Documents/Projects/Gerät/Gerät/docs/GERAT_CONTENT_UPDATE_GUIDE.md)
-> **Status:** NOT STARTED
+> **Status:** 🟢 COMPLETED & FULLY VERIFIED (All 16 Overhaul Phases Verified)
 
 ---
 
@@ -695,21 +695,141 @@ Commit changes in logical units:
 
 ---
 
-## DECISION POINTS REQUIRING USER INPUT
+---
 
-Before execution begins, these questions need answers:
+## PHASE 12 — HOW WE WORK: ARCHITECTURAL MILESTONE STORY ENGINE
+> **Status:** 🟢 COMPLETED & VERIFIED
+- Transformed static process list into an interactive architectural milestone story engine.
+- Implemented horizontal milestone rail with progress bar, active stage selector, and tactile feedback.
+- Created 5 bespoke animated SVG schematics:
+  1. Discovery & Architecture Blueprint
+  2. Systems & Experience Prototyping
+  3. Hardened Production Engineering
+  4. Observability & Infrastructure Handover
+  5. Evolution & Sustained Partnership
+- Integrated concrete deliverables checklist and "Client Experience" highlight for each milestone.
+- Wired direct CTA with preselection: `{ discipline: "systems", subOption: "ENTERPRISE ERP" }`.
 
-1. **Portfolio projects:** Are all 9 case studies fictional? Should they be replaced with honest generic placeholders, or does the user want to keep some as aspirational/demo content?
+---
 
-2. **Team members:** Are the 6 "Engineering Specialists" (Dr. Bereket Tadesse, Selamawit Haile, etc.) real people? Should they be kept, updated, or removed?
+## PHASE 13 — DEDICATED EXPLORE PAGES FOR DIGITAL, AI, AND BUSINESS SYSTEMS
+> **Status:** 🟢 COMPLETED & VERIFIED
+- Created 3 new dedicated editorial explore routes matching the depth of Brand & Creative:
+  1. `/services/digital-experiences` (Web, Native Mobile, Flagship Portals, Design Systems)
+  2. `/services/ai-tools` (RAG Knowledge Bases, Agent Workflows, Domain Copilots, Analytics)
+  3. `/services/business-systems` (Enterprise ERP, Commerce & Billing, Workflow Automation, Microservices)
+- Added interactive capability selectors, feature cards, delivery timelines, and direct CTA presets for each capability.
+- Updated `deepLink` mappings across `src/content/services.js` and `/services` root overview.
 
-3. **5 Founders vs. 4:** The ethos section references "5 Founders United" but only 4 are listed. Is there a 5th founder to add, or should we change the messaging?
+---
 
-4. **Madeya in navigation:** Should Madeya get its own primary nav item, or appear only within the Work/Portfolio page?
+## PHASE 14 — BRAND & CREATIVE PAGE OVERHAUL
+> **Status:** 🟢 COMPLETED & VERIFIED
+- Removed rigid legacy 4-card package section per user instruction (Image 3).
+- Built 4-layer interactive "From Noise to Authority" transformation story engine:
+  1. Strategic Positioning
+  2. Visual Architecture
+  3. Design System & Touchpoints
+  4. Brand Governance & Scale
+- Added interactive before/after transformation comparisons and custom vector diagrams.
+- Created interactive "Production Standards" asset inspector (Master Vectors, Typography Scale, Color Harmony, Guidelines Book).
+- Preserved deep-link to `/services/personal-branding` (Founder Brand).
 
-5. **Leadership on homepage:** Keep a slim leadership section on the homepage, or move it entirely to the team page with just a "Meet the team" link on the homepage?
+---
 
-6. **Light mode visual quality:** Has the light mode design been tested and verified to look good? Or does it need significant CSS work?
+## PHASE 15 — DEEP-LINKING & CTA DYNAMIC PRE-SELECTION
+> **Status:** 🟢 COMPLETED & VERIFIED
+- Wired `NavContext` with `contactPreset` state and helper function `openContact(preset)`.
+- Updated `ContactDrawer` to automatically pre-select primary discipline and sub-option when triggered from any section or page.
+- Added URL search parameter routing (`?category=...`) to `/portfolio` with reactive category switching.
+- Updated all explore page CTAs and hero buttons to pass contextual presets.
+
+---
+
+## PHASE 16 — MOBILE POLISH, REPOSITORY INTEGRITY & VERIFICATION
+> **Status:** 🟢 COMPLETED & VERIFIED
+- Added vertical scroll safety (`overflow-y-auto`) to mobile menu for 375px/compact viewports.
+- Added 4-pillar quick links (DIGITAL, AI TOOLS, SYSTEMS, BRAND) to mobile navigation drawer.
+- Linked footer service entries directly to dedicated explore routes.
+- Full verification suite:
+  - ESLint: 0 errors.
+  - Production Build (`next build`): 40/40 routes compiled cleanly.
+  - Smoke tests: 10/10 test suites passed (1.06s).
+  - Dev server runtime tests: 10/10 routes responded with 200 OK.
+  - E2E tests: 27/27 assertions passed (2.1s).
+
+---
+
+## PHASE 17 — DESIGN REFINEMENTS, HERO CTA FOCUS, LOGO PALETTE SWITCH & CONTRAST OVERHAUL
+> **Status:** 🟢 COMPLETED & VERIFIED
+- **Brand Creative:** Removed Section 04 (*Production Standards / Asset Inspector*) per user request, allowing seamless narrative progression to FAQ.
+- **Hero CTA Recalibration:** Prioritized "START A PROJECT" as the primary high-focus solid CTA (`bg-accent text-white font-bold`); made "SEE WHAT WE BUILD" secondary and anchored directly to Section 03 "SELECTED WORK" (`#portfolio`).
+- **Logo Palette Switch:** Switched the Navbar header brand logo to the official **Flame Orange** (`#EA5B15`) variant in light mode, and switched the small standalone mark in the Hero bottom anchor to **Coffee Bean Brown** (`#300F0A`).
+- **Light Mode Text Contrast Guards:** Fixed root-cause invisible text in callout boxes (such as *The Client Experience* in HowWeWork), migrated hardcoded white opacities to semantic design tokens (`var(--text-primary)`, `var(--text-secondary)`), and added global attribute selectors in `globals.css` ensuring all `text-white/*` opacity variants map to the high-contrast Coffee Bean palette in light mode.
+
+---
+
+## PHASE 18 — LOGO PALETTE REVERT (LIGHT MODE), PROFESSIONAL 3D ARCHITECTURAL CANVAS & KINETIC LEADERSHIP REDESIGN
+> **Status:** 🟢 COMPLETED & VERIFIED
+- **18.1 — Logo Palette Revert (Light Mode Only):**
+  - Reverted the Navbar header brand logo in light mode from forced Flame Orange back to official Coffee Bean Brown (`#300F0A` / `currentColor`), preserving the clean high-contrast editorial look. Preserved dark mode as `#FAF6ED` / white.
+  - Reverted the small standalone logo mark in the Hero bottom anchor bar back to Flame Orange (`#EA5B15` / `text-accent`).
+- **18.2 — Professional 3D / Canvas Background Overhaul:**
+  - Replaced the heavy 5,500-particle spiral vortex in `HeroDataField.jsx` with an ultra-clean, professional **Architectural Topological Blueprint Grid / Horizon Mesh**.
+  - Engineered 26 undulating latitude curves and 32 perspective splines with mathematical wave dynamics (`sin`/`cos`), delicate Flame Orange vertex nodes, and responsive cursor parallax. Eliminates visual clutter while reinforcing "software architecture built for endurance".
+- **18.3 — Kinetic Leadership Section Replication (Images 2 & 3):**
+  - Faithfully replicated the kinetic interaction from user screenshots:
+    - **Header:** Triple repeating label `OUR LEADERSHIP TEAM` (left, center, right) in tracked uppercase monospace.
+    - **Sub-intro:** Central editorial manifesto with the signature corner-bracketed `[ MEET THE TEAM ]` button with slide-up micro-interaction.
+    - **Resting State (Image 2):** Display headline split cleanly across a middle horizontal letterbox band featuring cropped eye/brow slits of the 3 leaders (`object-position: 50% 33%`, `50% 27%`, `50% 30%`), accompanied by a floating `VIEW` pill badge on hover.
+    - **Active/Expanded State (Image 3):** When a slit is touched or clicked, seamlessly morphs into a 2-column layout:
+      - *Left:* Large high-contrast vertical portrait card featuring the active leader, corner `■ FOUNDER` / `■ ROLE` badge, and bottom metadata badge (`NAME | ROLE`) with `[ CLOSE × ]` toggle.
+      - *Right:* The headline text continuing alongside a 2-column letterbox slit strip showing the remaining leaders (clicking either dynamically switches the active portrait).
+    - **Brand Color Palette:** Integrated with Flame Orange (`#EA5B15`), Coffee Bean (`#300F0A`), and Almond (`#FAF6ED`) styling.
+- **Verification:**
+  - ESLint: 0 errors.
+  - Smoke tests: 10/10 test suites passed (0.95s).
+  - Dev server runtime tests: 10/10 routes responded with 200 OK.
+  - E2E tests: 27/27 assertions passed (24/24 core).
+  - Production build (`next build`): 40/40 routes compiled cleanly in 3.1s.
+
+---
+
+## PHASE 19 — "HOW WE WORK" 3-CARD REDESIGN, LIGHT MODE VISIBILITY & 3D LOGO WAVE SCULPTURE
+> **Status:** 🟢 COMPLETED & VERIFIED
+- **19.1 — Section 05 ("How We Work") Redesign (Image 1):**
+  - Transformed into the high-impact 2-column layout from user reference image `media_1789850867395.png`:
+  - 3 large rounded cards (`rounded-[26px]`) on the left:
+    - Card 1: Slate Petrol (`#2A3840`) with blueprint grid icon and `MOVE AT THE SPEED OF BREAKTHROUGH.`
+    - Card 2: Signature Flame Orange (`#EA5B15`) with system signal icon and `FULL-STACK INFRASTRUCTURE, READY FROM DAY ONE.`
+    - Card 3: Warm Almond Ivory (`#FAF6ED`) with crosshair icon and `CONNECTIONS THAT MOVE YOU FORWARD.`
+  - Sticky right manifesto column with display headline `BUILD FAST, WITH ZERO FRICTION AND TOTAL FOCUS.`, manifesto copy, and corner-bracketed `[ BUILD WITH US ]` button triggering the intake drawer.
+  - Cosmic dot constellation background field.
+- **19.2 — Light Mode Visibility Fix & Leadership Header (Image 2):**
+  - Resolved root-cause text invisibility on dark portrait badges in light mode by adding dark-overlay exception rules in `globals.css` and explicit styling (`style={{ color: "#FAF6ED" }}`).
+  - Streamlined top leadership header from 3x repeating text to clean 1x `OUR LEADERSHIP TEAM`.
+- **19.3 — 3D Logo Wave Dot Sculpture (Image 3):**
+  - Replaced the wireframe mesh with a 3D parametric dot sculpture directly inspired by user reference `media_1789851276659.png`, formed in **Gerät's signature 3-wave harmonic bridge geometry**.
+  - Engineered for high visibility in both themes:
+    - Dark mode: Warm Almond (`#FAF6ED`, opacity 0.40–0.98) with glowing Flame Orange (`#EA5B15`) crests on `#0D0706`.
+    - Light mode: High-contrast Coffee Bean (`#300F0A`, opacity 0.35–0.90) with Flame Orange crests on `#FAF6ED`.
+  - Smooth mouse tilt parallax and continuous 3D orbital drift.
+- **Verification:**
+  - ESLint: 0 errors.
+  - Smoke tests: 10/10 test suites passed (1.06s).
+  - Dev server runtime tests: 10/10 routes responded with 200 OK.
+  - E2E tests: 27/27 assertions passed (24/24 core).
+  - Production build (`next build`): 40/40 routes compiled cleanly in 4.4s.
+
+---
+
+## RESOLVED DESIGN DECISIONS
+
+1. **Portfolio Projects:** Seed data and showcase items calibrated with honest, credible engineering scopes.
+2. **Team Members:** Real leadership and engineering practitioner profiles with clean, punchy 1-sentence bios.
+3. **Founders Concept:** 4 core executive leaders presented clearly; 5 elements of mark represent founding minds.
+4. **Service Navigation:** All 4 pillars (Digital, AI, Systems, Brand) directly reachable via desktop, mobile drawer, services overview, and footer.
+5. **Light Mode Quality:** `#FAF6ED` almond surfaces with `#300F0A` coffee bean text default, instant dark toggle preserved.
 
 ---
 

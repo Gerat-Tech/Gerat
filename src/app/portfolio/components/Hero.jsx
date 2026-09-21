@@ -29,21 +29,20 @@ export default function Hero({ activeCategory, onSelectCategory }) {
           <SplitText
             text="PROVEN ARCHITECTURES."
             as="h1"
-            className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+            className="font-parkinsans text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight uppercase leading-[0.92]"
           />
           <SplitText
             text="DELIVERED SYSTEMS."
             as="div"
             wordClassName="text-accent"
-            className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+            className="font-parkinsans text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight uppercase leading-[0.92]"
           />
         </div>
 
         <FadeUp delay={0.3} y={16}>
-          <p className="font-parkinsans text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed">
-            An index of mission-critical software, custom enterprise platforms,
-            domain-grounded RAG systems, and institutional digital products
-            engineered by Gerat Software Solution.
+          <p className="font-artific text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed">
+            An index of custom software, business platforms, intelligent tools, and
+            brand identity systems engineered by Gerat Software Solution.
           </p>
         </FadeUp>
 

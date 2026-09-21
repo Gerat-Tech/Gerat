@@ -30,23 +30,23 @@ export default function Partners() {
         {/* Header */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 items-start">
           <div className="lg:col-span-7 flex flex-col gap-4">
-            <SectionLabel index="06" label="TECHNOLOGY & ECOSYSTEM" />
+            <SectionLabel label="TECHNOLOGY & ECOSYSTEM" />
             <SplitText
               text="MODERN INFRASTRUCTURE."
               as="h2"
-              className="font-artific text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
+              className="font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium sm:font-semibold tracking-tight uppercase leading-[0.95]"
             />
             <SplitText
               text="STANDARDIZED FOUNDATIONS."
               as="h2"
               wordClassName="text-accent"
-              className="font-artific text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase leading-[0.95]"
+              className="font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium sm:font-semibold tracking-tight uppercase leading-[0.95]"
             />
           </div>
 
           <div className="lg:col-span-5 flex flex-col items-start gap-6 lg:border-l lg:border-white/10 lg:pl-10 pt-2">
             <FadeUp delay={0.2}>
-              <p className="font-parkinsans text-base text-white/70 leading-relaxed">
+              <p className="font-artific text-base text-white/75 leading-relaxed">
                 We build exclusively with proven, open, and battle-tested
                 technologies that guarantee vendor independence, high auditability,
                 and long-term operational viability.
@@ -78,11 +78,11 @@ export default function Partners() {
                 <span className="absolute top-0 left-0 size-1.5 border-t border-l border-white/20 group-hover:border-accent transition-colors" />
                 <span className="absolute bottom-0 right-0 size-1.5 border-b border-r border-white/20 group-hover:border-accent transition-colors" />
 
-                <span className="font-parkinsans text-[8px] sm:text-[9px] tracking-[0.2em] text-white/40 uppercase">
+                <span className="font-artific text-[8px] sm:text-[9px] tracking-[0.2em] text-white/50 uppercase font-medium">
                   {tech.category}
                 </span>
 
-                <h3 className="font-artific text-lg font-bold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
+                <h3 className="font-parkinsans text-lg font-semibold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
                   {tech.name}
                 </h3>
               </div>

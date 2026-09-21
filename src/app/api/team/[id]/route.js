@@ -52,6 +52,7 @@ export async function PATCH(request, { params }) {
     if (body.photoUrl !== undefined) data.photoUrl = body.photoUrl.trim();
     if (body.order !== undefined) data.order = Number(body.order);
     if (body.active !== undefined) data.active = Boolean(body.active);
+    if (body.email !== undefined) data.email = body.email?.trim() || null;
     if (body.linkedinUrl !== undefined) data.linkedinUrl = body.linkedinUrl?.trim() || null;
     if (body.githubUrl !== undefined) data.githubUrl = body.githubUrl?.trim() || null;
     if (body.twitterUrl !== undefined) data.twitterUrl = body.twitterUrl?.trim() || null;

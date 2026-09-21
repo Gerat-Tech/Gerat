@@ -2,7 +2,7 @@ import React from "react";
 
 const STATUS_STYLES = {
   // Inquiries
-  NEW_INTAKE: "bg-accent/20 border-accent text-accent animate-pulse",
+  NEW_INTAKE: "bg-accent/20 border-accent text-accent font-bold",
   TRIAGED: "bg-blue-500/15 border-blue-500/40 text-blue-400",
   DISCOVERY_SCHEDULED: "bg-purple-500/15 border-purple-500/40 text-purple-300",
   PROPOSAL_SENT: "bg-amber-500/15 border-amber-500/40 text-amber-300",
@@ -46,9 +46,6 @@ export default function StatusBadge({ status, className = "" }) {
     <span
       className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-[2px] border font-parkinsans text-[9px] tracking-[0.15em] uppercase font-medium whitespace-nowrap ${style} ${className}`}
     >
-      {status === "NEW_INTAKE" && (
-        <span className="size-1 rounded-full bg-accent animate-ping" />
-      )}
       {label}
     </span>
   );

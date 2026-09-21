@@ -5,24 +5,15 @@ import React from "react";
  * Displays technical metadata indices such as "01 / CAPABILITIES"
  */
 export default function SectionLabel({
-  index = "01",
+  index, // Kept for backwards compatibility if passed, but not rendered
   label = "SECTION",
   className = "",
-  showDot = true,
 }) {
   return (
     <div
-      className={`inline-flex items-center gap-3 font-parkinsans text-[11px] sm:text-[12px] tracking-[0.2em] text-white/60 uppercase select-none ${className}`}
+      className={`inline-flex items-center font-artific text-[11px] sm:text-[12px] tracking-[0.2em] text-[var(--text-secondary)] uppercase select-none ${className}`}
     >
-      {showDot && (
-        <span
-          className="size-1.5 rounded-[1px] bg-accent animate-corner-pulse shrink-0"
-          aria-hidden="true"
-        />
-      )}
-      <span className="text-white/40">{index}</span>
-      <span className="text-white/30 text-[10px]">·</span>
-      <span className="text-white/90">{label}</span>
+      <span className="text-[var(--text-primary)] font-medium">{label}</span>
     </div>
   );
 }

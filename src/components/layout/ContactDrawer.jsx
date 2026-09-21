@@ -4,30 +4,44 @@ import React, { useState, useEffect } from "react";
 import { X, CheckCircle2, ArrowRight, ShieldCheck, Clock, Terminal } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const DISCIPLINES = [
-  "ENTERPRISE ERP",
-  "AI & DOMAIN RAG",
-  "BRAND STRATEGY",
-  "LOGO & BRAND IDENTITY",
-  "GRAPHIC DESIGN",
-  "SOCIAL & MARKETING DESIGN",
-  "PERSONAL BRANDING",
-  "PUBLIC SECTOR",
-  "WEB & MOBILE",
-  "ARCHITECTURE AUDIT",
+const PRIMARY_DISCIPLINES = [
+  {
+    id: "digital",
+    label: "WEBSITE / DIGITAL PRODUCT",
+    subOptions: ["Website", "Web Application", "Customer Portal", "Digital Product"],
+  },
+  {
+    id: "intelligence",
+    label: "AI & INTELLIGENT TOOL",
+    subOptions: ["AI Assistant", "Knowledge & Search", "Workflow Automation", "Custom AI Model"],
+  },
+  {
+    id: "systems",
+    label: "BUSINESS SYSTEM / ERP",
+    subOptions: ["Custom ERP", "Operations Platform", "Workflow Engine", "Internal Software"],
+  },
+  {
+    id: "brand",
+    label: "BRAND & CREATIVE",
+    subOptions: ["BRAND STRATEGY", "LOGO & BRAND IDENTITY", "GRAPHIC DESIGN", "SOCIAL & MARKETING DESIGN", "PERSONAL BRANDING"],
+  },
+  {
+    id: "other",
+    label: "EXPLORING / NOT SURE YET",
+    subOptions: [],
+  },
 ];
 
 const TIMELINES = [
-  "IMMEDIATE (0-30 DAYS)",
-  "Q1-Q2 ROADMAP",
-  "3-6 MONTHS",
-  "STRATEGIC ENGAGEMENT",
+  "THIS MONTH (IMMEDIATE)",
+  "1–3 MONTHS",
+  "3–6 MONTHS",
+  "EXPLORING / FLEXIBLE",
 ];
 
 const BUDGET_RANGES = [
   "EXPLORING / NOT SURE YET",
-  "UNDER 25K ETB",
-  "25K – 50K ETB",
+  "UNDER 50K ETB",
   "50K – 100K ETB",
   "100K – 250K ETB",
   "250K+ ETB",
@@ -58,8 +72,9 @@ const PERSONAL_ROLES = [
  * Editorial Contact Drawer (Spec ref: §31 & Brand Spec §20, §21, §22)
  * Enters from right with backdrop blur, conditional question modules, and staggered field reveals.
  */
-export default function ContactDrawer({ open, setOpen }) {
-  const [selectedDiscipline, setSelectedDiscipline] = useState(DISCIPLINES[0]);
+export default function ContactDrawer({ open, setOpen, preset = null }) {
+  const [selectedPrimary, setSelectedPrimary] = useState(PRIMARY_DISCIPLINES[0]);
+  const [selectedSubOption, setSelectedSubOption] = useState(PRIMARY_DISCIPLINES[0].subOptions[0] || "");
   const [selectedTimeline, setSelectedTimeline] = useState(TIMELINES[0]);
   const [selectedBudget, setSelectedBudget] = useState(BUDGET_RANGES[0]);
   
@@ -84,13 +99,60 @@ export default function ContactDrawer({ open, setOpen }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [inquiryId, setInquiryId] = useState("");
 
-  const isBrandDiscipline = [
-    "BRAND STRATEGY",
-    "LOGO & BRAND IDENTITY",
-    "GRAPHIC DESIGN",
-    "SOCIAL & MARKETING DESIGN",
-    "PERSONAL BRANDING",
-  ].includes(selectedDiscipline);
+  const isBrandDiscipline =
+    selectedPrimary.id === "brand" ||
+    [
+      "BRAND STRATEGY",
+      "LOGO & BRAND IDENTITY",
+      "GRAPHIC DESIGN",
+      "SOCIAL & MARKETING DESIGN",
+      "PERSONAL BRANDING",
+    ].includes(selectedSubOption);
+
+  // Adjust state during render when preset prop changes (React recommended pattern)
+  const [prevPreset, setPrevPreset] = useState(preset);
+  if (preset !== prevPreset && open) {
+    setPrevPreset(preset);
+
+    let targetDiscipline = null;
+    let targetSub = null;
+
+    if (typeof preset === "string") {
+      targetDiscipline = preset;
+    } else if (typeof preset === "object") {
+      targetDiscipline = preset.discipline || preset.id;
+      targetSub = preset.subOption;
+    }
+
+    if (targetDiscipline) {
+      const match = PRIMARY_DISCIPLINES.find(
+        (d) =>
+          d.id.toLowerCase() === targetDiscipline.toLowerCase() ||
+          d.label.toLowerCase().includes(targetDiscipline.toLowerCase()) ||
+          targetDiscipline.toLowerCase().includes(d.id.toLowerCase())
+      );
+      if (match) {
+        setSelectedPrimary(match);
+        if (targetSub) {
+          const subMatch = match.subOptions.find(
+            (so) =>
+              so.toLowerCase() === targetSub.toLowerCase() ||
+              so.toLowerCase().includes(targetSub.toLowerCase()) ||
+              targetSub.toLowerCase().includes(so.toLowerCase())
+          );
+          if (subMatch) {
+            setSelectedSubOption(subMatch);
+          } else {
+            setSelectedSubOption(targetSub);
+          }
+        } else if (match.subOptions.length > 0) {
+          setSelectedSubOption(match.subOptions[0]);
+        } else {
+          setSelectedSubOption("");
+        }
+      }
+    }
+  }
 
   // Lock body scroll when open and handle Escape key
   useEffect(() => {
@@ -117,6 +179,10 @@ export default function ContactDrawer({ open, setOpen }) {
     e.preventDefault();
     setIsSubmitting(true);
 
+    const activeDiscipline = selectedSubOption
+      ? `${selectedPrimary.label} · ${selectedSubOption}`
+      : selectedPrimary.label;
+
     try {
       const res = await fetch("/api/intake", {
         method: "POST",
@@ -126,11 +192,13 @@ export default function ContactDrawer({ open, setOpen }) {
           email: formData.email,
           phone: formData.phone || "Not specified",
           company: formData.company,
-          discipline: selectedDiscipline,
+          discipline: activeDiscipline,
           timeline: selectedTimeline,
           budgetRange: selectedBudget,
           projectBrief: formData.message,
           metadata: {
+            primaryDiscipline: selectedPrimary.id,
+            subOption: selectedSubOption,
             brandStatus: brandSituation,
             hasGuidelines: needBrandGuidelines,
             graphicAssets: selectedAssetType,
@@ -193,27 +261,24 @@ export default function ContactDrawer({ open, setOpen }) {
             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
             role="dialog"
             aria-modal="true"
-            aria-label="Commission an engineering or creative engagement with Gerat"
+            aria-label="Start a project with Gerat"
             className="relative z-10 w-full max-w-[640px] h-full bg-[var(--surface)] text-white border-l border-white/10 flex flex-col shadow-2xl overflow-y-auto hide-scrollbar"
           >
-            {/* Header / Telemetry Bar */}
+            {/* Header / Bar */}
             <div className="sticky top-0 z-20 bg-[var(--surface)]/95 backdrop-blur-md border-b border-white/10 px-6 sm:px-10 py-5 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <span className="size-2 rounded-full bg-accent animate-pulse" />
-                <span className="font-parkinsans text-[10px] tracking-[0.25em] text-white/70 uppercase">
-                  INITIATE COMMISSION · {isBrandDiscipline ? "CREATIVE & BRAND" : "DIRECT ENGAGEMENT"}
+              <div className="flex items-center">
+                <span className="font-artific text-[10px] tracking-[0.25em] text-white/70 uppercase font-medium">
+                  START A PROJECT · DIRECT CONSULTATION
                 </span>
               </div>
 
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="relative size-9 flex items-center justify-center border border-white/10 bg-white/5 text-white/60 hover:text-white hover:border-accent hover:bg-accent/10 transition-colors rounded-[2px]"
+                className="size-9 flex items-center justify-center border border-white/10 bg-white/5 text-white/60 hover:text-white hover:border-accent hover:bg-accent/10 transition-colors rounded-[2px]"
                 aria-label="Close contact drawer"
               >
-                <X className="size-4" />
-                <span className="absolute -top-[1px] -left-[1px] size-1.5 border-t border-l border-white/30" />
-                <span className="absolute -bottom-[1px] -right-[1px] size-1.5 border-b border-r border-white/30" />
+                ✕
               </button>
             </div>
 
@@ -223,62 +288,90 @@ export default function ContactDrawer({ open, setOpen }) {
                 <form onSubmit={handleSubmit} className="flex flex-col gap-8">
                   {/* Hero Prompt */}
                   <div className="flex flex-col gap-2">
-                    <span className="font-parkinsans text-[10px] tracking-[0.2em] text-accent uppercase">
+                    <span className="font-artific text-[10px] tracking-[0.2em] text-accent uppercase font-medium">
                       GERAT SOFTWARE SOLUTION
                     </span>
-                    <h2 className="font-artific text-3xl sm:text-4xl font-medium tracking-tight uppercase leading-[1.05]">
-                      {isBrandDiscipline ? (
-                        <>
-                          TALK TO THE <br />
-                          <span className="text-white/60">BRAND & CREATIVE DIRECTORS.</span>
-                        </>
-                      ) : (
-                        <>
-                          TALK TO THE <br />
-                          <span className="text-white/60">ENGINEERING ARCHITECTS.</span>
-                        </>
-                      )}
+                    <h2 className="font-parkinsans text-2xl sm:text-3xl font-medium sm:font-semibold tracking-tight uppercase leading-[1.1]">
+                      LET&apos;S BUILD SOMETHING THAT WORKS.
                     </h2>
-                    <p className="font-parkinsans text-sm text-white/60 leading-relaxed mt-1">
-                      {isBrandDiscipline
-                        ? "Strategic brand positioning, monolithic visual identity, and graphic systems connected directly to digital execution. Direct review within 24–48 hours."
-                        : "Direct engineering review. We evaluate system scope, computational constraints, and deployment SLAs within 24–48 hours."}
+                    <p className="font-artific text-xs sm:text-sm text-white/70 leading-relaxed mt-1">
+                      Tell us what you&apos;re working on. We evaluate every inquiry directly
+                      and follow up within 24–48 hours.
                     </p>
                   </div>
 
-                  {/* Discipline Selection */}
+                  {/* Discipline Selection (4 Pillars + Fallback) */}
                   <div className="flex flex-col gap-3">
                     <label className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
-                      01 · SYSTEM & CREATIVE DISCIPLINE <span className="text-accent">*</span>
+                      WHAT CAN WE HELP YOU BUILD? <span className="text-accent">*</span>
                     </label>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                      {DISCIPLINES.map((discipline) => {
-                        const isSelected = selectedDiscipline === discipline;
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                      {PRIMARY_DISCIPLINES.map((p) => {
+                        const isSelected = selectedPrimary.id === p.id;
                         return (
                           <button
-                            key={discipline}
+                            key={p.id}
                             type="button"
-                            onClick={() => setSelectedDiscipline(discipline)}
-                            className={`px-3 py-2.5 text-left font-parkinsans text-[9px] tracking-[0.08em] border transition-all rounded-[2px] flex items-center justify-between ${
+                            onClick={() => {
+                              setSelectedPrimary(p);
+                              setSelectedSubOption(p.subOptions[0] || "");
+                            }}
+                            className={`p-3 text-left border transition-all rounded-[2px] flex items-center justify-between ${
                               isSelected
                                 ? "bg-accent/10 border-accent text-white font-medium"
-                                : "bg-white/[0.02] border-white/10 text-white/60 hover:border-white/30 hover:text-white"
-                            }`}
+                                : "bg-white/[0.02] border-white/10 text-white/70 hover:border-white/30 hover:text-white"
+                            } ${p.id === "other" ? "sm:col-span-2" : ""}`}
                           >
-                            <span>{discipline}</span>
+                            <span className="font-parkinsans text-[10px] sm:text-[11px] tracking-[0.08em] uppercase">
+                              {p.label}
+                            </span>
                             {isSelected && (
-                              <span className="size-1.5 rounded-full bg-accent shrink-0 ml-1.5" />
+                              <svg className="size-3 text-accent shrink-0 ml-2" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                                <path d="M2 6l3 3 5-5" />
+                              </svg>
                             )}
                           </button>
                         );
                       })}
                     </div>
+
+                    {/* Progressive Disclosure: Specific Focus Sub-Options */}
+                    {selectedPrimary.subOptions.length > 0 && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="flex flex-col gap-2 pt-2 border-t border-white/5"
+                      >
+                        <span className="font-parkinsans text-[9px] tracking-[0.15em] text-white/40 uppercase">
+                          SELECT FOCUS AREA (OPTIONAL)
+                        </span>
+                        <div className="flex flex-wrap gap-2">
+                          {selectedPrimary.subOptions.map((sub) => {
+                            const isSubSelected = selectedSubOption === sub;
+                            return (
+                              <button
+                                key={sub}
+                                type="button"
+                                onClick={() => setSelectedSubOption(sub)}
+                                className={`px-3 py-1.5 font-parkinsans text-[9px] tracking-[0.05em] border rounded-[2px] transition-all uppercase ${
+                                  isSubSelected
+                                    ? "bg-accent/20 border-accent text-white font-medium"
+                                    : "bg-white/[0.02] border-white/10 text-white/60 hover:text-white hover:border-white/20"
+                                }`}
+                              >
+                                {sub}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </motion.div>
+                    )}
                   </div>
 
                   {/* Core Contact Fields */}
                   <div className="flex flex-col gap-4">
                     <label className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
-                      02 · CONTACT PARAMETERS <span className="text-accent">*</span>
+                      CONTACT PARAMETERS <span className="text-accent">*</span>
                     </label>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -336,7 +429,7 @@ export default function ContactDrawer({ open, setOpen }) {
                   </div>
 
                   {/* Conditional Discipline Specifications */}
-                  {(selectedDiscipline === "BRAND STRATEGY" || selectedDiscipline === "LOGO & BRAND IDENTITY") && (
+                  {(selectedSubOption === "BRAND STRATEGY" || selectedSubOption === "LOGO & BRAND IDENTITY") && (
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -380,7 +473,7 @@ export default function ContactDrawer({ open, setOpen }) {
                     </motion.div>
                   )}
 
-                  {(selectedDiscipline === "GRAPHIC DESIGN" || selectedDiscipline === "SOCIAL & MARKETING DESIGN") && (
+                  {(selectedSubOption === "GRAPHIC DESIGN" || selectedSubOption === "SOCIAL & MARKETING DESIGN") && (
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -408,7 +501,7 @@ export default function ContactDrawer({ open, setOpen }) {
                     </motion.div>
                   )}
 
-                  {selectedDiscipline === "PERSONAL BRANDING" && (
+                  {selectedSubOption === "PERSONAL BRANDING" && (
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -468,7 +561,7 @@ export default function ContactDrawer({ open, setOpen }) {
                   {/* Timeline Selection */}
                   <div className="flex flex-col gap-3">
                     <label className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
-                      03 · DELIVERY TIMELINE
+                      DELIVERY TIMELINE
                     </label>
                     <div className="grid grid-cols-2 gap-2">
                       {TIMELINES.map((time) => {
@@ -494,7 +587,7 @@ export default function ContactDrawer({ open, setOpen }) {
                   {/* Budget Qualification */}
                   <div className="flex flex-col gap-3">
                     <label className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
-                      04 · ESTIMATED BUDGET SCALE (OPTIONAL)
+                      ESTIMATED BUDGET SCALE (OPTIONAL)
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                       {BUDGET_RANGES.map((budget) => {
@@ -520,7 +613,7 @@ export default function ContactDrawer({ open, setOpen }) {
                   {/* Scope Details */}
                   <div className="flex flex-col gap-3">
                     <label className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
-                      05 · {isBrandDiscipline ? "CREATIVE OBJECTIVES & CONTEXT" : "ARCHITECTURAL REQUIREMENTS"}
+                      {isBrandDiscipline ? "CREATIVE OBJECTIVES & CONTEXT" : "PROJECT BRIEF"}
                     </label>
                     <textarea
                       rows={4}
@@ -531,7 +624,7 @@ export default function ContactDrawer({ open, setOpen }) {
                       placeholder={
                         isBrandDiscipline
                           ? "Describe your brand vision, target audience, aesthetic benchmarks, existing assets, or specific collateral requirements..."
-                          : "Outline operational requirements, expected transaction volumes, legacy integrations, or specific target deadlines..."
+                          : "Tell us about what you want to build, current challenges, target audience, or specific requirements..."
                       }
                       className="w-full bg-[var(--surface-raised)] border border-white/10 p-4 font-parkinsans text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-accent transition-colors rounded-[2px] resize-none"
                     />
@@ -563,13 +656,9 @@ export default function ContactDrawer({ open, setOpen }) {
                       className="group relative isolate w-full py-4 bg-accent text-white font-parkinsans text-xs uppercase tracking-[0.2em] font-bold hover:bg-white hover:text-black disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 rounded-[2px] flex items-center justify-center gap-2"
                     >
                       <span>
-                        {isSubmitting ? "SUBMITTING INQUIRY..." : "SUBMIT INQUIRY"}
+                        {isSubmitting ? "SUBMITTING INQUIRY..." : "START YOUR PROJECT"}
                       </span>
                       <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform" />
-                      <span className="absolute -top-[1px] -left-[1px] size-2 border-t border-l border-white" />
-                      <span className="absolute -top-[1px] -right-[1px] size-2 border-t border-r border-white" />
-                      <span className="absolute -bottom-[1px] -left-[1px] size-2 border-b border-l border-white" />
-                      <span className="absolute -bottom-[1px] -right-[1px] size-2 border-b border-r border-white" />
                     </button>
                   </div>
                 </form>
@@ -581,16 +670,14 @@ export default function ContactDrawer({ open, setOpen }) {
                   </div>
 
                   <div className="flex flex-col gap-2">
-                    <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase">
+                    <span className="font-artific text-[10px] tracking-[0.25em] text-accent uppercase font-medium">
                       INQUIRY RECEIVED · {isBrandDiscipline ? "CREATIVE DISPATCH" : "GENERAL DISPATCH"}
                     </span>
-                    <h3 className="font-artific text-2xl sm:text-3xl font-medium tracking-tight uppercase">
+                    <h3 className="font-parkinsans text-2xl sm:text-3xl font-medium sm:font-semibold tracking-tight uppercase text-white">
                       INQUIRY LOGGED SUCCESSFULLY
                     </h3>
-                    <p className="font-parkinsans text-sm text-white/60 max-w-sm">
-                      {isBrandDiscipline
-                        ? "Our creative directors and brand architects will review your parameters and follow up within 24 business hours."
-                        : "Our lead software architects will review your system parameters and follow up via email within 24 business hours."}
+                    <p className="font-artific text-sm text-white/70 max-w-sm">
+                      Our leads will review your requirements and follow up via email within 24–48 hours.
                     </p>
                   </div>
 
@@ -604,7 +691,9 @@ export default function ContactDrawer({ open, setOpen }) {
                     </div>
                     <div className="flex justify-between items-center text-white/50 border-b border-white/5 pb-2">
                       <span>PRIMARY DISCIPLINE:</span>
-                      <span className="text-white">{selectedDiscipline}</span>
+                      <span className="text-white">
+                        {selectedSubOption ? `${selectedPrimary.label} · ${selectedSubOption}` : selectedPrimary.label}
+                      </span>
                     </div>
                     <div className="flex justify-between items-center text-white/50 border-b border-white/5 pb-2">
                       <span>BUDGET BRACKET:</span>

@@ -186,7 +186,9 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
       {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed bottom-6 right-6 z-50 bg-[#161616] border border-accent text-white px-4 py-3 rounded-[3px] font-parkinsans text-xs tracking-wider shadow-2xl flex items-center gap-2">
-          <span className="size-2 rounded-full bg-accent animate-pulse" />
+          <svg className="size-3 text-accent shrink-0" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+            <path d="M2 6l3 3 5-5" />
+          </svg>
           <span>{toastMessage}</span>
         </div>
       )}
@@ -205,7 +207,7 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="font-artific text-2xl sm:text-3xl font-bold uppercase text-white tracking-tight">
+            <h1 className="font-parkinsans text-2xl sm:text-3xl font-semibold tracking-tight uppercase text-white">
               {title || "UNTITLED CASE STUDY"}
             </h1>
             <span className="font-parkinsans text-[9px] tracking-[0.2em] px-2 py-0.5 rounded-[2px] bg-white/[0.05] border border-white/15 text-white/80 uppercase">
@@ -592,7 +594,7 @@ export default function CaseStudyEditor({ initialCaseStudy = null }) {
                   <div className="font-parkinsans text-[9px] tracking-[0.15em] text-white/40 uppercase">
                     {tags}
                   </div>
-                  <h3 className="font-artific text-lg font-bold uppercase text-white tracking-tight leading-tight mt-1">
+                  <h3 className="font-parkinsans text-lg font-bold uppercase text-white tracking-tight leading-tight mt-1">
                     {title || "TITLE PREVIEW"}
                   </h3>
                   <p className="font-sans text-xs text-white/70 leading-relaxed mt-2">

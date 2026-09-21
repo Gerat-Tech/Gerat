@@ -7,6 +7,8 @@ const NavContext = createContext({
   setIsMenuOpen: () => {},
   isContactOpen: false,
   setIsContactOpen: () => {},
+  contactPreset: null,
+  setContactPreset: () => {},
   openContact: () => {},
   closeContact: () => {},
 });
@@ -14,9 +16,18 @@ const NavContext = createContext({
 export function NavProvider({ children }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [contactPreset, setContactPreset] = useState(null);
 
-  const openContact = useCallback(() => setIsContactOpen(true), []);
-  const closeContact = useCallback(() => setIsContactOpen(false), []);
+  const openContact = useCallback((preset = null) => {
+    if (preset) {
+      setContactPreset(preset);
+    }
+    setIsContactOpen(true);
+  }, []);
+
+  const closeContact = useCallback(() => {
+    setIsContactOpen(false);
+  }, []);
 
   return (
     <NavContext.Provider
@@ -25,6 +36,8 @@ export function NavProvider({ children }) {
         setIsMenuOpen,
         isContactOpen,
         setIsContactOpen,
+        contactPreset,
+        setContactPreset,
         openContact,
         closeContact,
       }}

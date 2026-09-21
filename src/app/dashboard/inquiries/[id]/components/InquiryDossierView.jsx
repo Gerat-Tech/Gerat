@@ -227,7 +227,7 @@ export default function InquiryDossierView({ initialInquiry, teamMembers = [] })
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="font-artific text-2xl sm:text-3xl font-bold uppercase text-white tracking-tight">
+            <h1 className="font-parkinsans text-2xl sm:text-3xl font-semibold uppercase text-white tracking-tight">
               {inquiry.fullName}
             </h1>
             {inquiry.company && (

@@ -81,7 +81,7 @@ const PERSONAL_MODULES = [
     num: "05",
     title: "EXECUTIVE PERSONAL WEBSITE",
     icon: Globe,
-    subtitle: "SOVEREIGN DIGITAL ASSET · NEXT.JS",
+    subtitle: "CUSTOM PERSONAL WEBSITE · NEXT.JS",
     description:
       "A fast, bespoke personal website built on modern web standards. Houses your biography, portfolio, media appearances, speaking engagements, and contact pipeline.",
     deliverables: [
@@ -149,7 +149,7 @@ export default function PersonalBrandingPage() {
       {/* Hero Section */}
       <section className="relative w-full max-w-[1440px] mx-auto pt-36 sm:pt-44 pb-20 px-4 sm:px-6 md:px-8 lg:px-10 border-b border-white/10">
         <div className="flex flex-col gap-6 max-w-4xl">
-          <SectionLabel index="05" label="EXECUTIVE PRESENCE & PERSONAL BRANDING" />
+          <SectionLabel index="04" label="PERSONAL BRANDING" />
 
           <div className="space-y-2">
             <SplitText
@@ -172,9 +172,7 @@ export default function PersonalBrandingPage() {
 
           <FadeUp delay={0.3} y={16}>
             <p className="font-parkinsans text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed">
-              We help founders, executives, consultants, and technology leaders turn their
-              life&apos;s work and technical mastery into an undeniable, recognizable personal brand
-              that opens doors to capital, partnerships, and high-stakes opportunities.
+              We help founders, executives, and leaders build a personal brand that opens doors to capital, partnerships, and high-impact opportunities.
             </p>
           </FadeUp>
 
@@ -182,25 +180,30 @@ export default function PersonalBrandingPage() {
             <div className="flex flex-wrap items-center gap-4 pt-4">
               <button
                 type="button"
-                onClick={openContact}
+                onClick={() =>
+                  openContact({
+                    discipline: "brand",
+                    subOption: "PERSONAL BRANDING",
+                  })
+                }
                 className="inline-flex items-center font-parkinsans text-[11px] uppercase tracking-[0.2em] px-8 py-4 bg-accent text-white font-bold hover:bg-white hover:text-black transition-all rounded-[2px]"
               >
-                <span>COMMISSION PERSONAL BRANDING</span>
+                <span>BUILD YOUR PERSONAL BRAND</span>
                 <span className="ml-2">→</span>
               </button>
 
               <Link
-                href="/portfolio"
+                href="/portfolio?category=PERSONAL+BRAND"
                 className="inline-flex items-center font-parkinsans text-[11px] uppercase tracking-[0.2em] px-8 py-4 border border-white/20 bg-transparent text-white hover:border-white transition-all rounded-[2px]"
               >
-                <span>VIEW EXECUTIVE PROFILES</span>
+                <span>VIEW PROFILES</span>
               </Link>
             </div>
           </FadeUp>
         </div>
 
         <div className="mt-16 pt-4 border-t border-white/10 flex items-center justify-between font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
-          <span>FRAMEWORK · 07 MODULAR CAPABILITY PILLARS</span>
+          <span>FRAMEWORK · PERSONAL BRANDING</span>
           <span>DISCOVER METHODOLOGY ↓</span>
         </div>
       </section>
@@ -213,12 +216,12 @@ export default function PersonalBrandingPage() {
               <div className="p-6 bg-[var(--surface)] border border-white/10 rounded-[2px] h-full flex flex-col justify-between">
                 <div>
                   <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase font-bold">
-                    PROFILE · 0{idx + 1}
+                    LEADERSHIP PROFILE
                   </span>
-                  <h3 className="font-artific text-lg font-medium tracking-tight uppercase text-white mt-1">
+                  <h3 className="font-parkinsans text-lg font-semibold tracking-tight uppercase text-white mt-1">
                     {p.role}
                   </h3>
-                  <p className="font-parkinsans text-xs text-white/60 mt-3 leading-relaxed">
+                  <p className="font-artific text-xs text-white/60 mt-3 leading-relaxed">
                     {p.benefit}
                   </p>
                 </div>
@@ -233,14 +236,14 @@ export default function PersonalBrandingPage() {
       </section>
 
       {/* 7 Modular Framework Pillars */}
-      <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-24 sm:py-32 border-b border-white/10">
-        <div className="flex flex-col gap-4 mb-16 max-w-3xl">
-          <SectionLabel index="06" label="THE 7-PILLAR PERSONAL BRAND ENGINE" />
-          <h2 className="font-artific text-3xl sm:text-5xl font-medium tracking-tight uppercase leading-[1.05]">
+      <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-14 sm:py-18 md:py-20 border-b border-white/10">
+        <div className="flex flex-col gap-4 mb-10 sm:mb-12 max-w-3xl">
+          <SectionLabel label="THE 7-PILLAR PERSONAL BRAND ENGINE" />
+          <h2 className="font-parkinsans text-3xl sm:text-5xl font-semibold tracking-tight uppercase leading-[1.05]">
             MODULAR ARCHITECTURE. <br />
             <span className="text-accent">BUILT AROUND YOUR TIME.</span>
           </h2>
-          <p className="font-parkinsans text-sm sm:text-base text-white/70 leading-relaxed">
+          <p className="font-artific text-sm sm:text-base text-white/70 leading-relaxed">
             Busy executives do not have 20 hours a week to produce content. We design high-efficiency
             systems that extract your insights with minimal time commitment while maximizing institutional impact.
           </p>
@@ -250,7 +253,7 @@ export default function PersonalBrandingPage() {
           {PERSONAL_MODULES.map((mod, idx) => {
             const Icon = mod.icon;
             return (
-              <FadeUp key={mod.num} delay={0.08 * idx} y={24}>
+              <FadeUp key={mod.title} delay={0.08 * idx} y={24}>
                 <div className="group relative bg-[var(--surface)] border border-white/10 hover:border-accent/80 p-8 rounded-[2px] flex flex-col justify-between min-h-[380px] transition-all duration-300 h-full">
                   <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30 group-hover:border-accent transition-colors" />
                   <span className="absolute top-0 right-0 size-2 border-t border-r border-white/30 group-hover:border-accent transition-colors" />
@@ -264,7 +267,7 @@ export default function PersonalBrandingPage() {
                           <Icon className="size-3.5" />
                         </div>
                         <span className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
-                          MODULE · {mod.num}
+                          MODULE
                         </span>
                       </div>
                     </div>
@@ -273,10 +276,10 @@ export default function PersonalBrandingPage() {
                       <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase font-bold">
                         {mod.subtitle}
                       </span>
-                      <h3 className="font-artific text-2xl font-medium tracking-tight uppercase text-white mt-1">
+                      <h3 className="font-parkinsans text-2xl font-semibold tracking-tight uppercase text-white mt-1">
                         {mod.title}
                       </h3>
-                      <p className="font-parkinsans text-xs sm:text-sm text-white/70 leading-relaxed mt-2">
+                      <p className="font-artific text-xs sm:text-sm text-white/70 leading-relaxed mt-2">
                         {mod.description}
                       </p>
                     </div>
@@ -288,9 +291,8 @@ export default function PersonalBrandingPage() {
                     </span>
                     <ul className="space-y-1.5 font-parkinsans text-[9px] tracking-[0.08em] text-white/60">
                       {mod.deliverables.map((del) => (
-                        <li key={del} className="flex items-center gap-2">
-                          <span className="text-accent">•</span>
-                          <span>{del}</span>
+                        <li key={del} className="hover:text-white transition-colors">
+                          {del}
                         </li>
                       ))}
                     </ul>
@@ -311,10 +313,10 @@ export default function PersonalBrandingPage() {
                 <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase font-bold">
                   FLAGSHIP CASE STUDY · {executiveCase.category}
                 </span>
-                <h2 className="font-artific text-3xl sm:text-4xl font-medium tracking-tight uppercase text-white">
+                <h2 className="font-parkinsans text-3xl sm:text-4xl font-semibold tracking-tight uppercase text-white">
                   {executiveCase.title}
                 </h2>
-                <p className="font-parkinsans text-sm text-white/70 leading-relaxed max-w-xl">
+                <p className="font-artific text-sm text-white/70 leading-relaxed max-w-xl">
                   {executiveCase.summary}
                 </p>
 
@@ -331,7 +333,7 @@ export default function PersonalBrandingPage() {
 
                 <div className="pt-4">
                   <Link
-                    href="/portfolio"
+                    href="/portfolio?category=PERSONAL+BRAND"
                     className="inline-flex items-center gap-2 font-parkinsans text-[10px] tracking-[0.2em] uppercase text-white hover:text-accent transition-colors"
                   >
                     <span>EXPLORE COMPLETE PORTFOLIO</span>
@@ -342,7 +344,7 @@ export default function PersonalBrandingPage() {
 
               <div className="lg:col-span-5 bg-[var(--surface-raised)] border border-white/10 p-6 rounded-[2px] flex flex-col gap-3 font-parkinsans text-[10px]">
                 <span className="text-accent uppercase tracking-[0.2em]">CASE BREAKDOWN</span>
-                <div className="text-white/60 space-y-2 font-parkinsans text-xs">
+                <div className="text-white/60 space-y-2 font-artific text-xs">
                   <p><strong className="text-white">Challenge:</strong> {executiveCase.problem}</p>
                   <p><strong className="text-white">Solution:</strong> {executiveCase.architecture}</p>
                   <p><strong className="text-white">Result:</strong> {executiveCase.impact}</p>
@@ -358,15 +360,20 @@ export default function PersonalBrandingPage() {
         <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase">
           ELEVATE YOUR VISIBILITY
         </span>
-        <h2 className="font-artific text-3xl sm:text-5xl font-medium tracking-tight uppercase max-w-2xl">
+        <h2 className="font-parkinsans text-3xl sm:text-5xl font-semibold tracking-tight uppercase max-w-2xl">
           READY TO TURN YOUR STORY INTO AN ASSET?
         </h2>
-        <p className="font-parkinsans text-sm sm:text-base text-white/60 max-w-md">
+        <p className="font-artific text-sm sm:text-base text-white/60 max-w-md">
           Direct consultation with our executive branding directors. We map your trajectory in an introductory review.
         </p>
         <button
           type="button"
-          onClick={openContact}
+          onClick={() =>
+            openContact({
+              discipline: "brand",
+              subOption: "PERSONAL BRANDING",
+            })
+          }
           className="mt-2 px-10 py-4 bg-accent text-white font-parkinsans text-xs uppercase tracking-[0.2em] font-bold hover:bg-white hover:text-black transition-all rounded-[2px]"
         >
           BOOK A PERSONAL BRAND CONSULTATION
