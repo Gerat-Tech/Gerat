@@ -16,6 +16,17 @@ export const leadershipTeam = [
     image: "/image/team/leadership/hiruy.jpeg",
   },
   {
+    name: "EKD",
+    role: "CO-FOUNDER & CHIEF OPERATING OFFICER",
+    specialty: "OPERATIONS & STRATEGIC EXECUTION",
+    bio: "Oversees company-wide execution, strategic program management, and operational delivery across all engineering and client ventures.",
+    email: "ekd@gerat.com",
+    linkedinUrl: "https://linkedin.com/company/gerat",
+    twitterUrl: "https://x.com/geratsolutions",
+    githubUrl: "https://github.com/gerat-technologies",
+    image: "/image/team/leadership/EKD.jpg",
+  },
+  {
     name: "DAWIT TEKLEBRHAN",
     role: "CO-FOUNDER & CHIEF TECHNOLOGY OFFICER",
     specialty: "SYSTEMS ARCHITECTURE · COMPUTATIONAL PLATFORMS",

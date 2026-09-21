@@ -33,7 +33,11 @@ export default async function TeamPage() {
         role: m.roleTitle,
         specialty: m.focusTag,
         bio: m.bio,
-        image: m.photoUrl || "/image/team/leadership/WQF__0000_Founder-IgorTulchinsky.webp",
+        email: m.email,
+        linkedinUrl: m.linkedinUrl,
+        githubUrl: m.githubUrl,
+        twitterUrl: m.twitterUrl,
+        image: m.photoUrl || "/image/team/leadership/Dawit.jpeg",
       }));
     }
 

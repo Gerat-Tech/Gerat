@@ -15,6 +15,16 @@ const DEFAULT_PARTNERS = [
     position: "center 20%",
   },
   {
+    id: "ekd",
+    name: "EKD",
+    role: "CO-FOUNDER & CHIEF OPERATING OFFICER",
+    title: "CO-FOUNDER & CHIEF OPERATING OFFICER",
+    tag: "OPERATIONS & STRATEGIC EXECUTION",
+    bio: "Oversees company-wide execution, strategic program management, and operational delivery across all engineering and client ventures.",
+    image: "/image/team/leadership/EKD.jpg",
+    position: "center 20%",
+  },
+  {
     id: "dawit-teklebrhan",
     name: "DAWIT TEKLEBRHAN",
     role: "CO-FOUNDER & CHIEF TECHNOLOGY OFFICER",
@@ -45,6 +55,37 @@ const DEFAULT_PARTNERS = [
     position: "center 20%",
   },
 ];
+
+/**
+ * Concise role badges for slit cards to ensure crisp presentation without collision
+ */
+function getShortRole(role) {
+  if (!role) return "";
+  const upper = role.toUpperCase().trim();
+  if (upper.includes("CHIEF EXECUTIVE OFFICER") || upper.includes("CEO")) {
+    return upper.includes("CO-FOUNDER") ? "CO-FOUNDER & CEO" : "FOUNDER & CEO";
+  }
+  if (upper.includes("CHIEF OPERATING OFFICER") || upper.includes("COO")) {
+    return upper.includes("CO-FOUNDER") ? "CO-FOUNDER & COO" : "OPERATING OFFICER";
+  }
+  if (upper.includes("CHIEF TECHNOLOGY OFFICER") || upper.includes("CTO")) {
+    return upper.includes("CO-FOUNDER") ? "CO-FOUNDER & CTO" : "CHIEF TECH OFFICER";
+  }
+  if (upper.includes("ARTIFICIAL INTELLIGENCE") || upper.includes("AI")) {
+    return upper.includes("CO-FOUNDER") ? "CO-FOUNDER & HEAD OF AI" : "HEAD OF AI";
+  }
+  if (upper.includes("ENTERPRISE") || upper.includes("ERP")) {
+    return upper.includes("CO-FOUNDER") ? "CO-FOUNDER & HEAD OF ERP" : "HEAD OF ERP";
+  }
+  if (upper.length <= 22) return upper;
+  return upper
+    .replace("CHIEF TECHNOLOGY OFFICER", "CTO")
+    .replace("CHIEF OPERATING OFFICER", "COO")
+    .replace("CHIEF EXECUTIVE OFFICER", "CEO")
+    .replace("ARTIFICIAL INTELLIGENCE", "AI")
+    .replace("ENTERPRISE ENGINEERING", "ERP")
+    .slice(0, 24);
+}
 
 /**
  * Kinetic Leadership Section
@@ -114,11 +155,13 @@ export default function OurLeadership({ initialLeaders = null }) {
 
   // Responsive grid columns based on number of leaders
   const gridColsClass =
-    partners.length === 2
-      ? "md:grid-cols-2"
+    partners.length === 5
+      ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-5"
       : partners.length === 4
-      ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-4"
-      : "grid-cols-1 md:grid-cols-3";
+      ? "grid-cols-2 sm:grid-cols-2 md:grid-cols-4"
+      : partners.length === 2
+      ? "grid-cols-1 md:grid-cols-2"
+      : "grid-cols-2 sm:grid-cols-3";
 
   return (
     <section
@@ -177,9 +220,10 @@ export default function OurLeadership({ initialLeaders = null }) {
             </div>
 
             {/* Horizontal Slits Row */}
-            <div className={`grid ${gridColsClass} gap-4 md:gap-6 w-full max-w-[1240px] my-8 sm:my-10`}>
-              {partners.map((partner) => {
+            <div className={`grid ${gridColsClass} gap-3 sm:gap-4 md:gap-5 w-full max-w-[1240px] my-8 sm:my-10`}>
+              {partners.map((partner, pIdx) => {
                 const isHovered = hoveredIndex === partner.id;
+                const isLastInOdd = partners.length === 5 && pIdx === 4;
                 return (
                   <div
                     key={partner.id}
@@ -195,7 +239,9 @@ export default function OurLeadership({ initialLeaders = null }) {
                     role="button"
                     tabIndex={0}
                     aria-label={`View ${partner.name}`}
-                    className="group/slit relative h-[105px] sm:h-[125px] md:h-[135px] w-full cursor-pointer rounded-[2px] overflow-visible border border-white/15 hover:border-accent transition-all duration-300 bg-[#111111] outline-hidden focus-visible:ring-1 focus-visible:ring-accent"
+                    className={`group/slit relative h-[115px] sm:h-[135px] md:h-[145px] w-full cursor-pointer rounded-[2px] overflow-hidden border border-white/15 hover:border-accent transition-all duration-300 bg-[#111111] outline-hidden focus-visible:ring-1 focus-visible:ring-accent ${
+                      isLastInOdd ? "col-span-2 sm:col-span-1 lg:col-span-1" : ""
+                    }`}
                   >
                     {/* Cropped Letterbox Image focusing on eyes/portrait */}
                     <div className="w-full h-full overflow-hidden rounded-[2px] bg-[#1a1a1a]">
@@ -213,35 +259,36 @@ export default function OurLeadership({ initialLeaders = null }) {
 
                     {/* Floating Pill VIEW Badge */}
                     <div
-                      className={`absolute -top-3.5 right-3 z-20 transition-all duration-300 pointer-events-none ${
+                      className={`absolute top-2.5 right-2.5 z-20 transition-all duration-300 pointer-events-none ${
                         isHovered
                           ? "opacity-100 translate-y-0 scale-100"
-                          : "opacity-0 translate-y-2 scale-90"
+                          : "opacity-0 translate-y-1 scale-90"
                       }`}
                     >
-                      <div className="flex items-center justify-center bg-[#EA5B15] text-white px-2.5 py-1 rounded-[2px] shadow-lg border border-white/20">
-                        <span className="font-parkinsans text-[9px] tracking-[0.2em] uppercase font-bold text-white">
+                      <div className="flex items-center justify-center bg-[#EA5B15] text-white px-2 py-0.5 rounded-[2px] shadow-lg border border-white/20">
+                        <span className="font-parkinsans text-[8.5px] sm:text-[9px] tracking-[0.2em] uppercase font-bold text-white">
                           VIEW
                         </span>
                       </div>
                     </div>
 
-                    {/* Bottom Metadata in Slit */}
+                    {/* Bottom Metadata in Slit - Stacked Column so role never overlaps name */}
                     <div
                       data-dark-overlay="true"
-                      className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent p-3 flex items-end justify-between z-10 pointer-events-none"
+                      className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/70 to-transparent p-2.5 sm:p-3 flex flex-col justify-end z-10 pointer-events-none"
                     >
                       <span
-                        className="font-parkinsans text-[10px] tracking-[0.18em] uppercase font-bold text-white dark-overlay-text force-text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]"
+                        className="font-parkinsans text-[10px] sm:text-[11px] tracking-[0.16em] uppercase font-bold text-white dark-overlay-text force-text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] truncate"
                         style={{ color: "#FAF6ED" }}
                       >
                         {partner.name}
                       </span>
                       <span
-                        className="font-parkinsans text-[9px] tracking-[0.2em] uppercase text-accent font-bold drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] shrink-0 ml-2"
+                        className="font-parkinsans text-[8.5px] sm:text-[9.5px] tracking-[0.18em] uppercase text-accent font-semibold drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] truncate mt-0.5"
                         style={{ color: "#EA5B15" }}
+                        title={partner.role}
                       >
-                        {partner.role}
+                        {getShortRole(partner.role)}
                       </span>
                     </div>
                   </div>
@@ -273,14 +320,15 @@ export default function OurLeadership({ initialLeaders = null }) {
                   }}
                 />
 
-                {/* Top-Right Badge: [ROLE] */}
+                {/* Bottom-Right Badge: [ROLE] */}
                 <div
                   data-dark-overlay="true"
-                  className="absolute bottom-4 right-4 sm:bottom-5 sm:right-5 z-10 flex items-center bg-black/85 backdrop-blur-xs px-3 py-1.5 border border-white/25 rounded-[2px]"
+                  className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-10 max-w-[calc(100%-1.5rem)] flex items-center bg-black/85 backdrop-blur-xs px-2.5 sm:px-3 py-1.5 border border-white/25 rounded-[2px]"
                 >
                   <span
-                    className="font-parkinsans text-[10px] tracking-[0.2em] text-[#faf6ed] uppercase font-bold dark-overlay-text"
+                    className="font-parkinsans text-[9px] sm:text-[10px] tracking-[0.18em] text-[#faf6ed] uppercase font-bold dark-overlay-text truncate"
                     style={{ color: "#FAF6ED" }}
+                    title={activePartner.role}
                   >
                     {activePartner.role}
                   </span>
@@ -288,26 +336,29 @@ export default function OurLeadership({ initialLeaders = null }) {
               </div>
 
               {/* Bottom Metadata & Bio */}
-              <div className="w-full max-w-[460px] mt-4 flex flex-col gap-2 px-1">
-                <div className="flex items-center justify-between font-parkinsans text-[11px] uppercase tracking-[0.2em] text-white/70">
-                  <div className="flex items-center gap-3">
-                    <span className="font-bold text-white tracking-[0.18em]">
-                      {activePartner.name}
-                    </span>
-                    <span className="text-white/25">|</span>
-                    <span className="text-accent">{activePartner.tag}</span>
-                  </div>
+              <div className="w-full max-w-[460px] mt-4 flex flex-col gap-2.5 px-1">
+                <div className="flex items-center justify-between gap-4 font-parkinsans">
+                  <span className="font-bold text-white text-[13px] sm:text-[14px] tracking-[0.18em] uppercase truncate">
+                    {activePartner.name}
+                  </span>
 
                   <button
                     onClick={() => setExpandedIndex(null)}
-                    className="text-white/40 hover:text-white transition-colors cursor-pointer text-[10px] tracking-[0.15em] hover:text-accent flex items-center gap-1"
+                    className="text-white/50 hover:text-accent transition-colors cursor-pointer text-[10px] tracking-[0.15em] uppercase shrink-0 py-0.5 px-1"
                     title="Close expanded view"
                   >
                     [ CLOSE × ]
                   </button>
                 </div>
+
+                {activePartner.tag && (
+                  <div className="font-artific text-[10px] sm:text-[11px] tracking-[0.2em] uppercase text-accent font-medium">
+                    {activePartner.tag}
+                  </div>
+                )}
+
                 {activePartner.bio && (
-                  <p className="font-artific text-xs sm:text-sm text-white/75 leading-relaxed pt-1">
+                  <p className="font-artific text-xs sm:text-sm text-white/75 leading-relaxed pt-0.5">
                     {activePartner.bio}
                   </p>
                 )}
@@ -323,7 +374,7 @@ export default function OurLeadership({ initialLeaders = null }) {
               </div>
 
               {/* The Remaining Letterbox Slits */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 my-6 sm:my-8">
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-3 my-6 sm:my-8">
                 {remainingPartners.map((partner) => {
                   const isHovered = hoveredIndex === partner.id;
                   return (
@@ -341,7 +392,7 @@ export default function OurLeadership({ initialLeaders = null }) {
                       role="button"
                       tabIndex={0}
                       aria-label={`Switch to ${partner.name}`}
-                      className="group/slit relative h-[95px] sm:h-[110px] w-full cursor-pointer rounded-[2px] overflow-visible border border-white/15 hover:border-accent transition-all duration-300 bg-[#111111] outline-hidden focus-visible:ring-1 focus-visible:ring-accent"
+                      className="group/slit relative h-[95px] sm:h-[110px] w-full cursor-pointer rounded-[2px] overflow-hidden border border-white/15 hover:border-accent transition-all duration-300 bg-[#111111] outline-hidden focus-visible:ring-1 focus-visible:ring-accent"
                     >
                       <div className="w-full h-full overflow-hidden rounded-[2px] bg-[#1a1a1a]">
                         <img
@@ -358,13 +409,13 @@ export default function OurLeadership({ initialLeaders = null }) {
 
                       {/* Floating Pill VIEW Badge */}
                       <div
-                        className={`absolute -top-3.5 right-3 z-20 transition-all duration-300 pointer-events-none ${
+                        className={`absolute top-2 right-2 z-20 transition-all duration-300 pointer-events-none ${
                           isHovered
                             ? "opacity-100 translate-y-0 scale-100"
-                            : "opacity-0 translate-y-2 scale-90"
+                            : "opacity-0 translate-y-1 scale-90"
                         }`}
                       >
-                        <span className="inline-flex items-center bg-white text-black group-hover/slit:bg-accent group-hover/slit:text-white font-parkinsans text-[9px] font-bold uppercase tracking-[0.16em] px-2.5 py-0.5 rounded-full shadow-md transition-colors">
+                        <span className="inline-flex items-center bg-[#EA5B15] text-white font-parkinsans text-[8px] sm:text-[8.5px] font-bold uppercase tracking-[0.16em] px-2 py-0.5 rounded-[2px] shadow-md border border-white/20">
                           VIEW
                         </span>
                       </div>
@@ -374,19 +425,20 @@ export default function OurLeadership({ initialLeaders = null }) {
                       {/* Bottom Metadata in Slit */}
                       <div
                         data-dark-overlay="true"
-                        className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent p-2.5 sm:p-3 flex items-end justify-between z-10 pointer-events-none"
+                        className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/70 to-transparent p-2 sm:p-2.5 flex flex-col justify-end z-10 pointer-events-none"
                       >
                         <span
-                          className="font-parkinsans text-[9px] sm:text-[10px] tracking-[0.18em] uppercase font-bold text-white dark-overlay-text force-text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]"
+                          className="font-parkinsans text-[9px] sm:text-[10px] tracking-[0.16em] uppercase font-bold text-white dark-overlay-text force-text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] truncate"
                           style={{ color: "#FAF6ED" }}
                         >
                           {partner.name}
                         </span>
                         <span
-                          className="font-parkinsans text-[8px] sm:text-[9px] tracking-[0.2em] uppercase text-accent font-bold drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] shrink-0 ml-2"
+                          className="font-parkinsans text-[8px] sm:text-[8.5px] tracking-[0.16em] uppercase text-accent font-semibold drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] truncate mt-0.5"
                           style={{ color: "#EA5B15" }}
+                          title={partner.role}
                         >
-                          {partner.role}
+                          {getShortRole(partner.role)}
                         </span>
                       </div>
                     </div>

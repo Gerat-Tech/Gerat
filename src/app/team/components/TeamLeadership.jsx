@@ -45,7 +45,9 @@ export default function TeamLeadership({ initialLeaders = null }) {
       : defaultLeadership;
 
   const gridColsClass =
-    leadership.length === 4
+    leadership.length === 5
+      ? "sm:grid-cols-2 lg:grid-cols-3"
+      : leadership.length === 4
       ? "sm:grid-cols-2 lg:grid-cols-4"
       : leadership.length === 2
       ? "md:grid-cols-2"
