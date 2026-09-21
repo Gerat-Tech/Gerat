@@ -7,6 +7,7 @@ import PortfolioShowcase from "./PortfolioShowcase";
 
 const KNOWN_CATEGORIES = [
   "ALL DISCIPLINES",
+  "FEATURED",
   "BRAND & IDENTITY",
   "PERSONAL BRAND",
   "ENTERPRISE ERP",

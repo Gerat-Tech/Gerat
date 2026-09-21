@@ -12,6 +12,7 @@ import { portfolioProjects } from "@/content";
 export default function Hero({ activeCategory, onSelectCategory }) {
   const categories = [
     "ALL DISCIPLINES",
+    "FEATURED",
     "BRAND & IDENTITY",
     "PERSONAL BRAND",
     "ENTERPRISE ERP",

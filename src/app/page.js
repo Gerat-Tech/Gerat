@@ -62,24 +62,15 @@ export default async function Home() {
       }));
     }
 
-    // 2. Portfolio Projects
+    // 2. Portfolio Projects (Homepage only displays explicitly featured case studies)
     if (totalStudies > 0) {
-      let projectsToUse = caseStudies;
-      if (projectsToUse.length === 0) {
-        projectsToUse = await prisma.caseStudy
-          .findMany({
-            orderBy: [{ order: "asc" }, { createdAt: "desc" }],
-            take: 3,
-          })
-          .catch(() => []);
-      }
-
-      initialProjects = projectsToUse.map((p, idx) => ({
+      initialProjects = caseStudies.map((p, idx) => ({
         ...p,
         id: p.displayIndex || `0${idx + 1}`,
         image: p.imageUrl,
         description: p.summary,
         tech: p.techStack || p.tech || "",
+        featured: Boolean(p.featured),
         stack:
           typeof p.stackBadges === "string" && p.stackBadges.startsWith("[")
             ? JSON.parse(p.stackBadges)

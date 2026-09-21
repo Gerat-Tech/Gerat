@@ -22,6 +22,12 @@ export default function PortfolioClientView({ initialCaseStudies = [] }) {
   const [search, setSearch] = useState("");
   const [viewMode, setViewMode] = useState("grid"); // "grid" | "table"
   const [isUpdating, setIsUpdating] = useState(false);
+  const [toast, setToast] = useState(null);
+
+  const showToast = (message, isError = false) => {
+    setToast({ message, isError });
+    setTimeout(() => setToast(null), 3500);
+  };
 
   // Filter case studies
   const filtered = caseStudies.filter((item) => {
@@ -47,6 +53,7 @@ export default function PortfolioClientView({ initialCaseStudies = [] }) {
   const handleToggleFeatured = async (id, currentFeatured) => {
     setIsUpdating(true);
     const newFeatured = !currentFeatured;
+    const target = caseStudies.find((c) => c.id === id);
 
     setCaseStudies((prev) =>
       prev.map((c) => (c.id === id ? { ...c, featured: newFeatured } : c))
@@ -59,8 +66,22 @@ export default function PortfolioClientView({ initialCaseStudies = [] }) {
         body: JSON.stringify({ featured: newFeatured }),
       });
       if (!res.ok) throw new Error("Update failed");
+      const data = await res.json();
+      if (data.caseStudy) {
+        setCaseStudies((prev) =>
+          prev.map((c) =>
+            c.id === id ? { ...c, featured: Boolean(data.caseStudy.featured) } : c
+          )
+        );
+      }
+      showToast(
+        newFeatured
+          ? `"${target?.title || "Case study"}" is now FEATURED on the homepage.`
+          : `"${target?.title || "Case study"}" UNFEATURED (removed from homepage).`
+      );
     } catch {
       setCaseStudies(initialCaseStudies);
+      showToast("Failed to update featured status. Please try again.", true);
     } finally {
       setIsUpdating(false);
     }
@@ -74,10 +95,14 @@ export default function PortfolioClientView({ initialCaseStudies = [] }) {
     try {
       const res = await fetch(`/api/portfolio/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error("Delete failed");
+      showToast(`Case study "${title}" removed.`);
     } catch {
       setCaseStudies(initialCaseStudies);
+      showToast("Failed to delete case study.", true);
     }
   };
+
+  const featuredCount = caseStudies.filter((c) => c.featured).length;
 
   return (
     <div className="flex flex-col gap-6">
@@ -86,8 +111,8 @@ export default function PortfolioClientView({ initialCaseStudies = [] }) {
         {/* Quick Filter Tabs */}
         <div className="flex flex-wrap items-center gap-1">
           {[
-            { key: "ALL", label: "ALL CASE STUDIES" },
-            { key: "FEATURED", label: "HOMEPAGE FEATURED" },
+            { key: "ALL", label: `ALL CASE STUDIES (${caseStudies.length})` },
+            { key: "FEATURED", label: `HOMEPAGE FEATURED (${featuredCount})` },
             { key: "ENTERPRISE", label: "ENTERPRISE ERP" },
             { key: "BRAND", label: "BRAND & IDENTITY" },
           ].map((tab) => (
@@ -220,15 +245,19 @@ export default function PortfolioClientView({ initialCaseStudies = [] }) {
                     type="button"
                     disabled={isUpdating}
                     onClick={() => handleToggleFeatured(item.id, item.featured)}
-                    className="text-white/40 hover:text-white transition-colors"
+                    className={`font-parkinsans text-[9px] px-2.5 py-1 rounded-[2px] transition-all font-bold uppercase cursor-pointer ${
+                      item.featured
+                        ? "bg-accent text-black hover:bg-accent/80 shadow-sm"
+                        : "bg-white/5 text-white/50 hover:text-white hover:bg-white/10 border border-white/15"
+                    }`}
                   >
-                    {item.featured ? "UNFEATURE" : "FEATURE"}
+                    {item.featured ? "★ UNFEATURE" : "☆ FEATURE"}
                   </button>
                   <span className="text-white/20">|</span>
                   <button
                     type="button"
                     onClick={() => handleDelete(item.id, item.title)}
-                    className="text-rose-400/60 hover:text-rose-400 transition-colors"
+                    className="text-rose-400/60 hover:text-rose-400 transition-colors cursor-pointer"
                   >
                     DELETE
                   </button>
@@ -245,8 +274,20 @@ export default function PortfolioClientView({ initialCaseStudies = [] }) {
           ))}
 
           {filtered.length === 0 && (
-            <div className="col-span-3 p-12 bg-[#121212] border border-white/10 rounded-[3px] text-center font-parkinsans text-xs text-white/40 uppercase tracking-widest">
-              NO CASE STUDIES MATCHING FILTER
+            <div className="col-span-full p-12 bg-[#121212] border border-dashed border-white/15 rounded-[3px] text-center flex flex-col items-center justify-center gap-2">
+              <span className="font-parkinsans text-[10px] tracking-[0.2em] text-accent uppercase font-bold">
+                HOMEPAGE SPOTLIGHT // NO ACTIVE ITEMS
+              </span>
+              <div className="font-parkinsans text-sm uppercase text-white font-semibold">
+                {activeFilter === "FEATURED"
+                  ? "THERE ARE NO FINISHED PROJECTS FEATURED NOW"
+                  : "NO CASE STUDIES MATCHING FILTER"}
+              </div>
+              <p className="font-artific text-xs text-white/50 max-w-md">
+                {activeFilter === "FEATURED"
+                  ? "Completed projects featured from this dashboard will be spotlighted on the homepage. Toggle \"FEATURE\" on any project below to display it."
+                  : "Try clearing your search query or selecting a different category."}
+              </p>
             </div>
           )}
         </div>
@@ -287,18 +328,35 @@ export default function PortfolioClientView({ initialCaseStudies = [] }) {
                     {item.metric}
                   </td>
                   <td className="py-3 px-4">
-                    <span
-                      className={`font-parkinsans text-[9px] px-2 py-0.5 rounded-[2px] uppercase font-bold ${
+                    <button
+                      type="button"
+                      disabled={isUpdating}
+                      onClick={() => handleToggleFeatured(item.id, item.featured)}
+                      className={`font-parkinsans text-[9px] px-2.5 py-1 rounded-[2px] uppercase font-bold transition-all cursor-pointer ${
                         item.featured
-                          ? "bg-emerald-950/60 border border-emerald-500/40 text-emerald-400"
-                          : "bg-white/5 text-white/30"
+                          ? "bg-accent text-black hover:bg-accent/80 shadow-sm"
+                          : "bg-white/5 text-white/40 hover:text-white hover:bg-white/10 border border-white/10"
                       }`}
+                      title={item.featured ? "Click to remove from homepage" : "Click to feature on homepage"}
                     >
-                      {item.featured ? "FEATURED" : "STANDARD"}
-                    </span>
+                      {item.featured ? "★ FEATURED" : "☆ UNFEATURED"}
+                    </button>
                   </td>
                   <td className="py-3 px-4 text-right font-parkinsans text-[9px] tracking-wider uppercase">
                     <div className="flex items-center justify-end gap-2">
+                      <button
+                        type="button"
+                        disabled={isUpdating}
+                        onClick={() => handleToggleFeatured(item.id, item.featured)}
+                        className={`text-[9px] font-bold px-2 py-0.5 rounded-[2px] uppercase transition-colors cursor-pointer ${
+                          item.featured
+                            ? "text-accent hover:underline"
+                            : "text-white/40 hover:text-white"
+                        }`}
+                      >
+                        {item.featured ? "UNFEATURE" : "FEATURE"}
+                      </button>
+                      <span className="text-white/20">|</span>
                       <Link
                         href={`/portfolio#${item.slug}`}
                         target="_blank"
@@ -316,8 +374,43 @@ export default function PortfolioClientView({ initialCaseStudies = [] }) {
                   </td>
                 </tr>
               ))}
+              {filtered.length === 0 && (
+                <tr>
+                  <td colSpan={6} className="py-12 px-4 text-center">
+                    <div className="flex flex-col items-center justify-center gap-2">
+                      <span className="font-parkinsans text-[10px] tracking-[0.2em] text-accent uppercase font-bold">
+                        HOMEPAGE SPOTLIGHT // NO ACTIVE ITEMS
+                      </span>
+                      <div className="font-parkinsans text-sm uppercase text-white font-semibold">
+                        {activeFilter === "FEATURED"
+                          ? "THERE ARE NO FINISHED PROJECTS FEATURED NOW"
+                          : "NO CASE STUDIES MATCHING FILTER"}
+                      </div>
+                      <p className="font-artific text-xs text-white/50 max-w-md">
+                        {activeFilter === "FEATURED"
+                          ? "Completed projects featured from this dashboard will be spotlighted on the homepage."
+                          : "Try selecting another discipline or clearing your search."}
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
+        </div>
+      )}
+
+      {/* Floating Action Toast Notification */}
+      {toast && (
+        <div
+          className={`fixed bottom-6 right-6 z-50 px-4 py-3 rounded-[3px] border font-parkinsans text-xs tracking-wider uppercase font-semibold shadow-2xl flex items-center gap-2 animate-in fade-in slide-in-from-bottom-2 duration-200 ${
+            toast.isError
+              ? "bg-rose-950/90 border-rose-500/50 text-rose-200"
+              : "bg-emerald-950/90 border-emerald-500/50 text-emerald-200"
+          }`}
+        >
+          <span>{toast.isError ? "⚠" : "✓"}</span>
+          <span>{toast.message}</span>
         </div>
       )}
     </div>

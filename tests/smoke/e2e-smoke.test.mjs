@@ -265,6 +265,17 @@ async function runAllE2ETests() {
       assert(Array.isArray(data.caseStudies));
     });
 
+    await test("18a. Featured Portfolio API (/api/portfolio?featured=true) returns only featured items", async () => {
+      const res = await request("/api/portfolio?featured=true");
+      assert.strictEqual(res.status, 200);
+      const data = JSON.parse(res.body);
+      assert.strictEqual(data.success, true);
+      assert(Array.isArray(data.caseStudies));
+      data.caseStudies.forEach((cs) => {
+        assert.strictEqual(Boolean(cs.featured), true, "Every item must have featured=true");
+      });
+    });
+
     await test("19. Team API (/api/team) returns valid members roster", async () => {
       const res = await request("/api/team");
       assert.strictEqual(res.status, 200);

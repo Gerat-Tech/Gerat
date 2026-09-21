@@ -18,7 +18,6 @@ export default async function PortfolioPage() {
     const totalCount = await prisma.caseStudy.count();
     if (totalCount > 0) {
       const caseStudies = await prisma.caseStudy.findMany({
-        where: { active: true },
         orderBy: [{ order: "asc" }, { createdAt: "desc" }],
       });
 
@@ -28,6 +27,7 @@ export default async function PortfolioPage() {
         index: cs.displayIndex,
         image: cs.imageUrl,
         tech: cs.techStack,
+        featured: Boolean(cs.featured),
         stack:
           typeof cs.stackBadges === "string" && cs.stackBadges.startsWith("[")
             ? JSON.parse(cs.stackBadges)

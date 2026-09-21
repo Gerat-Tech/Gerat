@@ -78,6 +78,14 @@ export async function runPortfolioCmsSmokeTests() {
   );
   console.log("  ✓ Case study featured toggle and metric update verified");
 
+  // Test toggling back to unfeatured
+  const unfeaturedCaseStudy = await prisma.caseStudy.update({
+    where: { id: testCaseStudy.id },
+    data: { featured: false },
+  });
+  assert.strictEqual(unfeaturedCaseStudy.featured, false, "Featured flag must toggle back to false");
+  console.log("  ✓ Case study unfeature toggle verified");
+
   // 4. Test Fetching by Slug
   const fetched = await prisma.caseStudy.findUnique({
     where: { slug: testSlug },

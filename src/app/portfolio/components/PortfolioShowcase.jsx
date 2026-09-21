@@ -23,6 +23,7 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", 
             index: cs.displayIndex,
             image: cs.imageUrl,
             tech: cs.techStack,
+            featured: Boolean(cs.featured),
             stack:
               typeof cs.stackBadges === "string" && cs.stackBadges.startsWith("[")
                 ? JSON.parse(cs.stackBadges)
@@ -51,6 +52,8 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", 
   const filteredProjects =
     activeCategory === "ALL DISCIPLINES"
       ? allProjects
+      : activeCategory === "FEATURED"
+      ? allProjects.filter((p) => p.featured === true)
       : allProjects.filter((p) => {
           if (activeCategory === "AI & RAG" || activeCategory === "AI & RAG NETWORKS") {
             return p.category === "AI & RAG" || p.category === "AI & RAG NETWORKS";
@@ -86,26 +89,32 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", 
           </div>
 
           <ul className="flex flex-col gap-1.5">
-            {filteredProjects.map((p, i) => {
-              const isActive = activeIdx === i;
-              return (
-                <li key={p.id}>
-                  <a
-                    href={`#${p.id}`}
-                    className={`group flex items-center justify-between py-2 px-3 rounded-[2px] font-parkinsans text-[11px] tracking-[0.15em] uppercase transition-all duration-300 ${
-                      isActive
-                        ? "bg-accent/15 text-white border-l-2 border-accent"
-                        : "text-white/50 hover:text-white hover:bg-white/[0.03]"
-                    }`}
-                  >
-                    <span className="truncate max-w-[160px]">{p.title}</span>
-                    <span className="text-[9px] text-white/40 group-hover:text-accent">
-                      {p.index}
-                    </span>
-                  </a>
-                </li>
-              );
-            })}
+            {filteredProjects.length === 0 ? (
+              <li className="font-artific text-[10px] text-white/40 tracking-wider uppercase py-2">
+                NO MATCHING ENTRIES
+              </li>
+            ) : (
+              filteredProjects.map((p, i) => {
+                const isActive = activeIdx === i;
+                return (
+                  <li key={p.id}>
+                    <a
+                      href={`#${p.id}`}
+                      className={`group flex items-center justify-between py-2 px-3 rounded-[2px] font-parkinsans text-[11px] tracking-[0.15em] uppercase transition-all duration-300 ${
+                        isActive
+                          ? "bg-accent/15 text-white border-l-2 border-accent"
+                          : "text-white/50 hover:text-white hover:bg-white/[0.03]"
+                      }`}
+                    >
+                      <span className="truncate max-w-[160px]">{p.title}</span>
+                      <span className="text-[9px] text-white/40 group-hover:text-accent">
+                        {p.index}
+                      </span>
+                    </a>
+                  </li>
+                );
+              })
+            )}
           </ul>
 
           <div className="pt-4 border-t border-white/10">
@@ -123,13 +132,22 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", 
       {/* Main Case Study Cards Feed */}
       <div className="flex-1 flex flex-col gap-12 sm:gap-16">
         {filteredProjects.length === 0 ? (
-          <div className="w-full py-20 px-8 rounded-[4px] border border-white/10 bg-[#0e0e0e] text-center flex flex-col items-center justify-center gap-3">
-            <div className="size-2 bg-accent/60 rounded-full animate-pulse" />
-            <span className="font-artific text-[11px] tracking-[0.2em] text-white/50 uppercase font-medium">
-              NO CASE STUDIES CURRENTLY PUBLISHED IN THIS CADRE
+          <div className="w-full py-20 px-8 rounded-[4px] border border-dashed border-white/15 bg-[#0e0e0e] text-center flex flex-col items-center justify-center gap-3">
+            <div className="size-2.5 bg-accent rounded-full animate-pulse" />
+            <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase font-bold">
+              {activeCategory === "FEATURED"
+                ? "PORTFOLIO SPOTLIGHT // ARCHIVE NOTICE"
+                : "PORTFOLIO STATUS // ARCHIVE NOTICE"}
             </span>
-            <p className="font-parkinsans text-xs tracking-wider text-white/30 uppercase max-w-md">
-              Portfolio entries and case study visibility are managed via Mission Control.
+            <h3 className="font-parkinsans text-xl sm:text-2xl font-bold uppercase tracking-tight text-white">
+              {activeCategory === "FEATURED"
+                ? "THERE IS NO FINISHED PROJECT FEATURED NOW"
+                : "THERE IS NO FINISHED PROJECT NOW IN THIS CADRE"}
+            </h3>
+            <p className="font-artific text-sm text-white/60 max-w-lg leading-relaxed">
+              {activeCategory === "FEATURED"
+                ? "There are currently no finished projects marked as featured. Completed systems and case studies will be displayed here as they are spotlighted via Mission Control."
+                : "All delivered client systems and technical case studies will be displayed here as they are published."}
             </p>
           </div>
         ) : (

@@ -54,6 +54,11 @@ export default function OurPortfolio({ initialProjects = null }) {
       ? initialProjects
       : defaultFeatured;
 
+  // Hide the section completely on the homepage if no project is featured
+  if (!featuredProjects || featuredProjects.length === 0) {
+    return null;
+  }
+
   return (
     <section
       id="portfolio"
@@ -97,18 +102,7 @@ export default function OurPortfolio({ initialProjects = null }) {
         </div>
 
         {/* Featured Case Study Grid */}
-        {featuredProjects.length === 0 ? (
-          <div className="w-full py-16 px-8 rounded-[3px] border border-white/10 bg-[var(--surface)] text-center flex flex-col items-center justify-center gap-3">
-            <div className="size-2 bg-accent/60 rounded-full animate-pulse" />
-            <span className="font-artific text-[11px] tracking-[0.2em] text-white/50 uppercase font-medium">
-              NO FEATURED CASE STUDIES CURRENTLY PUBLISHED
-            </span>
-            <p className="font-parkinsans text-xs tracking-wider text-white/30 uppercase max-w-md">
-              Portfolio showcases are managed via Mission Control. Check back soon or browse all archives.
-            </p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {featuredProjects.map((project, idx) => (
             <FadeUp key={project.id} delay={0.15 * idx} y={30}>
               <Link
@@ -155,8 +149,7 @@ export default function OurPortfolio({ initialProjects = null }) {
               </Link>
             </FadeUp>
           ))}
-          </div>
-        )}
+        </div>
       </div>
     </section>
   );
