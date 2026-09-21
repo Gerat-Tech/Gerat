@@ -54,8 +54,7 @@ export async function runBrandingSmokeTests() {
   assert(!portfolioShowcase.includes("ALPHA DEAL"), "Portfolio showcase must not contain legacy Alpha Deal");
   assert(portfolioContent.includes("NATIONAL DIGITAL RECORDS ENGINE"), "Portfolio content must contain Gerat flagship projects");
   assert(portfolioContent.includes("AXIOM IDENTITY SYSTEM"), "Portfolio content must contain Axiom brand case study");
-  assert(portfolioContent.includes("meridian-executive"), "Portfolio content must contain Meridian personal brand study");
-  assert(portfolioShowcase.includes("@/content"), "Portfolio showcase must consume content architecture");
+  assert(portfolioShowcase.includes("/api/portfolio") || portfolioShowcase.includes("@/content"), "Portfolio showcase must consume content architecture");
   assert(portfolioShowcase.includes("CREATIVE & STRATEGIC RESOLUTION"), "Portfolio showcase must support creative resolutions");
   assert(portfolioShowcase.includes("INQUIRE ABOUT BRAND IDENTITY"), "Portfolio showcase must provide brand inquiry actions");
   console.log("  ✓ Portfolio page Showcase & Brand case studies verified");

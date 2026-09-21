@@ -282,20 +282,34 @@ export default function PortfolioClientView({ initialCaseStudies = [] }) {
           ))}
 
           {filtered.length === 0 && (
-            <div className="col-span-full p-12 bg-[#121212] border border-dashed border-white/15 rounded-[3px] text-center flex flex-col items-center justify-center gap-2">
+            <div className="col-span-full p-12 bg-[#121212] border border-dashed border-white/15 rounded-[3px] text-center flex flex-col items-center justify-center gap-3">
               <span className="font-parkinsans text-[10px] tracking-[0.2em] text-accent uppercase font-bold">
-                HOMEPAGE SPOTLIGHT // NO ACTIVE ITEMS
+                {caseStudies.length === 0
+                  ? "FLAGSHIP PORTFOLIO // EMPTY REPOSITORY"
+                  : "HOMEPAGE SPOTLIGHT // NO MATCHING ITEMS"}
               </span>
-              <div className="font-parkinsans text-sm uppercase text-white font-semibold">
-                {activeFilter === "FEATURED"
+              <div className="font-parkinsans text-base sm:text-lg uppercase text-white font-semibold">
+                {caseStudies.length === 0
+                  ? "NO CASE STUDIES PUBLISHED YET"
+                  : activeFilter === "FEATURED"
                   ? "THERE ARE NO FINISHED PROJECTS FEATURED NOW"
                   : "NO CASE STUDIES MATCHING FILTER"}
               </div>
               <p className="font-artific text-xs text-white/50 max-w-md">
-                {activeFilter === "FEATURED"
+                {caseStudies.length === 0
+                  ? "There are currently no case studies in the repository. Create your first case study to begin curating the flagship portfolio."
+                  : activeFilter === "FEATURED"
                   ? "Completed projects featured from this dashboard will be spotlighted on the homepage. Toggle \"FEATURE\" on any project below to display it."
-                  : "Try clearing your search query or selecting a different category."}
+                  : "Try clearing your search query or selecting a different discipline filter."}
               </p>
+              {caseStudies.length === 0 && (
+                <Link
+                  href="/dashboard/portfolio/new"
+                  className="mt-2 py-2 px-4 bg-accent hover:bg-accent/90 text-black font-parkinsans text-[10px] tracking-[0.15em] font-bold uppercase rounded-[2px] transition-colors"
+                >
+                  + CREATE FIRST CASE STUDY
+                </Link>
+              )}
             </div>
           )}
         </div>
@@ -385,20 +399,34 @@ export default function PortfolioClientView({ initialCaseStudies = [] }) {
               {filtered.length === 0 && (
                 <tr>
                   <td colSpan={6} className="py-12 px-4 text-center">
-                    <div className="flex flex-col items-center justify-center gap-2">
+                    <div className="flex flex-col items-center justify-center gap-3">
                       <span className="font-parkinsans text-[10px] tracking-[0.2em] text-accent uppercase font-bold">
-                        HOMEPAGE SPOTLIGHT // NO ACTIVE ITEMS
+                        {caseStudies.length === 0
+                          ? "FLAGSHIP PORTFOLIO // EMPTY REPOSITORY"
+                          : "HOMEPAGE SPOTLIGHT // NO MATCHING ITEMS"}
                       </span>
-                      <div className="font-parkinsans text-sm uppercase text-white font-semibold">
-                        {activeFilter === "FEATURED"
+                      <div className="font-parkinsans text-base uppercase text-white font-semibold">
+                        {caseStudies.length === 0
+                          ? "NO CASE STUDIES PUBLISHED YET"
+                          : activeFilter === "FEATURED"
                           ? "THERE ARE NO FINISHED PROJECTS FEATURED NOW"
                           : "NO CASE STUDIES MATCHING FILTER"}
                       </div>
                       <p className="font-artific text-xs text-white/50 max-w-md">
-                        {activeFilter === "FEATURED"
+                        {caseStudies.length === 0
+                          ? "There are currently no case studies in the repository. Create your first case study to begin curating the flagship portfolio."
+                          : activeFilter === "FEATURED"
                           ? "Completed projects featured from this dashboard will be spotlighted on the homepage."
                           : "Try selecting another discipline or clearing your search."}
                       </p>
+                      {caseStudies.length === 0 && (
+                        <Link
+                          href="/dashboard/portfolio/new"
+                          className="mt-2 py-2 px-4 bg-accent hover:bg-accent/90 text-black font-parkinsans text-[10px] tracking-[0.15em] font-bold uppercase rounded-[2px] transition-colors"
+                        >
+                          + CREATE FIRST CASE STUDY
+                        </Link>
+                      )}
                     </div>
                   </td>
                 </tr>

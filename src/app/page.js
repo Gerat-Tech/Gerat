@@ -16,9 +16,10 @@ export default async function Home() {
   let initialProjects = null;
   let initialPillars = null;
   let marqueeTokens = null;
+  let totalStudies = 0;
 
   try {
-    const [totalMembers, totalStudies, totalPillars, teamMembers, caseStudies, servicePillars, siteConfigs] =
+    const [totalMembers, fetchedStudiesCount, totalPillars, teamMembers, caseStudies, servicePillars, siteConfigs] =
       await Promise.all([
         prisma.teamMember.count().catch(() => 0),
         prisma.caseStudy.count().catch(() => 0),
@@ -44,6 +45,8 @@ export default async function Home() {
           .catch(() => []),
         prisma.siteConfig.findMany().catch(() => []),
       ]);
+
+    totalStudies = fetchedStudiesCount;
 
     // 1. Team Leadership: All active executive leaders
     if (totalMembers > 0) {
@@ -136,7 +139,7 @@ export default async function Home() {
       <Marquee customItems={marqueeTokens} />
       <OurFocus initialPillars={initialPillars} />
       <OurEthos />
-      <OurPortfolio initialProjects={initialProjects} />
+      <OurPortfolio initialProjects={initialProjects} totalProjectCount={totalStudies} />
       <OurLeadership initialLeaders={initialLeaders} />
       <HowWeWork />
       <Footer />

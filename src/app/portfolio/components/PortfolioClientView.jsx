@@ -17,6 +17,7 @@ const KNOWN_CATEGORIES = [
 ];
 
 export default function PortfolioClientView({ initialProjects = null }) {
+  const [liveCount, setLiveCount] = useState(initialProjects ? initialProjects.length : 0);
   const searchParams = useSearchParams();
   const paramCategory = searchParams.get("category");
 
@@ -44,11 +45,12 @@ export default function PortfolioClientView({ initialProjects = null }) {
       <Hero
         activeCategory={activeCategory}
         onSelectCategory={setUserSelectedCategory}
-        totalCount={initialProjects ? initialProjects.length : null}
+        totalCount={liveCount}
       />
       <PortfolioShowcase
         activeCategory={activeCategory}
         initialProjects={initialProjects}
+        onCountChange={setLiveCount}
       />
     </>
   );

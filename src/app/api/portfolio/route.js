@@ -3,8 +3,6 @@ import { revalidatePath } from "next/cache";
 import prisma from "@/lib/prisma";
 import { getCurrentUser, isAuthorized, ROLES } from "@/lib/auth";
 
-import { portfolioProjects } from "@/content/index.js";
-
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
@@ -31,67 +29,21 @@ export async function GET(request) {
       ];
     }
 
-    let caseStudies = null;
-    let dbAvailable = false;
-    try {
-      const totalCount = await prisma.caseStudy.count();
-      if (totalCount > 0) {
-        dbAvailable = true;
-        caseStudies = await prisma.caseStudy.findMany({
-          where,
-          orderBy: [{ order: "asc" }, { createdAt: "desc" }],
-        });
-      }
-    } catch (dbErr) {
-      console.warn("Prisma caseStudy findMany failed, falling back to static content:", dbErr.message);
-    }
+    // Always query the database — no static fallback.
+    // If the DB is empty, return an honest empty array.
+    const [totalCount, caseStudies] = await Promise.all([
+      prisma.caseStudy.count(),
+      prisma.caseStudy.findMany({
+        where,
+        orderBy: [{ order: "asc" }, { createdAt: "desc" }],
+      }),
+    ]);
 
-    if (!dbAvailable) {
-      caseStudies = portfolioProjects.map((p, idx) => ({
-        id: p.id,
-        slug: p.id,
-        displayIndex: p.index,
-        num: p.num || `${p.index} · 09`,
-        title: p.title,
-        category: p.category,
-        tags: p.tags,
-        metric: p.metric,
-        metricDetail: p.metricDetail || p.metric,
-        summary: p.summary,
-        problem: p.problem,
-        architecture: p.architecture,
-        techStack: p.tech,
-        stackBadges: JSON.stringify(p.stack || []),
-        imageUrl: p.image,
-        galleryImages: JSON.stringify([p.image]),
-        impact: p.impact,
-        year: p.year,
-        status: p.status,
-        featured: idx < 3,
-        order: idx + 1,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      }));
-
-      if (category && category !== "ALL DISCIPLINES") {
-        caseStudies = caseStudies.filter((c) => c.category === category);
-      }
-      if (featured === "true") {
-        caseStudies = caseStudies.filter((c) => c.featured);
-      }
-      if (search) {
-        const lower = search.toLowerCase();
-        caseStudies = caseStudies.filter(
-          (c) =>
-            c.title.toLowerCase().includes(lower) ||
-            c.summary.toLowerCase().includes(lower) ||
-            c.metric.toLowerCase().includes(lower) ||
-            c.techStack.toLowerCase().includes(lower)
-        );
-      }
-    }
-
-    return NextResponse.json({ success: true, caseStudies: caseStudies || [] });
+    return NextResponse.json({
+      success: true,
+      caseStudies,
+      totalCount,
+    });
   } catch (error) {
     console.error("Fetch case studies error:", error);
     return NextResponse.json({ error: "Failed to fetch case studies." }, { status: 500 });

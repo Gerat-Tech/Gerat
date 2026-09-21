@@ -1,13 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import SectionLabel from "@/components/common/SectionLabel";
 import FadeUp from "@/components/motion/FadeUp";
 import SplitText from "@/components/motion/SplitText";
 import Footer from "@/components/layout/Footer";
 import { useNav } from "@/context/NavContext";
-import { portfolioProjects } from "@/content";
 import {
   Compass,
   Sparkles,
@@ -142,7 +141,22 @@ const TARGET_PERSONAS = [
 
 export default function PersonalBrandingPage() {
   const { openContact } = useNav();
-  const executiveCase = portfolioProjects.find((p) => p.id === "meridian-executive");
+  const [executiveCase, setExecutiveCase] = useState(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetch("/api/portfolio/meridian-executive")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (isMounted && data?.success && data?.caseStudy) {
+          setExecutiveCase(data.caseStudy);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <div className="bg-[var(--bg)] min-h-screen text-[var(--text-primary)] selection:bg-accent selection:text-black">

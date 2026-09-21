@@ -4,13 +4,9 @@ import React from "react";
 import SectionLabel from "@/components/common/SectionLabel";
 import SplitText from "@/components/motion/SplitText";
 import FadeUp from "@/components/motion/FadeUp";
-import { portfolioProjects } from "@/content";
 
-/**
- * Editorial Portfolio Hero (Spec §18, Content Replacement §7, Phase 21)
- */
 export default function Hero({ activeCategory, onSelectCategory, totalCount = null }) {
-  const displayCount = totalCount !== null ? totalCount : portfolioProjects.length;
+  const displayCount = typeof totalCount === "number" ? totalCount : 0;
   const categories = [
     "ALL DISCIPLINES",
     "FEATURED",

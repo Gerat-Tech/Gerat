@@ -3,9 +3,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import FadeUp from "@/components/motion/FadeUp";
 import { useNav } from "@/context/NavContext";
-import { portfolioProjects as defaultProjects } from "@/content";
 
-export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", initialProjects = null }) {
+export default function PortfolioShowcase({
+  activeCategory = "ALL DISCIPLINES",
+  initialProjects = null,
+  onCountChange = null,
+}) {
   const [activeIdx, setActiveIdx] = useState(0);
   const itemsRef = useRef([]);
   const { openContact } = useNav();
@@ -34,13 +37,16 @@ export default function PortfolioShowcase({ activeCategory = "ALL DISCIPLINES", 
                 : [],
           }));
           setFetchedProjects(normalized);
+          if (typeof onCountChange === "function") {
+            onCountChange(normalized.length);
+          }
         }
       })
       .catch(() => {});
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [onCountChange]);
 
   const allProjects =
     fetchedProjects !== null

@@ -2,19 +2,10 @@ import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import prisma from "@/lib/prisma";
 import { getCurrentUser, isAuthorized, ROLES } from "@/lib/auth";
-import { portfolioProjects } from "@/content/index.js";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-function findStaticCaseStudy(id) {
-  const normalizedId = (id || "").toLowerCase().trim();
-  return portfolioProjects.find(
-    (p) =>
-      p.id.toLowerCase() === normalizedId ||
-      p.title.toLowerCase().replace(/[^a-z0-9]+/g, "-") === normalizedId
-  );
-}
 
 export async function GET(request, { params }) {
   try {
@@ -29,37 +20,6 @@ export async function GET(request, { params }) {
       });
     } catch (dbErr) {
       console.warn("DB findFirst error in GET portfolio/[id]:", dbErr.message);
-    }
-
-    if (!caseStudy) {
-      const p = findStaticCaseStudy(id);
-      if (p) {
-        caseStudy = {
-          id: p.id,
-          slug: p.id,
-          displayIndex: p.index,
-          num: p.num || `${p.index} · 09`,
-          title: p.title,
-          category: p.category,
-          tags: p.tags,
-          metric: p.metric,
-          metricDetail: p.metricDetail || p.metric,
-          summary: p.summary,
-          problem: p.problem,
-          architecture: p.architecture,
-          techStack: p.tech,
-          stackBadges: JSON.stringify(p.stack || []),
-          imageUrl: p.image,
-          galleryImages: JSON.stringify([p.image]),
-          impact: p.impact,
-          year: p.year,
-          status: p.status,
-          featured: true,
-          order: 1,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-        };
-      }
     }
 
     if (!caseStudy) {

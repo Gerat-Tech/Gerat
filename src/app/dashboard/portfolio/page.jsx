@@ -3,8 +3,6 @@ import Link from "next/link";
 import prisma from "@/lib/prisma";
 import PortfolioClientView from "./components/PortfolioClientView";
 
-import { portfolioProjects } from "@/content/index.js";
-
 export const metadata = {
   title: "Portfolio & Showcase CMS · Gerat Mission Control",
   description: "Curate, engineer, and publish flagship case studies and product showcases",
@@ -18,34 +16,6 @@ export default async function PortfolioDashboardPage() {
     });
   } catch (error) {
     console.warn("PortfolioDashboardPage: unable to fetch case studies:", error.message);
-  }
-
-  if (caseStudies.length === 0) {
-    caseStudies = portfolioProjects.map((p, idx) => ({
-      id: p.id,
-      slug: p.id,
-      displayIndex: p.index,
-      num: p.num || `${p.index} · 09`,
-      title: p.title,
-      category: p.category,
-      tags: p.tags,
-      metric: p.metric,
-      metricDetail: p.metricDetail || p.metric,
-      summary: p.summary,
-      problem: p.problem,
-      architecture: p.architecture,
-      techStack: p.tech,
-      stackBadges: JSON.stringify(p.stack || []),
-      imageUrl: p.image,
-      galleryImages: JSON.stringify([p.image]),
-      impact: p.impact,
-      year: p.year,
-      status: p.status,
-      featured: idx < 3,
-      order: idx + 1,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    }));
   }
 
   const total = caseStudies.length;
