@@ -32,7 +32,7 @@ export default function Hero() {
     <section
       id="hero"
       aria-label="Introduction"
-      className="relative min-h-[96dvh] w-full bg-[var(--surface)] text-[var(--text-primary)] flex flex-col justify-center overflow-hidden pt-36 sm:pt-44 md:pt-48 pb-16 sm:pb-24 border-b border-[var(--border-subtle)]"
+      className="relative min-h-[96dvh] w-full bg-[var(--surface)] text-[var(--text-primary)] flex flex-col justify-center overflow-hidden pt-36 sm:pt-44 md:pt-48 pb-20 sm:pb-28"
     >
       {/* Ambient Flame Glow Background */}
       <div

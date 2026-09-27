@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import SectionLabel from "../common/SectionLabel";
+import CurvedSectionTransition from "../common/CurvedSectionTransition";
 import FadeUp from "../motion/FadeUp";
 import SplitText from "../motion/SplitText";
 import { useNav } from "@/context/NavContext";
@@ -72,9 +73,17 @@ export default function HowWeWork() {
     <section
       id="process"
       aria-label="How We Work"
-      className="w-full px-4 sm:px-6 md:px-8 lg:px-12 my-20 sm:my-32 md:my-40 scroll-mt-24"
+      className="w-full bg-[var(--bg)] relative scroll-mt-24"
     >
-      <div className="w-full max-w-[1360px] mx-auto bg-[var(--surface)] text-[var(--text-primary)] p-10 sm:p-16 md:p-22 rounded-[36px] sm:rounded-[44px] border border-[var(--border-subtle)] shadow-[0_24px_64px_rgba(0,0,0,0.04)] overflow-hidden">
+      {/* Dynamic Scroll-Morphing Arched Transition into How We Work */}
+      <CurvedSectionTransition
+        fill="var(--bg)"
+        stroke="var(--border-subtle)"
+        showStroke={true}
+        defaultMaxArch={54}
+      />
+
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-16 sm:pt-24 pb-28 sm:pb-36">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* LEFT COLUMN: Sticky Narrative & Step Progress Indicator */}
           <div className="lg:col-span-5 lg:sticky lg:top-32 flex flex-col items-start gap-6 sm:gap-8 pt-2">

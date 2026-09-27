@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion, useScroll, useTransform } from "framer-motion";
 import SectionLabel from "../common/SectionLabel";
+import CurvedSectionTransition from "../common/CurvedSectionTransition";
 import FadeUp from "../motion/FadeUp";
 import SplitText from "../motion/SplitText";
 import { useNav } from "@/context/NavContext";
@@ -56,15 +56,6 @@ const V2_DEFAULT_PILLARS = [
 export default function OurFocus({ initialPillars = null }) {
   const { openContact } = useNav();
   const [fetchedPillars, setFetchedPillars] = useState(null);
-
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "start 25%"],
-  });
-
-  // Dynamic curve height: morphs from 90px convex dome down to 0px (straight)
-  const curveHeight = useTransform(scrollYProgress, [0, 0.85], [90, 0]);
 
   useEffect(() => {
     let isMounted = true;
@@ -125,30 +116,21 @@ export default function OurFocus({ initialPillars = null }) {
 
   return (
     <section
-      ref={containerRef}
       id="services"
       aria-label="What We Build"
-      className="w-full px-4 sm:px-6 md:px-8 lg:px-12 my-20 sm:my-32 md:my-40 scroll-mt-24"
+      className="w-full bg-[var(--surface)] relative scroll-mt-24"
     >
       <span id="capabilities" className="sr-only" />
 
-      {/* Dynamic Scroll-Morphing Convex Dome Curve (Receivio Model) */}
-      <div className="w-full max-w-[1360px] mx-auto overflow-hidden">
-        <motion.div
-          style={{ height: curveHeight }}
-          className="w-full overflow-hidden shrink-0 pointer-events-none -mb-1"
-        >
-          <svg
-            viewBox="0 0 1440 90"
-            preserveAspectRatio="none"
-            className="w-full h-full fill-[var(--surface)] text-[var(--surface)]"
-          >
-            <path d="M 0 90 Q 720 0 1440 90 L 1440 90 L 0 90 Z" />
-          </svg>
-        </motion.div>
-      </div>
+      {/* Dynamic Scroll-Morphing Arched Transition from Hero into What We Build */}
+      <CurvedSectionTransition
+        fill="var(--surface)"
+        stroke="var(--border-subtle)"
+        showStroke={true}
+        defaultMaxArch={54}
+      />
 
-      <div className="w-full max-w-[1360px] mx-auto bg-[var(--surface)] text-[var(--text-primary)] p-10 sm:p-16 md:p-22 rounded-b-[36px] sm:rounded-b-[48px] border-x border-b border-[var(--border-subtle)] shadow-[0_24px_64px_rgba(0,0,0,0.04)] overflow-hidden">
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-16 sm:pt-24 pb-28 sm:pb-36">
         {/* Section Header */}
         <div className="flex flex-col gap-5 mb-16 sm:mb-22 max-w-3xl">
           <SectionLabel index="02" label="THE BRIDGE" />

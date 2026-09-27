@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import SectionLabel from "../common/SectionLabel";
+import CurvedSectionTransition from "../common/CurvedSectionTransition";
 import FadeUp from "../motion/FadeUp";
 import SplitText from "../motion/SplitText";
 
@@ -41,14 +42,20 @@ export default function OurEthos() {
     <section
       id="about"
       aria-label="What We Believe"
-      className="w-full px-4 sm:px-6 md:px-8 lg:px-12 my-20 sm:my-32 md:my-40 scroll-mt-24"
+      data-dark-card="true"
+      className="w-full bg-[#300F0A] text-[#FAF6ED] relative scroll-mt-24"
     >
       <span id="ethos" className="sr-only" />
 
-      <div
-        data-dark-card="true"
-        className="relative w-full max-w-[1360px] mx-auto bg-[#300F0A] text-[#FAF6ED] p-10 sm:p-16 md:p-22 rounded-[36px] sm:rounded-[44px] border border-white/10 shadow-[0_24px_64px_rgba(48,15,10,0.3)] overflow-hidden"
-      >
+      {/* Dynamic Scroll-Morphing Arched Transition into Our Ethos */}
+      <CurvedSectionTransition
+        fill="#300F0A"
+        stroke="rgba(255, 255, 255, 0.15)"
+        showStroke={true}
+        defaultMaxArch={54}
+      />
+
+      <div className="relative w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-16 sm:pt-24 pb-28 sm:pb-36 overflow-hidden">
         {/* Subtle Warm Ambient Glow */}
         <div
           aria-hidden="true"

@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import GeratLogo from "../common/GeratLogo";
+import CurvedSectionTransition from "../common/CurvedSectionTransition";
 import { siteConfig } from "@/content/site";
 
 /**
@@ -42,10 +43,18 @@ export default function Footer() {
     <footer
       aria-label="Site Footer"
       data-orange-footer="true"
-      className="w-full bg-[#EA5B15] text-white rounded-t-[36px] sm:rounded-t-[48px] border-t border-white/20 overflow-hidden mt-16 sm:mt-24 shadow-[0_-20px_60px_rgba(234,91,21,0.2)]"
+      className="w-full bg-[#EA5B15] text-white overflow-hidden relative shadow-[0_-20px_60px_rgba(234,91,21,0.2)]"
     >
+      {/* Dynamic Scroll-Morphing Arched Transition into Flame Orange Footer */}
+      <CurvedSectionTransition
+        fill="#EA5B15"
+        stroke="rgba(255, 255, 255, 0.25)"
+        showStroke={true}
+        defaultMaxArch={52}
+      />
+
       {/* Upper Content Grid: Brand Statement & 3-Column Navigation */}
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-20 sm:pt-28 pb-16 sm:pb-20">
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-16 sm:pt-24 pb-16 sm:pb-20">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Brand Summary Column */}
           <div className="md:col-span-5 lg:col-span-5 flex flex-col gap-6">
@@ -138,16 +147,16 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Large Centered Brand Signature Mark (Debossed White Mark on Flame Orange) */}
-      <div className="w-full border-t border-white/20 pt-12 sm:pt-16 pb-10 overflow-hidden select-none pointer-events-none">
+      {/* Prominent White Brand Signature (100% Visible on Flame Orange) */}
+      <div className="w-full border-t border-white/20 py-16 sm:py-24 overflow-hidden select-none">
         <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 flex justify-center items-center">
-          <div className="w-full max-w-4xl opacity-20 hover:opacity-30 transition-opacity duration-500">
+          <div className="w-full max-w-2xl sm:max-w-3xl lg:max-w-4xl opacity-100 hover:scale-[1.01] transition-transform duration-300">
             <GeratLogo
               variant="primary"
               color="#FFFFFF"
               badgeColor="#FFFFFF"
               textColor="#FFFFFF"
-              className="w-full h-auto text-white"
+              className="w-full h-auto text-white drop-shadow-[0_8px_32px_rgba(0,0,0,0.15)]"
             />
           </div>
         </div>

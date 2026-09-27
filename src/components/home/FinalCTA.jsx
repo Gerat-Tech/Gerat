@@ -2,6 +2,7 @@
 
 import React from "react";
 import SectionLabel from "../common/SectionLabel";
+import CurvedSectionTransition from "../common/CurvedSectionTransition";
 import SplitText from "../motion/SplitText";
 import FadeUp from "../motion/FadeUp";
 import Magnetic from "../motion/Magnetic";
@@ -21,12 +22,18 @@ export default function FinalCTA() {
     <section
       id="contact"
       aria-label="Contact and Next Steps"
-      className="w-full px-4 sm:px-6 md:px-8 lg:px-12 my-20 sm:my-32 md:my-40 scroll-mt-24"
+      data-dark-card="true"
+      className="w-full bg-[#300F0A] text-[#FAF6ED] relative scroll-mt-24"
     >
-      <div
-        data-dark-card="true"
-        className="relative w-full max-w-[1360px] mx-auto bg-[#300F0A] text-[#FAF6ED] p-12 sm:p-20 md:p-26 rounded-[36px] sm:rounded-[44px] border border-white/10 shadow-[0_24px_64px_rgba(48,15,10,0.3)] overflow-hidden"
-      >
+      {/* Dynamic Scroll-Morphing Arched Transition into Final CTA */}
+      <CurvedSectionTransition
+        fill="#300F0A"
+        stroke="rgba(255, 255, 255, 0.15)"
+        showStroke={true}
+        defaultMaxArch={54}
+      />
+
+      <div className="relative w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-20 sm:pt-28 pb-28 sm:pb-36 overflow-hidden">
         {/* Background Bridge Watermark Accent */}
         <div
           aria-hidden="true"
