@@ -2,150 +2,158 @@
 
 import React from "react";
 import Link from "next/link";
-import { useNav } from "@/context/NavContext";
-import Magnetic from "../motion/Magnetic";
 import GeratLogo from "../common/GeratLogo";
+import { siteConfig } from "@/content/site";
 
 /**
- * Editorial Master Footer (Spec §34, Content Replacement §11)
- * Combines full-bleed brand CTA, precision navigation, and institutional legal footer.
+ * V2 Receivio-Inspired Footer
+ *
+ * Clean, dark, and minimal footer:
+ * - 3-column structured navigation (Navigation, Services, Connect)
+ * - Brand mission note
+ * - Large centered Gerat primary logo signature at the bottom
+ * - Institutional copyright colophon
  */
 export default function Footer() {
-  const { openContact } = useNav();
-
   const navLinks = [
+    { name: "HOME", href: "/" },
     { name: "SERVICES", href: "/services" },
     { name: "ABOUT", href: "/about" },
   ];
 
+  const serviceLinks = [
+    { name: "DIGITAL EXPERIENCES", href: "/services/digital-experiences" },
+    { name: "AI & INTELLIGENT TOOLS", href: "/services/ai-tools" },
+    { name: "BUSINESS SYSTEMS", href: "/services/business-systems" },
+    { name: "BRAND & CREATIVE", href: "/services/brand-creative" },
+  ];
+
+  const connectLinks = [
+    { name: "LINKEDIN", href: "https://linkedin.com/company/gerat", external: true },
+    { name: "GITHUB", href: "https://github.com/gerat-technologies", external: true },
+    { name: "TELEGRAM", href: "https://t.me/geratsolutions", external: true },
+    { name: "EMAIL", href: `mailto:${siteConfig.contact.inquiries}`, external: false },
+  ];
+
   return (
-    <footer className="w-full bg-[var(--bg)] text-white border-t border-white/10 overflow-hidden">
-      {/* Upper Master Call to Action (Flame Orange Banner with White & Dark Brown Typography) */}
-      <div className="w-full bg-accent text-white border-b border-black/10">
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-14 sm:py-18 md:py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
-            <div className="lg:col-span-8 flex flex-col gap-6">
-              <div className="inline-flex items-center font-artific text-[10px] sm:text-[11px] tracking-[0.25em] text-[#300F0A] uppercase font-bold">
-                <span>START A PROJECT</span>
-              </div>
-
-              <h2 className="font-parkinsans text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight uppercase leading-[0.94] text-white">
-                READY TO CONNECT <br />
-                <span className="text-[#300F0A] font-bold">WHAT COMES NEXT?</span>
-              </h2>
-
-              <p className="font-artific text-base sm:text-lg text-white/95 max-w-xl leading-relaxed">
-                Let&apos;s build the bridge together. We turn complex business challenges
-                into digital products, intelligent tools, business systems, and recognizable brands.
-              </p>
-            </div>
-
-            <div className="lg:col-span-4 flex flex-col items-start lg:items-end gap-4">
-              <Magnetic maxDisplacement={10}>
-                <button
-                  type="button"
-                  onClick={openContact}
-                  data-cursor-text="CONTACT"
-                  className="group relative isolate inline-flex items-center justify-center font-parkinsans text-[12px] uppercase tracking-[0.2em] px-9 py-4 bg-[#300F0A] text-white font-bold hover:bg-white hover:text-[#300F0A] border border-[#300F0A] transition-all duration-300 rounded-[2px] shadow-xl"
-                >
-                  <span>START A PROJECT</span>
-                  <span className="ml-2 group-hover:translate-x-1 transition-transform">
-                    →
-                  </span>
-                </button>
-              </Magnetic>
-
-              <span className="font-artific text-[10px] tracking-[0.18em] text-[#300F0A] uppercase font-bold">
-                DIRECT RESPONSE · 24-48 HOUR REVIEW
-              </span>
+    <footer
+      aria-label="Site Footer"
+      className="w-full bg-[#0d0706] text-[#FAF6ED] border-t border-white/10 overflow-hidden"
+    >
+      {/* Upper Content Grid: Brand Statement & 3-Column Navigation */}
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-16 sm:pt-20 pb-12 sm:pb-16">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 items-start">
+          {/* Brand Summary Column */}
+          <div className="md:col-span-5 lg:col-span-5 flex flex-col gap-5">
+            <Link
+              href="/"
+              className="inline-block focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded-sm max-w-fit"
+              aria-label="Gerat Software Solution Homepage"
+            >
+              <GeratLogo
+                variant="badge"
+                className="h-9 w-auto text-[#FAF6ED] hover:text-accent transition-colors duration-300"
+              />
+            </Link>
+            <p className="font-artific text-sm text-[#FAF6ED]/70 leading-relaxed max-w-sm">
+              We design and engineer digital experiences, intelligent tools, business platforms, and brand identities built around your business.
+            </p>
+            <div className="pt-2 font-artific text-xs text-[#FAF6ED]/40 uppercase tracking-[0.15em] space-y-1">
+              <div>BOLE SUBCITY · ADDIS ABABA, ETHIOPIA</div>
+              <div>{siteConfig.contact.inquiries.toUpperCase()}</div>
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* Middle Navigation & Information Row */}
-      <div className="w-full border-t border-white/10 bg-[var(--surface)]">
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-12">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 items-start">
-            {/* Brand column */}
-            <div className="lg:col-span-4 flex flex-col gap-4">
-              <Link href="/" className="inline-block focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded-sm" aria-label="Gerat Software Solution">
-                <GeratLogo variant="badge" className="h-8 w-auto text-white hover:text-accent transition-colors duration-300" />
-              </Link>
-              <p className="font-parkinsans text-[10px] text-white/50 leading-relaxed uppercase tracking-[0.15em] max-w-xs">
-                BRAND · DIGITAL · INTELLIGENCE · SYSTEMS
-              </p>
-            </div>
-
-            {/* Navigation links */}
-            <div className="lg:col-span-2 flex flex-col gap-3">
-              <span className="font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase mb-1">
+          {/* 3-Column Navigation Grid */}
+          <div className="md:col-span-7 lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8 sm:gap-10">
+            {/* Column 01: Navigation */}
+            <div className="flex flex-col gap-4">
+              <span className="font-parkinsans text-xs tracking-[0.25em] text-accent uppercase font-bold">
                 NAVIGATION
               </span>
-              <ul className="flex flex-col gap-2">
-                {navLinks.map((link) => (
-                  <li key={link.name}>
+              <ul className="flex flex-col gap-3 font-parkinsans text-xs tracking-[0.15em] text-[#FAF6ED]/70 uppercase">
+                {navLinks.map((item) => (
+                  <li key={item.name}>
                     <Link
-                      href={link.href}
-                      className="font-parkinsans text-[11px] tracking-[0.2em] text-white/70 hover:text-accent transition-colors uppercase"
+                      href={item.href}
+                      className="hover:text-accent transition-colors duration-200 inline-block py-0.5"
                     >
-                      {link.name}
+                      {item.name}
                     </Link>
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* Core Services (Aligned with 4 Pillars) */}
-            <div className="lg:col-span-3 flex flex-col gap-3">
-              <span className="font-parkinsans text-[10px] tracking-[0.2em] text-accent uppercase mb-1">
+            {/* Column 02: Services */}
+            <div className="flex flex-col gap-4">
+              <span className="font-parkinsans text-xs tracking-[0.25em] text-accent uppercase font-bold">
                 SERVICES
               </span>
-              <ul className="flex flex-col gap-2 font-parkinsans text-[10px] tracking-[0.15em] text-white/60 uppercase">
-                <li>
-                  <Link href="/services/digital-experiences" className="hover:text-white transition-colors">
-                    DIGITAL EXPERIENCES
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/services/ai-tools" className="hover:text-white transition-colors">
-                    AI & INTELLIGENT TOOLS
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/services/business-systems" className="hover:text-white transition-colors">
-                    BUSINESS SYSTEMS
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/services/brand-creative" className="hover:text-white transition-colors">
-                    BRAND & CREATIVE
-                  </Link>
-                </li>
+              <ul className="flex flex-col gap-3 font-parkinsans text-xs tracking-[0.15em] text-[#FAF6ED]/70 uppercase">
+                {serviceLinks.map((item) => (
+                  <li key={item.name}>
+                    <Link
+                      href={item.href}
+                      className="hover:text-accent transition-colors duration-200 inline-block py-0.5"
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
 
-            {/* Contact & Office */}
-            <div className="lg:col-span-3 flex flex-col gap-3">
-              <span className="font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase mb-1">
-                CONTACT
+            {/* Column 03: Connect */}
+            <div className="flex flex-col gap-4 col-span-2 sm:col-span-1">
+              <span className="font-parkinsans text-xs tracking-[0.25em] text-accent uppercase font-bold">
+                CONNECT
               </span>
-              <ul className="font-parkinsans text-[10px] tracking-[0.15em] text-white/50 space-y-2 uppercase">
-                <li>BOLE SUBCITY · ADDIS ABABA</li>
-                <li>INFO@GERAT.COM</li>
-                <li>+2519 2929 8030</li>
-                <li className="text-accent">DIRECT REVIEW · 24-48 HOURS</li>
+              <ul className="flex flex-col gap-3 font-parkinsans text-xs tracking-[0.15em] text-[#FAF6ED]/70 uppercase">
+                {connectLinks.map((item) => (
+                  <li key={item.name}>
+                    <a
+                      href={item.href}
+                      target={item.external ? "_blank" : undefined}
+                      rel={item.external ? "noopener noreferrer" : undefined}
+                      className="hover:text-accent transition-colors duration-200 inline-flex items-center gap-1.5 py-0.5"
+                    >
+                      <span>{item.name}</span>
+                      {item.external && (
+                        <span className="text-[10px] text-[#FAF6ED]/40 hover:text-accent">
+                          ↗
+                        </span>
+                      )}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom Legal & Colophon */}
-      <div className="w-full border-t border-white/5 bg-[var(--bg)]">
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-parkinsans text-[10px] tracking-[0.15em] text-white/40 uppercase">
-          <div>© 2026 GERAT SOFTWARE SOLUTION. ALL RIGHTS RESERVED.</div>
-          <div className="text-white/30">ADDIS ABABA · EST. 2026</div>
+      {/* Large Centered Brand Signature Mark (Receivio-Inspired) */}
+      <div className="w-full border-t border-white/10 pt-10 sm:pt-14 pb-8 overflow-hidden select-none pointer-events-none">
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 flex justify-center items-center">
+          <div className="w-full max-w-4xl opacity-15 hover:opacity-25 transition-opacity duration-500">
+            <GeratLogo
+              variant="primary"
+              className="w-full h-auto text-[#FAF6ED]"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Institutional Legal Colophon */}
+      <div className="w-full border-t border-white/5 bg-[#090403]">
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-parkinsans text-[11px] tracking-[0.18em] text-[#FAF6ED]/50 uppercase">
+          <div>© {new Date().getFullYear()} GERAT SOFTWARE SOLUTION. ALL RIGHTS RESERVED.</div>
+          <div className="flex items-center gap-4 text-[#FAF6ED]/40 text-[10px]">
+            <span>TECHNOLOGY IS A TOOL. MAKE IT USEFUL.</span>
+            <span>·</span>
+            <span>ADDIS ABABA · EST. 2026</span>
+          </div>
         </div>
       </div>
     </footer>

@@ -73,9 +73,14 @@ export async function runBrandingSmokeTests() {
   assert(servicesContent.includes("EXECUTIVE & FOUNDER PERSONAL BRANDING"), "services.js must include Personal Branding pillar");
   console.log("  ✓ Services content brand architecture verified");
 
-  // Footer must have Gerat copyright
+  // Footer must have Gerat copyright, 3-column nav, and no legacy orange banner
   const footer = fs.readFileSync(path.join(root, "src/components/layout/Footer.jsx"), "utf-8");
   assert(!footer.includes("WorldQuant"), "Footer should not contain 'WorldQuant'");
+  assert(!footer.includes("bg-accent text-white border-b"), "Footer should not contain legacy orange banner");
+  assert(footer.includes("NAVIGATION"), "Footer must contain 'NAVIGATION'");
+  assert(footer.includes("SERVICES"), "Footer must contain 'SERVICES'");
+  assert(footer.includes("CONNECT"), "Footer must contain 'CONNECT'");
+  assert(footer.includes("variant=\"primary\""), "Footer must render primary logo signature");
   assert(footer.includes("GERAT SOFTWARE SOLUTION"), "Footer must contain 'GERAT SOFTWARE SOLUTION'");
-  console.log("  ✓ Footer branding verified");
+  console.log("  ✓ V2 Footer branding & 3-column navigation verified");
 }
