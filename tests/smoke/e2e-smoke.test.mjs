@@ -130,16 +130,15 @@ async function runAllE2ETests() {
       assert(res.body.includes("GERAT SOFTWARE SOLUTION"));
     });
 
-    await test("2. Portfolio route (/portfolio) renders with 200 OK", async () => {
-      const res = await request("/portfolio");
+    await test("2. About route (/about) renders with 200 OK", async () => {
+      const res = await request("/about");
       assert.strictEqual(res.status, 200);
-      assert(res.body.includes("PORTFOLIO"));
+      assert(res.body.includes("About Gerat"));
     });
 
-    await test("3. Team route (/team) renders leadership roster with 200 OK", async () => {
-      const res = await request("/team");
-      assert.strictEqual(res.status, 200);
-      assert(res.body.includes("LEADERSHIP") || res.body.includes("HRUY DANIEL"));
+    await test("3. Archived route (/portfolio) returns 404", async () => {
+      const res = await request("/portfolio");
+      assert.strictEqual(res.status, 404);
     });
 
     await test("4. Services route (/services) renders core capabilities with 200 OK", async () => {
@@ -178,10 +177,9 @@ async function runAllE2ETests() {
       assert(res.body.includes("PERSONAL BRANDING"));
     });
 
-    await test("7. Insights route (/insights) renders research portal with 200 OK", async () => {
+    await test("7. Archived route (/insights) returns 404", async () => {
       const res = await request("/insights");
-      assert.strictEqual(res.status, 200);
-      assert(res.body.includes("INSIGHTS"));
+      assert.strictEqual(res.status, 404);
     });
 
     await test("8. Dashboard Login (/dashboard/login) renders authentication cockpit", async () => {

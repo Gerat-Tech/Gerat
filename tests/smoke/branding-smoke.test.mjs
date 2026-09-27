@@ -41,38 +41,13 @@ export async function runBrandingSmokeTests() {
   assert(!portfolio.includes("worldquantfoundry.com"), "Portfolio should not contain external WQF links");
   console.log("  ✓ Portfolio internal routing verified");
 
-  // Portfolio page components must not contain legacy WQF copy
-  const portfolioHero = fs.readFileSync(path.join(root, "src/app/portfolio/components/Hero.jsx"), "utf-8");
-  assert(!portfolioHero.includes("Born at the edge"), "Portfolio hero must not contain legacy WQF copy");
-  assert(portfolioHero.includes("PROVEN ARCHITECTURES."), "Portfolio hero must contain Gerat headline");
-  assert(portfolioHero.includes("BRAND & IDENTITY"), "Portfolio hero must include 'BRAND & IDENTITY' category filter");
-  assert(portfolioHero.includes("PERSONAL BRAND"), "Portfolio hero must include 'PERSONAL BRAND' category filter");
-  console.log("  ✓ Portfolio page Hero & category filters verified");
-
+  // Portfolio content clean slate in V2
   const portfolioContent = fs.readFileSync(path.join(root, "src/content/portfolio.js"), "utf-8");
-  const portfolioShowcase = fs.readFileSync(path.join(root, "src/app/portfolio/components/PortfolioShowcase.jsx"), "utf-8");
-  assert(!portfolioShowcase.includes("ALPHA DEAL"), "Portfolio showcase must not contain legacy Alpha Deal");
-  assert(portfolioContent.includes("NATIONAL DIGITAL RECORDS ENGINE"), "Portfolio content must contain Gerat flagship projects");
-  assert(portfolioContent.includes("AXIOM IDENTITY SYSTEM"), "Portfolio content must contain Axiom brand case study");
-  assert(portfolioShowcase.includes("/api/portfolio") || portfolioShowcase.includes("@/content"), "Portfolio showcase must consume content architecture");
-  assert(portfolioShowcase.includes("CREATIVE & STRATEGIC RESOLUTION"), "Portfolio showcase must support creative resolutions");
-  assert(portfolioShowcase.includes("INQUIRE ABOUT BRAND IDENTITY"), "Portfolio showcase must provide brand inquiry actions");
-  console.log("  ✓ Portfolio page Showcase & Brand case studies verified");
-
-  // Team page components must not contain legacy WQF copy
-  const teamHero = fs.readFileSync(path.join(root, "src/app/team/components/TeamHero.jsx"), "utf-8");
-  assert(!teamHero.includes("WorldQuant Foundry"), "Team hero must not contain legacy WQF text");
-  assert(teamHero.includes("ENGINEERED WITH RIGOR."), "Team hero must contain Gerat headline");
-  console.log("  ✓ Team page Hero verified");
-
-  // Insights page components must not contain legacy WQF copy
-  const insightsHero = fs.readFileSync(path.join(root, "src/app/insights/components/InsightsHero.jsx"), "utf-8");
-  assert(!insightsHero.includes("FOUNDRY TEAM"), "Insights hero must not contain legacy Foundry text");
-  assert(insightsHero.includes("SYSTEM ARCHITECTURE,"), "Insights hero must contain Gerat headline");
-  console.log("  ✓ Insights page Hero verified");
+  assert(portfolioContent.includes("export const portfolioProjects = []"), "Portfolio content must be clean slate in V2");
+  console.log("  ✓ Portfolio content V2 clean slate verified");
 
   // Services page components must not contain legacy WQF copy
-  const services = fs.readFileSync(path.join(root, "src/app/why-wqf/components/ServicesOverview.jsx"), "utf-8");
+  const services = fs.readFileSync(path.join(root, "src/components/services/ServicesOverview.jsx"), "utf-8");
   assert(!services.includes("WorldQuant Foundry"), "Services page must not contain legacy WQF text");
   assert(services.includes("WHAT WE") && services.includes("BUILD."), "Services page must contain Gerat headline");
   console.log("  ✓ Services page Overview verified");

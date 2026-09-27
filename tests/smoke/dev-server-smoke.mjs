@@ -68,9 +68,7 @@ async function runDevServerSmokeTests() {
 
     const routes = [
       { path: "/", name: "HomePage", expected: "GERAT" },
-      { path: "/portfolio", name: "PortfolioPage", expected: "PORTFOLIO" },
-      { path: "/team", name: "TeamPage", expected: "LEADERSHIP" },
-      { path: "/insights", name: "InsightsPage", expected: "INSIGHTS" },
+      { path: "/about", name: "AboutPage", expected: "About Gerat" },
       { path: "/services", name: "ServicesPage", expected: "SERVICES" },
       { path: "/services/digital-experiences", name: "DigitalExperiencesPage", expected: "DIGITAL EXPERIENCES" },
       { path: "/services/ai-tools", name: "AiToolsPage", expected: "INTELLIGENT TOOLS" },
