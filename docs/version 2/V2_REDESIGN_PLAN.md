@@ -800,6 +800,64 @@ Behavior: Headlines reveal word-by-word on viewport entry
 
 ---
 
+### Phase 9: Receivio Design Alignment & Brand Visual Overhaul (Direct User Feedback)
+**Goal:** Full alignment with Receivio's visual language (https://receivio.framer.media/) and Gerat's authentic brand palette, resolving all 8 user-reported items.
+
+#### 1. Navigation Bar Enhancement
+- Add **"Team"** to primary navbar: `Services | About | Team | [START A PROJECT]`.
+- Contextual navigation:
+  - Homepage (`/`): Smooth-scrolls to `#founders`.
+  - Subpages (`/about`, `/services`): Navigates to `/about#founders`.
+- Mobile navigation menu updated to include Team.
+
+#### 2. Hero Section Redesign (Receivio-Inspired)
+- **Remove:** The bottom bar with `"SCROLL TO EXPLORE"` and `"DIGITAL · AI · SYSTEMS · BRAND"` ticker and orange square icon (Image 1).
+- **Canvas:** Warm Almond/Ivory background (`#FAF6ED` / `#F1DFD9`) instead of flat dark void.
+- **Centered Layout:**
+  - Centered Display Title with a highlighted keyword inside a soft rounded pill badge with italic text (e.g. `Build what moves your business [forward]` or `Technology made [useful]` with soft accent pill badge).
+  - Centered subheadline.
+  - Centered pill button group: Primary pill button in Flame Orange (`rounded-full px-8 py-3.5 bg-accent text-white font-semibold shadow-md hover:bg-accent/90`) + secondary icon/action button (`rounded-full size-12 bg-white/80 border border-black/10`).
+- **Brand-Inspired Logo Animation Visual:**
+  - Dynamic 3-wave brand bridge animation rendered via animated SVG / Framer Motion, inspired by the Gerat wave geometries.
+  - Interactive fanned card showcase displaying Gerat's 4 core disciplines (Digital Experiences, AI Tools, Business Systems, Brand) with floating pill tags (`"Useful over complicated"`, `"Zero friction"`, `"Built for endurance"`), echoing Receivio's invoice card stack (Image 2).
+- **Curved Bottom Edge:** Elegant convex arc divider (`rounded-b-[40px]` or curved SVG boundary) transitioning smoothly into the next section.
+
+#### 3. Section Breathing Room & Floating Containers
+- Eliminate cramped, edge-to-edge section dividers.
+- Adopt Receivio's floating card container structure:
+  - Sections sit as floating container cards (`max-w-[1360px] mx-auto my-12 sm:my-20 p-8 sm:p-14 md:p-16 rounded-[32px]`) with generous outer margins.
+  - Canvas background breathes with warm Almond (`#F1DFD9`) / Cream (`#FAF6ED`).
+
+#### 4. Card & Button Border Radii Overhaul (Eliminate Sharp Rectangles)
+- **Buttons:** Change all sharp `rounded-[2px]` and `rounded-[4px]` buttons to **`rounded-full`** (pill buttons).
+- **Cards:** Change all cards from sharp rectangles to soft, premium rounded radii: **`rounded-2xl`** (16px), **`rounded-3xl`** (24px), or **`rounded-[28px]` / `rounded-[32px]`**.
+- **Pills & Badges:** Update all tags, category indicators, and status chips to **`rounded-full px-3 py-1`**.
+
+#### 5. Color Palette & Typography Contrast Fixes (Eliminate Muddy Brown, Champion Flame Orange)
+- **Issue Fix (Image 3 & 4):** Eliminate dark red/brown text on muddy dark brown backgrounds in `OurFocus.jsx`, `HowWeWork.jsx`, and `OurEthos.jsx`.
+- **Primary Accent Rule:** Use **Flame Orange (`#EA5B15`)** boldly for highlights, active stages, icons, and hero CTA buttons instead of muddy brown.
+- **Strict High-Contrast Typography:**
+  - **On Light/Almond Surfaces (`#F1DFD9` / `#FAF6ED`):** Headings and body text must be deep **Coffee Bean (`#300F0A`)** with Flame Orange (`#EA5B15`) accents. Cards use pure white or soft cream surfaces with subtle borders and shadows.
+  - **On Dark Surfaces (`#160705` / `#1F0B07`):** Headings must be pure white (`#FFFFFF`), body text light cream (`#FAF6ED`), and accents bright Flame Orange (`#EA5B15`). Never use dark brown or dark red text on dark backgrounds.
+
+#### 6. Footer Visibility & Logo Contrast (Image 5 Fix)
+- Fix washed-out white logo and links on light/almond backgrounds.
+- When footer renders on an Almond surface:
+  - Use the **dark Gerat logo** (`Gerat-Primary-Logo-Dark.svg` or `color="#300F0A"`).
+  - Navigation links, company address, and colophon text set to **Coffee Bean (`#300F0A`)**.
+  - Section headers set to **Flame Orange (`#EA5B15`)**.
+  - Large bottom signature mark uses Coffee Bean with 8–12% subtle opacity so it remains elegantly visible without washing out.
+
+#### 7. Verification & End-to-End Testing Gates
+- Update smoke tests (`tests/smoke/branding-smoke.test.mjs`, `dev-server-smoke.mjs`, `e2e-smoke.test.mjs`) to verify:
+  - `Navbar` includes "Team".
+  - Hero contains Receivio pill styling and removed bottom ticker.
+  - Card roundedness conforms to `rounded-2xl`, `rounded-3xl`, `rounded-full`.
+  - Contrast ratios pass WCAG AA across all cards and footer.
+- Verify `npm run build` and `npm test` execute with 100% pass rate.
+
+---
+
 ## 15. File Change Manifest
 
 ### Files to CREATE (New)
