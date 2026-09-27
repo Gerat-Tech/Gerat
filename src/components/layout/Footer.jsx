@@ -11,7 +11,7 @@ import { siteConfig } from "@/content/site";
  * Implements the user's explicit direction:
  * - Vibrant Flame Orange background (#EA5B15 / data-orange-footer="true")
  * - High-contrast white typography with deep Coffee Bean (#300F0A) accent headers & hover states
- * - Dual-tone brand logo (Coffee Bean badge with white waves and white wordmark)
+ * - Official pure white brand logo (Badge + Wordmark)
  * - 3-column structured navigation (Navigation, Services, Connect)
  * - Large embossed white brand watermark signature mark
  * - Institutional legal colophon in deeper orange (#D44E0E)
@@ -57,9 +57,7 @@ export default function Footer() {
               <GeratLogo
                 variant="badge"
                 color="#FFFFFF"
-                badgeColor="#300F0A"
-                textColor="#FFFFFF"
-                className="h-10 w-auto hover:opacity-95 transition-opacity"
+                className="h-10 w-auto text-white hover:opacity-90 transition-opacity"
               />
             </Link>
             <p className="font-artific text-sm sm:text-base text-white/95 leading-relaxed max-w-sm">
