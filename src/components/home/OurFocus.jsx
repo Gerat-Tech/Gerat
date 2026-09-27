@@ -5,48 +5,50 @@ import Link from "next/link";
 import SectionLabel from "../common/SectionLabel";
 import FadeUp from "../motion/FadeUp";
 import SplitText from "../motion/SplitText";
+import { useNav } from "@/context/NavContext";
 
-const DEFAULT_CAPABILITIES = [
+const V2_DEFAULT_PILLARS = [
   {
-    index: "01",
     num: "01",
     title: "DIGITAL EXPERIENCES",
-    tags: "WEBSITES · WEB APPLICATIONS · CUSTOMER PORTALS · DIGITAL PRODUCTS",
-    description:
-      "Websites and digital products that make your business easier to discover, understand, and use.",
-    link: "/services/digital-experiences",
+    desc: "Websites, web applications, portals, and digital products that make your business easier to discover, understand, and use.",
+    deliverables: ["Websites", "Web applications", "Customer portals", "Digital products"],
+    deepLink: "/services/digital-experiences",
+    actionLabel: "EXPLORE DIGITAL",
   },
   {
-    index: "02",
     num: "02",
     title: "AI & INTELLIGENT TOOLS",
-    tags: "PRACTICAL AI · KNOWLEDGE SYSTEMS · INTELLIGENT SEARCH · AUTOMATION",
-    description:
-      "Practical AI that helps people find information, automate repetitive work, and make better use of what they already know.",
-    link: "/services/ai-tools",
+    desc: "Practical AI for finding information, automating work, understanding documents, and turning existing knowledge into useful tools.",
+    deliverables: ["AI assistants", "RAG & knowledge systems", "Workflow automation", "Document intelligence"],
+    deepLink: "/services/ai-tools",
+    actionLabel: "EXPLORE AI & TOOLS",
   },
   {
-    index: "03",
     num: "03",
     title: "BUSINESS SYSTEMS",
-    tags: "OPERATIONS PLATFORMS · ERP · WORKFLOW SYSTEMS · CUSTOM SOFTWARE",
-    description:
-      "Software that connects operations, people, and information so businesses can work with less friction.",
-    link: "/services/business-systems",
+    desc: "Connected software for the work behind the business — operations, workflows, inventory, billing, and integrations.",
+    deliverables: ["ERP & operational platforms", "Internal tools", "Workflow systems", "API & system integrations"],
+    deepLink: "/services/business-systems",
+    actionLabel: "EXPLORE SYSTEMS",
   },
   {
-    index: "04",
     num: "04",
     title: "BRAND & CREATIVE",
-    tags: "BRAND STRATEGY · LOGO & IDENTITY · GRAPHIC DESIGN · PERSONAL BRANDING",
-    description:
-      "A clear identity that helps people recognize your business — from the logo to the way it shows up online.",
-    link: "/services/brand-creative",
+    desc: "Clear brand systems that make a business recognizable, credible, and consistent across digital and physical touchpoints.",
+    deliverables: ["Brand strategy", "Logo & visual identity", "Marketing design", "Founder & personal branding"],
+    deepLink: "/services/brand-creative",
+    actionLabel: "EXPLORE BRAND",
   },
 ];
 
+/**
+ * Section 03: THE BRIDGE ("WHAT GERAT BUILDS") — V2 Sticky Scroll-Stack Cards
+ * Presents the 4 core service pillars one by one as the user scrolls,
+ * creating a focused, story-like experience.
+ */
 export default function OurFocus({ initialPillars = null }) {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const { openContact } = useNav();
   const [fetchedPillars, setFetchedPillars] = useState(null);
 
   useEffect(() => {
@@ -54,7 +56,7 @@ export default function OurFocus({ initialPillars = null }) {
     fetch("/api/services?active=true", { cache: "no-store" })
       .then((res) => res.json())
       .then((data) => {
-        if (isMounted && data.success && Array.isArray(data.pillars)) {
+        if (isMounted && data.success && Array.isArray(data.pillars) && data.pillars.length > 0) {
           const normalized = data.pillars.map((p) => {
             let dels = [];
             if (Array.isArray(p.deliverables)) {
@@ -71,11 +73,22 @@ export default function OurFocus({ initialPillars = null }) {
 
             return {
               ...p,
-              index: p.num,
+              num: p.num || "01",
               title: p.title,
-              tags: Array.isArray(dels) && dels.length > 0 ? dels.join(" · ") : p.tagline,
-              description: p.desc || p.tagline,
-              link: p.deepLink || "/services",
+              desc: p.desc || p.tagline,
+              deliverables: dels.length > 0 ? dels : (V2_DEFAULT_PILLARS.find(v => v.num === p.num)?.deliverables || []),
+              deepLink: p.deepLink || (
+                p.num === "01" ? "/services/digital-experiences" :
+                p.num === "02" ? "/services/ai-tools" :
+                p.num === "03" ? "/services/business-systems" :
+                "/services/brand-creative"
+              ),
+              actionLabel: (
+                p.num === "01" ? "EXPLORE DIGITAL" :
+                p.num === "02" ? "EXPLORE AI & TOOLS" :
+                p.num === "03" ? "EXPLORE SYSTEMS" :
+                "EXPLORE BRAND"
+              ),
             };
           });
           setFetchedPillars(normalized);
@@ -88,115 +101,144 @@ export default function OurFocus({ initialPillars = null }) {
     };
   }, []);
 
-  const capabilities =
-    fetchedPillars !== null
+  const pillars =
+    fetchedPillars !== null && fetchedPillars.length > 0
       ? fetchedPillars
-      : initialPillars !== null
+      : initialPillars !== null && initialPillars.length > 0
       ? initialPillars
-      : DEFAULT_CAPABILITIES;
+      : V2_DEFAULT_PILLARS;
 
   return (
     <section
       id="services"
       aria-label="What We Build"
-      className="relative w-full bg-[var(--bg)] text-white py-24 sm:py-32 md:py-36 border-b border-white/10 scroll-mt-20"
+      className="relative w-full bg-[var(--bg)] text-white py-24 sm:py-32 md:py-36 border-b border-white/10 scroll-mt-20 overflow-hidden"
     >
       <span id="capabilities" className="sr-only" />
+
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
         {/* Section Header */}
-        <div className="flex flex-col gap-4 mb-10 sm:mb-12 max-w-3xl">
-          <SectionLabel label="WHAT WE BUILD" />
-          <SplitText
-            text="HOW WE BUILD"
-            as="h2"
-            className="font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium sm:font-semibold tracking-tight uppercase leading-[0.95]"
-          />
-          <SplitText
-            text="THE BRIDGE."
-            as="h2"
-            wordClassName="text-accent"
-            className="font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium sm:font-semibold tracking-tight uppercase leading-[0.95]"
-          />
-          <FadeUp delay={0.2} y={16}>
-            <p className="font-artific text-base sm:text-lg text-white/75 leading-relaxed pt-2">
-              Every business needs a strong foundation, a clear path, and
-              systems that can carry what comes next.
+        <div className="flex flex-col gap-4 mb-16 sm:mb-20 max-w-3xl">
+          <SectionLabel index="03" label="THE BRIDGE" />
+          <div className="space-y-2">
+            <SplitText
+              text="FROM BUSINESS NEED"
+              as="h2"
+              delay={0.1}
+              stagger={0.035}
+              className="font-parkinsans text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight uppercase leading-[0.96]"
+            />
+            <SplitText
+              text="TO WORKING SYSTEM."
+              as="div"
+              delay={0.25}
+              stagger={0.035}
+              wordClassName="text-accent"
+              className="font-parkinsans text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight uppercase leading-[0.96]"
+            />
+          </div>
+          <FadeUp delay={0.35} y={16}>
+            <p className="font-artific text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed">
+              We bring design, engineering, AI, and business thinking together around the problem that needs solving.
             </p>
           </FadeUp>
         </div>
 
-        {/* Interactive Capability Rows Table (Dynamic Pillars from Database) */}
-        {capabilities.length === 0 ? (
-          <div className="w-full py-16 px-8 rounded-[3px] border border-white/10 bg-[var(--surface)] text-center flex flex-col items-center justify-center gap-3 my-8">
-            <div className="size-2 bg-accent/60 rounded-full animate-pulse" />
-            <span className="font-artific text-[11px] tracking-[0.2em] text-white/50 uppercase font-medium">
-              NO CURRENT SERVICE PILLARS PUBLISHED
-            </span>
-            <p className="font-parkinsans text-xs tracking-wider text-white/30 uppercase max-w-md">
-              Practice pillars and services are configured via Mission Control.
-            </p>
-          </div>
-        ) : (
-          <div className="w-full border-t border-white/10">
-          {capabilities.map((item, idx) => {
-            const isHovered = hoveredIndex === idx;
-            return (
-              <Link
-                key={item.title || idx}
-                href={item.link || "/services"}
-                onMouseEnter={() => setHoveredIndex(idx)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                onFocus={() => setHoveredIndex(idx)}
-                onBlur={() => setHoveredIndex(null)}
-                className={`group relative block border-b border-white/10 py-6 sm:py-8 px-4 sm:px-6 transition-all duration-300 outline-none ${
-                  isHovered ? "bg-white/[0.03]" : "bg-transparent"
-                }`}
-              >
-                {/* Active Indicator Accent Line */}
-                <div
-                  className={`absolute left-0 top-0 bottom-0 w-[2px] bg-accent transition-opacity duration-300 ${
-                    isHovered ? "opacity-100" : "opacity-0"
-                  }`}
-                  aria-hidden="true"
-                />
-
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 items-baseline">
-                  {/* Column 1: Title & Tags */}
-                  <div className="lg:col-span-6 flex flex-col gap-1.5">
-                    <h3 className="font-parkinsans text-xl sm:text-2xl font-semibold tracking-tight uppercase text-white group-hover:text-accent transition-colors">
-                      {item.title}
-                    </h3>
-                    <span className="font-artific text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] text-white/50 uppercase font-medium">
-                      {item.tags}
+        {/* Sticky Scroll-Stack Cards Container */}
+        <div className="flex flex-col gap-8 sm:gap-12 relative pb-12">
+          {pillars.map((pillar, idx) => (
+            <div
+              key={pillar.num || idx}
+              style={{ top: `calc(88px + ${idx * 24}px)` }}
+              className="sticky transition-all duration-300 rounded-[4px] border border-white/15 bg-[#1f1310] shadow-[0_16px_40px_rgba(0,0,0,0.6)] p-8 sm:p-12 md:p-14 hover:border-accent/60 group"
+            >
+              <div className="flex flex-col md:flex-row md:items-start justify-between gap-8">
+                {/* Left Column: Number, Title, Description */}
+                <div className="flex flex-col gap-4 max-w-xl">
+                  <div className="flex items-center gap-3">
+                    <span className="font-parkinsans text-xs sm:text-sm font-bold tracking-[0.25em] text-accent uppercase">
+                      SERVICE {pillar.num || `0${idx + 1}`}
+                    </span>
+                    <span className="text-white/20">/</span>
+                    <span className="font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
+                      04
                     </span>
                   </div>
 
-                  {/* Column 2: Description */}
-                  <div className="lg:col-span-5 font-artific text-xs sm:text-sm text-white/70 group-hover:text-white/95 leading-relaxed transition-colors pt-1 lg:pt-0">
-                    {item.description}
+                  <h3 className="font-parkinsans text-2xl sm:text-4xl font-semibold uppercase tracking-tight text-white group-hover:text-accent transition-colors leading-[1.05]">
+                    {pillar.title}
+                  </h3>
+
+                  <p className="font-artific text-sm sm:text-base text-white/75 leading-relaxed pt-1">
+                    {pillar.desc}
+                  </p>
+                </div>
+
+                {/* Right Column: Deliverables & CTA */}
+                <div className="flex flex-col justify-between gap-6 md:min-w-[280px] lg:min-w-[340px] pt-4 md:pt-0 border-t md:border-t-0 md:border-l border-white/10 md:pl-8">
+                  <div>
+                    <span className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase block mb-3">
+                      KEY DELIVERABLES
+                    </span>
+                    <ul className="space-y-2">
+                      {(pillar.deliverables || []).map((item) => (
+                        <li
+                          key={item}
+                          className="font-parkinsans text-[11px] sm:text-[12px] tracking-[0.1em] text-white/70 flex items-center gap-2.5"
+                        >
+                          <span className="size-1.5 rounded-full bg-accent/80 shrink-0" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
 
-                  {/* Column 3: Trailing Arrow */}
-                  <div className="hidden lg:flex lg:col-span-1 justify-end font-parkinsans text-sm text-white/30 group-hover:text-accent group-hover:translate-x-1 transition-all">
-                    →
+                  <div className="flex items-center justify-between gap-4 pt-4 border-t border-white/10">
+                    <Link
+                      href={pillar.deepLink || "/services"}
+                      className="inline-flex items-center gap-1.5 font-parkinsans text-[10px] sm:text-[11px] tracking-[0.2em] uppercase font-bold text-accent hover:text-white transition-colors"
+                    >
+                      <span>{pillar.actionLabel || "LEARN MORE"}</span>
+                      <span>→</span>
+                    </Link>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const presetMap = {
+                          "01": { discipline: "digital" },
+                          "02": { discipline: "intelligence" },
+                          "03": { discipline: "systems" },
+                          "04": { discipline: "brand" },
+                        };
+                        openContact(presetMap[pillar.num] || { discipline: "digital" });
+                      }}
+                      className="font-parkinsans text-[9px] sm:text-[10px] tracking-[0.15em] uppercase text-white/50 hover:text-white transition-colors cursor-pointer"
+                    >
+                      INQUIRE →
+                    </button>
                   </div>
                 </div>
-              </Link>
-            );
-          })}
-          </div>
-        )}
+              </div>
+            </div>
+          ))}
+        </div>
 
-        {/* Bottom Capabilities Link */}
-        <FadeUp delay={0.3} y={16}>
-          <div className="mt-8 sm:mt-10 flex items-center justify-between">
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-2 font-parkinsans text-[11px] sm:text-[12px] uppercase tracking-[0.2em] text-white/60 hover:text-white transition-colors"
-            >
-              <span>EXPLORE ALL SERVICES & SOLUTIONS</span>
-              <span className="text-accent">→</span>
-            </Link>
+        {/* Bottom Hub CTA */}
+        <FadeUp delay={0.2} y={20}>
+          <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <p className="font-artific text-xs sm:text-sm text-white/50 max-w-md text-center sm:text-left">
+              Need a combination of digital experiences, intelligence, and brand systems? We design tailored architectures.
+            </p>
+            <div className="flex items-center gap-4">
+              <Link
+                href="/services"
+                className="inline-flex items-center font-parkinsans text-[11px] uppercase tracking-[0.2em] px-7 py-3.5 bg-white/5 hover:bg-white hover:text-black border border-white/20 hover:border-white text-white font-bold transition-all rounded-[2px]"
+              >
+                <span>VIEW ALL SERVICES</span>
+                <span className="ml-2">→</span>
+              </Link>
+            </div>
           </div>
         </FadeUp>
       </div>
