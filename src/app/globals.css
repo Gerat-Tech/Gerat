@@ -598,6 +598,34 @@ html.light [data-dark-card] h5,
 html.light [data-dark-card] p,
 html.light [data-dark-card] span,
 html.light [data-dark-card] div,
+html.light [data-dark-section],
+html.light [data-dark-section] h1,
+html.light [data-dark-section] h2,
+html.light [data-dark-section] h3,
+html.light [data-dark-section] h4,
+html.light [data-dark-section] h5,
+html.light [data-dark-section] p,
+html.light [data-dark-section] span,
+html.light [data-dark-section] div,
+html.site-light [data-dark-section],
+html.site-light [data-dark-section] h1,
+html.site-light [data-dark-section] h2,
+html.site-light [data-dark-section] h3,
+html.site-light [data-dark-section] h4,
+html.site-light [data-dark-section] h5,
+html.site-light [data-dark-section] p,
+html.site-light [data-dark-section] span,
+html.site-light [data-dark-section] div,
+html.light footer[data-dark-footer],
+html.light footer[data-dark-footer] p,
+html.light footer[data-dark-footer] span,
+html.light footer[data-dark-footer] div,
+html.light footer[data-dark-footer] a,
+html.site-light footer[data-dark-footer],
+html.site-light footer[data-dark-footer] p,
+html.site-light footer[data-dark-footer] span,
+html.site-light footer[data-dark-footer] div,
+html.site-light footer[data-dark-footer] a,
 html.light .card-coffee,
 html.light .card-coffee h1,
 html.light .card-coffee h2,
@@ -645,6 +673,20 @@ html.site-light #leadership .dark-overlay-text,
 html.light .force-text-white,
 html.site-light .force-text-white {
   color: #FAF6ED !important;
+}
+
+html.light footer[data-dark-footer],
+html.site-light footer[data-dark-footer],
+html.light [data-dark-section],
+html.site-light [data-dark-section] {
+  background-color: #160705 !important;
+}
+
+html.light footer[data-dark-footer] .text-accent,
+html.site-light footer[data-dark-footer] .text-accent,
+html.light [data-dark-section] .text-accent,
+html.site-light [data-dark-section] .text-accent {
+  color: #EA5B15 !important;
 }
 
 /* Ensure accent colors inside dark overlay remain vivid flame orange */

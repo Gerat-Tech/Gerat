@@ -800,61 +800,182 @@ Behavior: Headlines reveal word-by-word on viewport entry
 
 ---
 
-### Phase 9: Receivio Design Alignment & Brand Visual Overhaul (Direct User Feedback)
-**Goal:** Full alignment with Receivio's visual language (https://receivio.framer.media/) and Gerat's authentic brand palette, resolving all 8 user-reported items.
+### Phase 9: Receivio Spatial Alignment & Brand Visual Overhaul (Exhaustive Architectural Plan)
 
-#### 1. Navigation Bar Enhancement
-- Add **"Team"** to primary navbar: `Services | About | Team | [START A PROJECT]`.
-- Contextual navigation:
-  - Homepage (`/`): Smooth-scrolls to `#founders`.
-  - Subpages (`/about`, `/services`): Navigates to `/about#founders`.
-- Mobile navigation menu updated to include Team.
+> **Context:** Initiated directly from comprehensive user critique, 5 visual screenshot artifacts, and live reverse-engineering of the reference site [Receivio](https://receivio.framer.media/).
+> **Core Objective:** Eradicate all legacy rectangular cramping, eliminate muddy low-contrast brown tones, elevate the official Gerat brand palette (Almond `#F1DFD9`, Flame Orange `#EA5B15`, Coffee Bean `#300F0A`), introduce authentic logo-driven bridge animations, and establish floating rounded card architecture with generous spatial rhythm.
 
-#### 2. Hero Section Redesign (Receivio-Inspired)
-- **Remove:** The bottom bar with `"SCROLL TO EXPLORE"` and `"DIGITAL · AI · SYSTEMS · BRAND"` ticker and orange square icon (Image 1).
-- **Canvas:** Warm Almond/Ivory background (`#FAF6ED` / `#F1DFD9`) instead of flat dark void.
-- **Centered Layout:**
-  - Centered Display Title with a highlighted keyword inside a soft rounded pill badge with italic text (e.g. `Build what moves your business [forward]` or `Technology made [useful]` with soft accent pill badge).
-  - Centered subheadline.
-  - Centered pill button group: Primary pill button in Flame Orange (`rounded-full px-8 py-3.5 bg-accent text-white font-semibold shadow-md hover:bg-accent/90`) + secondary icon/action button (`rounded-full size-12 bg-white/80 border border-black/10`).
-- **Brand-Inspired Logo Animation Visual:**
-  - Dynamic 3-wave brand bridge animation rendered via animated SVG / Framer Motion, inspired by the Gerat wave geometries.
-  - Interactive fanned card showcase displaying Gerat's 4 core disciplines (Digital Experiences, AI Tools, Business Systems, Brand) with floating pill tags (`"Useful over complicated"`, `"Zero friction"`, `"Built for endurance"`), echoing Receivio's invoice card stack (Image 2).
-- **Curved Bottom Edge:** Elegant convex arc divider (`rounded-b-[40px]` or curved SVG boundary) transitioning smoothly into the next section.
+---
 
-#### 3. Section Breathing Room & Floating Containers
-- Eliminate cramped, edge-to-edge section dividers.
-- Adopt Receivio's floating card container structure:
-  - Sections sit as floating container cards (`max-w-[1360px] mx-auto my-12 sm:my-20 p-8 sm:p-14 md:p-16 rounded-[32px]`) with generous outer margins.
-  - Canvas background breathes with warm Almond (`#F1DFD9`) / Cream (`#FAF6ED`).
+#### 1. Detailed Problem Dissection & Root-Cause Analysis
 
-#### 4. Card & Button Border Radii Overhaul (Eliminate Sharp Rectangles)
-- **Buttons:** Change all sharp `rounded-[2px]` and `rounded-[4px]` buttons to **`rounded-full`** (pill buttons).
-- **Cards:** Change all cards from sharp rectangles to soft, premium rounded radii: **`rounded-2xl`** (16px), **`rounded-3xl`** (24px), or **`rounded-[28px]` / `rounded-[32px]`**.
-- **Pills & Badges:** Update all tags, category indicators, and status chips to **`rounded-full px-3 py-1`**.
+##### Critique 1: Navbar Missing "Team" Link
+- **User Instruction:** *"for nav bar add team"*
+- **Current State:** Navbar only offers `Services | About | [START A PROJECT]`.
+- **User Expectation:** Direct access to meet the 5 founders from the primary navigation bar.
+- **Root Cause & Scope:** During Phase 1 cleanup, `/team` was merged into `/about`. While the founders are on `/about` and on the homepage, there was no direct nav link labeled "Team".
+- **Downstream Impact:**
+  - `Navbar.jsx`: Add `Team` desktop item and mobile drawer item.
+  - Contextual anchor behavior: When on Home (`/`), clicking "Team" smooth-scrolls to `#founders`. When on other pages (`/about`, `/services`), clicking "Team" navigates to `/about#founders`.
+  - Scroll observer in `Navbar.jsx`: Add `"founders"` to active section observer array.
+  - `src/content/site.js`: Synchronize `siteConfig.navLinks`.
+  - Smoke tests: Update `branding-smoke.test.mjs` and `e2e-smoke.test.mjs` to assert `TEAM` link and `#founders` anchor support.
 
-#### 5. Color Palette & Typography Contrast Fixes (Eliminate Muddy Brown, Champion Flame Orange)
-- **Issue Fix (Image 3 & 4):** Eliminate dark red/brown text on muddy dark brown backgrounds in `OurFocus.jsx`, `HowWeWork.jsx`, and `OurEthos.jsx`.
-- **Primary Accent Rule:** Use **Flame Orange (`#EA5B15`)** boldly for highlights, active stages, icons, and hero CTA buttons instead of muddy brown.
-- **Strict High-Contrast Typography:**
-  - **On Light/Almond Surfaces (`#F1DFD9` / `#FAF6ED`):** Headings and body text must be deep **Coffee Bean (`#300F0A`)** with Flame Orange (`#EA5B15`) accents. Cards use pure white or soft cream surfaces with subtle borders and shadows.
-  - **On Dark Surfaces (`#160705` / `#1F0B07`):** Headings must be pure white (`#FFFFFF`), body text light cream (`#FAF6ED`), and accents bright Flame Orange (`#EA5B15`). Never use dark brown or dark red text on dark backgrounds.
+##### Critique 2: Authentic Logo-Based Brand Animation for Hero & Key Sections
+- **User Instruction:** *"find animation that will be added to hero section and other section that relate to our company design and goal, if you can make by our logo that will be amezing"*
+- **Current State:** The hero currently has only static ambient blur circles; previous 3D particle field was removed in Phase 3.
+- **Brand Geometry Source:** `docs/brand/Gerat - Logo Files/03 - Logo Mark (Standalone)/SVG/Gerat-Standalone-Orange.svg`.
+  - The brand logo consists of 3 stacked wave paths forming an ascending arch bridge:
+    - Path 1 (top, y=219.97): Problem discovery & business need
+    - Path 2 (mid, y=254.65): Architecture, AI, and system engineering
+    - Path 3 (base, y=289.33): Scalable operating foundation & sustained growth
+  - Together, they embody the company's core mission: *"We build the bridge from business need to working system."*
+- **Solution:** Create `src/components/common/BrandBridgeAnimation.jsx`.
+  - Framer Motion + SVG vector animation with travelling sine-wave offsets along the 3 paths.
+  - Glowing Flame Orange (`#EA5B15`) energy pulses and interactive mouse-reactive node displacements.
+  - Fanned capability deck in the Hero with interactive floating pill badges (`"Useful over complicated"`, `"Zero friction"`, `"Built to scale"`, `"Direct founder access"`), creating the exact visual energy seen in Receivio's hero.
+  - Watermark/divider variations for section accents.
 
-#### 6. Footer Visibility & Logo Contrast (Image 5 Fix)
-- Fix washed-out white logo and links on light/almond backgrounds.
-- When footer renders on an Almond surface:
-  - Use the **dark Gerat logo** (`Gerat-Primary-Logo-Dark.svg` or `color="#300F0A"`).
-  - Navigation links, company address, and colophon text set to **Coffee Bean (`#300F0A`)**.
-  - Section headers set to **Flame Orange (`#EA5B15`)**.
-  - Large bottom signature mark uses Coffee Bean with 8–12% subtle opacity so it remains elegantly visible without washing out.
+##### Critique 3: Hero Redesign & Scroll Transition (Images 1 & 2)
+- **User Instruction:** *"see the first attached image , can you remove that part please and see the second image I want the hero be like this, also when you move from hero to bellow section the scrolling effect should be like https://receivio.framer.media/"*
+- **Artifact Analysis:**
+  - **Image 1:** Shows the bottom architectural bar in `Hero.jsx` (`SCROLL TO EXPLORE`, `DIGITAL · AI · SYSTEMS · BRAND`, orange square icon). This must be **completely removed**.
+  - **Image 2 (Receivio Hero Reference):**
+    - Warm light canvas (`#FAF6ED` / `#F1DFD9`).
+    - Centered display title: `Build what moves your business [forward]` with `[forward]` highlighted inside a soft rounded pill badge (`rounded-full px-4 py-1 border border-accent/20 bg-accent/10 text-accent italic font-serif`).
+    - Centered subtext (max-w-2xl, relaxed line height).
+    - Centered pill button group: Primary pill button in Flame Orange (`rounded-full px-8 py-3.5 bg-accent text-white font-bold shadow-lg`) + secondary action button.
+    - Interactive fanned card stack below with floating status pills.
+    - **Bottom Arc Curve:** Hero bottom terminates in an elegant convex curved arc (`rounded-b-[48px] sm:rounded-b-[64px] md:rounded-b-[80px]` or SVG boundary), dipping into the page canvas.
+  - **Scroll Transition to Below:** As the user scrolls down, hero cards gently scale down while the next floating section glides into view over the warm Almond canvas.
 
-#### 7. Verification & End-to-End Testing Gates
-- Update smoke tests (`tests/smoke/branding-smoke.test.mjs`, `dev-server-smoke.mjs`, `e2e-smoke.test.mjs`) to verify:
-  - `Navbar` includes "Team".
-  - Hero contains Receivio pill styling and removed bottom ticker.
-  - Card roundedness conforms to `rounded-2xl`, `rounded-3xl`, `rounded-full`.
-  - Contrast ratios pass WCAG AA across all cards and footer.
-- Verify `npm run build` and `npm test` execute with 100% pass rate.
+##### Critique 4: Section Spacing & Margin Breathing Room
+- **User Instruction:** *"why the sections cramped together with little marign , consider using the same as https://receivio.framer.media/"*
+- **Current State:** Sections are full-bleed edge-to-edge strips with zero external margins and cramped padding, separated only by thin lines.
+- **Receivio Blueprint:**
+  - Master page background is an unbroken, warm Almond canvas (`#F1DFD9` / `#FAF6ED`).
+  - Major sections sit as **floating container cards** with generous external margins:
+    - Margin: `max-w-[1360px] mx-auto my-16 sm:my-24 lg:my-32`
+    - Padding inside containers: `p-8 sm:p-12 md:p-16 lg:p-20`
+    - Corners: `rounded-[28px]` or `rounded-[32px]`
+    - Borders: `border border-black/[0.06]` or `border-white/[0.08]`
+    - Shadows: Soft ambient drop shadows (`shadow-[0_24px_64px_rgba(0,0,0,0.06)]`)
+  - Result: Generous whitespace allows the reader to pause, read, and absorb each concept in isolation without visual crowding.
+
+##### Critique 5: Border Radii Overhaul (Soft Cards & Pill Buttons)
+- **User Instruction:** *"why everything is sharp rectangle, fix that make it look like cards and buttons in https://receivio.framer.media/"*
+- **Current State:** Buttons and cards use legacy `rounded-[2px]` and `rounded-[4px]`, creating sharp, industrial, brutalist boxes.
+- **Receivio Pattern Overhaul:**
+  - **Buttons:** Change all interactive buttons to **`rounded-full`** (pill buttons).
+    - Primary CTA: `rounded-full px-8 py-3.5 bg-accent text-white font-bold shadow-md hover:bg-white hover:text-[#300F0A]`
+    - Secondary CTA: `rounded-full px-7 py-3.5 bg-transparent border border-black/15 hover:border-accent`
+    - Header CTA: `rounded-full px-5 py-2.5 bg-accent text-white font-semibold`
+  - **Cards:**
+    - Capability Cards: `rounded-3xl` (24px) or `rounded-[28px]`
+    - Step Cards & Belief Cards: `rounded-2xl` (16px) or `rounded-3xl`
+    - Founder Cards: `rounded-2xl` (16px) with rounded photo masks
+    - Outer Section Containers: `rounded-[32px]`
+  - **Pills & Badges:** Update all tags, category indicators, step labels, and deliverable chips to **`rounded-full px-3.5 py-1`**.
+
+##### Critique 6: Card & Section Scroll Flows (Receivio Background Architecture)
+- **User Instruction:** *"basically stole the card and section and scroll flows and how they setup background and sections from https://receivio.framer.media/"*
+- **Architecture Spec:**
+  - Root canvas: Warm Almond (`#F1DFD9`) / Cream (`#FAF6ED`).
+  - Section 01 (Hero): Warm light canvas, centered layout, convex bottom arc curve.
+  - Section 02 (The Problem): Floating Ivory card on Almond canvas (`my-20 sm:my-28 rounded-[32px]`).
+  - Section 03 (The Bridge / Services): Sticky scroll-stack with soft rounded cards (`rounded-3xl`), floating on canvas.
+  - Section 04 (How We Work / The Process): Floating 2-column card with sticky phase progress on left, rounded step cards on right.
+  - Section 05 (Point of View / What We Believe): An intentional **dark floating card** (`bg-[#300F0A] text-[#FAF6ED] rounded-[32px] my-20 sm:my-28 p-10 sm:p-16`) that serves as a dramatic pause in the narrative, without breaking the underlying Almond canvas.
+  - Section 06 (The Founders): Warm Ivory floating container with soft rounded cards for the 5 founders.
+  - Section 07 (Final CTA): A deep Coffee Bean floating card (`bg-[#300F0A] text-white rounded-[32px] my-20 p-10 sm:p-16`).
+  - Section 08 (Footer): Seamless, floating or grounded footer with perfect high-contrast branding.
+
+##### Critique 7: Elimination of Muddy Brown & Championing Flame Orange (`#EA5B15`) with High Contrast (Images 3 & 4)
+- **User Instruction:** *"see the third image, the texts are visible [unreadable!], also instead of brown use orage one(for all brown we use), I saw in the process section"* & *"and the forth is our color"*
+- **Root-Cause Investigation (Image 3):**
+  - In `src/app/globals.css`, light-mode rules (`html.site-light .text-white`) force white text to deep Coffee Bean (`#300F0A`).
+  - However, in `OurFocus.jsx`, cards had hardcoded dark backgrounds (`bg-[#1f1310]`). This background was NOT mapped to light mode!
+  - Consequently, dark coffee bean text was rendered directly on top of dark brown backgrounds (`#1f1310`), causing headlines like `AI & INTELLIGENT TOOLS` and `BUSINESS SYSTEMS` to be completely unreadable!
+  - Furthermore, throughout `HowWeWork` and `OurFocus`, muddy brownish backgrounds were used instead of the official brand palette.
+- **The Contrast & Color Solution:**
+  - **Strict adherence to the official brand palette (Image 4):**
+    1. **Almond:** `#F1DFD9` (warm canvas)
+    2. **Flame Orange:** `#EA5B15` (vibrant primary accent for badges, active states, CTAs, highlight pills)
+    3. **Coffee Bean:** `#300F0A` (deep contrast dark sections and typography)
+    4. **Cream/Ivory:** `#FAF6ED` (crisp card surfaces)
+  - **Card Theming Rule (Zero Dark-on-Dark!):**
+    - In Light Mode: Cards use clean Cream/Ivory (`#FAF6ED`) or pure white with Coffee Bean (`#300F0A`) headlines, warm taupe body, and Flame Orange (`#EA5B15`) accents.
+    - In Dark Mode / Dark Sections: When a dark section/card is used (like `#300F0A` Coffee Bean), headlines MUST be crisp Pure White (`#FFFFFF`), body text Cream (`#FAF6ED`), and accents Flame Orange (`#EA5B15`). Never dark brown text on dark backgrounds!
+  - **Process Section Accent Fix:** Replace all muddy brown step indicators and borders with Flame Orange (`#EA5B15`).
+
+##### Critique 8: Footer Contrast & 100% Logo Visibility (Image 5)
+- **User Instruction:** *"and see the 5th image , footer is not good, look at it, the logo is not even visible"*
+- **Root-Cause Investigation (Image 5):**
+  - In `src/app/globals.css`, the rule `html.site-light .bg-[#0d0706]` forced the footer background to Almond `#F1DFD9`.
+  - However, inside `Footer.jsx`, the logo mark used `text-[#FAF6ED]`, the navigation links used `text-[#FAF6ED]/70`, and the giant signature watermark used `text-[#FAF6ED]` with `opacity-15`!
+  - White on Almond `#F1DFD9` has virtually 1:1 contrast (invisible). Only the orange section titles and the bottom black copyright bar were visible.
+- **The Footer Overhaul:**
+  - **Option A (Dark Container Footer - Recommended):** Wrap the footer in a dark container card (`bg-[#1a0a07]` or `#300F0A` with `rounded-t-[32px]`) with `text-[#FAF6ED]`, crisp white logo, and Flame Orange accents. Because the container is dark, the white logo and cream links pop with stunning 14:1 contrast ratio!
+  - **Option B (Adaptive Light Footer):** In Light Mode on Almond background, automatically switch the logo to the **Dark Gerat Logo** (`color="#300F0A"` Coffee Bean), navigation links to Coffee Bean `#300F0A`, section headers to Flame Orange `#EA5B15`, and the large signature watermark to Coffee Bean with 10% opacity.
+  - We will implement **adaptive contrast with dark container styling**: ensuring the footer is guaranteed to be 100% visible, legible, and striking in both light and dark themes.
+
+---
+
+#### 2. Downstream Impact Analysis & System-Wide Cascades
+
+| System / Area | Affected Files | Exact Changes Required | Downstream Verification |
+|---|---|---|---|
+| **Design Tokens & Global CSS** | `src/styles/tokens.css`<br>`src/app/globals.css` | - Add `--radius-pill: 9999px`, `--radius-card-sm: 16px`, `--radius-card-md: 24px`, `--radius-card-lg: 32px`<br>- Fix light-mode text inversion rules so dark cards retain crisp white text<br>- Fix footer light-mode color mappings | Verify contrast ratios across all cards in both light and dark modes via DevTools |
+| **Common UI Primitives** | `src/components/common/Button.jsx`<br>`src/components/common/GeratLogo.jsx`<br>`src/components/common/BrandBridgeAnimation.jsx` (New) | - `Button.jsx`: Update to pill button styling (`rounded-full`) with Flame Orange primary & outline secondary<br>- `GeratLogo.jsx`: Support explicit dark/light color overrides<br>- Create `BrandBridgeAnimation.jsx`: 3-wave interactive animated SVG | Unit smoke test on common components; verify clean rendering |
+| **Navigation & Header** | `src/components/layout/Navbar.jsx`<br>`src/content/site.js` | - Add `Team` link (`#founders` on home, `/about#founders` on subpages)<br>- Update desktop nav and mobile drawer<br>- Add `founders` to scroll observer<br>- Update navbar CTA button to pill styling (`rounded-full`)<br>- Make scrolled navbar pill-shaped (`rounded-full`) | Verify clicking "Team" smooth-scrolls on `/` and navigates on subpages; check active state indicator |
+| **Hero Section** | `src/components/home/Hero.jsx` | - Remove bottom ticker bar (`SCROLL TO EXPLORE`, `DIGITAL · AI · SYSTEMS · BRAND`)<br>- Centered display headline with pill highlight (`[forward]` badge)<br>- Centered subtitle & pill button group (`START A PROJECT` + icon/explore)<br>- Interactive `BrandBridgeAnimation` + fanned capability deck with floating tags<br>- Convex curved arc bottom transition (`rounded-b-[48px] sm:rounded-b-[80px]`) | Visual check of hero centered layout, smooth scroll cue, and bottom curved arc |
+| **The Problem Section** | `src/components/home/TheProblem.jsx` | - Restructure as floating container card (`max-w-[1360px] mx-auto my-16 sm:my-24 rounded-[32px] p-8 sm:p-14`)<br>- Light mode: crisp ivory card surface with Coffee Bean text<br>- Generous internal padding and margin breathing room | Verify generous whitespace around section; no edge-to-edge cramping |
+| **The Bridge (OurFocus)** | `src/components/home/OurFocus.jsx` | - Floating container with sticky scroll-stack<br>- Soft card borders (`rounded-3xl` / 24px)<br>- Eliminate dark-on-dark text bug: in light mode, cards use Cream surface with Coffee Bean titles and Flame Orange accents<br>- In dark mode, cards use crisp white titles and Flame Orange accents | Verify 100% legibility of all 4 service titles in both light and dark modes (Image 3 fix) |
+| **The Process (HowWeWork)** | `src/components/home/HowWeWork.jsx` | - Floating container (`rounded-[32px]`)<br>- Step cards updated from sharp `rounded-[4px]` to `rounded-2xl`<br>- Active stage indicators changed from muddy brown to vibrant Flame Orange (`#EA5B15`)<br>- Pill buttons for CTAs | Verify step progression animation and Flame Orange highlights |
+| **Point of View (OurEthos)** | `src/components/home/OurEthos.jsx` | - Restructure as elegant dark floating card (`bg-[#300F0A] text-[#FAF6ED] rounded-[32px] my-20 p-10 sm:p-16`)<br>- Crisp pure white headlines, cream descriptions, Flame Orange principles<br>- Pill link to `/about` | Visual check of dark dramatic pause on Almond canvas |
+| **The Founders (OurLeadership)** | `src/components/home/OurLeadership.jsx` | - Floating container card (`rounded-[32px]`)<br>- Founder cards updated to `rounded-2xl` with rounded photo masks<br>- High-contrast text hierarchy | Verify 5-founder grid readability and smooth anchor scroll from navbar |
+| **Final CTA Section** | `src/components/home/FinalCTA.jsx` | - Deep Coffee Bean floating card (`rounded-[32px] my-20 p-10 sm:p-16`)<br>- Pill CTA button (`rounded-full px-8 py-4 bg-accent`)<br>- Watermark brand logo integration | Verify CTA styling and drawer opening behavior |
+| **Footer Component** | `src/components/layout/Footer.jsx` | - Guaranteed high contrast: dark container styling (`bg-[#1a0a07] text-[#FAF6ED] rounded-t-[32px]`) or adaptive light mode rendering<br>- Logo rendered with 100% visibility (no washed-out white on Almond)<br>- High-contrast navigation links and Flame Orange headers | Visual check of logo visibility against footer background (Image 5 fix) |
+| **About & Services Subpages** | `src/app/about/**`<br>`src/app/services/**` | - Update buttons to `rounded-full` pill buttons<br>- Update cards to `rounded-2xl` / `rounded-3xl`<br>- Ensure `/about#founders` deep-link smoothly targets the founders section | Test navigation from navbar "Team" on `/about` and `/services` |
+| **Smoke & E2E Test Suite** | `tests/smoke/branding-smoke.test.mjs`<br>`tests/smoke/dev-server-smoke.mjs`<br>`tests/smoke/e2e-smoke.test.mjs` | - Assert `TEAM` link in navbar & `#founders` anchor support<br>- Assert Receivio pill button styling and absence of sharp 2px buttons<br>- Verify 200 OK across all routes without runtime errors | `npm test` runs with 100% pass rate |
+
+---
+
+#### 3. Step-by-Step Execution Plan (Once Approved by User)
+
+1. **Step 1: Design Tokens & Global CSS Fixes**
+   - Add pill button and rounded card radius variables in `tokens.css`.
+   - Resolve CSS light-mode text inversion conflicts in `globals.css` to permanently eliminate dark-on-dark text and light-on-light footer washout.
+2. **Step 2: Common Components & Logo Animation**
+   - Create `src/components/common/BrandBridgeAnimation.jsx` implementing the interactive 3-wave brand mark geometry.
+   - Update `src/components/common/Button.jsx` to Receivio pill styling.
+   - Ensure `GeratLogo.jsx` supports adaptive/explicit color passes.
+3. **Step 3: Navbar Enhancement (Team Link & Pill Styling)**
+   - Update `Navbar.jsx` with "Team" link (`#founders` on home, `/about#founders` on subpages).
+   - Update `site.js` `navLinks`.
+   - Update mobile menu drawer with Team.
+   - Style navbar buttons and scrolled container as soft pills (`rounded-full`).
+4. **Step 4: Hero Section Complete Overhaul**
+   - Remove the bottom ticker bar (Image 1 fix).
+   - Implement centered Receivio layout with pill badge highlight (`[forward]`), subtitle, and pill CTAs.
+   - Integrate `BrandBridgeAnimation` with fanned capability cards and floating pill tags (Image 2 alignment).
+   - Add convex curved arc bottom transition into page canvas.
+5. **Step 5: Homepage Sections Spatial & Contrast Overhaul**
+   - `TheProblem.jsx`: Wrap in floating container (`rounded-[32px]`) with generous margins (`my-16 sm:my-24`).
+   - `OurFocus.jsx`: Wrap in floating container, convert cards to `rounded-3xl`, resolve light-mode text contrast so titles are 100% readable (Image 3 fix), use Flame Orange accents.
+   - `HowWeWork.jsx`: Wrap in floating container, convert step cards to `rounded-2xl`, replace muddy brown with Flame Orange active indicators.
+   - `OurEthos.jsx`: Convert to dark floating card (`bg-[#300F0A] rounded-[32px]`) with crisp white typography.
+   - `OurLeadership.jsx`: Convert to floating container, update cards to `rounded-2xl`.
+   - `FinalCTA.jsx`: Convert to deep Coffee Bean floating card (`rounded-[32px]`) with pill CTA.
+6. **Step 6: Footer Visibility Overhaul**
+   - Re-engineer `Footer.jsx` with dark container card styling (`rounded-t-[32px] bg-[#1a0a07] text-[#FAF6ED]`) or adaptive contrast so the Gerat logo, links, and signature mark are 100% visible (Image 5 fix).
+7. **Step 7: Subpages Consistency Pass**
+   - Align button radii and card styling across `/about` and `/services`.
+8. **Step 8: Test Suite Updates & End-to-End Verification**
+   - Update assertions in `branding-smoke.test.mjs` and `e2e-smoke.test.mjs`.
+   - Run `npm run build` and `npm test` to verify zero regressions.
+9. **Step 9: Granular, Professional Git Commits**
+   - Commit changes logically in atomic steps with descriptive commit messages.
 
 ---
 
@@ -873,6 +994,7 @@ Behavior: Headlines reveal word-by-word on viewport entry
 | `src/app/about/components/WhereWeAreGoing.jsx` | Future direction |
 | `src/components/home/TheProblem.jsx` | "The Gap" homepage section |
 | `src/components/home/FinalCTA.jsx` | Pre-footer CTA section |
+| `src/components/common/BrandBridgeAnimation.jsx` | 3-wave brand mark interactive SVG animation |
 
 ### Files to HEAVILY MODIFY
 | File | Changes |
