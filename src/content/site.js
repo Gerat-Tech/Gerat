@@ -24,10 +24,8 @@ export const siteConfig = {
     headquarters: "Bole Subcity, Addis Ababa, Ethiopia",
   },
   navLinks: [
-    { name: "SERVICES", href: "/services" },
-    { name: "PORTFOLIO", href: "/portfolio" },
-    { name: "TEAM", href: "/team" },
-    { name: "INSIGHTS", href: "/insights" },
+    { name: "SERVICES", label: "Services", href: "/services" },
+    { name: "ABOUT", label: "About", href: "/about" },
   ],
   creativeServices: [
     { name: "BRAND STRATEGY", id: "brand-strategy" },
