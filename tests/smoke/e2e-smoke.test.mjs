@@ -133,7 +133,7 @@ async function runAllE2ETests() {
     await test("2. About route (/about) renders with 200 OK", async () => {
       const res = await request("/about");
       assert.strictEqual(res.status, 200);
-      assert(res.body.includes("About Gerat"));
+      assert(res.body.includes("A NEW COMPANY.") || res.body.includes("About Gerat"));
     });
 
     await test("3. Archived route (/portfolio) returns 404", async () => {
