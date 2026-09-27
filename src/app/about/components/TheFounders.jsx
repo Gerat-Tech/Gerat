@@ -135,7 +135,7 @@ export default function TheFounders() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
           {founders.map((founder, idx) => (
             <FadeUp key={founder.id} delay={0.1 + idx * 0.08} y={20}>
-              <div className="flex flex-col h-full rounded-[4px] border border-white/10 bg-[#1a0a07] overflow-hidden transition-all duration-300 hover:border-accent/50 hover:shadow-[0_16px_40px_rgba(0,0,0,0.5)] group">
+              <div className="flex flex-col h-full rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-2)] overflow-hidden transition-all duration-300 hover:border-accent/50 hover:shadow-[0_16px_40px_rgba(0,0,0,0.1)] group">
                 {/* Photo Header */}
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#120504]">
                   <Image

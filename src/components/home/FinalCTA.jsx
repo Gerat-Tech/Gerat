@@ -9,9 +9,10 @@ import GeratLogo from "../common/GeratLogo";
 import { useNav } from "@/context/NavContext";
 
 /**
- * Section 07: FINAL CTA ("WHAT HAPPENS NEXT") — V2 Storytelling Flow
- * Provides a strong, calm visual closing that brings back the bridge motif
- * and invites direct conversation.
+ * Section 07: FINAL CTA ("WHAT HAPPENS NEXT") — Receivio Floating Container Alignment
+ *
+ * Renders as a powerful, deep Coffee Bean floating card (#300F0A) with pill CTA
+ * and brand mark integration, setting up direct conversion into the contact drawer.
  */
 export default function FinalCTA() {
   const { openContact } = useNav();
@@ -20,18 +21,24 @@ export default function FinalCTA() {
     <section
       id="contact"
       aria-label="Contact and Next Steps"
-      className="relative w-full bg-[#300F0A] text-white py-24 sm:py-32 md:py-40 border-b border-black/20 overflow-hidden"
+      className="w-full px-4 sm:px-6 md:px-8 lg:px-12 my-12 sm:my-20 md:my-24 scroll-mt-24"
     >
-      {/* Background Bridge Watermark Accent */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 opacity-[0.06] pointer-events-none translate-x-1/4">
-        <GeratLogo variant="mark" className="w-[600px] h-[600px] text-white" />
-      </div>
+      <div
+        data-dark-card="true"
+        className="relative w-full max-w-[1360px] mx-auto bg-[#300F0A] text-[#FAF6ED] p-8 sm:p-14 md:p-18 lg:p-20 rounded-[32px] border border-white/10 shadow-[0_24px_64px_rgba(48,15,10,0.3)] overflow-hidden"
+      >
+        {/* Background Bridge Watermark Accent */}
+        <div
+          aria-hidden="true"
+          className="absolute right-0 top-1/2 -translate-y-1/2 opacity-[0.07] pointer-events-none translate-x-1/4"
+        >
+          <GeratLogo variant="mark" className="w-[600px] h-[600px] text-white" />
+        </div>
 
-      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
-        <div className="max-w-4xl flex flex-col gap-6 sm:gap-8">
+        <div className="relative z-10 max-w-4xl flex flex-col gap-6 sm:gap-8">
           <SectionLabel index="07" label="WHAT HAPPENS NEXT" />
 
-          <div className="space-y-2">
+          <div className="space-y-1 sm:space-y-2">
             <SplitText
               text="HAVE SOMETHING"
               as="h2"
@@ -50,18 +57,18 @@ export default function FinalCTA() {
           </div>
 
           <FadeUp delay={0.35} y={20} className="max-w-2xl">
-            <p className="font-artific text-base sm:text-lg md:text-xl text-white/80 leading-relaxed font-normal">
+            <p className="font-artific text-base sm:text-lg md:text-xl text-[#FAF6ED]/85 leading-relaxed font-normal">
               Tell us what you are trying to improve, build, or simplify. We will start with the problem and work from there.
             </p>
           </FadeUp>
 
-          <FadeUp delay={0.5} y={20} className="pt-2">
+          <FadeUp delay={0.5} y={20} className="pt-4">
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
               <Magnetic maxDisplacement={10}>
                 <button
                   type="button"
                   onClick={() => openContact()}
-                  className="group relative isolate inline-flex items-center justify-center font-parkinsans text-xs sm:text-sm uppercase tracking-[0.2em] px-8 sm:px-10 py-4 bg-accent text-white font-bold hover:bg-white hover:text-[#300F0A] border border-accent hover:border-white transition-all duration-300 rounded-[2px] shadow-xl select-none cursor-pointer"
+                  className="group relative isolate inline-flex items-center justify-center font-parkinsans text-xs sm:text-sm uppercase tracking-[0.2em] px-9 sm:px-11 py-4 bg-accent text-white font-bold hover:bg-white hover:text-[#300F0A] border border-accent hover:border-white transition-all duration-300 rounded-full shadow-xl select-none cursor-pointer"
                 >
                   <span>START A PROJECT</span>
                   <span className="ml-2.5 transition-transform duration-300 group-hover:translate-x-1">
@@ -70,14 +77,15 @@ export default function FinalCTA() {
                 </button>
               </Magnetic>
 
-              <div className="flex items-center gap-3 font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
-                <span>DIGITAL</span>
-                <span>·</span>
-                <span>AI</span>
-                <span>·</span>
-                <span>SYSTEMS</span>
-                <span>·</span>
-                <span>BRAND</span>
+              <div className="flex flex-wrap items-center gap-2">
+                {["DIGITAL", "AI", "SYSTEMS", "BRAND"].map((discipline) => (
+                  <span
+                    key={discipline}
+                    className="px-3.5 py-1 rounded-full bg-white/10 text-[10px] font-parkinsans uppercase tracking-[0.18em] text-[#FAF6ED]/70"
+                  >
+                    {discipline}
+                  </span>
+                ))}
               </div>
             </div>
           </FadeUp>

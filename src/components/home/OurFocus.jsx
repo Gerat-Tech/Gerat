@@ -43,9 +43,13 @@ const V2_DEFAULT_PILLARS = [
 ];
 
 /**
- * Section 03: THE BRIDGE ("WHAT GERAT BUILDS") — V2 Sticky Scroll-Stack Cards
- * Presents the 4 core service pillars one by one as the user scrolls,
- * creating a focused, story-like experience.
+ * Section 03: THE BRIDGE ("WHAT GERAT BUILDS") — Receivio Floating Scroll-Stack Alignment
+ *
+ * Resolves Image 3 critique:
+ * - High-contrast typography: titles are 100% visible deep Coffee Bean (in light mode) or crisp white (in dark mode)
+ * - Soft rounded cards (rounded-3xl) instead of sharp rectangular boxes
+ * - Vibrant Flame Orange (#EA5B15) accents throughout
+ * - Floating container card on warm Almond canvas with generous margins
  */
 export default function OurFocus({ initialPillars = null }) {
   const { openContact } = useNav();
@@ -112,13 +116,13 @@ export default function OurFocus({ initialPillars = null }) {
     <section
       id="services"
       aria-label="What We Build"
-      className="relative w-full bg-[var(--bg)] text-white py-24 sm:py-32 md:py-36 border-b border-white/10 scroll-mt-20 overflow-hidden"
+      className="w-full px-4 sm:px-6 md:px-8 lg:px-12 my-12 sm:my-20 md:my-24 scroll-mt-24"
     >
       <span id="capabilities" className="sr-only" />
 
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
+      <div className="w-full max-w-[1360px] mx-auto bg-[var(--surface)] text-[var(--text-primary)] p-8 sm:p-14 md:p-18 rounded-[32px] border border-[var(--border-subtle)] shadow-[0_24px_64px_rgba(0,0,0,0.04)] overflow-hidden">
         {/* Section Header */}
-        <div className="flex flex-col gap-4 mb-16 sm:mb-20 max-w-3xl">
+        <div className="flex flex-col gap-4 mb-14 sm:mb-18 max-w-3xl">
           <SectionLabel index="03" label="THE BRIDGE" />
           <div className="space-y-2">
             <SplitText
@@ -126,7 +130,7 @@ export default function OurFocus({ initialPillars = null }) {
               as="h2"
               delay={0.1}
               stagger={0.035}
-              className="font-parkinsans text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight uppercase leading-[0.96]"
+              className="font-parkinsans text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight uppercase leading-[0.96] text-[var(--text-primary)]"
             />
             <SplitText
               text="TO WORKING SYSTEM."
@@ -138,19 +142,19 @@ export default function OurFocus({ initialPillars = null }) {
             />
           </div>
           <FadeUp delay={0.35} y={16}>
-            <p className="font-artific text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed">
+            <p className="font-artific text-base sm:text-lg text-[var(--text-secondary)] max-w-2xl leading-relaxed">
               We bring design, engineering, AI, and business thinking together around the problem that needs solving.
             </p>
           </FadeUp>
         </div>
 
-        {/* Sticky Scroll-Stack Cards Container */}
-        <div className="flex flex-col gap-8 sm:gap-12 relative pb-12">
+        {/* Sticky Scroll-Stack Cards Container (Receivio Soft-Card Stack) */}
+        <div className="flex flex-col gap-8 sm:gap-10 relative pb-8">
           {pillars.map((pillar, idx) => (
             <div
               key={pillar.num || idx}
-              style={{ top: `calc(88px + ${idx * 24}px)` }}
-              className="sticky transition-all duration-300 rounded-[4px] border border-white/15 bg-[#1f1310] shadow-[0_16px_40px_rgba(0,0,0,0.6)] p-8 sm:p-12 md:p-14 hover:border-accent/60 group"
+              style={{ top: `calc(96px + ${idx * 20}px)` }}
+              className="sticky transition-all duration-300 rounded-3xl sm:rounded-[28px] border border-[var(--border-medium)] bg-[var(--surface-2)] shadow-[0_20px_50px_rgba(0,0,0,0.08)] p-8 sm:p-12 md:p-14 hover:border-accent/60 group"
             >
               <div className="flex flex-col md:flex-row md:items-start justify-between gap-8">
                 {/* Left Column: Number, Title, Description */}
@@ -159,44 +163,45 @@ export default function OurFocus({ initialPillars = null }) {
                     <span className="font-parkinsans text-xs sm:text-sm font-bold tracking-[0.25em] text-accent uppercase">
                       SERVICE {pillar.num || `0${idx + 1}`}
                     </span>
-                    <span className="text-white/20">/</span>
-                    <span className="font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
+                    <span className="text-[var(--text-dim)]">/</span>
+                    <span className="font-parkinsans text-[10px] tracking-[0.2em] text-[var(--text-muted)] uppercase">
                       04
                     </span>
                   </div>
 
-                  <h3 className="font-parkinsans text-2xl sm:text-4xl font-semibold uppercase tracking-tight text-white group-hover:text-accent transition-colors leading-[1.05]">
+                  {/* High-Contrast Headline (Resolves Image 3) */}
+                  <h3 className="font-parkinsans text-2xl sm:text-3xl md:text-4xl font-semibold uppercase tracking-tight text-[var(--text-primary)] group-hover:text-accent transition-colors leading-[1.08]">
                     {pillar.title}
                   </h3>
 
-                  <p className="font-artific text-sm sm:text-base text-white/75 leading-relaxed pt-1">
+                  <p className="font-artific text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed pt-1">
                     {pillar.desc}
                   </p>
                 </div>
 
                 {/* Right Column: Deliverables & CTA */}
-                <div className="flex flex-col justify-between gap-6 md:min-w-[280px] lg:min-w-[340px] pt-4 md:pt-0 border-t md:border-t-0 md:border-l border-white/10 md:pl-8">
+                <div className="flex flex-col justify-between gap-6 md:min-w-[280px] lg:min-w-[340px] pt-4 md:pt-0 border-t md:border-t-0 md:border-l border-[var(--border-subtle)] md:pl-8">
                   <div>
-                    <span className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase block mb-3">
+                    <span className="font-parkinsans text-[10px] tracking-[0.2em] text-[var(--text-muted)] uppercase block mb-3 font-semibold">
                       KEY DELIVERABLES
                     </span>
-                    <ul className="space-y-2">
+                    <ul className="space-y-2.5">
                       {(pillar.deliverables || []).map((item) => (
                         <li
                           key={item}
-                          className="font-parkinsans text-[11px] sm:text-[12px] tracking-[0.1em] text-white/70 flex items-center gap-2.5"
+                          className="font-parkinsans text-[11px] sm:text-[12px] tracking-[0.08em] text-[var(--text-primary)] flex items-center gap-2.5"
                         >
-                          <span className="size-1.5 rounded-full bg-accent/80 shrink-0" />
+                          <span className="size-2 rounded-full bg-accent shrink-0" />
                           <span>{item}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="flex items-center justify-between gap-4 pt-4 border-t border-white/10">
+                  <div className="flex items-center justify-between gap-4 pt-4 border-t border-[var(--border-subtle)]">
                     <Link
                       href={pillar.deepLink || "/services"}
-                      className="inline-flex items-center gap-1.5 font-parkinsans text-[10px] sm:text-[11px] tracking-[0.2em] uppercase font-bold text-accent hover:text-white transition-colors"
+                      className="inline-flex items-center gap-1.5 font-parkinsans text-[11px] tracking-[0.2em] uppercase font-bold text-accent hover:text-[var(--text-primary)] transition-colors"
                     >
                       <span>{pillar.actionLabel || "LEARN MORE"}</span>
                       <span>→</span>
@@ -213,7 +218,7 @@ export default function OurFocus({ initialPillars = null }) {
                         };
                         openContact(presetMap[pillar.num] || { discipline: "digital" });
                       }}
-                      className="font-parkinsans text-[9px] sm:text-[10px] tracking-[0.15em] uppercase text-white/50 hover:text-white transition-colors cursor-pointer"
+                      className="font-parkinsans text-[10px] tracking-[0.15em] uppercase text-[var(--text-muted)] hover:text-accent transition-colors cursor-pointer font-semibold"
                     >
                       INQUIRE →
                     </button>
@@ -226,14 +231,14 @@ export default function OurFocus({ initialPillars = null }) {
 
         {/* Bottom Hub CTA */}
         <FadeUp delay={0.2} y={20}>
-          <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6">
-            <p className="font-artific text-xs sm:text-sm text-white/50 max-w-md text-center sm:text-left">
+          <div className="mt-12 pt-8 border-t border-[var(--border-subtle)] flex flex-col sm:flex-row items-center justify-between gap-6">
+            <p className="font-artific text-xs sm:text-sm text-[var(--text-secondary)] max-w-md text-center sm:text-left">
               Need a combination of digital experiences, intelligence, and brand systems? We design tailored architectures.
             </p>
             <div className="flex items-center gap-4">
               <Link
                 href="/services"
-                className="inline-flex items-center font-parkinsans text-[11px] uppercase tracking-[0.2em] px-7 py-3.5 bg-white/5 hover:bg-white hover:text-black border border-white/20 hover:border-white text-white font-bold transition-all rounded-[2px]"
+                className="inline-flex items-center font-parkinsans text-xs uppercase tracking-[0.2em] px-8 py-3.5 bg-accent hover:bg-white hover:text-[#300F0A] text-white font-bold transition-all rounded-full shadow-md hover:shadow-accent/25"
               >
                 <span>VIEW ALL SERVICES</span>
                 <span className="ml-2">→</span>

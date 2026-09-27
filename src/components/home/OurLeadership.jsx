@@ -47,8 +47,11 @@ const DEFAULT_FOUNDERS = [
 
 /**
  * Section 06: FIVE FOUNDERS — THE PEOPLE BEHIND GERAT
- * Clean, intentional 5-person composition echoing the brand's five-part identity.
- * Minimal and focused on the homepage, deferring deep biographies to /about#founders.
+ *
+ * Receivio Floating Container Alignment:
+ * - Floating rounded card container (rounded-[32px])
+ * - Soft rounded founder cards (rounded-2xl)
+ * - Pill action button to deep-dive into /about#founders
  */
 export default function OurLeadership({ initialLeaders = null }) {
   const [fetchedLeaders, setFetchedLeaders] = useState(null);
@@ -97,22 +100,22 @@ export default function OurLeadership({ initialLeaders = null }) {
     <section
       id="founders"
       aria-label="The Founders"
-      className="relative w-full bg-[var(--bg)] text-[var(--text-primary)] py-24 sm:py-32 md:py-36 border-b border-white/10 scroll-mt-20 overflow-hidden"
+      className="w-full px-4 sm:px-6 md:px-8 lg:px-12 my-12 sm:my-20 md:my-24 scroll-mt-24"
     >
       <span id="leadership" className="sr-only" />
 
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+      <div className="w-full max-w-[1360px] mx-auto bg-[var(--surface)] text-[var(--text-primary)] p-8 sm:p-14 md:p-18 rounded-[32px] border border-[var(--border-subtle)] shadow-[0_24px_64px_rgba(0,0,0,0.04)] overflow-hidden">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 sm:mb-20 pb-10 border-b border-white/10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14 sm:mb-18 pb-8 border-b border-[var(--border-subtle)]">
           <div className="flex flex-col gap-4 max-w-2xl">
             <SectionLabel index="06" label="THE FOUNDERS" />
-            <div className="space-y-2">
+            <div className="space-y-1 sm:space-y-2">
               <SplitText
                 text="FIVE FOUNDERS."
                 as="h2"
                 delay={0.1}
                 stagger={0.035}
-                className="font-parkinsans text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight uppercase leading-[0.96]"
+                className="font-parkinsans text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight uppercase leading-[0.96] text-[var(--text-primary)]"
               />
               <SplitText
                 text="ONE DIRECTION."
@@ -133,10 +136,10 @@ export default function OurLeadership({ initialLeaders = null }) {
           <FadeUp delay={0.35} y={16}>
             <Link
               href="/about#founders"
-              className="group inline-flex items-center gap-2 font-parkinsans text-xs sm:text-sm uppercase tracking-[0.2em] text-white/70 hover:text-accent transition-colors duration-300 pb-1 border-b border-white/20 hover:border-accent"
+              className="group inline-flex items-center gap-2 font-parkinsans text-xs uppercase tracking-[0.2em] px-7 py-3.5 bg-accent hover:bg-white hover:text-[#300F0A] text-white font-bold rounded-full shadow-md hover:shadow-accent/25 transition-all duration-300"
             >
               <span>MEET THE FOUNDERS</span>
-              <span className="transition-transform duration-300 group-hover:translate-x-1 text-accent">
+              <span className="transition-transform duration-300 group-hover:translate-x-1">
                 →
               </span>
             </Link>
@@ -144,12 +147,12 @@ export default function OurLeadership({ initialLeaders = null }) {
         </div>
 
         {/* 5-Person Composition Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 sm:gap-6">
           {founders.map((founder, idx) => (
             <FadeUp key={founder.id} delay={0.1 + idx * 0.08} y={20}>
-              <div className="group relative flex flex-col rounded-[4px] border border-white/10 bg-[#1a0a07] overflow-hidden transition-all duration-300 hover:border-accent/50 hover:shadow-[0_12px_32px_rgba(0,0,0,0.5)]">
+              <div className="group relative flex flex-col rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-2)] overflow-hidden transition-all duration-300 hover:border-accent/60 hover:shadow-[0_16px_36px_rgba(0,0,0,0.08)] hover:-translate-y-1">
                 {/* Founder Photo */}
-                <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#120504]">
+                <div className="relative aspect-[4/5] w-full overflow-hidden bg-black/10">
                   <Image
                     src={founder.image}
                     alt={founder.name}
@@ -157,21 +160,21 @@ export default function OurLeadership({ initialLeaders = null }) {
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
                     className="object-cover object-top filter grayscale contrast-105 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500 ease-out"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#1a0a07] via-transparent to-transparent opacity-80" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--surface-2)] via-transparent to-transparent opacity-70" />
                 </div>
 
                 {/* Founder Details */}
-                <div className="p-5 sm:p-6 flex flex-col gap-2">
+                <div className="p-5 flex flex-col gap-1.5">
                   <div className="font-parkinsans text-xs font-bold text-accent uppercase tracking-[0.2em]">
                     0{idx + 1}
                   </div>
-                  <h3 className="font-parkinsans text-base sm:text-lg font-semibold uppercase tracking-tight text-white group-hover:text-accent transition-colors duration-200">
+                  <h3 className="font-parkinsans text-base font-semibold uppercase tracking-tight text-[var(--text-primary)] group-hover:text-accent transition-colors duration-200">
                     {founder.name}
                   </h3>
-                  <div className="font-artific text-xs uppercase tracking-wider text-white/60 line-clamp-1">
+                  <div className="font-artific text-xs uppercase tracking-wider text-[var(--text-muted)] line-clamp-1">
                     {founder.role}
                   </div>
-                  <div className="font-artific text-xs text-white/40 pt-2 border-t border-white/10 line-clamp-2">
+                  <div className="font-artific text-xs text-[var(--text-secondary)] pt-2 border-t border-[var(--border-subtle)] line-clamp-2">
                     {founder.specialty}
                   </div>
                 </div>

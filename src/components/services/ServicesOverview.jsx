@@ -130,7 +130,7 @@ export default function ServicesOverview({ initialPillars = null }) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
           {servicePillars.map((pillar, idx) => (
             <FadeUp key={pillar.num || idx} delay={0.1 * idx} y={20}>
-              <div className="group relative bg-[#180a07] border border-white/10 hover:border-accent/60 p-8 sm:p-10 md:p-12 rounded-[4px] flex flex-col justify-between min-h-[460px] transition-all duration-300 h-full shadow-[0_12px_32px_rgba(0,0,0,0.4)]">
+              <div className="group relative bg-[var(--surface-2)] border border-[var(--border-subtle)] hover:border-accent/60 p-8 sm:p-10 md:p-12 rounded-3xl flex flex-col justify-between min-h-[460px] transition-all duration-300 h-full shadow-[0_12px_32px_rgba(0,0,0,0.1)]">
                 {/* Header: Service Number & Tagline */}
                 <div>
                   <div className="flex items-center justify-between pb-6 border-b border-white/10">
@@ -254,22 +254,22 @@ export default function ServicesOverview({ initialPillars = null }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {approachSteps.map((step, idx) => (
             <FadeUp key={step.num} delay={0.1 + idx * 0.08} y={20}>
-              <div className="flex flex-col justify-between h-full p-8 rounded-[4px] border border-white/10 bg-[#170a07] hover:border-accent/50 transition-all duration-300 group">
-                <div className="flex items-center justify-between pb-6 border-b border-white/10">
+              <div className="flex flex-col justify-between h-full p-8 rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-2)] hover:border-accent/50 transition-all duration-300 group">
+                <div className="flex items-center justify-between pb-6 border-b border-[var(--border-subtle)]">
                   <span className="font-parkinsans text-xs font-bold tracking-[0.25em] text-accent uppercase">
                     PHASE {step.num}
                   </span>
-                  <span className="size-1.5 rounded-full bg-white/20 group-hover:bg-accent transition-colors" />
+                  <span className="size-2 rounded-full bg-accent/30 group-hover:bg-accent transition-colors" />
                 </div>
 
                 <div className="pt-6 space-y-3">
-                  <h3 className="font-parkinsans text-2xl font-semibold uppercase tracking-tight text-white group-hover:text-accent transition-colors">
+                  <h3 className="font-parkinsans text-2xl font-semibold uppercase tracking-tight text-[var(--text-primary)] group-hover:text-accent transition-colors">
                     {step.title}
                   </h3>
                   <div className="font-artific text-xs font-medium text-accent uppercase tracking-wider">
                     {step.question}
                   </div>
-                  <p className="font-artific text-sm text-white/70 leading-relaxed group-hover:text-white/90 transition-colors">
+                  <p className="font-artific text-sm text-[var(--text-secondary)] leading-relaxed group-hover:text-[var(--text-primary)] transition-colors">
                     {step.desc}
                   </p>
                 </div>
@@ -282,15 +282,15 @@ export default function ServicesOverview({ initialPillars = null }) {
       {/* 04. Concise FAQ Section */}
       <section
         aria-label="Frequently Asked Questions"
-        className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-24 sm:py-32 border-b border-white/10"
+        className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-24 sm:py-32 border-b border-[var(--border-subtle)]"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           <div className="lg:col-span-5 flex flex-col gap-6">
             <SectionLabel index="03" label="FAQ" />
-            <h2 className="font-parkinsans text-3xl sm:text-5xl font-semibold tracking-tight uppercase leading-[0.96] text-white">
+            <h2 className="font-parkinsans text-3xl sm:text-5xl font-semibold tracking-tight uppercase leading-[0.96] text-[var(--text-primary)]">
               COMMON <span className="text-accent">QUESTIONS.</span>
             </h2>
-            <p className="font-artific text-base text-white/70 leading-relaxed max-w-md">
+            <p className="font-artific text-base text-[var(--text-secondary)] leading-relaxed max-w-md">
               Clear answers on how we engage, our scope, and how we support what we build after launch.
             </p>
           </div>
@@ -301,12 +301,12 @@ export default function ServicesOverview({ initialPillars = null }) {
               return (
                 <div
                   key={faq.question}
-                  className="rounded-[4px] border border-white/10 bg-[#160906] overflow-hidden transition-colors duration-200"
+                  className="rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-2)] overflow-hidden transition-colors duration-200"
                 >
                   <button
                     type="button"
                     onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                    className="w-full text-left p-6 sm:p-7 flex items-center justify-between gap-4 font-parkinsans text-base sm:text-lg font-semibold uppercase tracking-tight text-white hover:text-accent transition-colors"
+                    className="w-full text-left p-6 sm:p-7 flex items-center justify-between gap-4 font-parkinsans text-base sm:text-lg font-semibold uppercase tracking-tight text-[var(--text-primary)] hover:text-accent transition-colors"
                   >
                     <span>{faq.question}</span>
                     <span className="text-accent text-xl font-mono shrink-0">
@@ -314,8 +314,8 @@ export default function ServicesOverview({ initialPillars = null }) {
                     </span>
                   </button>
                   {isOpen && (
-                    <div className="px-6 sm:px-7 pb-6 pt-2 border-t border-white/5">
-                      <p className="font-artific text-sm sm:text-base text-white/80 leading-relaxed">
+                    <div className="px-6 sm:px-7 pb-6 pt-2 border-t border-[var(--border-subtle)]">
+                      <p className="font-artific text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed">
                         {faq.answer}
                       </p>
                     </div>
@@ -333,15 +333,15 @@ export default function ServicesOverview({ initialPillars = null }) {
         className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-24 sm:py-32 text-center flex flex-col items-center"
       >
         <div className="max-w-3xl space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[2px] bg-accent/15 border border-accent/30 text-accent font-artific text-xs uppercase tracking-[0.25em] mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/15 border border-accent/30 text-accent font-artific text-xs uppercase tracking-[0.25em] mb-4">
             <span>GET IN TOUCH</span>
           </div>
 
-          <h2 className="font-parkinsans text-4xl sm:text-6xl md:text-7xl font-semibold tracking-tight uppercase leading-[0.94] text-white">
+          <h2 className="font-parkinsans text-4xl sm:text-6xl md:text-7xl font-semibold tracking-tight uppercase leading-[0.94] text-[var(--text-primary)]">
             TELL US WHAT YOU ARE <span className="text-accent">BUILDING.</span>
           </h2>
 
-          <p className="font-artific text-base sm:text-lg text-white/70 max-w-xl mx-auto leading-relaxed pt-2 pb-8">
+          <p className="font-artific text-base sm:text-lg text-[var(--text-secondary)] max-w-xl mx-auto leading-relaxed pt-2 pb-8">
             Have a business problem, digital idea, or system that needs work? Start the conversation.
           </p>
 
@@ -349,7 +349,7 @@ export default function ServicesOverview({ initialPillars = null }) {
             <button
               type="button"
               onClick={() => openContact({ discipline: "general", subOption: "SERVICES_CTA" })}
-              className="group inline-flex items-center gap-3 font-parkinsans text-xs sm:text-sm uppercase tracking-[0.2em] px-10 py-5 bg-accent text-white font-bold hover:bg-accent/90 transition-all duration-300 rounded-[2px] cursor-pointer shadow-[0_12px_40px_rgba(234,91,21,0.35)]"
+              className="group inline-flex items-center gap-3 font-parkinsans text-xs sm:text-sm uppercase tracking-[0.2em] px-10 py-5 bg-accent text-white font-bold hover:bg-accent/90 transition-all duration-300 rounded-full cursor-pointer shadow-[0_12px_40px_rgba(234,91,21,0.35)]"
             >
               <span>START A PROJECT</span>
               <span className="transition-transform duration-300 group-hover:translate-x-1">
