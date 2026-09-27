@@ -26,6 +26,7 @@ export const siteConfig = {
   navLinks: [
     { name: "SERVICES", label: "Services", href: "/services" },
     { name: "ABOUT", label: "About", href: "/about" },
+    { name: "TEAM", label: "Team", href: "/about#founders" },
   ],
   creativeServices: [
     { name: "BRAND STRATEGY", id: "brand-strategy" },

@@ -47,6 +47,12 @@ export default function Navbar() {
       href: isHomePage ? "#about" : "/#about",
       targetId: "about",
     },
+    {
+      name: "TEAM",
+      label: "Team",
+      href: isHomePage ? "#founders" : "/about#founders",
+      targetId: "founders",
+    },
   ];
 
   // Fetch optional announcement from SiteConfig
@@ -80,7 +86,7 @@ export default function Navbar() {
       return;
     }
 
-    const sectionIds = ["services", "about"];
+    const sectionIds = ["services", "about", "founders"];
     const handleScrollActive = () => {
       const scrollPos = window.scrollY + 200;
       let current = null;
@@ -204,7 +210,7 @@ export default function Navbar() {
           <div
             className={`mx-auto flex items-center justify-between transition-all duration-500 ease-(--ease-primary) ${
               isScrolled
-                ? "bg-[var(--surface-raised)]/85 backdrop-blur-md border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.6)] rounded-xl py-2 px-4 sm:px-6 md:w-fit"
+                ? "bg-[var(--surface-raised)]/90 backdrop-blur-md border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.6)] rounded-full py-2 px-5 sm:px-6 md:w-fit"
                 : "bg-transparent border-b border-white/10 pb-3 sm:pb-4 px-2"
             }`}
           >
@@ -232,6 +238,8 @@ export default function Navbar() {
                     ? activeSection === link.targetId
                     : link.targetId === "about"
                     ? pathname === "/about"
+                    : link.targetId === "founders"
+                    ? pathname === "/about"
                     : pathname.startsWith("/services");
 
                   return (
@@ -254,17 +262,14 @@ export default function Navbar() {
               </ul>
             </nav>
 
-            {/* Right Action: Clean START A PROJECT CTA Button */}
+            {/* Right Action: Clean START A PROJECT Pill CTA Button */}
             <div className="hidden lg:flex items-center gap-3">
               <button
                 type="button"
                 onClick={openContact}
-                className="relative group/btn font-parkinsans text-[11px] uppercase tracking-[0.2em] px-5 py-2.5 text-white/90 border border-white/20 hover:border-accent hover:text-white bg-white/5 hover:bg-accent/15 transition-all duration-300 rounded-[2px] select-none cursor-pointer"
+                className="font-parkinsans text-[11px] uppercase tracking-[0.2em] px-6 py-2.5 bg-accent text-white font-semibold hover:bg-white hover:text-[#300F0A] border border-accent hover:border-white transition-all duration-300 rounded-full shadow-md select-none cursor-pointer"
               >
                 <span>START A PROJECT</span>
-                {/* Micro corner indicators */}
-                <span className="absolute -top-[1px] -left-[1px] size-1.5 border-t border-l border-white/60 group-hover/btn:border-accent" />
-                <span className="absolute -bottom-[1px] -right-[1px] size-1.5 border-b border-r border-white/60 group-hover/btn:border-accent" />
               </button>
             </div>
 
@@ -272,7 +277,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden relative size-10 rounded-[2px] border border-white/15 bg-white/5 flex flex-col items-center justify-center gap-1.5 text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent hover:border-white/30 transition-colors"
+              className="lg:hidden relative size-10 rounded-full border border-white/15 bg-white/5 flex flex-col items-center justify-center gap-1.5 text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent hover:border-white/30 transition-colors"
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMenuOpen}
             >
@@ -311,6 +316,8 @@ export default function Navbar() {
                 ? activeSection === link.targetId
                 : link.targetId === "about"
                 ? pathname === "/about"
+                : link.targetId === "founders"
+                ? pathname === "/about"
                 : pathname.startsWith("/services");
 
               return (
@@ -318,17 +325,12 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link)}
-                  className={`relative py-4 px-6 font-parkinsans text-sm tracking-[0.2em] uppercase border transition-all duration-300 rounded-[2px] ${
+                  className={`relative py-3.5 px-6 font-parkinsans text-xs tracking-[0.2em] uppercase border transition-all duration-300 rounded-full ${
                     isCurrent
-                      ? "border-accent text-white bg-accent/15 font-semibold"
-                      : "border-white/15 text-white/80 hover:text-white hover:border-white/40 bg-white/[0.02]"
+                      ? "border-accent text-white bg-accent/20 font-semibold"
+                      : "border-white/15 text-white/80 hover:text-white hover:border-white/40 bg-white/[0.03]"
                   }`}
                 >
-                  {/* Subtle corner accents */}
-                  <span className="absolute top-0 left-0 size-1.5 border-t border-l border-white/50" />
-                  <span className="absolute top-0 right-0 size-1.5 border-t border-r border-white/50" />
-                  <span className="absolute bottom-0 left-0 size-1.5 border-b border-l border-white/50" />
-                  <span className="absolute bottom-0 right-0 size-1.5 border-b border-r border-white/50" />
                   {link.name}
                 </Link>
               );
@@ -343,7 +345,7 @@ export default function Navbar() {
                 setIsMenuOpen(false);
                 openContact();
               }}
-              className="relative w-full py-4 px-6 font-parkinsans text-xs tracking-[0.25em] uppercase font-bold text-white bg-accent hover:bg-accent/90 border border-accent transition-all duration-300 rounded-[2px] shadow-lg"
+              className="relative w-full py-4 px-6 font-parkinsans text-xs tracking-[0.25em] uppercase font-bold text-white bg-accent hover:bg-accent/90 border border-accent transition-all duration-300 rounded-full shadow-lg"
             >
               START A PROJECT →
             </button>
