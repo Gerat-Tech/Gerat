@@ -1,192 +1,114 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React from "react";
+import Link from "next/link";
 import SectionLabel from "../common/SectionLabel";
 import FadeUp from "../motion/FadeUp";
 import SplitText from "../motion/SplitText";
-import { useNav } from "@/context/NavContext";
 
-const ethosCards = [
+const PRINCIPLES = [
   {
-    id: 1,
-    title: "FOUNDATIONAL STABILITY",
-    short: "FOUNDATION · STABILITY",
-    description:
-      "Support is our backbone. We measure success by real-world system reliability, clear communication, and dependable day-to-day operation.",
-    bg: "bg-[var(--surface)]",
-    border: "border-white/15",
-    icon: (
-      <svg className="size-12 text-accent" viewBox="0 0 48 48" fill="none">
-        {/* Tent / Arch structural motif */}
-        <path d="M24 6L6 38H42L24 6Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-        <path d="M24 6V38" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1.5" />
-        <path d="M15 38L24 22L33 38" stroke="var(--accent, #ea5b15)" strokeWidth="1.5" strokeLinejoin="round" />
-        <circle cx="24" cy="22" r="2.5" fill="var(--accent, #ea5b15)" />
-      </svg>
-    ),
+    num: "01",
+    title: "USEFUL",
+    desc: "Technology should solve a real problem before it tries to impress.",
   },
   {
-    id: 2,
-    title: "THE DIGITAL BRIDGE",
-    short: "CONNECTION · THE BRIDGE",
-    description:
-      "We connect traditional operations to modern technology, bridging the gap between everyday business workflows and digital scale.",
-    bg: "bg-[var(--surface)]",
-    border: "border-white/15",
-    icon: (
-      <svg className="size-12 text-white" viewBox="0 0 48 48" fill="none">
-        {/* Interconnected digital bridge */}
-        <path d="M8 36V22C8 16 16 16 24 16C32 16 40 16 40 22V36" stroke="currentColor" strokeWidth="1.5" />
-        <line x1="8" y1="36" x2="40" y2="36" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.5" />
-        <line x1="16" y1="18" x2="16" y2="36" stroke="var(--accent, #ea5b15)" strokeWidth="1.5" />
-        <line x1="32" y1="18" x2="32" y2="36" stroke="var(--accent, #ea5b15)" strokeWidth="1.5" />
-        <circle cx="24" cy="16" r="3" fill="var(--accent, #ea5b15)" />
-      </svg>
-    ),
+    num: "02",
+    title: "CLEAR",
+    desc: "Good systems are easier to understand, use, and improve.",
   },
   {
-    id: 3,
-    title: "BUILT TO SCALE",
-    short: "GROWTH · ADAPTABILITY",
-    description:
-      "Solutions engineered for sustainable growth. From clear visual identities to business systems, everything expands smoothly without breaking.",
-    bg: "bg-[var(--surface)]",
-    border: "border-white/15",
-    icon: (
-      <svg className="size-12 text-accent" viewBox="0 0 48 48" fill="none">
-        {/* Ascending stepped chevrons (Logo motif) */}
-        <path d="M12 36L24 24L36 36" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M14 26L24 16L34 26" stroke="currentColor" strokeOpacity="0.6" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M16 16L24 8L32 16" stroke="var(--accent, #ea5b15)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
+    num: "03",
+    title: "STRONG",
+    desc: "Good foundations matter because businesses have to live with what we build.",
   },
   {
-    id: 4,
-    title: "DEDICATED SUPPORT",
-    short: "PARTNERSHIP · OWNERSHIP",
-    description:
-      "We care about what happens after the launch. We stay involved with clear handover, clean documentation, and dedicated ongoing support.",
-    bg: "bg-[var(--surface)]",
-    border: "border-white/15",
-    icon: (
-      <svg className="size-12 text-white" viewBox="0 0 48 48" fill="none">
-        {/* Converging collaboration nodes */}
-        <circle cx="24" cy="24" r="4" fill="var(--accent, #ea5b15)" />
-        <circle cx="24" cy="8" r="2.5" stroke="currentColor" strokeWidth="1.5" />
-        <circle cx="39" cy="19" r="2.5" stroke="currentColor" strokeWidth="1.5" />
-        <circle cx="33" cy="37" r="2.5" stroke="currentColor" strokeWidth="1.5" />
-        <circle cx="15" cy="37" r="2.5" stroke="currentColor" strokeWidth="1.5" />
-        <circle cx="9" cy="19" r="2.5" stroke="currentColor" strokeWidth="1.5" />
-        <line x1="24" y1="11" x2="24" y2="20" stroke="var(--accent, #ea5b15)" strokeWidth="1.2" />
-        <line x1="37" y1="20" x2="28" y2="23" stroke="currentColor" strokeOpacity="0.5" strokeWidth="1.2" />
-        <line x1="31" y1="35" x2="26" y2="27" stroke="currentColor" strokeOpacity="0.5" strokeWidth="1.2" />
-        <line x1="17" y1="35" x2="22" y2="27" stroke="currentColor" strokeOpacity="0.5" strokeWidth="1.2" />
-        <line x1="11" y1="20" x2="20" y2="23" stroke="currentColor" strokeOpacity="0.5" strokeWidth="1.2" />
-      </svg>
-    ),
+    num: "04",
+    title: "GROWING",
+    desc: "We build with the next stage in mind, not only today's requirement.",
   },
 ];
 
+/**
+ * Section 05: THE GERAT POINT OF VIEW ("WHAT WE BELIEVE")
+ * A short, editorial, high-contrast dark section that articulates
+ * the 4 founding beliefs of Gerat with large typography and calm pacing.
+ */
 export default function OurEthos() {
-  const [activeCard, setActiveCard] = useState(null);
-  const { openContact } = useNav();
-
   return (
     <section
       id="about"
-      aria-label="Why Gerat"
-      className="relative w-full bg-[var(--bg)] text-white py-24 sm:py-32 md:py-36 border-b border-white/10 scroll-mt-20"
+      aria-label="What We Believe"
+      className="relative w-full bg-[#1b0906] text-[#FAF6ED] py-24 sm:py-32 md:py-36 border-b border-white/10 scroll-mt-20 overflow-hidden"
     >
       <span id="ethos" className="sr-only" />
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
-        {/* Section Header */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-10 sm:mb-12 items-start">
-          <div className="lg:col-span-6 flex flex-col gap-4">
-            <SectionLabel label="WHY GERAT" />
+
+      {/* Subtle Warm Ambient Glow */}
+      <div
+        aria-hidden="true"
+        className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[140px] pointer-events-none"
+      />
+
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+        {/* Top Header Row */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 sm:mb-20 pb-10 border-b border-white/10">
+          <div className="flex flex-col gap-4 max-w-3xl">
+            <SectionLabel index="05" label="WHAT WE BELIEVE" />
             <SplitText
-              text="BUILT TO"
+              text="USEFUL OVER"
               as="h2"
-              className="font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium sm:font-semibold tracking-tight uppercase leading-[0.95]"
+              delay={0.1}
+              stagger={0.035}
+              className="font-parkinsans text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight uppercase leading-[0.96]"
             />
             <SplitText
-              text="HOLD WEIGHT."
-              as="h2"
+              text="COMPLICATED."
+              as="div"
+              delay={0.25}
+              stagger={0.035}
               wordClassName="text-accent"
-              className="font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium sm:font-semibold tracking-tight uppercase leading-[0.95]"
+              className="font-parkinsans text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight uppercase leading-[0.96]"
             />
           </div>
 
-          <div className="lg:col-span-6 flex flex-col items-start gap-6 lg:border-l lg:border-white/10 lg:pl-10 pt-2">
-            <FadeUp delay={0.2}>
-              <div className="flex flex-col gap-3 max-w-xl">
-                <p className="font-artific text-lg sm:text-xl text-white font-medium">
-                  We care about what happens after the launch.
-                </p>
-                <p className="font-artific text-base sm:text-lg text-white/75 leading-relaxed">
-                  A good website can look impressive. A good system has to keep working.
-                  We build with reliability, clarity, and the next stage of your business in mind.
-                </p>
-              </div>
-            </FadeUp>
-
-            <FadeUp delay={0.3}>
-              <button
-                type="button"
-                onClick={openContact}
-                className="group relative isolate inline-flex items-center font-parkinsans text-[11px] uppercase tracking-[0.2em] px-6 py-3 border border-white/20 hover:border-accent hover:bg-accent/10 text-white/90 hover:text-white transition-all duration-300 rounded-[2px]"
-              >
-                <span>START A PROJECT</span>
-                <span className="ml-2 text-white/40 group-hover:text-accent group-hover:translate-x-1 transition-all">
-                  →
-                </span>
-              </button>
-            </FadeUp>
-          </div>
+          <FadeUp delay={0.3} y={16}>
+            <Link
+              href="/about"
+              className="group inline-flex items-center gap-2 font-parkinsans text-xs sm:text-sm uppercase tracking-[0.2em] text-[#FAF6ED]/70 hover:text-accent transition-colors duration-300 pb-1 border-b border-white/20 hover:border-accent"
+            >
+              <span>LEARN MORE ABOUT US</span>
+              <span className="transition-transform duration-300 group-hover:translate-x-1 text-accent">
+                →
+              </span>
+            </Link>
+          </FadeUp>
         </div>
 
-        {/* Expandable Accordion Card Deck */}
-        <div className="flex flex-col lg:flex-row gap-4 lg:gap-3 min-h-[480px]">
-          {ethosCards.map((card) => {
-            const isActive = activeCard === card.id;
-            return (
-              <motion.div
-                key={card.id}
-                onMouseEnter={() => setActiveCard(card.id)}
-                onMouseLeave={() => setActiveCard(null)}
-                animate={{
-                  flex: activeCard === null ? 1 : isActive ? 2.2 : 0.8,
-                }}
-                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                className={`relative rounded-[4px] border transition-colors duration-400 overflow-hidden cursor-pointer p-6 sm:p-8 flex flex-col justify-between ${
-                  card.bg
-                } ${
-                  isActive
-                    ? "border-accent shadow-[0_0_24px_rgba(234,91,21,0.15)]"
-                    : "border-white/10 hover:border-white/30"
-                }`}
-              >
-                {/* Center Visual Icon */}
-                <div className="my-8 flex items-center justify-center py-4">
-                  {card.icon}
+        {/* 4 Editorial Principles Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+          {PRINCIPLES.map((item, idx) => (
+            <FadeUp key={item.num} delay={0.1 + idx * 0.08} y={20}>
+              <div className="flex flex-col justify-between h-full pt-6 border-t border-white/15 hover:border-accent/60 transition-colors duration-300 group">
+                {/* Top: Principle Index */}
+                <div className="flex items-center justify-between pb-8">
+                  <span className="font-parkinsans text-xs font-bold tracking-[0.25em] text-accent uppercase">
+                    PRINCIPLE {item.num}
+                  </span>
+                  <span className="size-1.5 rounded-full bg-white/20 group-hover:bg-accent transition-colors duration-300" />
                 </div>
 
-                {/* Bottom Card Content */}
-                <div className="flex flex-col gap-3">
-                  <span className="font-artific text-[9px] tracking-[0.25em] text-accent uppercase font-medium">
-                    {card.short}
-                  </span>
-                  <h3 className="font-parkinsans text-xl sm:text-2xl font-semibold tracking-tight uppercase text-white leading-tight">
-                    {card.title}
+                {/* Middle: Principle Title */}
+                <div className="space-y-4">
+                  <h3 className="font-parkinsans text-2xl sm:text-3xl font-semibold uppercase tracking-tight text-[#FAF6ED] group-hover:text-white transition-colors duration-300">
+                    {item.title}
                   </h3>
-                  <p className="font-artific text-xs sm:text-sm text-white/70 leading-relaxed">
-                    {card.description}
+                  <p className="font-artific text-sm sm:text-base text-[#FAF6ED]/70 leading-relaxed group-hover:text-[#FAF6ED]/90 transition-colors duration-300">
+                    {item.desc}
                   </p>
                 </div>
-              </motion.div>
-            );
-          })}
+              </div>
+            </FadeUp>
+          ))}
         </div>
       </div>
     </section>

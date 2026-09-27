@@ -32,12 +32,12 @@ export async function runBrandingSmokeTests() {
   assert(hero.includes("YOUR BUSINESS FORWARD."), "Hero must contain Gerat 'YOUR BUSINESS FORWARD.' headline");
   console.log("  ✓ Hero branding verified");
 
-  // Ethos must not contain legacy WQF copy
+  // Ethos must contain Gerat V2 beliefs copy
   const ethos = fs.readFileSync(path.join(root, "src/components/home/OurEthos.jsx"), "utf-8");
-  assert(ethos.includes("BUILT TO"), "Ethos must contain 'BUILT TO'");
-  assert(ethos.includes("HOLD WEIGHT."), "Ethos must contain 'HOLD WEIGHT.'");
-  assert(ethos.includes("FOUNDATIONAL STABILITY"), "Ethos must contain 'FOUNDATIONAL STABILITY'");
-  console.log("  ✓ Ethos branding verified");
+  assert(ethos.includes("USEFUL OVER"), "Ethos must contain 'USEFUL OVER'");
+  assert(ethos.includes("COMPLICATED."), "Ethos must contain 'COMPLICATED.'");
+  assert(ethos.includes("WHAT WE BELIEVE"), "Ethos must contain 'WHAT WE BELIEVE'");
+  console.log("  ✓ Ethos V2 beliefs branding verified");
 
   // Portfolio must not link to external worldquantfoundry.com
   const portfolio = fs.readFileSync(path.join(root, "src/components/home/OurPortfolio.jsx"), "utf-8");
