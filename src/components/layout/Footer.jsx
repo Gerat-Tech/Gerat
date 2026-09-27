@@ -15,9 +15,7 @@ export default function Footer() {
 
   const navLinks = [
     { name: "SERVICES", href: "/services" },
-    { name: "PORTFOLIO", href: "/portfolio" },
-    { name: "TEAM", href: "/team" },
-    { name: "INSIGHTS", href: "/insights" },
+    { name: "ABOUT", href: "/about" },
   ];
 
   return (

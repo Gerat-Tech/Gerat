@@ -95,10 +95,11 @@ export default function OurEthos() {
 
   return (
     <section
-      id="ethos"
+      id="about"
       aria-label="Why Gerat"
-      className="relative w-full bg-[var(--bg)] text-white py-14 sm:py-18 md:py-20 border-b border-white/10"
+      className="relative w-full bg-[var(--bg)] text-white py-14 sm:py-18 md:py-20 border-b border-white/10 scroll-mt-20"
     >
+      <span id="ethos" className="sr-only" />
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
         {/* Section Header */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-10 sm:mb-12 items-start">

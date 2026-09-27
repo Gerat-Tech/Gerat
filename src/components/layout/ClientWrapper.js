@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useSyncExternalStore } from "react";
+import React, { useSyncExternalStore, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Navbar from "./Navbar";
 import PageLoader from "./PageLoader";
@@ -16,6 +16,28 @@ export default function ClientWrapper({ children }) {
   const isDashboard = pathname?.startsWith("/dashboard");
   const { isMenuOpen } = useNav();
   const mounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
+
+  // Handle hash navigation (e.g. /#services, /#about) on initial mount or route change
+  useEffect(() => {
+    if (typeof window === "undefined" || isDashboard) return;
+    const handleHashScroll = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const id = hash.replace("#", "");
+        const element = document.getElementById(id) || document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    };
+
+    const timer = setTimeout(handleHashScroll, 120);
+    window.addEventListener("hashchange", handleHashScroll);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("hashchange", handleHashScroll);
+    };
+  }, [pathname, isDashboard]);
 
   if (!mounted) {
     return <div className="bg-[var(--bg)] min-h-screen text-[var(--text-primary)]">{children}</div>;
