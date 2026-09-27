@@ -83,4 +83,28 @@ export async function runBrandingSmokeTests() {
   assert(footer.includes("variant=\"primary\""), "Footer must render primary logo signature");
   assert(footer.includes("GERAT SOFTWARE SOLUTION"), "Footer must contain 'GERAT SOFTWARE SOLUTION'");
   console.log("  ✓ V2 Footer branding & 3-column navigation verified");
+
+  // About page V2 narrative components and copy
+  const aboutPage = fs.readFileSync(path.join(root, "src/app/about/page.js"), "utf-8");
+  assert(aboutPage.includes("AboutHero"), "About page must include AboutHero");
+  assert(aboutPage.includes("OurStory"), "About page must include OurStory");
+  assert(aboutPage.includes("WhatGeratMeans"), "About page must include WhatGeratMeans");
+  assert(aboutPage.includes("TheBridge"), "About page must include TheBridge");
+  assert(aboutPage.includes("WhatWeBelieve"), "About page must include WhatWeBelieve");
+  assert(aboutPage.includes("TheFounders"), "About page must include TheFounders");
+  assert(aboutPage.includes("WhereWeAreGoing"), "About page must include WhereWeAreGoing");
+  assert(aboutPage.includes("AboutCTA"), "About page must include AboutCTA");
+
+  const aboutHero = fs.readFileSync(path.join(root, "src/app/about/components/AboutHero.jsx"), "utf-8");
+  assert(aboutHero.includes("A NEW COMPANY."), "AboutHero must contain 'A NEW COMPANY.'");
+  assert(aboutHero.includes("A CLEAR DIRECTION."), "AboutHero must contain 'A CLEAR DIRECTION.'");
+
+  const whatGeratMeans = fs.readFileSync(path.join(root, "src/app/about/components/WhatGeratMeans.jsx"), "utf-8");
+  assert(whatGeratMeans.includes("Gerät"), "WhatGeratMeans must reference German word 'Gerät'");
+  assert(whatGeratMeans.includes("TECHNOLOGY IS A TOOL. MAKE IT USEFUL."), "WhatGeratMeans must feature brand motto");
+
+  const theFounders = fs.readFileSync(path.join(root, "src/app/about/components/TheFounders.jsx"), "utf-8");
+  assert(theFounders.includes("FIVE FOUNDERS."), "TheFounders must contain 'FIVE FOUNDERS.'");
+  assert(theFounders.includes("ONE VISION."), "TheFounders must contain 'ONE VISION.'");
+  console.log("  ✓ V2 About page narrative structure & copy verified");
 }
