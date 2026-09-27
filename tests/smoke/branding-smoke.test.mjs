@@ -17,11 +17,14 @@ export async function runBrandingSmokeTests() {
   assert(readme.includes("Gerat Software Solution"), "README must document Gerat Software Solution");
   console.log("  ✓ README.md branding verified");
 
-  // Navbar must not contain legacy WorldQuant Foundry text
+  // Navbar must support V2 contextual anchor navigation
   const navbar = fs.readFileSync(path.join(root, "src/components/layout/Navbar.jsx"), "utf-8");
   assert(!navbar.includes("WORLDQUANT"), "Navbar should not contain legacy 'WORLDQUANT' text");
   assert(navbar.includes("GERAT"), "Navbar must contain 'GERAT'");
-  console.log("  ✓ Navbar branding verified");
+  assert(navbar.includes("#services"), "Navbar must support #services anchor navigation");
+  assert(navbar.includes("#about"), "Navbar must support #about anchor navigation");
+  assert(navbar.includes("START A PROJECT"), "Navbar must feature 'START A PROJECT' primary CTA");
+  console.log("  ✓ Navbar branding & contextual anchor navigation verified");
 
   // Hero must contain Gerat headline and not legacy WQF text
   const hero = fs.readFileSync(path.join(root, "src/components/home/Hero.jsx"), "utf-8");
