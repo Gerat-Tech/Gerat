@@ -41,13 +41,13 @@ export default function OurEthos() {
     <section
       id="about"
       aria-label="What We Believe"
-      className="w-full px-4 sm:px-6 md:px-8 lg:px-12 my-12 sm:my-20 md:my-24 scroll-mt-24"
+      className="w-full px-4 sm:px-6 md:px-8 lg:px-12 my-20 sm:my-32 md:my-40 scroll-mt-24"
     >
       <span id="ethos" className="sr-only" />
 
       <div
         data-dark-card="true"
-        className="relative w-full max-w-[1360px] mx-auto bg-[#300F0A] text-[#FAF6ED] p-8 sm:p-14 md:p-18 rounded-[32px] border border-white/10 shadow-[0_24px_64px_rgba(48,15,10,0.3)] overflow-hidden"
+        className="relative w-full max-w-[1360px] mx-auto bg-[#300F0A] text-[#FAF6ED] p-10 sm:p-16 md:p-22 rounded-[36px] sm:rounded-[44px] border border-white/10 shadow-[0_24px_64px_rgba(48,15,10,0.3)] overflow-hidden"
       >
         {/* Subtle Warm Ambient Glow */}
         <div
@@ -96,7 +96,7 @@ export default function OurEthos() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {PRINCIPLES.map((item, idx) => (
               <FadeUp key={item.num} delay={0.1 + idx * 0.08} y={20}>
-                <div className="flex flex-col justify-between h-full p-6 sm:p-7 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-accent/60 transition-all duration-300 group">
+                <div className="flex flex-col justify-between h-full min-h-[280px] p-8 sm:p-9 rounded-3xl bg-white/[0.04] border border-white/10 hover:border-accent/60 transition-all duration-300 group">
                   {/* Top: Principle Index */}
                   <div className="flex items-center justify-between pb-8">
                     <span className="font-parkinsans text-xs font-bold tracking-[0.25em] text-accent uppercase">
@@ -106,11 +106,11 @@ export default function OurEthos() {
                   </div>
 
                   {/* Middle: Principle Title */}
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     <h3 className="font-parkinsans text-2xl sm:text-3xl font-semibold uppercase tracking-tight text-[#FAF6ED] group-hover:text-white transition-colors duration-300">
                       {item.title}
                     </h3>
-                    <p className="font-artific text-sm sm:text-base text-[#FAF6ED]/75 leading-relaxed group-hover:text-[#FAF6ED]/95 transition-colors duration-300">
+                    <p className="font-artific text-base text-[#FAF6ED]/75 leading-[1.8] group-hover:text-[#FAF6ED]/95 transition-colors duration-300">
                       {item.desc}
                     </p>
                   </div>

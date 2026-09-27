@@ -72,9 +72,9 @@ export default function HowWeWork() {
     <section
       id="process"
       aria-label="How We Work"
-      className="w-full px-4 sm:px-6 md:px-8 lg:px-12 my-12 sm:my-20 md:my-24 scroll-mt-24"
+      className="w-full px-4 sm:px-6 md:px-8 lg:px-12 my-20 sm:my-32 md:my-40 scroll-mt-24"
     >
-      <div className="w-full max-w-[1360px] mx-auto bg-[var(--surface)] text-[var(--text-primary)] p-8 sm:p-14 md:p-18 rounded-[32px] border border-[var(--border-subtle)] shadow-[0_24px_64px_rgba(0,0,0,0.04)] overflow-hidden">
+      <div className="w-full max-w-[1360px] mx-auto bg-[var(--surface)] text-[var(--text-primary)] p-10 sm:p-16 md:p-22 rounded-[36px] sm:rounded-[44px] border border-[var(--border-subtle)] shadow-[0_24px_64px_rgba(0,0,0,0.04)] overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* LEFT COLUMN: Sticky Narrative & Step Progress Indicator */}
           <div className="lg:col-span-5 lg:sticky lg:top-32 flex flex-col items-start gap-6 sm:gap-8 pt-2">
@@ -152,14 +152,14 @@ export default function HowWeWork() {
           </div>
 
           {/* RIGHT COLUMN: 4 Step Cards Sequence */}
-          <div className="lg:col-span-7 flex flex-col gap-6 sm:gap-8 w-full">
+          <div className="lg:col-span-7 flex flex-col gap-8 sm:gap-10 w-full">
             {PROCESS_STEPS.map((step, idx) => {
               const isActive = activeStep === idx;
               return (
                 <div
                   key={step.number}
                   ref={(el) => (stepRefs.current[idx] = el)}
-                  className={`relative flex flex-col justify-between rounded-2xl sm:rounded-3xl p-8 sm:p-10 md:p-12 transition-all duration-500 border ${
+                  className={`relative flex flex-col justify-between rounded-3xl p-10 sm:p-12 md:p-14 min-h-[300px] transition-all duration-500 border ${
                     isActive
                       ? "bg-[var(--surface-2)] border-accent shadow-[0_16px_40px_rgba(234,91,21,0.12)] scale-[1.01]"
                       : "bg-[var(--surface-2)]/60 border-[var(--border-subtle)] opacity-75 hover:opacity-100 hover:border-[var(--border-medium)]"
@@ -180,7 +180,7 @@ export default function HowWeWork() {
                     <h3 className="font-parkinsans text-2xl sm:text-3xl md:text-4xl font-semibold uppercase tracking-tight text-[var(--text-primary)]">
                       {step.title}
                     </h3>
-                    <p className="font-artific text-sm sm:text-base md:text-lg text-[var(--text-secondary)] leading-relaxed mt-4 max-w-xl">
+                    <p className="font-artific text-base sm:text-lg text-[var(--text-secondary)] leading-[1.8] mt-4 max-w-xl">
                       {step.description}
                     </p>
                   </div>

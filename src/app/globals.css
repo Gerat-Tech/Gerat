@@ -689,6 +689,29 @@ html.site-light [data-dark-section] .text-accent {
   color: #EA5B15 !important;
 }
 
+/* Flame Orange Signature Footer Rules */
+footer[data-orange-footer],
+html.light footer[data-orange-footer],
+html.site-light footer[data-orange-footer] {
+  background-color: #EA5B15 !important;
+  color: #FFFFFF !important;
+}
+
+footer[data-orange-footer] p,
+footer[data-orange-footer] ul,
+footer[data-orange-footer] li,
+footer[data-orange-footer] div {
+  color: inherit;
+}
+
+footer[data-orange-footer] a {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+footer[data-orange-footer] a:hover {
+  color: #300F0A !important;
+}
+
 /* Ensure accent colors inside dark overlay remain vivid flame orange */
 html.light [data-dark-overlay] .text-accent,
 html.site-light [data-dark-overlay] .text-accent,

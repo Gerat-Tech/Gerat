@@ -6,14 +6,15 @@ import GeratLogo from "../common/GeratLogo";
 import { siteConfig } from "@/content/site";
 
 /**
- * V2 Receivio-Inspired High-Contrast Footer
+ * V2 Flame Orange Signature Footer
  *
- * Resolves Image 5:
- * - Guaranteed high-contrast dark container (data-dark-footer="true")
- * - 100% visible Gerat logo mark and typography (no washed-out white on Almond)
- * - 3-column structured navigation including Team
- * - Large centered Gerat signature mark at bottom with crisp visibility
- * - Institutional copyright colophon
+ * Implements the user's explicit direction:
+ * - Vibrant Flame Orange background (#EA5B15 / data-orange-footer="true")
+ * - High-contrast white typography with deep Coffee Bean (#300F0A) accent headers & hover states
+ * - Dual-tone brand logo (Coffee Bean badge with white waves and white wordmark)
+ * - 3-column structured navigation (Navigation, Services, Connect)
+ * - Large embossed white brand watermark signature mark
+ * - Institutional legal colophon in deeper orange (#D44E0E)
  */
 export default function Footer() {
   const navLinks = [
@@ -40,31 +41,31 @@ export default function Footer() {
   return (
     <footer
       aria-label="Site Footer"
-      data-dark-footer="true"
-      className="w-full bg-[#160705] text-[#FAF6ED] rounded-t-[36px] sm:rounded-t-[48px] border-t border-white/10 overflow-hidden mt-12 sm:mt-16"
+      data-orange-footer="true"
+      className="w-full bg-[#EA5B15] text-white rounded-t-[36px] sm:rounded-t-[48px] border-t border-white/20 overflow-hidden mt-16 sm:mt-24 shadow-[0_-20px_60px_rgba(234,91,21,0.2)]"
     >
       {/* Upper Content Grid: Brand Statement & 3-Column Navigation */}
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-16 sm:pt-20 pb-12 sm:pb-16">
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-20 sm:pt-28 pb-16 sm:pb-20">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Brand Summary Column */}
-          <div className="md:col-span-5 lg:col-span-5 flex flex-col gap-5">
+          <div className="md:col-span-5 lg:col-span-5 flex flex-col gap-6">
             <Link
               href="/"
-              className="inline-block focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded-sm max-w-fit"
+              className="inline-block focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white rounded-sm max-w-fit"
               aria-label="Gerat Software Solution Homepage"
             >
               <GeratLogo
                 variant="badge"
-                color="#FAF6ED"
-                badgeColor="#EA5B15"
-                textColor="#FAF6ED"
-                className="h-9 w-auto hover:opacity-90 transition-opacity"
+                color="#FFFFFF"
+                badgeColor="#300F0A"
+                textColor="#FFFFFF"
+                className="h-10 w-auto hover:opacity-95 transition-opacity"
               />
             </Link>
-            <p className="font-artific text-sm text-[#FAF6ED]/80 leading-relaxed max-w-sm">
+            <p className="font-artific text-sm sm:text-base text-white/95 leading-relaxed max-w-sm">
               We design and engineer digital experiences, intelligent tools, business platforms, and brand identities built around your business.
             </p>
-            <div className="pt-2 font-artific text-xs text-[#FAF6ED]/50 uppercase tracking-[0.15em] space-y-1">
+            <div className="pt-2 font-artific text-xs text-white/80 uppercase tracking-[0.15em] space-y-1 font-medium">
               <div>BOLE SUBCITY · ADDIS ABABA, ETHIOPIA</div>
               <div>{siteConfig.contact.inquiries.toUpperCase()}</div>
             </div>
@@ -74,15 +75,15 @@ export default function Footer() {
           <div className="md:col-span-7 lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8 sm:gap-10">
             {/* Column 01: Navigation */}
             <div className="flex flex-col gap-4">
-              <span className="font-parkinsans text-xs tracking-[0.25em] text-accent uppercase font-bold">
+              <span className="font-parkinsans text-xs tracking-[0.25em] text-[#300F0A] uppercase font-bold">
                 NAVIGATION
               </span>
-              <ul className="flex flex-col gap-3 font-parkinsans text-xs tracking-[0.15em] text-[#FAF6ED]/80 uppercase font-medium">
+              <ul className="flex flex-col gap-3.5 font-parkinsans text-xs tracking-[0.15em] text-white/95 uppercase font-medium">
                 {navLinks.map((item) => (
                   <li key={item.name}>
                     <Link
                       href={item.href}
-                      className="hover:text-accent transition-colors duration-200 inline-block py-0.5"
+                      className="hover:text-[#300F0A] transition-colors duration-200 inline-block py-0.5"
                     >
                       {item.name}
                     </Link>
@@ -93,15 +94,15 @@ export default function Footer() {
 
             {/* Column 02: Services */}
             <div className="flex flex-col gap-4">
-              <span className="font-parkinsans text-xs tracking-[0.25em] text-accent uppercase font-bold">
+              <span className="font-parkinsans text-xs tracking-[0.25em] text-[#300F0A] uppercase font-bold">
                 SERVICES
               </span>
-              <ul className="flex flex-col gap-3 font-parkinsans text-xs tracking-[0.15em] text-[#FAF6ED]/80 uppercase font-medium">
+              <ul className="flex flex-col gap-3.5 font-parkinsans text-xs tracking-[0.15em] text-white/95 uppercase font-medium">
                 {serviceLinks.map((item) => (
                   <li key={item.name}>
                     <Link
                       href={item.href}
-                      className="hover:text-accent transition-colors duration-200 inline-block py-0.5"
+                      className="hover:text-[#300F0A] transition-colors duration-200 inline-block py-0.5"
                     >
                       {item.name}
                     </Link>
@@ -112,21 +113,21 @@ export default function Footer() {
 
             {/* Column 03: Connect */}
             <div className="flex flex-col gap-4 col-span-2 sm:col-span-1">
-              <span className="font-parkinsans text-xs tracking-[0.25em] text-accent uppercase font-bold">
+              <span className="font-parkinsans text-xs tracking-[0.25em] text-[#300F0A] uppercase font-bold">
                 CONNECT
               </span>
-              <ul className="flex flex-col gap-3 font-parkinsans text-xs tracking-[0.15em] text-[#FAF6ED]/80 uppercase font-medium">
+              <ul className="flex flex-col gap-3.5 font-parkinsans text-xs tracking-[0.15em] text-white/95 uppercase font-medium">
                 {connectLinks.map((item) => (
                   <li key={item.name}>
                     <a
                       href={item.href}
                       target={item.external ? "_blank" : undefined}
                       rel={item.external ? "noopener noreferrer" : undefined}
-                      className="hover:text-accent transition-colors duration-200 inline-flex items-center gap-1.5 py-0.5"
+                      className="hover:text-[#300F0A] transition-colors duration-200 inline-flex items-center gap-1.5 py-0.5 group"
                     >
                       <span>{item.name}</span>
                       {item.external && (
-                        <span className="text-[10px] text-[#FAF6ED]/40 hover:text-accent">
+                        <span className="text-[10px] text-white/70 group-hover:text-[#300F0A]">
                           ↗
                         </span>
                       )}
@@ -139,26 +140,26 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Large Centered Brand Signature Mark (100% Visible & Elegant) */}
-      <div className="w-full border-t border-white/10 pt-10 sm:pt-14 pb-8 overflow-hidden select-none pointer-events-none">
+      {/* Large Centered Brand Signature Mark (Debossed White Mark on Flame Orange) */}
+      <div className="w-full border-t border-white/20 pt-12 sm:pt-16 pb-10 overflow-hidden select-none pointer-events-none">
         <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 flex justify-center items-center">
-          <div className="w-full max-w-4xl opacity-25 hover:opacity-35 transition-opacity duration-500">
+          <div className="w-full max-w-4xl opacity-20 hover:opacity-30 transition-opacity duration-500">
             <GeratLogo
               variant="primary"
-              color="#FAF6ED"
-              badgeColor="#EA5B15"
-              textColor="#FAF6ED"
-              className="w-full h-auto text-[#FAF6ED]"
+              color="#FFFFFF"
+              badgeColor="#FFFFFF"
+              textColor="#FFFFFF"
+              className="w-full h-auto text-white"
             />
           </div>
         </div>
       </div>
 
-      {/* Institutional Legal Colophon */}
-      <div className="w-full border-t border-white/10 bg-[#0d0403]">
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-parkinsans text-[11px] tracking-[0.18em] text-[#FAF6ED]/60 uppercase font-medium">
+      {/* Institutional Legal Colophon Bar */}
+      <div className="w-full border-t border-white/20 bg-[#D44E0E]">
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-parkinsans text-[11px] tracking-[0.18em] text-white/90 uppercase font-medium">
           <div>© {new Date().getFullYear()} GERAT SOFTWARE SOLUTION. ALL RIGHTS RESERVED.</div>
-          <div className="flex items-center gap-4 text-[#FAF6ED]/50 text-[10px]">
+          <div className="flex items-center gap-4 text-white/80 text-[10px]">
             <span>TECHNOLOGY IS A TOOL. MAKE IT USEFUL.</span>
             <span>·</span>
             <span>ADDIS ABABA</span>

@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { motion, useScroll, useTransform } from "framer-motion";
 import SectionLabel from "../common/SectionLabel";
 import FadeUp from "../motion/FadeUp";
 import SplitText from "../motion/SplitText";
@@ -43,17 +44,27 @@ const V2_DEFAULT_PILLARS = [
 ];
 
 /**
- * Section 03: THE BRIDGE ("WHAT GERAT BUILDS") — Receivio Floating Scroll-Stack Alignment
+ * Section 02: THE BRIDGE ("WHAT GERAT BUILDS") — Receivio Convex Morph Alignment
  *
- * Resolves Image 3 critique:
- * - High-contrast typography: titles are 100% visible deep Coffee Bean (in light mode) or crisp white (in dark mode)
- * - Soft rounded cards (rounded-3xl) instead of sharp rectangular boxes
- * - Vibrant Flame Orange (#EA5B15) accents throughout
- * - Floating container card on warm Almond canvas with generous margins
+ * Implements:
+ * - Dynamic scroll-morphing convex dome top edge that straightens out upon scroll
+ * - High-contrast typography: titles are 100% visible in light and dark modes
+ * - Expansive, relaxed vertical spacing (longer & easy for eyes)
+ * - Soft rounded scroll-stack cards with generous breathing room
+ * - Flame Orange accents throughout
  */
 export default function OurFocus({ initialPillars = null }) {
   const { openContact } = useNav();
   const [fetchedPillars, setFetchedPillars] = useState(null);
+
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "start 25%"],
+  });
+
+  // Dynamic curve height: morphs from 90px convex dome down to 0px (straight)
+  const curveHeight = useTransform(scrollYProgress, [0, 0.85], [90, 0]);
 
   useEffect(() => {
     let isMounted = true;
@@ -114,15 +125,32 @@ export default function OurFocus({ initialPillars = null }) {
 
   return (
     <section
+      ref={containerRef}
       id="services"
       aria-label="What We Build"
-      className="w-full px-4 sm:px-6 md:px-8 lg:px-12 my-12 sm:my-20 md:my-24 scroll-mt-24"
+      className="w-full px-4 sm:px-6 md:px-8 lg:px-12 my-20 sm:my-32 md:my-40 scroll-mt-24"
     >
       <span id="capabilities" className="sr-only" />
 
-      <div className="w-full max-w-[1360px] mx-auto bg-[var(--surface)] text-[var(--text-primary)] p-8 sm:p-14 md:p-18 rounded-[32px] border border-[var(--border-subtle)] shadow-[0_24px_64px_rgba(0,0,0,0.04)] overflow-hidden">
+      {/* Dynamic Scroll-Morphing Convex Dome Curve (Receivio Model) */}
+      <div className="w-full max-w-[1360px] mx-auto overflow-hidden">
+        <motion.div
+          style={{ height: curveHeight }}
+          className="w-full overflow-hidden shrink-0 pointer-events-none -mb-1"
+        >
+          <svg
+            viewBox="0 0 1440 90"
+            preserveAspectRatio="none"
+            className="w-full h-full fill-[var(--surface)] text-[var(--surface)]"
+          >
+            <path d="M 0 90 Q 720 0 1440 90 L 1440 90 L 0 90 Z" />
+          </svg>
+        </motion.div>
+      </div>
+
+      <div className="w-full max-w-[1360px] mx-auto bg-[var(--surface)] text-[var(--text-primary)] p-10 sm:p-16 md:p-22 rounded-b-[36px] sm:rounded-b-[48px] border-x border-b border-[var(--border-subtle)] shadow-[0_24px_64px_rgba(0,0,0,0.04)] overflow-hidden">
         {/* Section Header */}
-        <div className="flex flex-col gap-4 mb-14 sm:mb-18 max-w-3xl">
+        <div className="flex flex-col gap-5 mb-16 sm:mb-22 max-w-3xl">
           <SectionLabel index="02" label="THE BRIDGE" />
           <div className="space-y-2">
             <SplitText
@@ -148,17 +176,17 @@ export default function OurFocus({ initialPillars = null }) {
           </FadeUp>
         </div>
 
-        {/* Sticky Scroll-Stack Cards Container (Receivio Soft-Card Stack) */}
-        <div className="flex flex-col gap-8 sm:gap-10 relative pb-8">
+        {/* Sticky Scroll-Stack Cards Container (Longer & Easy for Eyes) */}
+        <div className="flex flex-col gap-10 sm:gap-14 relative pb-12">
           {pillars.map((pillar, idx) => (
             <div
               key={pillar.num || idx}
-              style={{ top: `calc(96px + ${idx * 20}px)` }}
-              className="sticky transition-all duration-300 rounded-3xl sm:rounded-[28px] border border-[var(--border-medium)] bg-[var(--surface-2)] shadow-[0_20px_50px_rgba(0,0,0,0.08)] p-8 sm:p-12 md:p-14 hover:border-accent/60 group"
+              style={{ top: `calc(96px + ${idx * 24}px)` }}
+              className="sticky transition-all duration-300 rounded-3xl sm:rounded-[32px] border border-[var(--border-medium)] bg-[var(--surface-2)] shadow-[0_20px_50px_rgba(0,0,0,0.08)] p-10 sm:p-14 md:p-16 min-h-[380px] sm:min-h-[440px] flex flex-col justify-between hover:border-accent/60 group"
             >
-              <div className="flex flex-col md:flex-row md:items-start justify-between gap-8">
+              <div className="flex flex-col md:flex-row md:items-start justify-between gap-10">
                 {/* Left Column: Number, Title, Description */}
-                <div className="flex flex-col gap-4 max-w-xl">
+                <div className="flex flex-col gap-5 max-w-xl">
                   <div className="flex items-center gap-3">
                     <span className="font-parkinsans text-xs sm:text-sm font-bold tracking-[0.25em] text-accent uppercase">
                       SERVICE {pillar.num || `0${idx + 1}`}
@@ -169,27 +197,27 @@ export default function OurFocus({ initialPillars = null }) {
                     </span>
                   </div>
 
-                  {/* High-Contrast Headline (Resolves Image 3) */}
-                  <h3 className="font-parkinsans text-2xl sm:text-3xl md:text-4xl font-semibold uppercase tracking-tight text-[var(--text-primary)] group-hover:text-accent transition-colors leading-[1.08]">
+                  {/* High-Contrast Headline */}
+                  <h3 className="font-parkinsans text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold uppercase tracking-tight text-[var(--text-primary)] group-hover:text-accent transition-colors leading-[1.06]">
                     {pillar.title}
                   </h3>
 
-                  <p className="font-artific text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed pt-1">
+                  <p className="font-artific text-base sm:text-lg text-[var(--text-secondary)] leading-[1.8] pt-1">
                     {pillar.desc}
                   </p>
                 </div>
 
                 {/* Right Column: Deliverables & CTA */}
-                <div className="flex flex-col justify-between gap-6 md:min-w-[280px] lg:min-w-[340px] pt-4 md:pt-0 border-t md:border-t-0 md:border-l border-[var(--border-subtle)] md:pl-8">
+                <div className="flex flex-col justify-between gap-8 md:min-w-[300px] lg:min-w-[360px] pt-6 md:pt-0 border-t md:border-t-0 md:border-l border-[var(--border-subtle)] md:pl-10">
                   <div>
-                    <span className="font-parkinsans text-[10px] tracking-[0.2em] text-[var(--text-muted)] uppercase block mb-3 font-semibold">
+                    <span className="font-parkinsans text-xs tracking-[0.2em] text-[var(--text-muted)] uppercase block mb-4 font-semibold">
                       KEY DELIVERABLES
                     </span>
-                    <ul className="space-y-2.5">
+                    <ul className="space-y-3.5">
                       {(pillar.deliverables || []).map((item) => (
                         <li
                           key={item}
-                          className="font-parkinsans text-[11px] sm:text-[12px] tracking-[0.08em] text-[var(--text-primary)] flex items-center gap-2.5"
+                          className="font-parkinsans text-xs sm:text-sm tracking-[0.08em] text-[var(--text-primary)] flex items-center gap-3"
                         >
                           <span className="size-2 rounded-full bg-accent shrink-0" />
                           <span>{item}</span>
@@ -198,10 +226,10 @@ export default function OurFocus({ initialPillars = null }) {
                     </ul>
                   </div>
 
-                  <div className="flex items-center justify-between gap-4 pt-4 border-t border-[var(--border-subtle)]">
+                  <div className="flex items-center justify-between gap-4 pt-6 border-t border-[var(--border-subtle)]">
                     <Link
                       href={pillar.deepLink || "/services"}
-                      className="inline-flex items-center gap-1.5 font-parkinsans text-[11px] tracking-[0.2em] uppercase font-bold text-accent hover:text-[var(--text-primary)] transition-colors"
+                      className="inline-flex items-center gap-2 font-parkinsans text-xs sm:text-sm tracking-[0.2em] uppercase font-bold text-accent hover:text-[var(--text-primary)] transition-colors"
                     >
                       <span>{pillar.actionLabel || "LEARN MORE"}</span>
                       <span>→</span>
@@ -218,9 +246,9 @@ export default function OurFocus({ initialPillars = null }) {
                         };
                         openContact(presetMap[pillar.num] || { discipline: "digital" });
                       }}
-                      className="font-parkinsans text-[10px] tracking-[0.15em] uppercase text-[var(--text-muted)] hover:text-accent transition-colors cursor-pointer font-semibold"
+                      className="font-parkinsans text-xs uppercase tracking-[0.18em] px-5 py-2.5 rounded-full bg-accent/15 text-accent hover:bg-accent hover:text-white font-bold transition-all duration-200 cursor-pointer"
                     >
-                      INQUIRE →
+                      INQUIRE
                     </button>
                   </div>
                 </div>
@@ -228,24 +256,6 @@ export default function OurFocus({ initialPillars = null }) {
             </div>
           ))}
         </div>
-
-        {/* Bottom Hub CTA */}
-        <FadeUp delay={0.2} y={20}>
-          <div className="mt-12 pt-8 border-t border-[var(--border-subtle)] flex flex-col sm:flex-row items-center justify-between gap-6">
-            <p className="font-artific text-xs sm:text-sm text-[var(--text-secondary)] max-w-md text-center sm:text-left">
-              Need a combination of digital experiences, intelligence, and brand systems? We design tailored architectures.
-            </p>
-            <div className="flex items-center gap-4">
-              <Link
-                href="/services"
-                className="inline-flex items-center font-parkinsans text-xs uppercase tracking-[0.2em] px-8 py-3.5 bg-accent hover:bg-white hover:text-[#300F0A] text-white font-bold transition-all rounded-full shadow-md hover:shadow-accent/25"
-              >
-                <span>VIEW ALL SERVICES</span>
-                <span className="ml-2">→</span>
-              </Link>
-            </div>
-          </div>
-        </FadeUp>
       </div>
     </section>
   );

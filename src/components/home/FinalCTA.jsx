@@ -21,11 +21,11 @@ export default function FinalCTA() {
     <section
       id="contact"
       aria-label="Contact and Next Steps"
-      className="w-full px-4 sm:px-6 md:px-8 lg:px-12 my-12 sm:my-20 md:my-24 scroll-mt-24"
+      className="w-full px-4 sm:px-6 md:px-8 lg:px-12 my-20 sm:my-32 md:my-40 scroll-mt-24"
     >
       <div
         data-dark-card="true"
-        className="relative w-full max-w-[1360px] mx-auto bg-[#300F0A] text-[#FAF6ED] p-8 sm:p-14 md:p-18 lg:p-20 rounded-[32px] border border-white/10 shadow-[0_24px_64px_rgba(48,15,10,0.3)] overflow-hidden"
+        className="relative w-full max-w-[1360px] mx-auto bg-[#300F0A] text-[#FAF6ED] p-12 sm:p-20 md:p-26 rounded-[36px] sm:rounded-[44px] border border-white/10 shadow-[0_24px_64px_rgba(48,15,10,0.3)] overflow-hidden"
       >
         {/* Background Bridge Watermark Accent */}
         <div
@@ -36,7 +36,7 @@ export default function FinalCTA() {
         </div>
 
         <div className="relative z-10 max-w-4xl flex flex-col gap-6 sm:gap-8">
-          <SectionLabel index="07" label="WHAT HAPPENS NEXT" />
+          <SectionLabel index="06" label="WHAT HAPPENS NEXT" />
 
           <div className="space-y-1 sm:space-y-2">
             <SplitText
