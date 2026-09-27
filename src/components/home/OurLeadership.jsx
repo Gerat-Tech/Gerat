@@ -108,7 +108,7 @@ export default function OurLeadership({ initialLeaders = null }) {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14 sm:mb-18 pb-8 border-b border-[var(--border-subtle)]">
           <div className="flex flex-col gap-4 max-w-2xl">
-            <SectionLabel index="06" label="THE FOUNDERS" />
+            <SectionLabel index="05" label="THE FOUNDERS" />
             <div className="space-y-1 sm:space-y-2">
               <SplitText
                 text="FIVE FOUNDERS."

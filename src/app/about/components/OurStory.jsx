@@ -52,7 +52,7 @@ export default function OurStory() {
             <FadeUp delay={0.4} y={16}>
               <div className="pt-4 border-t border-white/10 flex items-center gap-3 text-xs font-parkinsans uppercase tracking-[0.2em] text-accent">
                 <span className="size-2 rounded-full bg-accent" />
-                <span>FOUNDED IN ADDIS ABABA · EST. 2026</span>
+                <span>FOUNDED IN ADDIS ABABA</span>
               </div>
             </FadeUp>
           </div>

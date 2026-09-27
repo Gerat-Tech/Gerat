@@ -1,7 +1,6 @@
 import React from "react";
 import prisma from "@/lib/prisma";
 import Hero from "@/components/home/Hero";
-import TheProblem from "@/components/home/TheProblem";
 import OurFocus from "@/components/home/OurFocus";
 import HowWeWork from "@/components/home/HowWeWork";
 import OurEthos from "@/components/home/OurEthos";
@@ -15,13 +14,12 @@ export const dynamic = "force-dynamic";
  * V2 Homepage — Storytelling Scroll Architecture
  * Narrative order:
  * 01. Hero (The Promise)
- * 02. The Problem (The Gap)
- * 03. The Bridge (What Gerat Builds)
- * 04. How We Work (The Process)
- * 05. Point of View (What We Believe)
- * 06. Five Founders (The Team)
- * 07. Final CTA (What Happens Next)
- * 08. Footer
+ * 02. The Bridge (What Gerat Builds)
+ * 03. How We Work (The Process)
+ * 04. Point of View (What We Believe)
+ * 05. Five Founders (The Team)
+ * 06. Final CTA (What Happens Next)
+ * 07. Footer
  */
 export default async function Home() {
   let initialLeaders = null;
@@ -99,25 +97,22 @@ export default async function Home() {
       {/* 01. The Promise */}
       <Hero />
 
-      {/* 02. The Problem */}
-      <TheProblem />
-
-      {/* 03. The Bridge */}
+      {/* 02. The Bridge */}
       <OurFocus initialPillars={initialPillars} />
 
-      {/* 04. The Process */}
+      {/* 03. The Process */}
       <HowWeWork />
 
-      {/* 05. Point of View */}
+      {/* 04. Point of View */}
       <OurEthos />
 
-      {/* 06. Five Founders */}
+      {/* 05. Five Founders */}
       <OurLeadership initialLeaders={initialLeaders} />
 
-      {/* 07. What Happens Next */}
+      {/* 06. What Happens Next */}
       <FinalCTA />
 
-      {/* 08. Footer */}
+      {/* 07. Footer */}
       <Footer />
     </div>
   );

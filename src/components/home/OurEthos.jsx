@@ -59,7 +59,7 @@ export default function OurEthos() {
           {/* Top Header Row */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14 sm:mb-18 pb-8 border-b border-white/15">
             <div className="flex flex-col gap-4 max-w-3xl">
-              <SectionLabel index="05" label="WHAT WE BELIEVE" />
+              <SectionLabel index="04" label="WHAT WE BELIEVE" />
               <div className="space-y-1 sm:space-y-2">
                 <SplitText
                   text="USEFUL OVER"

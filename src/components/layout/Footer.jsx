@@ -161,7 +161,7 @@ export default function Footer() {
           <div className="flex items-center gap-4 text-[#FAF6ED]/50 text-[10px]">
             <span>TECHNOLOGY IS A TOOL. MAKE IT USEFUL.</span>
             <span>·</span>
-            <span>ADDIS ABABA · EST. 2026</span>
+            <span>ADDIS ABABA</span>
           </div>
         </div>
       </div>

@@ -123,7 +123,7 @@ export default function OurFocus({ initialPillars = null }) {
       <div className="w-full max-w-[1360px] mx-auto bg-[var(--surface)] text-[var(--text-primary)] p-8 sm:p-14 md:p-18 rounded-[32px] border border-[var(--border-subtle)] shadow-[0_24px_64px_rgba(0,0,0,0.04)] overflow-hidden">
         {/* Section Header */}
         <div className="flex flex-col gap-4 mb-14 sm:mb-18 max-w-3xl">
-          <SectionLabel index="03" label="THE BRIDGE" />
+          <SectionLabel index="02" label="THE BRIDGE" />
           <div className="space-y-2">
             <SplitText
               text="FROM BUSINESS NEED"

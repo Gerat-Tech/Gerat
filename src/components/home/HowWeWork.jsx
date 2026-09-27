@@ -78,7 +78,7 @@ export default function HowWeWork() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* LEFT COLUMN: Sticky Narrative & Step Progress Indicator */}
           <div className="lg:col-span-5 lg:sticky lg:top-32 flex flex-col items-start gap-6 sm:gap-8 pt-2">
-            <SectionLabel index="04" label="THE PROCESS" />
+            <SectionLabel index="03" label="THE PROCESS" />
 
             <div className="w-full space-y-2">
               <SplitText
