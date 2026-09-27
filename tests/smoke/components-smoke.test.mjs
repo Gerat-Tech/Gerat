@@ -33,14 +33,12 @@ export async function runComponentSmokeTests() {
     "src/components/three/Hero3DFallback.jsx",
     // Home Composite Sections
     "src/components/home/Hero.jsx",
-    "src/components/home/Marquee.jsx",
+    "src/components/home/TheProblem.jsx",
     "src/components/home/OurEthos.jsx",
     "src/components/home/OurFocus.jsx",
-    "src/components/home/BrandCreativeSection.jsx",
-    "src/components/home/OurPortfolio.jsx",
     "src/components/home/HowWeWork.jsx",
     "src/components/home/OurLeadership.jsx",
-    "src/components/home/Partners.jsx",
+    "src/components/home/FinalCTA.jsx",
     // Services Component
     "src/components/services/ServicesOverview.jsx",
     // About Page

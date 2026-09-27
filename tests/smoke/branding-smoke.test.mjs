@@ -26,10 +26,10 @@ export async function runBrandingSmokeTests() {
   assert(navbar.includes("START A PROJECT"), "Navbar must feature 'START A PROJECT' primary CTA");
   console.log("  ✓ Navbar branding & contextual anchor navigation verified");
 
-  // Hero must contain Gerat headline and not legacy WQF text
+  // Hero must contain Gerat V2 headline and not legacy WQF text
   const hero = fs.readFileSync(path.join(root, "src/components/home/Hero.jsx"), "utf-8");
-  assert(hero.includes("WE BUILD THE BRIDGE."), "Hero must contain Gerat 'WE BUILD THE BRIDGE.' headline");
-  assert(hero.includes("YOU CROSS IT."), "Hero must contain Gerat 'YOU CROSS IT.' headline");
+  assert(hero.includes("BUILD WHAT MOVES"), "Hero must contain Gerat 'BUILD WHAT MOVES' headline");
+  assert(hero.includes("YOUR BUSINESS FORWARD."), "Hero must contain Gerat 'YOUR BUSINESS FORWARD.' headline");
   console.log("  ✓ Hero branding verified");
 
   // Ethos must not contain legacy WQF copy
