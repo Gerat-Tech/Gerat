@@ -6,12 +6,13 @@ import GeratLogo from "../common/GeratLogo";
 import { siteConfig } from "@/content/site";
 
 /**
- * V2 Receivio-Inspired Footer
+ * V2 Receivio-Inspired High-Contrast Footer
  *
- * Clean, dark, and minimal footer:
- * - 3-column structured navigation (Navigation, Services, Connect)
- * - Brand mission note
- * - Large centered Gerat primary logo signature at the bottom
+ * Resolves Image 5:
+ * - Guaranteed high-contrast dark container (data-dark-footer="true")
+ * - 100% visible Gerat logo mark and typography (no washed-out white on Almond)
+ * - 3-column structured navigation including Team
+ * - Large centered Gerat signature mark at bottom with crisp visibility
  * - Institutional copyright colophon
  */
 export default function Footer() {
@@ -19,6 +20,7 @@ export default function Footer() {
     { name: "HOME", href: "/" },
     { name: "SERVICES", href: "/services" },
     { name: "ABOUT", href: "/about" },
+    { name: "TEAM", href: "/about#founders" },
   ];
 
   const serviceLinks = [
@@ -38,7 +40,8 @@ export default function Footer() {
   return (
     <footer
       aria-label="Site Footer"
-      className="w-full bg-[#0d0706] text-[#FAF6ED] border-t border-white/10 overflow-hidden"
+      data-dark-footer="true"
+      className="w-full bg-[#160705] text-[#FAF6ED] rounded-t-[36px] sm:rounded-t-[48px] border-t border-white/10 overflow-hidden mt-12 sm:mt-16"
     >
       {/* Upper Content Grid: Brand Statement & 3-Column Navigation */}
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-16 sm:pt-20 pb-12 sm:pb-16">
@@ -52,13 +55,16 @@ export default function Footer() {
             >
               <GeratLogo
                 variant="badge"
-                className="h-9 w-auto text-[#FAF6ED] hover:text-accent transition-colors duration-300"
+                color="#FAF6ED"
+                badgeColor="#EA5B15"
+                textColor="#FAF6ED"
+                className="h-9 w-auto hover:opacity-90 transition-opacity"
               />
             </Link>
-            <p className="font-artific text-sm text-[#FAF6ED]/70 leading-relaxed max-w-sm">
+            <p className="font-artific text-sm text-[#FAF6ED]/80 leading-relaxed max-w-sm">
               We design and engineer digital experiences, intelligent tools, business platforms, and brand identities built around your business.
             </p>
-            <div className="pt-2 font-artific text-xs text-[#FAF6ED]/40 uppercase tracking-[0.15em] space-y-1">
+            <div className="pt-2 font-artific text-xs text-[#FAF6ED]/50 uppercase tracking-[0.15em] space-y-1">
               <div>BOLE SUBCITY · ADDIS ABABA, ETHIOPIA</div>
               <div>{siteConfig.contact.inquiries.toUpperCase()}</div>
             </div>
@@ -71,7 +77,7 @@ export default function Footer() {
               <span className="font-parkinsans text-xs tracking-[0.25em] text-accent uppercase font-bold">
                 NAVIGATION
               </span>
-              <ul className="flex flex-col gap-3 font-parkinsans text-xs tracking-[0.15em] text-[#FAF6ED]/70 uppercase">
+              <ul className="flex flex-col gap-3 font-parkinsans text-xs tracking-[0.15em] text-[#FAF6ED]/80 uppercase font-medium">
                 {navLinks.map((item) => (
                   <li key={item.name}>
                     <Link
@@ -90,7 +96,7 @@ export default function Footer() {
               <span className="font-parkinsans text-xs tracking-[0.25em] text-accent uppercase font-bold">
                 SERVICES
               </span>
-              <ul className="flex flex-col gap-3 font-parkinsans text-xs tracking-[0.15em] text-[#FAF6ED]/70 uppercase">
+              <ul className="flex flex-col gap-3 font-parkinsans text-xs tracking-[0.15em] text-[#FAF6ED]/80 uppercase font-medium">
                 {serviceLinks.map((item) => (
                   <li key={item.name}>
                     <Link
@@ -109,7 +115,7 @@ export default function Footer() {
               <span className="font-parkinsans text-xs tracking-[0.25em] text-accent uppercase font-bold">
                 CONNECT
               </span>
-              <ul className="flex flex-col gap-3 font-parkinsans text-xs tracking-[0.15em] text-[#FAF6ED]/70 uppercase">
+              <ul className="flex flex-col gap-3 font-parkinsans text-xs tracking-[0.15em] text-[#FAF6ED]/80 uppercase font-medium">
                 {connectLinks.map((item) => (
                   <li key={item.name}>
                     <a
@@ -133,12 +139,15 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Large Centered Brand Signature Mark (Receivio-Inspired) */}
+      {/* Large Centered Brand Signature Mark (100% Visible & Elegant) */}
       <div className="w-full border-t border-white/10 pt-10 sm:pt-14 pb-8 overflow-hidden select-none pointer-events-none">
         <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 flex justify-center items-center">
-          <div className="w-full max-w-4xl opacity-15 hover:opacity-25 transition-opacity duration-500">
+          <div className="w-full max-w-4xl opacity-25 hover:opacity-35 transition-opacity duration-500">
             <GeratLogo
               variant="primary"
+              color="#FAF6ED"
+              badgeColor="#EA5B15"
+              textColor="#FAF6ED"
               className="w-full h-auto text-[#FAF6ED]"
             />
           </div>
@@ -146,10 +155,10 @@ export default function Footer() {
       </div>
 
       {/* Institutional Legal Colophon */}
-      <div className="w-full border-t border-white/5 bg-[#090403]">
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-parkinsans text-[11px] tracking-[0.18em] text-[#FAF6ED]/50 uppercase">
+      <div className="w-full border-t border-white/10 bg-[#0d0403]">
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-parkinsans text-[11px] tracking-[0.18em] text-[#FAF6ED]/60 uppercase font-medium">
           <div>© {new Date().getFullYear()} GERAT SOFTWARE SOLUTION. ALL RIGHTS RESERVED.</div>
-          <div className="flex items-center gap-4 text-[#FAF6ED]/40 text-[10px]">
+          <div className="flex items-center gap-4 text-[#FAF6ED]/50 text-[10px]">
             <span>TECHNOLOGY IS A TOOL. MAKE IT USEFUL.</span>
             <span>·</span>
             <span>ADDIS ABABA · EST. 2026</span>
