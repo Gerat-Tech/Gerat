@@ -117,9 +117,9 @@ export default function Hero() {
           {/* Right Column: Official Brand Bridge 3-Wave Logo Animation */}
           <div className="lg:col-span-5 xl:col-span-4 flex items-center justify-center lg:justify-end pt-6 lg:pt-0">
             <FadeUp delay={0.35} y={24} className="w-full max-w-[340px] sm:max-w-[420px]">
-              <div className="relative p-6 sm:p-8 rounded-3xl bg-[var(--surface-2)]/70 border border-[var(--border-subtle)] shadow-[0_20px_50px_rgba(234,91,21,0.08)] backdrop-blur-sm group hover:border-accent/40 transition-all duration-300">
+              <div className="relative flex flex-col items-center justify-center bg-transparent group">
                 <BrandBridgeAnimation className="w-full h-auto" interactive={true} />
-                <div className="pt-4 text-center">
+                <div className="pt-3 text-center">
                   <span className="font-artific text-[10px] uppercase tracking-[0.25em] text-[var(--text-muted)] font-medium group-hover:text-accent transition-colors">
                     THE BRIDGE · PURPOSE TO SYSTEM
                   </span>
