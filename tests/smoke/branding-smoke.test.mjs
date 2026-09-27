@@ -49,11 +49,13 @@ export async function runBrandingSmokeTests() {
   assert(portfolioContent.includes("export const portfolioProjects = []"), "Portfolio content must be clean slate in V2");
   console.log("  ✓ Portfolio content V2 clean slate verified");
 
-  // Services page components must not contain legacy WQF copy
+  // Services page components must contain Gerat V2 headline and not legacy WQF text
   const services = fs.readFileSync(path.join(root, "src/components/services/ServicesOverview.jsx"), "utf-8");
   assert(!services.includes("WorldQuant Foundry"), "Services page must not contain legacy WQF text");
-  assert(services.includes("WHAT WE") && services.includes("BUILD."), "Services page must contain Gerat headline");
-  console.log("  ✓ Services page Overview verified");
+  assert(services.includes("TECHNOLOGY BUILT") && services.includes("AROUND YOUR BUSINESS."), "Services page must contain Gerat V2 headline");
+  assert(services.includes("NOT EVERY BUSINESS") && services.includes("NEEDS EVERYTHING."), "Services page must contain approach section");
+  assert(services.includes("COMMON") && services.includes("QUESTIONS."), "Services page must contain FAQ section");
+  console.log("  ✓ Services page V2 overview, approach & FAQ verified");
 
   // Contact drawer must have Gerat branding and brand/creative disciplines
   const contactDrawer = fs.readFileSync(path.join(root, "src/components/layout/ContactDrawer.jsx"), "utf-8");
