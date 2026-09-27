@@ -144,10 +144,11 @@ export default function OurLeadership({ initialLeaders = null }) {
 
   return (
     <section
-      id="leadership"
+      id="founders"
       aria-label="Our Leadership Team"
-      className="relative w-full bg-[#0d0706] text-[#faf6ed] border-t border-b border-white/10 overflow-hidden py-14 sm:py-18 md:py-20 select-none"
+      className="relative w-full bg-[#0d0706] text-[#faf6ed] border-t border-b border-white/10 overflow-hidden py-24 sm:py-32 md:py-36 select-none scroll-mt-20"
     >
+      <span id="leadership" className="sr-only" />
       {/* Top Label Bar */}
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 mb-8 sm:mb-10">
         <div className="flex items-center justify-between border-b border-white/10 pb-4 font-parkinsans text-[11px] sm:text-[12px] uppercase tracking-[0.25em] text-white/60">

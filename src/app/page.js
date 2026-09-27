@@ -1,40 +1,41 @@
 import React from "react";
 import prisma from "@/lib/prisma";
 import Hero from "@/components/home/Hero";
-import Marquee from "@/components/home/Marquee";
+import TheProblem from "@/components/home/TheProblem";
 import OurFocus from "@/components/home/OurFocus";
-import OurEthos from "@/components/home/OurEthos";
-import OurPortfolio from "@/components/home/OurPortfolio";
-import OurLeadership from "@/components/home/OurLeadership";
 import HowWeWork from "@/components/home/HowWeWork";
+import OurEthos from "@/components/home/OurEthos";
+import OurLeadership from "@/components/home/OurLeadership";
+import FinalCTA from "@/components/home/FinalCTA";
 import Footer from "@/components/layout/Footer";
 
 export const dynamic = "force-dynamic";
 
+/**
+ * V2 Homepage — Storytelling Scroll Architecture
+ * Narrative order:
+ * 01. Hero (The Promise)
+ * 02. The Problem (The Gap)
+ * 03. The Bridge (What Gerat Builds)
+ * 04. How We Work (The Process)
+ * 05. Point of View (What We Believe)
+ * 06. Five Founders (The Team)
+ * 07. Final CTA (What Happens Next)
+ * 08. Footer
+ */
 export default async function Home() {
   let initialLeaders = null;
-  let initialProjects = null;
   let initialPillars = null;
-  let marqueeTokens = null;
-  let totalStudies = 0;
 
   try {
-    const [totalMembers, fetchedStudiesCount, totalPillars, teamMembers, caseStudies, servicePillars, siteConfigs] =
+    const [totalMembers, totalPillars, teamMembers, servicePillars] =
       await Promise.all([
         prisma.teamMember.count().catch(() => 0),
-        prisma.caseStudy.count().catch(() => 0),
         prisma.servicePillar.count().catch(() => 0),
         prisma.teamMember
           .findMany({
             where: { active: true },
             orderBy: [{ order: "asc" }, { createdAt: "asc" }],
-          })
-          .catch(() => []),
-        prisma.caseStudy
-          .findMany({
-            where: { featured: true },
-            orderBy: [{ order: "asc" }, { createdAt: "desc" }],
-            take: 3,
           })
           .catch(() => []),
         prisma.servicePillar
@@ -43,10 +44,7 @@ export default async function Home() {
             orderBy: [{ order: "asc" }, { num: "asc" }],
           })
           .catch(() => []),
-        prisma.siteConfig.findMany().catch(() => []),
       ]);
-
-    totalStudies = fetchedStudiesCount;
 
     // 1. Team Leadership: All active executive leaders
     if (totalMembers > 0) {
@@ -65,29 +63,7 @@ export default async function Home() {
       }));
     }
 
-    // 2. Portfolio Projects (Homepage only displays explicitly featured case studies)
-    if (totalStudies > 0) {
-      initialProjects = caseStudies.map((p, idx) => ({
-        ...p,
-        id: p.displayIndex || `0${idx + 1}`,
-        image: p.imageUrl,
-        description: p.summary,
-        tech: p.techStack || p.tech || "",
-        featured: Boolean(p.featured),
-        stack:
-          typeof p.stackBadges === "string" && p.stackBadges.startsWith("[")
-            ? JSON.parse(p.stackBadges)
-            : Array.isArray(p.stackBadges)
-            ? p.stackBadges
-            : p.stackBadges
-            ? p.stackBadges.split(",").map((s) => s.trim())
-            : [],
-      }));
-    } else {
-      initialProjects = [];
-    }
-
-    // 3. Service Pillars for Capabilities section
+    // 2. Service Pillars for Capabilities section
     if (totalPillars > 0) {
       initialPillars = servicePillars.map((p) => {
         let dels = [];
@@ -114,34 +90,34 @@ export default async function Home() {
         };
       });
     }
-
-    // 4. Marquee Tokens from SiteConfig
-    const configMap = siteConfigs.reduce((acc, item) => {
-      acc[item.key] = item.value;
-      return acc;
-    }, {});
-
-    if (configMap.MARQUEE_TOKENS) {
-      try {
-        const parsed = JSON.parse(configMap.MARQUEE_TOKENS);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          marqueeTokens = parsed;
-        }
-      } catch {}
-    }
   } catch (error) {
     console.error("Home page SSR Prisma fetch error:", error);
   }
 
   return (
     <div className="bg-[var(--bg)] min-h-screen text-[var(--text-primary)] selection:bg-accent selection:text-black">
+      {/* 01. The Promise */}
       <Hero />
-      <Marquee customItems={marqueeTokens} />
+
+      {/* 02. The Problem */}
+      <TheProblem />
+
+      {/* 03. The Bridge */}
       <OurFocus initialPillars={initialPillars} />
-      <OurEthos />
-      <OurPortfolio initialProjects={initialProjects} totalProjectCount={totalStudies} />
-      <OurLeadership initialLeaders={initialLeaders} />
+
+      {/* 04. The Process */}
       <HowWeWork />
+
+      {/* 05. Point of View */}
+      <OurEthos />
+
+      {/* 06. Five Founders */}
+      <OurLeadership initialLeaders={initialLeaders} />
+
+      {/* 07. What Happens Next */}
+      <FinalCTA />
+
+      {/* 08. Footer */}
       <Footer />
     </div>
   );

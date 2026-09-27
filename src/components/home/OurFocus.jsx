@@ -99,7 +99,7 @@ export default function OurFocus({ initialPillars = null }) {
     <section
       id="services"
       aria-label="What We Build"
-      className="relative w-full bg-[var(--bg)] text-white py-14 sm:py-18 md:py-20 border-b border-white/10 scroll-mt-20"
+      className="relative w-full bg-[var(--bg)] text-white py-24 sm:py-32 md:py-36 border-b border-white/10 scroll-mt-20"
     >
       <span id="capabilities" className="sr-only" />
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">

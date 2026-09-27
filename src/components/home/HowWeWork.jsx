@@ -109,7 +109,7 @@ export default function HowWeWork() {
     <section
       id="process"
       aria-label="How We Work"
-      className="relative w-full py-14 sm:py-18 md:py-20 bg-[var(--bg)] text-[var(--text-primary)] border-b border-white/10 overflow-hidden"
+      className="relative w-full py-24 sm:py-32 md:py-36 bg-[var(--bg)] text-[var(--text-primary)] border-b border-white/10 overflow-hidden scroll-mt-20"
     >
       {/* Subtle Cosmic Dot Constellation Background */}
       <div
