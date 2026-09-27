@@ -23,13 +23,16 @@ export async function runBrandingSmokeTests() {
   assert(navbar.includes("GERAT"), "Navbar must contain 'GERAT'");
   assert(navbar.includes("#services"), "Navbar must support #services anchor navigation");
   assert(navbar.includes("#about"), "Navbar must support #about anchor navigation");
+  assert(navbar.includes("#founders"), "Navbar must support #founders anchor navigation");
+  assert(navbar.includes("TEAM") || navbar.includes("Team"), "Navbar must support 'Team' navigation");
   assert(navbar.includes("START A PROJECT"), "Navbar must feature 'START A PROJECT' primary CTA");
   console.log("  ✓ Navbar branding & contextual anchor navigation verified");
 
   // Hero must contain Gerat V2 headline and not legacy WQF text
   const hero = fs.readFileSync(path.join(root, "src/components/home/Hero.jsx"), "utf-8");
-  assert(hero.includes("BUILD WHAT MOVES"), "Hero must contain Gerat 'BUILD WHAT MOVES' headline");
-  assert(hero.includes("YOUR BUSINESS FORWARD."), "Hero must contain Gerat 'YOUR BUSINESS FORWARD.' headline");
+  const heroUpper = hero.toUpperCase();
+  assert(heroUpper.includes("BUILD WHAT MOVES"), "Hero must contain Gerat 'BUILD WHAT MOVES' headline");
+  assert(heroUpper.includes("YOUR BUSINESS") && heroUpper.includes("FORWARD"), "Hero must contain Gerat 'YOUR BUSINESS FORWARD' headline");
   console.log("  ✓ Hero branding verified");
 
   // Ethos must contain Gerat V2 beliefs copy

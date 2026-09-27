@@ -12,6 +12,7 @@ export async function runComponentSmokeTests() {
     "src/components/common/SectionLabel.jsx",
     "src/components/common/NavItem.jsx",
     "src/components/common/Button.jsx",
+    "src/components/common/BrandBridgeAnimation.jsx",
     "src/components/common/CustomCursor.jsx",
     // Motion
     "src/components/motion/FadeUp.jsx",
