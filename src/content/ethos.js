@@ -103,37 +103,53 @@ export const ethosCards = [
 export const methodologySteps = [
   {
     step: "01",
-    name: "DISCOVER",
-    title: "DISCOVER & UNDERSTAND",
+    name: "UNDERSTAND",
+    title: "UNDERSTAND",
     description:
-      "We understand the business, the people, the problem, and what success should look like.",
+      "We learn how the business works, where the friction is, and what the technology needs to achieve.",
   },
   {
     step: "02",
-    name: "DESIGN",
-    title: "DESIGN & DIRECTION",
+    name: "DEFINE",
+    title: "DEFINE",
     description:
-      "We turn that understanding into a clear experience, visual direction, and realistic plan.",
+      "We turn the problem into a clear scope, user experience, technical direction, and delivery plan.",
   },
   {
     step: "03",
     name: "BUILD",
-    title: "BUILD & ENGINEER",
+    title: "BUILD",
     description:
-      "We design and engineer the digital product, intelligent tool, or business platform.",
+      "We design and engineer the product, system, or brand with the right level of technology for the job.",
   },
   {
     step: "04",
-    name: "LAUNCH",
-    title: "TEST & LAUNCH",
+    name: "SUPPORT",
+    title: "SUPPORT",
     description:
-      "We test, refine, and prepare the system for real users and real-world conditions.",
+      "We help with launch, handover, improvements, and the next stage of the system.",
+  },
+];
+
+export const v2Beliefs = [
+  {
+    num: "01",
+    title: "USEFUL",
+    desc: "Technology should solve a real problem before it tries to impress.",
   },
   {
-    step: "05",
-    name: "SUPPORT",
-    title: "SUPPORT & EVOLVE",
-    description:
-      "We stay involved as the product grows, helping your business adapt to what comes next.",
+    num: "02",
+    title: "CLEAR",
+    desc: "Good systems are easier to understand, use, and improve.",
+  },
+  {
+    num: "03",
+    title: "STRONG",
+    desc: "Good foundations matter because businesses have to live with what we build.",
+  },
+  {
+    num: "04",
+    title: "GROWING",
+    desc: "We build with the next stage in mind, not only today's requirement.",
   },
 ];
