@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 import Hero from "@/components/home/Hero";
 import OurFocus from "@/components/home/OurFocus";
 import HowWeWork from "@/components/home/HowWeWork";
-import OurEthos from "@/components/home/OurEthos";
+import WhyGerat from "@/components/home/WhyGerat";
 import OurLeadership from "@/components/home/OurLeadership";
 import FinalCTA from "@/components/home/FinalCTA";
 import Footer from "@/components/layout/Footer";
@@ -58,6 +58,10 @@ export default async function Home() {
         bio: m.bio,
         image: m.photoUrl || "/image/team/leadership/Dawit.jpeg",
         photoUrl: m.photoUrl || "/image/team/leadership/Dawit.jpeg",
+        email: m.email,
+        twitterUrl: m.twitterUrl,
+        linkedinUrl: m.linkedinUrl,
+        githubUrl: m.githubUrl,
       }));
     }
 
@@ -103,16 +107,16 @@ export default async function Home() {
       {/* 03. The Process */}
       <HowWeWork />
 
-      {/* 04. Point of View */}
-      <OurEthos />
+      {/* 04. Why Gerät (Why It Works Differently) */}
+      <WhyGerat />
 
-      {/* 05. Five Founders */}
+      {/* 05. Five Founders / The Team */}
       <OurLeadership initialLeaders={initialLeaders} />
 
-      {/* 06. What Happens Next */}
+      {/* 05. What Happens Next */}
       <FinalCTA />
 
-      {/* 07. Footer */}
+      {/* 06. Footer */}
       <Footer />
     </div>
   );

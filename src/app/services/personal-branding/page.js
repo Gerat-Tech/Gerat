@@ -163,35 +163,35 @@ export default function PersonalBrandingPage() {
       {/* Hero Section */}
       <section className="relative w-full max-w-[1440px] mx-auto pt-36 sm:pt-44 pb-20 px-4 sm:px-6 md:px-8 lg:px-10 border-b border-white/10">
         <div className="flex flex-col gap-6 max-w-4xl">
-          <SectionLabel index="04" label="PERSONAL BRANDING" />
+          <SectionLabel label="PERSONAL BRANDING" />
 
           <div className="space-y-2">
             <SplitText
               text="YOUR NAME IS PART"
               as="h1"
-              className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+              className="font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-semibold tracking-tight uppercase leading-[1.04]"
             />
             <SplitText
               text="OF YOUR BUSINESS."
               as="div"
-              className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+              className="font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-semibold tracking-tight uppercase leading-[1.04]"
             />
             <SplitText
               text="MAKE IT COUNT."
               as="div"
               wordClassName="text-accent"
-              className="font-artific text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight uppercase leading-[0.92]"
+              className="font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-semibold tracking-tight uppercase leading-[1.04]"
             />
           </div>
 
           <FadeUp delay={0.3} y={16}>
-            <p className="font-parkinsans text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed">
+            <p className="font-artific text-sm sm:text-base text-white/70 max-w-xl leading-relaxed">
               We help founders, executives, and leaders build a personal brand that opens doors to capital, partnerships, and high-impact opportunities.
             </p>
           </FadeUp>
 
           <FadeUp delay={0.4} y={16}>
-            <div className="flex flex-wrap items-center gap-4 pt-4">
+            <div className="flex flex-wrap items-center gap-4 pt-2">
               <button
                 type="button"
                 onClick={() =>
@@ -200,46 +200,34 @@ export default function PersonalBrandingPage() {
                     subOption: "PERSONAL BRANDING",
                   })
                 }
-                className="inline-flex items-center font-parkinsans text-[11px] uppercase tracking-[0.2em] px-8 py-4 bg-accent text-white font-bold hover:bg-white hover:text-black transition-all rounded-[2px]"
+                className="inline-flex items-center font-parkinsans text-xs uppercase tracking-[0.18em] px-6 sm:px-7 py-3 bg-accent text-white font-semibold hover:bg-accent/90 transition-all rounded-full"
               >
                 <span>BUILD YOUR PERSONAL BRAND</span>
                 <span className="ml-2">→</span>
               </button>
-
-              <Link
-                href="/portfolio?category=PERSONAL+BRAND"
-                className="inline-flex items-center font-parkinsans text-[11px] uppercase tracking-[0.2em] px-8 py-4 border border-white/20 bg-transparent text-white hover:border-white transition-all rounded-[2px]"
-              >
-                <span>VIEW PROFILES</span>
-              </Link>
             </div>
           </FadeUp>
-        </div>
-
-        <div className="mt-16 pt-4 border-t border-white/10 flex items-center justify-between font-parkinsans text-[10px] tracking-[0.2em] text-white/40 uppercase">
-          <span>FRAMEWORK · PERSONAL BRANDING</span>
-          <span>DISCOVER METHODOLOGY ↓</span>
         </div>
       </section>
 
       {/* Target Audience / Personas Section */}
-      <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-20 sm:py-28 border-b border-white/10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-16 sm:py-24 border-b border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {TARGET_PERSONAS.map((p, idx) => (
             <FadeUp key={p.role} delay={0.1 * idx} y={16}>
-              <div className="p-6 bg-[var(--surface)] border border-white/10 rounded-[2px] h-full flex flex-col justify-between">
+              <div className="p-5 sm:p-6 bg-[var(--surface)] border border-white/10 rounded-2xl h-full flex flex-col justify-between">
                 <div>
-                  <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase font-bold">
+                  <span className="font-parkinsans text-[10px] tracking-[0.2em] text-accent uppercase font-semibold">
                     LEADERSHIP PROFILE
                   </span>
-                  <h3 className="font-parkinsans text-lg font-semibold tracking-tight uppercase text-white mt-1">
+                  <h3 className="font-parkinsans text-base sm:text-lg font-semibold tracking-tight uppercase text-white mt-1">
                     {p.role}
                   </h3>
-                  <p className="font-artific text-xs text-white/60 mt-3 leading-relaxed">
+                  <p className="font-artific text-xs text-white/60 mt-2.5 leading-relaxed">
                     {p.benefit}
                   </p>
                 </div>
-                <div className="pt-4 mt-4 border-t border-white/5 flex items-center gap-1.5 text-white/40 font-parkinsans text-[9px]">
+                <div className="pt-3.5 mt-3.5 border-t border-white/5 flex items-center gap-1.5 text-white/40 font-parkinsans text-[9px]">
                   <CheckCircle2 className="size-3 text-accent" />
                   <span>TARGETED OUTCOME</span>
                 </div>
@@ -251,46 +239,41 @@ export default function PersonalBrandingPage() {
 
       {/* 7 Modular Framework Pillars */}
       <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-14 sm:py-18 md:py-20 border-b border-white/10">
-        <div className="flex flex-col gap-4 mb-10 sm:mb-12 max-w-3xl">
-          <SectionLabel label="THE 7-PILLAR PERSONAL BRAND ENGINE" />
-          <h2 className="font-parkinsans text-3xl sm:text-5xl font-semibold tracking-tight uppercase leading-[1.05]">
+        <div className="flex flex-col gap-3 mb-10 sm:mb-12 max-w-3xl">
+          <SectionLabel label="PERSONAL BRAND ENGINE" />
+          <h2 className="font-parkinsans text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight uppercase leading-[1.08]">
             MODULAR ARCHITECTURE. <br />
             <span className="text-accent">BUILT AROUND YOUR TIME.</span>
           </h2>
-          <p className="font-artific text-sm sm:text-base text-white/70 leading-relaxed">
+          <p className="font-artific text-xs sm:text-sm text-white/70 max-w-xl leading-relaxed">
             Busy executives do not have 20 hours a week to produce content. We design high-efficiency
             systems that extract your insights with minimal time commitment while maximizing institutional impact.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {PERSONAL_MODULES.map((mod, idx) => {
             const Icon = mod.icon;
             return (
               <FadeUp key={mod.title} delay={0.08 * idx} y={24}>
-                <div className="group relative bg-[var(--surface)] border border-white/10 hover:border-accent/80 p-8 rounded-[2px] flex flex-col justify-between min-h-[380px] transition-all duration-300 h-full">
-                  <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30 group-hover:border-accent transition-colors" />
-                  <span className="absolute top-0 right-0 size-2 border-t border-r border-white/30 group-hover:border-accent transition-colors" />
-                  <span className="absolute bottom-0 left-0 size-2 border-b border-l border-white/30 group-hover:border-accent transition-colors" />
-                  <span className="absolute bottom-0 right-0 size-2 border-b border-r border-white/30 group-hover:border-accent transition-colors" />
-
+                <div className="group relative bg-[var(--surface)] border border-white/10 hover:border-accent/80 p-6 sm:p-7 rounded-2xl flex flex-col justify-between min-h-[300px] transition-all duration-300 h-full">
                   <div>
-                    <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                    <div className="flex items-center justify-between pb-3.5 border-b border-white/10">
                       <div className="flex items-center gap-2.5">
-                        <div className="size-8 rounded-[2px] bg-white/5 border border-white/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-black transition-colors">
+                        <div className="size-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-black transition-colors">
                           <Icon className="size-3.5" />
                         </div>
-                        <span className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
+                        <span className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase font-semibold">
                           MODULE
                         </span>
                       </div>
                     </div>
 
-                    <div className="mt-5">
-                      <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase font-bold">
+                    <div className="mt-4">
+                      <span className="font-parkinsans text-[10px] tracking-[0.2em] text-accent uppercase font-semibold">
                         {mod.subtitle}
                       </span>
-                      <h3 className="font-parkinsans text-2xl font-semibold tracking-tight uppercase text-white mt-1">
+                      <h3 className="font-parkinsans text-lg sm:text-xl font-semibold tracking-tight uppercase text-white mt-1">
                         {mod.title}
                       </h3>
                       <p className="font-artific text-xs sm:text-sm text-white/70 leading-relaxed mt-2">
@@ -299,14 +282,15 @@ export default function PersonalBrandingPage() {
                     </div>
                   </div>
 
-                  <div className="pt-6 border-t border-white/10 mt-6">
-                    <span className="font-parkinsans text-[8px] tracking-[0.2em] text-white/40 uppercase block mb-2.5">
+                  <div className="pt-4 border-t border-white/10 mt-5">
+                    <span className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase block mb-2 font-semibold">
                       DELIVERABLES
                     </span>
-                    <ul className="space-y-1.5 font-parkinsans text-[9px] tracking-[0.08em] text-white/60">
+                    <ul className="space-y-1.5 font-artific text-xs text-white/60">
                       {mod.deliverables.map((del) => (
-                        <li key={del} className="hover:text-white transition-colors">
-                          {del}
+                        <li key={del} className="hover:text-white transition-colors flex items-center gap-2">
+                          <span className="size-1 rounded-full bg-accent/80 shrink-0" />
+                          <span>{del}</span>
                         </li>
                       ))}
                     </ul>
@@ -320,24 +304,24 @@ export default function PersonalBrandingPage() {
 
       {/* Featured Case Study Spotlight */}
       {executiveCase && (
-        <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-24 sm:py-32 border-b border-white/10">
-          <div className="bg-[var(--surface)] border border-white/10 p-8 sm:p-12 rounded-[2px]">
+        <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-20 sm:py-28 border-b border-white/10">
+          <div className="bg-[var(--surface)] border border-white/10 p-6 sm:p-8 md:p-10 rounded-2xl">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-7 flex flex-col gap-4">
-                <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase font-bold">
+                <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase font-semibold">
                   FLAGSHIP CASE STUDY · {executiveCase.category}
                 </span>
-                <h2 className="font-parkinsans text-3xl sm:text-4xl font-semibold tracking-tight uppercase text-white">
+                <h2 className="font-parkinsans text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight uppercase text-white leading-[1.08]">
                   {executiveCase.title}
                 </h2>
-                <p className="font-artific text-sm text-white/70 leading-relaxed max-w-xl">
+                <p className="font-artific text-xs sm:text-sm text-white/70 leading-relaxed max-w-xl">
                   {executiveCase.summary}
                 </p>
 
                 <div className="pt-4 border-t border-white/10 flex flex-wrap gap-6 font-parkinsans text-[10px]">
                   <div>
                     <span className="text-white/40 block">METRIC IMPACT:</span>
-                    <span className="text-accent font-bold tracking-widest">{executiveCase.metric}</span>
+                    <span className="text-accent font-semibold tracking-widest">{executiveCase.metric}</span>
                   </div>
                   <div>
                     <span className="text-white/40 block">DEPLOYMENT:</span>
@@ -345,10 +329,10 @@ export default function PersonalBrandingPage() {
                   </div>
                 </div>
 
-                <div className="pt-4">
+                <div className="pt-2">
                   <Link
                     href="/portfolio?category=PERSONAL+BRAND"
-                    className="inline-flex items-center gap-2 font-parkinsans text-[10px] tracking-[0.2em] uppercase text-white hover:text-accent transition-colors"
+                    className="inline-flex items-center gap-2 font-parkinsans text-xs tracking-[0.18em] uppercase text-white hover:text-accent transition-colors"
                   >
                     <span>EXPLORE COMPLETE PORTFOLIO</span>
                     <ArrowRight className="size-3.5" />
@@ -356,8 +340,8 @@ export default function PersonalBrandingPage() {
                 </div>
               </div>
 
-              <div className="lg:col-span-5 bg-[var(--surface-raised)] border border-white/10 p-6 rounded-[2px] flex flex-col gap-3 font-parkinsans text-[10px]">
-                <span className="text-accent uppercase tracking-[0.2em]">CASE BREAKDOWN</span>
+              <div className="lg:col-span-5 bg-[var(--surface-raised)] border border-white/10 p-5 sm:p-6 rounded-2xl flex flex-col gap-3 font-parkinsans text-[10px]">
+                <span className="text-accent uppercase tracking-[0.2em] font-semibold">CASE BREAKDOWN</span>
                 <div className="text-white/60 space-y-2 font-artific text-xs">
                   <p><strong className="text-white">Challenge:</strong> {executiveCase.problem}</p>
                   <p><strong className="text-white">Solution:</strong> {executiveCase.architecture}</p>
@@ -370,14 +354,14 @@ export default function PersonalBrandingPage() {
       )}
 
       {/* CTA Banner */}
-      <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-20 sm:py-28 text-center flex flex-col items-center gap-6">
-        <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase">
+      <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-16 sm:py-24 text-center flex flex-col items-center gap-4">
+        <span className="font-parkinsans text-xs tracking-[0.25em] text-accent uppercase font-semibold">
           ELEVATE YOUR VISIBILITY
         </span>
-        <h2 className="font-parkinsans text-3xl sm:text-5xl font-semibold tracking-tight uppercase max-w-2xl">
+        <h2 className="font-parkinsans text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight uppercase max-w-xl leading-[1.08]">
           READY TO TURN YOUR STORY INTO AN ASSET?
         </h2>
-        <p className="font-artific text-sm sm:text-base text-white/60 max-w-md">
+        <p className="font-artific text-xs sm:text-sm text-white/60 max-w-md">
           Direct consultation with our executive branding directors. We map your trajectory in an introductory review.
         </p>
         <button
@@ -388,7 +372,7 @@ export default function PersonalBrandingPage() {
               subOption: "PERSONAL BRANDING",
             })
           }
-          className="mt-2 px-10 py-4 bg-accent text-white font-parkinsans text-xs uppercase tracking-[0.2em] font-bold hover:bg-white hover:text-black transition-all rounded-[2px]"
+          className="mt-2 px-7 sm:px-8 py-3.5 bg-accent text-white font-parkinsans text-xs uppercase tracking-[0.18em] font-semibold hover:bg-accent/90 transition-all rounded-full cursor-pointer shadow-lg"
         >
           BOOK A PERSONAL BRAND CONSULTATION
         </button>

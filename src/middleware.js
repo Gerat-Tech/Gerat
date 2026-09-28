@@ -48,6 +48,11 @@ export async function middleware(request) {
     const userRole = user.role || "VIEWER";
 
     if (userRole !== "SUPER_ADMIN") {
+      const normalizedUserRole =
+        userRole === "EDITOR" || userRole === "TECHNICAL_EDITOR" || userRole === "CREATIVE_EDITOR"
+          ? "OPERATIONS_LEAD"
+          : userRole;
+
       const ALLOWED_ROLE_ROUTES = {
         OPERATIONS_LEAD: [
           "/dashboard",
@@ -55,25 +60,8 @@ export async function middleware(request) {
           "/dashboard/team",
           "/dashboard/services",
         ],
-        EDITOR: [
-          "/dashboard",
-          "/dashboard/insights",
-          "/dashboard/portfolio",
-        ],
-        TECHNICAL_EDITOR: [
-          "/dashboard",
-          "/dashboard/insights",
-          "/dashboard/portfolio",
-        ],
-        CREATIVE_EDITOR: [
-          "/dashboard",
-          "/dashboard/portfolio",
-          "/dashboard/insights",
-        ],
         VIEWER: [
           "/dashboard",
-          "/dashboard/insights",
-          "/dashboard/portfolio",
           "/dashboard/team",
           "/dashboard/services",
         ],
@@ -89,7 +77,7 @@ export async function middleware(request) {
 
       // Block OPERATIONS_LEAD from mutating team or service pillars
       if (
-        userRole === "OPERATIONS_LEAD" &&
+        normalizedUserRole === "OPERATIONS_LEAD" &&
         (pathname.startsWith("/dashboard/team/") || pathname.startsWith("/dashboard/services/"))
       ) {
         const redirectUrl = new URL("/dashboard", request.url);
@@ -98,7 +86,7 @@ export async function middleware(request) {
         return NextResponse.redirect(redirectUrl);
       }
 
-      const allowedPrefixes = ALLOWED_ROLE_ROUTES[userRole] || ["/dashboard"];
+      const allowedPrefixes = ALLOWED_ROLE_ROUTES[normalizedUserRole] || ["/dashboard"];
       const isAllowed = allowedPrefixes.some((prefix) =>
         prefix === "/dashboard" ? pathname === "/dashboard" : pathname.startsWith(prefix)
       );

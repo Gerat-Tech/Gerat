@@ -72,30 +72,30 @@ export default function BrandCreativeSection() {
     >
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
         {/* Section Header */}
-        <div className="flex flex-col gap-4 mb-16 lg:mb-20 max-w-4xl">
-          <SectionLabel index="04" label="BRAND & CREATIVE ARCHITECTURE" />
+        <div className="flex flex-col gap-3.5 mb-12 lg:mb-16 max-w-3xl">
+          <SectionLabel label="BRAND & CREATIVE ARCHITECTURE" />
 
-          <div className="space-y-1 sm:space-y-2">
+          <div className="space-y-1 sm:space-y-1.5">
             <SplitText
               text="BUILD THE PRODUCT."
               as="h2"
-              className="font-parkinsans text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-medium sm:font-semibold tracking-tight uppercase leading-[0.95]"
+              className="font-parkinsans text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight uppercase leading-[1.08]"
             />
             <SplitText
               text="BUILD THE BRAND."
               as="h2"
-              className="font-parkinsans text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-medium sm:font-semibold tracking-tight uppercase leading-[0.95]"
+              className="font-parkinsans text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight uppercase leading-[1.08]"
             />
             <SplitText
               text="BUILD THE PRESENCE."
               as="h2"
               wordClassName="text-accent"
-              className="font-parkinsans text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-medium sm:font-semibold tracking-tight uppercase leading-[0.95]"
+              className="font-parkinsans text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight uppercase leading-[1.08]"
             />
           </div>
 
           <FadeUp delay={0.2} y={16}>
-            <p className="font-artific text-base sm:text-lg text-white/80 leading-relaxed pt-2 max-w-3xl">
+            <p className="font-artific text-sm sm:text-base text-white/80 leading-relaxed pt-1 max-w-2xl">
               A strong digital product starts long before the interface. We help businesses,
               products, and technology leaders define how they look, communicate, and show
               up — then connect that identity directly into the digital experiences and
@@ -105,7 +105,7 @@ export default function BrandCreativeSection() {
         </div>
 
         {/* 4 Monolithic Interactive Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
           {creativeCards.map((card, idx) => {
             const Icon = card.icon;
             const isHovered = hoveredCard === card.id;
@@ -115,25 +115,19 @@ export default function BrandCreativeSection() {
                 <div
                   onMouseEnter={() => setHoveredCard(card.id)}
                   onMouseLeave={() => setHoveredCard(null)}
-                  className={`group relative bg-[var(--surface)] border transition-all duration-300 p-8 sm:p-10 rounded-[2px] flex flex-col justify-between min-h-[380px] h-full ${
+                  className={`group relative bg-[var(--surface)] border transition-all duration-300 p-6 sm:p-7 rounded-2xl flex flex-col justify-between min-h-[300px] h-full ${
                     isHovered ? "border-accent/80 bg-[var(--surface)]" : "border-white/10 hover:border-white/30"
                   }`}
                 >
-                  {/* Precision Corner Brackets */}
-                  <span className="absolute top-0 left-0 size-2.5 border-t border-l border-white/30 group-hover:border-accent transition-colors" />
-                  <span className="absolute top-0 right-0 size-2.5 border-t border-r border-white/30 group-hover:border-accent transition-colors" />
-                  <span className="absolute bottom-0 left-0 size-2.5 border-b border-l border-white/30 group-hover:border-accent transition-colors" />
-                  <span className="absolute bottom-0 right-0 size-2.5 border-b border-r border-white/30 group-hover:border-accent transition-colors" />
-
                   {/* Top Bar: Icon & Index */}
                   <div>
-                    <div className="flex items-center justify-between pb-6 border-b border-white/10">
-                      <div className="flex items-center gap-3">
-                        <div className="size-9 rounded-[2px] bg-white/5 border border-white/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-black transition-all duration-300">
-                          <Icon className="size-4" />
+                    <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                      <div className="flex items-center gap-2.5">
+                        <div className="size-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-black transition-all duration-300">
+                          <Icon className="size-3.5" />
                         </div>
                         <span className="font-parkinsans text-[10px] tracking-[0.2em] text-white/50 uppercase">
-                          DISCIPLINE · {card.num}
+                          DISCIPLINE
                         </span>
                       </div>
                       <span className="font-parkinsans text-[10px] tracking-[0.2em] text-white/30">
@@ -142,14 +136,14 @@ export default function BrandCreativeSection() {
                     </div>
 
                     {/* Card Body */}
-                    <div className="flex flex-col gap-3 my-6">
+                    <div className="flex flex-col gap-2.5 my-5">
                       <span className="font-artific text-[9px] tracking-[0.2em] text-accent uppercase font-medium">
                         {card.subtitle}
                       </span>
-                      <h3 className="font-parkinsans text-2xl sm:text-3xl font-semibold tracking-tight uppercase text-white group-hover:text-white transition-colors">
+                      <h3 className="font-parkinsans text-lg sm:text-xl font-semibold tracking-tight uppercase text-white group-hover:text-white transition-colors">
                         {card.title}
                       </h3>
-                      <p className="font-artific text-sm text-white/70 leading-relaxed">
+                      <p className="font-artific text-xs sm:text-sm text-white/70 leading-relaxed">
                         {card.description}
                       </p>
                     </div>

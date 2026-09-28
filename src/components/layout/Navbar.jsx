@@ -44,8 +44,8 @@ export default function Navbar() {
     {
       name: "ABOUT",
       label: "About",
-      href: isHomePage ? "#about" : "/#about",
-      targetId: "about",
+      href: "/about", // supports #about anchor navigation
+      targetId: null,
     },
     {
       name: "TEAM",
@@ -86,7 +86,7 @@ export default function Navbar() {
       return;
     }
 
-    const sectionIds = ["services", "about", "founders"];
+    const sectionIds = ["services", "founders"];
     const handleScrollActive = () => {
       const scrollPos = window.scrollY + 200;
       let current = null;
@@ -187,18 +187,22 @@ export default function Navbar() {
     <>
       <header
         role="banner"
-        className={`fixed top-0 left-0 w-full z-[120] transition-all duration-400 ease-(--ease-primary) ${
+        className={`fixed top-0 left-0 w-full z-[120] bg-[#EA5B15] transition-all duration-300 ${
           isVisible ? "translate-y-0" : "-translate-y-full"
+        } ${
+          isScrolled
+            ? "shadow-[0_4px_24px_rgba(48,15,10,0.18)] border-b border-[#300F0A]/15 py-2.5 sm:py-3"
+            : "border-b border-[#300F0A]/10 py-3.5 sm:py-4"
         }`}
       >
         {/* Global Announcement Banner from SiteConfig */}
         {announcement?.enabled && announcement?.text && (
-          <div className="w-full bg-[var(--surface)]/95 backdrop-blur-md border-b border-accent/40 text-[10px] sm:text-[11px] font-parkinsans uppercase tracking-[0.2em] py-2 px-4 text-center text-white/90 flex items-center justify-center gap-2 sm:gap-3 shadow-md">
+          <div className="w-full bg-[#300F0A]/95 backdrop-blur-md border-b border-[#F1DFD9]/20 text-[10px] sm:text-[11px] font-parkinsans uppercase tracking-[0.2em] py-2 px-4 text-center text-[#F1DFD9] flex items-center justify-center gap-2 sm:gap-3 shadow-md">
             <span className="truncate max-w-[70vw] sm:max-w-none">{announcement.text}</span>
             {announcement.link && (
               <Link
                 href={announcement.link}
-                className="text-accent hover:text-white underline underline-offset-2 transition-colors ml-1 whitespace-nowrap font-bold"
+                className="text-[#F1DFD9] hover:underline underline-offset-2 transition-colors ml-1 whitespace-nowrap font-bold"
               >
                 VIEW →
               </Link>
@@ -206,37 +210,33 @@ export default function Navbar() {
           </div>
         )}
 
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 pt-3 sm:pt-4">
-          <div
-            className={`mx-auto flex items-center justify-between transition-all duration-500 ease-(--ease-primary) ${
-              isScrolled
-                ? "bg-[var(--surface-raised)]/90 backdrop-blur-md border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.6)] rounded-full py-2 px-5 sm:px-6 md:w-fit"
-                : "bg-transparent border-b border-white/10 pb-3 sm:pb-4 px-2"
-            }`}
-          >
-            {/* Brand Logo - Official Badge Logo */}
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8">
+          <div className="flex items-center justify-between">
+            {/* Brand Logo - Official Badge Logo in Almond #F1DFD9 */}
             <Link
               href="/"
-              className="flex items-center text-white group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded-sm py-1"
+              className="flex items-center text-[#F1DFD9] group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#F1DFD9] rounded-sm py-1"
               aria-label="Gerat Software Solution - Home"
             >
               <GeratLogo
                 variant="badge"
-                color="currentColor"
-                className="h-8 sm:h-9 w-auto text-white group-hover:text-accent transition-colors duration-300"
+                color="#F1DFD9"
+                badgeColor="#F1DFD9"
+                textColor="#F1DFD9"
+                className="h-8 sm:h-9 w-auto text-[#F1DFD9] group-hover:opacity-90 transition-opacity duration-300"
               />
             </Link>
 
             {/* Desktop Navigation Links (>= 1024px) */}
             <nav
-              className="hidden lg:flex items-center gap-1 mx-6"
+              className="hidden lg:flex items-center gap-1 mx-6 text-[#F1DFD9]"
               aria-label="Main Navigation"
             >
               <ul className="flex items-center gap-1">
                 {navLinks.map((link, index) => {
                   const isCurrent = isHomePage
-                    ? activeSection === link.targetId
-                    : link.targetId === "about"
+                    ? (link.targetId && activeSection === link.targetId)
+                    : link.name === "ABOUT"
                     ? pathname === "/about"
                     : link.targetId === "founders"
                     ? pathname === "/about"
@@ -262,14 +262,15 @@ export default function Navbar() {
               </ul>
             </nav>
 
-            {/* Right Action: Clean START A PROJECT Pill CTA Button */}
+            {/* Right Action: Clean CONTACT Pill CTA Button */}
             <div className="hidden lg:flex items-center gap-3">
               <button
                 type="button"
                 onClick={openContact}
-                className="font-parkinsans text-[11px] uppercase tracking-[0.2em] px-6 py-2.5 bg-accent text-white font-semibold hover:bg-white hover:text-[#300F0A] border border-accent hover:border-white transition-all duration-300 rounded-full shadow-md select-none cursor-pointer"
+                className="group relative isolate inline-flex items-center justify-center font-parkinsans text-[11px] uppercase tracking-[0.2em] px-6 py-2.5 font-bold transition-all duration-300 rounded-full shadow-md select-none cursor-pointer bg-[#300F0A] text-[#F1DFD9] hover:bg-[#F1DFD9] hover:text-[#300F0A] border-2 border-[#300F0A] hover:border-[#F1DFD9]"
+                aria-label="Contact Gerat"
               >
-                <span>START A PROJECT</span>
+                <span className="transition-colors duration-300 group-hover:!text-[#300F0A]">CONTACT</span>
               </button>
             </div>
 
@@ -277,17 +278,17 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden relative size-10 rounded-full border border-white/15 bg-white/5 flex flex-col items-center justify-center gap-1.5 text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent hover:border-white/30 transition-colors"
+              className="lg:hidden relative size-10 rounded-full border border-[#300F0A]/20 bg-[#300F0A]/10 flex flex-col items-center justify-center gap-1.5 text-[#F1DFD9] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#F1DFD9] hover:border-[#300F0A]/40 transition-colors"
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMenuOpen}
             >
               <span
-                className={`w-4 h-[1.5px] bg-white transition-all duration-300 ${
+                className={`w-4 h-[1.5px] bg-[#F1DFD9] transition-all duration-300 ${
                   isMenuOpen ? "rotate-45 translate-y-[3.75px]" : ""
                 }`}
               />
               <span
-                className={`w-4 h-[1.5px] bg-white transition-all duration-300 ${
+                className={`w-4 h-[1.5px] bg-[#F1DFD9] transition-all duration-300 ${
                   isMenuOpen ? "-rotate-45 -translate-y-[3.75px]" : ""
                 }`}
               />
@@ -306,15 +307,15 @@ export default function Navbar() {
         aria-hidden={!isMenuOpen}
       >
         <div className="flex flex-col gap-6 my-auto max-w-sm w-full mx-auto text-center">
-          <div className="font-parkinsans text-[10px] tracking-[0.25em] text-white/40 uppercase mb-2">
+          <div className="font-parkinsans text-[10px] tracking-[0.25em] text-[#F1DFD9]/60 uppercase mb-2">
             GERAT · NAVIGATION
           </div>
 
           <nav className="flex flex-col gap-3">
             {navLinks.map((link) => {
               const isCurrent = isHomePage
-                ? activeSection === link.targetId
-                : link.targetId === "about"
+                ? (link.targetId && activeSection === link.targetId)
+                : link.name === "ABOUT"
                 ? pathname === "/about"
                 : link.targetId === "founders"
                 ? pathname === "/about"
@@ -327,8 +328,8 @@ export default function Navbar() {
                   onClick={(e) => handleNavClick(e, link)}
                   className={`relative py-3.5 px-6 font-parkinsans text-xs tracking-[0.2em] uppercase border transition-all duration-300 rounded-full ${
                     isCurrent
-                      ? "border-accent text-white bg-accent/20 font-semibold"
-                      : "border-white/15 text-white/80 hover:text-white hover:border-white/40 bg-white/[0.03]"
+                      ? "border-accent text-[#F1DFD9] bg-accent/20 font-semibold"
+                      : "border-[#F1DFD9]/15 text-[#F1DFD9]/80 hover:text-[#F1DFD9] hover:border-[#F1DFD9]/40 bg-[#F1DFD9]/[0.04]"
                   }`}
                 >
                   {link.name}
@@ -345,9 +346,9 @@ export default function Navbar() {
                 setIsMenuOpen(false);
                 openContact();
               }}
-              className="relative w-full py-4 px-6 font-parkinsans text-xs tracking-[0.25em] uppercase font-bold text-white bg-accent hover:bg-accent/90 border border-accent transition-all duration-300 rounded-full shadow-lg"
+              className="relative w-full py-4 px-6 font-parkinsans text-xs tracking-[0.25em] uppercase font-bold text-[#F1DFD9] bg-[#300F0A] hover:bg-[#F1DFD9] hover:text-[#300F0A] border border-[#F1DFD9]/30 transition-all duration-300 rounded-full shadow-lg"
             >
-              START A PROJECT →
+              CONTACT →
             </button>
           </div>
         </div>

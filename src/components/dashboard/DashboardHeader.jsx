@@ -7,7 +7,7 @@ import ChangePasswordModal from "./ChangePasswordModal";
 
 export default function DashboardHeader({ user, onOpenCommand, onToggleSidebar }) {
   const router = useRouter();
-  const { resolvedTheme, toggleTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const isLight = resolvedTheme === "light";
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -82,35 +82,48 @@ export default function DashboardHeader({ user, onOpenCommand, onToggleSidebar }
 
         {/* Right: User Pill, Theme Switcher & Quick Action Bar */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* 1-Click Theme Switcher Pill */}
-          <button
-            type="button"
-            onClick={toggleTheme}
-            className={`flex items-center gap-1.5 py-1.5 px-2.5 rounded-[2px] font-parkinsans text-[9px] tracking-[0.15em] uppercase font-bold transition-colors ${
-              isLight
-                ? "bg-[#F0F2F5] hover:bg-[#E4E7ED] text-[#0D0F12] border border-[#E2E5EB]"
-                : "bg-white/5 hover:bg-white/10 text-white border border-white/10"
+          {/* Dual Segment Theme Switcher: Touching Light turns Light, touching Dark turns Dark */}
+          <div
+            className={`flex items-center p-0.5 rounded-[3px] border font-parkinsans text-[9px] tracking-[0.1em] font-bold uppercase transition-colors ${
+              isLight ? "bg-[#E5E9F0] border-[#D1D5DB]" : "bg-white/5 border-white/10"
             }`}
-            title={isLight ? "Switch to Dark Mode" : "Switch to Light Mode"}
-            aria-label="Toggle Theme"
+            role="group"
+            aria-label="Theme mode switcher"
           >
-            {isLight ? (
-              <>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="size-3 text-amber-600" strokeWidth="2.5">
-                  <circle cx="12" cy="12" r="5" />
-                  <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-                </svg>
-                <span className="hidden md:inline">LIGHT</span>
-              </>
-            ) : (
-              <>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="size-3 text-amber-400" strokeWidth="2.5">
-                  <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
-                </svg>
-                <span className="hidden md:inline">DARK</span>
-              </>
-            )}
-          </button>
+            <button
+              type="button"
+              onClick={() => setTheme("light")}
+              className={`flex items-center gap-1 px-2.5 py-1 rounded-[2px] transition-all cursor-pointer ${
+                isLight
+                  ? "bg-white text-[#0D0F12] shadow-sm font-extrabold"
+                  : "text-white/40 hover:text-white"
+              }`}
+              title="Activate Light Mode"
+              aria-pressed={isLight}
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="size-3 text-amber-600" strokeWidth="2.5">
+                <circle cx="12" cy="12" r="5" />
+                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+              </svg>
+              <span>LIGHT</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setTheme("dark")}
+              className={`flex items-center gap-1 px-2.5 py-1 rounded-[2px] transition-all cursor-pointer ${
+                !isLight
+                  ? "bg-[#222222] text-white shadow-sm font-extrabold border border-white/10"
+                  : "text-[#64748B] hover:text-black"
+              }`}
+              title="Activate Dark Mode"
+              aria-pressed={!isLight}
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="size-3 text-amber-400" strokeWidth="2.5">
+                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+              </svg>
+              <span>DARK</span>
+            </button>
+          </div>
 
           {/* Quick Add Action — Filtered Strictly by Role */}
           <div className="relative">
@@ -177,60 +190,6 @@ export default function DashboardHeader({ user, onOpenCommand, onToggleSidebar }
                   </>
                 )}
 
-                {/* Actions for Editor */}
-                {(role === "EDITOR" || role === "TECHNICAL_EDITOR" || role === "CREATIVE_EDITOR") && (
-                  <>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        router.push("/dashboard/insights/new");
-                        setIsMenuOpen(false);
-                      }}
-                      className={`w-full text-left px-3.5 py-2.5 font-bold text-accent transition-colors ${
-                        isLight ? "hover:bg-black/5" : "hover:bg-white/5"
-                      }`}
-                    >
-                      + Author New Article
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        router.push("/dashboard/portfolio/new");
-                        setIsMenuOpen(false);
-                      }}
-                      className={`w-full text-left px-3.5 py-2.5 font-bold text-accent transition-colors ${
-                        isLight ? "hover:bg-black/5" : "hover:bg-white/5"
-                      }`}
-                    >
-                      + Create Case Study
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        router.push("/dashboard/insights");
-                        setIsMenuOpen(false);
-                      }}
-                      className={`w-full text-left px-3.5 py-2.5 transition-colors ${
-                        isLight ? "text-[#0D0F12] hover:bg-black/5" : "text-white/80 hover:text-white hover:bg-white/5"
-                      }`}
-                    >
-                      Manage Articles
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        router.push("/dashboard/portfolio");
-                        setIsMenuOpen(false);
-                      }}
-                      className={`w-full text-left px-3.5 py-2.5 transition-colors ${
-                        isLight ? "text-[#0D0F12] hover:bg-black/5" : "text-white/80 hover:text-white hover:bg-white/5"
-                      }`}
-                    >
-                      Manage Showcase
-                    </button>
-                  </>
-                )}
-
                 {/* Actions for Super Admin */}
                 {role === "SUPER_ADMIN" && (
                   <>
@@ -249,26 +208,26 @@ export default function DashboardHeader({ user, onOpenCommand, onToggleSidebar }
                     <button
                       type="button"
                       onClick={() => {
-                        router.push("/dashboard/insights/new");
+                        router.push("/dashboard/team");
                         setIsMenuOpen(false);
                       }}
-                      className={`w-full text-left px-3.5 py-2.5 text-accent font-bold transition-colors ${
-                        isLight ? "hover:bg-black/5" : "hover:bg-white/5"
+                      className={`w-full text-left px-3.5 py-2.5 transition-colors ${
+                        isLight ? "text-[#0D0F12] hover:bg-black/5" : "text-white/80 hover:text-white hover:bg-white/5"
                       }`}
                     >
-                      + Author New Article
+                      Manage Team Roster
                     </button>
                     <button
                       type="button"
                       onClick={() => {
-                        router.push("/dashboard/portfolio/new");
+                        router.push("/dashboard/services");
                         setIsMenuOpen(false);
                       }}
-                      className={`w-full text-left px-3.5 py-2.5 text-accent font-bold transition-colors ${
-                        isLight ? "hover:bg-black/5" : "hover:bg-white/5"
+                      className={`w-full text-left px-3.5 py-2.5 transition-colors ${
+                        isLight ? "text-[#0D0F12] hover:bg-black/5" : "text-white/80 hover:text-white hover:bg-white/5"
                       }`}
                     >
-                      + Create Case Study
+                      Manage Practice Pillars
                     </button>
                     <button
                       type="button"
@@ -312,7 +271,7 @@ export default function DashboardHeader({ user, onOpenCommand, onToggleSidebar }
                   {role}
                 </span>
               </div>
-              <span className="text-[8px] text-white/40 hidden sm:inline">▼</span>
+              <span className={`text-[8px] hidden sm:inline ${isLight ? "text-[#64748B]" : "text-white/40"}`}>▼</span>
             </button>
 
             {/* Profile Dropdown Menu */}
@@ -320,8 +279,8 @@ export default function DashboardHeader({ user, onOpenCommand, onToggleSidebar }
               <div
                 className={`absolute right-0 mt-2 w-56 rounded-[3px] shadow-2xl py-1 z-50 font-parkinsans text-[10px] tracking-wider uppercase divide-y ${
                   isLight
-                    ? "bg-white border border-[#E2E5EB] divide-black/5"
-                    : "bg-[var(--surface)] border border-white/15 divide-white/5"
+                    ? "bg-white border border-[#CBD5E1] divide-[#E2E8F0] shadow-xl text-[#0D0F12]"
+                    : "bg-[var(--surface)] border border-white/15 divide-white/5 text-white"
                 }`}
                 onMouseLeave={() => setIsUserMenuOpen(false)}
               >
@@ -329,7 +288,7 @@ export default function DashboardHeader({ user, onOpenCommand, onToggleSidebar }
                   <div className={`font-artific font-bold text-xs ${isLight ? "text-[#0D0F12]" : "text-white"}`}>
                     {user?.name || "Operator"}
                   </div>
-                  <div className={`text-[9px] lowercase tracking-normal truncate ${isLight ? "text-[#555D6B]" : "text-white/40"}`}>
+                  <div className={`text-[9px] lowercase tracking-normal truncate ${isLight ? "text-[#64748B]" : "text-white/40"}`}>
                     {user?.email || "operator@gerat.com"}
                   </div>
                   <div className="font-parkinsans text-[8px] tracking-widest text-accent font-bold mt-1">
@@ -344,12 +303,12 @@ export default function DashboardHeader({ user, onOpenCommand, onToggleSidebar }
                       setIsUserMenuOpen(false);
                       setIsChangePassOpen(true);
                     }}
-                    className={`w-full text-left px-3.5 py-2 flex items-center gap-2 transition-colors ${
-                      isLight ? "text-[#0D0F12] hover:bg-black/5" : "text-white/80 hover:text-white hover:bg-white/5"
+                    className={`w-full text-left px-3.5 py-2 flex items-center gap-2 transition-colors cursor-pointer ${
+                      isLight ? "text-[#0D0F12] hover:bg-slate-100 font-semibold" : "text-white/80 hover:text-white hover:bg-white/5"
                     }`}
                   >
                     <span>🔑</span>
-                    <span>Change My Passphrase</span>
+                    <span className={isLight ? "text-[#0D0F12] font-semibold" : "text-white"}>Change Password</span>
                   </button>
                 </div>
 
@@ -358,7 +317,9 @@ export default function DashboardHeader({ user, onOpenCommand, onToggleSidebar }
                     type="button"
                     onClick={handleLogout}
                     disabled={isLoggingOut}
-                    className="w-full text-left px-3.5 py-2 text-red-400 hover:text-red-300 hover:bg-red-500/10 flex items-center gap-2 transition-colors cursor-pointer"
+                    className={`w-full text-left px-3.5 py-2 flex items-center gap-2 transition-colors cursor-pointer font-semibold ${
+                      isLight ? "text-red-600 hover:text-red-800 hover:bg-red-50" : "text-red-400 hover:text-red-300 hover:bg-red-500/10"
+                    }`}
                   >
                     <span>🚪</span>
                     <span>{isLoggingOut ? "Logging out..." : "End Session / Logout"}</span>

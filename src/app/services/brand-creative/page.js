@@ -336,35 +336,35 @@ export default function BrandCreativePage() {
       {/* Hero Section */}
       <section className="relative w-full max-w-[1440px] mx-auto pt-36 sm:pt-44 pb-20 px-4 sm:px-6 md:px-8 lg:px-10 border-b border-[var(--border-subtle)]">
         <div className="flex flex-col gap-6 max-w-4xl">
-          <SectionLabel index="04" label="BRAND & CREATIVE" />
+          <SectionLabel label="BRAND & CREATIVE" />
 
           <div className="space-y-2">
             <SplitText
               text="GIVE YOUR BUSINESS"
               as="h1"
-              className="font-parkinsans text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight uppercase leading-[0.92]"
+              className="font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-semibold tracking-tight uppercase leading-[1.04]"
             />
             <SplitText
               text="SOMETHING PEOPLE"
               as="div"
-              className="font-parkinsans text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight uppercase leading-[0.92]"
+              className="font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-semibold tracking-tight uppercase leading-[1.04]"
             />
             <SplitText
               text="CAN RECOGNIZE."
               as="div"
               wordClassName="text-accent"
-              className="font-parkinsans text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight uppercase leading-[0.92]"
+              className="font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-semibold tracking-tight uppercase leading-[1.04]"
             />
           </div>
 
           <FadeUp delay={0.3} y={16}>
-            <p className="font-artific text-base sm:text-lg text-[var(--text-secondary)] max-w-2xl leading-relaxed">
+            <p className="font-artific text-sm sm:text-base text-[var(--text-secondary)] max-w-xl leading-relaxed">
               We create brand identities and visual systems that make businesses clearer, more consistent, and easier to remember across every medium they touch.
             </p>
           </FadeUp>
 
           <FadeUp delay={0.4} y={16}>
-            <div className="flex flex-wrap items-center gap-4 pt-4">
+            <div className="flex flex-wrap items-center gap-4 pt-2">
               <button
                 type="button"
                 onClick={() =>
@@ -373,43 +373,31 @@ export default function BrandCreativePage() {
                     subOption: "LOGO & BRAND IDENTITY",
                   })
                 }
-                className="inline-flex items-center font-parkinsans text-[11px] uppercase tracking-[0.2em] px-8 py-4 bg-accent text-white font-bold hover:bg-[var(--text-primary)] hover:text-[var(--bg)] transition-all rounded-[2px]"
+                className="inline-flex items-center font-parkinsans text-xs uppercase tracking-[0.18em] px-6 sm:px-7 py-3 bg-accent text-white font-semibold hover:bg-accent/90 transition-all rounded-full"
               >
                 <span>BUILD YOUR BRAND</span>
                 <span className="ml-2">→</span>
               </button>
-
-              <Link
-                href="/portfolio?category=BRAND+%26+IDENTITY"
-                className="inline-flex items-center font-parkinsans text-[11px] uppercase tracking-[0.2em] px-8 py-4 border border-[var(--border-medium)] bg-transparent text-[var(--text-primary)] hover:border-[var(--text-primary)] transition-all rounded-[2px]"
-              >
-                <span>VIEW WORK</span>
-              </Link>
             </div>
           </FadeUp>
-        </div>
-
-        <div className="mt-16 pt-4 border-t border-[var(--border-subtle)] flex items-center justify-between font-parkinsans text-[10px] tracking-[0.2em] text-[var(--text-dim)] uppercase">
-          <span>SERVICES · BRAND & CREATIVE</span>
-          <span>EXPLORE TRANSFORMATION ↓</span>
         </div>
       </section>
 
       {/* 6 Core Disciplines Section */}
       <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-14 sm:py-18 md:py-20 border-b border-[var(--border-subtle)]">
-        <div className="flex flex-col gap-4 mb-10 sm:mb-12">
-          <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase font-bold">
+        <div className="flex flex-col gap-3 mb-10 sm:mb-12">
+          <span className="font-parkinsans text-xs tracking-[0.25em] text-accent uppercase font-semibold">
             DISCIPLINE CATALOG
           </span>
-          <h2 className="font-parkinsans text-3xl sm:text-5xl font-semibold tracking-tight uppercase">
+          <h2 className="font-parkinsans text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight uppercase leading-[1.08]">
             THE CREATIVE SERVICE FAMILY.
           </h2>
-          <p className="font-artific text-sm sm:text-base text-[var(--text-secondary)] max-w-2xl">
+          <p className="font-artific text-xs sm:text-sm text-[var(--text-secondary)] max-w-xl">
             Thoughtful design capabilities engineered to give your business credibility, presence, and consistency.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {brandCreativeFamily.map((item, idx) => {
             const presetMap = {
               "brand-strategy": { discipline: "brand", subOption: "BRAND STRATEGY" },
@@ -423,10 +411,10 @@ export default function BrandCreativePage() {
 
             return (
               <FadeUp key={item.id} delay={0.08 * idx} y={24}>
-                <div className="group relative bg-[var(--surface)] border border-[var(--border-subtle)] hover:border-accent/80 p-8 rounded-[2px] flex flex-col justify-between min-h-[420px] transition-all duration-300 h-full">
+                <div className="group relative bg-[var(--surface)] border border-[var(--border-subtle)] hover:border-accent/80 p-6 sm:p-7 rounded-2xl flex flex-col justify-between min-h-[320px] transition-all duration-300 h-full">
                   <div>
-                    <div className="flex items-center justify-between pb-4 border-b border-[var(--border-subtle)]">
-                      <span className="font-parkinsans text-[10px] tracking-[0.2em] text-accent font-bold">
+                    <div className="flex items-center justify-between pb-3.5 border-b border-[var(--border-subtle)]">
+                      <span className="font-parkinsans text-xs tracking-[0.2em] text-accent font-semibold">
                         DISCIPLINE
                       </span>
                       <span className="font-parkinsans text-[9px] tracking-[0.2em] text-[var(--text-dim)] uppercase">
@@ -434,7 +422,7 @@ export default function BrandCreativePage() {
                       </span>
                     </div>
 
-                    <h3 className="font-parkinsans text-2xl font-semibold tracking-tight uppercase text-[var(--text-primary)] mt-5 transition-colors">
+                    <h3 className="font-parkinsans text-lg sm:text-xl font-semibold tracking-tight uppercase text-[var(--text-primary)] mt-4 transition-colors">
                       {item.title}
                     </h3>
 
@@ -443,23 +431,24 @@ export default function BrandCreativePage() {
                     </p>
                   </div>
 
-                  <div className="pt-6 border-t border-[var(--border-subtle)] mt-6">
-                    <span className="font-parkinsans text-[9px] tracking-[0.2em] text-[var(--text-dim)] uppercase block mb-3 font-semibold">
+                  <div className="pt-4 border-t border-[var(--border-subtle)] mt-5">
+                    <span className="font-parkinsans text-[10px] tracking-[0.2em] text-[var(--text-dim)] uppercase block mb-2.5 font-semibold">
                       CORE DELIVERABLES
                     </span>
-                    <ul className="space-y-1.5 font-parkinsans text-[10px] tracking-[0.05em] text-[var(--text-secondary)]">
+                    <ul className="space-y-1.5 font-artific text-xs text-[var(--text-secondary)]">
                       {item.deliverables.map((del) => (
-                        <li key={del} className="hover:text-[var(--text-primary)] transition-colors">
-                          {del}
+                        <li key={del} className="hover:text-[var(--text-primary)] transition-colors flex items-center gap-2">
+                          <span className="size-1 rounded-full bg-accent/80 shrink-0" />
+                          <span>{del}</span>
                         </li>
                       ))}
                     </ul>
 
-                    <div className="pt-6 mt-6 border-t border-[var(--border-subtle)] flex items-center justify-between">
+                    <div className="pt-4 mt-5 border-t border-[var(--border-subtle)] flex items-center justify-between">
                       {item.id === "personal-branding" ? (
                         <Link
                           href="/services/personal-branding"
-                          className="font-parkinsans text-[10px] tracking-[0.2em] text-accent hover:text-[var(--text-primary)] uppercase font-bold transition-colors inline-flex items-center gap-1"
+                          className="font-parkinsans text-[11px] tracking-[0.18em] text-accent hover:text-[var(--text-primary)] uppercase font-semibold transition-colors inline-flex items-center gap-1"
                         >
                           EXPLORE PERSONAL BRANDING →
                         </Link>
@@ -467,7 +456,7 @@ export default function BrandCreativePage() {
                         <button
                           type="button"
                           onClick={() => openContact(preset)}
-                          className="font-parkinsans text-[10px] tracking-[0.2em] text-accent hover:text-[var(--text-primary)] uppercase font-bold transition-colors inline-flex items-center gap-1"
+                          className="font-parkinsans text-[11px] tracking-[0.18em] text-accent hover:text-[var(--text-primary)] uppercase font-semibold transition-colors inline-flex items-center gap-1"
                         >
                           {item.cta} →
                         </button>
@@ -485,19 +474,19 @@ export default function BrandCreativePage() {
           BRAND TRANSFORMATION STORY ENGINE (REPLACES RIGID PACKAGE SECTION)
           Interactive narrative showing how we take a company from noise to authority
           ===================================================================== */}
-      <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-24 sm:py-32 border-b border-[var(--border-subtle)]">
-        <div className="flex flex-col gap-4 mb-16">
-          <SectionLabel index="03" label="THE BRAND TRANSFORMATION" />
-          <h2 className="font-parkinsans text-3xl sm:text-5xl lg:text-6xl font-semibold tracking-tight uppercase leading-[0.98]">
+      <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-20 sm:py-28 border-b border-[var(--border-subtle)]">
+        <div className="flex flex-col gap-3 mb-12 sm:mb-14">
+          <SectionLabel label="THE BRAND TRANSFORMATION" />
+          <h2 className="font-parkinsans text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight uppercase leading-[1.08]">
             FROM NOISE TO <span className="text-accent">AUTHORITY.</span>
           </h2>
-          <p className="font-artific text-sm sm:text-base text-[var(--text-secondary)] max-w-2xl leading-relaxed">
+          <p className="font-artific text-xs sm:text-sm text-[var(--text-secondary)] max-w-xl leading-relaxed">
             How we systematically transform ambitious enterprises from overlooked market noise into category-defining, recognized industry leaders.
           </p>
         </div>
 
         {/* Milestone Stage Switcher Rail */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
           {TRANSFORMATION_STAGES.map((stage, idx) => {
             const isActive = activeStoryIdx === idx;
             return (
@@ -505,26 +494,26 @@ export default function BrandCreativePage() {
                 key={stage.id}
                 type="button"
                 onClick={() => setActiveStoryIdx(idx)}
-                className={`relative text-left p-4 sm:p-5 rounded-[2px] border transition-all duration-300 min-h-[48px] ${
+                className={`relative text-left p-4 rounded-xl border transition-all duration-300 min-h-[48px] ${
                   isActive
                     ? "bg-[var(--surface-2)] border-accent shadow-sm"
                     : "bg-[var(--surface)] border-[var(--border-subtle)] hover:border-[var(--border-medium)]"
                 }`}
               >
                 {isActive && (
-                  <span className="absolute top-0 left-0 right-0 h-[2px] bg-accent" />
+                  <span className="absolute top-0 left-0 right-0 h-[2px] bg-accent rounded-t-xl" />
                 )}
-                <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center justify-between mb-1.5">
                   <span
-                    className={`font-parkinsans text-[10px] tracking-[0.2em] font-bold uppercase ${
+                    className={`font-parkinsans text-[10px] tracking-[0.2em] font-semibold uppercase ${
                       isActive ? "text-accent" : "text-[var(--text-dim)]"
                     }`}
                   >
-                    STAGE {stage.num}
+                    STAGE
                   </span>
                   {isActive && <Flame className="size-3.5 text-accent" />}
                 </div>
-                <div className="font-parkinsans text-sm sm:text-base font-semibold tracking-tight uppercase text-[var(--text-primary)]">
+                <div className="font-parkinsans text-xs sm:text-sm font-semibold tracking-tight uppercase text-[var(--text-primary)]">
                   {stage.title}
                 </div>
               </button>
@@ -540,25 +529,25 @@ export default function BrandCreativePage() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.3 }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch bg-[var(--surface)] border border-[var(--border-subtle)] p-6 sm:p-8 lg:p-10 rounded-[2px]"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch bg-[var(--surface)] border border-[var(--border-subtle)] p-6 sm:p-8 rounded-2xl"
           >
             {/* Left Column: Narrative & Transformation Data */}
-            <div className="lg:col-span-6 flex flex-col justify-between space-y-6">
+            <div className="lg:col-span-6 flex flex-col justify-between space-y-5">
               <div>
-                <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase font-bold block mb-2">
+                <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase font-semibold block mb-2">
                   {activeStory.tagline}
                 </span>
-                <h3 className="font-parkinsans text-2xl sm:text-4xl font-semibold tracking-tight uppercase text-[var(--text-primary)] leading-tight">
+                <h3 className="font-parkinsans text-xl sm:text-2xl font-semibold tracking-tight uppercase text-[var(--text-primary)] leading-tight">
                   {activeStory.title}
                 </h3>
-                <p className="font-artific text-sm text-[var(--text-secondary)] leading-relaxed mt-4">
+                <p className="font-artific text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed mt-3">
                   {activeStory.summary}
                 </p>
 
                 {/* Before vs After Contrast Engine */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6 pt-6 border-t border-[var(--border-subtle)]">
-                  <div className="p-4 bg-[var(--bg-subtle)] border border-[var(--border-subtle)] rounded-[2px]">
-                    <span className="font-parkinsans text-[9px] tracking-[0.2em] text-[var(--text-dim)] uppercase block mb-1.5 font-bold">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mt-5 pt-5 border-t border-[var(--border-subtle)]">
+                  <div className="p-3.5 bg-[var(--bg-subtle)] border border-[var(--border-subtle)] rounded-xl">
+                    <span className="font-parkinsans text-[9px] tracking-[0.2em] text-[var(--text-dim)] uppercase block mb-1 font-semibold">
                       BEFORE TRANSFORMATION
                     </span>
                     <p className="font-artific text-xs text-[var(--text-secondary)] leading-relaxed">
@@ -566,8 +555,8 @@ export default function BrandCreativePage() {
                     </p>
                   </div>
 
-                  <div className="p-4 bg-[var(--surface-2)] border border-accent/40 rounded-[2px]">
-                    <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase block mb-1.5 font-bold">
+                  <div className="p-3.5 bg-[var(--surface-2)] border border-accent/40 rounded-xl">
+                    <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase block mb-1 font-semibold">
                       AFTER TRANSFORMATION
                     </span>
                     <p className="font-artific text-xs text-[var(--text-primary)] leading-relaxed font-medium">
@@ -577,15 +566,15 @@ export default function BrandCreativePage() {
                 </div>
 
                 {/* Deliverables Checklist */}
-                <div className="mt-6 pt-6 border-t border-[var(--border-subtle)]">
-                  <span className="font-parkinsans text-[9px] tracking-[0.2em] text-[var(--text-dim)] uppercase block mb-3 font-semibold">
+                <div className="mt-5 pt-5 border-t border-[var(--border-subtle)]">
+                  <span className="font-parkinsans text-[10px] tracking-[0.2em] text-[var(--text-dim)] uppercase block mb-2.5 font-semibold">
                     KEY STAGE DELIVERABLES
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {activeStory.deliverables.map((del) => (
                       <div key={del} className="flex items-start gap-2">
                         <CheckCircle2 className="size-3.5 text-accent shrink-0 mt-0.5" />
-                        <span className="font-parkinsans text-xs text-[var(--text-secondary)] leading-tight">
+                        <span className="font-artific text-xs text-[var(--text-secondary)] leading-tight">
                           {del}
                         </span>
                       </div>
@@ -595,10 +584,10 @@ export default function BrandCreativePage() {
               </div>
 
               {/* Strategic Takeaway & Stage Action */}
-              <div className="pt-6 border-t border-[var(--border-subtle)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="pt-5 border-t border-[var(--border-subtle)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div className="flex items-center gap-2.5">
                   <Sparkles className="size-4 text-accent shrink-0" />
-                  <span className="font-parkinsans text-xs text-[var(--text-primary)] font-medium">
+                  <span className="font-artific text-xs text-[var(--text-primary)] font-medium">
                     {activeStory.impact}
                   </span>
                 </div>
@@ -606,7 +595,7 @@ export default function BrandCreativePage() {
                 <button
                   type="button"
                   onClick={() => openContact(activeStory.ctaPreset)}
-                  className="font-parkinsans text-[10px] tracking-[0.2em] uppercase font-bold px-5 py-2.5 bg-accent text-white hover:bg-[var(--text-primary)] hover:text-[var(--bg)] transition-all rounded-[2px] shrink-0"
+                  className="font-parkinsans text-xs tracking-[0.18em] uppercase font-semibold px-5 py-2.5 bg-accent text-white hover:bg-accent/90 transition-all rounded-full shrink-0"
                 >
                   START STAGE {activeStory.num} →
                 </button>
@@ -614,8 +603,8 @@ export default function BrandCreativePage() {
             </div>
 
             {/* Right Column: Bespoke Interactive SVG Schematic */}
-            <div className="lg:col-span-6 bg-[var(--bg-subtle)] border border-[var(--border-subtle)] rounded-[2px] flex items-center justify-center p-4 relative overflow-hidden">
-              <span className="absolute top-4 right-4 font-parkinsans text-[9px] tracking-[0.2em] text-[var(--text-dim)] uppercase font-bold">
+            <div className="lg:col-span-6 bg-[var(--bg-subtle)] border border-[var(--border-subtle)] rounded-xl flex items-center justify-center p-4 relative overflow-hidden">
+              <span className="absolute top-4 right-4 font-parkinsans text-[9px] tracking-[0.2em] text-[var(--text-dim)] uppercase font-semibold">
                 SCHEMATIC · STAGE {activeStory.num}
               </span>
               {activeStoryIdx === 0 && <PositioningRadarSchematic />}
@@ -628,38 +617,38 @@ export default function BrandCreativePage() {
       </section>
 
       {/* FAQ Accordion Section */}
-      <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-24 sm:py-32">
+      <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-20 sm:py-28">
         <div className="max-w-3xl mx-auto flex flex-col gap-8">
           <div className="text-center flex flex-col items-center gap-3">
-            <span className="font-parkinsans text-[10px] tracking-[0.25em] text-accent uppercase font-bold">
+            <span className="font-parkinsans text-xs tracking-[0.25em] text-accent uppercase font-semibold">
               OPERATIONAL CLARITY
             </span>
-            <h2 className="font-parkinsans text-3xl sm:text-5xl font-semibold tracking-tight uppercase">
+            <h2 className="font-parkinsans text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight uppercase leading-[1.08]">
               FREQUENTLY ASKED QUESTIONS.
             </h2>
           </div>
 
-          <div className="space-y-4 pt-6">
+          <div className="space-y-3.5 pt-4">
             {FAQ_ITEMS.map((faq, idx) => {
               const isOpen = activeFaq === idx;
               return (
                 <div
                   key={faq.q}
-                  className="border border-[var(--border-subtle)] bg-[var(--surface)] p-6 rounded-[2px] transition-colors"
+                  className="border border-[var(--border-subtle)] bg-[var(--surface)] p-5 sm:p-6 rounded-2xl transition-colors"
                 >
                   <button
                     type="button"
                     onClick={() => setActiveFaq(isOpen ? null : idx)}
-                    className="w-full flex items-center justify-between text-left font-parkinsans text-lg font-medium uppercase text-[var(--text-primary)] hover:text-accent transition-colors"
+                    className="w-full flex items-center justify-between text-left font-parkinsans text-sm sm:text-base font-semibold uppercase text-[var(--text-primary)] hover:text-accent transition-colors"
                   >
                     <span>{faq.q}</span>
-                    <span className="font-parkinsans text-xs text-accent ml-4 font-bold">
+                    <span className="font-parkinsans text-xs text-accent ml-4 font-semibold">
                       {isOpen ? "−" : "+"}
                     </span>
                   </button>
 
                   {isOpen && (
-                    <p className="font-artific text-sm text-[var(--text-secondary)] leading-relaxed mt-4 pt-4 border-t border-[var(--border-subtle)]">
+                    <p className="font-artific text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed mt-3 pt-3 border-t border-[var(--border-subtle)]">
                       {faq.a}
                     </p>
                   )}

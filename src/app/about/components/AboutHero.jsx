@@ -1,86 +1,88 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
+import Image from "next/image";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import FadeUp from "@/components/motion/FadeUp";
-import SplitText from "@/components/motion/SplitText";
-import SectionLabel from "@/components/common/SectionLabel";
-import { useNav } from "@/context/NavContext";
 
 export default function AboutHero() {
-  const { openContact } = useNav();
+  const containerRef = useRef(null);
+  const prefersReducedMotion = useReducedMotion();
 
-  const scrollToFounders = (e) => {
-    e.preventDefault();
-    const el = document.getElementById("founders");
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  // Subtle scroll parallax for architectural depth
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const bgY = useTransform(scrollYProgress, [0, 1], prefersReducedMotion ? [0, 0] : [0, 50]);
+  const bgScale = useTransform(scrollYProgress, [0, 1], prefersReducedMotion ? [1, 1] : [1.02, 1.06]);
 
   return (
     <section
+      ref={containerRef}
       aria-label="About Hero"
-      className="relative w-full pt-36 sm:pt-44 md:pt-48 pb-20 sm:pb-28 border-b border-white/10 overflow-hidden"
+      data-dark-section="true"
+      className="relative w-full min-h-[92vh] flex flex-col justify-between pt-32 sm:pt-36 pb-10 sm:pb-14 border-b border-white/10 overflow-hidden bg-[#140604]"
+      style={{ backgroundColor: "#140604" }}
     >
-      {/* Subtle Background Glow */}
-      <div
-        aria-hidden="true"
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-accent/5 rounded-full blur-[160px] pointer-events-none"
-      />
+      {/* =========================================================================
+          BACKGROUND: High-Fidelity Architectural Bridge (Crisp, Vibrant, Unblurred)
+         ========================================================================= */}
+      <motion.div
+        style={{ y: bgY, scale: bgScale }}
+        className="absolute inset-0 z-0 pointer-events-none"
+      >
+        <Image
+          src="/image/about/background.png"
+          alt="Gerät Architectural Bridge and Digital Infrastructure"
+          fill
+          priority
+          unoptimized
+          sizes="100vw"
+          className="object-cover object-center select-none"
+        />
 
-      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
-        <div className="max-w-4xl flex flex-col gap-6 sm:gap-8">
-          <SectionLabel label="ABOUT GERAT" />
+        {/* Focused radial contrast mask: keeps architectural beams crisp on the perimeter while focusing contrast for center typography */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_70%_at_50%_48%,rgba(20,6,4,0.48)_0%,rgba(20,6,4,0.85)_100%)]" />
 
-          <div className="space-y-3">
-            <SplitText
-              text="A NEW COMPANY."
-              as="h1"
-              delay={0.1}
-              stagger={0.035}
-              className="font-parkinsans text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight uppercase leading-[0.94] text-white"
-            />
-            <SplitText
-              text="A CLEAR DIRECTION."
-              as="div"
-              delay={0.25}
-              stagger={0.035}
-              wordClassName="text-accent"
-              className="font-parkinsans text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight uppercase leading-[0.94]"
-            />
-          </div>
+        {/* Top subtle vignette from header */}
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#140604]/90 to-transparent" />
 
-          <FadeUp delay={0.35} y={16}>
-            <p className="font-artific text-lg sm:text-xl md:text-2xl text-white/80 max-w-2xl leading-relaxed">
-              Gerat is a software and IT solutions company building useful digital products, intelligent tools, business systems, and brand identities for growing businesses.
-            </p>
-          </FadeUp>
+        {/* Bottom gentle feather into next section (compact to avoid swallowing text) */}
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[var(--bg)] via-[var(--bg)]/50 to-transparent" />
+      </motion.div>
 
-          <FadeUp delay={0.45} y={16}>
-            <div className="flex flex-wrap items-center gap-4 pt-4">
-              <a
-                href="#founders"
-                onClick={scrollToFounders}
-                className="group relative isolate inline-flex items-center gap-3 font-parkinsans text-xs sm:text-sm uppercase tracking-[0.2em] text-white px-7 py-4 bg-accent hover:bg-accent/90 transition-all duration-300 rounded-[2px] font-semibold cursor-pointer shadow-lg"
-              >
-                <span>MEET THE FOUNDERS</span>
-                <span className="transition-transform duration-300 group-hover:translate-y-0.5">
-                  ↓
-                </span>
-              </a>
-
-              <button
-                type="button"
-                onClick={() => openContact({ discipline: "general", subOption: "ABOUT" })}
-                className="group inline-flex items-center gap-3 font-parkinsans text-xs sm:text-sm uppercase tracking-[0.2em] text-white/80 hover:text-white px-7 py-4 border border-white/20 hover:border-accent hover:bg-accent/10 transition-all duration-300 rounded-[2px] cursor-pointer"
-              >
-                <span>START A CONVERSATION</span>
-                <span className="text-accent transition-transform duration-300 group-hover:translate-x-1">
-                  →
-                </span>
-              </button>
+      {/* =========================================================================
+          CENTERED HERO TYPOGRAPHY: Maximum Impact & Razor-Sharp Visibility
+         ========================================================================= */}
+      <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 flex flex-col items-center justify-center text-center my-auto py-12">
+        <div className="flex flex-col items-center gap-5 sm:gap-7">
+          {/* Big Welcome Statement */}
+          <FadeUp delay={0.08} y={20}>
+            <div
+              className="font-parkinsans text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[92px] font-black uppercase tracking-tight leading-[0.98] drop-shadow-[0_6px_36px_rgba(0,0,0,0.9)]"
+              style={{ color: "#F1DFD9" }}
+            >
+              WELCOME TO GERÄT
             </div>
           </FadeUp>
+
+          {/* Headline: We build the bridge. You cross it. */}
+          <div className="space-y-1.5 sm:space-y-2">
+            <div
+              className="font-parkinsans text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight uppercase leading-[1.08] drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]"
+              style={{ color: "#FFFFFF" }}
+            >
+              WE BUILD THE BRIDGE.
+            </div>
+            <div
+              className="font-parkinsans text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight uppercase leading-[1.08] drop-shadow-[0_0_35px_rgba(234,91,21,0.65)]"
+              style={{ color: "#EA5B15" }}
+            >
+              YOU CROSS IT.
+            </div>
+          </div>
         </div>
       </div>
     </section>

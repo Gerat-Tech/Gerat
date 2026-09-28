@@ -5,8 +5,6 @@ import { useRouter } from "next/navigation";
 
 const ALL_ACTIONS = [
   { id: "inquiries", title: "Go to Inquiries Pipeline", section: "Navigation", shortcut: "G I", href: "/dashboard/inquiries" },
-  { id: "insights", title: "Go to Research & Insights", section: "Navigation", shortcut: "G A", href: "/dashboard/insights" },
-  { id: "portfolio", title: "Go to Portfolio Works", section: "Navigation", shortcut: "G P", href: "/dashboard/portfolio" },
   { id: "team", title: "Go to Team Roster", section: "Navigation", shortcut: "G T", href: "/dashboard/team" },
   { id: "services", title: "Go to Services & Practice Pillars", section: "Navigation", shortcut: "G S", href: "/dashboard/services" },
   { id: "settings", title: "Go to System Settings & Config", section: "Navigation", shortcut: "G C", href: "/dashboard/settings" },
@@ -14,7 +12,12 @@ const ALL_ACTIONS = [
 ];
 
 function getActionsForRole(role) {
-  switch (role) {
+  const normalizedRole =
+    role === "EDITOR" || role === "TECHNICAL_EDITOR" || role === "CREATIVE_EDITOR"
+      ? "OPERATIONS_LEAD"
+      : role;
+
+  switch (normalizedRole) {
     case "OPERATIONS_LEAD":
       return ALL_ACTIONS.filter((a) =>
         ["inquiries", "team", "services", "site"].includes(a.id)
@@ -24,12 +27,6 @@ function getActionsForRole(role) {
           : a.id === "services"
           ? { ...a, title: "Go to Practice Scope (Ref)" }
           : a
-      );
-    case "EDITOR":
-    case "TECHNICAL_EDITOR":
-    case "CREATIVE_EDITOR":
-      return ALL_ACTIONS.filter((a) =>
-        ["insights", "portfolio", "site"].includes(a.id)
       );
     case "SUPER_ADMIN":
     default:

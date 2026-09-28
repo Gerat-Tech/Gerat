@@ -6,9 +6,8 @@ import { useRouter } from "next/navigation";
 import { useTheme } from "@/context/ThemeContext";
 
 const AVAILABLE_ROLES = [
-  { id: "SUPER_ADMIN", name: "SUPER ADMIN", desc: "Full root authority, all 7 modules, user governance, audit logs, system config", badgeClass: "bg-red-500/15 text-red-400 border-red-500/30" },
+  { id: "SUPER_ADMIN", name: "SUPER ADMIN", desc: "Full root authority, all modules, user governance, audit logs, system config", badgeClass: "bg-red-500/15 text-red-400 border-red-500/30" },
   { id: "OPERATIONS_LEAD", name: "OPERATIONS LEAD", desc: "Inquiries CRM, lead triage, client communications, team directory", badgeClass: "bg-blue-500/15 text-blue-400 border-blue-500/30" },
-  { id: "EDITOR", name: "EDITOR", desc: "Research publications, insights CMS, portfolio case studies, and practice pillars", badgeClass: "bg-purple-500/15 text-purple-400 border-purple-500/30" },
 ];
 
 export default function UsersSettingsClientView({ initialUsers = [], currentUser = null }) {
@@ -49,7 +48,6 @@ export default function UsersSettingsClientView({ initialUsers = [], currentUser
   const totalUsers = users.length;
   const superAdmins = users.filter((u) => u.role === "SUPER_ADMIN").length;
   const opsLeads = users.filter((u) => u.role === "OPERATIONS_LEAD").length;
-  const editors = users.filter((u) => ["EDITOR", "TECHNICAL_EDITOR", "CREATIVE_EDITOR"].includes(u.role)).length;
   const activeCount = users.filter((u) => u.active).length;
 
   // Filtered users
@@ -283,20 +281,28 @@ Please log in and update your passphrase upon first access.`;
   return (
     <div className="flex flex-col gap-8 pb-16">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
+      <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b ${
+        isLight ? "border-[#CBD5E1]" : "border-white/10"
+      }`}>
         <div>
           <div className="flex items-center gap-2">
             <Link
               href="/dashboard/settings"
-              className="font-parkinsans text-[10px] tracking-[0.2em] text-white/40 hover:text-white uppercase transition-colors"
+              className={`font-parkinsans text-[10px] tracking-[0.2em] uppercase transition-colors ${
+                isLight ? "text-[#64748B] hover:text-[#0D0F12]" : "text-white/40 hover:text-white"
+              }`}
             >
               SETTINGS ·
             </Link>
-            <h1 className="font-parkinsans text-2xl sm:text-3xl font-semibold tracking-tight uppercase text-white">
+            <h1 className={`font-parkinsans text-2xl sm:text-3xl font-semibold tracking-tight uppercase ${
+              isLight ? "text-[#0D0F12]" : "text-white"
+            }`}>
               USER & ROLE GOVERNANCE
             </h1>
           </div>
-          <p className="font-parkinsans text-[10px] tracking-[0.15em] text-white/40 uppercase mt-1">
+          <p className={`font-parkinsans text-[10px] tracking-[0.15em] uppercase mt-1 ${
+            isLight ? "text-[#64748B]" : "text-white/40"
+          }`}>
             MANAGE AUTHORIZED OPERATORS, ASSIGN RBAC ROLES, AND AUDIT ACCESS CONTROL
           </p>
         </div>
@@ -315,10 +321,10 @@ Please log in and update your passphrase upon first access.`;
               });
               setIsAddModalOpen(true);
             }}
-            className="py-2 px-4 bg-accent hover:bg-white hover:text-black text-white font-parkinsans text-[10px] tracking-[0.2em] uppercase font-bold transition-all rounded-[2px] flex items-center gap-2 shadow-lg shadow-accent/20 cursor-pointer"
+            className="py-2 px-4 bg-accent hover:bg-[#fa6c26] text-white font-parkinsans text-[10px] tracking-[0.2em] uppercase font-bold transition-all rounded-[2px] flex items-center gap-2 shadow-lg shadow-accent/20 cursor-pointer"
           >
-            <span>+</span>
-            <span>PROVISION NEW OPERATOR</span>
+            <span className="!text-white font-bold">+</span>
+            <span className="!text-white font-bold">PROVISION NEW OPERATOR</span>
           </button>
         </div>
       </div>
@@ -328,7 +334,11 @@ Please log in and update your passphrase upon first access.`;
         <div
           className={`p-3.5 rounded-[2px] border flex items-center justify-between gap-3 text-xs font-parkinsans tracking-[0.05em] ${
             statusMessage.type === "success"
-              ? "bg-emerald-950/40 border-emerald-500/40 text-emerald-300"
+              ? isLight
+                ? "bg-emerald-50 border-emerald-300 text-emerald-800"
+                : "bg-emerald-950/40 border-emerald-500/40 text-emerald-300"
+              : isLight
+              ? "bg-red-50 border-red-300 text-red-800"
               : "bg-red-950/40 border-red-500/40 text-red-300"
           }`}
         >
@@ -336,7 +346,7 @@ Please log in and update your passphrase upon first access.`;
           <button
             type="button"
             onClick={() => setStatusMessage(null)}
-            className="text-white/60 hover:text-white text-sm cursor-pointer"
+            className={`${isLight ? "text-slate-500 hover:text-black" : "text-white/60 hover:text-white"} text-sm cursor-pointer`}
           >
             ✕
           </button>
@@ -344,49 +354,57 @@ Please log in and update your passphrase upon first access.`;
       )}
 
       {/* Metrics Row */}
-      <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
-        <div className="bg-[#121212] border border-white/10 p-4 rounded-[3px] flex flex-col gap-1">
-          <span className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">TOTAL OPERATORS</span>
-          <span className="font-artific text-2xl font-bold text-white">{totalUsers}</span>
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div className={`${isLight ? "bg-white border-[#E2E8F0] shadow-sm text-[#0D0F12]" : "bg-[#121212] border-white/10 text-white"} border p-4 rounded-[3px] flex flex-col gap-1`}>
+          <span className={`font-parkinsans text-[9px] tracking-[0.2em] uppercase ${isLight ? "text-[#64748B] font-semibold" : "text-white/40"}`}>TOTAL OPERATORS</span>
+          <span className={`font-artific text-2xl font-bold ${isLight ? "text-[#0D0F12]" : "text-white"}`}>{totalUsers}</span>
         </div>
-        <div className="bg-[#121212] border border-white/10 p-4 rounded-[3px] flex flex-col gap-1">
-          <span className="font-parkinsans text-[9px] tracking-[0.2em] text-red-400 uppercase">SUPER ADMINS</span>
-          <span className="font-artific text-2xl font-bold text-white">{superAdmins}</span>
+        <div className={`${isLight ? "bg-white border-[#E2E8F0] shadow-sm text-[#0D0F12]" : "bg-[#121212] border-white/10 text-white"} border p-4 rounded-[3px] flex flex-col gap-1`}>
+          <span className="font-parkinsans text-[9px] tracking-[0.2em] text-red-500 font-semibold uppercase">SUPER ADMINS</span>
+          <span className={`font-artific text-2xl font-bold ${isLight ? "text-[#0D0F12]" : "text-white"}`}>{superAdmins}</span>
         </div>
-        <div className="bg-[#121212] border border-white/10 p-4 rounded-[3px] flex flex-col gap-1">
-          <span className="font-parkinsans text-[9px] tracking-[0.2em] text-blue-400 uppercase">OPS LEADS</span>
-          <span className="font-artific text-2xl font-bold text-white">{opsLeads}</span>
+        <div className={`${isLight ? "bg-white border-[#E2E8F0] shadow-sm text-[#0D0F12]" : "bg-[#121212] border-white/10 text-white"} border p-4 rounded-[3px] flex flex-col gap-1`}>
+          <span className="font-parkinsans text-[9px] tracking-[0.2em] text-blue-500 font-semibold uppercase">OPS LEADS</span>
+          <span className={`font-artific text-2xl font-bold ${isLight ? "text-[#0D0F12]" : "text-white"}`}>{opsLeads}</span>
         </div>
-        <div className="bg-[#121212] border border-white/10 p-4 rounded-[3px] flex flex-col gap-1">
-          <span className="font-parkinsans text-[9px] tracking-[0.2em] text-purple-400 uppercase">EDITORS / CMS</span>
-          <span className="font-artific text-2xl font-bold text-white">{editors}</span>
-        </div>
-        <div className="bg-[#121212] border border-white/10 p-4 rounded-[3px] flex flex-col gap-1 col-span-2 lg:col-span-1">
-          <span className="font-parkinsans text-[9px] tracking-[0.2em] text-emerald-400 uppercase">ACTIVE SESSIONS</span>
-          <span className="font-artific text-2xl font-bold text-white">{activeCount} / {totalUsers}</span>
+        <div className={`${isLight ? "bg-white border-[#E2E8F0] shadow-sm text-[#0D0F12]" : "bg-[#121212] border-white/10 text-white"} border p-4 rounded-[3px] flex flex-col gap-1`}>
+          <span className="font-parkinsans text-[9px] tracking-[0.2em] text-emerald-600 font-semibold uppercase">ACTIVE SESSIONS</span>
+          <span className={`font-artific text-2xl font-bold ${isLight ? "text-[#0D0F12]" : "text-white"}`}>{activeCount} / {totalUsers}</span>
         </div>
       </div>
 
       {/* Search & Filter Bar */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-[#121212] border border-white/10 p-3 rounded-[3px]">
+      <div className={`flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 border p-3 rounded-[3px] ${
+        isLight ? "bg-white border-[#E2E8F0] shadow-sm" : "bg-[#121212] border-white/10"
+      }`}>
         <div className="relative flex-1">
           <input
             type="text"
             placeholder="Search operators by name, email, or role title..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-black/50 border border-white/10 focus:border-accent text-white px-3.5 py-2 rounded-[2px] font-parkinsans text-xs placeholder:text-white/20 outline-none transition-colors"
+            className={`w-full border px-3.5 py-2 rounded-[2px] font-parkinsans text-xs outline-none transition-colors ${
+              isLight
+                ? "bg-[#F8FAFC] border-[#CBD5E1] text-[#0D0F12] placeholder:text-[#94A3B8] focus:border-accent"
+                : "bg-black/50 border-white/10 focus:border-accent text-white placeholder:text-white/20"
+            }`}
           />
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="font-parkinsans text-[9px] tracking-[0.15em] text-white/40 uppercase whitespace-nowrap">
+          <span className={`font-parkinsans text-[9px] tracking-[0.15em] uppercase whitespace-nowrap font-semibold ${
+            isLight ? "text-[#64748B]" : "text-white/40"
+          }`}>
             FILTER ROLE:
           </span>
           <select
             value={roleFilter}
             onChange={(e) => setRoleFilter(e.target.value)}
-            className="bg-black/50 border border-white/10 focus:border-accent text-white px-3 py-2 rounded-[2px] font-parkinsans text-xs outline-none cursor-pointer uppercase"
+            className={`border px-3 py-2 rounded-[2px] font-parkinsans text-xs outline-none cursor-pointer uppercase ${
+              isLight
+                ? "bg-[#F8FAFC] border-[#CBD5E1] text-[#0D0F12] focus:border-accent"
+                : "bg-black/50 border-white/10 focus:border-accent text-white"
+            }`}
           >
             <option value="ALL">ALL ROLES ({totalUsers})</option>
             {AVAILABLE_ROLES.map((r) => (
@@ -399,11 +417,15 @@ Please log in and update your passphrase upon first access.`;
       </div>
 
       {/* Users Table */}
-      <div className="bg-[#121212] border border-white/10 rounded-[3px] overflow-hidden">
+      <div className={`border rounded-[3px] overflow-hidden ${
+        isLight ? "bg-white border-[#E2E8F0] shadow-sm" : "bg-[#121212] border-white/10"
+      }`}>
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="border-b border-white/10 bg-white/[0.02] font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
+              <tr className={`border-b font-parkinsans text-[9px] tracking-[0.2em] uppercase font-semibold ${
+                isLight ? "border-[#E2E8F0] bg-[#F8FAFC] text-[#64748B]" : "border-white/10 bg-white/[0.02] text-white/40"
+              }`}>
                 <th className="py-3 px-4">OPERATOR & CONTACT</th>
                 <th className="py-3 px-4">ROLE TITLE / DESIGNATION</th>
                 <th className="py-3 px-4">RBAC ROLE</th>
@@ -412,10 +434,12 @@ Please log in and update your passphrase upon first access.`;
                 <th className="py-3 px-4 text-right">GOVERNANCE ACTIONS</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5 font-sans text-xs">
+            <tbody className={`divide-y font-sans text-xs ${isLight ? "divide-[#E2E8F0]" : "divide-white/5"}`}>
               {filteredUsers.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="py-12 text-center text-white/40 font-parkinsans text-xs uppercase tracking-[0.1em]">
+                  <td colSpan={6} className={`py-12 text-center font-parkinsans text-xs uppercase tracking-[0.1em] ${
+                    isLight ? "text-[#94A3B8]" : "text-white/40"
+                  }`}>
                     No operators match the specified search or role filter.
                   </td>
                 </tr>
@@ -423,23 +447,25 @@ Please log in and update your passphrase upon first access.`;
                 filteredUsers.map((user) => {
                   const isSelf = user.id === currentUser?.id;
                   return (
-                    <tr key={user.id} className="hover:bg-white/[0.02] transition-colors">
+                    <tr key={user.id} className={`transition-colors ${isLight ? "hover:bg-[#F8FAFC]" : "hover:bg-white/[0.02]"}`}>
                       {/* Operator & Email */}
                       <td className="py-3.5 px-4">
                         <div className="flex items-center gap-3">
-                          <div className="size-8 rounded-[2px] bg-white/5 border border-white/15 flex items-center justify-center font-parkinsans text-xs font-bold text-white uppercase">
+                          <div className={`size-8 rounded-[2px] border flex items-center justify-center font-parkinsans text-xs font-bold uppercase ${
+                            isLight ? "bg-[#F1F5F9] border-[#CBD5E1] text-[#0D0F12]" : "bg-white/5 border-white/15 text-white"
+                          }`}>
                             {user.name.charAt(0)}
                           </div>
                           <div>
-                            <div className="font-artific font-bold text-white flex items-center gap-2">
+                            <div className={`font-artific font-bold flex items-center gap-2 ${isLight ? "text-[#0D0F12]" : "text-white"}`}>
                               <span>{user.name}</span>
                               {isSelf && (
-                                <span className="font-parkinsans text-[8px] tracking-[0.15em] px-1.5 py-0.5 rounded-[2px] bg-accent/20 border border-accent/40 text-accent uppercase">
+                                <span className="font-parkinsans text-[8px] tracking-[0.15em] px-1.5 py-0.5 rounded-[2px] bg-accent/20 border border-accent/40 text-accent uppercase font-bold">
                                   YOU (CURRENT)
                                 </span>
                               )}
                             </div>
-                            <div className="font-parkinsans text-[10px] text-white/40 tracking-normal">
+                            <div className={`font-parkinsans text-[10px] tracking-normal ${isLight ? "text-[#64748B]" : "text-white/40"}`}>
                               {user.email}
                             </div>
                           </div>
@@ -447,7 +473,7 @@ Please log in and update your passphrase upon first access.`;
                       </td>
 
                       {/* Title */}
-                      <td className="py-3.5 px-4 font-parkinsans text-[11px] text-white/70">
+                      <td className={`py-3.5 px-4 font-parkinsans text-[11px] font-medium ${isLight ? "text-[#334155]" : "text-white/70"}`}>
                         {user.title || "—"}
                       </td>
 
@@ -470,7 +496,11 @@ Please log in and update your passphrase upon first access.`;
                           onClick={() => handleToggleActive(user)}
                           className={`inline-flex items-center font-parkinsans text-[9px] tracking-[0.15em] px-2 py-0.5 rounded-[2px] border font-bold uppercase transition-colors ${
                             user.active
-                              ? "bg-emerald-950/40 text-emerald-400 border-emerald-500/30 hover:border-emerald-500"
+                              ? isLight
+                                ? "bg-emerald-50 text-emerald-800 border-emerald-300 hover:border-emerald-500"
+                                : "bg-emerald-950/40 text-emerald-400 border-emerald-500/30 hover:border-emerald-500"
+                              : isLight
+                              ? "bg-red-50 text-red-800 border-red-300 hover:border-red-500"
                               : "bg-red-950/40 text-red-400 border-red-500/30 hover:border-red-500"
                           } ${isSelf ? "cursor-default opacity-80" : "cursor-pointer"}`}
                         >
@@ -479,7 +509,7 @@ Please log in and update your passphrase upon first access.`;
                       </td>
 
                       {/* Registered */}
-                      <td className="py-3.5 px-4 font-parkinsans text-[10px] text-white/40">
+                      <td className={`py-3.5 px-4 font-parkinsans text-[10px] ${isLight ? "text-[#64748B]" : "text-white/40"}`}>
                         {new Date(user.createdAt).toLocaleDateString("en-US", {
                           month: "short",
                           day: "numeric",
@@ -497,7 +527,11 @@ Please log in and update your passphrase upon first access.`;
                               setNewRole(user.role);
                               setIsRoleModalOpen(true);
                             }}
-                            className="py-1 px-2 bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-accent/40 rounded-[2px] text-white/70 hover:text-white transition-colors cursor-pointer"
+                            className={`py-1 px-2.5 rounded-[2px] border transition-colors cursor-pointer font-bold ${
+                              isLight
+                                ? "bg-[#F8FAFC] hover:bg-white border-[#CBD5E1] hover:border-accent text-[#334155] hover:text-accent shadow-xs"
+                                : "bg-white/[0.03] hover:bg-white/[0.08] border-white/10 hover:border-accent/40 text-white/70 hover:text-white"
+                            }`}
                           >
                             ROLE
                           </button>
@@ -508,9 +542,13 @@ Please log in and update your passphrase upon first access.`;
                               setNewPassword(generateSecurePassword());
                               setIsPasswordModalOpen(true);
                             }}
-                            className="py-1 px-2 bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-accent/40 rounded-[2px] text-white/70 hover:text-white transition-colors cursor-pointer"
+                            className={`py-1 px-2.5 rounded-[2px] border transition-colors cursor-pointer font-bold ${
+                              isLight
+                                ? "bg-white hover:bg-slate-50 border-[#CBD5E1] hover:border-accent text-[#0D0F12] hover:text-accent shadow-xs"
+                                : "bg-white/[0.03] hover:bg-white/[0.08] border-white/10 hover:border-accent/40 text-white/70 hover:text-white"
+                            }`}
                           >
-                            PASSWORD
+                            CHANGE PASSWORD
                           </button>
                         </div>
                       </td>
@@ -540,12 +578,14 @@ Please log in and update your passphrase upon first access.`;
                   </svg>
                   CREDENTIALS GENERATED
                 </span>
-                <h2 className="font-parkinsans text-xl font-bold uppercase mt-0.5">DISPATCH OPERATOR CREDENTIALS</h2>
+                <h2 className={`font-parkinsans text-xl font-bold uppercase mt-0.5 ${isLight ? "text-[#0D0F12]" : "text-white"}`}>
+                  DISPATCH OPERATOR CREDENTIALS
+                </h2>
               </div>
               <button
                 type="button"
                 onClick={() => setProvisionedResult(null)}
-                className={`font-parkinsans text-sm cursor-pointer ${isLight ? "text-black/40 hover:text-black" : "text-white/40 hover:text-white"}`}
+                className={`font-parkinsans text-sm cursor-pointer ${isLight ? "text-slate-500 hover:text-black font-bold" : "text-white/40 hover:text-white"}`}
               >
                 ✕
               </button>
@@ -692,7 +732,9 @@ Please log in and update your passphrase upon first access.`;
                 <span className="font-parkinsans text-[9px] tracking-[0.25em] text-accent uppercase font-bold">
                   ACCESS CONTROL
                 </span>
-                <h2 className="font-parkinsans text-xl font-bold uppercase mt-0.5">PROVISION OPERATOR</h2>
+                <h2 className={`font-parkinsans text-xl font-bold uppercase mt-0.5 ${isLight ? "text-[#0D0F12]" : "text-white"}`}>
+                  PROVISION OPERATOR
+                </h2>
               </div>
               <button
                 type="button"
@@ -700,7 +742,7 @@ Please log in and update your passphrase upon first access.`;
                   setIsAddModalOpen(false);
                   setModalError(null);
                 }}
-                className={`font-parkinsans text-sm cursor-pointer ${isLight ? "text-black/40 hover:text-black" : "text-white/40 hover:text-white"}`}
+                className={`font-parkinsans text-sm cursor-pointer ${isLight ? "text-slate-400 hover:text-black" : "text-white/40 hover:text-white"}`}
               >
                 ✕
               </button>
@@ -708,13 +750,17 @@ Please log in and update your passphrase upon first access.`;
 
             {/* In-Modal Error Alert Card */}
             {modalError && (
-              <div className="p-3 bg-red-950/60 border border-red-500/60 rounded-[2px] flex items-start gap-2.5 text-xs text-red-200 font-parkinsans">
-                <span className="text-red-400 font-bold">⚠ ERROR:</span>
+              <div className={`p-3 rounded-[2px] flex items-start gap-2.5 text-xs font-parkinsans ${
+                isLight
+                  ? "bg-red-50 border border-red-300 text-red-900"
+                  : "bg-red-950/60 border border-red-500/60 text-red-200"
+              }`}>
+                <span className={isLight ? "text-red-700 font-bold" : "text-red-400 font-bold"}>⚠ ERROR:</span>
                 <span className="flex-1 leading-relaxed">{modalError.message}</span>
                 <button
                   type="button"
                   onClick={() => setModalError(null)}
-                  className="text-red-400/60 hover:text-red-300 font-bold cursor-pointer"
+                  className={isLight ? "text-red-600 hover:text-red-900 font-bold cursor-pointer" : "text-red-400/60 hover:text-red-300 font-bold cursor-pointer"}
                 >
                   ✕
                 </button>
@@ -861,7 +907,7 @@ Please log in and update your passphrase upon first access.`;
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="py-2.5 px-5 bg-accent hover:bg-white hover:text-black text-white font-bold rounded-[2px] transition-colors disabled:opacity-50 cursor-pointer"
+                  className="py-2.5 px-5 bg-accent hover:bg-[#300F0A] text-white font-bold rounded-[2px] transition-colors disabled:opacity-50 cursor-pointer shadow-sm"
                 >
                   {isSubmitting ? "PROVISIONING..." : "CONFIRM & PROVISION"}
                 </button>
@@ -876,15 +922,17 @@ Please log in and update your passphrase upon first access.`;
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
           <div
             className={`relative w-full max-w-md ${
-              isLight ? "bg-white border-[#D1D5DB] text-[#0D0F12]" : "bg-[#121212] border-white/15 text-white"
+              isLight ? "bg-white border-[#CBD5E1] text-[#0D0F12]" : "bg-[#121212] border-white/15 text-white"
             } border p-6 sm:p-8 rounded-[3px] shadow-2xl flex flex-col gap-5`}
           >
-            <div className={`flex items-center justify-between pb-3 border-b ${isLight ? "border-[#E5E7EB]" : "border-white/10"}`}>
+            <div className={`flex items-center justify-between pb-3 border-b ${isLight ? "border-[#E2E8F0]" : "border-white/10"}`}>
               <div>
                 <span className="font-parkinsans text-[9px] tracking-[0.25em] text-accent uppercase font-bold">
                   ROLE ASSIGNMENT
                 </span>
-                <h2 className="font-parkinsans text-lg font-bold uppercase mt-0.5">REASSIGN ROLE</h2>
+                <h2 className={`font-parkinsans text-lg font-bold uppercase mt-0.5 ${isLight ? "text-[#0D0F12]" : "text-white"}`}>
+                  REASSIGN ROLE
+                </h2>
               </div>
               <button
                 type="button"
@@ -892,7 +940,7 @@ Please log in and update your passphrase upon first access.`;
                   setIsRoleModalOpen(false);
                   setModalError(null);
                 }}
-                className={`font-parkinsans text-sm cursor-pointer ${isLight ? "text-black/40 hover:text-black" : "text-white/40 hover:text-white"}`}
+                className={`font-parkinsans text-sm cursor-pointer ${isLight ? "text-slate-400 hover:text-black" : "text-white/40 hover:text-white"}`}
               >
                 ✕
               </button>
@@ -900,27 +948,31 @@ Please log in and update your passphrase upon first access.`;
 
             {/* In-Modal Error Alert Card */}
             {modalError && (
-              <div className="p-3 bg-red-950/60 border border-red-500/60 rounded-[2px] flex items-start gap-2.5 text-xs text-red-200 font-parkinsans">
-                <span className="text-red-400 font-bold">⚠ ERROR:</span>
+              <div className={`p-3 rounded-[2px] flex items-start gap-2.5 text-xs font-parkinsans ${
+                isLight
+                  ? "bg-red-50 border border-red-300 text-red-900"
+                  : "bg-red-950/60 border border-red-500/60 text-red-200"
+              }`}>
+                <span className={isLight ? "text-red-700 font-bold" : "text-red-400 font-bold"}>⚠ ERROR:</span>
                 <span className="flex-1 leading-relaxed">{modalError.message}</span>
                 <button
                   type="button"
                   onClick={() => setModalError(null)}
-                  className="text-red-400/60 hover:text-red-300 font-bold cursor-pointer"
+                  className={isLight ? "text-red-600 hover:text-red-900 font-bold cursor-pointer" : "text-red-400/60 hover:text-red-300 font-bold cursor-pointer"}
                 >
                   ✕
                 </button>
               </div>
             )}
 
-            <div className={`p-3 rounded-[2px] font-parkinsans text-[10px] border ${isLight ? "bg-[#F9FAFB] border-[#E5E7EB]" : "bg-white/[0.02] border-white/10"}`}>
+            <div className={`p-3 rounded-[2px] font-parkinsans text-[10px] border ${isLight ? "bg-[#F8FAFC] border-[#E2E8F0] text-[#0D0F12]" : "bg-white/[0.02] border-white/10 text-white"}`}>
               <div className="font-bold">{selectedUser.name}</div>
-              <div className={isLight ? "text-[#6B7280]" : "text-white/50"}>{selectedUser.email}</div>
+              <div className={isLight ? "text-[#64748B]" : "text-white/50"}>{selectedUser.email}</div>
             </div>
 
             <form onSubmit={handleUpdateRole} className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
-                <label className={`font-parkinsans text-[9px] tracking-[0.15em] uppercase ${isLight ? "text-[#4B5563]" : "text-white/60"}`}>
+                <label className={`font-parkinsans text-[9px] tracking-[0.15em] uppercase font-semibold ${isLight ? "text-[#475569]" : "text-white/60"}`}>
                   SELECT NEW RBAC ROLE:
                 </label>
                 <div className="flex flex-col gap-2">
@@ -929,9 +981,11 @@ Please log in and update your passphrase upon first access.`;
                       key={r.id}
                       className={`p-3 border rounded-[2px] flex items-start gap-3 cursor-pointer transition-colors ${
                         newRole === r.id
-                          ? "bg-accent/10 border-accent text-white"
+                          ? isLight
+                            ? "bg-accent/15 border-accent text-[#0D0F12]"
+                            : "bg-accent/10 border-accent text-white"
                           : isLight
-                          ? "bg-[#F9FAFB] border-[#E5E7EB] text-[#1F242E] hover:bg-[#F3F4F6]"
+                          ? "bg-[#F8FAFC] border-[#E2E8F0] text-[#1F242E] hover:bg-[#F1F5F9]"
                           : "bg-white/[0.02] border-white/10 text-white/70 hover:bg-white/[0.05]"
                       }`}
                     >
@@ -944,8 +998,24 @@ Please log in and update your passphrase upon first access.`;
                         className="mt-0.5 accent-[#EA5B15]"
                       />
                       <div>
-                        <div className="font-parkinsans text-[10px] font-bold uppercase">{r.name}</div>
-                        <div className={`font-sans text-[11px] leading-relaxed ${isLight ? "text-[#6B7280]" : "text-white/50"}`}>
+                        <div className={`font-parkinsans text-[10px] font-bold uppercase ${
+                          newRole === r.id
+                            ? "text-accent"
+                            : isLight
+                            ? "text-[#0D0F12]"
+                            : "text-white"
+                        }`}>
+                          {r.name}
+                        </div>
+                        <div className={`font-sans text-[11px] leading-relaxed ${
+                          isLight
+                            ? newRole === r.id
+                              ? "text-[#334155]"
+                              : "text-[#64748B]"
+                            : newRole === r.id
+                            ? "text-white/80"
+                            : "text-white/50"
+                        }`}>
                           {r.desc}
                         </div>
                       </div>
@@ -954,7 +1024,7 @@ Please log in and update your passphrase upon first access.`;
                 </div>
               </div>
 
-              <div className={`flex items-center justify-end gap-3 pt-4 border-t ${isLight ? "border-[#E5E7EB]" : "border-white/10"} font-parkinsans text-[10px] tracking-[0.15em] uppercase`}>
+              <div className={`flex items-center justify-end gap-3 pt-4 border-t ${isLight ? "border-[#E2E8F0]" : "border-white/10"} font-parkinsans text-[10px] tracking-[0.15em] uppercase`}>
                 <button
                   type="button"
                   onClick={() => {
@@ -962,7 +1032,7 @@ Please log in and update your passphrase upon first access.`;
                     setModalError(null);
                   }}
                   className={`py-2 px-4 border rounded-[2px] cursor-pointer transition-colors ${
-                    isLight ? "border-[#D1D5DB] hover:bg-black/5 text-[#4B5563]" : "border-white/15 hover:bg-white/5 text-white/60 hover:text-white"
+                    isLight ? "border-[#CBD5E1] hover:bg-slate-100 text-[#475569] font-semibold" : "border-white/15 hover:bg-white/5 text-white/60 hover:text-white"
                   }`}
                 >
                   CANCEL
@@ -970,7 +1040,7 @@ Please log in and update your passphrase upon first access.`;
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="py-2 px-5 bg-accent hover:bg-white hover:text-black text-white font-bold rounded-[2px] transition-colors disabled:opacity-50 cursor-pointer"
+                  className="py-2 px-5 bg-accent hover:bg-[#300F0A] text-white font-bold rounded-[2px] transition-colors disabled:opacity-50 cursor-pointer shadow-sm"
                 >
                   {isSubmitting ? "UPDATING..." : "SAVE ROLE"}
                 </button>
@@ -985,15 +1055,17 @@ Please log in and update your passphrase upon first access.`;
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
           <div
             className={`relative w-full max-w-md ${
-              isLight ? "bg-white border-[#D1D5DB] text-[#0D0F12]" : "bg-[#121212] border-white/15 text-white"
+              isLight ? "bg-white border-[#CBD5E1] text-[#0D0F12]" : "bg-[#121212] border-white/15 text-white"
             } border p-6 sm:p-8 rounded-[3px] shadow-2xl flex flex-col gap-5`}
           >
-            <div className={`flex items-center justify-between pb-3 border-b ${isLight ? "border-[#E5E7EB]" : "border-white/10"}`}>
+            <div className={`flex items-center justify-between pb-3 border-b ${isLight ? "border-[#E2E8F0]" : "border-white/10"}`}>
               <div>
                 <span className="font-parkinsans text-[9px] tracking-[0.25em] text-accent uppercase font-bold">
                   CREDENTIAL RESET
                 </span>
-                <h2 className="font-parkinsans text-lg font-bold uppercase mt-0.5">RESET PASSPHRASE</h2>
+                <h2 className={`font-parkinsans text-lg font-bold uppercase mt-0.5 ${isLight ? "text-[#0D0F12]" : "text-white"}`}>
+                  RESET PASSWORD
+                </h2>
               </div>
               <button
                 type="button"
@@ -1001,7 +1073,7 @@ Please log in and update your passphrase upon first access.`;
                   setIsPasswordModalOpen(false);
                   setModalError(null);
                 }}
-                className={`font-parkinsans text-sm cursor-pointer ${isLight ? "text-black/40 hover:text-black" : "text-white/40 hover:text-white"}`}
+                className={`font-parkinsans text-sm cursor-pointer ${isLight ? "text-slate-500 hover:text-black font-bold" : "text-white/40 hover:text-white"}`}
               >
                 ✕
               </button>
@@ -1009,28 +1081,32 @@ Please log in and update your passphrase upon first access.`;
 
             {/* In-Modal Error Alert Card */}
             {modalError && (
-              <div className="p-3 bg-red-950/60 border border-red-500/60 rounded-[2px] flex items-start gap-2.5 text-xs text-red-200 font-parkinsans">
-                <span className="text-red-400 font-bold">⚠ ERROR:</span>
+              <div className={`p-3 rounded-[2px] flex items-start gap-2.5 text-xs font-parkinsans ${
+                isLight
+                  ? "bg-red-50 border border-red-300 text-red-900"
+                  : "bg-red-950/60 border border-red-500/60 text-red-200"
+              }`}>
+                <span className={isLight ? "text-red-700 font-bold" : "text-red-400 font-bold"}>⚠ ERROR:</span>
                 <span className="flex-1 leading-relaxed">{modalError.message}</span>
                 <button
                   type="button"
                   onClick={() => setModalError(null)}
-                  className="text-red-400/60 hover:text-red-300 font-bold cursor-pointer"
+                  className={isLight ? "text-red-600 hover:text-red-900 font-bold cursor-pointer" : "text-red-400/60 hover:text-red-300 font-bold cursor-pointer"}
                 >
                   ✕
                 </button>
               </div>
             )}
 
-            <p className={`font-artific text-xs leading-relaxed ${isLight ? "text-[#4B5563]" : "text-white/60"}`}>
-              Set a new temporary password for <strong>{selectedUser.name}</strong> ({selectedUser.email}).
+            <p className={`font-artific text-xs leading-relaxed ${isLight ? "text-[#334155]" : "text-white/60"}`}>
+              Set a new temporary password for <strong className={isLight ? "text-[#0D0F12]" : "text-white"}>{selectedUser.name}</strong> ({selectedUser.email}).
             </p>
 
             <form onSubmit={handleResetPassword} className="flex flex-col gap-4">
               <div className="flex flex-col gap-1.5">
                 <div className="flex items-center justify-between">
-                  <label className={`font-parkinsans text-[9px] tracking-[0.15em] uppercase ${isLight ? "text-[#4B5563]" : "text-white/60"}`}>
-                    NEW PASSPHRASE
+                  <label className={`font-parkinsans text-[9px] tracking-[0.15em] uppercase font-bold ${isLight ? "text-[#1E293B]" : "text-white/70"}`}>
+                    NEW PASSWORD
                   </label>
                   <button
                     type="button"
@@ -1038,7 +1114,7 @@ Please log in and update your passphrase upon first access.`;
                       setNewPassword(generateSecurePassword());
                       if (modalError?.field === "password") setModalError(null);
                     }}
-                    className="font-parkinsans text-[9px] tracking-[0.15em] text-accent hover:underline uppercase cursor-pointer"
+                    className="font-parkinsans text-[9px] tracking-[0.15em] text-accent hover:underline uppercase cursor-pointer font-bold"
                   >
                     GENERATE NEW
                   </button>
@@ -1054,15 +1130,17 @@ Please log in and update your passphrase upon first access.`;
                   placeholder="Min 6 characters"
                   className={`w-full border ${
                     modalError?.field === "password"
-                      ? "border-red-500 bg-red-950/20 text-white"
+                      ? isLight
+                        ? "border-red-500 bg-red-50/50 text-red-900"
+                        : "border-red-500 bg-red-950/20 text-white"
                       : isLight
-                      ? "bg-[#F9FAFB] border-[#D1D5DB] focus:border-accent text-[#0D0F12]"
+                      ? "bg-white border-[#CBD5E1] focus:border-accent text-[#0D0F12] placeholder:text-[#94A3B8]"
                       : "bg-black/50 border-white/15 focus:border-accent text-white"
                   } px-3 py-2 rounded-[2px] font-parkinsans text-xs outline-none font-mono transition-colors`}
                 />
               </div>
 
-              <div className={`flex items-center justify-end gap-3 pt-4 border-t ${isLight ? "border-[#E5E7EB]" : "border-white/10"} font-parkinsans text-[10px] tracking-[0.15em] uppercase`}>
+              <div className={`flex items-center justify-end gap-3 pt-4 border-t ${isLight ? "border-[#E2E8F0]" : "border-white/10"} font-parkinsans text-[10px] tracking-[0.15em] uppercase`}>
                 <button
                   type="button"
                   onClick={() => {
@@ -1070,7 +1148,7 @@ Please log in and update your passphrase upon first access.`;
                     setModalError(null);
                   }}
                   className={`py-2 px-4 border rounded-[2px] cursor-pointer transition-colors ${
-                    isLight ? "border-[#D1D5DB] hover:bg-black/5 text-[#4B5563]" : "border-white/15 hover:bg-white/5 text-white/60 hover:text-white"
+                    isLight ? "border-[#CBD5E1] hover:bg-slate-100 text-[#1E293B] font-semibold" : "border-white/15 hover:bg-white/5 text-white/60 hover:text-white"
                   }`}
                 >
                   CANCEL
@@ -1078,9 +1156,9 @@ Please log in and update your passphrase upon first access.`;
                 <button
                   type="submit"
                   disabled={isSubmitting || !newPassword}
-                  className="py-2 px-5 bg-accent hover:bg-white hover:text-black text-white font-bold rounded-[2px] transition-colors disabled:opacity-50 cursor-pointer"
+                  className="py-2 px-5 bg-accent hover:bg-[#FA6C26] text-white font-bold rounded-[2px] transition-colors disabled:opacity-50 cursor-pointer shadow-sm"
                 >
-                  {isSubmitting ? "SAVING..." : "OVERWRITE PASSPHRASE"}
+                  <span className="!text-white font-bold">{isSubmitting ? "SAVING..." : "OVERWRITE PASSWORD"}</span>
                 </button>
               </div>
             </form>

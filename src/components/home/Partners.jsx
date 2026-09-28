@@ -28,25 +28,27 @@ export default function Partners() {
     >
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
         {/* Header */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 items-start">
-          <div className="lg:col-span-7 flex flex-col gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 items-start">
+          <div className="lg:col-span-7 flex flex-col gap-3.5">
             <SectionLabel label="TECHNOLOGY & ECOSYSTEM" />
-            <SplitText
-              text="MODERN INFRASTRUCTURE."
-              as="h2"
-              className="font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium sm:font-semibold tracking-tight uppercase leading-[0.95]"
-            />
-            <SplitText
-              text="STANDARDIZED FOUNDATIONS."
-              as="h2"
-              wordClassName="text-accent"
-              className="font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium sm:font-semibold tracking-tight uppercase leading-[0.95]"
-            />
+            <div className="space-y-1 sm:space-y-1.5">
+              <SplitText
+                text="MODERN INFRASTRUCTURE."
+                as="h2"
+                className="font-parkinsans text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight uppercase leading-[1.08]"
+              />
+              <SplitText
+                text="STANDARDIZED FOUNDATIONS."
+                as="h2"
+                wordClassName="text-accent"
+                className="font-parkinsans text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight uppercase leading-[1.08]"
+              />
+            </div>
           </div>
 
-          <div className="lg:col-span-5 flex flex-col items-start gap-6 lg:border-l lg:border-white/10 lg:pl-10 pt-2">
+          <div className="lg:col-span-5 flex flex-col items-start gap-4 lg:border-l lg:border-white/10 lg:pl-8 pt-2">
             <FadeUp delay={0.2}>
-              <p className="font-artific text-base text-white/75 leading-relaxed">
+              <p className="font-artific text-sm sm:text-base text-white/75 leading-relaxed">
                 We build exclusively with proven, open, and battle-tested
                 technologies that guarantee vendor independence, high auditability,
                 and long-term operational viability.
@@ -57,14 +59,12 @@ export default function Partners() {
               <button
                 type="button"
                 onClick={openContact}
-                className="group relative isolate inline-flex items-center font-parkinsans text-[11px] uppercase tracking-[0.2em] px-6 py-3 bg-white text-black font-semibold hover:bg-accent hover:text-white transition-all duration-300 rounded-[2px]"
+                className="group relative isolate inline-flex items-center font-parkinsans text-xs uppercase tracking-[0.18em] px-6 py-3 bg-white text-black font-semibold hover:bg-accent hover:text-white transition-all duration-300 rounded-full"
               >
                 <span>COMMISSION A BUILD</span>
                 <span className="ml-2 group-hover:translate-x-1 transition-transform">
                   →
                 </span>
-                <span className="absolute -top-[1px] -left-[1px] size-1.5 border-t border-l border-white group-hover:border-accent" />
-                <span className="absolute -bottom-[1px] -right-[1px] size-1.5 border-b border-r border-white group-hover:border-accent" />
               </button>
             </FadeUp>
           </div>

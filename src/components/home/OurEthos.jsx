@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import SectionLabel from "../common/SectionLabel";
-import CurvedSectionTransition from "../common/CurvedSectionTransition";
 import FadeUp from "../motion/FadeUp";
 import SplitText from "../motion/SplitText";
 
@@ -43,17 +42,9 @@ export default function OurEthos() {
       id="about"
       aria-label="What We Believe"
       data-dark-card="true"
-      className="w-full bg-[#300F0A] text-[#FAF6ED] relative scroll-mt-24"
+      className="w-full bg-[#300F0A] text-[#F1DFD9] relative scroll-mt-24"
     >
       <span id="ethos" className="sr-only" />
-
-      {/* Dynamic Scroll-Morphing Arched Transition into Our Ethos */}
-      <CurvedSectionTransition
-        fill="#300F0A"
-        stroke="rgba(255, 255, 255, 0.15)"
-        showStroke={true}
-        defaultMaxArch={54}
-      />
 
       <div className="relative w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-16 sm:pt-24 pb-28 sm:pb-36 overflow-hidden">
         {/* Subtle Warm Ambient Glow */}
@@ -64,16 +55,16 @@ export default function OurEthos() {
 
         <div className="relative z-10 w-full">
           {/* Top Header Row */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14 sm:mb-18 pb-8 border-b border-white/15">
-            <div className="flex flex-col gap-4 max-w-3xl">
-              <SectionLabel index="04" label="WHAT WE BELIEVE" />
-              <div className="space-y-1 sm:space-y-2">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-12 pb-6 border-b border-white/15">
+            <div className="flex flex-col gap-3.5 max-w-2xl">
+              <SectionLabel label="WHAT WE BELIEVE" />
+              <div className="space-y-1 sm:space-y-1.5">
                 <SplitText
                   text="USEFUL OVER"
                   as="h2"
                   delay={0.1}
                   stagger={0.035}
-                  className="font-parkinsans text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight uppercase leading-[0.96] text-[#FAF6ED]"
+                  className="font-parkinsans text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight uppercase leading-[1.08] text-white"
                 />
                 <SplitText
                   text="COMPLICATED."
@@ -81,7 +72,7 @@ export default function OurEthos() {
                   delay={0.25}
                   stagger={0.035}
                   wordClassName="text-accent"
-                  className="font-parkinsans text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight uppercase leading-[0.96]"
+                  className="font-parkinsans text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight uppercase leading-[1.08]"
                 />
               </div>
             </div>
@@ -89,7 +80,7 @@ export default function OurEthos() {
             <FadeUp delay={0.3} y={16}>
               <Link
                 href="/about"
-                className="group inline-flex items-center gap-2 font-parkinsans text-xs uppercase tracking-[0.2em] text-[#FAF6ED] hover:text-white px-6 py-3 bg-white/10 hover:bg-accent rounded-full transition-all duration-300 font-bold shadow-sm"
+                className="group inline-flex items-center gap-2 font-parkinsans text-xs uppercase tracking-[0.18em] text-white px-6 py-3 bg-accent hover:bg-white hover:text-[#300F0A] border border-accent hover:border-white rounded-full transition-all duration-300 font-bold shadow-md cursor-pointer select-none"
               >
                 <span>LEARN MORE ABOUT US</span>
                 <span className="transition-transform duration-300 group-hover:translate-x-1">
@@ -99,25 +90,22 @@ export default function OurEthos() {
             </FadeUp>
           </div>
 
-          {/* 4 Editorial Principles Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+          {/* 4 Editorial Principles Grid (Guaranteed High Contrast & Proportional) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
             {PRINCIPLES.map((item, idx) => (
               <FadeUp key={item.num} delay={0.1 + idx * 0.08} y={20}>
-                <div className="flex flex-col justify-between h-full min-h-[280px] p-8 sm:p-9 rounded-3xl bg-white/[0.04] border border-white/10 hover:border-accent/60 transition-all duration-300 group">
-                  {/* Top: Principle Index */}
-                  <div className="flex items-center justify-between pb-8">
-                    <span className="font-parkinsans text-xs font-bold tracking-[0.25em] text-accent uppercase">
-                      PRINCIPLE {item.num}
-                    </span>
-                    <span className="size-2 rounded-full bg-white/20 group-hover:bg-accent transition-colors duration-300" />
+                <div className="ethos-card flex flex-col justify-between h-full min-h-[190px] sm:min-h-[210px] p-6 sm:p-7 rounded-2xl bg-[#220B07] border border-white/15 hover:border-accent/80 transition-all duration-300 group shadow-[0_12px_28px_rgba(0,0,0,0.18)]">
+                  {/* Top: Principle Indicator */}
+                  <div className="flex items-center justify-between pb-3">
+                    <span className="size-2 rounded-full bg-accent" />
                   </div>
 
-                  {/* Middle: Principle Title */}
-                  <div className="space-y-4">
-                    <h3 className="font-parkinsans text-2xl sm:text-3xl font-semibold uppercase tracking-tight text-[#FAF6ED] group-hover:text-white transition-colors duration-300">
+                  {/* Middle: Principle Title & Body */}
+                  <div className="space-y-2.5">
+                    <h3 className="font-parkinsans text-lg sm:text-xl font-semibold uppercase tracking-tight text-white group-hover:text-accent transition-colors duration-300">
                       {item.title}
                     </h3>
-                    <p className="font-artific text-base text-[#FAF6ED]/75 leading-[1.8] group-hover:text-[#FAF6ED]/95 transition-colors duration-300">
+                    <p className="font-artific text-xs sm:text-sm text-white/85 leading-relaxed group-hover:text-white transition-colors duration-300">
                       {item.desc}
                     </p>
                   </div>

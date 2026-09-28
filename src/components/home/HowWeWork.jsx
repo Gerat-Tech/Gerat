@@ -1,215 +1,269 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import SectionLabel from "../common/SectionLabel";
-import CurvedSectionTransition from "../common/CurvedSectionTransition";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import FadeUp from "../motion/FadeUp";
-import SplitText from "../motion/SplitText";
-import { useNav } from "@/context/NavContext";
+import { Workflow, Sparkles, ShieldCheck, Zap } from "lucide-react";
 
 const PROCESS_STEPS = [
   {
-    number: "01",
-    title: "UNDERSTAND",
+    num: "01",
+    tagline: "DISCOVERY & STRATEGY",
+    title: "We dissect the operational & market bottleneck.",
     description:
-      "We learn how the business works, where the friction is, and what the technology needs to achieve.",
-    tagline: "Problem discovery & business alignment",
+      "We audit your workflows, brand positioning, and technical landscape. Whether shaping a distinctive brand identity, a high-converting web platform, an internal ERP, or an AI tool, we map out clear requirements, user flows, and an honest delivery roadmap.",
   },
   {
-    number: "02",
-    title: "DEFINE",
+    num: "02",
+    tagline: "DESIGN & ARCHITECTURE",
+    title: "We craft the visual system & technical blueprint.",
     description:
-      "We turn the problem into a clear scope, user experience, technical direction, and delivery plan.",
-    tagline: "Architecture, scoping & UX direction",
+      "From typographic identity and interactive Figma prototypes to robust data schemas and API architecture. You test, refine, and validate the complete brand visual language and user experience before production starts—ensuring zero wasted effort.",
   },
   {
-    number: "03",
-    title: "BUILD",
+    num: "03",
+    tagline: "SPRINT DELIVERY",
+    title: "We build & iterate in transparent weekly cycles.",
     description:
-      "We design and engineer the product, system, or brand with the right level of technology for the job.",
-    tagline: "Engineering, system design & execution",
+      "Full-stack engineering, brand asset generation, and AI workflow integrations executed with uncompromising craft. You get weekly staging demos, creative reviews, clear changelogs, and direct collaboration with the designers and engineers building your solution.",
+  },
+];
+
+const SOLUTION_METRICS = [
+  {
+    label: "Assets & IP Ownership",
+    value: "100%",
+    caption: "Code, designs & brand kits",
+    icon: Workflow,
+    rotate: "lg:-rotate-2",
   },
   {
-    number: "04",
-    title: "SUPPORT",
-    description:
-      "We help with launch, handover, improvements, and the next stage of the system.",
-    tagline: "Telemetry, handover & sustained scale",
+    label: "Sprint Cadence",
+    value: "Weekly",
+    caption: "Live demos & design reviews",
+    icon: Zap,
+    rotate: "lg:-rotate-1",
+  },
+  {
+    label: "System Reliability",
+    value: "99.99%",
+    caption: "Uptime & production QA",
+    icon: ShieldCheck,
+    rotate: "lg:rotate-1",
+  },
+  {
+    label: "Future Readiness",
+    value: "Scalable",
+    caption: "Engineered for tomorrow's growth",
+    icon: Sparkles,
+    rotate: "lg:rotate-2",
   },
 ];
 
 /**
- * Section 04: THE PROCESS ("HOW WE WORK") — Receivio Floating Container Alignment
+ * Section 03: HOW WE WORK ("THE PROCESS")
  *
- * Eliminates muddy brown tones in favor of the official brand palette:
- * - Floating container card on warm canvas (rounded-[32px])
- * - Soft rounded step cards (rounded-2xl)
- * - Vibrant Flame Orange (#EA5B15) active phase indicators and progress bar
- * - Pill CTA buttons (rounded-full)
+ * Distinct Interaction Pattern:
+ * - Scroll-Linked Process Rail with sequential timeline activation
+ * - Staggered workflow cards with interactive hover elevation
+ * - Smooth container morphing and perspective reveal into Stage 04
+ * - Zero red dots on eyebrow text
  */
 export default function HowWeWork() {
-  const { openContact } = useNav();
-  const [activeStep, setActiveStep] = useState(0);
-  const stepRefs = useRef([]);
+  const sectionRef = useRef(null);
+  const prefersReducedMotion = useReducedMotion();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const viewportCenter = window.innerHeight * 0.45;
-      stepRefs.current.forEach((el, idx) => {
-        if (!el) return;
-        const rect = el.getBoundingClientRect();
-        if (rect.top <= viewportCenter && rect.bottom >= viewportCenter) {
-          setActiveStep(idx);
-        }
-      });
-    };
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start center", "end end"],
+  });
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  // Stage 04 container expand
+  const stage4Scale = useTransform(
+    scrollYProgress,
+    [0.6, 0.95],
+    prefersReducedMotion ? [1, 1] : [0.975, 1]
+  );
+  const stage4Opacity = useTransform(
+    scrollYProgress,
+    [0.6, 0.85],
+    prefersReducedMotion ? [1, 1] : [0.85, 1]
+  );
 
   return (
     <section
+      ref={sectionRef}
       id="process"
-      aria-label="How We Work"
-      className="w-full bg-[var(--bg)] relative scroll-mt-24"
+      aria-label="Our Process"
+      className="w-full bg-[var(--surface)] text-[var(--text-primary)] relative scroll-mt-24 pt-16 sm:pt-24 md:pt-32 pb-24 sm:pb-32 md:pb-40 overflow-hidden"
     >
-      {/* Dynamic Scroll-Morphing Arched Transition into How We Work */}
-      <CurvedSectionTransition
-        fill="var(--bg)"
-        stroke="var(--border-subtle)"
-        showStroke={true}
-        defaultMaxArch={54}
-      />
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 flex flex-col items-center">
+        {/* =========================================================================
+            HEADER: Eyebrow Pill, Headline, Subtitle
+           ========================================================================= */}
+        <FadeUp delay={0.1} y={16} className="flex justify-center">
+          <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-[#FAF6ED] border border-[#E5DAC8] font-parkinsans text-xs tracking-[0.2em] uppercase font-bold text-[#300F0A] shadow-xs">
+            <span>Our Process</span>
+          </div>
+        </FadeUp>
 
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-16 sm:pt-24 pb-28 sm:pb-36">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* LEFT COLUMN: Sticky Narrative & Step Progress Indicator */}
-          <div className="lg:col-span-5 lg:sticky lg:top-32 flex flex-col items-start gap-6 sm:gap-8 pt-2">
-            <SectionLabel index="03" label="THE PROCESS" />
+        <FadeUp delay={0.2} y={20} className="mt-5 text-center px-4 max-w-3xl">
+          <h2 className="font-parkinsans text-2xl sm:text-3xl md:text-4xl lg:text-[44px] xl:text-[48px] font-semibold tracking-tight uppercase leading-[1.08] text-[#300F0A]">
+            From Clear Discovery <br className="hidden sm:block" />
+            <span className="text-accent">To Market-Ready Reality.</span>
+          </h2>
+        </FadeUp>
 
-            <div className="w-full space-y-2">
-              <SplitText
-                text="START WITH THE PROBLEM."
-                as="h2"
-                delay={0.1}
-                stagger={0.035}
-                className="font-parkinsans text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight uppercase leading-[0.98] text-[var(--text-primary)]"
-              />
-              <SplitText
-                text="BUILD THE RIGHT THING."
-                as="div"
-                delay={0.25}
-                stagger={0.035}
-                wordClassName="text-accent"
-                className="font-parkinsans text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight uppercase leading-[0.98]"
-              />
-            </div>
+        <FadeUp delay={0.3} y={16} className="mt-3 text-center px-4 max-w-xl">
+          <p className="font-artific text-sm sm:text-base text-[#300F0A]/75 leading-relaxed">
+            A disciplined, transparent delivery workflow designed to eliminate friction, move fast, and craft brand systems, digital products, and automated operations that actually work.
+          </p>
+        </FadeUp>
 
-            <FadeUp delay={0.3} y={16}>
-              <p className="font-artific text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed max-w-md">
-                We keep the process clear: understand the business, shape the solution, build it well, then stay close after launch.
-              </p>
-            </FadeUp>
+        {/* =========================================================================
+            VERTICAL TIMELINE: Beacon Drop-Pin Node
+           ========================================================================= */}
+        <FadeUp delay={0.4} y={16} className="mt-10 sm:mt-12 flex flex-col items-center">
+          <div className="relative z-10 flex items-center justify-center w-6 h-6 rounded-full border-2 border-accent bg-[#FAF6ED] shadow-[0_0_16px_rgba(234,91,21,0.3)]">
+            <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+          </div>
+          {/* Dashed connector line to Step 01 */}
+          <div className="w-0 h-8 sm:h-10 border-l-2 border-dashed border-accent/60" />
+        </FadeUp>
 
-            {/* Step Progress Tracker */}
-            <div className="w-full max-w-sm pt-4 hidden sm:flex flex-col gap-3">
-              <div className="flex items-center justify-between text-xs font-parkinsans font-bold text-[var(--text-muted)] uppercase tracking-[0.2em]">
-                <span>Phase Progress</span>
-                <span className="text-accent">
-                  {PROCESS_STEPS[activeStep].number} / 04
-                </span>
-              </div>
-              <div className="grid grid-cols-4 gap-2">
-                {PROCESS_STEPS.map((step, idx) => (
-                  <button
-                    key={step.number}
-                    type="button"
-                    onClick={() => {
-                      stepRefs.current[idx]?.scrollIntoView({
-                        behavior: "smooth",
-                        block: "center",
-                      });
-                    }}
-                    className={`h-2 rounded-full transition-all duration-300 text-left ${
-                      idx === activeStep
-                        ? "bg-accent shadow-[0_0_12px_rgba(234,91,21,0.6)]"
-                        : idx < activeStep
-                        ? "bg-accent/40"
-                        : "bg-[var(--border-strong)] hover:bg-[var(--text-muted)]"
-                    }`}
-                    aria-label={`Jump to step ${step.number}: ${step.title}`}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Primary Action Button */}
-            <FadeUp delay={0.4} y={16}>
-              <button
-                type="button"
-                onClick={() => openContact({ discipline: "general", subOption: "PROCESS" })}
-                className="group relative isolate inline-flex items-center gap-3 font-parkinsans text-xs uppercase tracking-[0.2em] px-8 py-3.5 bg-accent hover:bg-white hover:text-[#300F0A] text-white font-bold rounded-full shadow-md hover:shadow-accent/25 transition-all duration-300 cursor-pointer mt-2"
+        {/* =========================================================================
+            THE THREE SEQUENTIAL WORKFLOW CARDS (01, 02, 03)
+           ========================================================================= */}
+        <div className="flex flex-col items-center w-full max-w-[560px] px-4">
+          {PROCESS_STEPS.map((item, idx) => (
+            <React.Fragment key={item.num}>
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.12 * idx,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                whileHover={
+                  prefersReducedMotion
+                    ? {}
+                    : {
+                        y: -4,
+                        borderColor: "rgba(234, 91, 21, 0.45)",
+                        boxShadow: "0 12px 32px rgba(48, 15, 10, 0.08)",
+                        transition: { duration: 0.25 },
+                      }
+                }
+                className="w-full bg-[#FAF6ED] border border-[#E5DAC8] rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-[0_4px_24px_rgba(48,15,10,0.03)] text-left cursor-default transition-colors duration-200"
               >
-                <span>START A PROJECT</span>
-                <span className="transition-transform duration-300 group-hover:translate-x-1">
-                  →
-                </span>
-              </button>
-            </FadeUp>
-          </div>
-
-          {/* RIGHT COLUMN: 4 Step Cards Sequence */}
-          <div className="lg:col-span-7 flex flex-col gap-8 sm:gap-10 w-full">
-            {PROCESS_STEPS.map((step, idx) => {
-              const isActive = activeStep === idx;
-              return (
-                <div
-                  key={step.number}
-                  ref={(el) => (stepRefs.current[idx] = el)}
-                  className={`relative flex flex-col justify-between rounded-3xl p-10 sm:p-12 md:p-14 min-h-[300px] transition-all duration-500 border ${
-                    isActive
-                      ? "bg-[var(--surface-2)] border-accent shadow-[0_16px_40px_rgba(234,91,21,0.12)] scale-[1.01]"
-                      : "bg-[var(--surface-2)]/60 border-[var(--border-subtle)] opacity-75 hover:opacity-100 hover:border-[var(--border-medium)]"
-                  }`}
-                >
-                  {/* Top: Step Number & Tagline */}
-                  <div className="flex items-center justify-between gap-4 pb-6 border-b border-[var(--border-subtle)]">
-                    <span className="font-parkinsans text-xs sm:text-sm font-bold tracking-[0.25em] text-accent uppercase">
-                      STEP {step.number}
-                    </span>
-                    <span className="font-artific text-xs text-[var(--text-muted)] tracking-wide uppercase font-medium">
-                      {step.tagline}
-                    </span>
-                  </div>
-
-                  {/* Middle: Step Headline */}
-                  <div className="py-6">
-                    <h3 className="font-parkinsans text-2xl sm:text-3xl md:text-4xl font-semibold uppercase tracking-tight text-[var(--text-primary)]">
-                      {step.title}
-                    </h3>
-                    <p className="font-artific text-base sm:text-lg text-[var(--text-secondary)] leading-[1.8] mt-4 max-w-xl">
-                      {step.description}
-                    </p>
-                  </div>
-
-                  {/* Bottom: Status Indicator */}
-                  <div className="flex items-center gap-2 pt-4 border-t border-[var(--border-subtle)] text-[11px] font-parkinsans uppercase tracking-[0.15em] text-[var(--text-muted)]">
-                    <span
-                      className={`size-2.5 rounded-full ${
-                        isActive ? "bg-accent animate-pulse" : "bg-[var(--border-strong)]"
-                      }`}
-                    />
-                    <span className={isActive ? "text-accent font-bold" : ""}>
-                      {isActive ? "ACTIVE STAGE" : `PHASE ${step.number}`}
-                    </span>
-                  </div>
+                <div className="flex items-center justify-between pb-3 mb-2 border-b border-[#E5DAC8]/60">
+                  <span className="font-parkinsans text-2xl sm:text-3xl font-bold text-[#300F0A]/35">
+                    {item.num}
+                  </span>
+                  <span className="font-parkinsans text-[10px] sm:text-[11px] tracking-[0.22em] uppercase text-accent font-bold">
+                    {item.tagline}
+                  </span>
                 </div>
-              );
-            })}
-          </div>
+                <p className="font-artific text-sm sm:text-[15px] leading-relaxed text-[#300F0A]/80 pt-1">
+                  <strong className="font-bold text-[#300F0A] mr-1.5">{item.title}</strong>
+                  {item.description}
+                </p>
+              </motion.div>
+
+              {/* Dashed connector between cards */}
+              <div className="w-0 h-8 sm:h-10 border-l-2 border-dashed border-accent/60" />
+            </React.Fragment>
+          ))}
         </div>
+
+        {/* Dashed connector continuing directly into the Stage 04 Dark Container */}
+        <div className="w-0 h-8 sm:h-12 border-l-2 border-dashed border-accent/60" />
+
+        {/* =========================================================================
+            STAGE 04: THE LARGE DARK FLOATING SOLUTION CONTAINER
+           ========================================================================= */}
+        <motion.div
+          style={{
+            scale: stage4Scale,
+            opacity: stage4Opacity,
+          }}
+          className="w-full max-w-[1080px] px-2 sm:px-4 will-change-transform"
+        >
+          <div
+            data-dark-overlay="true"
+            className="relative w-full bg-[#1F1713] text-white rounded-[28px] sm:rounded-[36px] md:rounded-[44px] border border-white/10 p-8 sm:p-12 md:p-16 shadow-[0_24px_80px_rgba(0,0,0,0.35)] overflow-hidden"
+          >
+            {/* Blueprint Grid Overlay */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 pointer-events-none opacity-40 bg-[linear-gradient(to_right,rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:32px_32px]"
+            />
+
+            {/* Ambient Radial Accent Glow */}
+            <div
+              aria-hidden="true"
+              className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-accent/20 rounded-full blur-[100px] pointer-events-none"
+            />
+
+            <div className="relative z-10 flex flex-col items-center text-center">
+              {/* Stage 04 Pill */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 font-parkinsans text-xs tracking-[0.18em] uppercase font-bold text-white shadow-xs backdrop-blur-sm">
+                <span>Stage 04 · Launch & Scale</span>
+                <span className="flex items-center justify-center w-3.5 h-3.5 rounded-full bg-accent/30 text-accent text-[9px] font-bold">
+                  ✓
+                </span>
+              </div>
+
+              {/* Main Solution Headline */}
+              <h3 className="font-parkinsans text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight uppercase leading-[1.08] text-white mt-5">
+                Unified Solutions. <br />
+                <span className="text-accent">
+                  Built To Scale & Run.
+                </span>
+              </h3>
+
+              {/* Solution Subtitle */}
+              <p className="font-artific text-sm sm:text-base text-white/75 max-w-xl mx-auto mt-4 leading-relaxed">
+                We handle cloud deployment, brand asset packaging, domain configuration, and staff onboarding. Once launched, we deliver complete brand kits and source code repositories, with ongoing support to ensure your brand and systems expand effortlessly.
+              </p>
+
+              {/* 4 Sleek Floating Perspective Metric Cards */}
+              <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-row lg:justify-center items-stretch gap-4 mt-12 sm:mt-16">
+                {SOLUTION_METRICS.map((metric) => {
+                  const Icon = metric.icon;
+                  return (
+                    <div
+                      key={metric.label}
+                      className={`group/card relative bg-[#281F1B]/95 hover:bg-[#322722] border border-white/10 hover:border-accent/50 rounded-2xl p-5 sm:p-6 shadow-xl backdrop-blur-md flex flex-col justify-between min-h-[140px] sm:min-h-[160px] lg:w-[220px] transition-all duration-300 text-left ${metric.rotate} hover:rotate-0 hover:scale-105`}
+                    >
+                      {/* Top row */}
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="font-parkinsans text-xs font-bold text-white/70 uppercase tracking-wide">
+                          {metric.label}
+                        </span>
+                        <div className="w-7 h-7 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center text-accent group-hover/card:scale-110 group-hover/card:bg-accent group-hover/card:text-white transition-all duration-300">
+                          <Icon className="w-3.5 h-3.5" strokeWidth={2} />
+                        </div>
+                      </div>
+
+                      {/* Bottom row */}
+                      <div className="mt-6 sm:mt-8">
+                        <div className="font-parkinsans text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                          {metric.value}
+                        </div>
+                        <div className="font-artific text-[11px] sm:text-xs text-white/60 tracking-tight mt-1">
+                          {metric.caption}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

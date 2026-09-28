@@ -1,24 +1,24 @@
 :root {
   /* ==========================================================================
      Color System (Gerat Brand Specification)
-     Warm obsidian palette grounded in Coffee Bean (#300F0A) with Flame (#EA5B15)
+     Grounded in deep Coffee Bean (#300F0A) with Flame Orange (#EA5B15) and Almond (#F1DFD9)
      ========================================================================== */
-  --bg: #0d0706;
-  --bg-subtle: #140c0a;
-  --surface: #1c120f;
-  --surface-2: #261814;
-  --surface-3: #33211c;
+  --bg: #300f0a;
+  --bg-subtle: #260c08;
+  --surface: #2b0e09;
+  --surface-2: #3a150f;
+  --surface-3: #4a1d15;
 
   /* Contrast Hierarchy */
-  --text-primary: #faf6ed;      /* Level 1: Ivory cream headlines, high clarity */
+  --text-primary: #f1dfd9;      /* Level 1: Warm Almond headlines, high clarity */
   --text-secondary: #d5c3bc;    /* Level 2: Warm Almond descriptions, main nav */
   --text-muted: #9e8a83;        /* Level 3: Metadata, captions, mono labels */
   --text-dim: #63534d;          /* Level 4: Subtle markers */
   
   /* Borders & Rules */
-  --border: #38241e;
-  --border-subtle: rgba(241, 223, 217, 0.08);
-  --border-medium: rgba(241, 223, 217, 0.16);
+  --border: #4a1d15;
+  --border-subtle: rgba(241, 223, 217, 0.10);
+  --border-medium: rgba(241, 223, 217, 0.18);
   --border-strong: rgba(241, 223, 217, 0.28);
 
   /* Brand Accent: Flame */

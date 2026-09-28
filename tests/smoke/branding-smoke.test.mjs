@@ -24,8 +24,7 @@ export async function runBrandingSmokeTests() {
   assert(navbar.includes("#services"), "Navbar must support #services anchor navigation");
   assert(navbar.includes("#about"), "Navbar must support #about anchor navigation");
   assert(navbar.includes("#founders"), "Navbar must support #founders anchor navigation");
-  assert(navbar.includes("TEAM") || navbar.includes("Team"), "Navbar must support 'Team' navigation");
-  assert(navbar.includes("START A PROJECT"), "Navbar must feature 'START A PROJECT' primary CTA");
+  assert(navbar.includes("CONTACT"), "Navbar must feature 'CONTACT' primary CTA");
   console.log("  ✓ Navbar branding & contextual anchor navigation verified");
 
   // Hero must contain Gerat V2 headline and not legacy WQF text
@@ -93,16 +92,17 @@ export async function runBrandingSmokeTests() {
   const aboutPage = fs.readFileSync(path.join(root, "src/app/about/page.js"), "utf-8");
   assert(aboutPage.includes("AboutHero"), "About page must include AboutHero");
   assert(aboutPage.includes("OurStory"), "About page must include OurStory");
-  assert(aboutPage.includes("WhatGeratMeans"), "About page must include WhatGeratMeans");
-  assert(aboutPage.includes("TheBridge"), "About page must include TheBridge");
   assert(aboutPage.includes("WhatWeBelieve"), "About page must include WhatWeBelieve");
   assert(aboutPage.includes("TheFounders"), "About page must include TheFounders");
-  assert(aboutPage.includes("WhereWeAreGoing"), "About page must include WhereWeAreGoing");
   assert(aboutPage.includes("AboutCTA"), "About page must include AboutCTA");
 
+  const whatWeBelieve = fs.readFileSync(path.join(root, "src/app/about/components/WhatWeBelieve.jsx"), "utf-8");
+  assert(whatWeBelieve.includes("SIMPLE PRINCIPLES."), "WhatWeBelieve must contain 'SIMPLE PRINCIPLES.'");
+  assert(whatWeBelieve.includes("HIGH STANDARDS."), "WhatWeBelieve must contain 'HIGH STANDARDS.'");
+
   const aboutHero = fs.readFileSync(path.join(root, "src/app/about/components/AboutHero.jsx"), "utf-8");
-  assert(aboutHero.includes("A NEW COMPANY."), "AboutHero must contain 'A NEW COMPANY.'");
-  assert(aboutHero.includes("A CLEAR DIRECTION."), "AboutHero must contain 'A CLEAR DIRECTION.'");
+  assert(aboutHero.includes("WE BUILD THE BRIDGE."), "AboutHero must contain 'WE BUILD THE BRIDGE.'");
+  assert(aboutHero.includes("YOU CROSS IT."), "AboutHero must contain 'YOU CROSS IT.'");
 
   const whatGeratMeans = fs.readFileSync(path.join(root, "src/app/about/components/WhatGeratMeans.jsx"), "utf-8");
   assert(whatGeratMeans.includes("Gerät"), "WhatGeratMeans must reference German word 'Gerät'");

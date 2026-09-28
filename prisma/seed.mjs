@@ -14,16 +14,11 @@ const prisma = new PrismaClient();
 async function main() {
   console.log("🌱 Seeding Gerat Mission Control database...");
 
-  // 1. Seed Users (Super Admin, Operations Lead, Editor)
+  // 1. Seed Root Admin User
   const adminPassword = await bcrypt.hash("GeratAdmin2026!#", 10);
-  const teamPassword = await bcrypt.hash("GeratTeam2026!#", 10);
 
   // Migrate legacy @gerat.et user emails to official @gerat.com
   await prisma.user.updateMany({ where: { email: "admin@gerat.et" }, data: { email: "admin@gerat.com" } });
-  await prisma.user.updateMany({ where: { email: "operations@gerat.et" }, data: { email: "operations@gerat.com" } });
-  await prisma.user.updateMany({ where: { email: "editor@gerat.et" }, data: { email: "editor@gerat.com" } });
-  await prisma.user.updateMany({ where: { email: "architect@gerat.et" }, data: { email: "architect@gerat.com" } });
-  await prisma.user.updateMany({ where: { email: "creative@gerat.et" }, data: { email: "creative@gerat.com" } });
 
   const superAdmin = await prisma.user.upsert({
     where: { email: "admin@gerat.com" },
@@ -42,41 +37,7 @@ async function main() {
     },
   });
 
-  const opsLead = await prisma.user.upsert({
-    where: { email: "operations@gerat.com" },
-    update: {
-      passwordHash: teamPassword,
-      role: "OPERATIONS_LEAD",
-      active: true,
-    },
-    create: {
-      email: "operations@gerat.com",
-      name: "Client Operations Lead",
-      passwordHash: teamPassword,
-      role: "OPERATIONS_LEAD",
-      title: "Head of Client Engagement & Solutions",
-      active: true,
-    },
-  });
-
-  const editor = await prisma.user.upsert({
-    where: { email: "editor@gerat.com" },
-    update: {
-      passwordHash: teamPassword,
-      role: "EDITOR",
-      active: true,
-    },
-    create: {
-      email: "editor@gerat.com",
-      name: "Content & Editorial Lead",
-      passwordHash: teamPassword,
-      role: "EDITOR",
-      title: "Content & Publications Director",
-      active: true,
-    },
-  });
-
-  console.log("  ✓ Created/verified 3 administrative users (Super Admin, Ops Lead, Editor)");
+  console.log("  ✓ Created/verified primary administrative user (Super Admin: admin@gerat.com)");
 
   // 2. Seed Portfolio Case Studies
   let projectOrder = 1;
@@ -249,84 +210,6 @@ async function main() {
   });
 
   console.log("  ✓ Seeded site configuration parameters");
-
-  // 7. Seed Sample Inquiries (for immediate testing of the CRM)
-  const sampleInquiry = await prisma.inquiry.upsert({
-    where: { telemetryCode: "GRT-ENG-202609-001248" },
-    update: {},
-    create: {
-      telemetryCode: "GRT-ENG-202609-001248",
-      status: "NEW_INTAKE",
-      priority: "CRITICAL_ENTERPRISE",
-      fullName: "Dr. Henok Tadesse",
-      email: "henok.tadesse@apexlogistics.et",
-      phone: "+251911223344",
-      company: "Apex Logistics & Trade PLC",
-      roleTitle: "Chief Operating Officer",
-      discipline: "CUSTOM ERP & OPERATIONAL PLATFORMS",
-      subServices: JSON.stringify(["Automated Supply Chain", "Multi-Entity Financial Ledger"]),
-      timeline: "STANDARD (1-3 MONTHS)",
-      budgetRange: "150K - 250K ETB",
-      projectBrief: "We require a centralized multi-warehouse inventory reconciliation engine that integrates with local banks and automated customs declaration APIs.",
-      sourceUrl: "/services",
-      countryCode: "ET",
-      assignedToId: opsLead.id,
-      notes: {
-        create: [
-          {
-            authorId: superAdmin.id,
-            content: "High-value enterprise lead. Reviewed initial scope; matches our Axiom ERP architecture. Scheduling discovery call.",
-            isPinned: true,
-          },
-        ],
-      },
-    },
-  });
-
-  const sampleBrandInquiry = await prisma.inquiry.upsert({
-    where: { telemetryCode: "GRT-BRD-202609-008472" },
-    update: {},
-    create: {
-      telemetryCode: "GRT-BRD-202609-008472",
-      status: "TRIAGED",
-      priority: "HIGH",
-      fullName: "Sara Alemayehu",
-      email: "sara@auracapital.et",
-      phone: "+251922334455",
-      company: "Aura Capital Partners",
-      roleTitle: "Managing Partner",
-      discipline: "BRAND STRATEGY & IDENTITY",
-      subServices: JSON.stringify(["Primary & Monogram Logo", "Design Token Standards", "Corporate Collateral"]),
-      timeline: "URGENT (2-4 WEEKS)",
-      budgetRange: "75K - 150K ETB",
-      projectBrief: "Launching a modern technology venture fund in East Africa. We need an authoritative, dark-mode visual identity system, pitch deck templates, and web guidelines.",
-      sourceUrl: "/services/brand-creative",
-      countryCode: "ET",
-      assignedToId: opsLead.id,
-      notes: {
-        create: [
-          {
-            authorId: opsLead.id,
-            content: "Connected on WhatsApp. Client confirmed budget and urgent timeline. Sent discovery questionnaire.",
-            isPinned: false,
-          },
-        ],
-      },
-      communications: {
-        create: [
-          {
-            actorId: opsLead.id,
-            channel: "WHATSAPP",
-            subject: "Initial Outreach & Scope Confirmation",
-            summary: "Sent formal WhatsApp greeting referencing telemetry code. Client responded within 10 minutes.",
-            outcome: "Discovery Zoom call scheduled for Wednesday 10:00 AM EAT.",
-          },
-        ],
-      },
-    },
-  });
-
-  console.log("  ✓ Seeded 2 sample inquiries with notes & communication history");
 
   // Initial Audit Log
   await prisma.auditLog.create({

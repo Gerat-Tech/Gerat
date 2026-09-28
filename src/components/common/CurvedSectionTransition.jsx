@@ -7,78 +7,67 @@ import { motion, useScroll, useTransform } from "framer-motion";
  * CurvedSectionTransition
  *
  * Implements the fluid, scroll-driven section transition inspired by Receivio:
- * - Starts as a smooth, shallow curved/arched edge as the section enters the viewport
- * - Progressively straightens into a flat horizontal boundary as the section scrolls into position
- * - Fluid, subtle, with no hard cut
- * - Responsive arch height adapting between mobile, tablet, and desktop
+ * - Starts as a smooth, elegant, circular/elliptical horizon arc rising into the section above
+ * - Progressively straightens into a flat horizontal boundary as the user scrolls down
+ * - Absolute positioning so it overlaps without causing layout shifts or scroll feedback loops
+ * - Initial SSR path ensures the curve is immediately rendered before hydration
  */
 export default function CurvedSectionTransition({
-  fill = "var(--surface)",
-  stroke = "var(--border-subtle)",
-  showStroke = true,
-  defaultMaxArch = 48,
+  fill = "#F1DFD9",
+  stroke = "transparent",
+  showStroke = false,
+  offset = ["start end", "start 25%"],
+  defaultMaxArch = 50,
   className = "",
 }) {
-  const transitionRef = useRef(null);
-  const [maxArch, setMaxArch] = useState(defaultMaxArch);
+  const containerRef = useRef(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const updateArch = () => {
-      if (window.innerWidth < 640) {
-        setMaxArch(Math.min(defaultMaxArch, 24));
-      } else if (window.innerWidth < 1024) {
-        setMaxArch(Math.min(defaultMaxArch, 36));
-      } else {
-        setMaxArch(defaultMaxArch);
-      }
-    };
-    updateArch();
-    window.addEventListener("resize", updateArch, { passive: true });
-    return () => window.removeEventListener("resize", updateArch);
-  }, [defaultMaxArch]);
+    setMounted(true);
+  }, []);
 
-  // Track the transition boundary entering the viewport:
-  // "start end": boundary touches bottom of viewport (scrollYProgress = 0)
-  // "start 25%": boundary reaches upper quarter of viewport (scrollYProgress = 1)
+  // Track the boundary entering the viewport:
+  // "start end": top of the transition container touches the bottom of the viewport
+  // "start 25%": transition container approaches reading level
   const { scrollYProgress } = useScroll({
-    target: transitionRef,
-    offset: ["start end", "start 25%"],
+    target: containerRef,
+    offset,
   });
 
-  // Dynamic curve height: morphs from shallow arch (maxArch) down to 0 (flat horizontal)
-  const curveHeight = useTransform(scrollYProgress, [0, 0.85], [maxArch, 0]);
+  // Morph control point Y from -100 (smooth upward parabolic dome reaching apex at y=0)
+  // down to 100 (perfectly straight flat horizontal line at y=100)
+  const curveY = useTransform(scrollYProgress, [0, 0.85], [-100, 100]);
+  const pathD = useTransform(
+    curveY,
+    (y) => `M 0 100 Q 720 ${y} 1440 100 L 1440 105 L 0 105 Z`
+  );
 
   return (
     <div
-      ref={transitionRef}
-      className={`w-full overflow-hidden shrink-0 pointer-events-none select-none relative z-20 ${className}`}
+      ref={containerRef}
+      className={`absolute -top-20 sm:-top-24 md:-top-28 lg:-top-32 xl:-top-36 left-0 right-0 w-full h-20 sm:h-24 md:h-28 lg:h-32 xl:h-36 pointer-events-none select-none z-20 overflow-visible ${className}`}
       aria-hidden="true"
     >
-      <motion.div
-        style={{ height: curveHeight }}
-        className="w-full overflow-hidden -mb-[1px]"
+      <svg
+        viewBox="0 0 1440 100"
+        preserveAspectRatio="none"
+        className="w-full h-full block overflow-visible"
       >
-        <svg
-          viewBox="0 0 1440 60"
-          preserveAspectRatio="none"
-          className="w-full h-full block"
-        >
-          {/* Smooth quadratic curve arching upwards in center and tapering to edges */}
-          <path
-            d="M 0 60 Q 720 0 1440 60 L 1440 60 L 0 60 Z"
-            fill={fill}
+        <motion.path
+          d={mounted ? pathD : "M 0 100 Q 720 -100 1440 100 L 1440 105 L 0 105 Z"}
+          fill={fill}
+        />
+        {showStroke && stroke && (
+          <motion.path
+            d={mounted ? pathD : "M 0 100 Q 720 -100 1440 100"}
+            fill="none"
+            stroke={stroke}
+            strokeWidth="1.2"
+            vectorEffect="non-scaling-stroke"
           />
-          {showStroke && stroke && (
-            <path
-              d="M 0 60 Q 720 0 1440 60"
-              fill="none"
-              stroke={stroke}
-              strokeWidth="1.2"
-              vectorEffect="non-scaling-stroke"
-            />
-          )}
-        </svg>
-      </motion.div>
+        )}
+      </svg>
     </div>
   );
 }

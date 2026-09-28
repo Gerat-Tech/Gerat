@@ -72,21 +72,23 @@ export default function OurPortfolio({ initialProjects = null, totalProjectCount
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 sm:mb-12">
-          <div className="flex flex-col gap-4 max-w-2xl">
+          <div className="flex flex-col gap-3.5 max-w-2xl">
             <SectionLabel label="SELECTED WORK" />
-            <SplitText
-              text="WE BUILD THINGS"
-              as="h2"
-              className="font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium sm:font-semibold tracking-tight uppercase leading-[0.95]"
-            />
-            <SplitText
-              text="PEOPLE ACTUALLY USE."
-              as="h2"
-              wordClassName="text-accent"
-              className="font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium sm:font-semibold tracking-tight uppercase leading-[0.95]"
-            />
+            <div className="space-y-1 sm:space-y-1.5">
+              <SplitText
+                text="WE BUILD THINGS"
+                as="h2"
+                className="font-parkinsans text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight uppercase leading-[1.08]"
+              />
+              <SplitText
+                text="PEOPLE ACTUALLY USE."
+                as="h2"
+                wordClassName="text-accent"
+                className="font-parkinsans text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight uppercase leading-[1.08]"
+              />
+            </div>
             <FadeUp delay={0.2} y={16}>
-              <p className="font-artific text-base sm:text-lg text-white/75 leading-relaxed pt-2">
+              <p className="font-artific text-sm sm:text-base text-white/75 leading-relaxed pt-1">
                 A few examples of the products, platforms, and experiences we&apos;ve helped shape.
               </p>
             </FadeUp>
