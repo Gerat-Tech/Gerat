@@ -131,25 +131,57 @@ export async function PATCH(request, { params }) {
     const targetId = existing?.id || id;
 
     try {
-      updated = await prisma.teamMember.upsert({
-        where: { id: targetId },
-        update: data,
-        create: {
-          id: targetId,
-          name: data.name || "UNNAMED ARCHITECT",
-          roleTitle: data.roleTitle || "ENGINEERING LEADERSHIP",
-          division: data.division || "EXECUTIVE_LEADERSHIP",
-          focusTag: data.focusTag || "SYSTEMS ARCHITECTURE",
-          bio: data.bio || "",
-          photoUrl: data.photoUrl || "/image/team/leadership/Dawit.jpeg",
-          order: data.order !== undefined ? data.order : 1,
-          active: data.active !== undefined ? data.active : true,
-          email: data.email || null,
-          linkedinUrl: data.linkedinUrl || null,
-          githubUrl: data.githubUrl || null,
-          twitterUrl: data.twitterUrl || null,
-        },
-      });
+      try {
+        updated = await prisma.teamMember.upsert({
+          where: { id: targetId },
+          update: data,
+          create: {
+            id: targetId,
+            name: data.name || "UNNAMED ARCHITECT",
+            roleTitle: data.roleTitle || "ENGINEERING LEADERSHIP",
+            division: data.division || "EXECUTIVE_LEADERSHIP",
+            focusTag: data.focusTag || "SYSTEMS ARCHITECTURE",
+            bio: data.bio || "",
+            photoUrl: data.photoUrl || "/image/team/leadership/Dawit.jpeg",
+            order: data.order !== undefined ? data.order : 1,
+            active: data.active !== undefined ? data.active : true,
+            email: data.email || null,
+            linkedinUrl: data.linkedinUrl || null,
+            githubUrl: data.githubUrl || null,
+            twitterUrl: data.twitterUrl || null,
+          },
+        });
+      } catch (firstErr) {
+        if (
+          firstErr.message?.includes("EMAXCONN") ||
+          firstErr.message?.includes("max clients") ||
+          firstErr.message?.includes("connection")
+        ) {
+          console.warn("Retrying teamMember.upsert after connection error...");
+          await new Promise((resolve) => setTimeout(resolve, 500));
+          updated = await prisma.teamMember.upsert({
+            where: { id: targetId },
+            update: data,
+            create: {
+              id: targetId,
+              name: data.name || "UNNAMED ARCHITECT",
+              roleTitle: data.roleTitle || "ENGINEERING LEADERSHIP",
+              division: data.division || "EXECUTIVE_LEADERSHIP",
+              focusTag: data.focusTag || "SYSTEMS ARCHITECTURE",
+              bio: data.bio || "",
+              photoUrl: data.photoUrl || "/image/team/leadership/Dawit.jpeg",
+              order: data.order !== undefined ? data.order : 1,
+              active: data.active !== undefined ? data.active : true,
+              email: data.email || null,
+              linkedinUrl: data.linkedinUrl || null,
+              githubUrl: data.githubUrl || null,
+              twitterUrl: data.twitterUrl || null,
+            },
+          });
+        } else {
+          throw firstErr;
+        }
+      }
 
       // Invalidate Next.js cache so public pages immediately show updated data
       try {
