@@ -1,40 +1,39 @@
 import React from "react";
 import prisma from "@/lib/prisma";
 import Hero from "@/components/home/Hero";
-import Marquee from "@/components/home/Marquee";
 import OurFocus from "@/components/home/OurFocus";
-import OurEthos from "@/components/home/OurEthos";
-import OurPortfolio from "@/components/home/OurPortfolio";
-import OurLeadership from "@/components/home/OurLeadership";
 import HowWeWork from "@/components/home/HowWeWork";
+import WhyGerat from "@/components/home/WhyGerat";
+import OurLeadership from "@/components/home/OurLeadership";
+import FinalCTA from "@/components/home/FinalCTA";
 import Footer from "@/components/layout/Footer";
 
 export const dynamic = "force-dynamic";
 
+/**
+ * V2 Homepage — Storytelling Scroll Architecture
+ * Narrative order:
+ * 01. Hero (The Promise)
+ * 02. The Bridge (What Gerat Builds)
+ * 03. How We Work (The Process)
+ * 04. Point of View (What We Believe)
+ * 05. Five Founders (The Team)
+ * 06. Final CTA (What Happens Next)
+ * 07. Footer
+ */
 export default async function Home() {
   let initialLeaders = null;
-  let initialProjects = null;
   let initialPillars = null;
-  let marqueeTokens = null;
-  let totalStudies = 0;
 
   try {
-    const [totalMembers, fetchedStudiesCount, totalPillars, teamMembers, caseStudies, servicePillars, siteConfigs] =
+    const [totalMembers, totalPillars, teamMembers, servicePillars] =
       await Promise.all([
         prisma.teamMember.count().catch(() => 0),
-        prisma.caseStudy.count().catch(() => 0),
         prisma.servicePillar.count().catch(() => 0),
         prisma.teamMember
           .findMany({
             where: { active: true },
             orderBy: [{ order: "asc" }, { createdAt: "asc" }],
-          })
-          .catch(() => []),
-        prisma.caseStudy
-          .findMany({
-            where: { featured: true },
-            orderBy: [{ order: "asc" }, { createdAt: "desc" }],
-            take: 3,
           })
           .catch(() => []),
         prisma.servicePillar
@@ -43,10 +42,7 @@ export default async function Home() {
             orderBy: [{ order: "asc" }, { num: "asc" }],
           })
           .catch(() => []),
-        prisma.siteConfig.findMany().catch(() => []),
       ]);
-
-    totalStudies = fetchedStudiesCount;
 
     // 1. Team Leadership: All active executive leaders
     if (totalMembers > 0) {
@@ -62,32 +58,14 @@ export default async function Home() {
         bio: m.bio,
         image: m.photoUrl || "/image/team/leadership/Dawit.jpeg",
         photoUrl: m.photoUrl || "/image/team/leadership/Dawit.jpeg",
+        email: m.email,
+        twitterUrl: m.twitterUrl,
+        linkedinUrl: m.linkedinUrl,
+        githubUrl: m.githubUrl,
       }));
     }
 
-    // 2. Portfolio Projects (Homepage only displays explicitly featured case studies)
-    if (totalStudies > 0) {
-      initialProjects = caseStudies.map((p, idx) => ({
-        ...p,
-        id: p.displayIndex || `0${idx + 1}`,
-        image: p.imageUrl,
-        description: p.summary,
-        tech: p.techStack || p.tech || "",
-        featured: Boolean(p.featured),
-        stack:
-          typeof p.stackBadges === "string" && p.stackBadges.startsWith("[")
-            ? JSON.parse(p.stackBadges)
-            : Array.isArray(p.stackBadges)
-            ? p.stackBadges
-            : p.stackBadges
-            ? p.stackBadges.split(",").map((s) => s.trim())
-            : [],
-      }));
-    } else {
-      initialProjects = [];
-    }
-
-    // 3. Service Pillars for Capabilities section
+    // 2. Service Pillars for Capabilities section
     if (totalPillars > 0) {
       initialPillars = servicePillars.map((p) => {
         let dels = [];
@@ -114,34 +92,31 @@ export default async function Home() {
         };
       });
     }
-
-    // 4. Marquee Tokens from SiteConfig
-    const configMap = siteConfigs.reduce((acc, item) => {
-      acc[item.key] = item.value;
-      return acc;
-    }, {});
-
-    if (configMap.MARQUEE_TOKENS) {
-      try {
-        const parsed = JSON.parse(configMap.MARQUEE_TOKENS);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          marqueeTokens = parsed;
-        }
-      } catch {}
-    }
   } catch (error) {
     console.error("Home page SSR Prisma fetch error:", error);
   }
 
   return (
     <div className="bg-[var(--bg)] min-h-screen text-[var(--text-primary)] selection:bg-accent selection:text-black">
+      {/* 01. The Promise */}
       <Hero />
-      <Marquee customItems={marqueeTokens} />
+
+      {/* 02. The Bridge */}
       <OurFocus initialPillars={initialPillars} />
-      <OurEthos />
-      <OurPortfolio initialProjects={initialProjects} totalProjectCount={totalStudies} />
-      <OurLeadership initialLeaders={initialLeaders} />
+
+      {/* 03. The Process */}
       <HowWeWork />
+
+      {/* 04. Why Gerät (Why It Works Differently) */}
+      <WhyGerat />
+
+      {/* 05. Five Founders / The Team */}
+      <OurLeadership initialLeaders={initialLeaders} />
+
+      {/* 05. What Happens Next */}
+      <FinalCTA />
+
+      {/* 06. Footer */}
       <Footer />
     </div>
   );

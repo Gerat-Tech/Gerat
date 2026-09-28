@@ -16,7 +16,7 @@ export async function runArticlesCmsSmokeTests() {
     "src/app/dashboard/insights/new/page.jsx",
     "src/app/dashboard/insights/[id]/page.jsx",
     "src/app/dashboard/insights/components/ArticleEditor.jsx",
-    "src/app/insights/[slug]/page.jsx",
+    "_archive/insights/[slug]/page.jsx",
     "src/app/api/articles/route.js",
     "src/app/api/articles/[id]/route.js",
   ];

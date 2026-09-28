@@ -17,65 +17,47 @@ export async function runBrandingSmokeTests() {
   assert(readme.includes("Gerat Software Solution"), "README must document Gerat Software Solution");
   console.log("  ✓ README.md branding verified");
 
-  // Navbar must not contain legacy WorldQuant Foundry text
+  // Navbar must support V2 contextual anchor navigation
   const navbar = fs.readFileSync(path.join(root, "src/components/layout/Navbar.jsx"), "utf-8");
   assert(!navbar.includes("WORLDQUANT"), "Navbar should not contain legacy 'WORLDQUANT' text");
   assert(navbar.includes("GERAT"), "Navbar must contain 'GERAT'");
-  console.log("  ✓ Navbar branding verified");
+  assert(navbar.includes("#services"), "Navbar must support #services anchor navigation");
+  assert(navbar.includes("#about"), "Navbar must support #about anchor navigation");
+  assert(navbar.includes("#founders"), "Navbar must support #founders anchor navigation");
+  assert(navbar.includes("CONTACT"), "Navbar must feature 'CONTACT' primary CTA");
+  console.log("  ✓ Navbar branding & contextual anchor navigation verified");
 
-  // Hero must contain Gerat headline and not legacy WQF text
+  // Hero must contain Gerat V2 headline and not legacy WQF text
   const hero = fs.readFileSync(path.join(root, "src/components/home/Hero.jsx"), "utf-8");
-  assert(hero.includes("WE BUILD THE BRIDGE."), "Hero must contain Gerat 'WE BUILD THE BRIDGE.' headline");
-  assert(hero.includes("YOU CROSS IT."), "Hero must contain Gerat 'YOU CROSS IT.' headline");
+  const heroUpper = hero.toUpperCase();
+  assert(heroUpper.includes("BUILD WHAT MOVES"), "Hero must contain Gerat 'BUILD WHAT MOVES' headline");
+  assert(heroUpper.includes("YOUR BUSINESS") && heroUpper.includes("FORWARD"), "Hero must contain Gerat 'YOUR BUSINESS FORWARD' headline");
   console.log("  ✓ Hero branding verified");
 
-  // Ethos must not contain legacy WQF copy
+  // Ethos must contain Gerat V2 beliefs copy
   const ethos = fs.readFileSync(path.join(root, "src/components/home/OurEthos.jsx"), "utf-8");
-  assert(ethos.includes("BUILT TO"), "Ethos must contain 'BUILT TO'");
-  assert(ethos.includes("HOLD WEIGHT."), "Ethos must contain 'HOLD WEIGHT.'");
-  assert(ethos.includes("FOUNDATIONAL STABILITY"), "Ethos must contain 'FOUNDATIONAL STABILITY'");
-  console.log("  ✓ Ethos branding verified");
+  assert(ethos.includes("USEFUL OVER"), "Ethos must contain 'USEFUL OVER'");
+  assert(ethos.includes("COMPLICATED."), "Ethos must contain 'COMPLICATED.'");
+  assert(ethos.includes("WHAT WE BELIEVE"), "Ethos must contain 'WHAT WE BELIEVE'");
+  console.log("  ✓ Ethos V2 beliefs branding verified");
 
   // Portfolio must not link to external worldquantfoundry.com
   const portfolio = fs.readFileSync(path.join(root, "src/components/home/OurPortfolio.jsx"), "utf-8");
   assert(!portfolio.includes("worldquantfoundry.com"), "Portfolio should not contain external WQF links");
   console.log("  ✓ Portfolio internal routing verified");
 
-  // Portfolio page components must not contain legacy WQF copy
-  const portfolioHero = fs.readFileSync(path.join(root, "src/app/portfolio/components/Hero.jsx"), "utf-8");
-  assert(!portfolioHero.includes("Born at the edge"), "Portfolio hero must not contain legacy WQF copy");
-  assert(portfolioHero.includes("PROVEN ARCHITECTURES."), "Portfolio hero must contain Gerat headline");
-  assert(portfolioHero.includes("BRAND & IDENTITY"), "Portfolio hero must include 'BRAND & IDENTITY' category filter");
-  assert(portfolioHero.includes("PERSONAL BRAND"), "Portfolio hero must include 'PERSONAL BRAND' category filter");
-  console.log("  ✓ Portfolio page Hero & category filters verified");
-
+  // Portfolio content clean slate in V2
   const portfolioContent = fs.readFileSync(path.join(root, "src/content/portfolio.js"), "utf-8");
-  const portfolioShowcase = fs.readFileSync(path.join(root, "src/app/portfolio/components/PortfolioShowcase.jsx"), "utf-8");
-  assert(!portfolioShowcase.includes("ALPHA DEAL"), "Portfolio showcase must not contain legacy Alpha Deal");
-  assert(portfolioContent.includes("NATIONAL DIGITAL RECORDS ENGINE"), "Portfolio content must contain Gerat flagship projects");
-  assert(portfolioContent.includes("AXIOM IDENTITY SYSTEM"), "Portfolio content must contain Axiom brand case study");
-  assert(portfolioShowcase.includes("/api/portfolio") || portfolioShowcase.includes("@/content"), "Portfolio showcase must consume content architecture");
-  assert(portfolioShowcase.includes("CREATIVE & STRATEGIC RESOLUTION"), "Portfolio showcase must support creative resolutions");
-  assert(portfolioShowcase.includes("INQUIRE ABOUT BRAND IDENTITY"), "Portfolio showcase must provide brand inquiry actions");
-  console.log("  ✓ Portfolio page Showcase & Brand case studies verified");
+  assert(portfolioContent.includes("export const portfolioProjects = []"), "Portfolio content must be clean slate in V2");
+  console.log("  ✓ Portfolio content V2 clean slate verified");
 
-  // Team page components must not contain legacy WQF copy
-  const teamHero = fs.readFileSync(path.join(root, "src/app/team/components/TeamHero.jsx"), "utf-8");
-  assert(!teamHero.includes("WorldQuant Foundry"), "Team hero must not contain legacy WQF text");
-  assert(teamHero.includes("ENGINEERED WITH RIGOR."), "Team hero must contain Gerat headline");
-  console.log("  ✓ Team page Hero verified");
-
-  // Insights page components must not contain legacy WQF copy
-  const insightsHero = fs.readFileSync(path.join(root, "src/app/insights/components/InsightsHero.jsx"), "utf-8");
-  assert(!insightsHero.includes("FOUNDRY TEAM"), "Insights hero must not contain legacy Foundry text");
-  assert(insightsHero.includes("SYSTEM ARCHITECTURE,"), "Insights hero must contain Gerat headline");
-  console.log("  ✓ Insights page Hero verified");
-
-  // Services page components must not contain legacy WQF copy
-  const services = fs.readFileSync(path.join(root, "src/app/why-wqf/components/ServicesOverview.jsx"), "utf-8");
+  // Services page components must contain Gerat V2 headline and not legacy WQF text
+  const services = fs.readFileSync(path.join(root, "src/components/services/ServicesOverview.jsx"), "utf-8");
   assert(!services.includes("WorldQuant Foundry"), "Services page must not contain legacy WQF text");
-  assert(services.includes("WHAT WE") && services.includes("BUILD."), "Services page must contain Gerat headline");
-  console.log("  ✓ Services page Overview verified");
+  assert(services.includes("TECHNOLOGY BUILT") && services.includes("AROUND YOUR BUSINESS."), "Services page must contain Gerat V2 headline");
+  assert(services.includes("NOT EVERY BUSINESS") && services.includes("NEEDS EVERYTHING."), "Services page must contain approach section");
+  assert(services.includes("COMMON") && services.includes("QUESTIONS."), "Services page must contain FAQ section");
+  console.log("  ✓ Services page V2 overview, approach & FAQ verified");
 
   // Contact drawer must have Gerat branding and brand/creative disciplines
   const contactDrawer = fs.readFileSync(path.join(root, "src/components/layout/ContactDrawer.jsx"), "utf-8");
@@ -95,9 +77,39 @@ export async function runBrandingSmokeTests() {
   assert(servicesContent.includes("EXECUTIVE & FOUNDER PERSONAL BRANDING"), "services.js must include Personal Branding pillar");
   console.log("  ✓ Services content brand architecture verified");
 
-  // Footer must have Gerat copyright
+  // Footer must have Gerat copyright, 3-column nav, and no legacy orange banner
   const footer = fs.readFileSync(path.join(root, "src/components/layout/Footer.jsx"), "utf-8");
   assert(!footer.includes("WorldQuant"), "Footer should not contain 'WorldQuant'");
+  assert(!footer.includes("bg-accent text-white border-b"), "Footer should not contain legacy orange banner");
+  assert(footer.includes("NAVIGATION"), "Footer must contain 'NAVIGATION'");
+  assert(footer.includes("SERVICES"), "Footer must contain 'SERVICES'");
+  assert(footer.includes("CONNECT"), "Footer must contain 'CONNECT'");
+  assert(footer.includes("variant=\"primary\""), "Footer must render primary logo signature");
   assert(footer.includes("GERAT SOFTWARE SOLUTION"), "Footer must contain 'GERAT SOFTWARE SOLUTION'");
-  console.log("  ✓ Footer branding verified");
+  console.log("  ✓ V2 Footer branding & 3-column navigation verified");
+
+  // About page V2 narrative components and copy
+  const aboutPage = fs.readFileSync(path.join(root, "src/app/about/page.js"), "utf-8");
+  assert(aboutPage.includes("AboutHero"), "About page must include AboutHero");
+  assert(aboutPage.includes("OurStory"), "About page must include OurStory");
+  assert(aboutPage.includes("WhatWeBelieve"), "About page must include WhatWeBelieve");
+  assert(aboutPage.includes("TheFounders"), "About page must include TheFounders");
+  assert(aboutPage.includes("AboutCTA"), "About page must include AboutCTA");
+
+  const whatWeBelieve = fs.readFileSync(path.join(root, "src/app/about/components/WhatWeBelieve.jsx"), "utf-8");
+  assert(whatWeBelieve.includes("SIMPLE PRINCIPLES."), "WhatWeBelieve must contain 'SIMPLE PRINCIPLES.'");
+  assert(whatWeBelieve.includes("HIGH STANDARDS."), "WhatWeBelieve must contain 'HIGH STANDARDS.'");
+
+  const aboutHero = fs.readFileSync(path.join(root, "src/app/about/components/AboutHero.jsx"), "utf-8");
+  assert(aboutHero.includes("WE BUILD THE BRIDGE."), "AboutHero must contain 'WE BUILD THE BRIDGE.'");
+  assert(aboutHero.includes("YOU CROSS IT."), "AboutHero must contain 'YOU CROSS IT.'");
+
+  const whatGeratMeans = fs.readFileSync(path.join(root, "src/app/about/components/WhatGeratMeans.jsx"), "utf-8");
+  assert(whatGeratMeans.includes("Gerät"), "WhatGeratMeans must reference German word 'Gerät'");
+  assert(whatGeratMeans.includes("TECHNOLOGY IS A TOOL. MAKE IT USEFUL."), "WhatGeratMeans must feature brand motto");
+
+  const theFounders = fs.readFileSync(path.join(root, "src/app/about/components/TheFounders.jsx"), "utf-8");
+  assert(theFounders.includes("FIVE FOUNDERS."), "TheFounders must contain 'FIVE FOUNDERS.'");
+  assert(theFounders.includes("ONE VISION."), "TheFounders must contain 'ONE VISION.'");
+  console.log("  ✓ V2 About page narrative structure & copy verified");
 }

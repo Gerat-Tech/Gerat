@@ -6,9 +6,18 @@ import Footer from "@/components/layout/Footer";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Services · Digital, AI, Business Systems & Brand | Gerat Software Solution",
+  title: "Services | Gerat Software Solution",
   description:
-    "From the way your business looks to the systems behind how it works, Gerat brings brand, design, software, and intelligent technology together.",
+    "From digital experiences to AI, business systems, and brand identity, we bring the right capabilities together around the problem you need to solve.",
+  openGraph: {
+    title: "Services — Technology Built Around Your Business | Gerat",
+    description:
+      "From digital experiences to AI, business systems, and brand identity, we bring the right capabilities together around the problem you need to solve.",
+    url: "https://www.gerat.com/services",
+    siteName: "Gerat Software Solution",
+    locale: "en_US",
+    type: "website",
+  },
 };
 
 export default async function ServicesPage() {

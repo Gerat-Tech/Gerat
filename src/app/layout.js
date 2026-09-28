@@ -1,7 +1,5 @@
 import "./globals.css";
-import { cookies } from "next/headers";
 import { NavProvider } from "@/context/NavContext";
-import { ThemeProvider } from "@/context/ThemeContext";
 import ClientWrapper from "@/components/layout/ClientWrapper";
 import { artific, parkinsans } from "./fonts";
 
@@ -79,14 +77,10 @@ const organizationJsonLd = {
 };
 
 export default async function RootLayout({ children }) {
-  const cookieStore = await cookies();
-  const themeCookie = cookieStore.get("gerat-theme")?.value || cookieStore.get("gerat-dashboard-theme")?.value || "light";
-  const initialTheme = themeCookie === "dark" ? "dark" : "light";
-
   return (
     <html
       lang="en"
-      className={`scroll-smooth ${artific.variable} ${parkinsans.variable} ${initialTheme === "light" ? "light site-light dashboard-light" : "dark site-dark dashboard-dark"}`}
+      className={`scroll-smooth ${artific.variable} ${parkinsans.variable} light site-light`}
       suppressHydrationWarning
     >
       <head>
@@ -104,15 +98,13 @@ export default async function RootLayout({ children }) {
           Skip to main content
         </a>
 
-        <ThemeProvider initialTheme={initialTheme}>
-          <NavProvider>
-            <ClientWrapper>
-              <main id="main-content" tabIndex="-1" className="outline-none min-h-screen">
-                {children}
-              </main>
-            </ClientWrapper>
-          </NavProvider>
-        </ThemeProvider>
+        <NavProvider>
+          <ClientWrapper>
+            <main id="main-content" tabIndex="-1" className="outline-none min-h-screen">
+              {children}
+            </main>
+          </ClientWrapper>
+        </NavProvider>
       </body>
     </html>
   );

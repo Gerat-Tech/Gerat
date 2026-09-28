@@ -120,9 +120,9 @@ export async function POST(request) {
       );
     }
 
-    // Validate role against 3 allowed roles
-    const validRoles = [ROLES.SUPER_ADMIN, ROLES.OPERATIONS_LEAD, ROLES.EDITOR];
-    const role = validRoles.includes(rawRole) ? rawRole : ROLES.EDITOR;
+    // Validate role against allowed roles
+    const validRoles = [ROLES.SUPER_ADMIN, ROLES.OPERATIONS_LEAD];
+    const role = validRoles.includes(rawRole) ? rawRole : ROLES.OPERATIONS_LEAD;
 
     // Check if user already exists
     const existing = await prisma.user.findUnique({

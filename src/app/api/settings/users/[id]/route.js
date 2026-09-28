@@ -47,11 +47,11 @@ export async function PATCH(request, context) {
     }
     if (role) {
       const normalizedRole =
-        role === "TECHNICAL_EDITOR" || role === "CREATIVE_EDITOR"
-          ? ROLES.EDITOR
+        role === "EDITOR" || role === "TECHNICAL_EDITOR" || role === "CREATIVE_EDITOR"
+          ? ROLES.OPERATIONS_LEAD
           : role;
 
-      if ([ROLES.SUPER_ADMIN, ROLES.OPERATIONS_LEAD, ROLES.EDITOR].includes(normalizedRole)) {
+      if ([ROLES.SUPER_ADMIN, ROLES.OPERATIONS_LEAD].includes(normalizedRole)) {
         // Prevent demoting oneself
         if (id === currentUser.id && normalizedRole !== ROLES.SUPER_ADMIN) {
           return NextResponse.json(

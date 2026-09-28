@@ -219,9 +219,9 @@ export default function HeroDataField() {
       const cosR = Math.cos(roll);
       const sinR = Math.sin(roll);
 
-      // Center offset: Positioned slightly to the right to balance hero typography
-      const centerX = width * (width < 768 ? 0.5 : 0.65);
-      const centerY = height * 0.44 - scrollY;
+      // Center offset: Positioned distinctly to the right to balance hero typography
+      const centerX = width * (width < 768 ? 0.5 : width < 1200 ? 0.68 : 0.72);
+      const centerY = height * (width < 768 ? 0.58 : 0.46) - scrollY;
       const focalLength = 550;
 
       // Transform, rotate & project points

@@ -1,231 +1,269 @@
 "use client";
 
-import React from "react";
-import { useNav } from "@/context/NavContext";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import FadeUp from "../motion/FadeUp";
+import { Workflow, Sparkles, ShieldCheck, Zap } from "lucide-react";
+
+const PROCESS_STEPS = [
+  {
+    num: "01",
+    tagline: "DISCOVERY & STRATEGY",
+    title: "We dissect the operational & market bottleneck.",
+    description:
+      "We audit your workflows, brand positioning, and technical landscape. Whether shaping a distinctive brand identity, a high-converting web platform, an internal ERP, or an AI tool, we map out clear requirements, user flows, and an honest delivery roadmap.",
+  },
+  {
+    num: "02",
+    tagline: "DESIGN & ARCHITECTURE",
+    title: "We craft the visual system & technical blueprint.",
+    description:
+      "From typographic identity and interactive Figma prototypes to robust data schemas and API architecture. You test, refine, and validate the complete brand visual language and user experience before production starts—ensuring zero wasted effort.",
+  },
+  {
+    num: "03",
+    tagline: "SPRINT DELIVERY",
+    title: "We build & iterate in transparent weekly cycles.",
+    description:
+      "Full-stack engineering, brand asset generation, and AI workflow integrations executed with uncompromising craft. You get weekly staging demos, creative reviews, clear changelogs, and direct collaboration with the designers and engineers building your solution.",
+  },
+];
+
+const SOLUTION_METRICS = [
+  {
+    label: "Assets & IP Ownership",
+    value: "100%",
+    caption: "Code, designs & brand kits",
+    icon: Workflow,
+    rotate: "lg:-rotate-2",
+  },
+  {
+    label: "Sprint Cadence",
+    value: "Weekly",
+    caption: "Live demos & design reviews",
+    icon: Zap,
+    rotate: "lg:-rotate-1",
+  },
+  {
+    label: "System Reliability",
+    value: "99.99%",
+    caption: "Uptime & production QA",
+    icon: ShieldCheck,
+    rotate: "lg:rotate-1",
+  },
+  {
+    label: "Future Readiness",
+    value: "Scalable",
+    caption: "Engineered for tomorrow's growth",
+    icon: Sparkles,
+    rotate: "lg:rotate-2",
+  },
+];
 
 /**
- * Section 05: How We Work (Methodology)
+ * Section 03: HOW WE WORK ("THE PROCESS")
  *
- * Implements the 2-column layout from user reference image (media_1789850867395.png),
- * utilizing the official brand color palette from (media_1789894686718.png):
- * - Card 01: Coffee bean (#300F0A) with Warm Almond text (#FAF6ED)
- * - Card 02: Flame (#EA5B15) with crisp pure white text (#FFFFFF)
- * - Card 03: Almond (#F1DFD9) with deep Coffee Bean text (#300F0A)
- *
- * Fully aligned with Gerat Software Solution's engineering mission:
- * "Software architecture built for endurance."
+ * Distinct Interaction Pattern:
+ * - Scroll-Linked Process Rail with sequential timeline activation
+ * - Staggered workflow cards with interactive hover elevation
+ * - Smooth container morphing and perspective reveal into Stage 04
+ * - Zero red dots on eyebrow text
  */
 export default function HowWeWork() {
-  const { openContact } = useNav();
+  const sectionRef = useRef(null);
+  const prefersReducedMotion = useReducedMotion();
 
-  const cards = [
-    {
-      number: "01",
-      title: "ARCHITECTURAL CLARITY BEFORE CODE.",
-      description:
-        "We audit operations, identify system bottlenecks, and blueprint your complete data flow and integration architecture before committing a single line of code.",
-      cardTheme: "coffee",
-      cardClass: "card-coffee bg-[#300F0A] text-[#FAF6ED] border border-white/10",
-      titleStyle: { color: "#FAF6ED" },
-      textStyle: { color: "rgba(250, 246, 237, 0.88)" },
-      numberStyle: { color: "#EA5B15" },
-      dividerClass: "border-white/20",
-      isDark: true,
-      // Blueprint grid icon in Flame Orange
-      icon: (
-        <svg
-          viewBox="0 0 32 32"
-          className="size-8 text-accent shrink-0"
-          fill="currentColor"
-          aria-hidden="true"
-        >
-          <rect x="2" y="2" width="12" height="12" rx="2" />
-          <rect x="18" y="2" width="12" height="12" rx="2" />
-          <rect x="2" y="18" width="12" height="12" rx="2" />
-          <rect x="18" y="18" width="12" height="12" rx="2" />
-        </svg>
-      ),
-    },
-    {
-      number: "02",
-      title: "PRODUCTION-HARDENED SYSTEMS, BUILT TO ENDURE.",
-      description:
-        "We construct resilient web experiences, intelligent tools, and scalable business backends with zero shortcuts, high test coverage, and automated deployment pipelines.",
-      cardTheme: "flame",
-      cardClass: "card-flame bg-accent text-white border border-accent/30",
-      titleStyle: { color: "#FFFFFF" },
-      textStyle: { color: "rgba(255, 255, 255, 0.92)" },
-      numberStyle: { color: "#FFFFFF" },
-      dividerClass: "border-white/30",
-      isDark: true,
-      // Ascending signal towers / system architecture icon
-      icon: (
-        <svg
-          viewBox="0 0 32 32"
-          className="size-8 text-white shrink-0"
-          fill="currentColor"
-          aria-hidden="true"
-        >
-          <rect x="4" y="18" width="6" height="12" rx="1.5" />
-          <rect x="13" y="10" width="6" height="20" rx="1.5" />
-          <rect x="22" y="2" width="6" height="28" rx="1.5" />
-        </svg>
-      ),
-    },
-    {
-      number: "03",
-      title: "OBSERVABILITY, HANDOVER & SUSTAINED SCALE.",
-      description:
-        "We don't abandon you at launch. We provide full telemetry, comprehensive documentation, team onboarding, and ongoing architectural stewardship as your business grows.",
-      cardTheme: "almond",
-      cardClass: "card-almond bg-[#F1DFD9] text-[#300F0A] border border-[#300F0A]/15 shadow-md",
-      titleStyle: { color: "#300F0A" },
-      textStyle: { color: "#4E241C" },
-      numberStyle: { color: "#EA5B15" },
-      dividerClass: "border-[#300F0A]/20",
-      isDark: false,
-      // Geometric target / crosshair icon in Coffee Bean
-      icon: (
-        <svg
-          viewBox="0 0 32 32"
-          className="size-8 text-[#300F0A] shrink-0"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="3"
-          aria-hidden="true"
-        >
-          <circle cx="16" cy="16" r="12" />
-          <circle cx="16" cy="16" r="5" fill="currentColor" />
-          <line x1="16" y1="0" x2="16" y2="7" strokeLinecap="round" />
-          <line x1="16" y1="25" x2="16" y2="32" strokeLinecap="round" />
-          <line x1="0" y1="16" x2="7" y2="16" strokeLinecap="round" />
-          <line x1="25" y1="16" x2="32" y2="16" strokeLinecap="round" />
-        </svg>
-      ),
-    },
-  ];
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start center", "end end"],
+  });
+
+  // Stage 04 container expand
+  const stage4Scale = useTransform(
+    scrollYProgress,
+    [0.6, 0.95],
+    prefersReducedMotion ? [1, 1] : [0.975, 1]
+  );
+  const stage4Opacity = useTransform(
+    scrollYProgress,
+    [0.6, 0.85],
+    prefersReducedMotion ? [1, 1] : [0.85, 1]
+  );
 
   return (
     <section
+      ref={sectionRef}
       id="process"
-      aria-label="How We Work"
-      className="relative w-full py-14 sm:py-18 md:py-20 bg-[var(--bg)] text-[var(--text-primary)] border-b border-white/10 overflow-hidden"
+      aria-label="Our Process"
+      className="w-full bg-[var(--surface)] text-[var(--text-primary)] relative scroll-mt-24 pt-16 sm:pt-24 md:pt-32 pb-24 sm:pb-32 md:pb-40 overflow-hidden"
     >
-      {/* Subtle Cosmic Dot Constellation Background */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 pointer-events-none opacity-25 select-none"
-      >
-        <svg
-          className="w-full h-full object-cover"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <pattern
-              id="constellationDots"
-              x="0"
-              y="0"
-              width="64"
-              height="64"
-              patternUnits="userSpaceOnUse"
-            >
-              <circle cx="12" cy="18" r="1.2" fill="currentColor" opacity="0.6" />
-              <circle cx="48" cy="42" r="1.5" fill="currentColor" opacity="0.4" />
-              <circle cx="32" cy="56" r="1.0" fill="currentColor" opacity="0.5" />
-              <circle cx="58" cy="12" r="1.2" fill="currentColor" opacity="0.7" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#constellationDots)" />
-        </svg>
-      </div>
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 flex flex-col items-center">
+        {/* =========================================================================
+            HEADER: Eyebrow Pill, Headline, Subtitle
+           ========================================================================= */}
+        <FadeUp delay={0.1} y={16} className="flex justify-center">
+          <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-[#FAF6ED] border border-[#E5DAC8] font-parkinsans text-xs tracking-[0.2em] uppercase font-bold text-[#300F0A] shadow-xs">
+            <span>Our Process</span>
+          </div>
+        </FadeUp>
 
-      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* LEFT COLUMN: 3 Large Rounded Cards (Coffee bean, Flame, Almond) */}
-          <div className="lg:col-span-7 flex flex-col gap-6 sm:gap-8 w-full">
-            {cards.map((card, idx) => (
-              <div
-                key={card.title}
-                data-dark-card={card.isDark ? "true" : undefined}
-                className={`relative flex flex-col justify-between rounded-[26px] sm:rounded-[30px] p-8 sm:p-10 md:p-12 shadow-[0_12px_40px_rgba(0,0,0,0.18)] transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_18px_48px_rgba(0,0,0,0.25)] min-h-[260px] sm:min-h-[290px] ${card.cardClass}`}
+        <FadeUp delay={0.2} y={20} className="mt-5 text-center px-4 max-w-3xl">
+          <h2 className="font-parkinsans text-2xl sm:text-3xl md:text-4xl lg:text-[44px] xl:text-[48px] font-semibold tracking-tight uppercase leading-[1.08] text-[#300F0A]">
+            From Clear Discovery <br className="hidden sm:block" />
+            <span className="text-accent">To Market-Ready Reality.</span>
+          </h2>
+        </FadeUp>
+
+        <FadeUp delay={0.3} y={16} className="mt-3 text-center px-4 max-w-xl">
+          <p className="font-artific text-sm sm:text-base text-[#300F0A]/75 leading-relaxed">
+            A disciplined, transparent delivery workflow designed to eliminate friction, move fast, and craft brand systems, digital products, and automated operations that actually work.
+          </p>
+        </FadeUp>
+
+        {/* =========================================================================
+            VERTICAL TIMELINE: Beacon Drop-Pin Node
+           ========================================================================= */}
+        <FadeUp delay={0.4} y={16} className="mt-10 sm:mt-12 flex flex-col items-center">
+          <div className="relative z-10 flex items-center justify-center w-6 h-6 rounded-full border-2 border-accent bg-[#FAF6ED] shadow-[0_0_16px_rgba(234,91,21,0.3)]">
+            <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+          </div>
+          {/* Dashed connector line to Step 01 */}
+          <div className="w-0 h-8 sm:h-10 border-l-2 border-dashed border-accent/60" />
+        </FadeUp>
+
+        {/* =========================================================================
+            THE THREE SEQUENTIAL WORKFLOW CARDS (01, 02, 03)
+           ========================================================================= */}
+        <div className="flex flex-col items-center w-full max-w-[560px] px-4">
+          {PROCESS_STEPS.map((item, idx) => (
+            <React.Fragment key={item.num}>
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.12 * idx,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                whileHover={
+                  prefersReducedMotion
+                    ? {}
+                    : {
+                        y: -4,
+                        borderColor: "rgba(234, 91, 21, 0.45)",
+                        boxShadow: "0 12px 32px rgba(48, 15, 10, 0.08)",
+                        transition: { duration: 0.25 },
+                      }
+                }
+                className="w-full bg-[#FAF6ED] border border-[#E5DAC8] rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-[0_4px_24px_rgba(48,15,10,0.03)] text-left cursor-default transition-colors duration-200"
               >
-                {/* Top Row: Headline + Geometric Icon */}
-                <div className="flex items-start justify-between gap-6">
-                  <h3
-                    style={card.titleStyle}
-                    className="font-parkinsans text-2xl sm:text-3xl md:text-[32px] font-semibold uppercase tracking-tight leading-[1.08] max-w-[420px]"
-                  >
-                    {card.title}
-                  </h3>
-                  {card.icon}
+                <div className="flex items-center justify-between pb-3 mb-2 border-b border-[#E5DAC8]/60">
+                  <span className="font-parkinsans text-2xl sm:text-3xl font-bold text-[#300F0A]/35">
+                    {item.num}
+                  </span>
+                  <span className="font-parkinsans text-[10px] sm:text-[11px] tracking-[0.22em] uppercase text-accent font-bold">
+                    {item.tagline}
+                  </span>
                 </div>
+                <p className="font-artific text-sm sm:text-[15px] leading-relaxed text-[#300F0A]/80 pt-1">
+                  <strong className="font-bold text-[#300F0A] mr-1.5">{item.title}</strong>
+                  {item.description}
+                </p>
+              </motion.div>
 
-                {/* Bottom Row: Divider & Description */}
-                <div className="mt-8 sm:mt-12">
-                  <div className={`border-t ${card.dividerClass} pt-4 sm:pt-5`}>
-                    <p
-                      style={card.textStyle}
-                      className="font-artific text-xs sm:text-sm uppercase tracking-[0.08em] leading-relaxed card-subtext"
-                    >
-                      {card.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* RIGHT COLUMN: Sticky Manifesto & Corner-Bracketed Button */}
-          <div className="lg:col-span-5 lg:sticky lg:top-36 flex flex-col items-start gap-6 sm:gap-8 pt-2">
-            {/* Small Monospace Label */}
-            <div className="font-artific text-[11px] sm:text-[12px] uppercase tracking-[0.25em] text-accent font-medium">
-              METHODOLOGY
-            </div>
-
-            {/* Display Headline */}
-            <div className="w-full">
-              <h2 className="font-parkinsans text-3xl sm:text-4xl md:text-5xl font-semibold uppercase tracking-tight leading-[1.04] text-[var(--text-primary)]">
-                WE ARCHITECT RIGOROUSLY. WE DELIVER RAPIDLY.
-              </h2>
-              {/* Horizontal Rule */}
-              <div className="w-full border-t border-white/20 mt-6 sm:mt-8" />
-            </div>
-
-            {/* Monospace Manifesto Paragraph */}
-            <p className="font-artific text-[12px] sm:text-[13px] tracking-[0.04em] text-[var(--text-secondary)] leading-relaxed max-w-[440px]">
-              SKIP THE FRAGILE PROTOTYPES. WE ENGINEER MISSION-CRITICAL PLATFORMS
-              WITH TRANSPARENT MILESTONES AND DIRECT ACCESS TO PRINCIPAL ARCHITECTS
-              FROM DAY ONE.
-            </p>
-
-            {/* Corner-Bracketed "START A PROJECT" Button */}
-            <button
-              type="button"
-              onClick={() =>
-                openContact({
-                  discipline: "systems",
-                  subOption: "ENTERPRISE ERP",
-                })
-              }
-              className="group relative isolate inline-flex items-center justify-center font-parkinsans text-[12px] sm:text-[13px] uppercase tracking-[0.25em] text-[var(--text-primary)] hover:text-accent px-8 py-3.5 transition-colors duration-300 cursor-pointer mt-2"
-            >
-              <span className="relative z-10 overflow-hidden h-[18px] inline-flex flex-col">
-                <span className="transition-transform duration-400 ease-in-out group-hover:-translate-y-full">
-                  START A PROJECT
-                </span>
-                <span className="absolute inset-0 transition-transform duration-400 ease-in-out translate-y-full group-hover:translate-y-0 text-accent font-bold">
-                  START A PROJECT
-                </span>
-              </span>
-
-              {/* 4 Corner Brackets */}
-              <div className="absolute top-0 left-0 w-2.5 h-2.5 border-t border-l border-current opacity-70 group-hover:opacity-100 group-hover:border-accent transition-all duration-300" />
-              <div className="absolute top-0 right-0 w-2.5 h-2.5 border-t border-r border-current opacity-70 group-hover:opacity-100 group-hover:border-accent transition-all duration-300" />
-              <div className="absolute bottom-0 left-0 w-2.5 h-2.5 border-b border-l border-current opacity-70 group-hover:opacity-100 group-hover:border-accent transition-all duration-300" />
-              <div className="absolute bottom-0 right-0 w-2.5 h-2.5 border-b border-r border-current opacity-70 group-hover:opacity-100 group-hover:border-accent transition-all duration-300" />
-            </button>
-          </div>
+              {/* Dashed connector between cards */}
+              <div className="w-0 h-8 sm:h-10 border-l-2 border-dashed border-accent/60" />
+            </React.Fragment>
+          ))}
         </div>
+
+        {/* Dashed connector continuing directly into the Stage 04 Dark Container */}
+        <div className="w-0 h-8 sm:h-12 border-l-2 border-dashed border-accent/60" />
+
+        {/* =========================================================================
+            STAGE 04: THE LARGE DARK FLOATING SOLUTION CONTAINER
+           ========================================================================= */}
+        <motion.div
+          style={{
+            scale: stage4Scale,
+            opacity: stage4Opacity,
+          }}
+          className="w-full max-w-[1080px] px-2 sm:px-4 will-change-transform"
+        >
+          <div
+            data-dark-overlay="true"
+            className="relative w-full bg-[#1F1713] text-white rounded-[28px] sm:rounded-[36px] md:rounded-[44px] border border-white/10 p-8 sm:p-12 md:p-16 shadow-[0_24px_80px_rgba(0,0,0,0.35)] overflow-hidden"
+          >
+            {/* Blueprint Grid Overlay */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 pointer-events-none opacity-40 bg-[linear-gradient(to_right,rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:32px_32px]"
+            />
+
+            {/* Ambient Radial Accent Glow */}
+            <div
+              aria-hidden="true"
+              className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-accent/20 rounded-full blur-[100px] pointer-events-none"
+            />
+
+            <div className="relative z-10 flex flex-col items-center text-center">
+              {/* Stage 04 Pill */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 font-parkinsans text-xs tracking-[0.18em] uppercase font-bold text-white shadow-xs backdrop-blur-sm">
+                <span>Stage 04 · Launch & Scale</span>
+                <span className="flex items-center justify-center w-3.5 h-3.5 rounded-full bg-accent/30 text-accent text-[9px] font-bold">
+                  ✓
+                </span>
+              </div>
+
+              {/* Main Solution Headline */}
+              <h3 className="font-parkinsans text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight uppercase leading-[1.08] text-white mt-5">
+                Unified Solutions. <br />
+                <span className="text-accent">
+                  Built To Scale & Run.
+                </span>
+              </h3>
+
+              {/* Solution Subtitle */}
+              <p className="font-artific text-sm sm:text-base text-white/75 max-w-xl mx-auto mt-4 leading-relaxed">
+                We handle cloud deployment, brand asset packaging, domain configuration, and staff onboarding. Once launched, we deliver complete brand kits and source code repositories, with ongoing support to ensure your brand and systems expand effortlessly.
+              </p>
+
+              {/* 4 Sleek Floating Perspective Metric Cards */}
+              <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-row lg:justify-center items-stretch gap-4 mt-12 sm:mt-16">
+                {SOLUTION_METRICS.map((metric) => {
+                  const Icon = metric.icon;
+                  return (
+                    <div
+                      key={metric.label}
+                      className={`group/card relative bg-[#281F1B]/95 hover:bg-[#322722] border border-white/10 hover:border-accent/50 rounded-2xl p-5 sm:p-6 shadow-xl backdrop-blur-md flex flex-col justify-between min-h-[140px] sm:min-h-[160px] lg:w-[220px] transition-all duration-300 text-left ${metric.rotate} hover:rotate-0 hover:scale-105`}
+                    >
+                      {/* Top row */}
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="font-parkinsans text-xs font-bold text-white/70 uppercase tracking-wide">
+                          {metric.label}
+                        </span>
+                        <div className="w-7 h-7 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center text-accent group-hover/card:scale-110 group-hover/card:bg-accent group-hover/card:text-white transition-all duration-300">
+                          <Icon className="w-3.5 h-3.5" strokeWidth={2} />
+                        </div>
+                      </div>
+
+                      {/* Bottom row */}
+                      <div className="mt-6 sm:mt-8">
+                        <div className="font-parkinsans text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                          {metric.value}
+                        </div>
+                        <div className="font-artific text-[11px] sm:text-xs text-white/60 tracking-tight mt-1">
+                          {metric.caption}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

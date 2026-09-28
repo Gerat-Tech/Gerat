@@ -12,6 +12,7 @@ export async function runComponentSmokeTests() {
     "src/components/common/SectionLabel.jsx",
     "src/components/common/NavItem.jsx",
     "src/components/common/Button.jsx",
+    "src/components/common/BrandBridgeAnimation.jsx",
     "src/components/common/CustomCursor.jsx",
     // Motion
     "src/components/motion/FadeUp.jsx",
@@ -33,24 +34,16 @@ export async function runComponentSmokeTests() {
     "src/components/three/Hero3DFallback.jsx",
     // Home Composite Sections
     "src/components/home/Hero.jsx",
-    "src/components/home/Marquee.jsx",
+    "src/components/home/TheProblem.jsx",
     "src/components/home/OurEthos.jsx",
     "src/components/home/OurFocus.jsx",
-    "src/components/home/BrandCreativeSection.jsx",
-    "src/components/home/OurPortfolio.jsx",
     "src/components/home/HowWeWork.jsx",
     "src/components/home/OurLeadership.jsx",
-    "src/components/home/Partners.jsx",
-    // Team Page Components
-    "src/app/team/components/TeamHero.jsx",
-    "src/app/team/components/TeamLeadership.jsx",
-    "src/app/team/components/AdvisorAndTeam.jsx",
-    "src/app/team/components/TeamEthos.jsx",
-    // Insights Page Components
-    "src/app/insights/components/InsightsHero.jsx",
-    "src/app/insights/components/LatestNews.jsx",
-    // Services Page Components
-    "src/app/why-wqf/components/ServicesOverview.jsx",
+    "src/components/home/FinalCTA.jsx",
+    // Services Component
+    "src/components/services/ServicesOverview.jsx",
+    // About Page
+    "src/app/about/page.js",
     // Context
     "src/context/NavContext.js",
     "src/context/PageTransitionContext.jsx",

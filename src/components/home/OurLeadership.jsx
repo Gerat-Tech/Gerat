@@ -1,82 +1,120 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
+import FadeUp from "../motion/FadeUp";
+import SplitText from "../motion/SplitText";
+import { Mail } from "lucide-react";
 
-const DEFAULT_PARTNERS = [
+function XIcon({ className = "w-3.5 h-3.5" }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
+}
+
+function TelegramIcon({ className = "w-3.5 h-3.5" }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z" />
+    </svg>
+  );
+}
+
+function WhatsAppIcon({ className = "w-3.5 h-3.5" }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.301-.15-1.78-.878-2.056-.978-.276-.1-.477-.15-.678.15-.2.301-.778.978-.954 1.179-.176.2-.352.226-.653.075-.301-.15-1.27-.468-2.42-1.493-.895-.798-1.5-1.784-1.676-2.085-.176-.301-.019-.464.132-.614.136-.135.301-.351.452-.527.15-.176.2-.301.301-.502.101-.2.05-.376-.025-.526-.075-.15-.678-1.634-.929-2.238-.244-.588-.493-.509-.678-.519l-.578-.01c-.2 0-.527.075-.803.376s-1.054 1.03-1.054 2.511c0 1.482 1.08 2.911 1.23 3.112.15.2 2.124 3.243 5.145 4.549.719.311 1.28.497 1.718.636.722.23 1.378.197 1.898.12.578-.087 1.78-.727 2.03-1.43.251-.703.251-1.305.176-1.43-.075-.125-.276-.2-.577-.35zM12.042 2C6.516 2 2.03 6.486 2.03 12.012c0 1.98.577 3.824 1.578 5.378L2 22l4.783-1.554a9.96 9.96 0 004.859 1.266h.004c5.524 0 10.012-4.488 10.012-10.014 0-2.673-1.042-5.186-2.934-7.078A9.94 9.94 0 0012.042 2z" />
+    </svg>
+  );
+}
+
+function LinkedinIcon({ className = "w-3.5 h-3.5" }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.64a1.64 1.64 0 0 0-1.66 1.64 1.64 1.64 0 0 0 1.66 1.64 1.64 1.64 0 0 0 1.65-1.64 1.64 1.64 0 0 0-1.65-1.64z" />
+    </svg>
+  );
+}
+
+const DEFAULT_FOUNDERS = [
   {
     id: "hruy-daniel",
     name: "HRUY DANIEL",
-    role: "FOUNDER & CHIEF EXECUTIVE OFFICER",
-    title: "FOUNDER & CHIEF EXECUTIVE OFFICER",
-    tag: "STRATEGY & VENTURE",
-    bio: "Directs Gerat's vision, partnerships, and business growth, helping organizations turn strategy into reliable digital ventures.",
+    role: "CHIEF EXECUTIVE OFFICER",
+    specialty: "Strategy, Brand Positioning & Growth",
     image: "/image/team/leadership/hiruy.jpeg",
-    position: "center 20%",
+    email: "hruydaniel@gerat.com",
+    twitter: "https://x.com/geratsolutions",
+    telegram: "https://t.me/geratsolutions",
+    whatsapp: "https://wa.me/251929298030",
+    linkedin: "https://linkedin.com/company/gerat",
   },
   {
     id: "ekd",
     name: "EKD",
-    role: "CO-FOUNDER & CHIEF OPERATING OFFICER",
-    title: "CO-FOUNDER & CHIEF OPERATING OFFICER",
-    tag: "OPERATIONS & STRATEGIC EXECUTION",
-    bio: "Oversees company-wide execution, strategic program management, and operational delivery across all engineering and client ventures.",
+    role: "CHIEF OPERATING OFFICER",
+    specialty: "Operations, Execution & Client Delivery",
     image: "/image/team/leadership/EKD.jpg",
-    position: "center 20%",
+    email: "ekd@gerat.com",
+    twitter: "https://x.com/geratsolutions",
+    telegram: "https://t.me/geratsolutions",
+    whatsapp: "https://wa.me/251929298030",
+    linkedin: "https://linkedin.com/company/gerat",
   },
   {
     id: "dawit-teklebrhan",
     name: "DAWIT TEKLEBRHAN",
-    role: "CO-FOUNDER & CHIEF TECHNOLOGY OFFICER",
-    title: "CO-FOUNDER & CHIEF TECHNOLOGY OFFICER",
-    tag: "SYSTEMS ARCHITECTURE",
-    bio: "Leads engineering and technical architecture, focusing on reliable digital products, intelligent tools, and business systems.",
+    role: "CHIEF TECHNOLOGY OFFICER",
+    specialty: "Systems Architecture & Digital Platforms",
     image: "/image/team/leadership/Dawit.jpeg",
-    position: "center 20%",
+    email: "dawit@gerat.com",
+    twitter: "https://x.com/geratsolutions",
+    telegram: "https://t.me/geratsolutions",
+    whatsapp: "https://wa.me/251929298030",
+    linkedin: "https://linkedin.com/company/gerat",
   },
   {
     id: "yohannes-tadesse",
     name: "YOHANNES TADESSE",
-    role: "CO-FOUNDER & HEAD OF ARTIFICIAL INTELLIGENCE",
-    title: "CO-FOUNDER & HEAD OF ARTIFICIAL INTELLIGENCE",
-    tag: "APPLIED AI & RAG",
-    bio: "Guides applied artificial intelligence and data systems, building practical tools that make information accessible and actionable.",
+    role: "HEAD OF ARTIFICIAL INTELLIGENCE",
+    specialty: "Applied AI, Knowledge Systems & Automation",
     image: "/image/team/leadership/Nisiha.jpeg",
-    position: "center 20%",
+    email: "yohannes@gerat.com",
+    twitter: "https://x.com/geratsolutions",
+    telegram: "https://t.me/geratsolutions",
+    whatsapp: "https://wa.me/251929298030",
+    linkedin: "https://linkedin.com/company/gerat",
   },
   {
     id: "solomon-kassahun",
     name: "SOLOMON KASSAHUN",
-    role: "CO-FOUNDER & HEAD OF ENTERPRISE ENGINEERING",
-    title: "CO-FOUNDER & HEAD OF ENTERPRISE ENGINEERING",
-    tag: "DISTRIBUTED CLOUD & ERP",
-    bio: "Oversees business platforms, operations engineering, and secure system integrations that keep company workflows running smoothly.",
+    role: "HEAD OF ENTERPRISE ENGINEERING",
+    specialty: "Business Systems, Cloud & Integrations",
     image: "/image/team/leadership/hosea.jpeg",
-    position: "center 20%",
+    email: "solomon@gerat.com",
+    twitter: "https://x.com/geratsolutions",
+    telegram: "https://t.me/geratsolutions",
+    whatsapp: "https://wa.me/251929298030",
+    linkedin: "https://linkedin.com/company/gerat",
   },
 ];
 
 /**
- * Formats role title cleanly without overriding or replacing what is configured in the CMS
- */
-function formatRole(role) {
-  if (!role) return "";
-  return role.trim().toUpperCase();
-}
-
-/**
- * Kinetic Leadership Section
+ * Section: THE TEAM (OUR LEADERSHIP)
  *
- * Replicates the editorial dual-state layout:
- * - Resting state: Top manifesto intro with corner-bracketed button,
- *   and headline split across horizontal letterbox slits with floating VIEW badge.
- * - Active state: Morphs dynamically into a 2-column layout with the active leader in full portrait
- *   and full bio on the left, and remaining leaders in letterbox slits beside the continuing headline on the right.
+ * Grounded in pure White (#FFFFFF) canvas with Almond (#F1DFD9) cards:
+ * - Background: Solid pure White (#FFFFFF)
+ * - Section label: High-contrast eyebrow pill in brand Almond (#F1DFD9)
+ * - Action button: MEET THE TEAM (links to /about#founders)
+ * - Cards: Warm Almond (#F1DFD9) with crisp borders (#300F0A/12)
+ * - Direct contact methods for every team member (Email, Telegram, WhatsApp, X, LinkedIn)
+ * - Multidisciplinary representation across all 4 services (Brand, Digital, Systems, AI)
  */
 export default function OurLeadership({ initialLeaders = null }) {
-  const [expandedIndex, setExpandedIndex] = useState(null);
   const [fetchedLeaders, setFetchedLeaders] = useState(null);
-  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -88,7 +126,9 @@ export default function OurLeadership({ initialLeaders = null }) {
             (m) => m.division === "EXECUTIVE_LEADERSHIP"
           );
           const list = execs.length > 0 ? execs : data.members;
-          setFetchedLeaders(list);
+          if (list.length > 0) {
+            setFetchedLeaders(list);
+          }
         }
       })
       .catch(() => {});
@@ -99,363 +139,183 @@ export default function OurLeadership({ initialLeaders = null }) {
   }, []);
 
   const rawList =
-    fetchedLeaders !== null
+    fetchedLeaders !== null && fetchedLeaders.length > 0
       ? fetchedLeaders
-      : initialLeaders !== null
+      : initialLeaders !== null && initialLeaders.length > 0
       ? initialLeaders
-      : DEFAULT_PARTNERS;
+      : DEFAULT_FOUNDERS;
 
-  const partners = rawList.map((leader, idx) => {
-    const defaultItem = DEFAULT_PARTNERS[idx] || DEFAULT_PARTNERS[0];
-    const resolvedImage =
-      leader.photoUrl || leader.image || defaultItem.image || "/image/team/leadership/Dawit.jpeg";
-
+  const founders = rawList.slice(0, 5).map((leader, idx) => {
+    const fallback = DEFAULT_FOUNDERS[idx] || DEFAULT_FOUNDERS[0];
     return {
-      id: leader.id || `leader-${idx}`,
-      name: leader.name || defaultItem.name,
-      role: leader.roleTitle || leader.role || defaultItem.role,
-      title: leader.roleTitle || leader.role || defaultItem.title,
-      tag: leader.focusTag || leader.specialty || leader.tag || defaultItem.tag,
-      bio: leader.bio || defaultItem.bio,
-      image: resolvedImage,
-      position: leader.position || defaultItem.position || "center 20%",
+      id: leader.id || fallback.id,
+      name: (leader.name || fallback.name).toUpperCase(),
+      role: (leader.roleTitle || leader.role || fallback.role).toUpperCase(),
+      specialty: leader.focusTag || leader.specialty || fallback.specialty,
+      image: leader.photoUrl || leader.image || fallback.image,
+      email: leader.email || fallback.email,
+      twitter: leader.twitterUrl || leader.twitter || fallback.twitter,
+      telegram: leader.telegramUrl || leader.telegram || fallback.telegram,
+      whatsapp: leader.whatsappUrl || leader.whatsapp || fallback.whatsapp,
+      linkedin: leader.linkedinUrl || leader.linkedin || fallback.linkedin,
     };
   });
 
-  const activePartner =
-    expandedIndex !== null
-      ? partners.find((p) => p.id === expandedIndex) || partners[0]
-      : null;
-
-  const remainingPartners =
-    expandedIndex !== null
-      ? partners.filter((p) => p.id !== expandedIndex)
-      : [];
-
-  // Responsive grid columns based on number of leaders
-  const gridColsClass =
-    partners.length === 5
-      ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-5"
-      : partners.length === 4
-      ? "grid-cols-2 sm:grid-cols-2 md:grid-cols-4"
-      : partners.length === 2
-      ? "grid-cols-1 md:grid-cols-2"
-      : "grid-cols-2 sm:grid-cols-3";
-
   return (
     <section
-      id="leadership"
-      aria-label="Our Leadership Team"
-      className="relative w-full bg-[#0d0706] text-[#faf6ed] border-t border-b border-white/10 overflow-hidden py-14 sm:py-18 md:py-20 select-none"
+      id="founders"
+      aria-label="The Team"
+      className="w-full bg-[#FAF6ED] text-[#300F0A] relative scroll-mt-24 border-t border-[#300F0A]/10"
+      style={{ backgroundColor: "#FAF6ED" }}
     >
-      {/* Top Label Bar */}
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 mb-8 sm:mb-10">
-        <div className="flex items-center justify-between border-b border-white/10 pb-4 font-parkinsans text-[11px] sm:text-[12px] uppercase tracking-[0.25em] text-white/60">
-          <span>OUR LEADERSHIP TEAM</span>
-          <span className="text-accent text-[10px]">DIRECTORS & ARCHITECTS</span>
+      <span id="leadership" className="sr-only" />
+      <span id="about" className="sr-only" />
+
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-14 sm:pt-20 pb-20 sm:pb-28">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-12 pb-6 border-b border-[#300F0A]/12">
+          <div className="flex flex-col gap-3.5 max-w-2xl">
+            {/* High-Contrast Almond Eyebrow Badge Pill (No dot) */}
+            <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-[#F1DFD9] border border-[#300F0A]/15 shadow-xs w-fit">
+              <span className="font-parkinsans text-xs tracking-[0.2em] uppercase font-bold text-[#300F0A]">
+                The Team
+              </span>
+            </div>
+
+            <div className="space-y-1 sm:space-y-1.5">
+              <SplitText
+                text="FIVE FOUNDERS."
+                as="h2"
+                delay={0.1}
+                stagger={0.035}
+                className="font-parkinsans text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight uppercase leading-[1.08] text-[#300F0A]"
+              />
+              <SplitText
+                text="ONE DIRECTION."
+                as="div"
+                delay={0.25}
+                stagger={0.035}
+                wordClassName="text-accent"
+                className="font-parkinsans text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight uppercase leading-[1.08]"
+              />
+            </div>
+            <FadeUp delay={0.35} y={16}>
+              <p className="font-artific text-sm sm:text-base text-[#300F0A]/80 leading-relaxed mt-1 max-w-lg">
+                Gerät was founded by five partners uniting leadership across brand strategy, digital experiences, enterprise systems, and applied intelligence—delivering comprehensive multidisciplinary craft to every client engagement.
+              </p>
+            </FadeUp>
+          </div>
+
+          <FadeUp delay={0.35} y={16}>
+            <Link
+              href="/about#founders"
+              className="group inline-flex items-center gap-2 font-parkinsans text-xs uppercase tracking-[0.18em] px-6 py-3.5 bg-[#300F0A] hover:bg-accent text-[#F1DFD9] hover:text-white font-bold rounded-full shadow-md hover:shadow-accent/25 transition-all duration-300"
+            >
+              <span>MEET THE TEAM</span>
+              <span className="transition-transform duration-300 group-hover:translate-x-1">
+                →
+              </span>
+            </Link>
+          </FadeUp>
         </div>
-      </div>
 
-      {/* Intro Manifesto & Corner-Bracketed Button */}
-      <div className="w-full max-w-[640px] mx-auto px-4 text-center mb-8 sm:mb-10 flex flex-col items-center gap-6">
-        <p className="font-parkinsans text-[12px] sm:text-[13px] text-white/60 uppercase tracking-[0.16em] leading-relaxed max-w-[500px]">
-          The founders and engineering directors behind Gerat. Turning technical precision
-          into dependable systems that endure.
-        </p>
+        {/* 5-Person Composition Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5">
+          {founders.map((founder, idx) => (
+            <FadeUp key={founder.id} delay={0.1 + idx * 0.08} y={20}>
+              <div className="group relative flex flex-col justify-between rounded-2xl border border-[#300F0A]/12 bg-[#F1DFD9] overflow-hidden transition-all duration-300 hover:border-accent hover:shadow-[0_16px_36px_rgba(48,15,10,0.12)] hover:-translate-y-1 h-full">
+                {/* Founder Photo */}
+                <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#300F0A]/5">
+                  <Image
+                    src={founder.image}
+                    alt={founder.name}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
+                    className="object-cover object-top filter grayscale contrast-105 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500 ease-out"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#F1DFD9] via-transparent to-transparent opacity-90" />
+                </div>
 
-        {/* Corner-Bracketed "MEET THE TEAM" Button */}
-        <Link
-          href="/team"
-          className="group relative isolate inline-flex items-center justify-center font-parkinsans text-[12px] sm:text-[13px] uppercase tracking-[0.25em] text-white/80 hover:text-white px-8 py-3.5 transition-colors duration-300"
-        >
-          <span className="relative z-10 overflow-hidden h-[18px] inline-flex flex-col">
-            <span className="transition-transform duration-400 ease-in-out group-hover:-translate-y-full">
-              MEET THE TEAM
-            </span>
-            <span className="absolute inset-0 transition-transform duration-400 ease-in-out translate-y-full group-hover:translate-y-0 text-accent">
-              MEET THE TEAM
-            </span>
-          </span>
-
-          {/* 4 Corner Tick Brackets */}
-          <div className="absolute top-0 left-0 w-2.5 h-2.5 border-t border-l border-white/60 group-hover:border-accent transition-colors duration-300" />
-          <div className="absolute top-0 right-0 w-2.5 h-2.5 border-t border-r border-white/60 group-hover:border-accent transition-colors duration-300" />
-          <div className="absolute bottom-0 left-0 w-2.5 h-2.5 border-b border-l border-white/60 group-hover:border-accent transition-colors duration-300" />
-          <div className="absolute bottom-0 right-0 w-2.5 h-2.5 border-b border-r border-white/60 group-hover:border-accent transition-colors duration-300" />
-        </Link>
-      </div>
-
-      {/* Main Kinetic Display Area */}
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
-        {expandedIndex === null ? (
-          /* ============================================================
-             RESTING STATE: Centered Headlines + Slits
-             ============================================================ */
-          <div className="flex flex-col items-center w-full">
-            {/* Top Line of Headline */}
-            <div className="w-full text-center max-w-[980px] font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium sm:font-semibold tracking-tight uppercase leading-[1.05] text-white">
-              <div>WE ARCHITECT THE FOUNDATIONS</div>
-              <div>BEFORE THEY&apos;RE VISIBLE.</div>
-            </div>
-
-            {/* Horizontal Slits Row */}
-            {partners.length === 0 ? (
-              <div className="w-full max-w-[980px] mx-auto my-8 sm:my-10 py-12 px-6 rounded-[2px] border border-white/10 bg-[#111111] text-center flex flex-col items-center justify-center gap-2">
-                <div className="size-2 bg-accent/60 rounded-full animate-pulse" />
-                <span className="font-artific text-[10px] sm:text-[11px] tracking-[0.2em] text-white/50 uppercase font-medium">
-                  NO CURRENT ACTIVE MEMBERS
-                </span>
-                <p className="font-parkinsans text-[10px] sm:text-xs tracking-wider text-white/30 uppercase max-w-md">
-                  Active executive leadership roster is managed via Mission Control.
-                </p>
-              </div>
-            ) : (
-              <div className={`grid ${gridColsClass} gap-3 sm:gap-4 md:gap-5 w-full max-w-[1240px] my-8 sm:my-10`}>
-                {partners.map((partner, pIdx) => {
-                  const isHovered = hoveredIndex === partner.id;
-                  const isLastInOdd = partners.length === 5 && pIdx === 4;
-                  return (
-                    <div
-                      key={partner.id}
-                      onMouseEnter={() => setHoveredIndex(partner.id)}
-                      onMouseLeave={() => setHoveredIndex(null)}
-                      onClick={() => setExpandedIndex(partner.id)}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" || e.key === " ") {
-                          e.preventDefault();
-                          setExpandedIndex(partner.id);
-                        }
-                      }}
-                      role="button"
-                      tabIndex={0}
-                      aria-label={`View ${partner.name}`}
-                      className={`group/slit relative h-[115px] sm:h-[135px] md:h-[145px] w-full cursor-pointer rounded-[2px] overflow-hidden border border-white/15 hover:border-accent transition-all duration-300 bg-[#111111] outline-hidden focus-visible:ring-1 focus-visible:ring-accent ${
-                        isLastInOdd ? "col-span-2 sm:col-span-1 lg:col-span-1" : ""
-                      }`}
-                    >
-                      {/* Cropped Letterbox Image focusing on eyes/portrait */}
-                      <div className="w-full h-full overflow-hidden rounded-[2px] bg-[#1a1a1a]">
-                        <img
-                          src={partner.image}
-                          alt={partner.name}
-                          loading="lazy"
-                          className="w-full h-full object-cover grayscale contrast-115 group-hover/slit:scale-105 group-hover/slit:grayscale-0 transition-all duration-500"
-                          style={{ objectPosition: partner.position }}
-                          onError={(e) => {
-                            e.target.src = "/image/team/leadership/Dawit.jpeg";
-                          }}
-                        />
-                      </div>
-
-                      {/* Floating Pill VIEW Badge */}
-                      <div
-                        className={`absolute top-2.5 right-2.5 z-20 transition-all duration-300 pointer-events-none ${
-                          isHovered
-                            ? "opacity-100 translate-y-0 scale-100"
-                            : "opacity-0 translate-y-1 scale-90"
-                        }`}
-                      >
-                        <div className="flex items-center justify-center bg-[#EA5B15] text-white px-2 py-0.5 rounded-[2px] shadow-lg border border-white/20">
-                          <span className="font-parkinsans text-[8.5px] sm:text-[9px] tracking-[0.2em] uppercase font-bold text-white">
-                            VIEW
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Bottom Metadata in Slit - Stacked Column so role never overlaps name */}
-                      <div
-                        data-dark-overlay="true"
-                        className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/70 to-transparent p-2.5 sm:p-3 flex flex-col justify-end z-10 pointer-events-none"
-                      >
-                        <span
-                          className="font-parkinsans text-[10px] sm:text-[11px] tracking-[0.16em] uppercase font-bold text-white dark-overlay-text force-text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] truncate"
-                          style={{ color: "#FAF6ED" }}
-                        >
-                          {partner.name}
-                        </span>
-                        <span
-                          className="font-parkinsans text-[8.5px] sm:text-[9.5px] tracking-[0.18em] uppercase text-accent font-semibold drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] truncate mt-0.5"
-                          style={{ color: "#EA5B15" }}
-                          title={partner.role}
-                        >
-                          {formatRole(partner.role)}
-                        </span>
-                      </div>
+                {/* Founder Details */}
+                <div className="p-5 flex flex-col justify-between flex-grow gap-2.5">
+                  <div className="flex flex-col gap-1">
+                    <h3 className="font-parkinsans text-base font-semibold uppercase tracking-tight text-[#300F0A] group-hover:text-accent transition-colors duration-200">
+                      {founder.name}
+                    </h3>
+                    <div className="font-artific text-xs uppercase tracking-wider text-accent font-bold line-clamp-1">
+                      {founder.role}
                     </div>
-                  );
-                })}
-              </div>
-            )}
-
-            {/* Bottom Line of Headline */}
-            <div className="w-full text-center max-w-[980px] font-parkinsans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium sm:font-semibold tracking-tight uppercase leading-[1.05] text-white">
-              <div>TRANSFORM THEM INTO</div>
-              <div>SYSTEMS THAT ENDURE.</div>
-            </div>
-          </div>
-        ) : (
-          /* ============================================================
-             ACTIVE / EXPANDED STATE: 2-Column Morph
-             ============================================================ */
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center w-full max-w-[1280px] mx-auto animate-in fade-in zoom-in-95 duration-400">
-            {/* Left Column: Full Portrait Card of Active Leader */}
-            <div className="lg:col-span-5 flex flex-col items-start w-full">
-              <div className="relative aspect-4/5 w-full max-w-[460px] mx-auto lg:mx-0 rounded-[3px] overflow-hidden bg-[#111111] border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.85)]">
-                {/* Full Portrait Image */}
-                <img
-                  src={activePartner.image}
-                  alt={activePartner.name}
-                  className="w-full h-full object-cover object-top grayscale contrast-110"
-                  onError={(e) => {
-                    e.target.src = "/image/team/leadership/Dawit.jpeg";
-                  }}
-                />
-
-                {/* Bottom-Right Badge: [ROLE] */}
-                <div
-                  data-dark-overlay="true"
-                  className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-10 max-w-[calc(100%-1.5rem)] flex items-center bg-black/85 backdrop-blur-xs px-2.5 sm:px-3 py-1.5 border border-white/25 rounded-[2px]"
-                >
-                  <span
-                    className="font-parkinsans text-[9px] sm:text-[10px] tracking-[0.18em] text-[#faf6ed] uppercase font-bold dark-overlay-text truncate"
-                    style={{ color: "#FAF6ED" }}
-                    title={activePartner.role}
-                  >
-                    {activePartner.role}
-                  </span>
-                </div>
-              </div>
-
-              {/* Bottom Metadata & Bio */}
-              <div className="w-full max-w-[460px] mt-4 flex flex-col gap-2.5 px-1">
-                <div className="flex items-center justify-between gap-4 font-parkinsans">
-                  <span className="font-bold text-white text-[13px] sm:text-[14px] tracking-[0.18em] uppercase truncate">
-                    {activePartner.name}
-                  </span>
-
-                  <button
-                    onClick={() => setExpandedIndex(null)}
-                    className="text-white/50 hover:text-accent transition-colors cursor-pointer text-[10px] tracking-[0.15em] uppercase shrink-0 py-0.5 px-1"
-                    title="Close expanded view"
-                  >
-                    [ CLOSE × ]
-                  </button>
-                </div>
-
-                {activePartner.tag && (
-                  <div className="font-artific text-[10px] sm:text-[11px] tracking-[0.2em] uppercase text-accent font-medium">
-                    {activePartner.tag}
+                    <div className="font-artific text-xs text-[#300F0A]/80 pt-2 border-t border-[#300F0A]/12 line-clamp-2">
+                      {founder.specialty}
+                    </div>
                   </div>
-                )}
 
-                {activePartner.bio && (
-                  <p className="font-artific text-xs sm:text-sm text-white/75 leading-relaxed pt-0.5">
-                    {activePartner.bio}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            {/* Right Column: Headline + Remaining Slits */}
-            <div className="lg:col-span-7 flex flex-col justify-center">
-              {/* Top Headline */}
-              <div className="font-parkinsans text-3xl sm:text-4xl md:text-5xl font-medium sm:font-semibold tracking-tight uppercase leading-[1.05] text-white">
-                <div>WE ARCHITECT THE FOUNDATIONS</div>
-                <div>BEFORE THEY&apos;RE VISIBLE.</div>
-              </div>
-
-              {/* The Remaining Letterbox Slits */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-3 my-6 sm:my-8">
-                {remainingPartners.map((partner) => {
-                  const isHovered = hoveredIndex === partner.id;
-                  return (
-                    <div
-                      key={partner.id}
-                      onMouseEnter={() => setHoveredIndex(partner.id)}
-                      onMouseLeave={() => setHoveredIndex(null)}
-                      onClick={() => setExpandedIndex(partner.id)}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" || e.key === " ") {
-                          e.preventDefault();
-                          setExpandedIndex(partner.id);
-                        }
-                      }}
-                      role="button"
-                      tabIndex={0}
-                      aria-label={`Switch to ${partner.name}`}
-                      className="group/slit relative h-[95px] sm:h-[110px] w-full cursor-pointer rounded-[2px] overflow-hidden border border-white/15 hover:border-accent transition-all duration-300 bg-[#111111] outline-hidden focus-visible:ring-1 focus-visible:ring-accent"
-                    >
-                      <div className="w-full h-full overflow-hidden rounded-[2px] bg-[#1a1a1a]">
-                        <img
-                          src={partner.image}
-                          alt={partner.name}
-                          loading="lazy"
-                          className="w-full h-full object-cover grayscale contrast-115 group-hover/slit:scale-105 group-hover/slit:grayscale-0 transition-all duration-500"
-                          style={{ objectPosition: partner.position }}
-                          onError={(e) => {
-                            e.target.src = "/image/team/leadership/Dawit.jpeg";
-                          }}
-                        />
-                      </div>
-
-                      {/* Floating Pill VIEW Badge */}
-                      <div
-                        className={`absolute top-2 right-2 z-20 transition-all duration-300 pointer-events-none ${
-                          isHovered
-                            ? "opacity-100 translate-y-0 scale-100"
-                            : "opacity-0 translate-y-1 scale-90"
-                        }`}
+                  {/* Direct Contact Methods */}
+                  <div className="flex items-center gap-1.5 pt-3 border-t border-[#300F0A]/12 mt-auto">
+                    {founder.email && (
+                      <a
+                        href={`mailto:${founder.email}`}
+                        aria-label={`Email ${founder.name}`}
+                        className="size-7 rounded-full bg-white/80 hover:bg-accent text-[#300F0A] hover:text-white border border-[#300F0A]/10 flex items-center justify-center transition-all duration-200 shadow-2xs"
+                        title="Email"
                       >
-                        <span className="inline-flex items-center bg-[#EA5B15] text-white font-parkinsans text-[8px] sm:text-[8.5px] font-bold uppercase tracking-[0.16em] px-2 py-0.5 rounded-[2px] shadow-md border border-white/20">
-                          VIEW
-                        </span>
-                      </div>
-
-                      <div className="absolute inset-0 bg-black/20 group-hover/slit:bg-transparent transition-colors pointer-events-none rounded-[2px]" />
-
-                      {/* Bottom Metadata in Slit */}
-                      <div
-                        data-dark-overlay="true"
-                        className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/70 to-transparent p-2 sm:p-2.5 flex flex-col justify-end z-10 pointer-events-none"
+                        <Mail className="size-3.5" />
+                      </a>
+                    )}
+                    {founder.telegram && (
+                      <a
+                        href={founder.telegram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${founder.name} on Telegram`}
+                        className="size-7 rounded-full bg-white/80 hover:bg-accent text-[#300F0A] hover:text-white border border-[#300F0A]/10 flex items-center justify-center transition-all duration-200 shadow-2xs"
+                        title="Telegram"
                       >
-                        <span
-                          className="font-parkinsans text-[9px] sm:text-[10px] tracking-[0.16em] uppercase font-bold text-white dark-overlay-text force-text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] truncate"
-                          style={{ color: "#FAF6ED" }}
-                        >
-                          {partner.name}
-                        </span>
-                        <span
-                          className="font-parkinsans text-[8px] sm:text-[8.5px] tracking-[0.16em] uppercase text-accent font-semibold drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] truncate mt-0.5"
-                          style={{ color: "#EA5B15" }}
-                          title={partner.role}
-                        >
-                          {formatRole(partner.role)}
-                        </span>
-                      </div>
-                    </div>
-                  );
-                })}
+                        <TelegramIcon className="size-3.5" />
+                      </a>
+                    )}
+                    {founder.whatsapp && (
+                      <a
+                        href={founder.whatsapp}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${founder.name} on WhatsApp`}
+                        className="size-7 rounded-full bg-white/80 hover:bg-accent text-[#300F0A] hover:text-white border border-[#300F0A]/10 flex items-center justify-center transition-all duration-200 shadow-2xs"
+                        title="WhatsApp"
+                      >
+                        <WhatsAppIcon className="size-3.5" />
+                      </a>
+                    )}
+                    {founder.twitter && (
+                      <a
+                        href={founder.twitter}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${founder.name} on X`}
+                        className="size-7 rounded-full bg-white/80 hover:bg-accent text-[#300F0A] hover:text-white border border-[#300F0A]/10 flex items-center justify-center transition-all duration-200 shadow-2xs"
+                        title="X (Twitter)"
+                      >
+                        <XIcon className="size-3" />
+                      </a>
+                    )}
+                    {founder.linkedin && (
+                      <a
+                        href={founder.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${founder.name} on LinkedIn`}
+                        className="size-7 rounded-full bg-white/80 hover:bg-accent text-[#300F0A] hover:text-white border border-[#300F0A]/10 flex items-center justify-center transition-all duration-200 shadow-2xs"
+                        title="LinkedIn"
+                      >
+                        <LinkedinIcon className="size-3.5" />
+                      </a>
+                    )}
+                  </div>
+                </div>
               </div>
-
-              {/* Bottom Headline */}
-              <div className="font-parkinsans text-3xl sm:text-4xl md:text-5xl font-medium sm:font-semibold tracking-tight uppercase leading-[1.05] text-white">
-                <div>TRANSFORM THEM INTO</div>
-                <div>SYSTEMS THAT ENDURE.</div>
-              </div>
-
-              {/* Bottom Tagline & Collapse Bar */}
-              <div className="mt-8 flex items-center justify-between border-t border-white/10 pt-4 font-parkinsans text-[10px] tracking-[0.2em] uppercase text-white/50">
-                <span>THE ARCHITECTS OF GERAT&apos;S SYSTEMIC EXCELLENCE.</span>
-                <button
-                  onClick={() => setExpandedIndex(null)}
-                  className="text-accent hover:text-white transition-colors cursor-pointer font-bold"
-                >
-                  RESET VIEW ↑
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
+            </FadeUp>
+          ))}
+        </div>
       </div>
     </section>
   );

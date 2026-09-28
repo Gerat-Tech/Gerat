@@ -1,63 +1,86 @@
+"use client";
+
+import React from "react";
 import Link from "next/link";
 
+/**
+ * V2 Receivio-Inspired Pill Button Component
+ *
+ * Replaces sharp industrial rectangles with smooth, organic pill buttons (`rounded-full`).
+ * Variants:
+ * - `primary`: Flame Orange (#EA5B15) background, white bold text, ambient glow shadow
+ * - `secondary`: Transparent/subtle border, high-contrast hover
+ * - `dark`: Deep Coffee Bean (#300F0A) background, cream text
+ */
 export default function Button({
   children,
-  href = "#",
+  href,
+  onClick,
+  variant = "primary",
+  size = "md",
   className = "",
-  textColor = "text-white",
-  bgColor = "bg-white",
-  borderColor = "border-white",
-  padding = "px-[20px] py-[10px]",
+  type = "button",
+  icon,
+  iconPosition = "right",
+  disabled = false,
+  ...props
 }) {
+  const sizeClasses = {
+    sm: "px-5 py-2 text-[11px] tracking-[0.18em]",
+    md: "px-7 py-3.5 text-[12px] tracking-[0.2em]",
+    lg: "px-9 py-4 text-[13px] tracking-[0.22em]",
+  };
+
+  const variantClasses = {
+    primary:
+      "bg-accent text-white font-bold border border-accent shadow-md hover:bg-white hover:text-[#300F0A] hover:border-white hover:shadow-accent/20",
+    secondary:
+      "bg-transparent text-[var(--text-primary)] font-semibold border border-[var(--border-strong)] hover:border-accent hover:text-accent hover:bg-accent/5",
+    dark:
+      "bg-[#300F0A] text-[#FAF6ED] font-bold border border-[#300F0A] hover:bg-accent hover:text-white hover:border-accent",
+    ghost:
+      "bg-transparent text-[var(--text-secondary)] font-medium hover:text-accent",
+  };
+
+  const baseClasses = `group relative isolate inline-flex items-center justify-center font-parkinsans uppercase rounded-full select-none cursor-pointer transition-all duration-300 transform-gpu active:scale-[0.98] ${
+    sizeClasses[size] || sizeClasses.md
+  } ${variantClasses[variant] || variantClasses.primary} ${
+    disabled ? "opacity-50 pointer-events-none" : ""
+  } ${className}`;
+
+  const content = (
+    <>
+      {icon && iconPosition === "left" && (
+        <span className="mr-2 transition-transform duration-300 group-hover:-translate-x-0.5">
+          {icon}
+        </span>
+      )}
+      <span>{children}</span>
+      {icon && iconPosition === "right" && (
+        <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">
+          {icon}
+        </span>
+      )}
+    </>
+  );
+
+  if (href) {
+    return (
+      <Link href={href} className={baseClasses} {...props}>
+        {content}
+      </Link>
+    );
+  }
+
   return (
-    <Link
-      href={href}
-      // className={`${className} group relative isolate inline-block hover:animate-glitch-twice motion-reduce:hover:animate-none`}
-      className={`${className} group relative isolate inline-block  hover:[animation:glitch_0.1s_linear_2]`}
+    <button
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      className={baseClasses}
+      {...props}
     >
-      <div className="glitch-wrapper">
-        {/* <div className="px-[20px] py-[10px]"> */}
-        <div className={`${padding}`}>
-          {/* DOT */}
-
-          <div
-            className={`${bgColor} absolute left-0 top-1/2 -translate-y-1/2 size-[10px] rounded-[3px]
-                opacity-0 transition-all duration-300 ease-in-out group-hover:left-2 group-hover:opacity-100`}
-          />
-
-          {/* TEXT */}
-          <div
-            className={`${textColor} font-parkinsans relative isolate flex -translate-x-[5px] overflow-hidden transition-transform duration-400
-          ease-in-out group-hover:translate-x-[5px]`}
-          >
-            <span className=" text-[12px] uppercase transition-transform duration-400 ease-in-out group-hover:-translate-y-full">
-              {children}
-            </span>
-
-            <span
-              className="absolute inset-0 text-[12px] uppercase translate-y-full transition-transform duration-400
-          ease-in-out group-hover:translate-y-0"
-            >
-              {children}
-            </span>
-          </div>
-        </div>
-
-        {/* CORNER  */}
-
-        <div
-          className={`absolute top-0 left-0 w-2 h-2 border-t border-l ${borderColor}`}
-        />
-        <div
-          className={`absolute top-0 right-0 w-2 h-2 border-t border-r ${borderColor}`}
-        />
-        <div
-          className={`absolute bottom-0 left-0 w-2 h-2 border-b border-l ${borderColor}`}
-        />
-        <div
-          className={`absolute bottom-0 right-0 w-2 h-2 border-b border-r ${borderColor}`}
-        />
-      </div>
-    </Link>
+      {content}
+    </button>
   );
 }

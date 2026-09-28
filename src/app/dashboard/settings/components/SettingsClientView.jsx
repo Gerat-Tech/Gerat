@@ -385,13 +385,13 @@ export default function SettingsClientView({
 
         <Link
           href="/dashboard/settings/users"
-          className={`py-2 px-3.5 rounded-[2px] transition-colors flex items-center gap-1.5 ${
+          className={`py-2 px-3.5 rounded-[2px] transition-colors flex items-center gap-1.5 font-bold ${
             isLight
-              ? "bg-black/5 hover:bg-black/10 text-accent font-bold"
+              ? "bg-[#EA5B15]/10 hover:bg-[#EA5B15]/20 text-[#EA5B15] border border-[#EA5B15]/30"
               : "bg-white/5 hover:bg-white/10 text-accent font-bold"
           }`}
         >
-          <span>05 · USER & ROLE GOVERNANCE</span>
+          <span className={isLight ? "text-[#EA5B15] font-bold" : "text-accent font-bold"}>05 · USER & ROLE GOVERNANCE</span>
           <span>→</span>
         </Link>
       </div>
@@ -644,13 +644,9 @@ export default function SettingsClientView({
                 />
                 <button
                   type="submit"
-                  className={`px-4 font-parkinsans text-[10px] tracking-[0.15em] uppercase rounded-[2px] transition-colors font-bold ${
-                    isLight
-                      ? "bg-[#0D0F12] text-white hover:bg-accent"
-                      : "bg-white/10 text-white hover:bg-accent hover:text-black"
-                  }`}
+                  className="px-4 py-2 font-parkinsans text-[10px] tracking-[0.15em] uppercase rounded-[2px] transition-colors font-bold bg-[#EA5B15] hover:bg-[#FA6C26] text-white cursor-pointer shadow-sm shrink-0"
                 >
-                  ADD TOKEN
+                  <span className="!text-white font-bold">ADD TOKEN</span>
                 </button>
               </form>
 

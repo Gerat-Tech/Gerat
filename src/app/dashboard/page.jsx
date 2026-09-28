@@ -7,78 +7,54 @@ import StatusBadge from "@/components/dashboard/common/StatusBadge";
 export default async function DashboardPage({ searchParams }) {
   const resolvedSearchParams = await searchParams;
   const user = await getCurrentUser();
-  const role = user?.role || "OPERATOR";
+  const rawRole = user?.role || "OPERATOR";
+  const role =
+    rawRole === "EDITOR" || rawRole === "TECHNICAL_EDITOR" || rawRole === "CREATIVE_EDITOR"
+      ? "OPERATIONS_LEAD"
+      : rawRole;
+
   const isUnauthorized = resolvedSearchParams?.unauthorized === "true";
   const attemptedDomain = resolvedSearchParams?.domain || "";
-
-  // Fetch role-relevant counts
-  const isOpsOrAdmin = role === "SUPER_ADMIN" || role === "OPERATIONS_LEAD";
-  const isEditor = role === "EDITOR" || role === "TECHNICAL_EDITOR" || role === "CREATIVE_EDITOR";
 
   let inquiryCount = 0;
   let newInquiries = 0;
   let urgentInquiries = 0;
-  let articleCount = 0;
-  let publishedCount = 0;
-  let draftCount = 0;
-  let projectCount = 0;
   let memberCount = 0;
+  let pillarCount = 0;
   let recentInquiries = [];
-  let recentArticles = [];
 
   try {
     const counts = await Promise.all([
-      isOpsOrAdmin ? prisma.inquiry.count() : 0,
-      isOpsOrAdmin ? prisma.inquiry.count({ where: { status: "NEW_INTAKE" } }) : 0,
-      isOpsOrAdmin ? prisma.inquiry.count({ where: { priority: "CRITICAL_ENTERPRISE" } }) : 0,
-      prisma.article.count(),
-      isEditor ? prisma.article.count({ where: { status: "PUBLISHED" } }) : 0,
-      isEditor ? prisma.article.count({ where: { status: "DRAFT" } }) : 0,
-      prisma.caseStudy.count(),
+      prisma.inquiry.count(),
+      prisma.inquiry.count({ where: { status: "NEW_INTAKE" } }),
+      prisma.inquiry.count({ where: { priority: "CRITICAL_ENTERPRISE" } }),
       prisma.teamMember.count(),
+      prisma.servicePillar.count(),
     ]);
 
     [
       inquiryCount,
       newInquiries,
       urgentInquiries,
-      articleCount,
-      publishedCount,
-      draftCount,
-      projectCount,
       memberCount,
+      pillarCount,
     ] = counts;
 
-    if (isOpsOrAdmin) {
-      recentInquiries = await prisma.inquiry.findMany({
-        take: 5,
-        orderBy: { createdAt: "desc" },
-        select: {
-          id: true,
-          telemetryCode: true,
-          fullName: true,
-          company: true,
-          discipline: true,
-          budgetRange: true,
-          status: true,
-          priority: true,
-          createdAt: true,
-        },
-      });
-    } else {
-      recentArticles = await prisma.article.findMany({
-        take: 5,
-        orderBy: { createdAt: "desc" },
-        select: {
-          id: true,
-          title: true,
-          category: true,
-          readingTime: true,
-          status: true,
-          createdAt: true,
-        },
-      });
-    }
+    recentInquiries = await prisma.inquiry.findMany({
+      take: 6,
+      orderBy: { createdAt: "desc" },
+      select: {
+        id: true,
+        telemetryCode: true,
+        fullName: true,
+        company: true,
+        discipline: true,
+        budgetRange: true,
+        status: true,
+        priority: true,
+        createdAt: true,
+      },
+    });
   } catch (error) {
     console.error("Dashboard overview data fetch error:", error);
   }
@@ -105,18 +81,6 @@ export default async function DashboardPage({ searchParams }) {
         className="w-fit py-2 px-4 bg-accent hover:bg-black hover:text-white text-white font-parkinsans text-[10px] tracking-[0.15em] uppercase font-bold transition-all rounded-[2px] flex items-center gap-2"
       >
         <span>OPEN KANBAN PIPELINE ({newInquiries} NEW)</span>
-        <span>→</span>
-      </Link>
-    );
-  } else if (role === "EDITOR" || role === "TECHNICAL_EDITOR" || role === "CREATIVE_EDITOR") {
-    cockpitTitle = "EDITORIAL & CONTENT COCKPIT";
-    cockpitSubtitle = `LOGGED IN AS ${user?.name || "EDITOR"} · RESEARCH PUBLICATIONS & PORTFOLIO SHOWCASES`;
-    headerAction = (
-      <Link
-        href="/dashboard/insights/new"
-        className="w-fit py-2 px-4 bg-accent hover:bg-black hover:text-white text-white font-parkinsans text-[10px] tracking-[0.15em] uppercase font-bold transition-all rounded-[2px] flex items-center gap-2"
-      >
-        <span>+ AUTHOR NEW ARTICLE</span>
         <span>→</span>
       </Link>
     );
@@ -169,347 +133,190 @@ export default async function DashboardPage({ searchParams }) {
         {headerAction}
       </div>
 
-      {/* KPI Metrics Strip tailored per role */}
+      {/* KPI Metrics Strip */}
       <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {role === "OPERATIONS_LEAD" ? (
-          <>
-            <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
-              <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                AWAITING TRIAGE
-              </div>
-              <div className="font-artific text-3xl sm:text-4xl font-bold text-accent mt-1">
-                {newInquiries.toString().padStart(2, "0")}
-              </div>
-              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-accent mt-2">
-                <span>UNREAD INTAKES</span>
-              </div>
-            </div>
+        <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
+          <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
+          <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
+            AWAITING TRIAGE
+          </div>
+          <div className="font-artific text-3xl sm:text-4xl font-bold text-accent mt-1">
+            {newInquiries.toString().padStart(2, "0")}
+          </div>
+          <div className="font-parkinsans text-[9px] tracking-[0.15em] text-accent mt-2">
+            <span>UNREAD INTAKES</span>
+          </div>
+        </div>
 
-            <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
-              <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                TOTAL LEADS
-              </div>
-              <div className="font-artific text-3xl sm:text-4xl font-bold text-white mt-1">
-                {inquiryCount.toString().padStart(2, "0")}
-              </div>
-              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-emerald-500 mt-2">
-                ACROSS ALL CHANNELS
-              </div>
-            </div>
+        <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
+          <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
+          <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
+            TOTAL INTAKES
+          </div>
+          <div className="font-artific text-3xl sm:text-4xl font-bold text-white mt-1">
+            {inquiryCount.toString().padStart(2, "0")}
+          </div>
+          <div className="font-parkinsans text-[9px] tracking-[0.15em] text-emerald-500 mt-2">
+            ACROSS ALL CHANNELS
+          </div>
+        </div>
 
-            <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
-              <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                CRITICAL LEADS
-              </div>
-              <div className="font-artific text-3xl sm:text-4xl font-bold text-white mt-1">
-                {urgentInquiries.toString().padStart(2, "0")}
-              </div>
-              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-amber-500 mt-2">
-                ENTERPRISE PRIORITY
-              </div>
-            </div>
+        <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
+          <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
+          <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
+            CRITICAL LEADS
+          </div>
+          <div className="font-artific text-3xl sm:text-4xl font-bold text-white mt-1">
+            {urgentInquiries.toString().padStart(2, "0")}
+          </div>
+          <div className="font-parkinsans text-[9px] tracking-[0.15em] text-amber-500 mt-2">
+            ENTERPRISE PRIORITY
+          </div>
+        </div>
 
-            <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
-              <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                TEAM ARCHITECTS
-              </div>
-              <div className="font-artific text-3xl sm:text-4xl font-bold text-white mt-1">
-                {memberCount.toString().padStart(2, "0")}
-              </div>
-              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-white/50 mt-2">
-                AVAILABLE FOR ASSIGNMENT
-              </div>
-            </div>
-          </>
-        ) : isEditor ? (
-          <>
-            <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
-              <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                TOTAL PUBLICATIONS
-              </div>
-              <div className="font-artific text-3xl sm:text-4xl font-bold text-white mt-1">
-                {articleCount.toString().padStart(2, "0")}
-              </div>
-              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-white/50 mt-2">
-                RESEARCH PAPERS & POSTS
-              </div>
-            </div>
-
-            <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
-              <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                PUBLISHED ARTICLES
-              </div>
-              <div className="font-artific text-3xl sm:text-4xl font-bold text-emerald-400 mt-1">
-                {publishedCount.toString().padStart(2, "0")}
-              </div>
-              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-emerald-500 mt-2">
-                LIVE ON WEBSITE
-              </div>
-            </div>
-
-            <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
-              <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                DRAFTS IN PROGRESS
-              </div>
-              <div className="font-artific text-3xl sm:text-4xl font-bold text-amber-400 mt-1">
-                {draftCount.toString().padStart(2, "0")}
-              </div>
-              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-amber-500 mt-2">
-                PENDING EDITORIAL REVIEW
-              </div>
-            </div>
-
-            <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
-              <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                PORTFOLIO CASE STUDIES
-              </div>
-              <div className="font-artific text-3xl sm:text-4xl font-bold text-accent mt-1">
-                {projectCount.toString().padStart(2, "0")}
-              </div>
-              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-accent mt-2">
-                ACTIVE SHOWCASES
-              </div>
-            </div>
-          </>
-        ) : (
-          /* SUPER_ADMIN / VIEWER default metrics */
-          <>
-            <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
-              <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                TOTAL INTAKES
-              </div>
-              <div className="font-artific text-3xl sm:text-4xl font-bold text-white mt-1">
-                {inquiryCount.toString().padStart(2, "0")}
-              </div>
-              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-accent mt-2">
-                <span>{newInquiries} AWAITING TRIAGE</span>
-              </div>
-            </div>
-
-            <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
-              <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                PORTFOLIO WORKS
-              </div>
-              <div className="font-artific text-3xl sm:text-4xl font-bold text-white mt-1">
-                {projectCount.toString().padStart(2, "0")}
-              </div>
-              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-emerald-500 mt-2">
-                ACTIVE CASE STUDIES
-              </div>
-            </div>
-
-            <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
-              <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                RESEARCH INSIGHTS
-              </div>
-              <div className="font-artific text-3xl sm:text-4xl font-bold text-white mt-1">
-                {articleCount.toString().padStart(2, "0")}
-              </div>
-              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-white/50 mt-2">
-                PUBLICATIONS LIVE
-              </div>
-            </div>
-
-            <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
-              <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
-              <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                ENGINEERING ROSTER
-              </div>
-              <div className="font-artific text-3xl sm:text-4xl font-bold text-white mt-1">
-                {memberCount.toString().padStart(2, "0")}
-              </div>
-              <div className="font-parkinsans text-[9px] tracking-[0.15em] text-white/50 mt-2">
-                PRACTITIONERS & LEADS
-              </div>
-            </div>
-          </>
-        )}
+        <div className="relative bg-[#121212] border border-white/10 p-5 rounded-[3px]">
+          <span className="absolute top-0 left-0 size-2 border-t border-l border-white/30" />
+          <div className="font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
+            TEAM ROSTER
+          </div>
+          <div className="font-artific text-3xl sm:text-4xl font-bold text-white mt-1">
+            {memberCount.toString().padStart(2, "0")}
+          </div>
+          <div className="font-parkinsans text-[9px] tracking-[0.15em] text-white/50 mt-2">
+            PRACTITIONERS & LEADS
+          </div>
+        </div>
       </section>
 
-      {/* Operational Modules Navigation — STRICTLY FILTERED BY ROLE */}
+      {/* Operational Modules Navigation — CRM, Team, Services, Settings */}
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {/* Module 01: CRM (Only for SUPER_ADMIN and OPERATIONS_LEAD) */}
-        {isOpsOrAdmin && (
-          <Link
-            href="/dashboard/inquiries"
-            className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all"
-          >
-            <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
-              MODULE 01 · CRM
-            </span>
-            <h2 className="font-parkinsans text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
-              CLIENT INTAKE & COMMUNICATIONS
-            </h2>
-            <p className="font-artific text-xs text-white/60 mt-2 leading-relaxed">
-              Triage website leads, access 1-click WhatsApp and call triggers, and log team notes.
-            </p>
-            <div className="mt-4 flex items-center gap-2 font-parkinsans text-[10px] tracking-[0.15em] text-white/40 group-hover:text-white uppercase transition-colors">
-              <span>OPEN PIPELINE</span>
-              <span>→</span>
-            </div>
-          </Link>
-        )}
+        {/* Module 01: CRM */}
+        <Link
+          href="/dashboard/inquiries"
+          className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all"
+        >
+          <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
+            MODULE 01 · CRM
+          </span>
+          <h2 className="font-parkinsans text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
+            CLIENT INTAKE & COMMUNICATIONS
+          </h2>
+          <p className="font-artific text-xs text-white/60 mt-2 leading-relaxed">
+            Triage incoming website leads, review project scopes, access direct contact triggers, and log internal team notes.
+          </p>
+          <div className="mt-4 flex items-center gap-2 font-parkinsans text-[10px] tracking-[0.15em] text-white/40 group-hover:text-white uppercase transition-colors">
+            <span>OPEN PIPELINE</span>
+            <span>→</span>
+          </div>
+        </Link>
 
-        {/* Module 02: Research & Insights (SUPER_ADMIN, EDITOR) */}
-        {(role === "SUPER_ADMIN" || isEditor) && (
-          <Link
-            href="/dashboard/insights"
-            className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all"
-          >
-            <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
-              MODULE {isEditor ? "01" : "02"} · CMS
-            </span>
-            <h2 className="font-parkinsans text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
-              RESEARCH & INSIGHTS PUBLISHING
-            </h2>
-            <p className="font-artific text-xs text-white/60 mt-2 leading-relaxed">
-              Author technical whitepapers with split-screen Markdown, math formulas, and code syntax.
-            </p>
-            <div className="mt-4 flex items-center gap-2 font-parkinsans text-[10px] tracking-[0.15em] text-white/40 group-hover:text-white uppercase transition-colors">
-              <span>MANAGE ARTICLES</span>
-              <span>→</span>
-            </div>
-          </Link>
-        )}
+        {/* Module 02: Team & Roster */}
+        <Link
+          href="/dashboard/team"
+          className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all"
+        >
+          <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
+            MODULE 02 · {role === "OPERATIONS_LEAD" ? "REF" : "CMS"}
+          </span>
+          <h2 className="font-parkinsans text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
+            {role === "OPERATIONS_LEAD" ? "TEAM PRACTITIONER DIRECTORY" : "TEAM & LEADERSHIP ROSTER"}
+          </h2>
+          <p className="font-artific text-xs text-white/60 mt-2 leading-relaxed">
+            {role === "OPERATIONS_LEAD"
+              ? "Reference practitioner disciplines and skillsets to assign technical leads to client briefs."
+              : "Manage leadership profiles, practitioner specialties, social handles, and headshots."}
+          </p>
+          <div className="mt-4 flex items-center gap-2 font-parkinsans text-[10px] tracking-[0.15em] text-white/40 group-hover:text-white uppercase transition-colors">
+            <span>{role === "OPERATIONS_LEAD" ? "VIEW DIRECTORY" : "MANAGE TEAM"}</span>
+            <span>→</span>
+          </div>
+        </Link>
 
-        {/* Module 03: Portfolio & Showcase (SUPER_ADMIN, EDITOR) */}
-        {(role === "SUPER_ADMIN" || isEditor) && (
-          <Link
-            href="/dashboard/portfolio"
-            className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all"
-          >
-            <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
-              MODULE {isEditor ? "02" : "03"} · CMS
-            </span>
-            <h2 className="font-parkinsans text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
-              PORTFOLIO & PRODUCTS
-            </h2>
-            <p className="font-artific text-xs text-white/60 mt-2 leading-relaxed">
-              Maintain case studies, impact metrics, tech stack badges, and vector deliverable assets.
-            </p>
-            <div className="mt-4 flex items-center gap-2 font-parkinsans text-[10px] tracking-[0.15em] text-white/40 group-hover:text-white uppercase transition-colors">
-              <span>MANAGE SHOWCASE</span>
-              <span>→</span>
-            </div>
-          </Link>
-        )}
+        {/* Module 03: Practice Pillars */}
+        <Link
+          href="/dashboard/services"
+          className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all"
+        >
+          <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
+            MODULE 03 · {role === "OPERATIONS_LEAD" ? "REF" : "CMS"}
+          </span>
+          <h2 className="font-parkinsans text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
+            {role === "OPERATIONS_LEAD" ? "PRACTICE PILLARS & SCOPE" : "PRACTICE PILLARS & SERVICES"}
+          </h2>
+          <p className="font-artific text-xs text-white/60 mt-2 leading-relaxed">
+            {role === "OPERATIONS_LEAD"
+              ? "Reference the practice pillars, capabilities matrix, and deliverables when scoping proposals."
+              : "Edit the practice pillars, capabilities table matrix, and service deliverables."}
+          </p>
+          <div className="mt-4 flex items-center gap-2 font-parkinsans text-[10px] tracking-[0.15em] text-white/40 group-hover:text-white uppercase transition-colors">
+            <span>{role === "OPERATIONS_LEAD" ? "VIEW PILLARS" : "MANAGE SERVICES"}</span>
+            <span>→</span>
+          </div>
+        </Link>
 
-        {/* Module 04: Team & Roster (SUPER_ADMIN, OPERATIONS_LEAD) */}
-        {(role === "SUPER_ADMIN" || role === "OPERATIONS_LEAD") && (
-          <Link
-            href="/dashboard/team"
-            className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all"
-          >
-            <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
-              MODULE 04 · {role === "OPERATIONS_LEAD" ? "REF" : "CMS"}
-            </span>
-            <h2 className="font-parkinsans text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
-              {role === "OPERATIONS_LEAD" ? "TEAM PRACTITIONER DIRECTORY" : "TEAM & LEADERSHIP ROSTER"}
-            </h2>
-            <p className="font-artific text-xs text-white/60 mt-2 leading-relaxed">
-              {role === "OPERATIONS_LEAD"
-                ? "Reference practitioner disciplines to assign appropriate technical leads to client briefs."
-                : "Manage leadership profiles, engineering practitioner specialties, and 4:5 headshots."}
-            </p>
-            <div className="mt-4 flex items-center gap-2 font-parkinsans text-[10px] tracking-[0.15em] text-white/40 group-hover:text-white uppercase transition-colors">
-              <span>{role === "OPERATIONS_LEAD" ? "VIEW DIRECTORY" : "MANAGE TEAM"}</span>
-              <span>→</span>
-            </div>
-          </Link>
-        )}
-
-        {/* Module 05: Practice Pillars (SUPER_ADMIN, OPERATIONS_LEAD) */}
-        {(role === "SUPER_ADMIN" || role === "OPERATIONS_LEAD") && (
-          <Link
-            href="/dashboard/services"
-            className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all"
-          >
-            <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
-              MODULE 05 · {role === "OPERATIONS_LEAD" ? "REF" : "CMS"}
-            </span>
-            <h2 className="font-parkinsans text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
-              {role === "OPERATIONS_LEAD" ? "PRACTICE PILLARS & SCOPE" : "PRACTICE PILLARS & SERVICES"}
-            </h2>
-            <p className="font-artific text-xs text-white/60 mt-2 leading-relaxed">
-              {role === "OPERATIONS_LEAD"
-                ? "Reference the 6 practice pillars and deliverables matrix when scoping client proposals."
-                : "Edit the 6 practice pillars, capabilities table matrix, and creative service packages."}
-            </p>
-            <div className="mt-4 flex items-center gap-2 font-parkinsans text-[10px] tracking-[0.15em] text-white/40 group-hover:text-white uppercase transition-colors">
-              <span>{role === "OPERATIONS_LEAD" ? "VIEW PILLARS" : "MANAGE SERVICES"}</span>
-              <span>→</span>
-            </div>
-          </Link>
-        )}
-
-        {/* Module 06: System Settings (STRICTLY SUPER_ADMIN ONLY) */}
+        {/* Module 04: System Settings (Super Admin Only) */}
         {role === "SUPER_ADMIN" && (
           <Link
             href="/dashboard/settings"
-            className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all"
+            className="group relative bg-[#121212] border border-white/10 hover:border-accent p-6 rounded-[3px] transition-all sm:col-span-2 lg:col-span-3"
           >
             <span className="font-parkinsans text-[9px] tracking-[0.2em] text-accent uppercase">
-              MODULE 06 · SYSTEM
+              MODULE 04 · SYSTEM CONTROL
             </span>
             <h2 className="font-parkinsans text-xl font-bold uppercase text-white group-hover:text-accent mt-1 transition-colors">
-              TELEMETRY, RBAC & AUDIT LOGS
+              SYSTEM SETTINGS, USER GOVERNANCE & AUDIT LOGS
             </h2>
-            <p className="font-artific text-xs text-white/60 mt-2 leading-relaxed">
-              Configure ticker tokens, review mutation audit trails, and manage team member access.
+            <p className="font-artific text-xs text-white/60 mt-2 leading-relaxed max-w-2xl">
+              Configure real-time Telegram / Discord / webhook notification alerts, provision and manage operators, review immutable mutation audit trails, and maintain brand parameters.
             </p>
             <div className="mt-4 flex items-center gap-2 font-parkinsans text-[10px] tracking-[0.15em] text-white/40 group-hover:text-white uppercase transition-colors">
-              <span>SYSTEM SETTINGS</span>
+              <span>MANAGE SYSTEM</span>
               <span>→</span>
             </div>
           </Link>
         )}
       </section>
 
-      {/* Bottom Data Section: Inquiries for Ops/Admin, Publications for Editors */}
-      {isOpsOrAdmin ? (
-        <section className="bg-[#121212] border border-white/10 rounded-[3px] p-6">
-          <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
-            <div>
-              <h3 className="font-parkinsans text-lg font-bold uppercase text-white">
-                RECENT INTAKE TELEMETRY
-              </h3>
-              <p className="font-parkinsans text-[10px] tracking-[0.15em] text-white/40 uppercase">
-                LATEST INQUIRIES RECEIVED ACROSS PLATFORM
-              </p>
-            </div>
-            <Link
-              href="/dashboard/inquiries"
-              className="font-parkinsans text-[10px] tracking-[0.2em] text-accent hover:underline uppercase font-bold"
-            >
-              VIEW ALL INTAKES →
-            </Link>
+      {/* Bottom Data Section: Always Inquiries Telemetry */}
+      <section className="bg-[#121212] border border-white/10 rounded-[3px] p-6">
+        <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
+          <div>
+            <h3 className="font-parkinsans text-lg font-bold uppercase text-white">
+              RECENT INTAKE TELEMETRY
+            </h3>
+            <p className="font-parkinsans text-[10px] tracking-[0.15em] text-white/40 uppercase">
+              LATEST CLIENT INQUIRIES RECEIVED ACROSS PLATFORM
+            </p>
           </div>
+          <Link
+            href="/dashboard/inquiries"
+            className="font-parkinsans text-[10px] tracking-[0.2em] text-accent hover:underline uppercase font-bold"
+          >
+            VIEW ALL INTAKES ({inquiryCount}) →
+          </Link>
+        </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-left font-sans">
-              <thead>
-                <tr className="border-b border-white/10 font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                  <th className="py-2.5 px-3">TELEMETRY CODE</th>
-                  <th className="py-2.5 px-3">CLIENT / COMPANY</th>
-                  <th className="py-2.5 px-3">DISCIPLINE</th>
-                  <th className="py-2.5 px-3">BUDGET RANGE</th>
-                  <th className="py-2.5 px-3">STATUS</th>
-                  <th className="py-2.5 px-3 text-right">ACTION</th>
+        <div className="overflow-x-auto">
+          <table className="w-full text-left font-sans">
+            <thead>
+              <tr className="border-b border-white/10 font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
+                <th className="py-2.5 px-3">TELEMETRY CODE</th>
+                <th className="py-2.5 px-3">CLIENT / COMPANY</th>
+                <th className="py-2.5 px-3">DISCIPLINE</th>
+                <th className="py-2.5 px-3">BUDGET RANGE</th>
+                <th className="py-2.5 px-3">STATUS</th>
+                <th className="py-2.5 px-3 text-right">ACTION</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-white/5 font-parkinsans text-xs">
+              {recentInquiries.length === 0 ? (
+                <tr>
+                  <td colSpan={6} className="py-8 text-center text-white/40 font-parkinsans text-xs uppercase tracking-wider">
+                    No inquiries recorded in the intake telemetry registry yet.
+                  </td>
                 </tr>
-              </thead>
-              <tbody className="divide-y divide-white/5 font-parkinsans text-xs">
-                {recentInquiries.map((inq) => (
+              ) : (
+                recentInquiries.map((inq) => (
                   <tr key={inq.id} className="hover:bg-white/[0.02] transition-colors">
                     <td className="py-3 px-3 text-accent font-semibold tracking-wider">
                       {inq.telemetryCode}
@@ -534,71 +341,12 @@ export default async function DashboardPage({ searchParams }) {
                       </Link>
                     </td>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-      ) : (
-        <section className="bg-[#121212] border border-white/10 rounded-[3px] p-6">
-          <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
-            <div>
-              <h3 className="font-parkinsans text-lg font-bold uppercase text-white">
-                RECENT STUDIO PUBLICATIONS
-              </h3>
-              <p className="font-parkinsans text-[10px] tracking-[0.15em] text-white/40 uppercase">
-                RESEARCH ARTICLES & ARCHITECTURAL WHITEPAPERS
-              </p>
-            </div>
-            <Link
-              href="/dashboard/insights"
-              className="font-parkinsans text-[10px] tracking-[0.2em] text-accent hover:underline uppercase font-bold"
-            >
-              VIEW ALL ARTICLES →
-            </Link>
-          </div>
-
-          <div className="overflow-x-auto">
-            <table className="w-full text-left font-sans">
-              <thead>
-                <tr className="border-b border-white/10 font-parkinsans text-[9px] tracking-[0.2em] text-white/40 uppercase">
-                  <th className="py-2.5 px-3">ARTICLE TITLE</th>
-                  <th className="py-2.5 px-3">CATEGORY</th>
-                  <th className="py-2.5 px-3">READ TIME</th>
-                  <th className="py-2.5 px-3">STATUS</th>
-                  <th className="py-2.5 px-3 text-right">ACTION</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-white/5 font-parkinsans text-xs">
-                {recentArticles.map((art) => (
-                  <tr key={art.id} className="hover:bg-white/[0.02] transition-colors">
-                    <td className="py-3 px-3 text-white font-semibold">
-                      {art.title}
-                    </td>
-                    <td className="py-3 px-3 text-accent text-[10px] uppercase font-bold">
-                      {art.category}
-                    </td>
-                    <td className="py-3 px-3 text-white/70">{art.readingTime}</td>
-                    <td className="py-3 px-3">
-                      <span className={`px-2 py-0.5 rounded-[2px] font-parkinsans text-[9px] font-bold tracking-wider uppercase ${art.status === "PUBLISHED" ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40" : "bg-amber-500/20 text-amber-400 border border-amber-500/40"}`}>
-                        {art.status}
-                      </span>
-                    </td>
-                    <td className="py-3 px-3 text-right">
-                      <Link
-                        href={`/dashboard/insights/${art.id}`}
-                        className="inline-flex items-center px-2.5 py-1 bg-white/[0.03] hover:bg-accent hover:text-black border border-white/15 text-white/80 font-parkinsans text-[9px] tracking-wider uppercase rounded-[2px] transition-colors"
-                      >
-                        EDIT ARTICLE →
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-      )}
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+      </section>
     </div>
   );
 }

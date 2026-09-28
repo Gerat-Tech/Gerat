@@ -11,7 +11,6 @@ export const COOKIE_NAME = "gerat_session";
 export const ROLES = {
   SUPER_ADMIN: "SUPER_ADMIN",
   OPERATIONS_LEAD: "OPERATIONS_LEAD",
-  EDITOR: "EDITOR",
 };
 
 /**
@@ -60,26 +59,6 @@ export const SYSTEM_PRESET_USERS = [
     role: "SUPER_ADMIN",
     title: "Executive Director & Principal Architect",
     plainPassword: process.env.ADMIN_DEFAULT_PASSWORD || "GeratAdmin2026!#",
-    active: true,
-  },
-  {
-    id: "usr_ops_lead_gerat",
-    email: "operations@gerat.com",
-    alternateEmail: "operations@gerat.et",
-    name: "Client Operations Lead",
-    role: "OPERATIONS_LEAD",
-    title: "Head of Client Engagement & Solutions",
-    plainPassword: "GeratTeam2026!#",
-    active: true,
-  },
-  {
-    id: "usr_editor_gerat",
-    email: "editor@gerat.com",
-    alternateEmail: "editor@gerat.et",
-    name: "Content & Editorial Lead",
-    role: "EDITOR",
-    title: "Content & Publications Director",
-    plainPassword: "GeratTeam2026!#",
     active: true,
   },
 ];
@@ -172,8 +151,8 @@ export function isAuthorized(userRole, allowedRoles) {
   
   // Normalize legacy editor roles
   const normalizedRole =
-    userRole === "TECHNICAL_EDITOR" || userRole === "CREATIVE_EDITOR"
-      ? ROLES.EDITOR
+    userRole === "EDITOR" || userRole === "TECHNICAL_EDITOR" || userRole === "CREATIVE_EDITOR"
+      ? ROLES.OPERATIONS_LEAD
       : userRole;
 
   return allowedRoles.includes(normalizedRole) || allowedRoles.includes(userRole);
